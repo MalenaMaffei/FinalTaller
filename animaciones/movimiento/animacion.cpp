@@ -4,7 +4,7 @@ and may not be redistributed without written permission.*/
 //Using SDL, SDL_image, standard IO, and strings
 #include<SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+// #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 
@@ -13,6 +13,7 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_FPS = 8;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
+#define SPRITE_SIZE 32
 //Texture wrapper class
 class LTexture
 {
@@ -79,6 +80,9 @@ LTexture gSpriteSheetTextureBird;
 
 SDL_Rect gSpriteClipsExpd[ WALKING_ANIMATION_FRAMES ];
 LTexture gSpriteSheetTextureEp;
+
+SDL_Rect gSpriteClipsGrass[ 1 ];
+LTexture gSpriteSheetTextureGrass;
 
 LTexture::LTexture()
 {
@@ -259,6 +263,10 @@ bool loadMedia()
 		printf( "Failed to load bird animation texture!\n" );
 		success = false;
 	}
+	if( !gSpriteSheetTextureGrass.loadFromFile( "grass.bmp" ) ){
+		printf( "Failed to load grass texture!\n" );
+		success = false;
+	}
 	else
 	{
 		int col = 0;
@@ -278,6 +286,10 @@ bool loadMedia()
 			// printf("frame: %i\n", frame);
 			// ++frame;
 		}
+		gSpriteClipsGrass[ 0 ].x =   0;
+		gSpriteClipsGrass[ 0 ].y =   0;
+		gSpriteClipsGrass[ 0 ].w =  32;
+		gSpriteClipsGrass[ 0 ].h = 32;
 
 	}
 
@@ -289,6 +301,7 @@ void close()
 	//Free loaded images
 	gSpriteSheetTextureTank.free();
 	gSpriteSheetTextureBird.free();
+	gSpriteSheetTextureGrass.free();
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
@@ -380,6 +393,7 @@ Uint32 LTimer::getTicks()
 
 int main( int argc, char* args[] )
 {
+
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -428,6 +442,19 @@ int main( int argc, char* args[] )
 				//Render current frame
 				SDL_Rect* currentClipTank = &gSpriteClipsTank[ frame / 4 ];
 				SDL_Rect* currentClipBird = &gSpriteClipsBird[ frame / 4 ];
+				SDL_Rect* currentClipGrass = &gSpriteClipsGrass[0];
+
+				for (int x = 0; x < (SCREEN_WIDTH / SPRITE_SIZE); x++) {
+					for (int y = 0; y < SCREEN_HEIGHT / SPRITE_SIZE; y++) {
+						// rcGrass.x = x * SPRITE_SIZE;
+						// rcGrass.y = y * SPRITE_SIZE;
+						// SDL_BlitSurface(grass, NULL, screen, &rcGrass);
+						gSpriteSheetTextureGrass.render( x * SPRITE_SIZE, y * SPRITE_SIZE, currentClipGrass );
+					}
+				}
+				gSpriteSheetTextureGrass.render( 0, 0, currentClipGrass );
+
+
 				if (i == 1) {
 					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
 					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
@@ -495,6 +522,9 @@ int main( int argc, char* args[] )
 					pos = 213;
 				}
 				// gSpriteSheetTexture.render( ( SCREEN_WIDTH - currentClip->w ) / 2, ( SCREEN_HEIGHT - currentClip->h ) / 2, currentClip );
+
+
+
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );
