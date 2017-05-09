@@ -4,7 +4,7 @@ and may not be redistributed without written permission.*/
 //Using SDL, SDL_image, standard IO, and strings
 #include<SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+// #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 
@@ -13,6 +13,7 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_FPS = 8;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
+#define SPRITE_SIZE 32
 //Texture wrapper class
 class LTexture
 {
@@ -74,11 +75,20 @@ const int WALKING_ANIMATION_FRAMES = 3;
 SDL_Rect gSpriteClipsTank[ WALKING_ANIMATION_FRAMES ];
 LTexture gSpriteSheetTextureTank;
 
+SDL_Rect gSpriteClipsDiag[ WALKING_ANIMATION_FRAMES ];
+LTexture gSpriteSheetTextureDiag;
+
 SDL_Rect gSpriteClipsBird[ WALKING_ANIMATION_FRAMES ];
 LTexture gSpriteSheetTextureBird;
 
 SDL_Rect gSpriteClipsExpd[ WALKING_ANIMATION_FRAMES ];
 LTexture gSpriteSheetTextureEp;
+
+SDL_Rect gSpriteClipsGrass[ 1 ];
+LTexture gSpriteSheetTextureGrass;
+
+SDL_Rect gSpriteClipsCrater[ 1 ];
+LTexture gSpriteSheetTextureCrater;
 
 LTexture::LTexture()
 {
@@ -254,11 +264,29 @@ bool loadMedia()
 	if( !gSpriteSheetTextureTank.loadFromFile( "tank.png" ) ){
 		printf( "Failed to load tank animation texture!\n" );
 		success = false;
+		return success;
 	}
 	if( !gSpriteSheetTextureBird.loadFromFile( "bird.png" ) ){
 		printf( "Failed to load bird animation texture!\n" );
 		success = false;
+		return success;
 	}
+	if( !gSpriteSheetTextureGrass.loadFromFile( "grass.bmp" ) ){
+		printf( "Failed to load grass texture!\n" );
+		success = false;
+		return success;
+	}
+	if( !gSpriteSheetTextureCrater.loadFromFile( "crater.png" ) ){
+		printf( "Failed to load crater texture!\n" );
+		success = false;
+		return success;
+	}
+	if( !gSpriteSheetTextureDiag.loadFromFile( "diag.png" ) ){
+		printf( "Failed to load diag animation texture!\n" );
+		success = false;
+		return success;
+	}
+
 	else
 	{
 		int col = 0;
@@ -267,6 +295,11 @@ bool loadMedia()
 			gSpriteClipsTank[ j ].y =   0;
 			gSpriteClipsTank[ j ].w =  32;
 			gSpriteClipsTank[ j ].h = 96;
+
+			gSpriteClipsDiag[ j ].x =   col;
+			gSpriteClipsDiag[ j ].y =   0;
+			gSpriteClipsDiag[ j ].w =  32;
+			gSpriteClipsDiag[ j ].h = 96;
 
 			gSpriteClipsBird[ j ].x =   col;
 			gSpriteClipsBird[ j ].y =   0;
@@ -278,6 +311,15 @@ bool loadMedia()
 			// printf("frame: %i\n", frame);
 			// ++frame;
 		}
+		gSpriteClipsGrass[ 0 ].x =   0;
+		gSpriteClipsGrass[ 0 ].y =   0;
+		gSpriteClipsGrass[ 0 ].w =  32;
+		gSpriteClipsGrass[ 0 ].h = 32;
+
+		gSpriteClipsCrater[ 0 ].x =   0;
+		gSpriteClipsCrater[ 0 ].y =   0;
+		gSpriteClipsCrater[ 0 ].w =  32;
+		gSpriteClipsCrater[ 0 ].h = 32;
 
 	}
 
@@ -288,7 +330,10 @@ void close()
 {
 	//Free loaded images
 	gSpriteSheetTextureTank.free();
+	gSpriteSheetTextureDiag.free();
 	gSpriteSheetTextureBird.free();
+	gSpriteSheetTextureGrass.free();
+	gSpriteSheetTextureCrater.free();
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
@@ -380,6 +425,7 @@ Uint32 LTimer::getTicks()
 
 int main( int argc, char* args[] )
 {
+
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -427,74 +473,30 @@ int main( int argc, char* args[] )
 
 				//Render current frame
 				SDL_Rect* currentClipTank = &gSpriteClipsTank[ frame / 4 ];
+				SDL_Rect* currentClipDiag = &gSpriteClipsDiag[ frame / 4 ];
 				SDL_Rect* currentClipBird = &gSpriteClipsBird[ frame / 4 ];
-				if (i == 1) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				} else if (i==2){
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==3) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==4) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==4) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==5) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==6) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==7) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==8) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==9) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==10) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==11) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					++i;
-					pos+=15;
-				}else if (i==12) {
-					gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
-					gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
-					i=1;
-					pos = 213;
+				SDL_Rect* currentClipGrass = &gSpriteClipsGrass[0];
+				SDL_Rect* currentClipCrater = &gSpriteClipsCrater[0];
+
+				for (int x = 0; x < (SCREEN_WIDTH / SPRITE_SIZE); x++) {
+					for (int y = 0; y < SCREEN_HEIGHT / SPRITE_SIZE; y++) {
+						// rcGrass.x = x * SPRITE_SIZE;
+						// rcGrass.y = y * SPRITE_SIZE;
+						// SDL_BlitSurface(grass, NULL, screen, &rcGrass);
+						if(x==y){
+							gSpriteSheetTextureCrater.render(  x * SPRITE_SIZE, y * SPRITE_SIZE, currentClipCrater );
+						} else{
+							gSpriteSheetTextureGrass.render( x * SPRITE_SIZE, y * SPRITE_SIZE, currentClipGrass );
+
+						}
+					}
 				}
-				// gSpriteSheetTexture.render( ( SCREEN_WIDTH - currentClip->w ) / 2, ( SCREEN_HEIGHT - currentClip->h ) / 2, currentClip );
+
+				pos = (i%42)*15;
+				gSpriteSheetTextureTank.render( pos, ( SCREEN_HEIGHT - currentClipTank->h ) / 2, currentClipTank );
+				gSpriteSheetTextureDiag.render( pos, pos, currentClipDiag );
+				gSpriteSheetTextureBird.render( pos, ( SCREEN_HEIGHT - currentClipBird->h ) / 2 -100, currentClipBird );
+				++i;
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );
