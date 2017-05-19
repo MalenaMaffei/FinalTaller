@@ -1,6 +1,6 @@
 #ifndef TPFINAL_LTEXTURE_H
 #define TPFINAL_LTEXTURE_H
-#include<SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
 class LTexture

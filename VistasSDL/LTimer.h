@@ -1,6 +1,6 @@
 #ifndef TPFINAL_LTIMER_H
 #define TPFINAL_LTIMER_H
-#include<SDL2/SDL.h>
+#include <SDL2/SDL.h>
 class LTimer {
    public:
     //Initializes variables
