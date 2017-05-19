@@ -4,7 +4,8 @@ project(TPFinal)
 set(CMAKE_CXX_STANDARD 11)
 
 #cada uno tiene que agregar su file(GLOB MIPARTE_SRC wildcardsDeLosArchivos) y
-#add_executable() con sus sources y el nombre del exe.
+#add_executable() con sus sources y el nombre del exe y tambien agregar las
+#librerias que usen.
 #Para usarlo propongo la carpeta build asi no quedan los execs por ahi.
 #cd build; cmake ..; make
 #y ahi quedan los execs de cada uno dentro de build.
