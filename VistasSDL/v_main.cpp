@@ -7,14 +7,9 @@
 #include "Vista.h"
 #include "LTexture.h"
 #include "Camara.h"
-
-//The dimensions of the level
-//const int LEVEL_WIDTH = 1280;
-//const int LEVEL_HEIGHT = 960;
-//
-////Screen dimension constants
-//const int SCREEN_WIDTH = 640;
-//const int SCREEN_HEIGHT = 480;
+#include "VistaTiles.h"
+#include "Tile.h"
+#include "VistaAnimada.h"
 
 const int SCREEN_FPS = 8;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -120,7 +115,7 @@ int main( int argc, char* args[] ){
         //Event handler
         SDL_Event e;
 
-        Camara dot;
+        Camara camara;
 
 
 
@@ -135,12 +130,31 @@ int main( int argc, char* args[] ){
         //While application is running
         int i =1;
         int pos = 213;
-//        Vista Tank(gRenderer);
+        VistaAnimada Tank(gRenderer);
 
-//        LTexture gDotTexture(gRenderer);
-//        gDotTexture.loadFromFile("../VistasSDL/imgs/dot.bmp");
-        LTexture gBGTexture(gRenderer);
-        gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
+
+//        LTexture gBGTexture(gRenderer);
+//        gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
+        VistaTiles tilesTexture(gRenderer);
+
+
+        Tile tile1(0,0, 0, &tilesTexture );
+        Tile tile2(20,0, 1, &tilesTexture );
+        Tile tile3(200,0, 2, &tilesTexture );
+        Tile tile4(700,0, 3, &tilesTexture );
+        Tile tile5(880,0, 0, &tilesTexture );
+        Tile tile6(0,200, 1, &tilesTexture );
+        Tile tile7(0,1000, 3, &tilesTexture );
+        Tile tile8(0,100, 1, &tilesTexture );
+        Tile tile8b(16,100, 1, &tilesTexture );
+        Tile tile9(0,116, 1, &tilesTexture );
+        Tile tile9b(16,116, 1, &tilesTexture );
+        Tile tile10(0,132, 1, &tilesTexture );
+        Tile tile10b(16,132, 1, &tilesTexture );
+
+
+
+
 
 //        SDL_Rect cuadro = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT   };
 
@@ -158,53 +172,65 @@ int main( int argc, char* args[] ){
                 }
 
                 //Handle input for the dot
-                dot.handleEvent( e );
+                camara.handleEvent( e );
             }
 
 
             //Move the dot
-            dot.move();
-//            dot.setCamera();
-//            //Center the camera over the dot
-//            camera.x = ( dot.getPosX() + Dot::DOT_WIDTH / 2 ) - SCREEN_WIDTH / 2;
-//            camera.y = ( dot.getPosY() + Dot::DOT_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
-
-
+            camara.move();
 
 
             //Clear screen
             SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
             SDL_RenderClear( gRenderer );
 
-//			printf("y de la camara: %i    ",dot.getCamaraY());
-//			printf("x de la camara: %i\n",dot.getCamaraX());
 
             //Render background
 
-            gBGTexture.render( 0, 0, dot.getCamara() );
+            tile1.mostrar(camara);
+            tile2.mostrar(camara);
+            tile3.mostrar(camara);
+            tile4.mostrar(camara);
+            tile5.mostrar(camara);
+            tile6.mostrar(camara);
+            tile7.mostrar(camara);
+            tile8.mostrar(camara);
+            tile8b.mostrar(camara);
+            tile9.mostrar(camara);
+            tile9b.mostrar(camara);
+            tile10.mostrar(camara);
+            tile10b.mostrar(camara);
+
+
+
+//            tilesTexture.mostrar(0,0,0);
+//            tilesTexture.mostrar(0,20,1);
+
+
+//            gBGTexture.mostrar( 0, 0, camara.getCamara() );
 
 
 
 
 			//Render objects
-//			dot.render( &gDotTexture );
+//			dot.mostrar( &gDotTexture );
 
 
             pos = (i%42)*15;
 //            cuadro.x = pos;
 
-//            gBGTexture.render( 0, 0, &cuadro );
-//            Tank.mostrar(pos, 100);
+//            gBGTexture.mostrar( 0, 0, &cuadro );
+            Tank.mostrar(pos, 100);
             ++i;
             //Update screen
             SDL_RenderPresent( gRenderer );
 
 
-//            int frameTicks = capTimer.getTicks();
-//            if( frameTicks < SCREEN_TICK_PER_FRAME ){
-//                //Wait remaining time
-//                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-//            }
+            int frameTicks = capTimer.getTicks();
+            if( frameTicks < SCREEN_TICK_PER_FRAME ){
+                //Wait remaining time
+                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+            }
         }
 	}
 

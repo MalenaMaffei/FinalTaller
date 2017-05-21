@@ -87,7 +87,7 @@ void LTexture::setAlpha( Uint8 alpha )
 
 void LTexture::render( int x, int y, SDL_Rect* clip )
 {
-    //Set rendering space and render to screen
+    //Set rendering space and mostrar to screen
     SDL_Rect renderQuad = { x, y, mWidth, mHeight };
 
     //Set clip rendering dimensions

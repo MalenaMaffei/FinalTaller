@@ -48,7 +48,7 @@ bool Vista::loadMedia() {
 }
 
 //void Vista::mostrar(int x, int y) {
-//    render( x, y, currentClip);
+//    mostrar( x, y, currentClip);
 //    avanzarFrame();
 //}
 

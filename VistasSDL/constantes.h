@@ -30,6 +30,6 @@ const int TILE_BOTTOMLEFT = 9;
 const int TILE_LEFT = 10;
 const int TILE_TOPLEFT = 11;
 
-const char tilePath[] = "../VistasSDL/imgs/tank.png";
-const char tankPath[] = "../VistasSDL/imgs/ciudadTiles.png";
+const char tankPath[] = "../VistasSDL/imgs/tank.png";
+const char tilePath[] = "../VistasSDL/imgs/ciudadTiles.png";
 #endif //TPFINAL_CONSTANTES_H

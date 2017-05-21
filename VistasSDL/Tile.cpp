@@ -15,10 +15,12 @@ Tile::Tile(int x, int y, int tileType, VistaTiles *textura) : mType(tileType)
 //    mType = tileType;
 }
 
-void Tile::render( Camara& camera ){
+void Tile::mostrar(Camara &camera){
+//    textura->mostrar(mBox.x, mBox.y , mType);
     //If the tile is on screen
     if( camera.checkCollision( mBox ) ){
         //Show the tile
+
         textura->mostrar(mBox.x - camera.getCamaraX(), mBox.y - camera.getCamaraY(),
                          mType);
 //        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );

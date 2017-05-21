@@ -9,7 +9,7 @@ class Tile {
     Tile(int x, int y, int tileType, VistaTiles *textura);
 
     //Shows the tile
-    void render(  Camara& camera );
+    void mostrar(Camara &camera);
 
     //Get the tile type
     int getType();

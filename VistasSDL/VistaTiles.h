@@ -4,7 +4,7 @@
 
 class VistaTiles : public Vista {
  public:
-  VistaTiles(SDL_Renderer *gRenderer, const std::string &fileName);
+  VistaTiles(SDL_Renderer *gRenderer);
   void mostrar(int x, int y, int clip);
 
  private:

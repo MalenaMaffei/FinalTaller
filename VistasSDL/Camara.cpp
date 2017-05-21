@@ -96,64 +96,64 @@ void Camara::move()
 //    }
 //}
 
-//void Camara::render(LTexture *dotTexture) {
+//void Camara::mostrar(LTexture *dotTexture) {
 //    //Show the dot
-//    dotTexture->render( mBox.x - camera.x, mBox.y - camera.y);
+//    dotTexture->mostrar( mBox.x - camera.x, mBox.y - camera.y);
 //}
 
 bool Camara::checkCollision(SDL_Rect b) {
-    return true;
-//    //The sides of the rectangles
-//    int leftA, leftB;
-//    int rightA, rightB;
-//    int topA, topB;
-//    int bottomA, bottomB;
-//
-//    //Calculate the sides of rect A
-//    leftA = camera.x;
-//    rightA = camera.x + camera.w;
-//    topA = camera.y;
-//    bottomA = camera.y + camera.h;
-//
-//    //Calculate the sides of rect B
-//    leftB = b.x;
-//    rightB = b.x + b.w;
-//    topB = b.y;
-//    bottomB = b.y + b.h;
-//
-//    //If any of the sides from A are outside of B
-//    if( bottomA <= topB )
-//    {
-//        return false;
-//    }
-//
-//    if( topA >= bottomB )
-//    {
-//        return false;
-//    }
-//
-//    if( rightA <= leftB )
-//    {
-//        return false;
-//    }
-//
-//    if( leftA >= rightB )
-//    {
-//        return false;
-//    }
-//
-//    //If none of the sides from A are outside B
 //    return true;
+    //The sides of the rectangles
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
+
+    //Calculate the sides of rect A
+    leftA = mBox.x;
+    rightA = mBox.x + mBox.w;
+    topA = mBox.y;
+    bottomA = mBox.y + mBox.h;
+
+    //Calculate the sides of rect B
+    leftB = b.x;
+    rightB = b.x + b.w;
+    topB = b.y;
+    bottomB = b.y + b.h;
+
+    //If any of the sides from A are outside of B
+    if( bottomA <= topB )
+    {
+        return false;
+    }
+
+    if( topA >= bottomB )
+    {
+        return false;
+    }
+
+    if( rightA <= leftB )
+    {
+        return false;
+    }
+
+    if( leftA >= rightB )
+    {
+        return false;
+    }
+
+    //If none of the sides from A are outside B
+    return true;
 }
 //
 int Camara::getCamaraX() {
-//    return camera.x;
-    return 0;
+    return mBox.x;
+//    return 0;
 }
 //
 int Camara::getCamaraY() {
-//    return camera.y;
-    return 0;
+    return mBox.y;
+//    return 0;
 }
 //
 

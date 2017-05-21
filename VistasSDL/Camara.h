@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include "LTexture.h"
 #include "constantes.h"
-//TODO meter render del background en camara? ver como esta hecho en tiles
+//TODO meter mostrar del background en camara? ver como esta hecho en tiles
 class Camara {
  public:
   //The dimensions of the dot
