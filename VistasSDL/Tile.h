@@ -1,14 +1,15 @@
 #ifndef TPFINAL_TILE_H
 #define TPFINAL_TILE_H
-
+#include "VistaTiles.h"
+#include "Camara.h"
 class Tile {
 
    public:
     //Initializes position and type
-    Tile( int x, int y, int tileType );
+    Tile(int x, int y, int tileType, VistaTiles *textura);
 
     //Shows the tile
-    void render( SDL_Rect& camera );
+    void render(  Camara& camera );
 
     //Get the tile type
     int getType();
@@ -22,6 +23,8 @@ class Tile {
 
     //The tile type
     int mType;
+
+    VistaTiles* textura;
 };
 
 #endif //TPFINAL_TILE_H

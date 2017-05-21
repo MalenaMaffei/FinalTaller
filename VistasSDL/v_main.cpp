@@ -1,22 +1,24 @@
-/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
-and may not be redistributed without written permission.*/
-
-//Using SDL, SDL_image, standard IO, and strings
 #include<SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-// #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
-#include "VistaAnimada.h"
+//#include "VistaAnimada.h"
 #include "LTimer.h"
+#include "Vista.h"
+#include "LTexture.h"
+#include "Camara.h"
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+//The dimensions of the level
+//const int LEVEL_WIDTH = 1280;
+//const int LEVEL_HEIGHT = 960;
+//
+////Screen dimension constants
+//const int SCREEN_WIDTH = 640;
+//const int SCREEN_HEIGHT = 480;
+
 const int SCREEN_FPS = 8;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 #define SPRITE_SIZE 32
-//Texture wrapper class
 
 
 //Starts up SDL and creates window
@@ -117,6 +119,13 @@ int main( int argc, char* args[] ){
 
         //Event handler
         SDL_Event e;
+
+        Camara dot;
+
+
+
+
+
         //The frames per second timer
         LTimer fpsTimer;
 
@@ -128,7 +137,16 @@ int main( int argc, char* args[] ){
         //While application is running
         int i =1;
         int pos = 213;
-        Vista Tank(gRenderer);
+//        Vista Tank(gRenderer);
+
+        LTexture gDotTexture(gRenderer);
+        gDotTexture.loadFromFile("../VistasSDL/imgs/dot.bmp");
+        LTexture gBGTexture(gRenderer);
+        gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
+
+
+
+
         while( !quit )
         {
             capTimer.start();
@@ -140,15 +158,38 @@ int main( int argc, char* args[] ){
                 {
                     quit = true;
                 }
+
+                //Handle input for the dot
+                dot.handleEvent( e );
             }
+
+
+            //Move the dot
+            dot.move();
+            dot.setCamera();
+//            //Center the camera over the dot
+//            camera.x = ( dot.getPosX() + Dot::DOT_WIDTH / 2 ) - SCREEN_WIDTH / 2;
+//            camera.y = ( dot.getPosY() + Dot::DOT_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
+
+
+
 
             //Clear screen
             SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
             SDL_RenderClear( gRenderer );
 
+			printf("y de la camara: %i    ",dot.getCamaraY());
+			printf("x de la camara: %i\n",dot.getCamaraX());
+
+            //Render background
+            gBGTexture.render( 0, 0, dot.getCamara() );
+//Render objects
+			dot.render( &gDotTexture );
+
+
             pos = (i%42)*15;
 
-            Tank.mostrar(pos, 100);
+//            Tank.mostrar(pos, 100);
             ++i;
             //Update screen
             SDL_RenderPresent( gRenderer );

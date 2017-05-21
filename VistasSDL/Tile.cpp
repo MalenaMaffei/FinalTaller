@@ -1,23 +1,27 @@
 #include "Tile.h"
+#define TILE_SIZE 16
 
-Tile::Tile( int x, int y, int tileType ){
+Tile::Tile(int x, int y, int tileType, VistaTiles *textura) : mType(tileType)
+    , textura(textura) {
     //Get the offsets
     mBox.x = x;
     mBox.y = y;
 
     //Set the collision box
-    mBox.w = TILE_WIDTH;
-    mBox.h = TILE_HEIGHT;
+    mBox.w = TILE_SIZE;
+    mBox.h = TILE_SIZE;
 
     //Get the tile type
-    mType = tileType;
+//    mType = tileType;
 }
 
-void Tile::render( SDL_Rect& camera ){
+void Tile::render( Camara& camera ){
     //If the tile is on screen
-    if( checkCollision( camera, mBox ) ){
+    if( camera.checkCollision( mBox ) ){
         //Show the tile
-        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );
+        textura->mostrar(mBox.x - camera.getCamaraX(), mBox.y - camera.getCamaraY(),
+                         mType);
+//        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );
     }
 }
 
