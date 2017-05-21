@@ -124,8 +124,6 @@ int main( int argc, char* args[] ){
 
 
 
-
-
         //The frames per second timer
         LTimer fpsTimer;
 
@@ -139,12 +137,12 @@ int main( int argc, char* args[] ){
         int pos = 213;
 //        Vista Tank(gRenderer);
 
-        LTexture gDotTexture(gRenderer);
-        gDotTexture.loadFromFile("../VistasSDL/imgs/dot.bmp");
+//        LTexture gDotTexture(gRenderer);
+//        gDotTexture.loadFromFile("../VistasSDL/imgs/dot.bmp");
         LTexture gBGTexture(gRenderer);
         gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
 
-
+//        SDL_Rect cuadro = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT   };
 
 
         while( !quit )
@@ -166,7 +164,7 @@ int main( int argc, char* args[] ){
 
             //Move the dot
             dot.move();
-            dot.setCamera();
+//            dot.setCamera();
 //            //Center the camera over the dot
 //            camera.x = ( dot.getPosX() + Dot::DOT_WIDTH / 2 ) - SCREEN_WIDTH / 2;
 //            camera.y = ( dot.getPosY() + Dot::DOT_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
@@ -178,28 +176,35 @@ int main( int argc, char* args[] ){
             SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
             SDL_RenderClear( gRenderer );
 
-			printf("y de la camara: %i    ",dot.getCamaraY());
-			printf("x de la camara: %i\n",dot.getCamaraX());
+//			printf("y de la camara: %i    ",dot.getCamaraY());
+//			printf("x de la camara: %i\n",dot.getCamaraX());
 
             //Render background
+
             gBGTexture.render( 0, 0, dot.getCamara() );
-//Render objects
-			dot.render( &gDotTexture );
+
+
+
+
+			//Render objects
+//			dot.render( &gDotTexture );
 
 
             pos = (i%42)*15;
+//            cuadro.x = pos;
 
+//            gBGTexture.render( 0, 0, &cuadro );
 //            Tank.mostrar(pos, 100);
             ++i;
             //Update screen
             SDL_RenderPresent( gRenderer );
 
 
-            int frameTicks = capTimer.getTicks();
-            if( frameTicks < SCREEN_TICK_PER_FRAME ){
-                //Wait remaining time
-                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-            }
+//            int frameTicks = capTimer.getTicks();
+//            if( frameTicks < SCREEN_TICK_PER_FRAME ){
+//                //Wait remaining time
+//                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+//            }
         }
 	}
 

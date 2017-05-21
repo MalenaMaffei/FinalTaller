@@ -3,12 +3,12 @@
 
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
 //The dimensions of the level
-const int LEVEL_WIDTH = 1280;
-const int LEVEL_HEIGHT = 960;
+const int LEVEL_WIDTH = SCREEN_WIDTH*4;
+const int LEVEL_HEIGHT = SCREEN_HEIGHT*6;
 
 //Tile constants
 const int TILE_WIDTH = 80;

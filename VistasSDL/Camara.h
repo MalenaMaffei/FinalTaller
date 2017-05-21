@@ -7,8 +7,8 @@
 class Camara {
  public:
   //The dimensions of the dot
-  static const int DOT_WIDTH = 20;
-  static const int DOT_HEIGHT = 20;
+//  static const int DOT_WIDTH = 20;
+//  static const int DOT_HEIGHT = 20;
 
   //Maximum axis velocity of the dot
   static const int DOT_VEL = 10;
@@ -38,7 +38,7 @@ class Camara {
 
   //The velocity of the dot
   int mVelX, mVelY;
-  SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };;
+//  SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };;
 };
 
 #endif //TPFINAL_CAMARA_H
