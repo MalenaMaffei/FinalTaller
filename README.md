@@ -2,6 +2,7 @@
 
 
 ## Ideas Generacion de Mapas teniendo en cuenta los tiles que existen ##
+* Estoy probando con una vista de águila de 800\*600 y un mapa total de 3200\*3600 lo que sería 200\*225 tiles, parecería ser una buena resolución, cuando tenga un mapa completo lo subo y se fijan que les parece en términos de jugabilidad.
 * Propongo para los mapas usar el típico archivo .map, es una matriz de números, cada uno índica un tipo de tile.
 * Al comienzo del mapa se indica si es de tipo jungla, ciudad o artico
 * Tierra, Pradera o Nieve se simbolizarían con un solo numero (p. ej 0), la imagen la decide el cliente teniendo en cuenta el comienzo del mapa
