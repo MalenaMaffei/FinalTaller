@@ -4,15 +4,15 @@
 #define WALKING_ANIMATION_FRAMES 3
 //TODO esto va en cada vista depende las frames
 
-class Vista : public LTexture{
+class VistaAnimada : public LTexture{
  public:
-  Vista(SDL_Renderer *gRenderer);
+  VistaAnimada(SDL_Renderer *gRenderer);
 
 //  TODO convertir en void y que lance error
   bool loadMedia();
   void mostrar(int x, int y);
   void avanzarFrame();
-  virtual ~Vista();
+  virtual ~VistaAnimada();
 
  protected:
   SDL_Rect gSpriteClips[WALKING_ANIMATION_FRAMES];

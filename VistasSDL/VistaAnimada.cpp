@@ -1,14 +1,14 @@
-#include "Vista.h"
+#include "VistaAnimada.h"
 
 
-Vista::Vista(SDL_Renderer *gRenderer) : LTexture(gRenderer) {
+VistaAnimada::VistaAnimada(SDL_Renderer *gRenderer) : LTexture(gRenderer) {
 
     loadMedia();
     frame = 0;
     currentClip = &gSpriteClips[frame % WALKING_ANIMATION_FRAMES];
 }
 
-bool Vista::loadMedia() {
+bool VistaAnimada::loadMedia() {
     //Loading success flag
     bool success = true;
 
@@ -36,17 +36,17 @@ bool Vista::loadMedia() {
     return success;
 }
 
-void Vista::mostrar(int x, int y) {
+void VistaAnimada::mostrar(int x, int y) {
     render( x, y, currentClip);
     avanzarFrame();
 }
 
-void Vista::avanzarFrame() {
+void VistaAnimada::avanzarFrame() {
     ++frame;
     frame = frame % WALKING_ANIMATION_FRAMES;
     currentClip = &gSpriteClips[frame];
 }
 
-Vista::~Vista() {
+VistaAnimada::~VistaAnimada() {
 //gSpriteSheetTextureTank.free(); TODO no se si hay que ponerlo
 }

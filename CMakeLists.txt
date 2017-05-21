@@ -24,6 +24,5 @@ set(SDL2_IMG_LIBRARY /usr/lib64/libSDL2_image.so)
 
 include_directories(${SDL2_INCLUDE_DIR})
 
-
 add_executable(vista  ${VISTA_SRC})
 target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMG_LIBRARY})
