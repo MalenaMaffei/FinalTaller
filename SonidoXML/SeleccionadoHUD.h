@@ -20,14 +20,17 @@
 #include <gtkmm/button.h>
 #include <gtkmm/window.h>
 
-class CharacterHUD : public Gtk::Window {
+class SeleccionadoHUD : public Gtk::Window {
 public:
-    CharacterHUD();
-    virtual ~CharacterHUD();
+    SeleccionadoHUD();
+    virtual ~SeleccionadoHUD();
+    void seleccionarFabrica();
+    void seleccionarPersonaje();
 protected:
     //Signal handlers:
     //Our new improved on_button_clicked()
-    void on_button_clicked(Glib::ustring data);
+    void on_button_clicked();
+    bool on_timeout();
     
     //Child widgets:
     Gtk::Grid m_grid;
@@ -38,6 +41,8 @@ protected:
     
     Gtk::Image m_ammo;
     Gtk::Image m_ammo_name;
+
+    Gtk::Button m_button;
     
 };
 

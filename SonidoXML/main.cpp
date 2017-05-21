@@ -2,7 +2,7 @@
 #include "Reproductor.h"
 #include <tinyxml2.h>
 #include <iostream>
-#include "CharacterHUD.h"
+#include "SeleccionadoHUD.h"
 #include <gtkmm/application.h>
 
 #define MUS_NAME "musica/music_desert.ogg"
@@ -13,8 +13,10 @@ int main( int argc, char* args[] )
 {
 	auto app = Gtk::Application::create(argc, args, "org.gtkmm.example");
   
-	CharacterHUD grunt_hud;
-  
-	return app->run(grunt_hud);
-	return 0;
+	SeleccionadoHUD grunt_hud;
+
+//	grunt_hud.seleccionarFabrica();
+	
+	app->run(grunt_hud);
+
 }
