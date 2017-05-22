@@ -1,4 +1,4 @@
-#include "AEstrella.h"
+#include "server_AEstrella.h"
 
 AEstrella::AEstrella(Casillero origen, Casillero destino) :
 							origen(origen), destino(destino) {}

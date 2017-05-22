@@ -1,5 +1,5 @@
-#ifndef AESTRELLA_H_
-#define AESTRELLA_H_
+#ifndef SERVER_AESTRELLA_H_
+#define SERVER_AESTRELLA_H_
 
 #include "server_Casillero.h"
 
@@ -19,9 +19,9 @@ class AEstrella {
 
 		void pathFinding(Casillero &fin);
 
-		void getRecorrido(std::vector<Casillero> &recorrido)
+		void getRecorrido(std::vector<Casillero> &recorrido);
 
 		virtual ~AEstrella();
 };
 
-#endif /* AESTRELLA_H_ */
+#endif /* SERVER_AESTRELLA_H_ */

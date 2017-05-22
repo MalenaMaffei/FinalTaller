@@ -2,8 +2,10 @@
 
 Mapa::Mapa() {}
 
-void Mapa::AEstrella(Posicion origen, Posicion destino) {
-
+void Mapa::AEstrella(Casillero origen, Casillero destino) {
+	AEstrella camino(origen, destino);
+	std::vector<Casillero> recorrido;
+	camino.getRecorrido(recorrido);
 }
 
 Mapa::~Mapa() {

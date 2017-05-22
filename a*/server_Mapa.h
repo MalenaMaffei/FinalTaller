@@ -4,6 +4,7 @@
 #include <vector>
 #include "server_Casillero.h"
 #include "server_Posicion.h"
+#include "server_AEstrella.h"
 
 class Mapa {
 	private:
@@ -12,7 +13,7 @@ class Mapa {
 	public:
 		Mapa();
 
-		void AEstrella(Posicion origen, Posicion destino);
+		void AEstrella(Casillero origen, Casillero destino);
 
 		virtual ~Mapa();
 };
