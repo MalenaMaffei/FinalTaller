@@ -6,3 +6,4 @@
 4. Tanques tienen cañón que se podría mover independientemente de la dirección del tanuqe, hace falta? Se podría girar el tanque para disparar
 5. Cuando se hace un click, le digo que id se toco al server para que me devuelva que mostrar? o muestra el cliente la ventana que corresponde y despues manda al server que accion se hizo?
 6. Puedo esperar que el servidor me diga correctamente qué métodos usar sobre un Elemento del mapa? Así no tengo que preocuparme de intentar validar Si x Elemento es del tipo ElementMovible y directamente hago elementos[id].mover(x,y).
+7. Colores de las unidades.. hago una vista con todos los colores y cada elemento elige la fila en el spritesheet que le corresponde o hago una Textura para cada color?
