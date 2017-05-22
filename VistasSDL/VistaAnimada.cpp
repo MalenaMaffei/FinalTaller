@@ -1,11 +1,12 @@
 #include "VistaAnimada.h"
-
+#include "Camara.h"
 
 VistaAnimada::VistaAnimada(SDL_Renderer *gRenderer) : LTexture(gRenderer) {
 
     loadMedia();
     frame = 0;
     currentClip = &gSpriteClips[frame % WALKING_ANIMATION_FRAMES];
+
 }
 
 bool VistaAnimada::loadMedia() {
@@ -36,9 +37,11 @@ bool VistaAnimada::loadMedia() {
     return success;
 }
 
-void VistaAnimada::mostrar(int x, int y) {
-    render( x, y, currentClip);
-    avanzarFrame();
+void VistaAnimada::mostrar(Camara &camara) {
+    if( camara.checkCollision( objeto ) ) {
+        render(x-camara.getCamaraX(), y-camara.getCamaraY(), currentClip);
+        avanzarFrame();
+    }
 }
 
 void VistaAnimada::avanzarFrame() {

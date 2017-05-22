@@ -2,6 +2,7 @@
 #define TPFINAL_VISTATILE_H
 #include <vector>
 #include "LTexture.h"
+#include "Camara.h"
 
 class Vista : public LTexture{
  public:
@@ -11,7 +12,7 @@ class Vista : public LTexture{
           int clips,
           std::string fileName);
   virtual bool loadMedia();
-//  virtual void mostrar(int x, int y) = 0;
+  virtual void mostrar(int x, int y, int nrClip);
   virtual ~Vista();
 
  protected:

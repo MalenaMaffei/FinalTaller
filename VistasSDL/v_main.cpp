@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <algorithm>
 //#include "VistaAnimada.h"
 #include "LTimer.h"
 #include "Vista.h"
@@ -10,6 +11,14 @@
 #include "VistaTiles.h"
 #include "Tile.h"
 #include "VistaAnimada.h"
+#include "VistaRoca.h"
+#include "Elemento.h"
+#include "ElementoRoca.h"
+#include "ElementoFuerte.h"
+#include "VistaBandera.h"
+#include "ElementoBandera.h"
+#include "VistaPuente.h"
+#include "ElementoPuente.h"
 
 const int SCREEN_FPS = 8;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -95,11 +104,26 @@ void close()
 	gWindow = NULL;
 	gRenderer = NULL;
 
+//    TODO destruir a los elementos
+
+
+
+
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
 }
-
+int getTileType(int x, int y){
+    if(x < 50){
+        return 0;
+    } else if(x < 100) {
+        return 1;
+    } else if(x < 150){
+        return 2;
+    } else if(x < 200){
+        return 3;
+    }
+}
 
 int main( int argc, char* args[] ){
 
@@ -129,34 +153,53 @@ int main( int argc, char* args[] ){
 
         //While application is running
         int i =1;
-        int pos = 213;
+        int pos = 0;
         VistaAnimada Tank(gRenderer);
 
 
 //        LTexture gBGTexture(gRenderer);
 //        gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
         VistaTiles tilesTexture(gRenderer);
-
-
-        Tile tile1(0,0, 0, &tilesTexture );
-        Tile tile2(20,0, 1, &tilesTexture );
-        Tile tile3(200,0, 2, &tilesTexture );
-        Tile tile4(700,0, 3, &tilesTexture );
-        Tile tile5(880,0, 0, &tilesTexture );
-        Tile tile6(0,200, 1, &tilesTexture );
-        Tile tile7(0,1000, 3, &tilesTexture );
-        Tile tile8(0,100, 1, &tilesTexture );
-        Tile tile8b(16,100, 1, &tilesTexture );
-        Tile tile9(0,116, 1, &tilesTexture );
-        Tile tile9b(16,116, 1, &tilesTexture );
-        Tile tile10(0,132, 1, &tilesTexture );
-        Tile tile10b(16,132, 1, &tilesTexture );
-
-
-
-
+        std::vector<Tile> tiles;
+        for (int x = 0; x < LEVEL_WIDTH/TILE_WIDTH ; ++x) {
+            for (int y = 0; y < LEVEL_HEIGHT/TILE_HEIGHT; ++y) {
+                Tile tile (x*TILE_WIDTH, y*TILE_HEIGHT, getTileType(x,y),
+                           &tilesTexture);
+                tiles.push_back(tile);
+            }
+        }
 
 //        SDL_Rect cuadro = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT   };
+
+
+        VistaRoca rocaTextura(gRenderer);
+        std::vector<Elemento*> elementos;
+        for (int j = 0; j <640; j+=32) {
+            Elemento* roca = new ElementoRoca(j, j+10, j+500,&rocaTextura);
+            elementos.push_back(roca);
+        }
+
+        VistaFuerte fuerteTextura(gRenderer);
+        Elemento* fuerte1 = new ElementoFuerte(1, 100, 100, &fuerteTextura);
+        elementos.push_back(fuerte1);
+        Elemento* fuerte2 = new ElementoFuerte(1, 900, 900, &fuerteTextura);
+        elementos.push_back(fuerte2);
+
+        VistaBandera banderaTextura(gRenderer);
+        for (int j = 0; j <640; j+=32) {
+            Elemento* bandera = new ElementoBandera(j, j+60, j+500,
+                                                    &banderaTextura);
+            elementos.push_back(bandera);
+        }
+
+        VistaPuente puenteTextura(gRenderer);
+        for (int j = 0; j <640; j+=64) {
+            Elemento* puente = new ElementoPuente(j, j+200, j+800,
+                                                    &puenteTextura, j%3==0);
+            elementos.push_back(puente);
+        }
+
+
 
 
         while( !quit )
@@ -187,19 +230,14 @@ int main( int argc, char* args[] ){
 
             //Render background
 
-            tile1.mostrar(camara);
-            tile2.mostrar(camara);
-            tile3.mostrar(camara);
-            tile4.mostrar(camara);
-            tile5.mostrar(camara);
-            tile6.mostrar(camara);
-            tile7.mostrar(camara);
-            tile8.mostrar(camara);
-            tile8b.mostrar(camara);
-            tile9.mostrar(camara);
-            tile9b.mostrar(camara);
-            tile10.mostrar(camara);
-            tile10b.mostrar(camara);
+            std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
+              tile.mostrar(camara);
+            });
+
+            std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
+            elemento){
+              elemento->mostrar(camara);
+            });
 
 
 
@@ -216,21 +254,21 @@ int main( int argc, char* args[] ){
 //			dot.mostrar( &gDotTexture );
 
 
-            pos = (i%42)*15;
+//            pos = (i%LEVEL_WIDTH)*3;
 //            cuadro.x = pos;
 
 //            gBGTexture.mostrar( 0, 0, &cuadro );
-            Tank.mostrar(pos, 100);
-            ++i;
+//            Tank.mostrar(camara);
+//            ++i;
             //Update screen
             SDL_RenderPresent( gRenderer );
 
-
-            int frameTicks = capTimer.getTicks();
-            if( frameTicks < SCREEN_TICK_PER_FRAME ){
-                //Wait remaining time
-                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-            }
+//
+//            int frameTicks = capTimer.getTicks();
+//            if( frameTicks < SCREEN_TICK_PER_FRAME ){
+//                //Wait remaining time
+//                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+//            }
         }
 	}
 

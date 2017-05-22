@@ -35,10 +35,6 @@ bool Vista::loadMedia() {
             rect.w = width;
             rect.h = height;
             gClips.push_back(rect);
-//            gClips[ j ].x =   col;
-//            gClips[ j ].y =   0;
-//            gClips[ j ].w =  width;
-//            gClips[ j ].h =  height;
 
             col += width;
         }
@@ -47,13 +43,11 @@ bool Vista::loadMedia() {
     return success;
 }
 
-//void Vista::mostrar(int x, int y) {
-//    mostrar( x, y, currentClip);
-//    avanzarFrame();
-//}
-
 Vista::~Vista() {
 //gSpriteSheetTextureTank.free(); TODO no se si hay que ponerlo
+}
+void Vista::mostrar(int x, int y, int nrClip) {
+    render(x, y, &gClips[nrClip%clips]);
 }
 
 

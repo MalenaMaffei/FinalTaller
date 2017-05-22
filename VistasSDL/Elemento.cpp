@@ -1,21 +1,20 @@
-#include "Tile.h"
-#define TILE_SIZE 16
-
-Tile::Tile(int x, int y, int tileType, VistaTiles *textura) : mType(tileType)
-    , textura(textura) {
-    //Get the offsets
+#include "Elemento.h"
+Elemento::Elemento(int id,
+                   int x,
+                   int y,
+                   int width,
+                   int height,
+                   Vista *textura)
+    : textura(textura), id(id), currentClip(0) {
     mBox.x = x;
     mBox.y = y;
 
     //Set the collision box
-    mBox.w = TILE_SIZE;
-    mBox.h = TILE_SIZE;
-
-    //Get the tile type
-//    mType = tileType;
+    mBox.w = width;
+    mBox.h = height;
 }
 
-void Tile::mostrar(Camara &camera){
+void Elemento::mostrar(Camara &camera) {
 //    textura->mostrar(mBox.x, mBox.y , mType);
     //If the tile is on screen
     if( camera.checkCollision( mBox ) ){
@@ -23,15 +22,7 @@ void Tile::mostrar(Camara &camera){
 
         textura->mostrar(mBox.x - camera.getCamaraX(),
                          mBox.y - camera.getCamaraY(),
-                         mType);
+                         currentClip);
 //        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );
     }
-}
-
-int Tile::getType(){
-    return mType;
-}
-
-SDL_Rect Tile::getBox(){
-    return mBox;
 }
