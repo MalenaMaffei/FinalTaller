@@ -6,4 +6,9 @@
 4. Tanques tienen cañón que se podría mover independientemente de la dirección del tanuqe, hace falta? Se podría girar el tanque para disparar
 5. Cuando se hace un click, le digo que id se toco al server para que me devuelva que mostrar? o muestra el cliente la ventana que corresponde y despues manda al server que accion se hizo?
 6. Puedo esperar que el servidor me diga correctamente qué métodos usar sobre un Elemento del mapa? Así no tengo que preocuparme de intentar validar Si x Elemento es del tipo ElementMovible y directamente hago elementos[id].mover(x,y).
-7. Colores de las unidades.. hago una vista con todos los colores y cada elemento elige la fila en el spritesheet que le corresponde o hago una Textura para cada color?
+7. Colores de las unidades:
+  * hago una vista con todos los colores y cada elemento elige la fila en el spritesheet que le corresponde
+  * hago una Textura para cada color
+  * cambio el string de donde la vista saca la imagen.. aunque me traeria otros problemas con el diseño que ya tengo.
+  
+8. Elementos son los SDL_Rects que toman el clip que necesitan de una Vista, una misma vista es usada por varios elementos que son del mismo tipo. Necesito que los elementos sepan quiénes son? Empecé haciendo ELementoRoca ElementoPuente etc, pero perfectamente podrían ser los dos ElementoNoAnimado o algo asi y todos las unidades son ElementosAnimados o Movibles o lo que sea, siento que al tener el id a mi no me importa qué exactamente es un elemento, solo necesito su id para pasarle al Server. La única diferencia entre mismos tipos(movible, no movible, etc) de elementos va a ser qué vista le paso cuando lo creo.
