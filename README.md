@@ -2,7 +2,7 @@
 
 
 ## Ideas Generacion de Mapas teniendo en cuenta los tiles que existen ##
-* Estoy probando con una vista de águila de 800\*600 y un mapa total de 3200\*3600 lo que sería 200\*225 tiles, parecería ser una buena resolución, cuando tenga un mapa completo lo subo y se fijan que les parece en términos de jugabilidad.
+* Estoy probando con una vista de águila de 800\*600 y un mapa total de 3200\*3600 lo que sería 200\*225 tiles, parecería ser una buena resolución, ~~cuando tenga un mapa completo lo subo y se fijan que les parece en términos de jugabilidad.~~ Si corren ./vista con wasd se mueven por el mapa, yo creo  que el tamaño esta bien, aunque podría ser más grande, no tengo bien la sensación de cuantas fábricas y unidades se van a llegar a construir antes de que termine el juego, por el minimap de la captura que tenemos del juego original no pareciera que el mapa total fuera muy grande.
 * Propongo para los mapas usar el típico archivo .map, es una matriz de números, cada uno índica un tipo de tile.
 * Al comienzo del mapa se indica si es de tipo jungla, ciudad o artico
 * Tierra, Pradera o Nieve se simbolizarían con un solo numero (p. ej 0), la imagen la decide el cliente teniendo en cuenta el comienzo del mapa
