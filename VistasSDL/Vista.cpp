@@ -49,5 +49,14 @@ Vista::~Vista() {
 void Vista::mostrar(int x, int y, int nrClip) {
     render(x, y, &gClips[nrClip%clips]);
 }
+int Vista::getHeight() const {
+    return height;
+}
+int Vista::getWidth() const {
+    return width;
+}
+int Vista::getClips() const {
+    return clips;
+}
 
 

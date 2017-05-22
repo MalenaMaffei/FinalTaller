@@ -19,6 +19,8 @@
 #include "ElementoBandera.h"
 #include "VistaPuente.h"
 #include "ElementoPuente.h"
+#include "VistaRobotCaminar.h"
+#include "ElementoRobot.h"
 
 const int SCREEN_FPS = 8;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -199,6 +201,12 @@ int main( int argc, char* args[] ){
             elementos.push_back(puente);
         }
 
+
+        VistaRobotCaminar robotCaminarTextura(gRenderer);
+        Elemento* robot1 = new ElementoRobot(1,20,20, &robotCaminarTextura);
+        elementos.push_back(robot1);
+        Elemento* robot2 = new ElementoRobot(1,40,40, &robotCaminarTextura);
+        elementos.push_back(robot2);
 
 
 

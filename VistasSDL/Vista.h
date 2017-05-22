@@ -14,6 +14,9 @@ class Vista : public LTexture{
   virtual bool loadMedia();
   virtual void mostrar(int x, int y, int nrClip);
   virtual ~Vista();
+  int getHeight() const;
+  int getWidth() const;
+  int getClips() const;
 
  protected:
   std::vector<SDL_Rect> gClips;

@@ -24,6 +24,7 @@ const char fabricaVehiculosPath[] = "../VistasSDL/imgs/Edificios/vehicle.png";
 const char fabricaRobotsPath[] = "../VistasSDL/imgs/Edificios/robot.png";
 const char puentePath[] = "../VistasSDL/imgs/Puentes/bridge_city.png";
 const char banderaPath[] = "../VistasSDL/imgs/Banderas/blue_flag.png";
+const char robotCaminarPath[] = "../VistasSDL/imgs/Robots/caminar_robot.png";
 
 
 
