@@ -1,69 +1,73 @@
 #include "AEstrella.h"
 
-AEstrella::AEstrella(std::vector<std::vector<int>> &mapa, punto &origen, punto &destino) : 
-						mapa(mapa), origen(origen), destino(destino) {}
+AEstrella::AEstrella(Casillero origen, Casillero destino) :
+							origen(origen), destino(destino) {}
 
-punto AEstrella::pathFinding() {
+void AEstrella::vecinoConMenorPeso(Casillero &resultado) {
+	resultado = listaAbierta[0];
+	for(size_t i = 1; i < listaAbierta.size(); ++i) {
+		if(listaAbierta[i].getF() < resultado.getF()) {
+			resultado = listaAbierta[i];
+		}
+	}
+	listaAbierta.erase(std::remove(listaAbierta.begin(),
+									listaAbierta.end(), resultado), listaAbierta.end());
+}
+
+void AEstrella::setEcuacion(Casillero &actual, Casillero &adyacente) {
+	int distH = actual.distanciaH(adyacente);
+	int distG = actual.distanciaG(adyacente);
+
+	adyacente.setH(distH + actual.getH());
+	adyacente.setG(distG + actual.getG());
+}
+
+void AEstrella::pathFinding(Casillero &fin) {
 	listaAbierta.push_back(origen);
-
-	while (listaAbierta.size() != 0) {
-		punto actual = this->puntoConMenorPeso();
+	while(listaAbierta.size() != 0) {
+		Casillero actual;
+		this->vecinoConMenorPeso(actual);
 		listaCerrada.push_back(actual);
 
-		if (actual == destino) {
-			return actual;
+		if (actual.cmp(destino)) {
+			fin = actual;
+			return;
+
 		} else {
-			vector<punto> adyacentes = mapa.getAdyacentes(actual);
+			std::vector<Casillero> adyacentes;
+			actual.getVecinos(adyacentes);
 
 			for (size_t i = 0; i < adyacentes.size(); ++i) {
-				punto adyacente = adyacentes[i];
+				Casillero adyacente = adyacentes[i];
 				if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) == listaAbierta.end() &&
 					std::find(listaCerrada.begin(), listaCerrada.end(), adyacente) == listaCerrada.end()) {
-
-					this->setEcuacion(actual, adyacente); //falta implementar
+					this->setEcuacion(actual, adyacente);
 					adyacente.setPadre(actual);
 					listaAbierta.push_back(adyacente);
 
 				} else if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) != vector.end()) {
-					/*No entiendo esta parte*/
+					if (adyacente.getG() < actual.getG()) {
+						this->setEcuacion(actual, adyacente);
+						adyacente.setPadre(actual);
+					}
 				}
 			}
 		}
 	}
-
-	return actual
 }
 
-punto AEstrella::puntoConMenorPeso() {
-	punto resultado = listaAbierta[0];
+void AEstrella::getRecorrido(std::vector<Casillero> &recorrido) {
+	Casillero actual;
+	this->pathFinding(actual);
 
-	if (listaAbierta.size() > 1) { //creo que es al pedo esta linea
-		for (size_t i = 1; i < listaAbierta.size(); ++i) {
-			if (listaAbierta[i].getPeso() < resultado.getPeso()) {
-				resultado = listaAbierta[i];
-			}
-		}
+	while (actual != origen) {
+		recorrido.push_back(actual);
+		Casillero aux;
+		actual.getPadre(aux);
+		actual = aux;
 	}
-	return resultado;
-}	
-
-void AEstrella::guardarRecorrido(punto &origen, punto &destino) {
-	if (destino.cmp(origen) != 0) {
-		pila.push(destino);
-		this->guardarRecorrido(origen, destino.getPadre());
-	}
-	return;
-}
-
-vector<punto> AEstrella::getRecorrido() {
-	this->pathFinding();
-	this->guardarRecorrido(origen, destino);
-	vector<punto> recorrido;
-
-	while (!pila.empty()) {
-		recorrido.push_back(pila.top());
-		pila.pop();
-	}
+	recorrido.push_back(origen);
 }
 
 AEstrella::~AEstrella() {}
+

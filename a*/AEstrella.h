@@ -1,18 +1,27 @@
-#ifndef AEstrella_H_
-#define AEstrella_H_
+#ifndef AESTRELLA_H_
+#define AESTRELLA_H_
 
-typedef std::tuple<unsigned int, unsigned int> punto; //es mejor hacer clase punto o vertice
+#include "server_Casillero.h"
 
 class AEstrella {
 	private:
-		std::vector<std::vector<int>> &mapa;  //tiene que ser un grafo?
-		punto &origen; 
-		punto &destino;
-		vector<punto> listaAbierta;
-		vector<punto> listaCerrada;
-		std::stack<punto> pila;
+		Casillero &origen;
+		Casillero &destino;
+		std::vector<Casillero> listaAbierta;
+		std::vector<Casillero> listaCerrada;
 
 	public:
+		AEstrella(Casillero origen, Casillero destino);
 
+		void setEcuacion(Casillero &actual, Casillero &adyacente);
 
-#endif /* AEstrella_H_ */
+		void vecinoConMenorPeso(Casillero &resultado);
+
+		void pathFinding(Casillero &fin);
+
+		void getRecorrido(std::vector<Casillero> &recorrido)
+
+		virtual ~AEstrella();
+};
+
+#endif /* AESTRELLA_H_ */
