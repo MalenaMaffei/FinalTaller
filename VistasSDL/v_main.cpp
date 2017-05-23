@@ -209,13 +209,18 @@ int main( int argc, char* args[] ){
 
 
         ElementoUnidad* robot1 =
-            new ElementoRobot(1, 20, 20, &robotCaminarTextura,
-                              &pyroDispararTextura);
+            new ElementoRobot(1,
+                              20,
+                              20,
+                              &robotCaminarTextura,
+                              &pyroDispararTextura,
+                              nullptr);
         unidades.push_back(robot1);
 
         VistaHeavy heavyTextura(gRenderer);
+        VistaMuerteTanque muerteTextura(gRenderer);
         ElementoUnidad* tanque =
-            new ElementoTanque(1, 80, 80, &heavyTextura);
+            new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTextura);
         unidades.push_back(tanque);
 
 
@@ -257,10 +262,15 @@ int main( int argc, char* args[] ){
 //            });
 
             robot1->mover(pos_robot, pos_robot);
-            tanque->mover(pos_tanque,0);
+
 
             if (pos_tanque == 100){
                 fuerte1->matar();
+            }
+            if (pos_tanque > 200){
+                tanque->matar();
+            } else {
+                tanque->mover(pos_tanque,0);
             }
 
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*

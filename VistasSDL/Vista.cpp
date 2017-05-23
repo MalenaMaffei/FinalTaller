@@ -56,5 +56,8 @@ int Vista::getWidth() const {
 int Vista::getClip(int clip) const {
     return clip%clips;
 }
+bool Vista::isLastClip(int clip) const {
+    return clip == clips-1 ;
+}
 
 

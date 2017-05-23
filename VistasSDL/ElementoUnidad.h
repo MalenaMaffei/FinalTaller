@@ -6,17 +6,24 @@
 class ElementoUnidad : public Elemento{
  public:
   ElementoUnidad(int id,
-                  int x,
-                  int y,
-                  VistaDireccionada *textura);
+                   int x,
+                   int y,
+                   VistaDireccionada *textura,
+                   Vista *vistaMuerte);
   virtual void mover(int newX, int newY);
+  void mostrar(Camara &camera);
+  void matar();
  protected:
-//  TODO seguramente tenga que usar un enum aca pero estoy probando rapido el
+  void morir();
+
+  //  TODO seguramente tenga que usar un enum aca pero estoy probando rapido el
 // concepto
   int direccion;
   bool enMovimiento;
   bool disparando;
+  bool muriendo;
   VistaDireccionada* texturaDireccionada;
+  Vista* vistaMuerte;
 
 };
 

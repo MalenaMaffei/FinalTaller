@@ -17,6 +17,7 @@ class Vista : public LTexture{
   int getHeight() const;
   int getWidth() const;
   int getClip(int clip) const;
+  bool isLastClip(int clip) const;
 
  protected:
   std::vector<SDL_Rect> gClips;

@@ -7,10 +7,11 @@
 class ElementoRobot : public ElementoUnidad{
  public:
   ElementoRobot(int id,
-                int x,
-                int y,
-                VistaDireccionada *texturaCaminar,
-                VistaDireccionada *texturaDisparar);
+                  int x,
+                  int y,
+                  VistaDireccionada *texturaCaminar,
+                  VistaDireccionada *texturaDisparar,
+                  Vista *vistaMuerte);
  private:
   Vista* texturaDisparar;
   Vista* currentVista;

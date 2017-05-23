@@ -3,7 +3,7 @@ Elemento::Elemento(int id,
                    int x,
                    int y,
                    Vista *textura)
-    : textura(textura), id(id), currentClip(0) {
+    : textura(textura), id(id), currentClip(0), muerto(false) {
     mBox.x = x;
     mBox.y = y;
 
@@ -15,14 +15,17 @@ Elemento::Elemento(int id,
 void Elemento::mostrar(Camara &camera) {
 //    textura->mostrar(mBox.x, mBox.y , mType);
     //If the tile is on screen
-    if( camera.checkCollision( mBox ) ){
-        //Show the tile
+    if(!muerto){
+        if( camera.checkCollision( mBox ) ){
+            //Show the tile
 
-        textura->mostrar(mBox.x - camera.getCamaraX(),
-                         mBox.y - camera.getCamaraY(),
-                         currentClip);
+            textura->mostrar(mBox.x - camera.getCamaraX(),
+                             mBox.y - camera.getCamaraY(),
+                             currentClip);
 //        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );
+        }
     }
+
 }
 
 bool Elemento::estaMuerto() const {
