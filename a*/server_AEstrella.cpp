@@ -39,16 +39,19 @@ void AEstrella::pathFinding(Casillero &fin) {
 
 			for (size_t i = 0; i < adyacentes.size(); ++i) {
 				Casillero adyacente = adyacentes[i];
-				if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) == listaAbierta.end() &&
-					std::find(listaCerrada.begin(), listaCerrada.end(), adyacente) == listaCerrada.end()) {
-					this->setEcuacion(actual, adyacente);
-					adyacente.setPadre(actual);
-					listaAbierta.push_back(adyacente);
-
-				} else if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) != vector.end()) {
-					if (adyacente.getG() < actual.getG()) {
+				
+				if (!adyacente.estaOcupado()) {
+					if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) == listaAbierta.end() &&
+						std::find(listaCerrada.begin(), listaCerrada.end(), adyacente) == listaCerrada.end()) {
 						this->setEcuacion(actual, adyacente);
 						adyacente.setPadre(actual);
+						listaAbierta.push_back(adyacente);
+
+					} else if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) != vector.end()) {
+						if (adyacente.getG() < actual.getG()) {
+							this->setEcuacion(actual, adyacente);
+							adyacente.setPadre(actual);
+						}
 					}
 				}
 			}
