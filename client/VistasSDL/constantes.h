@@ -15,20 +15,21 @@ const int TILE_WIDTH = 16;
 const int TILE_HEIGHT = 16;
 const int TILE_CLIPS = 4;
 
-const char tankPath[] = "../VistasSDL/imgs/tank.png";
-const char tilePath[] = "../VistasSDL/imgs/ciudadTiles.png";
-const char rocaPath[] = "../VistasSDL/imgs/Rocas/roca_roca.png";
-const char hieloPath[] = "../VistasSDL/imgs/Rocas/roca_hielo.png";
-const char fuertePath[] = "../VistasSDL/imgs/Edificios/fort.png";
-const char fabricaVehiculosPath[] = "../VistasSDL/imgs/Edificios/vehicle.png";
-const char fabricaRobotsPath[] = "../VistasSDL/imgs/Edificios/robot.png";
-const char puentePath[] = "../VistasSDL/imgs/Puentes/bridge_city.png";
-const char banderaPath[] = "../VistasSDL/imgs/Banderas/blue_flag.png";
-const char robotCaminarPath[] = "../VistasSDL/imgs/Robots/caminar_robot.png";
-const char robotPyroDisparar[] = "../VistasSDL/imgs/Robots/disparo_pyro.png";
-const char robotMuertePath[] = "../VistasSDL/imgs/Robots/muerte.png";
-const char tanquePath[] = "../VistasSDL/imgs/Tanks/heavy.png";
-const char tanqueMuertePath[] = "../VistasSDL/imgs/Tanks/explosion.png";
+const char tankPath[] = "../client/VistasSDL/imgs/tank.png";
+const char tilePath[] = "../client/VistasSDL/imgs/ciudadTiles.png";
+const char rocaPath[] = "../client/VistasSDL/imgs/Rocas/roca_roca.png";
+const char hieloPath[] = "../client/VistasSDL/imgs/Rocas/roca_hielo.png";
+const char fuertePath[] = "../client/VistasSDL/imgs/Edificios/fort.png";
+const char fabricaVehiculosPath[] = "../client/VistasSDL/imgs/Edificios/vehicle.png";
+const char fabricaRobotsPath[] = "../client/VistasSDL/imgs/Edificios/robot.png";
+const char puentePath[] = "../client/VistasSDL/imgs/Puentes/bridge_city.png";
+const char banderaPath[] = "../client/VistasSDL/imgs/Banderas/blue_flag.png";
+const char robotCaminarPath[] = "../client/VistasSDL/imgs/Robots/caminar_robot.png";
+const char robotPyroDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_pyro.png";
+const char robotMuertePath[] = "../client/VistasSDL/imgs/Robots/muerte.png";
+const char tanquePath[] = "../client/VistasSDL/imgs/Tanks/heavy.png";
+const char tanqueMuertePath[] = "../client/VistasSDL/imgs/Tanks/explosion.png";
+const char tanqueMissilePath[] = "../client/VistasSDL/imgs/Tanks/missile.png";
 
 
 #endif //TPFINAL_CONSTANTES_H

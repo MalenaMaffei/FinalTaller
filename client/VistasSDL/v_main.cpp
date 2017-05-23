@@ -10,7 +10,6 @@
 #include "Camara.h"
 #include "VistaTiles.h"
 #include "Tile.h"
-#include "VistaAnimada.h"
 #include "VistaRoca.h"
 #include "Elemento.h"
 #include "ElementoRoca.h"
@@ -26,6 +25,7 @@
 #include "VistaHeavy.h"
 #include "VistaMuerteRobot.h"
 #include "Mouse.h"
+#include "VistaMissilelauncher.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -159,7 +159,6 @@ int main( int argc, char* args[] ){
         int pos_robot = 0;
         int pos_tanque = 0;
         int pos = 0;
-        VistaAnimada Tank(gRenderer);
 
 
 //        LTexture gBGTexture(gRenderer);
@@ -222,6 +221,16 @@ int main( int argc, char* args[] ){
             new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
         unidades.push_back(tanque);
 
+
+        VistaMissilelauncher missilelauncherTextura(gRenderer);
+        ElementoUnidad* tanque2 = new ElementoTanque(1, 0,0,
+                                                     &missilelauncherTextura,
+                                                     &muerteTanqueTextura);
+        unidades.push_back(tanque2);
+
+
+
+
         Mouse mouse;
         SelectBox selectBox;
 
@@ -271,20 +280,22 @@ int main( int argc, char* args[] ){
 
 
 
-            if (pos_tanque == 100){
+            if (pos_tanque == 110){
                 fuerte1->matar();
             }
-            if (pos_tanque > 200){
+            if (pos_tanque > 100){
                 tanque->matar();
             } else {
                 tanque->mover(pos_tanque,0);
             }
 
-            if (pos_tanque > 300){
+            if (pos_tanque > 60){
                 robot1->matar();
             } else {
                 robot1->mover(pos_robot, pos_robot);
             }
+
+            tanque2->mover(0, pos_tanque);
 
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
             elemento){
