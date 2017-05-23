@@ -11,7 +11,7 @@ class AEstrella {
 		std::vector<Posicion> listaCerrada;
 
 	public:
-		AEstrella(Posicion origen, Posicion destino);
+		AEstrella(Posicion &origen, Posicion &destino);
 
 		void setEcuacion(Posicion &actual, Posicion &adyacente);
 

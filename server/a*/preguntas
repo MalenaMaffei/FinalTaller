@@ -1,3 +1,5 @@
 preguntas:
 	. Objetos reciben todas las posiciones?
+	. Diferenciar vehiculo de robot para atravesar agua/pantano
+	. Cada objeto lista de posiciones o posicion.ocupar()
 

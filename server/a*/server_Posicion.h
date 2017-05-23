@@ -9,8 +9,8 @@ class Posicion {
 		Terreno &terreno;
 		int x;
 		int y;
+		Objeto &ocupante;
 		std::vector<Posicion> &vecinos;
-		bool ocupado;
 		int distG;
 		int distH;
 		Posicion &padre;

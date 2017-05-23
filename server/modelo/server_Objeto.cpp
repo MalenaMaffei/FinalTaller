@@ -6,6 +6,6 @@ bool Objeto::estaVivo() {
 	return vida > 0;
 }
 
-void Movible::recibirAtaque(int danio) {
+void Objeto::recibirAtaque(int danio) {
 	vida -= danio;
 }

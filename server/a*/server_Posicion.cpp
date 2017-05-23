@@ -7,8 +7,7 @@
 #define DIST_ORT 10
 
 Posicion::Posicion(Terreno &terreno, unsigned int x, unsigned int y) : 
-								terreno(terreno), x(x), y(y), vecinos(NULL), padre(NULL) {
-	ocupado = false;
+							terreno(terreno), x(x), y(y), ocupante(NULL), vecinos(NULL), padre(NULL) {
 	distG = 0;
 	distH = 0;
 }
@@ -35,8 +34,12 @@ bool Posicion::cmp(Posicion &other) {
 	return (x == otherX && y == otherY);
 }
 
+void Posicion::ocupar(Objeto &nuevoOcupante) {
+	ocupante = nuevoOcupante;
+}
+
 bool Posicion::estaOcupado() {
-	return ocupado;
+	return ocupante != NULL;
 }
 
 void Posicion::setG(int distancia) {

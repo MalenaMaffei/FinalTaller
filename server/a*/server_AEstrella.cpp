@@ -1,6 +1,6 @@
 #include "server_AEstrella.h"
 
-AEstrella::AEstrella(Posicion origen, Posicion destino) :
+AEstrella::AEstrella(Posicion &origen, Posicion &destino) :
 							origen(origen), destino(destino) {}
 
 void AEstrella::vecinoConMenorPeso(Posicion &resultado) {
