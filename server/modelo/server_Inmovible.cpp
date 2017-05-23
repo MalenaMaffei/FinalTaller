@@ -1,3 +1,3 @@
 #include "server_Inmovible.h"
 
-Inmovible::Inmovible(int vida) : Objeto(vida) {}
+Inmovible::Inmovible(int id, int vida) : Objeto(id, vida) {}

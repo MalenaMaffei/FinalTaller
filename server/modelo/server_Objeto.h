@@ -1,12 +1,17 @@
-#ifndef SERVER_Objeto_H_
-#define SERVER_Objeto_H_
+#ifndef SERVER_OBJETO_H_
+#define SERVER_OBJETO_H_
 
 class Objeto {
 	private:
+		int id;
 		int vida;
 
 	public:
-		Objeto(int vida);
+		Objeto(int id, int vida);
+
+		bool estaVivo();
+
+		void recibirAtaque(int danio);
 
 		virtual ~Objeto();
 }

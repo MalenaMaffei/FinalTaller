@@ -1,3 +1,5 @@
 #include "server_Movible.h"
 
-Movible::Movible(int vida, Armamento &armamento) : Objeto(vida), armamento(armamento) {}
+Movible::Movible(int id, int vida, Armamento &armamento) : 
+							Objeto(id, vida), armamento(armamento) {}
+

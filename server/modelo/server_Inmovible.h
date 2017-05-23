@@ -1,9 +1,9 @@
-#ifndef SERVER_Inmovible_H_
-#define SERVER_Inmovible_H_
+#ifndef SERVER_INMOVIBLE_H_
+#define SERVER_INMOVIBLE_H_
 
 class Inmovible : public Objeto {
 	public:
-		Inmovible(int vida);
+		Inmovible(int id, int vida);
 
 		virtual ~Inmovible();
 }

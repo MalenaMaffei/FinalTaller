@@ -1,25 +1,25 @@
 #ifndef SERVER_AESTRELLA_H_
 #define SERVER_AESTRELLA_H_
 
-#include "server_Casillero.h"
+#include "server_Posicion.h"
 
 class AEstrella {
 	private:
-		Casillero &origen;
-		Casillero &destino;
-		std::vector<Casillero> listaAbierta;
-		std::vector<Casillero> listaCerrada;
+		Posicion &origen;
+		Posicion &destino;
+		std::vector<Posicion> listaAbierta;
+		std::vector<Posicion> listaCerrada;
 
 	public:
-		AEstrella(Casillero origen, Casillero destino);
+		AEstrella(Posicion origen, Posicion destino);
 
-		void setEcuacion(Casillero &actual, Casillero &adyacente);
+		void setEcuacion(Posicion &actual, Posicion &adyacente);
 
-		void vecinoConMenorPeso(Casillero &resultado);
+		void vecinoConMenorPeso(Posicion &resultado);
 
-		void pathFinding(Casillero &fin);
+		void pathFinding(Posicion &fin);
 
-		void getRecorrido(std::vector<Casillero> &recorrido);
+		void getRecorrido(std::vector<Posicion> &recorrido);
 
 		virtual ~AEstrella();
 };

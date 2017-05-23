@@ -1,9 +1,9 @@
 #include "server_AEstrella.h"
 
-AEstrella::AEstrella(Casillero origen, Casillero destino) :
+AEstrella::AEstrella(Posicion origen, Posicion destino) :
 							origen(origen), destino(destino) {}
 
-void AEstrella::vecinoConMenorPeso(Casillero &resultado) {
+void AEstrella::vecinoConMenorPeso(Posicion &resultado) {
 	resultado = listaAbierta[0];
 	for(size_t i = 1; i < listaAbierta.size(); ++i) {
 		if(listaAbierta[i].getF() < resultado.getF()) {
@@ -14,7 +14,7 @@ void AEstrella::vecinoConMenorPeso(Casillero &resultado) {
 									listaAbierta.end(), resultado), listaAbierta.end());
 }
 
-void AEstrella::setEcuacion(Casillero &actual, Casillero &adyacente) {
+void AEstrella::setEcuacion(Posicion &actual, Posicion &adyacente) {
 	int distH = actual.distanciaH(adyacente);
 	int distG = actual.distanciaG(adyacente);
 
@@ -22,10 +22,10 @@ void AEstrella::setEcuacion(Casillero &actual, Casillero &adyacente) {
 	adyacente.setG(distG + actual.getG());
 }
 
-void AEstrella::pathFinding(Casillero &fin) {
+void AEstrella::pathFinding(Posicion &fin) {
 	listaAbierta.push_back(origen);
 	while(listaAbierta.size() != 0) {
-		Casillero actual;
+		Posicion actual;
 		this->vecinoConMenorPeso(actual);
 		listaCerrada.push_back(actual);
 
@@ -34,11 +34,11 @@ void AEstrella::pathFinding(Casillero &fin) {
 			return;
 
 		} else {
-			std::vector<Casillero> adyacentes;
+			std::vector<Posicion> adyacentes;
 			actual.getVecinos(adyacentes);
 
 			for (size_t i = 0; i < adyacentes.size(); ++i) {
-				Casillero adyacente = adyacentes[i];
+				Posicion adyacente = adyacentes[i];
 				
 				if (!adyacente.estaOcupado()) {
 					if (std::find(listaAbierta.begin(), listaAbierta.end(), adyacente) == listaAbierta.end() &&
@@ -59,13 +59,13 @@ void AEstrella::pathFinding(Casillero &fin) {
 	}
 }
 
-void AEstrella::getRecorrido(std::vector<Casillero> &recorrido) {
-	Casillero actual;
+void AEstrella::getRecorrido(std::vector<Posicion> &recorrido) {
+	Posicion actual;
 	this->pathFinding(actual);
 
 	while (actual != origen) {
 		recorrido.push_back(actual);
-		Casillero aux;
+		Posicion aux;
 		actual.getPadre(aux);
 		actual = aux;
 	}

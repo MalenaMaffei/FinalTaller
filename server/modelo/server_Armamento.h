@@ -1,15 +1,16 @@
-#ifndef SERVER_Armamento_H_
-#define SERVER_Armamento_H_
+#ifndef SERVER_ARMAMENTO_H_
+#define SERVER_ARMAMENTO_H_
 
 #include "server_Posicion.h"
 
 class Armamento {
 	private:
+		int id;
 		int danio;
-		Posicion &origen;
+		std::vector<Posicion> posiciones;
 
 	public:
-		Armamento(int danio);
+		Armamento(int id, int danio);
 
 		void atacarA(Objeto &atacado);
 
