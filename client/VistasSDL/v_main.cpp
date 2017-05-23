@@ -10,7 +10,6 @@
 #include "Camara.h"
 #include "VistaTiles.h"
 #include "Tile.h"
-#include "VistaAnimada.h"
 #include "VistaRoca.h"
 #include "Elemento.h"
 #include "ElementoRoca.h"
@@ -160,7 +159,6 @@ int main( int argc, char* args[] ){
         int pos_robot = 0;
         int pos_tanque = 0;
         int pos = 0;
-        VistaAnimada Tank(gRenderer);
 
 
 //        LTexture gBGTexture(gRenderer);
@@ -282,16 +280,16 @@ int main( int argc, char* args[] ){
 
 
 
-            if (pos_tanque == 100){
+            if (pos_tanque == 110){
                 fuerte1->matar();
             }
-            if (pos_tanque > 200){
+            if (pos_tanque > 100){
                 tanque->matar();
             } else {
                 tanque->mover(pos_tanque,0);
             }
 
-            if (pos_tanque > 300){
+            if (pos_tanque > 60){
                 robot1->matar();
             } else {
                 robot1->mover(pos_robot, pos_robot);
