@@ -25,6 +25,7 @@
 #include "ElementoTanque.h"
 #include "VistaHeavy.h"
 #include "VistaMuerteRobot.h"
+#include "Mouse.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -211,21 +212,18 @@ int main( int argc, char* args[] ){
 
 
         ElementoUnidad* robot1 =
-            new ElementoRobot(1,
-                              20,
-                              20,
-                              &robotCaminarTextura,
-                              &pyroDispararTextura,
+            new ElementoRobot(1,20,20,&robotCaminarTextura,&pyroDispararTextura,
                               &robotMorirTextura);
         unidades.push_back(robot1);
 
         VistaHeavy heavyTextura(gRenderer);
-        VistaMuerteTanque muerteTextura(gRenderer);
+        VistaMuerteTanque muerteTanqueTextura(gRenderer);
         ElementoUnidad* tanque =
-            new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTextura);
+            new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
         unidades.push_back(tanque);
 
-
+        Mouse mouse;
+        SelectBox selectBox;
 
         while( !quit )
         {
@@ -238,17 +236,16 @@ int main( int argc, char* args[] ){
                 {
                     quit = true;
                 }
-
+//TODO VER COMO SEPARAR TECLADO EVENT VS MOUSE EVENTS aunque no se si hace falta
                 //Handle input for the dot
                 camara.handleEvent( e );
+                mouse.setState(e.type, e);
             }
-
 
             float timeStep = stepTimer.getTicks() / 1000.f;
 
             //Move the dot
 //            camara.move();
-
 
             camara.move(timeStep);
             //Restart step timer
@@ -257,6 +254,7 @@ int main( int argc, char* args[] ){
             //Clear screen
             SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
             SDL_RenderClear( gRenderer );
+
 
 
             //Render background
@@ -297,6 +295,11 @@ int main( int argc, char* args[] ){
                 (ElementoUnidad* elemento){
               elemento->mostrar(camara);
             });
+
+
+            selectBox = mouse.createSelectBox();
+            selectBox.mostrar(gRenderer);
+
 
 
             ++pos_robot;
