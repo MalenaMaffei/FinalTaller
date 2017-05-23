@@ -274,24 +274,7 @@ int main( int argc, char* args[] ){
               elemento->mostrar(camara);
             });
 
-//            tilesTexture.mostrar(0,0,0);
-//            tilesTexture.mostrar(0,20,1);
 
-
-//            gBGTexture.mostrar( 0, 0, camara.getCamara() );
-
-
-
-
-			//Render objects
-//			dot.mostrar( &gDotTexture );
-
-
-//            pos = (i%LEVEL_WIDTH)*3;
-//            cuadro.x = pos;
-
-//            gBGTexture.mostrar( 0, 0, &cuadro );
-//            Tank.mostrar(camara);
             ++pos_robot;
             ++pos_tanque;
             //Update screen
