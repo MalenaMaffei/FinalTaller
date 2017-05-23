@@ -11,4 +11,4 @@ class Inmovible : public Objeto {
 
 
 
-#endif /* SERVER_Objeto_H_ */
+#endif /* SERVER_Inmovible_H_ */

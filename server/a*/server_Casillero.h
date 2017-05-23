@@ -8,16 +8,16 @@ typedef std::tuple<int,int> posicion;
 
 class Casillero {
 	private:
-		std::vector<Casillero> vecinos;
+		std::vector<Casillero> &vecinos;
 		posicion posCentro;
 		bool ocupado;
 		int distG;
 		int distH;
 		Casillero &padre;
-		Terreno terreno;
+		Terreno &terreno;
 
 	public:
-		Casillero(std::vector<Casillero> &vecinos);
+		Casillero(Terreno &terreno);
 
 		void getVecinos(std::vector<Casillero> &resultado);
 

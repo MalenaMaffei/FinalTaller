@@ -14,4 +14,4 @@ class Movible : public Objeto {
 
 
 
-#endif /* SERVER_Objeto_H_ */
+#endif /* SERVER_Movible_H_ */

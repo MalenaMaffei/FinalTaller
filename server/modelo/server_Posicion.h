@@ -1,10 +1,3 @@
-/*
- * Posicion.h
- *
- *  Created on: 21/05/2017
- *      Author: ivan
- */
-
 #ifndef SERVER_POSICION_H_
 #define SERVER_POSICION_H_
 
@@ -15,8 +8,13 @@ class Posicion {
 
 	public:
 		Posicion(int x, int y);
+
 		int getX();
+
 		int getY();
+
+		void ocupantes(std::vector<Objeto> &ocupantes);
+
 		virtual ~Posicion();
 };
 

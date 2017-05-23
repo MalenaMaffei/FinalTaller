@@ -6,10 +6,15 @@
 #define DIST_DIAG 14
 #define DIST_ORT 10
 
-Casillero::Casillero(std::vector<Casillero> &vecinos) : vecinos(vecinos), padre(NULL) {
+Casillero::Casillero(Terreno &terreno) : 
+									terreno(terreno), vecinos(NULL), padre(NULL) {
 	ocupado = false;
 	distG = 0;
 	distH = 0;
+}
+
+void Casillero::setVecinos(std::vector<Casillero> &nuevosVecinos) {
+	vecinos = nuevosVecinos;
 }
 
 void Casillero::getVecinos(std::vector<Casillero> &resultado) {
