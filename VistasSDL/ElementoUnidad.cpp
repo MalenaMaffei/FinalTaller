@@ -6,8 +6,8 @@ ElementoUnidad::ElementoUnidad(int id,
                                VistaDireccionada *textura,
                                Vista *vistaMuerte) :
     Elemento(id, x, y, textura),
-    texturaDireccionada(textura), enMovimiento(false), direccion(0), muriendo
-        (false){}
+    vistaMovimiento(textura), enMovimiento(false), direccion(0), muriendo
+        (false), vistaMuerte(vistaMuerte){}
 
 
 void ElementoUnidad::mover(int newX, int newY) {
@@ -47,11 +47,11 @@ void ElementoUnidad::mover(int newX, int newY) {
     if (!enMovimiento){
         currentClip = 0;
         enMovimiento = true;
-
+        textura = vistaMovimiento;
     } else {
         ++currentClip;
     }
-    currentClip = texturaDireccionada->getClip(currentClip, direccion);
+    currentClip = vistaMovimiento->getClip(currentClip, direccion);
 }
 
 //TODO terminar de refactorizar bien aca para usar esto para tanques y

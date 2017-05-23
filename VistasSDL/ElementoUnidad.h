@@ -22,7 +22,7 @@ class ElementoUnidad : public Elemento{
   bool enMovimiento;
   bool disparando;
   bool muriendo;
-  VistaDireccionada* texturaDireccionada;
+  VistaDireccionada* vistaMovimiento;
   Vista* vistaMuerte;
 
 };

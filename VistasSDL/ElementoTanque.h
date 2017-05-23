@@ -11,13 +11,9 @@ class ElementoTanque : public ElementoUnidad {
                  VistaDireccionada *textura,
                  Vista *texturaMuerte);
 
-  void matar();
-  void mostrar(Camara &camera);
 
  private:
-  void morir();
-  Vista* vistaMuerte;
-  Vista* vistaMovimiento;
+
 
 };
 

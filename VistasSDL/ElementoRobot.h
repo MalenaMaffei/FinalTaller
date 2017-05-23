@@ -14,7 +14,7 @@ class ElementoRobot : public ElementoUnidad{
                   Vista *vistaMuerte);
  private:
   Vista* texturaDisparar;
-  Vista* currentVista;
+//  Vista* currentVista;
 
 };
 

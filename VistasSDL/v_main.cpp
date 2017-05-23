@@ -24,6 +24,7 @@
 #include "VistaPyroDisparar.h"
 #include "ElementoTanque.h"
 #include "VistaHeavy.h"
+#include "VistaMuerteRobot.h"
 
 const int SCREEN_FPS = 10;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -204,7 +205,7 @@ int main( int argc, char* args[] ){
 
         VistaRobotCaminar robotCaminarTextura(gRenderer);
         VistaPyroDisparar pyroDispararTextura(gRenderer);
-
+        VistaMuerteRobot robotMorirTextura(gRenderer);
         std::vector<ElementoUnidad*> unidades;
 
 
@@ -214,7 +215,7 @@ int main( int argc, char* args[] ){
                               20,
                               &robotCaminarTextura,
                               &pyroDispararTextura,
-                              nullptr);
+                              &robotMorirTextura);
         unidades.push_back(robot1);
 
         VistaHeavy heavyTextura(gRenderer);
@@ -261,7 +262,7 @@ int main( int argc, char* args[] ){
 //                    elemento->mover(pos_robot,pos_robot);
 //            });
 
-            robot1->mover(pos_robot, pos_robot);
+
 
 
             if (pos_tanque == 100){
@@ -271,6 +272,12 @@ int main( int argc, char* args[] ){
                 tanque->matar();
             } else {
                 tanque->mover(pos_tanque,0);
+            }
+
+            if (pos_tanque > 300){
+                robot1->matar();
+            } else {
+                robot1->mover(pos_robot, pos_robot);
             }
 
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*

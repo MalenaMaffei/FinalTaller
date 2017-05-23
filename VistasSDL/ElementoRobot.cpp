@@ -5,5 +5,6 @@ ElementoRobot::ElementoRobot(int id,
                              VistaDireccionada *texturaCaminar,
                              VistaDireccionada *texturaDisparar,
                              Vista *vistaMuerte) :
-    ElementoUnidad(id, x, y, texturaCaminar, vistaMuerte), texturaDisparar(texturaDisparar), currentVista
-    (texturaCaminar) {}
+    ElementoUnidad(id, x, y, texturaCaminar, vistaMuerte), texturaDisparar(texturaDisparar)
+//    , currentVista(texturaCaminar)
+{}
