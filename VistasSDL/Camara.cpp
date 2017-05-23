@@ -42,64 +42,72 @@ void Camara::handleEvent( SDL_Event& e )
     }
 }
 
-void Camara::move()
+
+void Camara::move(float timeStep)
 {
     //Move the dot left or right
-    mBox.x += mVelX;
+    mBox.x += mVelX * timeStep;
 
-    //If the dot went too far to the left or right or touched a wall
-    if( ( mBox.x < 0 ) || ( mBox.x + mBox.w > LEVEL_WIDTH ))
+    //If the dot went too far to the left or right
+    if( mBox.x < 0 )
     {
-        //move back
-        mBox.x -= mVelX;
+        mBox.x = 0;
     }
+    else if( mBox.x > LEVEL_WIDTH - mBox.w )
+    {
+        mBox.x = LEVEL_WIDTH - mBox.w;
+    }
+    //If the dot went too far to the left or right or touched a wall
+//    if( ( mBox.x < 0 ) || ( mBox.x + mBox.w > LEVEL_WIDTH ))
+//    {
+//        //move back
+//        mBox.x -= mVelX;
+//    }
 
     //Move the dot up or down
-    mBox.y += mVelY;
+    mBox.y += mVelY * timeStep;
 
-    //If the dot went too far up or down or touched a wall
-    if( ( mBox.y < 0 ) || ( mBox.y + mBox.h  > LEVEL_HEIGHT ))
+//    //If the dot went too far up or down or touched a wall
+//    if( ( mBox.y < 0 ) || ( mBox.y + mBox.h  > LEVEL_HEIGHT ))
+//    {
+//        //move back
+//        mBox.y -= mVelY;
+//    }
+
+    //If the dot went too far up or down
+    if( mBox.y < 0 )
     {
-        //move back
-        mBox.y -= mVelY;
+        mBox.y = 0;
+    }
+    else if( mBox.y > LEVEL_HEIGHT - mBox.h )
+    {
+        mBox.y  = LEVEL_HEIGHT - mBox.h;
     }
 }
-
-//void Camara::setCamera() {
-//    //Center the camera over the dot
-//    camera.x = ( mBox.x + mBox.w / 2 ) - SCREEN_WIDTH / 2;
-//    camera.y = ( mBox.y + DOT_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
 //
-//    printf("------------DENTRO DE SETCAMERA-------------\n");
-//    printf("x de la camara: %i    ",camera.x);
-//    printf("y de la camara: %i\n",camera.y);
-//    //Keep the camera in bounds
-//    if( camera.x < 0 ){
-//        printf("X menor que 0 ->");
-//        camera.x = 0;
-//        printf("x de la camara: %i    \n",camera.x);
+//void Camara::move()
+//{
+//    //Move the dot left or right
+//    mBox.x += mVelX;
+//
+//    //If the dot went too far to the left or right or touched a wall
+//    if( ( mBox.x < 0 ) || ( mBox.x + mBox.w > LEVEL_WIDTH ))
+//    {
+//        //move back
+//        mBox.x -= mVelX;
 //    }
-//    if( camera.y < 0 ){
-//        printf("Y menor que 0 ->");
-//        camera.y = 0;
-//        printf("y de la camara: %i\n",camera.y);
-//    }
-//    if( camera.x > LEVEL_WIDTH - camera.w ){
-//        printf("X mayor que level width ->");
-//        camera.x = LEVEL_WIDTH - camera.w;
-//        printf("x de la camara: %i    \n",camera.x);
-//    }
-//    if( camera.y > LEVEL_HEIGHT - camera.h ){
-//        printf("Y mayor que level height ->");
-//        camera.y = LEVEL_HEIGHT - camera.h;
-//        printf("y de la camara: %i\n",camera.y);
+//
+//    //Move the dot up or down
+//    mBox.y += mVelY;
+//
+//    //If the dot went too far up or down or touched a wall
+//    if( ( mBox.y < 0 ) || ( mBox.y + mBox.h  > LEVEL_HEIGHT ))
+//    {
+//        //move back
+//        mBox.y -= mVelY;
 //    }
 //}
 
-//void Camara::mostrar(LTexture *dotTexture) {
-//    //Show the dot
-//    dotTexture->mostrar( mBox.x - camera.x, mBox.y - camera.y);
-//}
 
 bool Camara::checkCollision(SDL_Rect b) {
 //    return true;

@@ -26,7 +26,7 @@
 #include "VistaHeavy.h"
 #include "VistaMuerteRobot.h"
 
-const int SCREEN_FPS = 10;
+const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 
@@ -144,7 +144,8 @@ int main( int argc, char* args[] ){
         Camara camara;
 
 
-
+//Keeps track of time between steps
+        LTimer stepTimer;
         //The frames per second timer
         LTimer fpsTimer;
 
@@ -243,8 +244,15 @@ int main( int argc, char* args[] ){
             }
 
 
+            float timeStep = stepTimer.getTicks() / 1000.f;
+
             //Move the dot
-            camara.move();
+//            camara.move();
+
+
+            camara.move(timeStep);
+            //Restart step timer
+            stepTimer.start();
 
             //Clear screen
             SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
@@ -297,11 +305,11 @@ int main( int argc, char* args[] ){
             SDL_RenderPresent( gRenderer );
 
 //
-//            int frameTicks = capTimer.getTicks();
-//            if( frameTicks < SCREEN_TICK_PER_FRAME ){
-//                //Wait remaining time
-//                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-//            }
+            int frameTicks = capTimer.getTicks();
+            if( frameTicks < SCREEN_TICK_PER_FRAME ){
+                //Wait remaining time
+                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+            }
         }
 	}
 

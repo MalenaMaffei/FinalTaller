@@ -11,7 +11,8 @@ class Camara {
 //  static const int DOT_HEIGHT = 20;
 
   //Maximum axis velocity of the dot
-  static const int DOT_VEL = 10;
+//  static const int DOT_VEL = 10;
+  static const int DOT_VEL = 640;
 
   //Initializes the variables
   explicit Camara();
@@ -20,11 +21,12 @@ class Camara {
   void handleEvent( SDL_Event& e );
 
   //Moves the dot and check collision against tiles
-  void move();
+//  void move();
+  void move(float timeStep);
 
   //Centers the camera over the dot
-  void setCamera();
-
+//  void setCamera();
+//
   int getCamaraX();
   int getCamaraY();
   SDL_Rect* getCamara();
@@ -37,7 +39,8 @@ class Camara {
   SDL_Rect mBox;
 
   //The velocity of the dot
-  int mVelX, mVelY;
+//  int mVelX, mVelY;
+  float mVelX, mVelY;
 //  SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };;
 };
 
