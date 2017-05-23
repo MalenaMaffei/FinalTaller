@@ -6,7 +6,12 @@
 class Movible : public Objeto {
 	private:
 		Armamento &armamento;
-		std::vector<Posicion> posiciones;
+		int freqDisp;
+		int alcance;
+		int ptosEstruc;
+		int velBase;
+		int tiempoFabr;
+		int nivelTec;
 
 	public:
 		Movible(int id, int vida, Armamento &armamento);

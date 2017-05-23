@@ -20,6 +20,20 @@ unsigned int Posicion::getY() {
 	return y;
 }
 
+int Posicion::calcularDistancia(Posicion &other) {
+	int x = pos.getX();
+	int y = pos.getY();
+
+	int xOther = other.getX();
+	int yOther = other.getY();
+
+	int difX = xOther - x;
+	int difY = yOther - y;
+
+	int dist = sqrt(pow(difX, 2) + pow(difY, 2));
+	return dist;
+}
+
 void Posicion::setVecinos(std::vector<Posicion> &nuevosVecinos) {
 	vecinos = nuevosVecinos;
 }
@@ -73,9 +87,9 @@ int Posicion::distanciaG(Posicion &destino) {
 	destino.getPos(destinoPos);
 
 	if (this->estaEnDiagonal(destinoPos)) {
-		g = DIST_DIAG + (float(1)/destino.getFactorTerreno()); //FALTA DIFERENCIAR VEHICULOS DE ROBOTS
+		g = DIST_DIAG + (float(10)/destino.getFactorTerreno()); //FALTA DIFERENCIAR VEHICULOS DE ROBOTS
 	} else {
-		g = DIST_ORT + (float(1)/destino.getFactorTerreno()); //FALTA DIFERENCIAR VEHICULOS DE ROBOTS
+		g = DIST_ORT + (float(10)/destino.getFactorTerreno()); //FALTA DIFERENCIAR VEHICULOS DE ROBOTS
 	}
 
 	return g;

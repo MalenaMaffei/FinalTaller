@@ -3,13 +3,14 @@
 
 #include "a*/server_Mapa.h"
 
-class server_Juego {
+class Juego {
 public:
-    server_Juego();
-    server_Juego(const server_Juego& orig);
-    virtual ~server_Juego();
+    Juego();
+    Juego(const server_Juego& orig);
+    virtual ~Juego();
 private:
     Mapa mapa;
+    
 };
 
 #endif /* SERVER_JUEGO_H */

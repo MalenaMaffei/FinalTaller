@@ -1,6 +1,6 @@
 #include "server_Armamento.h"
 
-#define VEL_MOV 0.1
+#define VEL_MOV 1
 
 Armamento::Armamento(int id, int danio, Posicion &origen) : 
 											id(id), danio(danio) {
@@ -15,7 +15,7 @@ void Armamento::atacarA(Objeto &atacado) {
 
 
 void Armamento::moverseA(Posicion &destino) {
-	Posicion actual = posiciones.back();  //CHEQUEAR SI DEVUELVE COPIA O REFERENCIA
+	Posicion &actual = posiciones.back();  //todo CHEQUEAR SI DEVUELVE COPIA O REFERENCIA
 
 	int xActual = actual.getX();
 	int yActual = actual.getY();
@@ -34,6 +34,7 @@ void Armamento::moverseA(Posicion &destino) {
 	while(xActual != xDestino && yActual != yDestino) {
 		xActual += movEnX;
 		yActual += movEnY;
+		//todo
 		//CHEQUEAR COLISIONES, OCUPAR NUEVA POSICION
 		posiciones.push_back(siguiente);
 	}
