@@ -10,6 +10,9 @@ class VistaDireccionada : public Vista{
                       int clips,
                       int largoAnimacion,
                       const std::string &fileName);
+//  void mostrar(int x, int y, int nrClip, int direccion);
+  int getLargoAnimacion() const;
+  int getClip(int clip, int direccion) const;
  protected:
   int largoAnimacion;
 };

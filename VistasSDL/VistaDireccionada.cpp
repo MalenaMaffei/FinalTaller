@@ -10,3 +10,13 @@ VistaDireccionada::VistaDireccionada(SDL_Renderer *gRenderer,
     width,
     clips,
     fileName), largoAnimacion(largoAnimacion) {}
+
+int VistaDireccionada::getLargoAnimacion() const {
+    return largoAnimacion;
+}
+
+int VistaDireccionada::getClip(int clip, int direccion) const {
+    clip = clip%largoAnimacion;
+    clip = clip + (direccion*largoAnimacion);
+    return clip;
+}

@@ -1,5 +1,4 @@
 #include "Vista.h"
-#include "VistaAnimada.h"
 
 
 Vista::Vista(SDL_Renderer *gRenderer,
@@ -46,8 +45,9 @@ bool Vista::loadMedia() {
 Vista::~Vista() {
 //gSpriteSheetTextureTank.free(); TODO no se si hay que ponerlo
 }
+
 void Vista::mostrar(int x, int y, int nrClip) {
-    render(x, y, &gClips[nrClip%clips]);
+    render(x, y, &gClips[nrClip]);
 }
 int Vista::getHeight() const {
     return height;
@@ -55,8 +55,9 @@ int Vista::getHeight() const {
 int Vista::getWidth() const {
     return width;
 }
-int Vista::getClips() const {
-    return clips;
+
+int Vista::getClip(int clip) const {
+    return clip%clips;
 }
 
 

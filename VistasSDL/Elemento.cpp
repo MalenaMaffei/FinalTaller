@@ -2,16 +2,14 @@
 Elemento::Elemento(int id,
                    int x,
                    int y,
-                   int width,
-                   int height,
                    Vista *textura)
     : textura(textura), id(id), currentClip(0) {
     mBox.x = x;
     mBox.y = y;
 
     //Set the collision box
-    mBox.w = width;
-    mBox.h = height;
+    mBox.w = textura->getWidth();
+    mBox.h = textura->getHeight();
 }
 
 void Elemento::mostrar(Camara &camera) {

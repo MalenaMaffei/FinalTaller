@@ -5,12 +5,11 @@
 #include "Vista.h"
 class Elemento {
  public:
+//  TODO refactorizar la necesidad de pasar width height
   Elemento(int id,
-             int x,
-             int y,
-             int width,
-             int height,
-             Vista *textura);
+           int x,
+           int y,
+           Vista *textura);
   virtual void mostrar(Camara &camera);
  protected:
   //The attributes of the tile

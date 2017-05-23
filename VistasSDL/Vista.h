@@ -16,7 +16,7 @@ class Vista : public LTexture{
   virtual ~Vista();
   int getHeight() const;
   int getWidth() const;
-  int getClips() const;
+  int getClip(int clip) const;
 
  protected:
   std::vector<SDL_Rect> gClips;

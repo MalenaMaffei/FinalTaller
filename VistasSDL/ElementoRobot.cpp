@@ -1,10 +1,6 @@
 #include "ElementoRobot.h"
-ElementoRobot::ElementoRobot(int id,
-                             int x,
-                             int y,
-                             Vista *textura) : Elemento(id,
-                                                        x,
-                                                        y,
-                                                        textura->getWidth(),
-                                                        textura->getWidth(),
-                                                        textura) {}
+ElementoRobot::ElementoRobot(int id, int x, int y,
+                             VistaDireccionada *texturaCaminar,
+                             VistaDireccionada *texturaDisparar) :
+    ElementoUnidad(id, x,y, texturaCaminar), texturaDisparar(texturaDisparar), currentVista
+    (texturaCaminar) {}

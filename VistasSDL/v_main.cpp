@@ -21,8 +21,11 @@
 #include "ElementoPuente.h"
 #include "VistaRobotCaminar.h"
 #include "ElementoRobot.h"
+#include "VistaPyroDisparar.h"
+#include "ElementoTanque.h"
+#include "VistaHeavy.h"
 
-const int SCREEN_FPS = 8;
+const int SCREEN_FPS = 10;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 #define SPRITE_SIZE 32
 
@@ -154,7 +157,8 @@ int main( int argc, char* args[] ){
         int frame = 0;
 
         //While application is running
-        int i =1;
+        int pos_robot = 0;
+        int pos_tanque = 0;
         int pos = 0;
         VistaAnimada Tank(gRenderer);
 
@@ -203,10 +207,20 @@ int main( int argc, char* args[] ){
 
 
         VistaRobotCaminar robotCaminarTextura(gRenderer);
-        Elemento* robot1 = new ElementoRobot(1,20,20, &robotCaminarTextura);
-        elementos.push_back(robot1);
-        Elemento* robot2 = new ElementoRobot(1,40,40, &robotCaminarTextura);
-        elementos.push_back(robot2);
+        VistaPyroDisparar pyroDispararTextura(gRenderer);
+
+        std::vector<ElementoUnidad*> unidades;
+
+
+        ElementoUnidad* robot1 =
+            new ElementoRobot(1, 20, 20, &robotCaminarTextura,
+                              &pyroDispararTextura);
+        unidades.push_back(robot1);
+
+        VistaHeavy heavyTextura(gRenderer);
+        ElementoUnidad* tanque =
+            new ElementoTanque(1, 80, 80, &heavyTextura);
+        unidades.push_back(tanque);
 
 
 
@@ -230,7 +244,6 @@ int main( int argc, char* args[] ){
             //Move the dot
             camara.move();
 
-
             //Clear screen
             SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
             SDL_RenderClear( gRenderer );
@@ -242,12 +255,24 @@ int main( int argc, char* args[] ){
               tile.mostrar(camara);
             });
 
+//            std::for_each(unidades.begin(), unidades.end(), [&]
+//                (ElementoUnidad* elemento){
+//                    elemento->mover(pos_robot,pos_robot);
+//            });
+
+            robot1->mover(pos_robot, pos_robot);
+            tanque->mover(pos_tanque,0);
+
+
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
             elemento){
               elemento->mostrar(camara);
             });
 
-
+            std::for_each(unidades.begin(), unidades.end(), [&]
+                (ElementoUnidad* elemento){
+              elemento->mostrar(camara);
+            });
 
 //            tilesTexture.mostrar(0,0,0);
 //            tilesTexture.mostrar(0,20,1);
@@ -267,16 +292,17 @@ int main( int argc, char* args[] ){
 
 //            gBGTexture.mostrar( 0, 0, &cuadro );
 //            Tank.mostrar(camara);
-//            ++i;
+            ++pos_robot;
+            ++pos_tanque;
             //Update screen
             SDL_RenderPresent( gRenderer );
 
 //
-//            int frameTicks = capTimer.getTicks();
-//            if( frameTicks < SCREEN_TICK_PER_FRAME ){
-//                //Wait remaining time
-//                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-//            }
+            int frameTicks = capTimer.getTicks();
+            if( frameTicks < SCREEN_TICK_PER_FRAME ){
+                //Wait remaining time
+                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+            }
         }
 	}
 

@@ -2,13 +2,18 @@
 #define TPFINAL_ELEMENTOROBOT_H
 
 #include "Elemento.h"
+#include "ElementoUnidad.h"
 
-class ElementoRobot : public Elemento{
+class ElementoRobot : public ElementoUnidad{
  public:
   ElementoRobot(int id,
-                  int x,
-                  int y,
-                  Vista *textura);
+                int x,
+                int y,
+                VistaDireccionada *texturaCaminar,
+                VistaDireccionada *texturaDisparar);
+ private:
+  Vista* texturaDisparar;
+  Vista* currentVista;
 
 };
 
