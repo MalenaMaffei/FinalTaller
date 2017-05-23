@@ -2,3 +2,6 @@
 /SonidoXML/dist/
 /cliente/build/
 /cliente/dist/
+.*/
+build/
+cmake-build-debug/

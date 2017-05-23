@@ -29,6 +29,7 @@ const char robotPyroDisparar[] = "../VistasSDL/imgs/Robots/disparo_pyro.png";
 const char robotMuertePath[] = "../VistasSDL/imgs/Robots/muerte.png";
 const char tanquePath[] = "../VistasSDL/imgs/Tanks/heavy.png";
 const char tanqueMuertePath[] = "../VistasSDL/imgs/Tanks/explosion.png";
+const char tanqueMissilePath[] = "../VistasSDL/imgs/Tanks/missile.png";
 
 
 #endif //TPFINAL_CONSTANTES_H
