@@ -27,14 +27,10 @@
 
 const int SCREEN_FPS = 10;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
-#define SPRITE_SIZE 32
 
 
 //Starts up SDL and creates window
 bool init();
-
-//Loads media
-//bool loadMedia();
 
 //Frees media and shuts down SDL
 void close();
@@ -263,6 +259,9 @@ int main( int argc, char* args[] ){
             robot1->mover(pos_robot, pos_robot);
             tanque->mover(pos_tanque,0);
 
+            if (pos_tanque == 100){
+                fuerte1->matar();
+            }
 
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
             elemento){
@@ -281,11 +280,11 @@ int main( int argc, char* args[] ){
             SDL_RenderPresent( gRenderer );
 
 //
-            int frameTicks = capTimer.getTicks();
-            if( frameTicks < SCREEN_TICK_PER_FRAME ){
-                //Wait remaining time
-                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-            }
+//            int frameTicks = capTimer.getTicks();
+//            if( frameTicks < SCREEN_TICK_PER_FRAME ){
+//                //Wait remaining time
+//                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+//            }
         }
 	}
 

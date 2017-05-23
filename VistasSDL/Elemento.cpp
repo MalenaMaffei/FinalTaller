@@ -24,3 +24,10 @@ void Elemento::mostrar(Camara &camera) {
 //        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );
     }
 }
+
+bool Elemento::estaMuerto() const {
+    return muerto;
+}
+void Elemento::matar() {
+    return;
+}

@@ -16,8 +16,6 @@ bool Vista::loadMedia() {
     bool success = true;
 
     //Load sprite sheet texture
-//    TODO sacar ruta y ponerla en un .h
-    printf( "justo antes de cargar\n" );
     if( !loadFromFile(fileName) ){
         printf( "Failed to load tile texture!\n" );
         success = false;
@@ -38,7 +36,6 @@ bool Vista::loadMedia() {
             col += width;
         }
     }
-    printf( "al final de cargar\n" );
     return success;
 }
 

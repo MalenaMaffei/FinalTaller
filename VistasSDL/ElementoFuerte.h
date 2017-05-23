@@ -6,7 +6,7 @@
 class ElementoFuerte : public Elemento {
  public:
   ElementoFuerte(int id, int x, int y, VistaFuerte *textura);
-
+  void matar();
 };
 
 #endif //TPFINAL_ELEMENTOFUERTE_H
