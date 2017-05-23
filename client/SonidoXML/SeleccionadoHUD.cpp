@@ -52,8 +52,6 @@ SeleccionadoHUD::SeleccionadoHUD () {
 	
 	int timeout_value = 1500;
 	
-	seleccionarFabrica();
-	
 	show_all_children();
 	set_keep_above (true);
 	
