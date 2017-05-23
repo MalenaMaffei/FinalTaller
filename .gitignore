@@ -3,5 +3,5 @@
 /cliente/build/
 /cliente/dist/
 .*/
-build/
+build/*
 cmake-build-debug/
