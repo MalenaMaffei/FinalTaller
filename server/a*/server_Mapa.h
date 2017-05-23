@@ -7,15 +7,13 @@
 #include "server_AEstrella.h"
 
 class Mapa {
-	private:
-		std::vector<std::vector<Casillero>> mapa;
-
 	public:
 		Mapa();
-
 		void AEstrella(Casillero origen, Casillero destino);
-
 		virtual ~Mapa();
+	private:
+            std::vector< std::vector<Casillero> > mapa;
+
 };
 
 #endif /* SERVER_MAPA_H_ */

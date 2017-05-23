@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="build">
+      </df>
+      <df name="client">
+        <df name="animaciones">
+          <df name="movimiento">
+          </df>
+        </df>
+        <df name="SonidoXML">
+          <df name="build">
+            <df name="Debug">
+              <df name="GNU-Linux">
+              </df>
+            </df>
+          </df>
+          <df name="dist">
+            <df name="Debug">
+              <df name="GNU-Linux">
+              </df>
+            </df>
+          </df>
+          <df name="efectos">
+          </df>
+          <df name="musica">
+          </df>
+          <in>GeneradorMapa.cpp</in>
+          <in>GeneradorMapa.h</in>
+          <in>Reproductor.cpp</in>
+          <in>Reproductor.h</in>
+          <in>SeleccionadoHUD.cpp</in>
+          <in>SeleccionadoHUD.h</in>
+          <in>main.cpp</in>
+        </df>
+        <df name="VistasSDL">
+          <df name="imgs">
+            <df name="Banderas">
+            </df>
+            <df name="Edificios">
+            </df>
+            <df name="Puentes">
+            </df>
+            <df name="Robots">
+            </df>
+            <df name="Rocas">
+            </df>
+            <df name="Tanks">
+            </df>
+          </df>
+          <in>Camara.cpp</in>
+          <in>Camara.h</in>
+          <in>Elemento.cpp</in>
+          <in>Elemento.h</in>
+          <in>ElementoBandera.cpp</in>
+          <in>ElementoBandera.h</in>
+          <in>ElementoFuerte.cpp</in>
+          <in>ElementoFuerte.h</in>
+          <in>ElementoPuente.cpp</in>
+          <in>ElementoPuente.h</in>
+          <in>ElementoRobot.cpp</in>
+          <in>ElementoRobot.h</in>
+          <in>ElementoRoca.cpp</in>
+          <in>ElementoRoca.h</in>
+          <in>ElementoTanque.cpp</in>
+          <in>ElementoTanque.h</in>
+          <in>ElementoUnidad.cpp</in>
+          <in>ElementoUnidad.h</in>
+          <in>LTexture.cpp</in>
+          <in>LTexture.h</in>
+          <in>LTimer.cpp</in>
+          <in>LTimer.h</in>
+          <in>Mouse.cpp</in>
+          <in>Mouse.h</in>
+          <in>SelectBox.cpp</in>
+          <in>SelectBox.h</in>
+          <in>Tile.cpp</in>
+          <in>Tile.h</in>
+          <in>Vista.cpp</in>
+          <in>Vista.h</in>
+          <in>VistaAnimada.cpp</in>
+          <in>VistaAnimada.h</in>
+          <in>VistaBandera.cpp</in>
+          <in>VistaBandera.h</in>
+          <in>VistaDireccionada.cpp</in>
+          <in>VistaDireccionada.h</in>
+          <in>VistaFuerte.cpp</in>
+          <in>VistaFuerte.h</in>
+          <in>VistaHeavy.cpp</in>
+          <in>VistaHeavy.h</in>
+          <in>VistaMuerteRobot.cpp</in>
+          <in>VistaMuerteRobot.h</in>
+          <in>VistaMuerteTanque.cpp</in>
+          <in>VistaMuerteTanque.h</in>
+          <in>VistaPuente.cpp</in>
+          <in>VistaPuente.h</in>
+          <in>VistaPyroDisparar.cpp</in>
+          <in>VistaPyroDisparar.h</in>
+          <in>VistaRobotCaminar.cpp</in>
+          <in>VistaRobotCaminar.h</in>
+          <in>VistaRoca.cpp</in>
+          <in>VistaRoca.h</in>
+          <in>VistaTiles.cpp</in>
+          <in>VistaTiles.h</in>
+          <in>constantes.h</in>
+          <in>v_main.cpp</in>
+        </df>
+      </df>
+      <df name="CMakeFiles">
+      </df>
+      <df name="common">
+        <in>common_Lock.cpp</in>
+        <in>common_Lock.h</in>
+        <in>common_Socket.cpp</in>
+        <in>common_Socket.h</in>
+        <in>common_SocketException.cpp</in>
+        <in>common_SocketException.h</in>
+        <in>common_Thread.cpp</in>
+        <in>common_Thread.h</in>
+      </df>
+      <df name="Diagramas ALGO3">
+        <df name="Diagramas de Secuencia">
+        </df>
+      </df>
+      <df name="server">
+        <df name="a*">
+          <in>server_AEstrella.cpp</in>
+          <in>server_AEstrella.h</in>
+          <in>server_Casillero.cpp</in>
+          <in>server_Casillero.h</in>
+          <in>server_FabricaTerreno.cpp</in>
+          <in>server_FabricaTerreno.h</in>
+          <in>server_Mapa.cpp</in>
+          <in>server_Mapa.h</in>
+          <in>server_Posicion.cpp</in>
+          <in>server_Terreno.cpp</in>
+          <in>server_Terreno.h</in>
+        </df>
+        <df name="modelo">
+          <in>server_Armamento.cpp</in>
+          <in>server_Armamento.h</in>
+          <in>server_Inmovible.cpp</in>
+          <in>server_Inmovible.h</in>
+          <in>server_Movible.cpp</in>
+          <in>server_Movible.h</in>
+          <in>server_Objeto.cpp</in>
+          <in>server_Objeto.h</in>
+          <in>server_Posicion.cpp</in>
+          <in>server_Posicion.h</in>
+        </df>
+        <in>server_GeneradorMapa.cpp</in>
+        <in>server_GeneradorMapa.h</in>
+        <in>server_Juego.cpp</in>
+        <in>server_Juego.h</in>
+        <in>server_main.cpp</in>
+      </df>
+      <df name="wireframes">
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -11,7 +11,7 @@
  * Created on 21 de mayo de 2017, 12:47
  */
 
-#include "GeneradorMapa.h"
+#include "server_GeneradorMapa.h"
 #include <array>
 #include <random>
 #include <iostream>
@@ -36,13 +36,13 @@ GeneradorMapa::GeneradorMapa () { }
 
 GeneradorMapa::~GeneradorMapa () { }
 
-void GeneradorMapa::generarMapa(const std::string& nombre) {
+void GeneradorMapa::generarMapa() {
 	
 	int mapa[H][W];
   
 	std::ofstream myfile;
 	
-	myfile.open(nombre);
+	myfile.open("mapa.map");
 	
 	std::default_random_engine generador (std::random_device{}());
 	std::uniform_int_distribution<int> distribucion_terrenos(0,7);
