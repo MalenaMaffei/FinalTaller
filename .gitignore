@@ -7,3 +7,7 @@ build/*
 cmake-build-debug/
 CMakeFiles/
 CMakeCache.txt
+client/VistasSDL/.*
+client/VistasSDL/cmake-build-debug/
+client/VistasSDL/CMakeLists.txt
+
