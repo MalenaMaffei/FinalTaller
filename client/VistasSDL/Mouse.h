@@ -5,23 +5,25 @@
 class Mouse {
 
  public:
-  bool leftButtonDown = false;
-  bool mouseMoves = false;
 
-  struct MouseCoords {
-    int x = -1;
-    int y = -1;
-  };
-
-  MouseCoords start_coords;
-  MouseCoords move_coords;
   Mouse(){}
 
   void setState(Uint32 eventType, SDL_Event event);
 
   MouseCoords getCoordinates();
 
-  SelectBox createSelectBox();
+  void setSelectBox(SelectBox &selectBox);
+
+ private:
+  struct MouseCoords {
+    int x = -1;
+    int y = -1;
+  };
+  bool rightButtonDown = false;
+  bool leftButtonDown = false;
+  bool mouseMoves = false;
+  MouseCoords start_coords;
+  MouseCoords move_coords;
 };
 
 #endif //TPFINAL_MOUSE_H

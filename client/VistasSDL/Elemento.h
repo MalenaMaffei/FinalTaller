@@ -6,10 +6,7 @@
 class Elemento {
  public:
 //  TODO refactorizar la necesidad de pasar width height
-  Elemento(int id,
-           int x,
-           int y,
-           Vista *textura);
+  Elemento(int id, int x, int y, Vista *textura, bool esMio = true);
   virtual void mostrar(Camara &camera);
   virtual bool estaMuerto() const;
 //  TODO deberia ser virtual total pero por ahora lo dejo vacio porque no
@@ -17,6 +14,7 @@ class Elemento {
   virtual void matar();
  protected:
   //The attributes of the tile
+  bool esMio;
   bool muerto;
   SDL_Rect mBox;
 

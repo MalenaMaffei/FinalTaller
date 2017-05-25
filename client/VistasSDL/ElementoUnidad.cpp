@@ -5,7 +5,7 @@ ElementoUnidad::ElementoUnidad(int id,
                                int y,
                                VistaDireccionada *textura,
                                Vista *vistaMuerte) :
-    Elemento(id, x, y, textura),
+    Elemento(id, x, y, textura, false),
     vistaMovimiento(textura), enMovimiento(false), direccion(0), muriendo
         (false), vistaMuerte(vistaMuerte){}
 
@@ -84,6 +84,15 @@ void ElementoUnidad::mostrar(Camara &camera) {
     Elemento::mostrar(camera);
     if (muriendo){
         morir();
+    }
+}
+
+void ElementoUnidad::seleccionar(SelectBox &selectBox) {
+    if(!muerto){
+        if( selectBox.checkCollision( mBox ) ){
+            //Show the tile
+            textura->setColor(0,255,0);
+        }
     }
 }
 

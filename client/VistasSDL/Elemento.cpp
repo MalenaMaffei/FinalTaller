@@ -1,9 +1,6 @@
 #include "Elemento.h"
-Elemento::Elemento(int id,
-                   int x,
-                   int y,
-                   Vista *textura)
-    : textura(textura), id(id), currentClip(0), muerto(false) {
+Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
+    : textura(textura), id(id), currentClip(0), muerto(false), esMio(esMio) {
     mBox.x = x;
     mBox.y = y;
 

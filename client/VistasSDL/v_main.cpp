@@ -208,25 +208,36 @@ int main( int argc, char* args[] ){
         VistaPyroDisparar pyroDispararTextura(gRenderer);
         VistaMuerteRobot robotMorirTextura(gRenderer);
         std::vector<ElementoUnidad*> unidades;
+//
+//
+//        ElementoUnidad* robot1 =
+//            new ElementoRobot(1,20,20,&robotCaminarTextura,&pyroDispararTextura,
+//                              &robotMorirTextura);
+//        unidades.push_back(robot1);
+
+        for (int i = 40; i < 40*2; i+=40) {
+            unidades.push_back(new ElementoRobot(1,i,20,&robotCaminarTextura,
+                                                 &pyroDispararTextura,
+                                                 &robotMorirTextura));
+        }
 
 
-        ElementoUnidad* robot1 =
-            new ElementoRobot(1,20,20,&robotCaminarTextura,&pyroDispararTextura,
-                              &robotMorirTextura);
-        unidades.push_back(robot1);
-
-        VistaHeavy heavyTextura(gRenderer);
-        VistaMuerteTanque muerteTanqueTextura(gRenderer);
-        ElementoUnidad* tanque =
-            new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
-        unidades.push_back(tanque);
 
 
-        VistaMissilelauncher missilelauncherTextura(gRenderer);
-        ElementoUnidad* tanque2 = new ElementoTanque(1, 0,0,
-                                                     &missilelauncherTextura,
-                                                     &muerteTanqueTextura);
-        unidades.push_back(tanque2);
+
+
+//        VistaHeavy heavyTextura(gRenderer);
+//        VistaMuerteTanque muerteTanqueTextura(gRenderer);
+//        ElementoUnidad* tanque =
+//            new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
+//        unidades.push_back(tanque);
+//
+//
+//        VistaMissilelauncher missilelauncherTextura(gRenderer);
+//        ElementoUnidad* tanque2 = new ElementoTanque(1, 0,0,
+//                                                     &missilelauncherTextura,
+//                                                     &muerteTanqueTextura);
+//        unidades.push_back(tanque2);
 
 
 
@@ -280,22 +291,22 @@ int main( int argc, char* args[] ){
 
 
 
-            if (pos_tanque == 110){
-                fuerte1->matar();
-            }
-            if (pos_tanque > 100){
-                tanque->matar();
-            } else {
-                tanque->mover(pos_tanque,0);
-            }
-
-            if (pos_tanque > 60){
-                robot1->matar();
-            } else {
-                robot1->mover(pos_robot, pos_robot);
-            }
-
-            tanque2->mover(0, pos_tanque);
+//            if (pos_tanque == 110){
+//                fuerte1->matar();
+//            }
+//            if (pos_tanque > 100){
+//                tanque->matar();
+//            } else {
+//                tanque->mover(pos_tanque,0);
+//            }
+//
+//            if (pos_tanque > 60){
+//                robot1->matar();
+//            } else {
+//                robot1->mover(pos_robot, pos_robot);
+//            }
+//
+//            tanque2->mover(0, pos_tanque);
 
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
             elemento){
@@ -308,10 +319,15 @@ int main( int argc, char* args[] ){
             });
 
 
-            selectBox = mouse.createSelectBox();
+            mouse.setSelectBox(selectBox);
             selectBox.mostrar(gRenderer);
 
 
+
+            std::for_each(unidades.begin(), unidades.end(), [&]
+                (ElementoUnidad* elemento){
+              elemento->seleccionar(selectBox);
+            });
 
             ++pos_robot;
             ++pos_tanque;

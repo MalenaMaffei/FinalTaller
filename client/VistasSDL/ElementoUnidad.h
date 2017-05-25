@@ -3,6 +3,7 @@
 
 #include "Elemento.h"
 #include "VistaDireccionada.h"
+#include "SelectBox.h"
 class ElementoUnidad : public Elemento{
  public:
   ElementoUnidad(int id,
@@ -12,6 +13,7 @@ class ElementoUnidad : public Elemento{
                    Vista *vistaMuerte);
   virtual void mover(int newX, int newY);
   void mostrar(Camara &camera);
+  void seleccionar(SelectBox &selectBox);
   void matar();
  protected:
   void morir();

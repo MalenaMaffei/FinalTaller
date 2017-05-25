@@ -5,7 +5,11 @@ ElementoPuente::ElementoPuente(int id,
                                int x,
                                int y,
                                Vista *textura,
-                               bool vertical) : Elemento(id, x, y, textura) {
+                               bool vertical) : Elemento(id,
+                                                         x,
+                                                         y,
+                                                         textura,
+                                                         false) {
     if (vertical){
         currentClip = 2;
     }
