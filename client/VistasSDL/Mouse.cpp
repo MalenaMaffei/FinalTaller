@@ -36,17 +36,18 @@ Mouse::MouseCoords Mouse::getCoordinates() {
 
 void Mouse::setSelectBox(SelectBox &selectBox) {
 
-    if(this->rightButtonDown) {
+    if(rightButtonDown) {
 
         int width = move_coords.x - start_coords.x;
         int height = start_coords.y - move_coords.y;
         int x = start_coords.x ;
         int y = move_coords.y;
 
+
         SDL_Rect rect = {x,y,width,height};
         selectBox.setRect(rect);
-//        SelectBox rect(x, y,width, height);
-//        return rect;
+//        printf("x: %i, y: %i, w: %i, h: %i\n", x,y,width,height);
+
     } else {
         SDL_Rect rect = {0,0,0,0};
         selectBox.setRect(rect);

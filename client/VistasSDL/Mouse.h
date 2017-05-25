@@ -5,7 +5,10 @@
 class Mouse {
 
  public:
-
+  struct MouseCoords {
+    int x = -1;
+    int y = -1;
+  };
   Mouse(){}
 
   void setState(Uint32 eventType, SDL_Event event);
@@ -15,10 +18,7 @@ class Mouse {
   void setSelectBox(SelectBox &selectBox);
 
  private:
-  struct MouseCoords {
-    int x = -1;
-    int y = -1;
-  };
+
   bool rightButtonDown = false;
   bool leftButtonDown = false;
   bool mouseMoves = false;
