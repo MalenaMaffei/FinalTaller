@@ -1,6 +1,6 @@
 #include "Mouse.h"
-
-
+#include <algorithm>
+#include <cmath>
 
 void Mouse::setState(Uint32 eventType, SDL_Event event) {
 
@@ -43,8 +43,10 @@ void Mouse::setSelectBox(SelectBox &selectBox) {
         int x = start_coords.x ;
         int y = move_coords.y;
 
+        int newX = std::min(x, x+width);
+        int newY = std::min(y, y+height);
 
-        SDL_Rect rect = {x,y,width,height};
+        SDL_Rect rect = {newX,newY,std::abs(width),std::abs(height)};
         selectBox.setRect(rect);
 //        printf("x: %i, y: %i, w: %i, h: %i\n", x,y,width,height);
 
