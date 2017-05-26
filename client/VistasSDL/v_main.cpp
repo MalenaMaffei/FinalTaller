@@ -215,7 +215,7 @@ int main( int argc, char* args[] ){
 //                              &robotMorirTextura);
 //        unidades.push_back(robot1);
 
-        for (int i = 40; i < 40*2; i+=40) {
+        for (int i = 40; i < 40*7; i+=40) {
             unidades.push_back(new ElementoRobot(1,i,20,&robotCaminarTextura,
                                                  &pyroDispararTextura,
                                                  &robotMorirTextura));
@@ -244,6 +244,7 @@ int main( int argc, char* args[] ){
 
         Mouse mouse;
         SelectBox selectBox;
+
 
         while( !quit )
         {
@@ -326,7 +327,7 @@ int main( int argc, char* args[] ){
 
             std::for_each(unidades.begin(), unidades.end(), [&]
                 (ElementoUnidad* elemento){
-              elemento->seleccionar(selectBox);
+              elemento->chequearSeleccion(selectBox);
             });
 
             ++pos_robot;

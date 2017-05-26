@@ -1,5 +1,6 @@
 #include "ElementoUnidad.h"
 #include "VistaDireccionada.h"
+#include "SelectBox.h"
 ElementoUnidad::ElementoUnidad(int id,
                                int x,
                                int y,
@@ -11,8 +12,8 @@ ElementoUnidad::ElementoUnidad(int id,
 
 
 void ElementoUnidad::mover(int newX, int newY) {
-    int shiftX = mBox.x - newX;
-    int shiftY = mBox.y - newY;
+    int shiftX = rect.x - newX;
+    int shiftY = rect.y - newY;
 //    TODO horrible, crear clase coordenada
     if (shiftX > 0){
         if (shiftY > 0){
@@ -41,8 +42,8 @@ void ElementoUnidad::mover(int newX, int newY) {
         }
     }
 
-    mBox.x = newX;
-    mBox.y = newY;
+    rect.x = newX;
+    rect.y = newY;
 
     if (!enMovimiento){
         currentClip = 0;
@@ -87,12 +88,23 @@ void ElementoUnidad::mostrar(Camara &camera) {
     }
 }
 
-void ElementoUnidad::seleccionar(SelectBox &selectBox) {
+void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
     if(!muerto){
-        if( selectBox.checkCollision( mBox ) ){
+        if( selectBox.checkCollision( rect )){
             //Show the tile
-            textura->setColor(0,255,0);
+//            textura->setColor(0,255,0);
+            selectBox.selectUnidad(*this);
+        } else {
+//            textura->setColor(255,255,255);
         }
     }
+}
+
+void ElementoUnidad::seleccionar() {
+    textura->setColor(0,255,0);
+}
+
+void ElementoUnidad::deseleccionar() {
+    textura->setColor(255,255,255);
 }
 

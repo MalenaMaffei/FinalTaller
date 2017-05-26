@@ -21,6 +21,7 @@ class LTexture
   //Set color modulation
   void setColor( Uint8 red, Uint8 green, Uint8 blue );
 
+
   //Set blending
   void setBlendMode( SDL_BlendMode blending );
 

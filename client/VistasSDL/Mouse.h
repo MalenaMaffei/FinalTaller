@@ -9,7 +9,15 @@ class Mouse {
     int x = -1;
     int y = -1;
   };
-  Mouse(){}
+
+  enum ButtonPressed{
+    rightButtonDown = 0,
+    rightButtonUp = 1,
+    leftButtonDown = 2,
+    leftButtonUp = 3
+  };
+
+  Mouse();
 
   void setState(Uint32 eventType, SDL_Event event);
 
@@ -19,11 +27,12 @@ class Mouse {
 
  private:
 
-  bool rightButtonDown = false;
-  bool leftButtonDown = false;
+//  bool rightButtonDown = false;
+//  bool leftButtonDown = false;
   bool mouseMoves = false;
   MouseCoords start_coords;
   MouseCoords move_coords;
+  int lastButton;
 };
 
 #endif //TPFINAL_MOUSE_H

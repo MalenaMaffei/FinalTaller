@@ -1,25 +1,25 @@
 #include "Elemento.h"
 Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
     : textura(textura), id(id), currentClip(0), muerto(false), esMio(esMio) {
-    mBox.x = x;
-    mBox.y = y;
+    rect.x = x;
+    rect.y = y;
 
     //Set the collision box
-    mBox.w = textura->getWidth();
-    mBox.h = textura->getHeight();
+    rect.w = textura->getWidth();
+    rect.h = textura->getHeight();
 }
 
 void Elemento::mostrar(Camara &camera) {
-//    textura->mostrar(mBox.x, mBox.y , mType);
+//    textura->mostrar(rect.x, rect.y , mType);
     //If the tile is on screen
     if(!muerto){
-        if( camera.checkCollision( mBox ) ){
+        if( camera.checkCollision( rect ) ){
             //Show the tile
 
-            textura->mostrar(mBox.x - camera.getCamaraX(),
-                             mBox.y - camera.getCamaraY(),
+            textura->mostrar(rect.x - camera.getCamaraX(),
+                             rect.y - camera.getCamaraY(),
                              currentClip);
-//        gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ] );
+//        gTileTexture.render( rect.x - camera.x, rect.y - camera.y, &gTileClips[ mType ] );
         }
     }
 
@@ -28,6 +28,14 @@ void Elemento::mostrar(Camara &camera) {
 bool Elemento::estaMuerto() const {
     return muerto;
 }
+
 void Elemento::matar() {
     return;
+}
+
+const SDL_Rect &Elemento::getRect() const {
+    return rect;
+}
+int Elemento::getId() const {
+    return id;
 }

@@ -2,12 +2,14 @@
 #include <algorithm>
 #include <cmath>
 
+Mouse::Mouse() : lastButton(-1) {}
+
 void Mouse::setState(Uint32 eventType, SDL_Event event) {
 
     if ( eventType == SDL_MOUSEBUTTONDOWN) {
 //        handleMouseDown(event);
         if (event.button.button == SDL_BUTTON_RIGHT){
-            rightButtonDown = true;
+            lastButton = rightButtonDown;
             start_coords.x = event.button.x;
             start_coords.y = event.button.y;
         } else {
@@ -18,7 +20,7 @@ void Mouse::setState(Uint32 eventType, SDL_Event event) {
 
     if ( eventType == SDL_MOUSEBUTTONUP ) {
         if (event.button.button ==  SDL_BUTTON_RIGHT) {
-            rightButtonDown = false;
+            lastButton = rightButtonUp;
         } else {
 ////            TODO manejar seleccion de fabricas etc
         }
@@ -36,7 +38,7 @@ Mouse::MouseCoords Mouse::getCoordinates() {
 
 void Mouse::setSelectBox(SelectBox &selectBox) {
 
-    if(rightButtonDown) {
+    if(lastButton == rightButtonDown) {
 
         int width = move_coords.x - start_coords.x;
         int height = start_coords.y - move_coords.y;
@@ -48,11 +50,12 @@ void Mouse::setSelectBox(SelectBox &selectBox) {
 
         SDL_Rect rect = {newX,newY,std::abs(width),std::abs(height)};
         selectBox.setRect(rect);
-//        printf("x: %i, y: %i, w: %i, h: %i\n", x,y,width,height);
+        selectBox.vaciarSeleccionadas();
 
-    } else {
+    } else if (lastButton == rightButtonUp) {
         SDL_Rect rect = {0,0,0,0};
         selectBox.setRect(rect);
     }
 
 }
+

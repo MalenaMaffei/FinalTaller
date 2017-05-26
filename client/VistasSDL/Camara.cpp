@@ -58,20 +58,20 @@ void Camara::move(float timeStep)
         mBox.x = LEVEL_WIDTH - mBox.w;
     }
     //If the dot went too far to the left or right or touched a wall
-//    if( ( mBox.x < 0 ) || ( mBox.x + mBox.w > LEVEL_WIDTH ))
+//    if( ( rect.x < 0 ) || ( rect.x + rect.w > LEVEL_WIDTH ))
 //    {
 //        //move back
-//        mBox.x -= mVelX;
+//        rect.x -= mVelX;
 //    }
 
     //Move the dot up or down
     mBox.y += mVelY * timeStep;
 
 //    //If the dot went too far up or down or touched a wall
-//    if( ( mBox.y < 0 ) || ( mBox.y + mBox.h  > LEVEL_HEIGHT ))
+//    if( ( rect.y < 0 ) || ( rect.y + rect.h  > LEVEL_HEIGHT ))
 //    {
 //        //move back
-//        mBox.y -= mVelY;
+//        rect.y -= mVelY;
 //    }
 
     //If the dot went too far up or down
@@ -88,70 +88,35 @@ void Camara::move(float timeStep)
 //void Camara::move()
 //{
 //    //Move the dot left or right
-//    mBox.x += mVelX;
+//    rect.x += mVelX;
 //
 //    //If the dot went too far to the left or right or touched a wall
-//    if( ( mBox.x < 0 ) || ( mBox.x + mBox.w > LEVEL_WIDTH ))
+//    if( ( rect.x < 0 ) || ( rect.x + rect.w > LEVEL_WIDTH ))
 //    {
 //        //move back
-//        mBox.x -= mVelX;
+//        rect.x -= mVelX;
 //    }
 //
 //    //Move the dot up or down
-//    mBox.y += mVelY;
+//    rect.y += mVelY;
 //
 //    //If the dot went too far up or down or touched a wall
-//    if( ( mBox.y < 0 ) || ( mBox.y + mBox.h  > LEVEL_HEIGHT ))
+//    if( ( rect.y < 0 ) || ( rect.y + rect.h  > LEVEL_HEIGHT ))
 //    {
 //        //move back
-//        mBox.y -= mVelY;
+//        rect.y -= mVelY;
 //    }
 //}
 
 
 bool Camara::checkCollision(SDL_Rect b) {
-//    return true;
-    //The sides of the rectangles
-    int leftA, leftB;
-    int rightA, rightB;
-    int topA, topB;
-    int bottomA, bottomB;
 
-    //Calculate the sides of rect A
-    leftA = mBox.x;
-    rightA = mBox.x + mBox.w;
-    topA = mBox.y;
-    bottomA = mBox.y + mBox.h;
-
-    //Calculate the sides of rect B
-    leftB = b.x;
-    rightB = b.x + b.w;
-    topB = b.y;
-    bottomB = b.y + b.h;
-
-    //If any of the sides from A are outside of B
-    if( bottomA <= topB )
-    {
-        return false;
+    SDL_bool res = SDL_HasIntersection(&mBox, &b);
+    if (res == SDL_TRUE){
+        return true;
     }
+    return false;
 
-    if( topA >= bottomB )
-    {
-        return false;
-    }
-
-    if( rightA <= leftB )
-    {
-        return false;
-    }
-
-    if( leftA >= rightB )
-    {
-        return false;
-    }
-
-    //If none of the sides from A are outside B
-    return true;
 }
 //
 int Camara::getCamaraX() {

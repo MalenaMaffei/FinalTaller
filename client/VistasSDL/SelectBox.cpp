@@ -1,15 +1,25 @@
 #include "SelectBox.h"
+#include <algorithm>
+//#include "ElementoUnidad.h"
 
 void SelectBox::mostrar(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
     SDL_RenderDrawRect(renderer, &rect);
+    printf("hay para seleccionar: %i\n", seleccionadas.size());
+    std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
+        (ElementoUnidad &unidad){
+        printf("dibijando: %i", unidad.getId());
+        SDL_Rect rectUnidad = unidad.getRect();
+        SDL_RenderDrawRect(renderer, &rectUnidad);
+    });
 }
 
-SelectBox::SelectBox(int x, int y, int w, int h, int filled) {
-    rect.x = x;
-    rect.y = y;
-    rect.w = w;
-    rect.h = h;
+SelectBox::SelectBox() {
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 0;
+    rect.h = 0;
+
 }
 
 void SelectBox::setRect(const SDL_Rect &rect) {
@@ -17,50 +27,6 @@ void SelectBox::setRect(const SDL_Rect &rect) {
 }
 
 bool SelectBox::checkCollision(SDL_Rect b) {
-//    int leftA, leftB;
-//    int rightA, rightB;
-//    int topA, topB;
-//    int bottomA, bottomB;
-//
-//    //Calculate the sides of rect A
-//    leftA = rect.x;
-//    rightA = rect.x + rect.w;
-//    topA = rect.y;
-//    bottomA = rect.y + rect.h;
-//
-//    //Calculate the sides of rect B
-//    leftB = b.x;
-//    rightB = b.x + b.w;
-//    topB = b.y;
-//    bottomB = b.y + b.h;
-//
-//    //If any of the sides from A are outside of B
-//    if( bottomA <= topB )
-//    {
-////        printf("bottomA <= topB:%i, %i  \n", bottomA, topB);
-//        return false;
-//    }
-//
-//    if( topA >= bottomB )
-//    {
-////        printf("topA >= bottomB \n");
-//        return false;
-//    }
-//
-//    if( rightA <= leftB )
-//    {
-////        printf("rightA <= leftB \n");
-//        return false;
-//    }
-//
-//    if( leftA >= rightB )
-//    {
-////        printf("leftA >= rightB \n");
-//        return false;
-//    }
-//
-//    //If none of the sides from A are outside B
-//    return true;
     SDL_bool res = SDL_HasIntersection(&rect, &b);
     if (res == SDL_TRUE){
         return true;
@@ -71,6 +37,21 @@ bool SelectBox::checkCollision(SDL_Rect b) {
 int SelectBox::getX() {
     return rect.x;
 }
+
 int SelectBox::getY() {
     return rect.y;
+}
+
+void SelectBox::selectUnidad(ElementoUnidad &unidad) {
+//    unidad.seleccionar();
+    seleccionadas.push_back(unidad);
+    printf("cantidad seleccionados:%i \n", seleccionadas.size());
+}
+
+void SelectBox::vaciarSeleccionadas() {
+    std::for_each(seleccionadas.begin(), seleccionadas.end(), []
+        (ElementoUnidad &unidad){
+//      unidad.deseleccionar();
+    });
+    seleccionadas.clear();
 }
