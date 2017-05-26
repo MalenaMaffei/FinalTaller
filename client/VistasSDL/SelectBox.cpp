@@ -1,14 +1,11 @@
 #include "SelectBox.h"
 #include <algorithm>
-//#include "ElementoUnidad.h"
 
 void SelectBox::mostrar(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
     SDL_RenderDrawRect(renderer, &rect);
-    printf("hay para seleccionar: %i\n", seleccionadas.size());
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
         (ElementoUnidad &unidad){
-        printf("dibijando: %i", unidad.getId());
         SDL_Rect rectUnidad = unidad.getRect();
         SDL_RenderDrawRect(renderer, &rectUnidad);
     });
@@ -54,4 +51,8 @@ void SelectBox::vaciarSeleccionadas() {
 //      unidad.deseleccionar();
     });
     seleccionadas.clear();
+}
+
+bool SelectBox::haySeleccion() {
+    return seleccionadas.empty();
 }

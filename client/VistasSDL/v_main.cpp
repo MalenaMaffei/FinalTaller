@@ -215,15 +215,11 @@ int main( int argc, char* args[] ){
 //                              &robotMorirTextura);
 //        unidades.push_back(robot1);
 
-        for (int i = 40; i < 40*7; i+=40) {
+        for (int i = 40; i < 40*7; i+=45) {
             unidades.push_back(new ElementoRobot(1,i,20,&robotCaminarTextura,
                                                  &pyroDispararTextura,
-                                                 &robotMorirTextura));
+                                                 &robotMorirTextura, i%2==0));
         }
-
-
-
-
 
 
 //        VistaHeavy heavyTextura(gRenderer);
@@ -244,7 +240,7 @@ int main( int argc, char* args[] ){
 
         Mouse mouse;
         SelectBox selectBox;
-
+        Click click;
 
         while( !quit )
         {
@@ -309,10 +305,14 @@ int main( int argc, char* args[] ){
 //
 //            tanque2->mover(0, pos_tanque);
 
+            mouse.setMouseAction(selectBox, click);
+
             std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
             elemento){
               elemento->mostrar(camara);
+              elemento->clicked(click);
             });
+
 
             std::for_each(unidades.begin(), unidades.end(), [&]
                 (ElementoUnidad* elemento){
@@ -320,14 +320,14 @@ int main( int argc, char* args[] ){
             });
 
 
-            mouse.setSelectBox(selectBox);
             selectBox.mostrar(gRenderer);
 
 
 
             std::for_each(unidades.begin(), unidades.end(), [&]
-                (ElementoUnidad* elemento){
-              elemento->chequearSeleccion(selectBox);
+                (ElementoUnidad* unidad){
+              unidad->chequearSeleccion(selectBox);
+              unidad->clicked(click);
             });
 
             ++pos_robot;

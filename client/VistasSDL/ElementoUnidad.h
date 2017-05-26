@@ -12,7 +12,8 @@ class ElementoUnidad : public Elemento{
                    int x,
                    int y,
                    VistaDireccionada *textura,
-                   Vista *vistaMuerte);
+                   Vista *vistaMuerte,
+                   bool esMio);
   virtual void mover(int newX, int newY);
   void mostrar(Camara &camera);
   void chequearSeleccion(SelectBox &selectBox);

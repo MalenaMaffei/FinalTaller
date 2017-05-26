@@ -3,10 +3,12 @@
 
 #include <SDL_rect.h>
 #include "Vista.h"
+//#include "Click.h"
+class Click;
 class Elemento {
  public:
 //  TODO refactorizar la necesidad de pasar width height
-  Elemento(int id, int x, int y, Vista *textura, bool esMio = true);
+  Elemento(int id, int x, int y, Vista *textura, bool esMio);
   virtual void mostrar(Camara &camera);
   virtual bool estaMuerto() const;
 //  TODO deberia ser virtual total pero por ahora lo dejo vacio porque no
@@ -14,6 +16,7 @@ class Elemento {
   virtual void matar();
   const SDL_Rect &getRect() const;
   int getId() const;
+  void clicked(Click& click);
  protected:
   //The attributes of the tile
   bool esMio;

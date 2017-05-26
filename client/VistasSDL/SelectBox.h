@@ -18,6 +18,7 @@ class SelectBox {
   void setRect(const SDL_Rect &rect);
   void selectUnidad(ElementoUnidad &unidad);
   void vaciarSeleccionadas();
+  bool haySeleccion();
 
  private:
   SDL_Rect rect;

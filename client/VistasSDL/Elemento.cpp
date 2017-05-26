@@ -1,4 +1,6 @@
 #include "Elemento.h"
+//TODO chequwar que todos tengan implementado el esMio
+#include "Click.h"
 Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
     : textura(textura), id(id), currentClip(0), muerto(false), esMio(esMio) {
     rect.x = x;
@@ -36,6 +38,16 @@ void Elemento::matar() {
 const SDL_Rect &Elemento::getRect() const {
     return rect;
 }
+
 int Elemento::getId() const {
     return id;
+}
+
+void Elemento::clicked(Click &click) {
+    SDL_bool clickeado = SDL_PointInRect(&click.getPoint(),
+                             &rect);
+
+    if (clickeado == SDL_TRUE){
+        click.setClicked(this);
+    }
 }

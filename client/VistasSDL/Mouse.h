@@ -2,6 +2,7 @@
 #define TPFINAL_MOUSE_H
 #include <SDL2/SDL.h>
 #include "SelectBox.h"
+#include "Click.h"
 class Mouse {
 
  public:
@@ -23,7 +24,7 @@ class Mouse {
 
   MouseCoords getCoordinates();
 
-  void setSelectBox(SelectBox &selectBox);
+  void setMouseAction(SelectBox &selectBox, Click &click);
 
  private:
 
@@ -32,6 +33,7 @@ class Mouse {
   bool mouseMoves = false;
   MouseCoords start_coords;
   MouseCoords move_coords;
+  MouseCoords left_click_coords;
   int lastButton;
 };
 

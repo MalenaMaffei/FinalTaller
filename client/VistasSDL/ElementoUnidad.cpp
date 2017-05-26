@@ -5,8 +5,9 @@ ElementoUnidad::ElementoUnidad(int id,
                                int x,
                                int y,
                                VistaDireccionada *textura,
-                               Vista *vistaMuerte) :
-    Elemento(id, x, y, textura, false),
+                               Vista *vistaMuerte,
+                               bool esMio) :
+    Elemento(id, x, y, textura, esMio),
     vistaMovimiento(textura), enMovimiento(false), direccion(0), muriendo
         (false), vistaMuerte(vistaMuerte){}
 
@@ -90,12 +91,10 @@ void ElementoUnidad::mostrar(Camara &camera) {
 
 void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
     if(!muerto){
-        if( selectBox.checkCollision( rect )){
-            //Show the tile
-//            textura->setColor(0,255,0);
+        printf("es mio?: %i\n", esMio);
+        if(selectBox.checkCollision(rect) && esMio){
+
             selectBox.selectUnidad(*this);
-        } else {
-//            textura->setColor(255,255,255);
         }
     }
 }
@@ -108,3 +107,4 @@ void ElementoUnidad::deseleccionar() {
     textura->setColor(255,255,255);
 }
 
+//TODO clicked polimorfizar

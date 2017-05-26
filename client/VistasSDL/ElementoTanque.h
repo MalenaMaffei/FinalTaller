@@ -6,10 +6,11 @@
 class ElementoTanque : public ElementoUnidad {
  public:
   ElementoTanque(int id,
-                 int x,
-                 int y,
-                 VistaDireccionada *textura,
-                 Vista *texturaMuerte);
+                   int x,
+                   int y,
+                   VistaDireccionada *textura,
+                   Vista *texturaMuerte,
+                   bool esMio);
 
 
  private:

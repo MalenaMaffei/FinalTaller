@@ -11,7 +11,8 @@ class ElementoRobot : public ElementoUnidad{
                   int y,
                   VistaDireccionada *texturaCaminar,
                   VistaDireccionada *texturaDisparar,
-                  Vista *vistaMuerte);
+                  Vista *vistaMuerte,
+                  bool esMio);
  private:
   Vista* texturaDisparar;
 //  Vista* currentVista;

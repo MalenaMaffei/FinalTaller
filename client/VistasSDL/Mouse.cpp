@@ -1,4 +1,5 @@
 #include "Mouse.h"
+#include "Click.h"
 #include <algorithm>
 #include <cmath>
 
@@ -22,7 +23,9 @@ void Mouse::setState(Uint32 eventType, SDL_Event event) {
         if (event.button.button ==  SDL_BUTTON_RIGHT) {
             lastButton = rightButtonUp;
         } else {
-////            TODO manejar seleccion de fabricas etc
+            lastButton = leftButtonUp;
+            left_click_coords.x = event.button.x;
+            left_click_coords.y = event.button.y;
         }
     }
 
@@ -36,25 +39,31 @@ Mouse::MouseCoords Mouse::getCoordinates() {
     return move_coords;
 }
 
-void Mouse::setSelectBox(SelectBox &selectBox) {
+void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
+    switch (lastButton){
+        case rightButtonDown:{
+            int width = move_coords.x - start_coords.x;
+            int height = start_coords.y - move_coords.y;
+            int x = start_coords.x ;
+            int y = move_coords.y;
 
-    if(lastButton == rightButtonDown) {
+            int newX = std::min(x, x+width);
+            int newY = std::min(y, y+height);
 
-        int width = move_coords.x - start_coords.x;
-        int height = start_coords.y - move_coords.y;
-        int x = start_coords.x ;
-        int y = move_coords.y;
+            SDL_Rect rect = {newX,newY,std::abs(width),std::abs(height)};
+            selectBox.setRect(rect);
+            selectBox.vaciarSeleccionadas();
+        } break;
 
-        int newX = std::min(x, x+width);
-        int newY = std::min(y, y+height);
+        case rightButtonUp:{
+            SDL_Rect rect = {0,0,0,0};
+            selectBox.setRect(rect);
+        } break;
 
-        SDL_Rect rect = {newX,newY,std::abs(width),std::abs(height)};
-        selectBox.setRect(rect);
-        selectBox.vaciarSeleccionadas();
+        case leftButtonUp:{
+            click.setCoords(left_click_coords.x,left_click_coords.y);
+        }
 
-    } else if (lastButton == rightButtonUp) {
-        SDL_Rect rect = {0,0,0,0};
-        selectBox.setRect(rect);
     }
 
 }
