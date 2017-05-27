@@ -215,7 +215,7 @@ int main( int argc, char* args[] ){
 //                              &robotMorirTextura);
 //        unidades.push_back(robot1);
 
-        for (int i = 40; i < 40*7; i+=45) {
+        for (int i = 40; i < 40*200; i+=45) {
             unidades.push_back(new ElementoRobot(1,i,20,&robotCaminarTextura,
                                                  &pyroDispararTextura,
                                                  &robotMorirTextura, i%2==0));
@@ -256,7 +256,7 @@ int main( int argc, char* args[] ){
 //TODO VER COMO SEPARAR TECLADO EVENT VS MOUSE EVENTS aunque no se si hace falta
                 //Handle input for the dot
                 camara.handleEvent( e );
-                mouse.setState(e.type, e);
+                mouse.setState(e.type, e, camara.getOffset());
             }
 
             float timeStep = stepTimer.getTicks() / 1000.f;

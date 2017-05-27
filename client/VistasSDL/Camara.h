@@ -29,7 +29,7 @@ class Camara {
 //
   int getCamaraX();
   int getCamaraY();
-
+  SDL_Point getOffset();
   SDL_Rect* getCamara();
 
   //Shows the dot on the screen

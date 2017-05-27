@@ -20,7 +20,7 @@ class Mouse {
 
   Mouse();
 
-  void setState(Uint32 eventType, SDL_Event event);
+  void setState(Uint32 eventType, SDL_Event event, SDL_Point offset);
 
   SDL_Point getCoordinates();
 

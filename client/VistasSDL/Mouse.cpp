@@ -5,7 +5,7 @@
 
 Mouse::Mouse() : lastButton(-1) {}
 
-void Mouse::setState(Uint32 eventType, SDL_Event event) {
+void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
 
     if ( eventType == SDL_MOUSEBUTTONDOWN) {
         if (event.button.button == SDL_BUTTON_RIGHT){

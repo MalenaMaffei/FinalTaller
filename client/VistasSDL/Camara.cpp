@@ -133,3 +133,7 @@ int Camara::getCamaraY() {
 SDL_Rect *Camara::getCamara() {
     &mBox;
 }
+
+SDL_Point Camara::getOffset() {
+    return {mBox.x, mBox.y};
+}
