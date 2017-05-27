@@ -8,11 +8,9 @@ Mouse::Mouse() : lastButton(-1) {}
 void Mouse::setState(Uint32 eventType, SDL_Event event) {
 
     if ( eventType == SDL_MOUSEBUTTONDOWN) {
-//        handleMouseDown(event);
         if (event.button.button == SDL_BUTTON_RIGHT){
             lastButton = rightButtonDown;
-            start_coords.x = event.button.x;
-            start_coords.y = event.button.y;
+            start_coords = {event.button.x, event.button.y};
         } else {
 ////            TODO seleccion fabrica o seleccion terreno
         }
@@ -24,18 +22,16 @@ void Mouse::setState(Uint32 eventType, SDL_Event event) {
             lastButton = rightButtonUp;
         } else {
             lastButton = leftButtonUp;
-            left_click_coords.x = event.button.x;
-            left_click_coords.y = event.button.y;
+            left_click_coords = {event.button.x, event.button.y};
         }
     }
 
     if ( eventType == SDL_MOUSEMOTION ) {
-        move_coords.x = event.motion.x;
-        move_coords.y = event.motion.y;
+        move_coords = {event.motion.x, event.motion.y};
     }
 }
 
-Mouse::MouseCoords Mouse::getCoordinates() {
+SDL_Point Mouse::getCoordinates() {
     return move_coords;
 }
 

@@ -91,7 +91,6 @@ void ElementoUnidad::mostrar(Camara &camera) {
 
 void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
     if(!muerto){
-        printf("es mio?: %i\n", esMio);
         if(selectBox.checkCollision(rect) && esMio){
 
             selectBox.selectUnidad(*this);

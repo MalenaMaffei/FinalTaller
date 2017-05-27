@@ -6,10 +6,10 @@
 class Mouse {
 
  public:
-  struct MouseCoords {
-    int x = -1;
-    int y = -1;
-  };
+//  struct MouseCoords {
+//    int x = -1;
+//    int y = -1;
+//  };
 
   enum ButtonPressed{
     rightButtonDown = 0,
@@ -22,7 +22,7 @@ class Mouse {
 
   void setState(Uint32 eventType, SDL_Event event);
 
-  MouseCoords getCoordinates();
+  SDL_Point getCoordinates();
 
   void setMouseAction(SelectBox &selectBox, Click &click);
 
@@ -31,9 +31,9 @@ class Mouse {
 //  bool rightButtonDown = false;
 //  bool leftButtonDown = false;
   bool mouseMoves = false;
-  MouseCoords start_coords;
-  MouseCoords move_coords;
-  MouseCoords left_click_coords;
+  SDL_Point start_coords;
+  SDL_Point move_coords;
+  SDL_Point left_click_coords;
   int lastButton;
 };
 
