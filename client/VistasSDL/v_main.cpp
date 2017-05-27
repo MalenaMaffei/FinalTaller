@@ -319,7 +319,6 @@ int main( int argc, char* args[] ){
               elemento->mostrar(camara);
             });
 
-
             selectBox.mostrar(gRenderer);
 
 

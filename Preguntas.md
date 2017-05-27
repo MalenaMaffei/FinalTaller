@@ -1,3 +1,8 @@
+## Martes 30/05 ##
+#### Male (Cliente) ####
+1. Me conviene guardar el offset o la pos real de cada elemento? .. creo el la pos real -> entonces como hago para "saber" el offset sin tener que andar pasandolo por todos lados???
+
+
 ## Martes 23/05 ##
 #### Male (Cliente) ####
 1. Se recibe el mapa por sockets y se guarda en un archivo para que SDL dsp lo dibuje o se lo vamos pasando desde el socket a SDL? Yo me inclino por lo primero. 

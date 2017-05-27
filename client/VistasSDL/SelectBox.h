@@ -10,7 +10,7 @@ class SelectBox {
    public:
   SelectBox();
 
-  void mostrar(SDL_Renderer* renderer);
+  void mostrar(SDL_Renderer *renderer);
   int getX();
   int getY();
 

@@ -1,5 +1,7 @@
 #include "Click.h"
-Click::Click() : clicked(nullptr){}
+Click::Click() : clicked(nullptr){
+    point = {-1,-1};
+}
 
 void Click::setCoords(int clickedX,int clickedY) {
     point = {clickedX, clickedY};

@@ -22,7 +22,10 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
             lastButton = rightButtonUp;
         } else {
             lastButton = leftButtonUp;
-            left_click_coords = {event.button.x, event.button.y};
+            left_click_coords = {event.button.x + offset.x, event.button.y +
+                offset.y};
+//            left_click_coords = {event.button.x, event.button.y };
+            printf("click en x: %i, y: %i\n", left_click_coords.x, left_click_coords.y);
         }
     }
 
