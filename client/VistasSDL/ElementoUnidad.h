@@ -16,7 +16,7 @@ class ElementoUnidad : public Elemento{
                    bool esMio);
   virtual void mover(int newX, int newY);
   void mostrar(Camara &camera);
-  void chequearSeleccion(SelectBox &selectBox);
+  void chequearSeleccion(SelectBox &selectBox, SDL_Point offset);
   void matar();
   void seleccionar();
   void deseleccionar();

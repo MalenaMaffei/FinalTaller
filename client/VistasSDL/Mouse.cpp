@@ -10,7 +10,11 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
     if ( eventType == SDL_MOUSEBUTTONDOWN) {
         if (event.button.button == SDL_BUTTON_RIGHT){
             lastButton = rightButtonDown;
-            start_coords = {event.button.x, event.button.y};
+//            start_coords = {event.button.x, event.button.y};
+            start_coords = {event.button.x + offset.x, event.button.y +
+                offset.y};
+//            printf("Rclick en x: %i, y: %i\n", start_coords.x,
+//                   start_coords.y);
         } else {
 ////            TODO seleccion fabrica o seleccion terreno
         }
@@ -25,12 +29,13 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
             left_click_coords = {event.button.x + offset.x, event.button.y +
                 offset.y};
 //            left_click_coords = {event.button.x, event.button.y };
-            printf("click en x: %i, y: %i\n", left_click_coords.x, left_click_coords.y);
+//            printf("click en x: %i, y: %i\n", left_click_coords.x, left_click_coords.y);
         }
     }
 
     if ( eventType == SDL_MOUSEMOTION ) {
-        move_coords = {event.motion.x, event.motion.y};
+//        move_coords = {event.motion.x, event.motion.y};
+        move_coords = {event.motion.x+ offset.x, event.motion.y+ offset.y};
     }
 }
 
@@ -52,6 +57,7 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
             SDL_Rect rect = {newX,newY,std::abs(width),std::abs(height)};
             selectBox.setRect(rect);
             selectBox.vaciarSeleccionadas();
+            printf("pos rect creado: %i,%i\n", newX, newY);
         } break;
 
         case rightButtonUp:{

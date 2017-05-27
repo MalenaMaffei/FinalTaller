@@ -216,7 +216,7 @@ int main( int argc, char* args[] ){
 //        unidades.push_back(robot1);
 
         for (int i = 40; i < 40*200; i+=45) {
-            unidades.push_back(new ElementoRobot(1,i,20,&robotCaminarTextura,
+            unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
                                                  &pyroDispararTextura,
                                                  &robotMorirTextura, i%2==0));
         }
@@ -319,13 +319,13 @@ int main( int argc, char* args[] ){
               elemento->mostrar(camara);
             });
 
-            selectBox.mostrar(gRenderer);
+            selectBox.mostrar(gRenderer, camara.getOffset());
 
 
 
             std::for_each(unidades.begin(), unidades.end(), [&]
                 (ElementoUnidad* unidad){
-              unidad->chequearSeleccion(selectBox);
+              unidad->chequearSeleccion(selectBox, SDL_Point());
               unidad->clicked(click);
             });
 

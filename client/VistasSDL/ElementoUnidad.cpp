@@ -89,9 +89,12 @@ void ElementoUnidad::mostrar(Camara &camera) {
     }
 }
 
-void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
+void ElementoUnidad::chequearSeleccion(SelectBox &selectBox, SDL_Point offset) {
     if(!muerto){
-        if(selectBox.checkCollision(rect) && esMio){
+        SDL_Rect collisionRect = rect;
+//        collisionRect.x - offset.x;
+//        collisionRect.y - offset.y;
+        if(selectBox.checkCollision(collisionRect) && esMio){
 
             selectBox.selectUnidad(*this);
         }
