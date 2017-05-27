@@ -62,5 +62,5 @@ void SelectBox::vaciarSeleccionadas() {
 }
 
 bool SelectBox::haySeleccion() {
-    return seleccionadas.empty();
+    return !seleccionadas.empty();
 }

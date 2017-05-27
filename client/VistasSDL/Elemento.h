@@ -17,9 +17,10 @@ class Elemento {
   const SDL_Rect &getRect() const;
   int getId() const;
   void clicked(Click& click);
+  bool esMio() const;
  protected:
   //The attributes of the tile
-  bool esMio;
+  bool Mio;
   bool muerto;
   SDL_Rect rect;
 

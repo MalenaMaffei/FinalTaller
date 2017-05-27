@@ -67,6 +67,7 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
 
         case leftButtonUp:{
             click.setCoords(left_click_coords.x,left_click_coords.y);
+            click.setSeleccion(selectBox.haySeleccion());
         }
 
     }

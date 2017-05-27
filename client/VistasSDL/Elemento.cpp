@@ -1,8 +1,8 @@
 #include "Elemento.h"
-//TODO chequwar que todos tengan implementado el esMio
+//TODO chequwar que todos tengan implementado el Mio
 #include "Click.h"
 Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
-    : textura(textura), id(id), currentClip(0), muerto(false), esMio(esMio) {
+    : textura(textura), id(id), currentClip(0), muerto(false), Mio(esMio) {
     rect.x = x;
     rect.y = y;
 
@@ -53,4 +53,8 @@ void Elemento::clicked(Click &click) {
         click.setClicked(this);
 
     }
+}
+
+bool Elemento::esMio() const {
+    return Mio;
 }

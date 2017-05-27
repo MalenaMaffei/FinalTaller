@@ -94,7 +94,7 @@ void ElementoUnidad::chequearSeleccion(SelectBox &selectBox, SDL_Point offset) {
         SDL_Rect collisionRect = rect;
 //        collisionRect.x - offset.x;
 //        collisionRect.y - offset.y;
-        if(selectBox.checkCollision(collisionRect) && esMio){
+        if(selectBox.checkCollision(collisionRect) && Mio){
 
             selectBox.selectUnidad(*this);
         }
