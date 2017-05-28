@@ -42,6 +42,8 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
 //        printf("SDL_MOUSEMOTION\n");
 //        move_coords = {event.motion.x, event.motion.y};
         move_coords = {event.motion.x+ offset.x, event.motion.y+ offset.y};
+//        printf("moviemiento a: %i, %i\n", move_coords.x,
+//               move_coords.y);
     }
 
 
@@ -87,6 +89,9 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
 }
 
 void Mouse::resetState() {
-    lastButton = none;
+    if (lastButton != rightButtonDown){
+        lastButton = none;
+    }
+
 }
 
