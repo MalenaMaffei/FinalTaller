@@ -17,6 +17,7 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
 //                   start_coords.y);
         } else {
 ////            TODO seleccion fabrica o seleccion terreno
+
         }
 
     }
@@ -37,6 +38,8 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
 //        move_coords = {event.motion.x, event.motion.y};
         move_coords = {event.motion.x+ offset.x, event.motion.y+ offset.y};
     }
+
+    
 }
 
 SDL_Point Mouse::getCoordinates() {

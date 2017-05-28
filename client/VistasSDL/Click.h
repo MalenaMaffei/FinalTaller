@@ -9,11 +9,14 @@ class Click {
   const SDL_Point &getPoint() const;
   void setClicked(Elemento *clicked);
   void setSeleccion(bool seleccion);
+  bool hayClickeado();
+  void resetCoords();
+  bool huboClick();
   Elemento *getClicked() const;
 
  private:
   Elemento* clicked;
-  SDL_Point point;
+  SDL_Point coords;
   bool seleccion;
 //  int x;
 //  int y;

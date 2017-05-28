@@ -5,12 +5,27 @@ ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox, Click &click)
     : selectBox(selectBox), click(click) {}
 
 void ColectorDeAcciones::crearAcciones() {
-    Elemento* clickeado = click.getClicked();
-    if (clickeado == nullptr){
+    if (!click.hayClickeado()){
         return;
     }
+
+    if (!click.hayClickeado()){
+        if (selectBox.haySeleccion()){
+            std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
+            std::for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
+                                                                  unidad){
+              printf("Unidad id: %i se mueve a: %i,%i\n", unidad.getId(),
+                     click.getPoint().x, click.getPoint().y);
+            });
+            selectBox.vaciarSeleccionadas();
+        }
+        click.resetCoords();
+        return;
+    }
+
+    Elemento* clickeado = click.getClicked();
     if (clickeado->esMio()){
-        printf("request info de id: %i\n", clickeado->getId());
+        printf("request info MIO de id: %i\n", clickeado->getId());
     } else if (selectBox.haySeleccion()){
         std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
         std::for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
@@ -19,7 +34,8 @@ void ColectorDeAcciones::crearAcciones() {
                    clickeado->getId());
         });
         selectBox.vaciarSeleccionadas();
+    } else {
+        printf("request info de id: %i\n", clickeado->getId());
     }
-
-
+    click.resetCoords();
 }

@@ -1,14 +1,14 @@
 #include "Click.h"
 Click::Click() : clicked(nullptr){
-    point = {-1,-1};
+    coords = {-1,-1};
 }
 
 void Click::setCoords(int clickedX,int clickedY) {
-    point = {clickedX, clickedY};
+    coords = {clickedX, clickedY};
 }
 
 const SDL_Point &Click::getPoint() const {
-    return point;
+    return coords;
 }
 
 void Click::setClicked(Elemento *clicked) {
@@ -29,6 +29,17 @@ void Click::setSeleccion(bool seleccion) {
 
 Elemento *Click::getClicked() const {
     return clicked;
+}
+
+bool Click::hayClickeado() {
+    return clicked != nullptr;
+}
+
+void Click::resetCoords() {
+    coords = {-1,-1};
+}
+bool Click::huboClick() {
+    return coords.x >= 0;
 }
 
 //TODO delete coords after using them

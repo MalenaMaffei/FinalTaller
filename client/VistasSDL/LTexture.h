@@ -28,7 +28,7 @@ class LTexture
   //Set alpha modulation
   void setAlpha( Uint8 alpha );
 
-  //Renders texture at given point
+  //Renders texture at given coords
   void render( int x, int y, SDL_Rect* clip = NULL );
 
   //Gets image dimensions

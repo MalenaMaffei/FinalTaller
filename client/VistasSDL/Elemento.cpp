@@ -48,8 +48,8 @@ void Elemento::clicked(Click &click) {
                              &rect);
 
     if (clickeado == SDL_TRUE){
-//        printf("click en x: %i, y: %i\n", click.getPoint().x, click.getPoint().y);
-//        printf("pos del elemento x: %i, y: %i \n", rect.x, rect.y);
+        printf("click en x: %i, y: %i\n", click.getPoint().x, click.getPoint().y);
+        printf("pos del elemento x: %i, y: %i \n", rect.x, rect.y);
         click.setClicked(this);
 
     }
