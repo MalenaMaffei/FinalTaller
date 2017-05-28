@@ -9,6 +9,7 @@ class Click {
   const SDL_Point &getPoint() const;
   void setClicked(Elemento *clicked);
   void setSeleccion(bool seleccion);
+  Elemento *getClicked() const;
 
  private:
   Elemento* clicked;

@@ -13,7 +13,7 @@ const SDL_Point &Click::getPoint() const {
 
 void Click::setClicked(Elemento *clicked) {
     Click::clicked = clicked;
-    printf("me clickearon: %i y  habia seleccion?: %i\n", clicked->getId(), seleccion);
+//    printf("me clickearon: %i y  habia seleccion?: %i\n", clicked->getId(), seleccion);
 //      TODO esto lo tendria que manejar alguien de afuera, el colector de
 // acciones. Lo de abajo funciona igual.
 //    if (seleccion && !clicked->esMio()){
@@ -25,6 +25,10 @@ void Click::setClicked(Elemento *clicked) {
 
 void Click::setSeleccion(bool seleccion) {
     Click::seleccion = seleccion;
+}
+
+Elemento *Click::getClicked() const {
+    return clicked;
 }
 
 //TODO delete coords after using them

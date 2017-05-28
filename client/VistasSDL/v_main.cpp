@@ -26,6 +26,7 @@
 #include "VistaMuerteRobot.h"
 #include "Mouse.h"
 #include "VistaMissilelauncher.h"
+#include "ColectorDeAcciones.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -241,7 +242,7 @@ int main( int argc, char* args[] ){
         Mouse mouse;
         SelectBox selectBox;
         Click click;
-
+        ColectorDeAcciones colector(selectBox, click);
         while( !quit )
         {
             capTimer.start();
@@ -333,7 +334,7 @@ int main( int argc, char* args[] ){
             ++pos_tanque;
             //Update screen
             SDL_RenderPresent( gRenderer );
-
+            colector.crearAcciones();
 //
             int frameTicks = capTimer.getTicks();
             if( frameTicks < SCREEN_TICK_PER_FRAME ){

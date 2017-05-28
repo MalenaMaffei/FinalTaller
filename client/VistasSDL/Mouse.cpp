@@ -57,7 +57,7 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
             SDL_Rect rect = {newX,newY,std::abs(width),std::abs(height)};
             selectBox.setRect(rect);
             selectBox.vaciarSeleccionadas();
-            printf("pos rect creado: %i,%i\n", newX, newY);
+//            printf("pos rect creado: %i,%i\n", newX, newY);
         } break;
 
         case rightButtonUp:{
@@ -68,6 +68,7 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
         case leftButtonUp:{
             click.setCoords(left_click_coords.x,left_click_coords.y);
             click.setSeleccion(selectBox.haySeleccion());
+            click.setClicked(nullptr);
         }
 
     }

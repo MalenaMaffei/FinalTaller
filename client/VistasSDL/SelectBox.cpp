@@ -7,7 +7,7 @@ void SelectBox::mostrar(SDL_Renderer *renderer, SDL_Point offset) {
                             rect.h};
 //    rect.x -= offset.x;
 //    rect.y -= offset.y;
-    printf("disp rect creado: %i,%i\n", rect.x - offset.x, rect.y - offset.y);
+//    printf("disp rect creado: %i,%i\n", rect.x - offset.x, rect.y - offset.y);
     SDL_RenderDrawRect(renderer, &displayRect);
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
         (ElementoUnidad &unidad){
@@ -49,8 +49,8 @@ int SelectBox::getY() {
 void SelectBox::selectUnidad(ElementoUnidad &unidad) {
 //    unidad.seleccionar();
     seleccionadas.push_back(unidad);
-    printf("seleccionado: %i\n", unidad.getId());
-    printf("cantidad seleccionados:%i \n", seleccionadas.size());
+//    printf("seleccionado: %i\n", unidad.getId());
+//    printf("cantidad seleccionados:%i \n", seleccionadas.size());
 }
 
 void SelectBox::vaciarSeleccionadas() {
@@ -63,4 +63,8 @@ void SelectBox::vaciarSeleccionadas() {
 
 bool SelectBox::haySeleccion() {
     return !seleccionadas.empty();
+}
+
+const std::vector<ElementoUnidad> &SelectBox::getSeleccionadas() const {
+    return seleccionadas;
 }

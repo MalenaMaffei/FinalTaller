@@ -19,6 +19,7 @@ class SelectBox {
   void selectUnidad(ElementoUnidad &unidad);
   void vaciarSeleccionadas();
   bool haySeleccion();
+  const std::vector<ElementoUnidad> &getSeleccionadas() const;
 
  private:
   SDL_Rect rect;
