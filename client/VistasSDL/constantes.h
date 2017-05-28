@@ -26,6 +26,14 @@ const char puentePath[] = "../client/VistasSDL/imgs/Puentes/bridge_city.png";
 const char banderaPath[] = "../client/VistasSDL/imgs/Banderas/blue_flag.png";
 const char robotCaminarPath[] = "../client/VistasSDL/imgs/Robots/caminar_robot.png";
 const char robotPyroDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_pyro.png";
+const char robotGruntDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_grunt.png";
+const char robotToughDisparar[] = "."
+    "./client/VistasSDL/imgs/Robots/disparo_tough.png";
+const char robotLaserDisparar[] = "."
+    "./client/VistasSDL/imgs/Robots/disparo_laser.png";
+const char robotPsychoDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_psycho.png";
+const char robotSniperDisparar[] = "."
+    "./client/VistasSDL/imgs/Robots/disparo_sniper.png";
 const char robotMuertePath[] = "../client/VistasSDL/imgs/Robots/muerte.png";
 const char tanquePath[] = "../client/VistasSDL/imgs/Tanks/heavy.png";
 const char tanqueMuertePath[] = "../client/VistasSDL/imgs/Tanks/explosion.png";
