@@ -36,6 +36,7 @@ bool Click::hayClickeado() {
 }
 
 void Click::resetCoords() {
+    printf("reseting coords\n");
     coords = {-1,-1};
 }
 bool Click::huboClick() {
