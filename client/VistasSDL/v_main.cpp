@@ -335,7 +335,7 @@ int main( int argc, char* args[] ){
             //Update screen
             SDL_RenderPresent( gRenderer );
             colector.crearAcciones();
-//
+            mouse.resetState();
             int frameTicks = capTimer.getTicks();
             if( frameTicks < SCREEN_TICK_PER_FRAME ){
                 //Wait remaining time

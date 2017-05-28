@@ -6,8 +6,8 @@
 Mouse::Mouse() : lastButton(-1) {}
 
 void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
-
     if ( eventType == SDL_MOUSEBUTTONDOWN) {
+//        printf("SDL_MOUSEBUTTONDOWN\n");
         if (event.button.button == SDL_BUTTON_RIGHT){
             lastButton = rightButtonDown;
 //            start_coords = {event.button.x, event.button.y};
@@ -25,6 +25,8 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
     }
 
     if ( eventType == SDL_MOUSEBUTTONUP ) {
+//        printf("SDL_MOUSEBUTTONUP\n");
+
         if (event.button.button ==  SDL_BUTTON_RIGHT) {
             lastButton = rightButtonUp;
         } else {
@@ -37,10 +39,13 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
     }
 
     if ( eventType == SDL_MOUSEMOTION ) {
+//        printf("SDL_MOUSEMOTION\n");
 //        move_coords = {event.motion.x, event.motion.y};
         move_coords = {event.motion.x+ offset.x, event.motion.y+ offset.y};
     }
 
+
+//    printf("lastButton: %i\n", lastButton);
 
 }
 
@@ -74,9 +79,14 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
             click.setCoords(left_click_coords.x,left_click_coords.y);
             click.setSeleccion(selectBox.haySeleccion());
             click.setClicked(nullptr);
-        }
+        } break;
+
 
     }
 
+}
+
+void Mouse::resetState() {
+    lastButton = none;
 }
 

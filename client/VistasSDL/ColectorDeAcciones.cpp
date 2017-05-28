@@ -5,7 +5,7 @@ ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox, Click &click)
     : selectBox(selectBox), click(click) {}
 
 void ColectorDeAcciones::crearAcciones() {
-    if (!click.hayClickeado()){
+    if (!click.huboClick()){
         return;
     }
 

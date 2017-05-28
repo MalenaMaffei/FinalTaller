@@ -4,6 +4,7 @@ Click::Click() : clicked(nullptr){
 }
 
 void Click::setCoords(int clickedX,int clickedY) {
+//    printf("me estan seteando las coords\n");
     coords = {clickedX, clickedY};
 }
 
@@ -36,10 +37,11 @@ bool Click::hayClickeado() {
 }
 
 void Click::resetCoords() {
-    printf("reseting coords\n");
+//    printf("reseting coords\n");
     coords = {-1,-1};
 }
 bool Click::huboClick() {
+//    printf("mis coords son %i,%i\n", coords.x, coords.y);
     return coords.x >= 0;
 }
 

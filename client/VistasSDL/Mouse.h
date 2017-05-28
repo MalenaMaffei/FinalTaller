@@ -12,6 +12,7 @@ class Mouse {
 //  };
 
   enum ButtonPressed{
+    none = -1,
     rightButtonDown = 0,
     rightButtonUp = 1,
     leftButtonDown = 2,
@@ -21,7 +22,7 @@ class Mouse {
   Mouse();
 
   void setState(Uint32 eventType, SDL_Event event, SDL_Point offset);
-
+  void resetState();
   SDL_Point getCoordinates();
 
   void setMouseAction(SelectBox &selectBox, Click &click);
