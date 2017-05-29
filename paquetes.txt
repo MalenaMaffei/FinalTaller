@@ -2,13 +2,19 @@ Primer intento de diseñar los paquetes
 
 LOS QUE RECIBE EL CLIENTE:
 
-4bytes 2bytes   1byte       2bytes  2bytes  1byte       1byte
+4bytes 2bytes   1byte       2bytes  2bytes  1byte       1byte		1byte
             
-LARGO | ID |    COMANDO |   x       | y |    COLOR  |   ESDELCLIENTE?
+LARGO | ID |    COMANDO |   x       | y | TIPO A CREAR|   ESDELCLIENTE? |    COLOR  
 
 largo: largo del mensaje
 id: id del elemento a crear/modificar
 comando: 0 Crear, 1 Matar, 2 Mover, 3 Disparar
 x,y: voy a necesesitar para todos excepto matar (para disparar necesito para orientar al sprite).
-color: 0 amarillo, 1 azul, 2 rojo, 3 verde SOLO PARA CREAR
-esDelCliente?: 0 o 1 para saber si el elemento a crear es del cliente SOLO PARA CREAR
+tipo a crear: 0 roca/hielo, 1 fuerte, 2 fabrica robot, 3 fabrica vehiculo, 4 puente, 5 bandera,
+	      6 grunt, 7 psycho, 8 tough, 9 pyro, 10 sniper, 11 laser -> ROB0TS
+	      12 jeep, 13 light, 14 medium, 15 heavy, 16 missile -> TANQUES
+		
+esDelCliente?: 0 o 1 para saber si el elemento a crear es del cliente SOLO PARA CREAR donde corresponda
+color: 0 amarillo, 1 azul, 2 rojo, 3 verde SOLO PARA CREAR unidades donde corresponda
+
+
