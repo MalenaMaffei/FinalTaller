@@ -208,15 +208,15 @@ void Canvas::run(){
     }
 
     VistaFuerte fuerteTextura(gRenderer);
-    Elemento* fuerte1 = new ElementoFuerte(1, 100, 100, &fuerteTextura);
+    Elemento* fuerte1 = new ElementoFuerte(1, 100, 100, &fuerteTextura, 0);
     elementos.push_back(fuerte1);
-    Elemento* fuerte2 = new ElementoFuerte(1, 900, 900, &fuerteTextura);
+    Elemento* fuerte2 = new ElementoFuerte(1, 900, 900, &fuerteTextura, 0);
     elementos.push_back(fuerte2);
 
     VistaBandera banderaTextura(gRenderer);
     for (int j = 0; j <640; j+=32) {
-        Elemento* bandera = new ElementoBandera(j, j+60, j+500,
-                                                &banderaTextura);
+        Elemento* bandera = new ElementoBandera(j, j + 60, j + 500,
+                                                &banderaTextura, 0);
         elementos.push_back(bandera);
     }
 

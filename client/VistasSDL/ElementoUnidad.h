@@ -3,17 +3,15 @@
 
 #include "Elemento.h"
 #include "VistaDireccionada.h"
+#include "ElementoColoreado.h"
 //#include "SelectBox.h"
 
 class SelectBox;
-class ElementoUnidad : public Elemento{
+class ElementoUnidad : public ElementoColoreado{
  public:
-  ElementoUnidad(int id,
-                   int x,
-                   int y,
+  ElementoUnidad(int id, int x, int y,
                    VistaDireccionada *textura,
-                   Vista *vistaMuerte,
-                   bool esMio);
+                   Vista *vistaMuerte, bool esMio, int color);
   virtual void mover(int newX, int newY);
   void mostrar(Camara &camera);
   void chequearSeleccion(SelectBox &selectBox, SDL_Point offset);

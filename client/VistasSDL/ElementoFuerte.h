@@ -5,7 +5,8 @@
 #include "ElementoEstructura.h"
 class ElementoFuerte : public ElementoEstructura {
  public:
-  ElementoFuerte(int id, int x, int y, VistaFuerte *textura);
+  ElementoFuerte(int id, int x, int y, VistaFuerte *textura,
+                   int color);
   void matar();
 };
 

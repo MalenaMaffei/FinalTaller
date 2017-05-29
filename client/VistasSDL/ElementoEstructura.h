@@ -2,9 +2,12 @@
 #define TPFINAL_ELEMENTOESTRUCTURA_H
 
 #include "Elemento.h"
-class ElementoEstructura : public Elemento{
+#include "ElementoColoreado.h"
+
+class ElementoEstructura : public ElementoColoreado{
  public:
-  ElementoEstructura(int id, int x, int y, Vista *textura, bool esMio);
+  ElementoEstructura(int id, int x, int y, Vista *textura,
+                       bool esMio, int color);
 
 };
 

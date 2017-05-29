@@ -5,7 +5,7 @@
 #include "VistaRoca.h"
 class ElementoRoca : public Elemento{
  public:
-  ElementoRoca(int id, int x, int y, VistaRoca *textura);
+  ElementoRoca(int id, int x, int y, Vista *textura);
 
 };
 

@@ -2,9 +2,12 @@
 #define TPFINAL_ELEMENTOBANDERA_H
 
 #include "Elemento.h"
-class ElementoBandera : public Elemento {
+#include "ElementoColoreado.h"
+
+class ElementoBandera : public ElementoColoreado {
  public:
-  ElementoBandera(int id, int x, int y, Vista *textura);
+  ElementoBandera(int id, int x, int y, Vista *textura,
+                    int color);
   void mostrar(Camara &camera);
 
 
