@@ -1,8 +1,10 @@
 Primer intento de diseñar los paquetes
 
 LOS QUE RECIBE EL CLIENTE:
+por ahi mejor hacemos que el largo sea un short o un int y el resto que venga que sea en chars asi es mas facil de armar y desarmar lo que llega.
 
-4bytes 2bytes   1byte       2bytes  2bytes  1byte       1byte		1byte
+short? 2bytes   1byte       2bytes  2bytes  1byte       1byte		1byte -> opcion 1
+short? xChars   1char       xChars  xChars  1char       1char		1char -> opcion 2 con chars
             
 LARGO | ID |    COMANDO |   x       | y | TIPO A CREAR|   ESDELCLIENTE? |    COLOR  
 
