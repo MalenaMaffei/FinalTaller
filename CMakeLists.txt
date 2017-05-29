@@ -24,5 +24,26 @@ set(SDL2_IMG_LIBRARY /usr/lib64/libSDL2_image.so)
 
 include_directories(${SDL2_INCLUDE_DIR})
 
+
+
+set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package(Threads REQUIRED)
+
+#target_link_libraries(test Threads::Threads)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 add_executable(vista  ${VISTA_SRC})
-target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMG_LIBRARY})
+target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMG_LIBRARY} Threads::Threads)

@@ -2,6 +2,7 @@
 #### Male (Cliente) ####
 1. Me conviene guardar el offset o la pos real de cada elemento? .. creo el la pos real -> entonces como hago para "saber" el offset sin tener que andar pasandolo por todos lados???
 2. que tan malo es chequear nullptr? seguramente deberia hacer un get
+3. Como hago para cuando cierro el SDL, lo pongo en el ~ directamente? o es conveniente dejar la funcion close
 
 
 ## Martes 23/05 ##

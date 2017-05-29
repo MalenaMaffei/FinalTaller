@@ -1,0 +1,14 @@
+Primer intento de diseñar los paquetes
+
+LOS QUE RECIBE EL CLIENTE:
+
+4bytes 2bytes   1byte       2bytes  2bytes  1byte       1byte
+            
+LARGO | ID |    COMANDO |   x       | y |    COLOR  |   ESDELCLIENTE?
+
+largo: largo del mensaje
+id: id del elemento a crear/modificar
+comando: 0 Crear, 1 Matar, 2 Mover, 3 Disparar
+x,y: voy a necesesitar para todos excepto matar (para disparar necesito para orientar al sprite).
+color: 0 amarillo, 1 azul, 2 rojo, 3 verde SOLO PARA CREAR
+esDelCliente?: 0 o 1 para saber si el elemento a crear es del cliente SOLO PARA CREAR
