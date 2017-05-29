@@ -1,193 +1,191 @@
-/*
- *	commonSocket.cpp
- */
-
 #include "common_Socket.h"
-
-#include <iostream>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <string.h>
-#include <string>
-#include <netdb.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <errno.h>
+// #define _POSIX_C_SOURCE 200112L
 #include "common_SocketException.h"
+#include <sys/socket.h>
+#include <unistd.h>
+#include <memory.h>
+#include "common_SocketException.h"
+#include <cstring>
+#include <string>
+#define SERVER_MODE 0
+#define CLIENT_MODE 0
+#define BACKLOG 10
+#define LENGTH_SIZE 4
+#define BUFFSIZE 300
 
-#define OK 0
-#define ERROR 1
-#define CLOSED 2
-#define NUM_CLIENTS 10
+int Socket::filladdrinfo(const char *ip, const char *port, int
+mode){
+    int status = 0;
 
-Socket::Socket() { 
-    this->fd = socket(AF_INET, SOCK_STREAM,0);
-    if (this->fd == -1) {
-        throw SocketException("Error al crear socket, fd es -1. ");
-    }
-}
-
-Socket::Socket(int fd) : fd(fd) { }
-
-Socket::~Socket() {
-	if (this->fd == -1) {
-		return;
-	}
-	if (close(this->fd) == -1) {
-        throw SocketException("Error al cerrar socket. ");
-    }
-}
-
-Socket::Socket(Socket &&orig) : fd(orig.fd) {
-	orig.fd = -1;
-}
-
-Socket &Socket::operator=(Socket &&orig) {
-	this->fd = orig.fd;
-	orig.fd = -1;
-	return *this;
-}
-
-int Socket::connect(const std::string& host, const std::string& service) {
     struct addrinfo hints;
-    struct addrinfo *result, *ptr;
-        
-    memset(&hints,0,sizeof(struct addrinfo));
-    hints.ai_family = AF_INET;  /* IPv4 */
-    hints.ai_socktype = SOCK_STREAM;    /* TCP */
-    hints.ai_flags = 0;
-    int s = getaddrinfo(host.c_str(), service.c_str(), &hints, &result);
-    
-    if (s != 0) {
-		throw SocketException(
-			"En connect, error en getaddrinfo (return value: %d). ", s);
+//    struct addrinfo *res;
+
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    if (mode == SERVER_MODE){
+        hints.ai_flags = AI_PASSIVE;
+    } else{
+        hints.ai_flags = 0;
     }
-    
-    for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
-        s = ::connect(this->fd, ptr->ai_addr, ptr->ai_addrlen);
-        if (s != -1) break;
-    }
-    
-    freeaddrinfo(result);
-    
-    if (!ptr) {
-		throw SocketException("En connect, !ptr. ");
-    }
-    
-    return OK;	
+
+    status = getaddrinfo(ip, port, &hints, &res);
+    if (status < 0) { return (NOK); }
+    if (!res) { return NOK; }
+    return OK;
 }
 
-int Socket::bindandlisten(const std::string& service) {
-    struct addrinfo hints;
-    struct addrinfo *result, *ptr;
-    
-    memset(&hints,0,sizeof(struct addrinfo));
-    hints.ai_family = AF_INET;  /* IPv4 */
-    hints.ai_socktype = SOCK_STREAM;    /* TCP */
-    hints.ai_flags = AI_PASSIVE;
-    int s = getaddrinfo(NULL, service.c_str(), &hints, &result);
-        
-    if (s != 0) {		
-		throw SocketException(
-			"En bindandlisten, error en getaddrinfo (return value: %d). ", s);
+void Socket::Create(const char *ip, const char *port, int mode){
+    int skt = 0;
+    filladdrinfo(ip, port, mode);
+    skt = socket(res->ai_family, res->ai_socktype,
+                 res->ai_protocol);
+    if (skt == NOK) {
+        throw SocketException("Error creando socket", fD);
     }
-    
-    for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
-        s = ::bind(this->fd, ptr->ai_addr, ptr->ai_addrlen);
-        if (s != -1) break;
-    }
-    
-    freeaddrinfo(result);
-
-    if (!ptr) {
-		throw SocketException("En bindandlisten, !ptr. ");
-    }
-
-    listen(this->fd,NUM_CLIENTS);
-    
-    return OK;    	
+    fD = skt;
 }
 
-Socket Socket::accept() {
-	int fd = ::accept(this->fd,NULL,NULL);
-	if (fd == -1) {
-		throw SocketException("En accept, fd es -1. ");
-    }
-	Socket new_socket(fd);
-	
-    return std::move(new_socket);
-}
+void Socket::CreateAndConnect(const char *ip, const char *port){
+    struct addrinfo* ptr;
+    bool connected = false;
+    int status = 0;
+    int skt = 0;
 
-int Socket::shutdown(const std::string& mode) {
-    int how;
-    if (mode == "read&write"){
-        how = SHUT_RDWR;
-    } else if (mode == "read"){
-        how = SHUT_RD;
-    } else if (mode == "write"){
-        how = SHUT_WR;
-    } else {
-		throw SocketException("En shutdown, %s no es un modo. ", mode);
-    }
-    if (::shutdown(this->fd,how)) {
-		throw SocketException("Error en shutdown. ");
-	}
-    return OK;	
-}
+    filladdrinfo(ip, port, CLIENT_MODE);
 
-int Socket::send(const char* buffer, size_t length) {
-    bool socket_error = false;
-    bool socket_closed = false;
-    size_t bytes_sent = 0;
-    
-    while (bytes_sent < length && !socket_error && !socket_closed) {
-        int s = ::send(this->fd, &buffer[bytes_sent], 
-                length - bytes_sent, MSG_NOSIGNAL);
+    for (ptr = res; ptr != NULL && !connected; ptr = ptr->ai_next) {
+        skt = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 
-		if (s<0) {
-			socket_error = true;
-		} else if (s == 0) {
-			socket_closed = true;
-		} else {
-			bytes_sent += s;
-		}
-	}
-    if (socket_error) {
-		throw SocketException("Error en receive. ");
-	}
-	if (socket_closed) {
-		return CLOSED;
-	}
-    return OK;	
-}
-
-int Socket::receive(char* buffer, size_t length) {
-	bool socket_error = false;
-    bool socket_closed = false;
-    size_t bytes_recv = 0;
-    
-    while (bytes_recv < length && !socket_error && !socket_closed) {
-        int s = ::recv(this->fd, &buffer[bytes_recv],
-                length - bytes_recv, MSG_NOSIGNAL);
-    	        
-        if (s<0) {
-                socket_error = true;
-        } else if (s == 0) {
-                socket_closed = true;
+        if (skt == NOK) {
+            throw SocketException("Error creando socket", fD);
         } else {
-                bytes_recv += s;
+            fD = skt;
+            status = connect(fD,  ptr->ai_addr, ptr->ai_addrlen);
+            if (status == NOK) {
+                close(skt);
+                continue;
+            }
+            connected = (status != NOK);
         }
     }
-    if (socket_error) {
-		throw SocketException("Error en receive. ");
-	}
-	if (socket_closed) {
-		return CLOSED;
-	}
-	return OK;  
+
+    fD = skt;
 }
 
-int Socket::set_reuseaddr() {
-	int val = 1;
-	return setsockopt(this->fd,SOL_SOCKET,SO_REUSEADDR,&val,sizeof(val));
+void Socket::Send(unsigned char *source, size_t length){
+    int bytes_left;
+    int bytes_sent = 0;
+    unsigned char *buffer_ptr = source;
+    for (bytes_left = length; bytes_left>0; bytes_left-=bytes_sent) {
+        if (!isConnected()) {
+            throw SocketException("Tried sending, but socket was closed", fD);
+        }
+        bytes_sent=send(fD, buffer_ptr, bytes_left, MSG_NO_SIGNAL);
+        if (bytes_sent<=0) {
+            throw SocketException("Tried sending", fD);
+        } else {
+            buffer_ptr+=bytes_sent;
+        }
+    }
 }
+
+void Socket::BindAndListen(int backlog){
+    int s_bind = bind(fD, res->ai_addr, res->ai_addrlen);
+    if (s_bind < 0){ throw SocketException("error en bind", fD); }
+    int s_lis = listen(fD, backlog);
+    if (s_lis <0){ throw SocketException("error en listen", fD); }
+}
+
+Socket Socket::Accept() {
+    struct sockaddr_storage c_addr;
+    struct sockaddr *a;
+    socklen_t *l;
+    socklen_t addr_s = sizeof c_addr;
+
+    a = (struct sockaddr *)&c_addr;
+    l= &addr_s;
+    int new_fd = accept(fD, a, l);
+    if (new_fd < 0){
+        throw SocketException("Error en Accept", fD);
+    }
+    Socket newSocket;
+    newSocket.fD = new_fd;
+    newSocket.res = nullptr;
+    return newSocket;
+}
+
+int Socket::Receive(unsigned char *buffer, size_t length){
+    int bytes_read = recv(fD, buffer, length, MSG_NO_SIGNAL);
+    if (bytes_read == MSG_NO_SIGNAL){
+        throw SocketException("Intentaba recibir pero se cerro el socket", fD);
+    }
+    return bytes_read;
+}
+
+void Socket::Shutdown(int mode){
+    if (mode != SHUT_RDWR && mode != SHUT_RD && mode != SHUT_WR){
+        throw SocketException("Modo de shutdown incorrecto", fD);
+    }
+    int status = shutdown(fD, mode);
+    if (status<0){
+        throw SocketException("Error en shutdown", fD);
+    }
+}
+
+void Socket::Close(){
+    if (res){
+        freeaddrinfo(res);
+    }
+    int status = close(fD);
+    if (status<0){
+        throw SocketException("Error en close", fD);
+    }
+}
+
+string Socket::ReceiveStrWLen() {
+    int read = 0;
+    unsigned char buffer_leer[BUFFSIZE] = {0};
+    while (read < LENGTH_SIZE){
+        read = Receive(buffer_leer,LENGTH_SIZE);
+    }
+
+    int net_length;
+    std::memcpy(&net_length, buffer_leer, sizeof net_length);
+    int normal_length = ntohl(net_length);
+    int bytes_read = 0;
+    int left_to_read = normal_length;
+    unsigned char *buffer_ptr = buffer_leer;
+    while (left_to_read != 0){
+        bytes_read = Receive(buffer_ptr,left_to_read);
+        left_to_read -= bytes_read;
+        buffer_ptr += bytes_read;
+    }
+    buffer_leer[normal_length] = '\0';
+    string received((char *)buffer_leer);
+    return received;
+}
+
+void Socket::SendStrWLen(string &str) {
+    int normal_length = str.size();
+    int net_length = htonl(normal_length);
+    Send((unsigned char*)&net_length, LENGTH_SIZE);
+    char *char_message = &str[0];
+    Send((unsigned char *)char_message, str.size());
+}
+
+bool Socket::isConnected() {
+    int read = recv(fD, NULL, 0, MSG_DONTWAIT | MSG_PEEK);
+    return read != 0;
+}
+
+void Socket::setServerMode(string port) {
+    Create(0, port.c_str(), SERVER_MODE);
+    BindAndListen(BACKLOG);
+}
+
+void Socket::setClientMode(string ip, string port) {
+    CreateAndConnect(ip.c_str(), port.c_str());
+}
+
+Socket::~Socket() {}
