@@ -34,8 +34,13 @@ void Paquete::aplicar(std::map<int, Vista*> &vistas,
 
     if(comando == crear){
 //        TODO depende el rango
-        if
-        crearElemento(vistas, elementos);
+        if(0 <= comando && comando >= 5){
+            crearElemento(vistas, elementos);
+        } else{
+            crearUnidad(vistas, vistasDireccionadas, elementos, unidades);
+        }
+
+
     }
 
 
@@ -60,6 +65,63 @@ void Paquete::crearElemento(map<int, Vista *> &vistas, map<int, Elemento*> &elem
             elemento = new ElementoFuerte(id, x, y, vistas.at(tipo),color);
         }
 
+    }
+//    TODO agregar en el mapa al elemento
+
+}
+void Paquete::crearUnidad(map<int, Vista *> &vistas,
+                          map<int,VistaDireccionada *> &vistasDireccionadas,
+                          map<int, Elemento *> &elementos,
+                          map<int, ElementoUnidad *> &unidades) {
+
+    Elemento* elemento;
+    ElementoUnidad* unidad;
+    switch (tipo){
+        case grunt:{
+            unidad = new ElementoUnidad(id, x, y, vistasDireccionadas.at
+                                            (tipo), vistasDireccionadas.at
+                (tipo), vistas.at(tipo), esMio, color);
+        } break;
+
+        case psycho:{
+
+        } break;
+
+        case tough:{
+
+        } break;
+
+        case pyro:{
+
+        } break;
+
+        case sniper:{
+
+        } break;
+
+        case laser:{
+
+        } break;
+
+        case jeep:{
+
+        } break;
+
+        case light:{
+
+        } break;
+
+        case medium:{
+
+        } break;
+
+        case heavy:{
+
+        } break;
+
+        case missile:{
+
+        } break;
     }
 
 }

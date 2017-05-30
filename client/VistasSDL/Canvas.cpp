@@ -28,6 +28,9 @@
 #include "Mouse.h"
 #include "VistaMissilelauncher.h"
 #include "ColectorDeAcciones.h"
+#include "Hud.h"
+#include "VistaHud.h"
+#include "VistaHudCaras.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -261,7 +264,9 @@ void Canvas::run(){
 
 
 
-
+    VistaHud vistaHud(gRenderer);
+    VistaHudCaras vistaCaras(gRenderer);
+    Hud hud(vistaHud, vistaCaras);
     Mouse mouse;
     SelectBox selectBox;
     Click click;
@@ -341,7 +346,7 @@ void Canvas::run(){
         });
 
         selectBox.mostrar(gRenderer, camara.getOffset());
-
+        hud.mostrar();
 
 
         std::for_each(unidades.begin(), unidades.end(), [&]

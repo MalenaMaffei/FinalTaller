@@ -39,5 +39,12 @@ const char tanquePath[] = "../client/VistasSDL/imgs/Tanks/heavy.png";
 const char tanqueMuertePath[] = "../client/VistasSDL/imgs/Tanks/explosion.png";
 const char tanqueMissilePath[] = "../client/VistasSDL/imgs/Tanks/missile.png";
 
+//---------------------HUD---------------------
+const char hudPath[] = "../client/VistasSDL/imgs/HUD/hud.png";
+const char carasPath[] = "../client/VistasSDL/imgs/HUD/Unidades/grunt_azul"
+    ".png";
+
+
+
 
 #endif //TPFINAL_CONSTANTES_H

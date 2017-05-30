@@ -1,11 +1,17 @@
 #include "ElementoUnidad.h"
 #include "VistaDireccionada.h"
 #include "SelectBox.h"
-ElementoUnidad::ElementoUnidad(int id, int x, int y,
-                               VistaDireccionada *textura,
-                               Vista *vistaMuerte, bool esMio, int color) :
-        ElementoColoreado(id, x, y, textura, esMio, color),
-    vistaMovimiento(textura), enMovimiento(false), direccion(0), muriendo
+ElementoUnidad::ElementoUnidad(int id,
+                               int x,
+                               int y,
+                               VistaDireccionada *movimiento,
+                               VistaDireccionada *disparar,
+                               Vista *vistaMuerte,
+                               bool esMio,
+                               int color) :
+        ElementoColoreado(id, x, y, movimiento, esMio, color),
+    vistaMovimiento(movimiento), vistaDisparar(disparar), enMovimiento(false),
+                                                direccion(0), muriendo
         (false), vistaMuerte(vistaMuerte){}
 
 

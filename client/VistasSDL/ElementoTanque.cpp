@@ -6,5 +6,5 @@ ElementoTanque::ElementoTanque(int id,
                                VistaDireccionada *textura,
                                Vista *texturaMuerte,
                                bool esMio)
-    : ElementoUnidad(id, x, y, textura, texturaMuerte, false, 0) {}
+    : ElementoUnidad(id, x, y, textura, nullptr, texturaMuerte, false, 0) {}
 

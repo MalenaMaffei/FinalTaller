@@ -22,28 +22,20 @@ set(SDL2_LIBRARY /usr/lib64/libSDL2.so)
 
 set(SDL2_IMG_LIBRARY /usr/lib64/libSDL2_image.so)
 
-include_directories(${SDL2_INCLUDE_DIR})
-
-
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
 
-#target_link_libraries(test Threads::Threads)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+
+add_definitions(${GTK3_CFLAGS_OTHER})
 
 
-
-
-
-
-
-
-
-
-
-
+include_directories(${SDL2_INCLUDE_DIR} ${GTK3_INCLUDE_DIRS})
+link_directories(${GTK3_LIBRARY_DIRS})
 
 
 add_executable(vista  ${VISTA_SRC})
-target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMG_LIBRARY} Threads::Threads)
+target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMG_LIBRARY} Threads::Threads ${GTK3_LIBRARIES})

@@ -9,9 +9,14 @@
 class SelectBox;
 class ElementoUnidad : public ElementoColoreado{
  public:
-  ElementoUnidad(int id, int x, int y,
-                   VistaDireccionada *textura,
-                   Vista *vistaMuerte, bool esMio, int color);
+  ElementoUnidad(int id,
+                   int x,
+                   int y,
+                   VistaDireccionada *movimiento,
+                   VistaDireccionada *disparar,
+                   Vista *vistaMuerte,
+                   bool esMio,
+                   int color);
   virtual void mover(int newX, int newY);
   void mostrar(Camara &camera);
   void chequearSeleccion(SelectBox &selectBox, SDL_Point offset);
@@ -28,6 +33,7 @@ class ElementoUnidad : public ElementoColoreado{
   bool disparando;
   bool muriendo;
   VistaDireccionada* vistaMovimiento;
+  VistaDireccionada* vistaDisparar;
   Vista* vistaMuerte;
 
 };

@@ -1,8 +1,12 @@
 ## Martes 30/05 ##
 #### Male (Cliente) ####
 1. Me conviene guardar el offset o la pos real de cada elemento? .. creo el la pos real -> entonces como hago para "saber" el offset sin tener que andar pasandolo por todos lados???
-2. que tan malo es chequear nullptr? seguramente deberia hacer un get
+2. que tan malo es chequear nullptr? seguramente deberia hacer un get -> ya ni se que era esto
 3. Como hago para cuando cierro el SDL, lo pongo en el ~ directamente? o es conveniente dejar la funcion close
+4. Cliente basado en animaciones, como solo recibo info de loque esta a mi alcance, el servidor deberia cuando yo cambio de imagen informarme de la muerte por ejemplo de 
+	unidades que por ahi ni existen ya :o como se maneja en esos casos? tendria que algunas cosas avisarme siempre? y tambien tendria que cuando yo cambio de ventana
+	decirme las posiciones actualizadas de todo el mundo. Es muy importante mandar solo lo que interesa a c/ cliente? 
+5. Comunicacion entre SDL y GTKMM? Como yo en realidad no se de que tipo es cada uno, necesito que el servidor al hacer click sobre un robot me mande su informacion (pyro psycho etc) o sino lo guardo en la c/ ElementoUnidad. Pero minimo si le tengo que pedir al server la info de su vida y eso. RESUMEN: guardo un str con el tipo de cada elemento o le pido al server que me traiga info de ID xxx y el me dice tiene tanta vida y es pyro.
 
 
 ## Martes 23/05 ##
