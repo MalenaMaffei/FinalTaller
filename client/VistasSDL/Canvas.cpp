@@ -225,7 +225,7 @@ void Canvas::run(){
     VistaMuerteRobot robotMorirTextura(gRenderer);
     std::vector<ElementoUnidad*> unidades;
 //
-//
+
 //        ElementoUnidad* robot1 =
 //            new ElementoRobot(1,20,20,&robotCaminarTextura,&pyroDispararTextura,
 //                              &robotMorirTextura);
@@ -241,7 +241,7 @@ void Canvas::run(){
 //        VistaHeavy heavyTextura(gRenderer);
 //        VistaMuerteTanque muerteTanqueTextura(gRenderer);
 //        ElementoUnidad* tanque =
-//            new ElementoTanque(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
+//            new ElementoU(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
 //        unidades.push_back(tanque);
 //
 //
@@ -301,14 +301,14 @@ void Canvas::run(){
           tile.mostrar(camara);
         });
 
-//            std::for_each(unidades.begin(), unidades.end(), [&]
-//                (ElementoUnidad* elemento){
-//                    elemento->mover(pos_robot,pos_robot);
-//            });
+            std::for_each(unidades.begin(), unidades.end(), [&]
+                (ElementoUnidad* elemento){
+                    elemento->mover(pos_robot,pos_robot);
+            });
 
 
-
-
+//
+//
 //            if (pos_tanque == 110){
 //                fuerte1->matar();
 //            }
@@ -361,11 +361,11 @@ void Canvas::run(){
 
 
 
-        int frameTicks = capTimer.getTicks();
-        if( frameTicks < SCREEN_TICK_PER_FRAME ){
-            //Wait remaining time
-            SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-        }
+//        int frameTicks = capTimer.getTicks();
+//        if( frameTicks < SCREEN_TICK_PER_FRAME ){
+//            //Wait remaining time
+//            SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+//        }
     }
 
 
