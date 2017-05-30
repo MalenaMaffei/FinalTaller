@@ -2,7 +2,7 @@
 #include "VistaFuerte.h"
 #define HEIGHT 192
 #define WIDTH 160
-ElementoFuerte::ElementoFuerte(int id, int x, int y, VistaFuerte *textura,
+ElementoFuerte::ElementoFuerte(int id, int x, int y, Vista *textura,
                                int color)
     : ElementoEstructura(id, x, y, textura, false, color) {}
 

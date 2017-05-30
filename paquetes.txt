@@ -21,7 +21,7 @@ x,y: voy a necesesitar para todos excepto matar (para disparar necesito para ori
 		
 esDelCliente?: 0 o 1 para saber si el elemento a crear es del cliente SOLO PARA CREAR 
 
-tipo a crear: 0 roca/hielo, 1 fuerte, 2 fabrica robot, 3 fabrica vehiculo, 4 puente, 5 bandera,
+tipo a crear: 0 roca/hielo, 1 puente, 2 bandera, 3 fuerte, 4 fabrica robot, 5 fabrica vehiculo,
 	      6 grunt, 7 psycho, 8 tough, 9 pyro, 10 sniper, 11 laser -> ROB0TS
 	      12 jeep, 13 light, 14 medium, 15 heavy, 16 missile -> TANQUES
 

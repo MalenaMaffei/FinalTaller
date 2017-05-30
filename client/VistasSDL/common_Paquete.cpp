@@ -2,6 +2,7 @@
 #include "ElementoBandera.h"
 #include "ElementoRoca.h"
 #include "ElementoPuente.h"
+#include "ElementoFuerte.h"
 
 using std::string;
 using std::stoi;
@@ -33,6 +34,7 @@ void Paquete::aplicar(std::map<int, Vista*> &vistas,
 
     if(comando == crear){
 //        TODO depende el rango
+        if
         crearElemento(vistas, elementos);
     }
 
@@ -55,7 +57,7 @@ void Paquete::crearElemento(map<int, Vista *> &vistas, map<int, Elemento*> &elem
         } break;
 
         case fuerte:{
-
+            elemento = new ElementoFuerte(id, x, y, vistas.at(tipo),color);
         }
 
     }

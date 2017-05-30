@@ -1,12 +1,5 @@
 #include "Canvas.h"
 
-
-
-
-
-
-
-
 int main (){
 
     printf("probando thread\n");
