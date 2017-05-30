@@ -1,8 +1,13 @@
 #include "ColectorDeAcciones.h"
+#include "Hud.h"
+#include "GuiEdificio.h"
 #include <algorithm>
 #include <vector>
-ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox, Click &click)
-    : selectBox(selectBox), click(click) {}
+ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
+                                       Click &click,
+                                       Hud &hud,
+                                       GuiEdificio &guiEdificio)
+    : selectBox(selectBox), click(click), guiEdificio(guiEdificio), hud(hud) {}
 
 void ColectorDeAcciones::crearAcciones() {
     if (!click.huboClick()){
@@ -36,6 +41,9 @@ void ColectorDeAcciones::crearAcciones() {
         selectBox.vaciarSeleccionadas();
     } else {
         printf("request info de id: %i\n", clickeado->getId());
+//        TODO dispatch para saber si fue edificio o unidad
+        guiEdificio.abrirGui(click.getPoint());
+//        TODO obviamente le voy a tener que pasar mas info
     }
     click.resetCoords();
 }

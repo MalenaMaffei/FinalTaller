@@ -16,6 +16,9 @@ void Hud::mostrar() {
 
 }
 
+//TODO TANQUE SI ESTA CON ALGUIEN ES SIEMPRE UN GRUNT!!!
+//tTODO fabricas tienen qeu ser mias
+
 //TODO todos los turnos pido info del id seleccionado
 //TODO en realidad me va a llegar un paquete y el me dira que hacer
 void Hud::setInfo(int tipo) {

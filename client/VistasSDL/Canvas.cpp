@@ -31,6 +31,8 @@
 #include "VistaHud.h"
 #include "VistaHudCaras.h"
 #include "common_CodigosPaquete.h"
+#include "VistaGui.h"
+#include "GuiEdificio.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -254,10 +256,16 @@ void Canvas::run(){
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);
     Hud hud(vistaHud, vistaCaras);
+    VistaGui vistaGui(gRenderer);
+    GuiEdificio guiEdificio(vistaGui);
+
     Mouse mouse;
     SelectBox selectBox;
     Click click;
-    ColectorDeAcciones colector(selectBox, click);
+    ColectorDeAcciones colector(selectBox,
+                                click,
+                                hud,
+                                guiEdificio);
     while( !quit ){
         capTimer.start();
         //Handle events on queue
@@ -334,6 +342,7 @@ void Canvas::run(){
 
         selectBox.mostrar(gRenderer, camara.getOffset());
         hud.mostrar();
+        guiEdificio.mostrar(camara.getOffset());
 
 
         std::for_each(unidades.begin(), unidades.end(), [&]

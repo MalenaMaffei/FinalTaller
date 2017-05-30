@@ -3,15 +3,22 @@
 
 #include "SelectBox.h"
 #include "Click.h"
+#include "Hud.h"
+#include "GuiEdificio.h"
 class ColectorDeAcciones {
  public:
-  ColectorDeAcciones(SelectBox &selectBox, Click &click);
+  ColectorDeAcciones(SelectBox &selectBox,
+                       Click &click,
+                       Hud &hud,
+                       GuiEdificio &guiEdificio);
 
   void crearAcciones();
 
  private:
   SelectBox &selectBox;
   Click &click;
+  GuiEdificio &guiEdificio;
+  Hud &hud;
 };
 
 #endif //TPFINAL_COLECTORDEACCIONES_H

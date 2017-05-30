@@ -11,7 +11,7 @@
 7. para mostrar y todas esas cosas por ahora se recorre un map. Lo dejo asi? o creo un vector mas con punteros a elementos a fines de recorrer p/mostrar y clickear?
 8. puedo hacer que mis sockets creen y manden paquetes?
 9. Lock en el socket ok?
-
+10. unidades tienen que ser mias para poder sacar info? Yo diria que si
 
 ## Martes 23/05 ##
 #### Male (Cliente) ####
