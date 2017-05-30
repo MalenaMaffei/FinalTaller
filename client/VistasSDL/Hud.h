@@ -12,6 +12,7 @@ class Hud {
   SDL_Rect hudRect;
   int x, y;
   int tipoCara;
+  bool seleccionado;
 };
 
 #endif //TPFINAL_HUD_H
