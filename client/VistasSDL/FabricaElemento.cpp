@@ -3,9 +3,10 @@
 #include "ElementoRoca.h"
 #include "ElementoPuente.h"
 #include "ElementoFuerte.h"
+
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
-#define COMIENZO_UNIDADES 6
+
 FabricaElemento::FabricaElemento(std::map<int, Vista *> &vistas,
                              std::map<int,
                                       std::vector<VistaDireccionada *>> vistasDireccionadas,
@@ -14,10 +15,11 @@ FabricaElemento::FabricaElemento(std::map<int, Vista *> &vistas,
     : vistas(vistas),
       vistasDireccionadas(vistasDireccionadas),
       elementos(elementos),
-      unidades(unidades) {}
+      unidades(unidades) {
+}
 
 void FabricaElemento::fabricar(Paquete &paquete) {
-    if (paquete.getTipo() >= 6) {
+    if (codigos.esUnidad(paquete.getTipo())) {
         fabricarUnidad(paquete);
     } else {
         fabricarElemento(paquete);
@@ -48,22 +50,15 @@ void FabricaElemento::fabricarElemento(Paquete &paquete) {
     int y = paquete.getY();
     int color = paquete.getColor();
 
-    switch (tipo) {
-        case bandera: {
-            elemento = new ElementoBandera(id, x, y, vistas.at(tipo), color);
-        } break;
-
-        case roca: {
-            elemento = new ElementoRoca(id, x, y, vistas.at(tipo));
-        } break;
-
-        case puente: {
-            elemento = new ElementoPuente(id, x, y, vistas.at(tipo));
-        } break;
-
-        case fuerte: {
-            elemento = new ElementoFuerte(id, x, y, vistas.at(tipo), color);
-        }
-//        TODO faltarian los vehiculos y fabricas de robots
+    if (tipo == codigos.bandera){
+        elemento = new ElementoBandera(id, x, y, vistas.at(tipo), color);
+    } else if (tipo == codigos.roca){
+        elemento = new ElementoRoca(id, x, y, vistas.at(tipo));
+    } else if (tipo == codigos.puente){
+        elemento = new ElementoPuente(id, x, y, vistas.at(tipo));
+    } else if (tipo == codigos.fuerte){
+        elemento = new ElementoFuerte(id, x, y, vistas.at(tipo), color);
     }
+//        TODO faltarian los vehiculos y fabricas de robots
+    elementos[id] = elemento;
 }

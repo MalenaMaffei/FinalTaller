@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string>
 #include <algorithm>
-//#include "VistaAnimada.h"
 #include "LTimer.h"
 #include "Vista.h"
 #include "LTexture.h"
@@ -31,6 +30,7 @@
 #include "Hud.h"
 #include "VistaHud.h"
 #include "VistaHudCaras.h"
+#include "common_CodigosPaquete.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -49,29 +49,12 @@ const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 // voy a tener que borrar los dos, pero los de elementos solo el de elementos
 // tengo que hacer delete de cada uno. Todos los mapas van a tener punteros.
 
+//TODO fabrica de vistas para no tener todos los include aca
 
 
 
 
-
-
-
-
-
-
-
-
-////Starts up SDL and creates window
-//bool init();
-//
-////Frees media and shuts down SDL
-//void close();
-
-
-
-
-void Canvas::init()
-{
+Canvas::Canvas() {
     //Initialization flag
     bool success = true;
 
@@ -126,6 +109,7 @@ void Canvas::init()
     }
 }
 
+
 void Canvas::close()
 {
 
@@ -157,11 +141,14 @@ int getTileType(int x, int y){
     }
 }
 
+
+void Canvas::manejarPaquete() {
+//    TODO aca voy a tener encolados todos los paquetes y voy sacando
+}
+
+
 void Canvas::run(){
 
-    //Start up SDL and create window
-
-    init();
 
     //Main loop flag
     bool quit = false;

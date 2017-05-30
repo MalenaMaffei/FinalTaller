@@ -5,10 +5,12 @@
 
 class Canvas : public Thread{
  public:
+  Canvas();
   void init();
   void close();
   void run();
   void gameLoop();
+  void manejarPaquete();
 
  private:
   //The window we'll be rendering to

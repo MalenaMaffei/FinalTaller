@@ -7,6 +7,10 @@
 	unidades que por ahi ni existen ya :o como se maneja en esos casos? tendria que algunas cosas avisarme siempre? y tambien tendria que cuando yo cambio de ventana
 	decirme las posiciones actualizadas de todo el mundo. Es muy importante mandar solo lo que interesa a c/ cliente? 
 5. Como yo en realidad no se de que tipo es cada uno, necesito que el servidor al hacer click sobre un robot me mande su informacion (pyro psycho etc) o sino lo guardo en la c/ ElementoUnidad. Pero minimo si le tengo que pedir al server la info de su vida y eso. RESUMEN: guardo un str/INT con el tipo de cada elemento o le pido al server que me traiga info de ID xxx y el me dice tiene tanta vida y es pyro. Sea como sea al momento de cliquear sobre un tanque si voy a necesitar la info del tipo del robot que este adentro
+6. enums publicos en la clase codigos
+7. para mostrar y todas esas cosas por ahora se recorre un map. Lo dejo asi? o creo un vector mas con punteros a elementos a fines de recorrer p/mostrar y clickear?
+8. puedo hacer que mis sockets creen y manden paquetes?
+9. Lock en el socket ok?
 
 
 ## Martes 23/05 ##

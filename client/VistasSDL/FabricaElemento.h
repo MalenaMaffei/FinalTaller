@@ -5,6 +5,7 @@
 #include "VistaDireccionada.h"
 #include "ElementoUnidad.h"
 #include "common_Paquete.h"
+#include "common_CodigosPaquete.h"
 #include <map>
 class FabricaElemento {
  public:
@@ -23,14 +24,7 @@ class FabricaElemento {
   std::map<int, std::vector<VistaDireccionada *>> &vistasDireccionadas;
   std::map<int, Elemento *> &elementos;
   std::map<int, ElementoUnidad *> &unidades;
-  enum tipoElemento{
-    roca = 0,
-    puente = 1,
-    bandera = 2,
-    fuerte = 3,
-    fabricaRobot = 4,
-    fabricaVehiculo = 5,
-  };
+  CodigosPaquete codigos;
 };
 
 #endif //TPFINAL_FABRICAUNIDAD_H
