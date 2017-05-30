@@ -9,16 +9,23 @@
 class Paquete {
  public:
   Paquete(std::string mensaje);
-  void aplicar(std::map<int, Vista*> &vistas,
-               std::map<int, VistaDireccionada*> &vistasDireccionadas,
-               std::map<int, Elemento*> &elementos,
-               std::map<int, ElementoUnidad*> &unidades);
+  int getId() const;
+  int getComando() const;
+  int getX() const;
+  int getY() const;
+  int getTipo() const;
+  bool isEsMio() const;
+  int getColor() const;
+//  void aplicar(std::map<int, Vista*> &vistas,
+//               std::map<int, VistaDireccionada*> &vistasDireccionadas,
+//               std::map<int, Elemento*> &elementos,
+//               std::map<int, ElementoUnidad*> &unidades);
  private:
-  void crearElemento(std::map<int, Vista *> &vistas, std::map<int, Elemento*> &elementos);
-  void crearUnidad(std::map<int, Vista*> &vistas,
-                   std::map<int, VistaDireccionada*> &vistasDireccionadas,
-                   std::map<int, Elemento*> &elementos,
-                   std::map<int, ElementoUnidad*> &unidades);
+//  void crearElemento(std::map<int, Vista *> &vistas, std::map<int, Elemento*> &elementos);
+//  void crearUnidad(std::map<int, Vista*> &vistas,
+//                   std::map<int, VistaDireccionada*> &vistasDireccionadas,
+//                   std::map<int, Elemento*> &elementos,
+//                   std::map<int, ElementoUnidad*> &unidades);
   enum comando{
     crear = 0,
     matar = 1,

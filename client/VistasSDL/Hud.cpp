@@ -12,15 +12,17 @@ Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
 
 void Hud::mostrar() {
     vistaHud.mostrar(x,y,0);
-    if (seleccionado){
-        vistaCaras.mostrar(x+X_CARA,y+Y_CARA,0);
-    }
+    mostrarContenido();
 
 }
 
 //TODO todos los turnos pido info del id seleccionado
 //TODO en realidad me va a llegar un paquete y el me dira que hacer
-void Hud::setCara(int tipo) {
+void Hud::setInfo(int tipo) {
     tipoCara = tipo;
     seleccionado = true;
+}
+
+void Hud::mostrarContenido() {
+//    TODO IF CARA IF ESTO IF LO OTRO
 }

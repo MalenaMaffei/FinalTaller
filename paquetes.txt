@@ -9,6 +9,7 @@ short? 3Chars?   1char       4Chars?  4Chars?  1char       1char	1char -> opcion
 LARGO | ID |    COMANDO |   x       | y | ESDELCLIENTE? | TIPO A CREAR|  COLOR  
 
 
+tenemos que ver como va a ser el paquete de informacion para el hud, no servirian casi ninguno de los campos
 
 
 
@@ -16,7 +17,7 @@ largo: largo del mensaje
 
 id: id del elemento a crear/modificar
 
-comando: 0 Crear, 1 Matar, 2 Mover, 3 Disparar
+comando: 0 Crear, 1 Matar, 2 Mover, 3 Disparar, 4 info para elhud
 x,y: voy a necesesitar para todos excepto matar (para disparar necesito para orientar al sprite).
 		
 esDelCliente?: 0 o 1 para saber si el elemento a crear es del cliente SOLO PARA CREAR 
