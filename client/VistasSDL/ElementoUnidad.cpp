@@ -1,6 +1,7 @@
 #include "ElementoUnidad.h"
 #include "VistaDireccionada.h"
 #include "SelectBox.h"
+#include "ColectorDeAcciones.h"
 ElementoUnidad::ElementoUnidad(int id,
                                int x,
                                int y,
@@ -110,6 +111,9 @@ void ElementoUnidad::seleccionar() {
 
 void ElementoUnidad::deseleccionar() {
     textura->setColor(255,255,255);
+}
+void ElementoUnidad::guiRequest(ColectorDeAcciones &colector) const {
+    colector.showHud();
 }
 
 //TODO clicked polimorfizar

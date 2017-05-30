@@ -13,6 +13,10 @@ Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
 void Hud::mostrar() {
     vistaHud.mostrar(x,y,0);
     mostrarContenido();
+//    TODO sacar despues
+    if (seleccionado){
+        vistaCaras.mostrar(x+X_CARA, y+Y_CARA,0);
+    }
 
 }
 

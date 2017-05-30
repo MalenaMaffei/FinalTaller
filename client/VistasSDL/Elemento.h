@@ -5,6 +5,7 @@
 #include "Vista.h"
 //#include "Click.h"
 class Click;
+class ColectorDeAcciones;
 class Elemento {
  public:
 //  TODO refactorizar la necesidad de pasar width height
@@ -18,6 +19,7 @@ class Elemento {
   int getId() const;
   void clicked(Click& click);
   bool esMio() const;
+  virtual void guiRequest(ColectorDeAcciones& colector) const;
  protected:
   //The attributes of the tile
   bool Mio;

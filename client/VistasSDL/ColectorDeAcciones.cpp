@@ -30,7 +30,11 @@ void ColectorDeAcciones::crearAcciones() {
 
     Elemento* clickeado = click.getClicked();
     if (clickeado->esMio()){
+        //        TODO dispatch para saber si fue edificio o unidad
+
+//        TODO obviamente le voy a tener que pasar mas info o no, no se
         printf("request info MIO de id: %i\n", clickeado->getId());
+        clickeado->guiRequest(*this);
     } else if (selectBox.haySeleccion()){
         std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
         std::for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
@@ -40,10 +44,17 @@ void ColectorDeAcciones::crearAcciones() {
         });
         selectBox.vaciarSeleccionadas();
     } else {
-        printf("request info de id: %i\n", clickeado->getId());
-//        TODO dispatch para saber si fue edificio o unidad
-        guiEdificio.abrirGui(click.getPoint());
-//        TODO obviamente le voy a tener que pasar mas info
+        printf("request info de id: %i?????\n", clickeado->getId());
+
     }
     click.resetCoords();
+}
+
+void ColectorDeAcciones::showEdificio() {
+    guiEdificio.abrirGui(click.getPoint());
+}
+
+void ColectorDeAcciones::showHud() {
+//TODO codigo para que le diga al hud que muestre otra foto
+    hud.setInfo(0);
 }

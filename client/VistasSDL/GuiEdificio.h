@@ -3,6 +3,8 @@
 
 #include "Vista.h"
 //TODO van a faltar las vistas de los bichos
+//TODO es la misma para todos, el server me dice que puede construir, dsp
+// vemos que hacer con el nombre
 class GuiEdificio {
  public:
   GuiEdificio(Vista &vistaGui);

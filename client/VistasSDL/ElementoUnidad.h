@@ -23,6 +23,7 @@ class ElementoUnidad : public ElementoColoreado{
   void matar();
   void seleccionar();
   void deseleccionar();
+  void guiRequest(ColectorDeAcciones& colector) const;
  protected:
   void morir();
 

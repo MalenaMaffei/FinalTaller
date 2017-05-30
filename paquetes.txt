@@ -10,7 +10,7 @@ LARGO | ID |    COMANDO |   x       | y | ESDELCLIENTE? | TIPO A CREAR|  COLOR
 
 
 tenemos que ver como va a ser el paquete de informacion para el hud, no servirian casi ninguno de los campos
-
+y lo mismo para informacion para crear elementos, necesitaria recibir con ints que unidades se pueden crear
 
 
 largo: largo del mensaje

@@ -13,6 +13,8 @@ class ColectorDeAcciones {
                        GuiEdificio &guiEdificio);
 
   void crearAcciones();
+  void showHud();
+  void showEdificio();
 
  private:
   SelectBox &selectBox;

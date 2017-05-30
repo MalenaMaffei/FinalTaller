@@ -57,7 +57,7 @@ void FabricaElemento::fabricarElemento(Paquete &paquete) {
     } else if (tipo == codigos.puente){
         elemento = new ElementoPuente(id, x, y, vistas.at(tipo));
     } else if (tipo == codigos.fuerte){
-        elemento = new ElementoFuerte(id, x, y, vistas.at(tipo), color);
+        elemento = new ElementoFuerte(id, x, y, vistas.at(tipo), false, color);
     }
 //        TODO faltarian los vehiculos y fabricas de robots
     elementos[id] = elemento;

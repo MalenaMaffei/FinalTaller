@@ -200,9 +200,11 @@ void Canvas::run(){
     }
 
     VistaFuerte fuerteTextura(gRenderer);
-    Elemento* fuerte1 = new ElementoFuerte(1, 100, 100, &fuerteTextura, 0);
+    Elemento* fuerte1 =
+        new ElementoFuerte(1, 100, 100, &fuerteTextura, true, 0);
     elementos.push_back(fuerte1);
-    Elemento* fuerte2 = new ElementoFuerte(1, 900, 900, &fuerteTextura, 0);
+    Elemento* fuerte2 =
+        new ElementoFuerte(1, 900, 900, &fuerteTextura, false, 0);
     elementos.push_back(fuerte2);
 
     VistaBandera banderaTextura(gRenderer);
@@ -301,10 +303,10 @@ void Canvas::run(){
           tile.mostrar(camara);
         });
 
-            std::for_each(unidades.begin(), unidades.end(), [&]
-                (ElementoUnidad* elemento){
-                    elemento->mover(pos_robot,pos_robot);
-            });
+//            std::for_each(unidades.begin(), unidades.end(), [&]
+//                (ElementoUnidad* elemento){
+//                    elemento->mover(pos_robot,pos_robot);
+//            });
 
 
 //
