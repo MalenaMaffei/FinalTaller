@@ -14,6 +14,14 @@ void ColectorDeAcciones::crearAcciones() {
         return;
     }
 
+//    TODO llevarme de aca el paquete que tenga que mandar al servidor
+    if (guiEdificio.click(click.getPoint())){
+        click.resetCoords();
+        return;
+    }
+
+
+
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
             std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
