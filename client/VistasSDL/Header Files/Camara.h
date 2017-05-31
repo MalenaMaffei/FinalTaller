@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include "Texture.h"
 #include "constantes.h"
+#include "../Punto.h"
 //TODO meter mostrar del background en camara? ver como esta hecho en tiles
 class Camara {
  public:

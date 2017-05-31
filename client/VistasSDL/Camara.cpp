@@ -1,6 +1,6 @@
 #include "Header Files/Camara.h"
 #include "Header Files/Texture.h"
-
+#include "Punto.h"
 Camara::Camara(){
     //Initialize the collision box
     mBox.x = 0;

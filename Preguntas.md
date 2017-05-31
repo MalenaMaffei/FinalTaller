@@ -1,3 +1,9 @@
+## Martes 6/06 ##
+#### Cliente ####
+1. Creo todas las vistas de una o solo las que voy necesitando? op 1 es mas facil, op2 se vuelve un poco mas complejo, necesitaria comunicar fabrica de elementos con la de vistas.
+
+
+
 ## Martes 30/05 ##
 #### Male (Cliente) ####
 1. Me conviene guardar el offset o la pos real de cada elemento? .. creo el la pos real -> entonces como hago para "saber" el offset sin tener que andar pasandolo por todos lados???

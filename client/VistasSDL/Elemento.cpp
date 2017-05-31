@@ -13,16 +13,13 @@ Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
 }
 
 void Elemento::mostrar(Camara &camera) {
-//    textura->mostrar(rect.x, rect.y , mType);
-    //If the tile is on screen
     if(!muerto){
         if( camera.checkCollision( rect ) ){
-            //Show the tile
+
 
             textura->mostrar(rect.x - camera.getCamaraX(),
                              rect.y - camera.getCamaraY(),
                              currentClip);
-//        gTileTexture.render( rect.x - camera.x, rect.y - camera.y, &gTileClips[ mType ] );
         }
     }
 

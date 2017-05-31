@@ -2,6 +2,7 @@
 #include <algorithm>
 
 void SelectBox::mostrar(SDL_Renderer *renderer, SDL_Point offset) {
+//    TODO no dibujar cuando no hay colision, voy a tener que pasar la camara
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
     SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
                             rect.h};
