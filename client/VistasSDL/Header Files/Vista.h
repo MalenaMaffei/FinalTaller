@@ -1,10 +1,10 @@
 #ifndef TPFINAL_VISTATILE_H
 #define TPFINAL_VISTATILE_H
 #include <vector>
-#include "LTexture.h"
+#include "Texture.h"
 #include "Camara.h"
 
-class Vista : public LTexture{
+class Vista : public Texture{
  public:
   Vista(SDL_Renderer *gRenderer,
           int height,

@@ -6,7 +6,7 @@ Vista::Vista(SDL_Renderer *gRenderer,
              int width,
              int clips,
              std::string fileName)
-    : LTexture(gRenderer), height(height), width(width), clips(clips),
+    : Texture(gRenderer), height(height), width(width), clips(clips),
       fileName(fileName){
     loadMedia();
 }

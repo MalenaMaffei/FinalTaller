@@ -1,4 +1,4 @@
-#include "Header Files/VistaSniperDisparar.h"
+#include "../Header Files/VistaSniperDisparar.h"
 #define HEIGHT 16
 #define WIDTH 16
 #define CLIPS 40

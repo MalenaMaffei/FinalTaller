@@ -3,14 +3,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
-class LTexture
+class Texture
 {
  public:
   //Initializes variables
-  LTexture(SDL_Renderer *gRenderer);
+  Texture(SDL_Renderer *gRenderer);
 
   //Deallocates memory
-  ~LTexture();
+  ~Texture();
 
   //Loads image at specified path
   bool loadFromFile( std::string path );

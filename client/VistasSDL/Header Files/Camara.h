@@ -1,7 +1,7 @@
 #ifndef TPFINAL_CAMARA_H
 #define TPFINAL_CAMARA_H
 #include <SDL2/SDL.h>
-#include "LTexture.h"
+#include "Texture.h"
 #include "constantes.h"
 //TODO meter mostrar del background en camara? ver como esta hecho en tiles
 class Camara {
@@ -33,7 +33,7 @@ class Camara {
   SDL_Rect* getCamara();
 
   //Shows the dot on the screen
-  void render(LTexture *dotTexture);
+  void render(Texture *dotTexture);
   bool checkCollision(SDL_Rect b );
  private:
   //Collision box of the dot

@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "Header Files/LTimer.h"
 #include "Header Files/Vista.h"
-#include "Header Files/LTexture.h"
+#include "Header Files/Texture.h"
 #include "Header Files/Camara.h"
 #include "Header Files/VistaTiles.h"
 #include "Header Files/Tile.h"
@@ -177,7 +177,7 @@ void Canvas::run(){
     int pos = 0;
 
 
-//        LTexture gBGTexture(gRenderer);
+//        Texture gBGTexture(gRenderer);
 //        gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
     VistaTiles tilesTexture(gRenderer);
     std::vector<Tile> tiles;

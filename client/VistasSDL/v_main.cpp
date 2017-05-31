@@ -6,7 +6,7 @@
 ////#include "VistaAnimada.h"
 //#include "LTimer.h"
 //#include "Vista.h"
-//#include "LTexture.h"
+//#include "Texture.h"
 //#include "Camara.h"
 //#include "VistaTiles.h"
 //#include "Tile.h"
