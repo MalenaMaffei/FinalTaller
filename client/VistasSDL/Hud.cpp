@@ -1,5 +1,5 @@
-#include "Hud.h"
-#include "constantes.h"
+#include "Header Files/Hud.h"
+#include "Header Files/constantes.h"
 #define X_CARA 9
 #define Y_CARA 58
 

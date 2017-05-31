@@ -1,4 +1,4 @@
-#include "VistaHeavy.h"
+#include "../Header Files/VistaHeavy.h"
 #define HEIGHT 32
 #define WIDTH 32
 #define LARGO_ANIMACION 3

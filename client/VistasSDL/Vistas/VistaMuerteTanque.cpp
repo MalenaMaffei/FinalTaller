@@ -1,4 +1,4 @@
-#include "VistaMuerteTanque.h"
+#include "../Header Files/VistaMuerteTanque.h"
 #define HEIGHT 32
 #define WIDTH 32
 #define CLIPS 7

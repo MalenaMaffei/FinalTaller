@@ -1,8 +1,8 @@
-#include "FabricaElemento.h"
-#include "ElementoBandera.h"
-#include "ElementoRoca.h"
-#include "ElementoPuente.h"
-#include "ElementoFuerte.h"
+#include "Header Files/FabricaElemento.h"
+#include "Header Files/ElementoBandera.h"
+#include "Header Files/ElementoRoca.h"
+#include "Header Files/ElementoPuente.h"
+#include "Header Files/ElementoFuerte.h"
 
 #define POS_CAMINAR 0
 #define POS_DISPARO 1

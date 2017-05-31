@@ -1,4 +1,4 @@
-#include "GuiEdificio.h"
+#include "Header Files/GuiEdificio.h"
 GuiEdificio::GuiEdificio(Vista &vistaGui) : vistaGui(vistaGui), seMuestra(false) {
     cancel = {-1,-1,0,0};
     ok = {-1,-1,0,0};

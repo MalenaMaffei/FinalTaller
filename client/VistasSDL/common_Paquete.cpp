@@ -1,8 +1,8 @@
-#include "common_Paquete.h"
-#include "ElementoBandera.h"
-#include "ElementoRoca.h"
-#include "ElementoPuente.h"
-#include "ElementoFuerte.h"
+#include "Header Files/common_Paquete.h"
+#include "Header Files/ElementoBandera.h"
+#include "Header Files/ElementoRoca.h"
+#include "Header Files/ElementoPuente.h"
+#include "Header Files/ElementoFuerte.h"
 
 using std::string;
 using std::stoi;

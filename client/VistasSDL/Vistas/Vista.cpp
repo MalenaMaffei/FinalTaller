@@ -1,4 +1,4 @@
-#include "Vista.h"
+#include "../Header Files/Vista.h"
 
 
 Vista::Vista(SDL_Renderer *gRenderer,

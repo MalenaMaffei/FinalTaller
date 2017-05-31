@@ -1,12 +1,12 @@
-#include "VistaSniperDisparar.h"
+#include "Header Files/VistaToughDisparar.h"
 #define HEIGHT 16
 #define WIDTH 16
-#define CLIPS 40
-#define LARGO_ANIMACION 5
-VistaSniperDisparar::VistaSniperDisparar(SDL_Renderer *gRenderer)
+#define CLIPS 24
+#define LARGO_ANIMACION 3
+VistaToughDisparar::VistaToughDisparar(SDL_Renderer *gRenderer)
     : VistaDireccionada(gRenderer,
                         HEIGHT,
                         WIDTH,
                         CLIPS,
                         LARGO_ANIMACION,
-                        robotSniperDisparar) {}
+                        robotToughDisparar) {}

@@ -1,12 +1,12 @@
-#include "VistaMissilelauncher.h"
-#define HEIGHT 30
-#define WIDTH 32
+#include "../Header Files/VistaLaserDisparar.h"
+#define HEIGHT 16
+#define WIDTH 16
 #define CLIPS 24
 #define LARGO_ANIMACION 3
-VistaMissilelauncher::VistaMissilelauncher(SDL_Renderer *gRenderer)
+VistaLaserDisparar::VistaLaserDisparar(SDL_Renderer *gRenderer)
     : VistaDireccionada(gRenderer,
                         HEIGHT,
                         WIDTH,
                         CLIPS,
                         LARGO_ANIMACION,
-                        tanqueMissilePath) {}
+                        robotLaserDisparar) {}

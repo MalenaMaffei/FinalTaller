@@ -1,5 +1,5 @@
-#include "Camara.h"
-#include "LTexture.h"
+#include "Header Files/Camara.h"
+#include "Header Files/LTexture.h"
 
 Camara::Camara(){
     //Initialize the collision box

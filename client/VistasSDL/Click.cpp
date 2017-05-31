@@ -1,4 +1,4 @@
-#include "Click.h"
+#include "Header Files/Click.h"
 Click::Click() : clicked(nullptr){
     coords = {-1,-1};
 }

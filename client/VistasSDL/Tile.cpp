@@ -1,4 +1,4 @@
-#include "Tile.h"
+#include "Header Files/Tile.h"
 #define TILE_SIZE 16
 
 Tile::Tile(int x, int y, int tileType, VistaTiles *textura) : mType(tileType)

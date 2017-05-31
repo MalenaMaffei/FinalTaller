@@ -1,4 +1,4 @@
-#include "VistaPuente.h"
+#include "../Header Files/VistaPuente.h"
 #define HEIGHT 64
 #define WIDTH 64
 #define CLIPS 4

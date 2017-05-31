@@ -1,5 +1,5 @@
-#include "VistaTiles.h"
-#include "constantes.h"
+#include "Header Files/VistaTiles.h"
+#include "Header Files/constantes.h"
 //#define TILE_SIZE 16
 //#define CLIPS 4
 

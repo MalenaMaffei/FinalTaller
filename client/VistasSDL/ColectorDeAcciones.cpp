@@ -1,6 +1,6 @@
-#include "ColectorDeAcciones.h"
-#include "Hud.h"
-#include "GuiEdificio.h"
+#include "Header Files/ColectorDeAcciones.h"
+#include "Header Files/Hud.h"
+#include "Header Files/GuiEdificio.h"
 #include <algorithm>
 #include <vector>
 ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
@@ -51,9 +51,6 @@ void ColectorDeAcciones::crearAcciones() {
                    clickeado->getId());
         });
         selectBox.vaciarSeleccionadas();
-    } else {
-        printf("request info de id: %i?????\n", clickeado->getId());
-
     }
     click.resetCoords();
 }

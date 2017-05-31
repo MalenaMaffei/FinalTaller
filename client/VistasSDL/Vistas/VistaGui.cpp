@@ -1,5 +1,5 @@
-#include "VistaGui.h"
-#include "constantes.h"
+#include "../Header Files/VistaGui.h"
+#include "../Header Files/constantes.h"
 #define WIDTH 112
 #define HEIGHT 80
 #define CLIPS 1

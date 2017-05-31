@@ -1,5 +1,5 @@
-#include "ElementoRoca.h"
-#include "VistaRoca.h"
+#include "Header Files/ElementoRoca.h"
+#include "Header Files/VistaRoca.h"
 #define WIDTH 32
 #define HEIGHT 32
 ElementoRoca::ElementoRoca(int id, int x, int y, Vista *textura)

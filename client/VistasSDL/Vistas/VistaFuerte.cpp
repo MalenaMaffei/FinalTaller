@@ -1,4 +1,4 @@
-#include "VistaFuerte.h"
+#include "../Header Files/VistaFuerte.h"
 #define CLIPS 2
 #define HEIGHT 192
 #define WIDTH 160

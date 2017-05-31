@@ -1,5 +1,5 @@
-#include "ElementoEstructura.h"
-#include "ColectorDeAcciones.h"
+#include "Header Files/ElementoEstructura.h"
+#include "Header Files/ColectorDeAcciones.h"
 
 ElementoEstructura::ElementoEstructura(int id, int x, int y, Vista *textura,
                                        bool esMio, int color) :

@@ -1,4 +1,4 @@
-#include "LTexture.h"
+#include "Header Files/LTexture.h"
 
 LTexture::LTexture(SDL_Renderer *gRenderer) : gRenderer(gRenderer)
 {

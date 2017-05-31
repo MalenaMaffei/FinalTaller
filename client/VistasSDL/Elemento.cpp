@@ -1,7 +1,7 @@
-#include "Elemento.h"
+#include "Header Files/Elemento.h"
 //TODO chequwar que todos tengan implementado el Mio
-#include "Click.h"
-#include "ColectorDeAcciones.h"
+#include "Header Files/Click.h"
+#include "Header Files/ColectorDeAcciones.h"
 Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
     : textura(textura), id(id), currentClip(0), muerto(false), Mio(esMio) {
     rect.x = x;

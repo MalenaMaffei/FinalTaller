@@ -1,4 +1,4 @@
-#include "VistaBandera.h"
+#include "../Header Files/VistaBandera.h"
 #define HEIGHT 24
 #define WIDTH 32
 #define CLIPS 4

@@ -1,5 +1,5 @@
-#include "ElementoFuerte.h"
-#include "VistaFuerte.h"
+#include "Header Files/ElementoFuerte.h"
+#include "Header Files/VistaFuerte.h"
 #define HEIGHT 192
 #define WIDTH 160
 ElementoFuerte::ElementoFuerte(int id,

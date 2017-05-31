@@ -1,5 +1,5 @@
-#include "Mouse.h"
-#include "Click.h"
+#include "Header Files/Mouse.h"
+#include "Header Files/Click.h"
 #include <algorithm>
 #include <cmath>
 

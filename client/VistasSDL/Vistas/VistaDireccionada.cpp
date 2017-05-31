@@ -1,4 +1,4 @@
-#include "VistaDireccionada.h"
+#include "../Header Files/VistaDireccionada.h"
 VistaDireccionada::VistaDireccionada(SDL_Renderer *gRenderer,
                                      int height,
                                      int width,
