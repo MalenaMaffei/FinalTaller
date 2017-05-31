@@ -7,6 +7,7 @@ class ColaPaquetes {
  public:
     void encolar(Paquete& paquete);
     Paquete desencolar();
+    bool isEmpty();
  private:
   std::queue<Paquete> paquetes;
   std::mutex &m;

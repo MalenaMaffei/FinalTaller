@@ -8,3 +8,6 @@ Paquete ColaPaquetes::desencolar() {
     Paquete paquete = paquetes.front();
     paquetes.pop();
 }
+bool ColaPaquetes::isEmpty() {
+    return paquetes.empty();
+}
