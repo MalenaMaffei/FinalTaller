@@ -1,20 +1,22 @@
 #include "Header Files/SelectBox.h"
 #include <algorithm>
 
-void SelectBox::mostrar(SDL_Renderer *renderer, SDL_Point offset) {
+void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
 //    TODO no dibujar cuando no hay colision, voy a tener que pasar la camara
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
-    SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
-                            rect.h};
-//    rect.x -= offset.x;
-//    rect.y -= offset.y;
-//    printf("disp rect creado: %i,%i\n", rect.x - offset.x, rect.y - offset.y);
+
+//    SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
+//                            rect.h};
+    Rect displayRect(rect.getPunto() - offset, rect.w, rect.h);
+
     SDL_RenderDrawRect(renderer, &displayRect);
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
         (ElementoUnidad &unidad){
-        SDL_Rect rectUnidad = unidad.getRect();
-        displayRect = {rectUnidad.x - offset.x, rectUnidad.y - offset.y, rectUnidad.w,
-                       rectUnidad.h};
+        Rect rectUnidad = unidad.getRect();
+//        displayRect = {rectUnidad.x - offset.x, rectUnidad.y - offset.y, rectUnidad.w,
+//                       rectUnidad.h};
+        displayRect = Rect(rectUnidad.getPunto() - offset, rectUnidad.w,
+                           rectUnidad.h);
         SDL_RenderDrawRect(renderer, &displayRect);
     });
 }
@@ -27,16 +29,17 @@ SelectBox::SelectBox() {
 
 }
 
-void SelectBox::setRect(const SDL_Rect &rect) {
+void SelectBox::setRect(const Rect &rect) {
     SelectBox::rect = rect;
 }
 
-bool SelectBox::checkCollision(SDL_Rect b) {
-    SDL_bool res = SDL_HasIntersection(&rect, &b);
-    if (res == SDL_TRUE){
-        return true;
-    }
-    return false;
+bool SelectBox::checkCollision(Rect b) {
+//    SDL_bool res = SDL_HasIntersection(&rect, &b);
+//    if (res == SDL_TRUE){
+//        return true;
+//    }
+//    return false;
+    return rect.hayColision(b);
 }
 
 int SelectBox::getX() {

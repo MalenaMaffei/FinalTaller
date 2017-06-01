@@ -12,7 +12,7 @@ class Vista : public Texture{
           int clips,
           std::string fileName);
   virtual bool loadMedia();
-  virtual void mostrar(int x, int y, int nrClip);
+  virtual void mostrar(Punto p, int nrClip);
   virtual ~Vista();
   int getHeight() const;
   int getWidth() const;

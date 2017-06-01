@@ -10,19 +10,19 @@ class SelectBox {
    public:
   SelectBox();
 
-  void mostrar(SDL_Renderer *renderer, SDL_Point offset);
+  void mostrar(SDL_Renderer *renderer, Punto offset);
   int getX();
   int getY();
 
-  bool checkCollision(SDL_Rect b );
-  void setRect(const SDL_Rect &rect);
+  bool checkCollision(Rect b);
+  void setRect(const Rect &rect);
   void selectUnidad(ElementoUnidad &unidad);
   void vaciarSeleccionadas();
   bool haySeleccion();
   const std::vector<ElementoUnidad> &getSeleccionadas() const;
 
  private:
-  SDL_Rect rect;
+  Rect rect;
 
   std::vector<ElementoUnidad> seleccionadas;
 };

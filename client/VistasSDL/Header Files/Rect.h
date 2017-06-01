@@ -9,6 +9,7 @@ class Rect : public SDL_Rect{
   Rect(Punto p = Punto(0,0), int width = 0, int height = 0);
   bool incluyePunto(Punto p);
   bool hayColision(Rect otro);
+  Punto getPunto();
 };
 
 #endif //TPFINAL_RECT_H

@@ -6,7 +6,7 @@ class Click {
  public:
   Click();
   void setCoords(int clickedX,int clickedY);
-  const SDL_Point &getPoint() const;
+  const Punto & getPoint() const;
   void setClicked(Elemento *clicked);
   void setSeleccion(bool seleccion);
   bool hayClickeado();
@@ -16,7 +16,7 @@ class Click {
 
  private:
   Elemento* clicked;
-  SDL_Point coords;
+  Punto coords;
   bool seleccion;
 //  int x;
 //  int y;

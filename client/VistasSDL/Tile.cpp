@@ -20,10 +20,8 @@ void Tile::mostrar(Camara &camera){
     //If the tile is on screen
     if( camera.checkCollision( mBox ) ){
         //Show the tile
-
-        textura->mostrar(mBox.x - camera.getCamaraX(),
-                         mBox.y - camera.getCamaraY(),
-                         mType);
+//        Punto p = mBox.getPunto() - camera.getOffset();
+        textura->mostrar(mBox.getPunto() - camera.getOffset(), mType);
 //        gTileTexture.render( rect.x - camera.x, rect.y - camera.y, &gTileClips[ mType ] );
     }
 }

@@ -33,7 +33,7 @@
 #include "Header Files/common_CodigosPaquete.h"
 #include "Header Files/VistaGui.h"
 #include "Header Files/GuiEdificio.h"
-#include "Rect.h"
+#include "Header Files/Rect.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -270,14 +270,6 @@ void Canvas::run(){
                                 hud,
                                 guiEdificio);
     while( !quit ){
-
-        Punto p(1,1);
-        Punto p2(9,9);
-        Rect r(Punto(0,0), 10, 10);
-        Rect r2(Punto(9,9), 10, 10);
-        printf("esta en rect?: %i\n", r.hayColision(r2));
-
-
         capTimer.start();
         //Handle events on queue
         while( SDL_PollEvent( &e ) != 0 ){
@@ -358,7 +350,7 @@ void Canvas::run(){
 
         std::for_each(unidades.begin(), unidades.end(), [&]
             (ElementoUnidad* unidad){
-          unidad->chequearSeleccion(selectBox, SDL_Point());
+          unidad->chequearSeleccion(selectBox);
           unidad->clicked(click);
         });
 

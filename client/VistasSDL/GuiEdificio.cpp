@@ -11,12 +11,12 @@ void GuiEdificio::mostrar(SDL_Point offset) {
         int yReal = position.y-offset.y;
         cancel = {xReal+67, yReal + 47, 40, 14};
         ok = {xReal+67, yReal + 61, 40, 13};
-        vistaGui.mostrar(xReal,yReal,0);
+        vistaGui.mostrar(position, 0);
     }
 
 }
 
-void GuiEdificio::abrirGui(SDL_Point pos) {
+void GuiEdificio::abrirGui(Punto pos) {
     seMuestra = true;
     position = pos;
 }

@@ -1,6 +1,6 @@
 #include "Header Files/Camara.h"
 #include "Header Files/Texture.h"
-#include "Punto.h"
+#include "Header Files/Punto.h"
 Camara::Camara(){
     //Initialize the collision box
     mBox.x = 0;
@@ -109,13 +109,13 @@ void Camara::move(float timeStep)
 //}
 
 
-bool Camara::checkCollision(SDL_Rect b) {
-
-    SDL_bool res = SDL_HasIntersection(&mBox, &b);
-    if (res == SDL_TRUE){
-        return true;
-    }
-    return false;
+bool Camara::checkCollision(Rect b) {
+    return mBox.hayColision(b);
+//    SDL_bool res = SDL_HasIntersection(&mBox, &b);
+//    if (res == SDL_TRUE){
+//        return true;
+//    }
+//    return false;
 
 }
 //
@@ -134,6 +134,6 @@ SDL_Rect *Camara::getCamara() {
     &mBox;
 }
 
-SDL_Point Camara::getOffset() {
-    return {mBox.x, mBox.y};
+Punto Camara::getOffset() {
+    return mBox.getPunto();
 }

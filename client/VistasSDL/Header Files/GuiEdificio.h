@@ -9,7 +9,7 @@ class GuiEdificio {
  public:
   GuiEdificio(Vista &vistaGui);
   void mostrar(SDL_Point offset);
-  void abrirGui(SDL_Point pos);
+  void abrirGui(Punto pos);
   bool click(SDL_Point click);
  private:
   Vista& vistaGui;
@@ -17,7 +17,7 @@ class GuiEdificio {
   SDL_Rect cancel;
   SDL_Rect next;
   bool seMuestra;
-  SDL_Point position;
+  Punto position;
 };
 
 #endif //TPFINAL_GUIEDIFICIO_H

@@ -15,11 +15,7 @@ Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
 void Elemento::mostrar(Camara &camera) {
     if(!muerto){
         if( camera.checkCollision( rect ) ){
-
-
-            textura->mostrar(rect.x - camera.getCamaraX(),
-                             rect.y - camera.getCamaraY(),
-                             currentClip);
+            textura->mostrar(rect.getPunto() - camera.getOffset(), currentClip);
         }
     }
 
@@ -33,7 +29,7 @@ void Elemento::matar() {
     return;
 }
 
-const SDL_Rect &Elemento::getRect() const {
+const Rect & Elemento::getRect() const {
     return rect;
 }
 

@@ -11,8 +11,9 @@ class Hud {
 
   Vista& vistaHud;
   Vista& vistaCaras;
-  SDL_Rect hudRect;
-  int x, y;
+  Rect hudRect;
+//  int x, y;
+  Punto p;
   int tipoCara;
   bool seleccionado;
   int aMostrar;

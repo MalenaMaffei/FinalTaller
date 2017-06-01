@@ -3,7 +3,8 @@
 #include <SDL2/SDL.h>
 #include "Texture.h"
 #include "constantes.h"
-#include "../Punto.h"
+#include "Punto.h"
+#include "Rect.h"
 //TODO meter mostrar del background en camara? ver como esta hecho en tiles
 class Camara {
  public:
@@ -30,15 +31,14 @@ class Camara {
 //
   int getCamaraX();
   int getCamaraY();
-  SDL_Point getOffset();
+  Punto getOffset();
   SDL_Rect* getCamara();
 
-  //Shows the dot on the screen
-  void render(Texture *dotTexture);
-  bool checkCollision(SDL_Rect b );
+  bool checkCollision(Rect b);
  private:
   //Collision box of the dot
-  SDL_Rect mBox;
+//  SDL_Rect mBox;
+    Rect mBox;
 
   //The velocity of the dot
 //  int mVelX, mVelY;

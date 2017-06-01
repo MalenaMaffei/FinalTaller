@@ -1,12 +1,12 @@
-#include "Punto.h"
-Punto Punto::operator+(Punto &otro) {
+#include "Header Files/Punto.h"
+Punto Punto::operator+(Punto otro) {
     Punto nuevo(0, 0);
     nuevo.x = x + otro.x;
     nuevo.y = y + otro.y;
     return nuevo;
 }
 
-Punto Punto::operator-(Punto &otro) {
+Punto Punto::operator-(Punto otro) {
     Punto nuevo(0, 0);
     nuevo.x = x - otro.x;
     nuevo.y = y - otro.y;

@@ -19,7 +19,7 @@ class ElementoUnidad : public ElementoColoreado{
                    int color);
   virtual void mover(int newX, int newY);
   void mostrar(Camara &camera);
-  void chequearSeleccion(SelectBox &selectBox, SDL_Point offset);
+  void chequearSeleccion(SelectBox &selectBox);
   void matar();
   void seleccionar();
   void deseleccionar();

@@ -8,7 +8,7 @@ void Click::setCoords(int clickedX,int clickedY) {
     coords = {clickedX, clickedY};
 }
 
-const SDL_Point &Click::getPoint() const {
+const Punto & Click::getPoint() const {
     return coords;
 }
 
