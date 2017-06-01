@@ -4,7 +4,7 @@
 #include <SDL_rect.h>
 class Punto : public SDL_Point{
  public:
-  Punto();
+  Punto(int x, int y);
   Punto operator+(Punto &otro);
   Punto operator-(Punto &otro);
 

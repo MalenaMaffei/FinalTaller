@@ -1,17 +1,19 @@
 #include "Punto.h"
 Punto Punto::operator+(Punto &otro) {
-    Punto nuevo;
-    x = x + otro.x;
-    y = y + otro.y;
+    Punto nuevo(0, 0);
+    nuevo.x = x + otro.x;
+    nuevo.y = y + otro.y;
     return nuevo;
 }
 
 Punto Punto::operator-(Punto &otro) {
-    Punto nuevo;
+    Punto nuevo(0, 0);
     nuevo.x = x - otro.x;
     nuevo.y = y - otro.y;
     return nuevo;
 }
-Punto::Punto() {
 
+Punto::Punto(int x, int y) {
+    this->x = x;
+    this->y = y;
 }
