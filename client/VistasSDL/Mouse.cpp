@@ -5,50 +5,30 @@
 
 Mouse::Mouse() : lastButton(-1) {}
 
-void Mouse::setState(Uint32 eventType, SDL_Event event, SDL_Point offset) {
+void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
     if ( eventType == SDL_MOUSEBUTTONDOWN) {
-//        printf("SDL_MOUSEBUTTONDOWN\n");
+        Punto eventPunto(event.button.x, event.button.y);
         if (event.button.button == SDL_BUTTON_RIGHT){
             lastButton = rightButtonDown;
-//            start_coords = {event.button.x, event.button.y};
-            start_coords = {event.button.x + offset.x, event.button.y +
-                offset.y};
-//            printf("Rclick en x: %i, y: %i\n", start_coords.x,
-//                   start_coords.y);
+            start_coords = eventPunto + offset;
         } else {
             lastButton = leftButtonDown;
-            left_click_coords = {event.button.x + offset.x, event.button.y +
-                offset.y};
-
+            left_click_coords = eventPunto + offset;
         }
 
     }
 
     if ( eventType == SDL_MOUSEBUTTONUP ) {
-//        printf("SDL_MOUSEBUTTONUP\n");
-
         if (event.button.button ==  SDL_BUTTON_RIGHT) {
             lastButton = rightButtonUp;
         } else {
             lastButton = leftButtonUp;
-//            left_click_coords = {event.button.x + offset.x, event.button.y +
-//                offset.y};
-//            left_click_coords = {event.button.x, event.button.y };
-//            printf("click en x: %i, y: %i\n", left_click_coords.x, left_click_coords.y);
         }
     }
 
     if ( eventType == SDL_MOUSEMOTION ) {
-//        printf("SDL_MOUSEMOTION\n");
-//        move_coords = {event.motion.x, event.motion.y};
-        move_coords = {event.motion.x+ offset.x, event.motion.y+ offset.y};
-//        printf("moviemiento a: %i, %i\n", move_coords.x,
-//               move_coords.y);
+        move_coords = Punto(event.motion.x, event.motion.y) + offset;
     }
-
-
-//    printf("lastButton: %i\n", lastButton);
-
 }
 
 SDL_Point Mouse::getCoordinates() {
@@ -69,11 +49,9 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
             Rect rect(Punto(newX,newY),std::abs(width),std::abs(height));
             selectBox.setRect(rect);
             selectBox.vaciarSeleccionadas();
-//            printf("pos rect creado: %i,%i\n", newX, newY);
         } break;
 
         case rightButtonUp:{
-//            SDL_Rect rect = {0,0,0,0};
             selectBox.setRect(Rect());
         } break;
 
@@ -92,6 +70,5 @@ void Mouse::resetState() {
     if (lastButton != rightButtonDown){
         lastButton = none;
     }
-
 }
 

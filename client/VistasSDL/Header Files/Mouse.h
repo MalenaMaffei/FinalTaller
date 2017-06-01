@@ -21,7 +21,7 @@ class Mouse {
 
   Mouse();
 
-  void setState(Uint32 eventType, SDL_Event event, SDL_Point offset);
+  void setState(Uint32 eventType, SDL_Event event, Punto offset);
   void resetState();
   SDL_Point getCoordinates();
 
@@ -32,9 +32,9 @@ class Mouse {
 //  bool rightButtonDown = false;
 //  bool leftButtonDown = false;
   bool mouseMoves = false;
-  SDL_Point start_coords;
-  SDL_Point move_coords;
-  SDL_Point left_click_coords;
+  Punto start_coords;
+  Punto move_coords;
+  Punto left_click_coords;
   int lastButton;
 };
 
