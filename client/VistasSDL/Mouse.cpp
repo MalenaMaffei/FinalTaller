@@ -31,7 +31,7 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
     }
 }
 
-SDL_Point Mouse::getCoordinates() {
+Punto Mouse::getCoordinates() {
     return move_coords;
 }
 

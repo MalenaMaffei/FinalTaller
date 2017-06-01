@@ -1,19 +1,22 @@
 #include "Header Files/GuiEdificio.h"
+#define OFF_CANCEL_X 67
+#define OFF_CANCEL_Y 47
+#define OFF_OK_X 67
+#define OFF_OK_Y 61
 GuiEdificio::GuiEdificio(Vista &vistaGui) : vistaGui(vistaGui), seMuestra(false) {
-    cancel = {-1,-1,0,0};
-    ok = {-1,-1,0,0};
-    next = {-1,-1,0,0};
+//    cancel = {-1,-1,0,0};
+//    ok = {-1,-1,0,0};
+//    next = {-1,-1,0,0};
 }
 
-void GuiEdificio::mostrar(SDL_Point offset) {
+void GuiEdificio::mostrar(Punto offset) {
     if(seMuestra){
-        int xReal = position.x-offset.x;
-        int yReal = position.y-offset.y;
-        cancel = {xReal+67, yReal + 47, 40, 14};
-        ok = {xReal+67, yReal + 61, 40, 13};
+        Punto pReal = position - offset;
+//        TODO sacar numeros magicos
+        cancel = Rect(pReal + Punto(OFF_CANCEL_X, OFF_CANCEL_Y), 40, 14);
+        ok = Rect(pReal + Punto(OFF_OK_X, OFF_OK_Y), 40, 13);
         vistaGui.mostrar(position, 0);
     }
-
 }
 
 void GuiEdificio::abrirGui(Punto pos) {
@@ -21,11 +24,11 @@ void GuiEdificio::abrirGui(Punto pos) {
     position = pos;
 }
 
-bool GuiEdificio::click(SDL_Point click) {
-    if (SDL_PointInRect(&click, &cancel)){
+bool GuiEdificio::click(Punto click) {
+    if (cancel.incluyePunto(click)){
         seMuestra = false;
         return true;
-    } else if(SDL_PointInRect(&click, &ok)){
+    } else if(ok.incluyePunto(click)){
         seMuestra = false;
         printf("se apreto ok en gui crear\n");
         return true;

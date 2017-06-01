@@ -23,7 +23,7 @@ class Mouse {
 
   void setState(Uint32 eventType, SDL_Event event, Punto offset);
   void resetState();
-  SDL_Point getCoordinates();
+  Punto getCoordinates();
 
   void setMouseAction(SelectBox &selectBox, Click &click);
 
