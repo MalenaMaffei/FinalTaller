@@ -57,7 +57,8 @@ const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 
 
-Canvas::Canvas() {
+Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
+    colaEntrada(colaEntrada), colaSalida(colaSalida) {
     //Initialization flag
     bool success = true;
 

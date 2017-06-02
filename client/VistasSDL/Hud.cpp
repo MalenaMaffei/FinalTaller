@@ -5,8 +5,6 @@
 
 Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
     (vistaCaras), seleccionado(false), p(SCREEN_WIDTH - hud.getWidth(), 0) {
-//    p.x = SCREEN_WIDTH - hud.getWidth();
-//    p.y = 0;
     hudRect = {p,hud.getWidth(),hud.getHeight()};
 }
 

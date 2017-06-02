@@ -10,7 +10,7 @@ class ColaPaquetes {
     bool isEmpty();
  private:
   std::queue<Paquete> paquetes;
-  std::mutex &m;
+  std::mutex m;
 };
 
 #endif //TPFINAL_MONITORPAQUETES_H

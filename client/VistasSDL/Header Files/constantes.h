@@ -41,8 +41,7 @@ const char tanqueMissilePath[] = "../client/VistasSDL/imgs/Tanks/missile.png";
 
 //---------------------HUD---------------------
 const char hudPath[] = "../client/VistasSDL/imgs/Gui/hud.png";
-const char carasPath[] = "../client/VistasSDL/imgs/Gui/Unidades/grunt_azul"
-    ".png";
+const char carasPath[] = "../client/VistasSDL/imgs/Gui/Unidades/unidades.png";
 const char guiEdificioPath[] = "../client/VistasSDL/imgs/Gui/edificio.png";
 
 

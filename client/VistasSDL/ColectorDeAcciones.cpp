@@ -19,6 +19,7 @@ void ColectorDeAcciones::crearAcciones() {
         click.resetCoords();
         return;
     }
+//    TODO hacer lo mismo con clicks sobre el hud
 
 
 

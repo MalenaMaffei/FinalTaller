@@ -11,7 +11,4 @@ FabricaVista::FabricaVista(std::map<int, Vista *> &vistas,
 // sino que los mapas deberian ser mios al 100% y este seria un vistaManager?
 
 
-
-
-
 }
