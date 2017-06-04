@@ -234,7 +234,7 @@ void Canvas::run(){
 //    VistaRobotMorir robotMorirTextura(gRenderer);
 //    std::vector<ElementoUnidad*> unidades;
 
-    for (int i = 40; i < 40*2; i+=45) {
+    for (int i = 0; i < 40*2; i+=40) {
 //        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
 //                                             &pyroDispararTextura,
 //                                             &robotMorirTextura, i%2==0));
