@@ -234,15 +234,16 @@ void Canvas::run(){
 //    VistaRobotMorir robotMorirTextura(gRenderer);
 //    std::vector<ElementoUnidad*> unidades;
 
-    for (int i = 0; i < 40*2; i+=40) {
+    for (int i = 40; i <= 40*2; i+=40) {
 //        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
 //                                             &pyroDispararTextura,
 //                                             &robotMorirTextura, i%2==0));
+        std::string id = "0" + std::to_string(i);
         std::string posX = "00"+std::to_string(i);
         std::string posY = "0020";
         std::string mio = std::to_string(i%2==0);
         std::string tipoColor = "91";
-        std::string mensaje = "0000"+posX+posY+mio+tipoColor;
+        std::string mensaje = id+"0"+posX+posY+mio+tipoColor;
         Paquete paquete(mensaje);
     printf("tipo: %i, x,y: %i,%i\n", paquete.getTipo(), paquete.getX(),
            paquete.getY());

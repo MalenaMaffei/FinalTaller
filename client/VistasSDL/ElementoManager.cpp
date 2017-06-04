@@ -30,6 +30,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
                                 paquete.isEsMio(), paquete.getColor());
 
     unidades[id] = unidad;
+    printf("creo en %i,%i\n", paquete.getX(), paquete.getY());
 }
 
 void ElementoManager::fabricarElemento(Paquete &paquete) {

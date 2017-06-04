@@ -24,6 +24,7 @@ VistaDireccionada *VistaManager::getVistaDireccionada(int tipoUnidad,
         fabricarVistasDeElemento(tipoUnidad);
         return vistasDireccionadas.at(tipoUnidad)[tipoVista];
     }
+    return vistasDireccionadas.at(tipoUnidad)[tipoVista];
 }
 
 VistaDireccionada *VistaManager::getVistaDisparo(int tipoUnidad) {
@@ -107,8 +108,8 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         morir = new VistaTanqueMorir(gRenderer);
 
         vistas[tipo] = morir;
-        vistasDireccionadas[tipo][POS_CAMINAR] = caminar;
-        vistasDireccionadas[tipo][POS_DISPARO] = disparar;
+        vistasDireccionadas[tipo].push_back(caminar);
+        vistasDireccionadas[tipo].push_back(disparar);
     }
 }
 
