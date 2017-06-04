@@ -2,7 +2,7 @@
 #define TPFINAL_ELEMENTOTANQUE_H
 
 #include "ElementoUnidad.h"
-#include "VistaMuerteTanque.h"
+#include "VistaTanqueMorir.h"
 class ElementoTanque : public ElementoUnidad {
  public:
   ElementoTanque(int id,

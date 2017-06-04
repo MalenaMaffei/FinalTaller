@@ -7,7 +7,7 @@
 
 class VistaManager {
  public:
-  VistaManager();
+  VistaManager(SDL_Renderer *gRenderer);
   VistaDireccionada* getVistaDisparo(int tipoUnidad);
   VistaDireccionada* getVistaCaminar(int tipoUnidad);
 //  Vista* getVistaMuerte(int tipoUnidad);
@@ -17,6 +17,7 @@ class VistaManager {
   std::map<int, Vista *> vistas;
   std::map<int, std::vector<VistaDireccionada *>> vistasDireccionadas;
   CodigosPaquete codigos;
+  SDL_Renderer *gRenderer;
 
   void fabricarVistasDeElemento(int tipo);
   VistaDireccionada* getVistaDireccionada(int tipoUnidad, int tipoVista);

@@ -1,8 +1,8 @@
-#include "../Header Files/VistaMuerteRobot.h"
+#include "../Header Files/VistaRobotMorir.h"
 #define HEIGHT 16
 #define WIDTH 16
 #define CLIPS 7
-VistaMuerteRobot::VistaMuerteRobot(SDL_Renderer *gRenderer) : Vista(
+VistaRobotMorir::VistaRobotMorir(SDL_Renderer *gRenderer) : Vista(
     gRenderer,
     HEIGHT,
     WIDTH,

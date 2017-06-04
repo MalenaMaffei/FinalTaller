@@ -1,5 +1,5 @@
 #include "Header Files/ElementoTanque.h"
-#include "Header Files/VistaMuerteTanque.h"
+#include "Header Files/VistaTanqueMorir.h"
 ElementoTanque::ElementoTanque(int id,
                                int x,
                                int y,

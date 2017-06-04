@@ -2,9 +2,9 @@
 #define TPFINAL_VISTAMUERTETANQUE_H
 
 #include "Vista.h"
-class VistaMuerteTanque : public Vista{
+class VistaTanqueMorir : public Vista{
  public:
-  VistaMuerteTanque(SDL_Renderer *gRenderer);
+  VistaTanqueMorir(SDL_Renderer *gRenderer);
 //  bool isLastClip(int clip) const;
 };
 

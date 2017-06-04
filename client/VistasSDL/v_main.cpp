@@ -23,7 +23,7 @@
 //#include "VistaPyroDisparar.h"
 //#include "ElementoTanque.h"
 //#include "VistaHeavy.h"
-//#include "VistaMuerteRobot.h"
+//#include "VistaRobotMorir.h"
 //#include "Mouse.h"
 //#include "VistaMissilelauncher.h"
 //#include "ColectorDeAcciones.h"
@@ -207,7 +207,7 @@
 //
 //        VistaRobotCaminar robotCaminarTextura(gRenderer);
 //        VistaPyroDisparar pyroDispararTextura(gRenderer);
-//        VistaMuerteRobot robotMorirTextura(gRenderer);
+//        VistaRobotMorir robotMorirTextura(gRenderer);
 //        std::vector<ElementoUnidad*> unidades;
 ////
 ////

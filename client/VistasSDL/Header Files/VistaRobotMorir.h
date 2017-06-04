@@ -2,9 +2,9 @@
 #define TPFINAL_VISTAMUERTEROBOT_H
 
 #include "Vista.h"
-class VistaMuerteRobot : public Vista{
+class VistaRobotMorir : public Vista{
  public:
-  VistaMuerteRobot(SDL_Renderer *gRenderer);
+  VistaRobotMorir(SDL_Renderer *gRenderer);
 
 };
 

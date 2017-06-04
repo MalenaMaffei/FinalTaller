@@ -7,6 +7,7 @@ class CodigosPaquete {
   int unidadesBegin();
   int unidadesEnd();
   bool esRobot(int tipo);
+  bool esTanque(int tipo);
 
   enum comando{
     crear = 0,

@@ -23,7 +23,7 @@
 #include "Header Files/VistaPyroDisparar.h"
 #include "Header Files/ElementoTanque.h"
 #include "Header Files/VistaHeavy.h"
-#include "Header Files/VistaMuerteRobot.h"
+#include "Header Files/VistaRobotMorir.h"
 #include "Header Files/Mouse.h"
 #include "Header Files/VistaMissilelauncher.h"
 #include "Header Files/ColectorDeAcciones.h"
@@ -226,7 +226,7 @@ void Canvas::run(){
 
     VistaRobotCaminar robotCaminarTextura(gRenderer);
     VistaPyroDisparar pyroDispararTextura(gRenderer);
-    VistaMuerteRobot robotMorirTextura(gRenderer);
+    VistaRobotMorir robotMorirTextura(gRenderer);
     std::vector<ElementoUnidad*> unidades;
 //
 
@@ -243,7 +243,7 @@ void Canvas::run(){
 
 
 //        VistaHeavy heavyTextura(gRenderer);
-//        VistaMuerteTanque muerteTanqueTextura(gRenderer);
+//        VistaTanqueMorir muerteTanqueTextura(gRenderer);
 //        ElementoUnidad* tanque =
 //            new ElementoU(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
 //        unidades.push_back(tanque);
