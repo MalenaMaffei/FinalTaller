@@ -4,6 +4,10 @@
 class CodigosPaquete {
  public:
   bool esUnidad(int tipo);
+  int unidadesBegin();
+  int unidadesEnd();
+  bool esRobot(int tipo);
+
   enum comando{
     crear = 0,
     matar = 1,
