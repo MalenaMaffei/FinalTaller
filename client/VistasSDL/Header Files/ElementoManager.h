@@ -7,12 +7,16 @@
 #include "common_Paquete.h"
 #include "common_CodigosPaquete.h"
 #include "../VistaManager.h"
+#include "Mouse.h"
 #include <map>
 class ElementoManager {
  public:
   ElementoManager(VistaManager &vistaManager);
 
   void fabricar(Paquete &paquete);
+  void elementosVivir(Camara &camara,
+                      Click &click,
+                      SelectBox &selectBox);
  private:
   void fabricarUnidad(Paquete &paquete);
   void fabricarElemento(Paquete &paquete);

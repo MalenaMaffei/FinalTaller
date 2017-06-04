@@ -1,10 +1,10 @@
+#include <algorithm>
 #include "Header Files/ElementoManager.h"
 #include "Header Files/ElementoBandera.h"
 #include "Header Files/ElementoRoca.h"
 #include "Header Files/ElementoPuente.h"
 #include "Header Files/ElementoFuerte.h"
-
-
+#include "Header Files/Mouse.h"
 
 ElementoManager::ElementoManager(VistaManager &vistaManager) : vistaManager
                                                                    (vistaManager) {}
@@ -19,7 +19,7 @@ void ElementoManager::fabricar(Paquete &paquete) {
 }
 
 void ElementoManager::fabricarUnidad(Paquete &paquete) {
-    Elemento* elemento;
+//    TODO mejor tengo unidades por un lado y elementos x el otro?
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
     int id = paquete.getId();
@@ -28,8 +28,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
                                 vistaManager.getVistaDisparo(tipo),
                                 vistaManager.getVista(tipo),
                                 paquete.isEsMio(), paquete.getColor());
-    elemento = unidad;
-    elementos[id] = elemento;
+
     unidades[id] = unidad;
 }
 
@@ -54,4 +53,20 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
     }
 //        TODO faltarian los vehiculos y fabricas de robots
     elementos[id] = elemento;
+}
+
+void ElementoManager::elementosVivir(Camara &camara,Click &click,
+                                     SelectBox &selectBox) {
+    for (const auto& kv : elementos) {
+        Elemento* elemento = elementos.at(kv.first);
+        elemento->mostrar(camara);
+        elemento->clicked(click);
+    }
+
+    for (const auto& kv : unidades) {
+        ElementoUnidad* unidad = unidades.at(kv.first);
+        unidad->mostrar(camara);
+        unidad->chequearSeleccion(selectBox);
+        unidad->clicked(click);
+    }
 }

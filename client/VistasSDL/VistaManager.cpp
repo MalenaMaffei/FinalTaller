@@ -27,10 +27,13 @@ VistaDireccionada *VistaManager::getVistaDireccionada(int tipoUnidad,
 }
 
 VistaDireccionada *VistaManager::getVistaDisparo(int tipoUnidad) {
+    printf("entro a disparo\n");
+
     return getVistaDireccionada(tipoUnidad, POS_DISPARO);
 }
 
 VistaDireccionada *VistaManager::getVistaCaminar(int tipoUnidad) {
+    printf("entro a caminar\n");
     return getVistaDireccionada(tipoUnidad, POS_CAMINAR);
 }
 
@@ -47,6 +50,7 @@ Vista *VistaManager::getVista(int tipoElemento) {
 }
 
 void VistaManager::fabricarVistasDeElemento(int tipo) {
+    printf("fabricar vista de %i\n", tipo);
 
     if(!codigos.esUnidad(tipo)){
         Vista* vista;
@@ -75,14 +79,18 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         } else if (tipo == codigos.psycho){
             disparar = new VistaPsychoDisparar(gRenderer);
         } else if (tipo == codigos.pyro){
+            printf("entro al creador correcto\n");
             disparar = new VistaPyroDisparar(gRenderer);
+            printf("creo correcto\n");
         } else if (tipo == codigos.tough){
             disparar = new VistaToughDisparar(gRenderer);
         }
         vistas[tipo] = morir;
-        vistasDireccionadas[tipo][POS_CAMINAR] = caminar;
-        vistasDireccionadas[tipo][POS_DISPARO] = disparar;
-
+        printf("guardo la morir\n");
+        vistasDireccionadas[tipo].push_back(caminar);
+        printf("guardo la caminar\n");
+        vistasDireccionadas[tipo].push_back(disparar);
+        printf("guardo la disparar\n");
     }
 //    jeep = 12,
 //    light = 13,

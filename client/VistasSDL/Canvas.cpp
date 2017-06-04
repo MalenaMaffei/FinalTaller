@@ -34,6 +34,8 @@
 #include "Header Files/VistaGui.h"
 #include "Header Files/GuiEdificio.h"
 #include "Header Files/Rect.h"
+#include "VistaManager.h"
+#include "Header Files/ElementoManager.h"
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -194,6 +196,9 @@ void Canvas::run(){
 //        SDL_Rect cuadro = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT   };
 
 
+    VistaManager vistaManager(gRenderer);
+    ElementoManager elementoManager(vistaManager);
+
     VistaRoca rocaTextura(gRenderer);
     std::vector<Elemento*> elementos;
     for (int j = 0; j <640; j+=32) {
@@ -224,36 +229,27 @@ void Canvas::run(){
     }
 
 
-    VistaRobotCaminar robotCaminarTextura(gRenderer);
-    VistaPyroDisparar pyroDispararTextura(gRenderer);
-    VistaRobotMorir robotMorirTextura(gRenderer);
-    std::vector<ElementoUnidad*> unidades;
-//
+//    VistaRobotCaminar robotCaminarTextura(gRenderer);
+//    VistaPyroDisparar pyroDispararTextura(gRenderer);
+//    VistaRobotMorir robotMorirTextura(gRenderer);
+//    std::vector<ElementoUnidad*> unidades;
 
-//        ElementoUnidad* robot1 =
-//            new ElementoRobot(1,20,20,&robotCaminarTextura,&pyroDispararTextura,
-//                              &robotMorirTextura);
-//        unidades.push_back(robot1);
-
-    for (int i = 40; i < 40*200; i+=45) {
-        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
-                                             &pyroDispararTextura,
-                                             &robotMorirTextura, i%2==0));
+    for (int i = 40; i < 40*2; i+=45) {
+//        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
+//                                             &pyroDispararTextura,
+//                                             &robotMorirTextura, i%2==0));
+        std::string posX = "00"+std::to_string(i);
+        std::string posY = "0020";
+        std::string mio = std::to_string(i%2==0);
+        std::string tipoColor = "91";
+        std::string mensaje = "0000"+posX+posY+mio+tipoColor;
+        Paquete paquete(mensaje);
+    printf("tipo: %i, x,y: %i,%i\n", paquete.getTipo(), paquete.getX(),
+           paquete.getY());
+        elementoManager.fabricar(paquete);
     }
 
-
-//        VistaHeavy heavyTextura(gRenderer);
-//        VistaTanqueMorir muerteTanqueTextura(gRenderer);
-//        ElementoUnidad* tanque =
-//            new ElementoU(1, 80, 80, &heavyTextura, &muerteTanqueTextura);
-//        unidades.push_back(tanque);
-//
-//
-//        VistaMissilelauncher missilelauncherTextura(gRenderer);
-//        ElementoUnidad* tanque2 = new ElementoTanque(1, 0,0,
-//                                                     &missilelauncherTextura,
-//                                                     &muerteTanqueTextura);
-//        unidades.push_back(tanque2);
+//    Paquete paquete("001000100010191");
 
 
 
@@ -305,55 +301,39 @@ void Canvas::run(){
           tile.mostrar(camara);
         });
 
-//            std::for_each(unidades.begin(), unidades.end(), [&]
-//                (ElementoUnidad* elemento){
-//                    elemento->mover(pos_robot,pos_robot);
-//            });
-
-
-//
-//
-//            if (pos_tanque == 110){
-//                fuerte1->matar();
-//            }
-//            if (pos_tanque > 100){
-//                tanque->matar();
-//            } else {
-//                tanque->mover(pos_tanque,0);
-//            }
-//
-//            if (pos_tanque > 60){
-//                robot1->matar();
-//            } else {
-//                robot1->mover(pos_robot, pos_robot);
-//            }
-//
-//            tanque2->mover(0, pos_tanque);
 
         mouse.setMouseAction(selectBox, click);
 
-        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
-        elemento){
-          elemento->mostrar(camara);
-          elemento->clicked(click);
-        });
+        elementoManager.elementosVivir(camara, click, selectBox);
+
+//        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
+//        elemento){
+//          elemento->mostrar(camara);
+//          elemento->clicked(click);
+//        });
+//
+//
+//        std::for_each(unidades.begin(), unidades.end(), [&]
+//            (ElementoUnidad* unidad){
+//          unidad->mostrar(camara);
+//          unidad->chequearSeleccion(selectBox);
+//          unidad->clicked(click);
+//        });
 
 
-        std::for_each(unidades.begin(), unidades.end(), [&]
-            (ElementoUnidad* elemento){
-          elemento->mostrar(camara);
-        });
 
         selectBox.mostrar(gRenderer, camara.getOffset());
         hud.mostrar();
         guiEdificio.mostrar(camara.getOffset());
 
 
-        std::for_each(unidades.begin(), unidades.end(), [&]
-            (ElementoUnidad* unidad){
-          unidad->chequearSeleccion(selectBox);
-          unidad->clicked(click);
-        });
+//        std::for_each(unidades.begin(), unidades.end(), [&]
+//            (ElementoUnidad* unidad){
+//          unidad->chequearSeleccion(selectBox);
+//          unidad->clicked(click);
+//        });
+
+
 
         ++pos_robot;
         ++pos_tanque;
