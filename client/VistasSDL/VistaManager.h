@@ -1,13 +1,14 @@
 #ifndef TPFINAL_FABRICAVISTA_H
 #define TPFINAL_FABRICAVISTA_H
 #include <map>
+#include <vector>
 #include "Header Files/Vista.h"
 #include "Header Files/VistaDireccionada.h"
 #include "Header Files/common_CodigosPaquete.h"
 
 class VistaManager {
  public:
-  VistaManager(SDL_Renderer *gRenderer);
+  explicit VistaManager(SDL_Renderer *gRenderer);
   VistaDireccionada* getVistaDisparo(int tipoUnidad);
   VistaDireccionada* getVistaCaminar(int tipoUnidad);
 //  Vista* getVistaMuerte(int tipoUnidad);

@@ -3,14 +3,11 @@
 #define OFF_CANCEL_Y 47
 #define OFF_OK_X 67
 #define OFF_OK_Y 61
-GuiEdificio::GuiEdificio(Vista &vistaGui) : vistaGui(vistaGui), seMuestra(false) {
-//    cancel = {-1,-1,0,0};
-//    ok = {-1,-1,0,0};
-//    next = {-1,-1,0,0};
-}
+GuiEdificio::GuiEdificio(Vista &vistaGui) : vistaGui(vistaGui),
+                                            seMuestra(false) {}
 
 void GuiEdificio::mostrar(Punto offset) {
-    if(seMuestra){
+    if (seMuestra){
         Punto pReal = position - offset;
 //        TODO sacar numeros magicos
         cancel = Rect(pReal + Punto(OFF_CANCEL_X, OFF_CANCEL_Y), 40, 14);
@@ -28,7 +25,7 @@ bool GuiEdificio::click(Punto click) {
     if (cancel.incluyePunto(click)){
         seMuestra = false;
         return true;
-    } else if(ok.incluyePunto(click)){
+    } else if (ok.incluyePunto(click)){
         seMuestra = false;
         printf("se apreto ok en gui crear\n");
         return true;

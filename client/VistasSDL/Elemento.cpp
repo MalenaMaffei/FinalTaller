@@ -13,12 +13,11 @@ Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
 }
 
 void Elemento::mostrar(Camara &camera) {
-    if(!muerto){
-        if( camera.checkCollision( rect ) ){
+    if (!muerto){
+        if (camera.checkCollision(rect)){
             textura->mostrar(rect.getPunto() - camera.getOffset(), currentClip);
         }
     }
-
 }
 
 bool Elemento::estaMuerto() const {

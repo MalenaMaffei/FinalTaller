@@ -7,11 +7,10 @@ void PaqueteSender::run() {
 // qe hay que ver si usar priority queue
 
     while (! salir){
-        if(!cola.isEmpty()){
+        if (!cola.isEmpty()){
             Paquete paquete = cola.desencolar();
 //            socket.SendStrWLen(paquete.getString());
         }
     }
-
 }
 

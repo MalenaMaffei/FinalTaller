@@ -6,7 +6,7 @@
 Mouse::Mouse() : lastButton(-1) {}
 
 void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
-    if ( eventType == SDL_MOUSEBUTTONDOWN) {
+    if (eventType == SDL_MOUSEBUTTONDOWN) {
         Punto eventPunto(event.button.x, event.button.y);
         if (event.button.button == SDL_BUTTON_RIGHT){
             lastButton = rightButtonDown;
@@ -15,10 +15,9 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
             lastButton = leftButtonDown;
             left_click_coords = eventPunto + offset;
         }
-
     }
 
-    if ( eventType == SDL_MOUSEBUTTONUP ) {
+    if (eventType == SDL_MOUSEBUTTONUP) {
         if (event.button.button ==  SDL_BUTTON_RIGHT) {
             lastButton = rightButtonUp;
         } else {
@@ -26,7 +25,7 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
         }
     }
 
-    if ( eventType == SDL_MOUSEMOTION ) {
+    if (eventType == SDL_MOUSEMOTION) {
         move_coords = Punto(event.motion.x, event.motion.y) + offset;
     }
 }
@@ -40,7 +39,7 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
         case rightButtonDown:{
             int width = move_coords.x - start_coords.x;
             int height = start_coords.y - move_coords.y;
-            int x = start_coords.x ;
+            int x = start_coords.x;
             int y = move_coords.y;
 
             int newX = std::min(x, x+width);
@@ -60,10 +59,7 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
             click.setSeleccion(selectBox.haySeleccion());
             click.setClicked(nullptr);
         } break;
-
-
     }
-
 }
 
 void Mouse::resetState() {
@@ -71,4 +67,3 @@ void Mouse::resetState() {
         lastButton = none;
     }
 }
-

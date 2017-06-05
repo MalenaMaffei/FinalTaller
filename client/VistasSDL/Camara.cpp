@@ -14,26 +14,19 @@ Camara::Camara(){
 //    SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 }
 
-void Camara::handleEvent( SDL_Event& e )
-{
+void Camara::handleEvent(SDL_Event& e){
     //If a key was pressed
-    if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-    {
+    if (e.type == SDL_KEYDOWN && e.key.repeat == 0){
         //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
+        switch (e.key.keysym.sym){
             case SDLK_w: mVelY -= DOT_VEL; break;
             case SDLK_s: mVelY += DOT_VEL; break;
             case SDLK_a: mVelX -= DOT_VEL; break;
             case SDLK_d: mVelX += DOT_VEL; break;
         }
-    }
-        //If a key was released
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-    {
+    }else if (e.type == SDL_KEYUP && e.key.repeat == 0){
         //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
+        switch (e.key.keysym.sym){
             case SDLK_w: mVelY += DOT_VEL; break;
             case SDLK_s: mVelY -= DOT_VEL; break;
             case SDLK_a: mVelX += DOT_VEL; break;
@@ -49,12 +42,9 @@ void Camara::move(float timeStep)
     mBox.x += mVelX * timeStep;
 
     //If the dot went too far to the left or right
-    if( mBox.x < 0 )
-    {
+    if (mBox.x < 0){
         mBox.x = 0;
-    }
-    else if( mBox.x > LEVEL_WIDTH - mBox.w )
-    {
+    } else if (mBox.x > LEVEL_WIDTH - mBox.w){
         mBox.x = LEVEL_WIDTH - mBox.w;
     }
     //If the dot went too far to the left or right or touched a wall
@@ -75,12 +65,9 @@ void Camara::move(float timeStep)
 //    }
 
     //If the dot went too far up or down
-    if( mBox.y < 0 )
-    {
+    if (mBox.y < 0){
         mBox.y = 0;
-    }
-    else if( mBox.y > LEVEL_HEIGHT - mBox.h )
-    {
+    }else if (mBox.y > LEVEL_HEIGHT - mBox.h){
         mBox.y  = LEVEL_HEIGHT - mBox.h;
     }
 }
@@ -111,24 +98,15 @@ void Camara::move(float timeStep)
 
 bool Camara::checkCollision(Rect b) {
     return mBox.hayColision(b);
-//    SDL_bool res = SDL_HasIntersection(&mBox, &b);
-//    if (res == SDL_TRUE){
-//        return true;
-//    }
-//    return false;
-
 }
-//
+
 int Camara::getCamaraX() {
     return mBox.x;
-//    return 0;
 }
-//
+
 int Camara::getCamaraY() {
     return mBox.y;
-//    return 0;
 }
-//
 
 SDL_Rect *Camara::getCamara() {
     &mBox;

@@ -1,4 +1,6 @@
 #include "Header Files/PaqueteReceiver.h"
+#include <string>
+
 PaqueteReceiver::PaqueteReceiver(const Socket &socket, ColaPaquetes &cola)
     : PaqueteDelivery(socket, cola) {}
 

@@ -18,7 +18,6 @@ void Hud::mostrar() {
         Punto caraPos = p + caraOffset;
         vistaCaras.mostrar(caraPos, 0);
     }
-
 }
 
 //TODO TANQUE SI ESTA CON ALGUIEN ES SIEMPRE UN GRUNT!!!

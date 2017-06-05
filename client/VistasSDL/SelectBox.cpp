@@ -1,6 +1,6 @@
 #include "Header Files/SelectBox.h"
 #include <algorithm>
-
+#include <vector>
 void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
 //    TODO no dibujar cuando no hay colision, voy a tener que pasar la camara
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
@@ -13,8 +13,6 @@ void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
         (ElementoUnidad &unidad){
         Rect rectUnidad = unidad.getRect();
-//        displayRect = {rectUnidad.x - offset.x, rectUnidad.y - offset.y, rectUnidad.w,
-//                       rectUnidad.h};
         displayRect = Rect(rectUnidad.getPunto() - offset, rectUnidad.w,
                            rectUnidad.h);
         SDL_RenderDrawRect(renderer, &displayRect);
@@ -26,7 +24,6 @@ SelectBox::SelectBox() {
     rect.y = 0;
     rect.w = 0;
     rect.h = 0;
-
 }
 
 void SelectBox::setRect(const Rect &rect) {

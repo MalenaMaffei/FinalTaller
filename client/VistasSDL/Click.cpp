@@ -14,14 +14,6 @@ const Punto & Click::getPoint() const {
 
 void Click::setClicked(Elemento *clicked) {
     Click::clicked = clicked;
-//    printf("me clickearon: %i y  habia seleccion?: %i\n", clicked->getId(), seleccion);
-//      TODO esto lo tendria que manejar alguien de afuera, el colector de
-// acciones. Lo de abajo funciona igual.
-//    if (seleccion && !clicked->esMio()){
-//        printf("atacar a %i!\n", clicked->getId());
-//    } else {
-//        printf("pedir informacion de: %i\n", clicked->getId());
-//    }
 }
 
 void Click::setSeleccion(bool seleccion) {

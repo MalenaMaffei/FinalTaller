@@ -18,11 +18,10 @@ Tile::Tile(int x, int y, int tileType, VistaTiles *textura) : mType(tileType)
 void Tile::mostrar(Camara &camera){
 //    textura->mostrar(rect.x, rect.y , mType);
     //If the tile is on screen
-    if( camera.checkCollision( mBox ) ){
+    if (camera.checkCollision(mBox)){
         //Show the tile
 //        Punto p = mBox.getPunto() - camera.getOffset();
         textura->mostrar(mBox.getPunto() - camera.getOffset(), mType);
-//        gTileTexture.render( rect.x - camera.x, rect.y - camera.y, &gTileClips[ mType ] );
     }
 }
 

@@ -3,7 +3,7 @@
 #include "Header Files/ElementoRoca.h"
 #include "Header Files/ElementoPuente.h"
 #include "Header Files/ElementoFuerte.h"
-
+#include <string>
 using std::string;
 using std::stoi;
 using std::map;
@@ -12,7 +12,7 @@ Paquete::Paquete(std::string mensaje) {
     id = stoi(mensaje.substr(0,3));
     comando = stoi(mensaje.substr(3,1));
     if (comando == matar){
-        return ;
+        return;
     }
 
     x = stoi(mensaje.substr(4,4));

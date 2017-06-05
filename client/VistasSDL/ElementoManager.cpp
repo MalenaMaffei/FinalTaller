@@ -6,8 +6,8 @@
 #include "Header Files/ElementoFuerte.h"
 #include "Header Files/Mouse.h"
 
-ElementoManager::ElementoManager(VistaManager &vistaManager) : vistaManager
-                                                                   (vistaManager) {}
+ElementoManager::ElementoManager(VistaManager &vistaManager) :
+    vistaManager(vistaManager) {}
 
 void ElementoManager::fabricar(Paquete &paquete) {
     if (codigos.esUnidad(paquete.getTipo())) {
@@ -15,7 +15,6 @@ void ElementoManager::fabricar(Paquete &paquete) {
     } else {
         fabricarElemento(paquete);
     }
-
 }
 
 void ElementoManager::fabricarUnidad(Paquete &paquete) {

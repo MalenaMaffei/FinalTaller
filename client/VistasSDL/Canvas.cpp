@@ -18,14 +18,7 @@
 #include "Header Files/ElementoBandera.h"
 #include "Header Files/VistaPuente.h"
 #include "Header Files/ElementoPuente.h"
-#include "Header Files/VistaRobotCaminar.h"
-#include "Header Files/ElementoRobot.h"
-#include "Header Files/VistaPyroDisparar.h"
-#include "Header Files/ElementoTanque.h"
-#include "Header Files/VistaHeavy.h"
-#include "Header Files/VistaRobotMorir.h"
-#include "Header Files/Mouse.h"
-#include "Header Files/VistaMissilelauncher.h"
+
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/VistaHud.h"
@@ -39,14 +32,6 @@
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
-
-
-
-
-
-
-
-
 
 
 //TODO voy a necesitar un mapa de vistas, uno de vistas Dir, uno de
@@ -148,7 +133,7 @@ int getTileType(int x, int y){
 }
 
 
-void Canvas::manejarPaquete() {
+void Canvas::manejarPaquetes() {
 //    TODO aca voy a tener encolados todos los paquetes y voy sacando
 }
 
@@ -193,7 +178,6 @@ void Canvas::run(){
         }
     }
 
-//        SDL_Rect cuadro = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT   };
 
 
     VistaManager vistaManager(gRenderer);
@@ -229,15 +213,7 @@ void Canvas::run(){
     }
 
 
-//    VistaRobotCaminar robotCaminarTextura(gRenderer);
-//    VistaPyroDisparar pyroDispararTextura(gRenderer);
-//    VistaRobotMorir robotMorirTextura(gRenderer);
-//    std::vector<ElementoUnidad*> unidades;
-
     for (int i = 40; i <= 40*2; i+=40) {
-//        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
-//                                             &pyroDispararTextura,
-//                                             &robotMorirTextura, i%2==0));
         std::string id = "0" + std::to_string(i);
         std::string posX = "00"+std::to_string(i);
         std::string posY = "0020";
@@ -249,10 +225,6 @@ void Canvas::run(){
            paquete.getY());
         elementoManager.fabricar(paquete);
     }
-
-//    Paquete paquete("001000100010191");
-
-
 
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);

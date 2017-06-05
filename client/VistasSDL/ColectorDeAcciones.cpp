@@ -25,7 +25,7 @@ void ColectorDeAcciones::crearAcciones() {
 
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
-            std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
+            std::vector<ElementoUnidad> seleccion=selectBox.getSeleccionadas();
             std::for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
                                                                   unidad){
               printf("Unidad id: %i se mueve a: %i,%i\n", unidad.getId(),

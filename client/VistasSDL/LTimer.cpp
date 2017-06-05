@@ -29,20 +29,15 @@ Uint32 LTimer::getTicks()
     Uint32 time = 0;
 
     //If the timer is running
-    if( mStarted )
-    {
+    if (mStarted) {
         //If the timer is paused
-        if( mPaused )
-        {
+        if (mPaused) {
             //Return the number of ticks when the timer was paused
             time = mPausedTicks;
-        }
-        else
-        {
+        } else {
             //Return the current time minus the start time
             time = SDL_GetTicks() - mStartTicks;
         }
     }
-
     return time;
 }

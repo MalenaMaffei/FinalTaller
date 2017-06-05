@@ -76,7 +76,7 @@ void ElementoUnidad::morir() {
 }
 
 void ElementoUnidad::matar() {
-    if (muriendo || estaMuerto() ){
+    if (muriendo || estaMuerto()){
         return;
     }
     currentClip = 0;
@@ -94,12 +94,8 @@ void ElementoUnidad::mostrar(Camara &camera) {
 }
 
 void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
-    if(!muerto){
-//        SDL_Rect collisionRect = rect;
-//        collisionRect.x - offset.x;
-//        collisionRect.y - offset.y;
-        if(selectBox.checkCollision(rect) && Mio){
-
+    if (!muerto){
+        if (selectBox.checkCollision(rect) && Mio){
             selectBox.selectUnidad(*this);
         }
     }

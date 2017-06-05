@@ -3,6 +3,7 @@
 #include <SDL_render.h>
 #include "common_Thread.h"
 #include "ColaPaquetes.h"
+#include "ElementoManager.h"
 
 class Canvas : public Thread{
  public:
@@ -11,7 +12,7 @@ class Canvas : public Thread{
   void close();
   void run();
   void gameLoop();
-  void manejarPaquete();
+  void manejarPaquetes();
 
  private:
   //The window we'll be rendering to

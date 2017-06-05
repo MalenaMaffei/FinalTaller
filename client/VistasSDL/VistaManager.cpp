@@ -20,7 +20,7 @@ VistaManager::VistaManager(SDL_Renderer *gRenderer) : gRenderer(gRenderer) {}
 
 VistaDireccionada *VistaManager::getVistaDireccionada(int tipoUnidad,
                                                       int tipoVista) {
-    if(! vistasDireccionadas.count(tipoUnidad)){
+    if (!vistasDireccionadas.count(tipoUnidad)){
         fabricarVistasDeElemento(tipoUnidad);
         return vistasDireccionadas.at(tipoUnidad)[tipoVista];
     }
@@ -44,7 +44,7 @@ VistaDireccionada *VistaManager::getVistaCaminar(int tipoUnidad) {
 //}
 
 Vista *VistaManager::getVista(int tipoElemento) {
-    if(! vistas.count(tipoElemento)){
+    if (!vistas.count(tipoElemento)){
         fabricarVistasDeElemento(tipoElemento);
         return vistas.at(tipoElemento);
     }
@@ -52,8 +52,7 @@ Vista *VistaManager::getVista(int tipoElemento) {
 
 void VistaManager::fabricarVistasDeElemento(int tipo) {
     printf("fabricar vista de %i\n", tipo);
-
-    if(!codigos.esUnidad(tipo)){
+    if (!codigos.esUnidad(tipo)){
         Vista* vista;
         if (tipo == codigos.bandera){
             vista = new VistaBandera(gRenderer);
