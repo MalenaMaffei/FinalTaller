@@ -1,7 +1,7 @@
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/GuiEdificio.h"
-#include "Paquete.h"
+#include "Header Files/Paquete.h"
 #include <algorithm>
 #include <vector>
 
@@ -36,7 +36,7 @@ void ColectorDeAcciones::crearAcciones() {
                      click.getPoint().x, click.getPoint().y);
               paquete.mover(unidad.getId(), click.getPoint().x, click
                   .getPoint().y);
-              printf("el paquete dice %s\n", paquete.getMensaje().c_str());
+//              printf("el paquete dice %s\n", paquete.getMensaje().c_str());
               colaSalida.encolar(paquete);
             });
             selectBox.vaciarSeleccionadas();
@@ -52,7 +52,7 @@ void ColectorDeAcciones::crearAcciones() {
 //        TODO obviamente le voy a tener que pasar mas info o no, no se
         printf("request info MIO de id: %i\n", clickeado->getId());
         paquete.pedirInfo(clickeado->getId());
-        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
+//        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
         colaSalida.encolar(paquete);
         clickeado->guiRequest(*this);
     } else if (selectBox.haySeleccion()){
@@ -63,7 +63,7 @@ void ColectorDeAcciones::crearAcciones() {
                    clickeado->getId());
             paquete.atacar(unidad.getId(),clickeado->getId());
             colaSalida.encolar(paquete);
-            printf("el paquete dice %s\n", paquete.getMensaje().c_str());
+//            printf("el paquete dice %s\n", paquete.getMensaje().c_str());
 
         });
         selectBox.vaciarSeleccionadas();

@@ -5,11 +5,12 @@
 #include "Header Files/ElementoPuente.h"
 #include "Header Files/ElementoFuerte.h"
 #include "Header Files/Mouse.h"
+#include "Header Files/Paquete.h"
 
 ElementoManager::ElementoManager(VistaManager &vistaManager) :
     vistaManager(vistaManager) {}
 
-void ElementoManager::fabricar(PaqueteEntrada &paquete) {
+void ElementoManager::crear(Paquete &paquete) {
     if (codigos.esUnidad(paquete.getTipo())) {
         fabricarUnidad(paquete);
     } else {
@@ -17,7 +18,7 @@ void ElementoManager::fabricar(PaqueteEntrada &paquete) {
     }
 }
 
-void ElementoManager::fabricarUnidad(PaqueteEntrada &paquete) {
+void ElementoManager::fabricarUnidad(Paquete &paquete) {
 //    TODO mejor tengo unidades por un lado y elementos x el otro?
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
@@ -26,13 +27,13 @@ void ElementoManager::fabricarUnidad(PaqueteEntrada &paquete) {
                                 vistaManager.getVistaCaminar(tipo),
                                 vistaManager.getVistaDisparo(tipo),
                                 vistaManager.getVista(tipo),
-                                paquete.isEsMio(), paquete.getColor());
+                                paquete.esMio(), paquete.getColor());
 
     unidades[id] = unidad;
     printf("creo en %i,%i\n", paquete.getX(), paquete.getY());
 }
 
-void ElementoManager::fabricarElemento(PaqueteEntrada &paquete) {
+void ElementoManager::fabricarElemento(Paquete &paquete) {
     Elemento *elemento;
     int tipo = paquete.getTipo();
     int id = paquete.getId();
@@ -49,7 +50,7 @@ void ElementoManager::fabricarElemento(PaqueteEntrada &paquete) {
         elemento = new ElementoPuente(id, x, y, vistaManager.getVista(tipo));
     } else if (tipo == codigos.fuerte){
         elemento = new ElementoFuerte(id, x, y, vistaManager.getVista(tipo),
-                                      paquete.isEsMio(), color);
+                                      paquete.esMio(), color);
     }
 //        TODO faltarian los vehiculos y fabricas de robots
     elementos[id] = elemento;
@@ -82,7 +83,7 @@ void ElementoManager::elementosVivir(Camara &camara,Click &click,
     limpiarMuertos(muertos);
 }
 
-void ElementoManager::matar(PaqueteEntrada &paquete) {
+void ElementoManager::matar(Paquete &paquete) {
     Elemento* elemento;
     int id = paquete.getId();
     if (elementos.count(id)){
@@ -108,12 +109,12 @@ void ElementoManager::limpiarMuertos(std::vector<int> &muertos) {
     });
 }
 
-void ElementoManager::mover(PaqueteEntrada &paquete) {
+void ElementoManager::mover(Paquete &paquete) {
     ElementoUnidad* unidad = unidades.at(paquete.getId());
     unidad->mover(Punto());
 }
 
-void ElementoManager::disparar(PaqueteEntrada &paquete) {
+void ElementoManager::disparar(Paquete &paquete) {
 //    TODO terminar disparar
 //    ElementoUnidad* unidad = unidades.at(paquete.getId());
 

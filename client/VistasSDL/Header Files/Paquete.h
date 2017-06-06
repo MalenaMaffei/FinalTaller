@@ -1,7 +1,7 @@
 #ifndef TPFINAL_PAQUETE_H
 #define TPFINAL_PAQUETE_H
 #include <string>
-#include "Header Files/common_CodigosPaquete.h"
+#include "common_CodigosPaquete.h"
 class Paquete {
  public:
     void atacar(int idAgresor, int idAgredido);

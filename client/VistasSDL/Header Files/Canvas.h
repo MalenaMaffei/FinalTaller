@@ -4,15 +4,18 @@
 #include "common_Thread.h"
 #include "ColaPaquetes.h"
 #include "ElementoManager.h"
+#include "Hud.h"
+#include "GuiEdificio.h"
 
 class Canvas : public Thread{
  public:
   Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida);
-  void init();
   void close();
   void run();
   void gameLoop();
-  void manejarPaquetes();
+  void manejarPaquetes(ElementoManager &elementoManager,
+                         Hud &hud,
+                         GuiEdificio &guiEdificio);
 
  private:
   //The window we'll be rendering to

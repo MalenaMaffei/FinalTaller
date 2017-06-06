@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Header Files/PaqueteSender.h"
 PaqueteSender::PaqueteSender(const Socket &socket, ColaPaquetes &cola)
     : PaqueteDelivery(socket, cola) {}
@@ -9,7 +10,10 @@ void PaqueteSender::run() {
     while (! salir){
         if (!cola.isEmpty()){
             Paquete paquete = cola.desencolar();
-            socket.SendStrWLen(paquete.getMensaje());
+//            socket.SendStrWLen(paquete.getMensaje());
+            printf("el paquete mandado dice %s\n", paquete.getMensaje().c_str
+                ());
+
         }
     }
 }

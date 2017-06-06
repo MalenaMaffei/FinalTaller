@@ -137,8 +137,25 @@ int getTileType(int x, int y){
 }
 
 
-void Canvas::manejarPaquetes() {
-//    TODO aca voy a tener encolados todos los paquetes y voy sacando
+void Canvas::manejarPaquetes(ElementoManager &elementoManager,
+                             Hud &hud,
+                             GuiEdificio &guiEdificio) {
+//    TODO esto deberia ser otro thread? se me puede llegar a quedar
+// bloqueado aca?
+    CodigosPaquete codigos;
+    while (!colaEntrada.isEmpty()){
+        Paquete paquete = colaEntrada.desencolar();
+        if (paquete.getComando() == codigos.crear) {
+            elementoManager.crear(paquete);
+        } else if (paquete.getComando() == codigos.mover){
+            elementoManager.mover(paquete);
+        } else if (paquete.getComando() == codigos.disparar){
+            elementoManager.disparar(paquete);
+        } else if (paquete.getComando() == codigos.matar){
+            elementoManager.matar(paquete);
+        }
+//        TODO manejar infos para el hud y la gui edificio
+    }
 }
 
 
@@ -237,7 +254,7 @@ void Canvas::run(){
 //        PaqueteEntrada paquete(mensaje);
 //    printf("tipo: %i, x,y: %i,%i\n", paquete.getTipo(), paquete.getX(),
 //           paquete.getY());
-//        elementoManager.fabricar(paquete);
+//        elementoManager.crear(paquete);
 //    }
 
     VistaHud vistaHud(gRenderer);
@@ -256,13 +273,15 @@ void Canvas::run(){
                                 colaSalida);
     while( !quit ){
         capTimer.start();
+
+        manejarPaquetes(elementoManager, hud, guiEdificio);
+
         //Handle events on queue
         while( SDL_PollEvent( &e ) != 0 ){
             //User requests quit
             if( e.type == SDL_QUIT ){
                 quit = true;
             }
-//TODO VER COMO SEPARAR TECLADO EVENT VS MOUSE EVENTS aunque no se si hace falta
             //Handle input for the dot
             camara.handleEvent( e );
             mouse.setState(e.type, e, camara.getOffset());

@@ -7,7 +7,7 @@
 #include "common_CodigosPaquete.h"
 #include "../VistaManager.h"
 #include "Mouse.h"
-#include "common_PaqueteEntrada.h"
+#include "Paquete.h"
 #include <map>
 class PaqueteEntrada;
 
@@ -15,16 +15,16 @@ class ElementoManager {
  public:
   ElementoManager(VistaManager &vistaManager);
 
-  void fabricar(PaqueteEntrada &paquete);
-  void mover(PaqueteEntrada &paquete);
-  void matar(PaqueteEntrada &paquete);
-  void disparar(PaqueteEntrada &paquete);
+  void crear(Paquete &paquete);
+  void mover(Paquete &paquete);
+  void matar(Paquete &paquete);
+  void disparar(Paquete &paquete);
   void elementosVivir(Camara &camara,
                       Click &click,
                       SelectBox &selectBox);
  private:
-  void fabricarUnidad(PaqueteEntrada &paquete);
-  void fabricarElemento(PaqueteEntrada &paquete);
+  void fabricarUnidad(Paquete &paquete);
+  void fabricarElemento(Paquete &paquete);
   void limpiarMuertos(std::vector<int> &muertos);
 
   std::map<int, Elemento *> elementos;

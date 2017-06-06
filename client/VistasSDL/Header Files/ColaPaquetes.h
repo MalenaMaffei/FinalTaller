@@ -1,11 +1,11 @@
 #ifndef TPFINAL_MONITORPAQUETES_H
 #define TPFINAL_MONITORPAQUETES_H
-#include "../Paquete.h"
+#include "Paquete.h"
 #include <queue>
 #include <mutex>
 class ColaPaquetes {
  public:
-    void encolar(Paquete& paquete);
+    void encolar(Paquete paquete);
     Paquete desencolar();
     bool isEmpty();
  private:

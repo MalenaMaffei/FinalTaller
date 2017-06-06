@@ -51,7 +51,7 @@ Vista *VistaManager::getVista(int tipoElemento) {
 }
 
 void VistaManager::fabricarVistasDeElemento(int tipo) {
-    printf("fabricar vista de %i\n", tipo);
+    printf("crear vista de %i\n", tipo);
     if (!codigos.esUnidad(tipo)){
         Vista* vista;
         if (tipo == codigos.bandera){
