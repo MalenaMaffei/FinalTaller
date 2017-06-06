@@ -9,14 +9,14 @@ class ColectorDeAcciones;
 class Elemento {
  public:
 //  TODO refactorizar la necesidad de pasar width height
-  Elemento(int id, int x, int y, Vista *textura, bool esMio);
+  Elemento(std::string id, int x, int y, Vista *textura, bool esMio);
   virtual void mostrar(Camara &camera);
   virtual bool estaMuerto() const;
 //  TODO deberia ser virtual total pero por ahora lo dejo vacio porque no
 // tengo tiempo de ponerme hacer todos de un saque antes de probar
   virtual void matar();
   const Rect & getRect() const;
-  int getId() const;
+  std::string getId() const;
   void clicked(Click& click);
   bool esMio() const;
   virtual void guiRequest(ColectorDeAcciones& colector) const;
@@ -27,7 +27,7 @@ class Elemento {
   Rect rect;
 
   Vista* textura;
-  int id;
+  std::string id;
   int currentClip;
 };
 

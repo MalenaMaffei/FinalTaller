@@ -26,10 +26,10 @@ class ElementoManager {
  private:
   void fabricarUnidad(Paquete &paquete);
   void fabricarElemento(Paquete &paquete);
-  void limpiarMuertos(std::vector<int> &muertos);
+  void limpiarMuertos(std::vector<std::string> &muertos);
   int miColor;
-  std::map<int, Elemento *> elementos;
-  std::map<int, ElementoUnidad *> unidades;
+  std::map<std::string, Elemento *> elementos;
+  std::map<std::string, ElementoUnidad *> unidades;
 //  std::map<std::string, ElementoBala*> balas;
   CodigosPaquete codigos;
   VistaManager& vistaManager;
