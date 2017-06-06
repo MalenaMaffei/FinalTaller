@@ -3,27 +3,27 @@
 <MUNICIONES>
 	<MUNICION>
 		<!--BALA-->
-		<ID>0</ID>
+		<ID>17</ID>
 		<DANIO>2</DANIO>
 	</MUNICION>
 	<MUNICION>
 		<!--LANZALLAMAS-->
-		<ID>1</ID>
+		<ID>18</ID>
 		<DANIO>10</DANIO>
 	</MUNICION>
 	<MUNICION>
 		<!--ALTO CALIBRE-->
-		<ID>2</ID>
+		<ID>19</ID>
 		<DANIO>20</DANIO>
 	</MUNICION>
 	<MUNICION>
 		<!--LASER-->
-		<ID>3</ID>
+		<ID>20</ID>
 		<DANIO>10</DANIO>
 	</MUNICION>
 	<MUNICION>
 		<!--MISIL-->
-		<ID>4</ID>
+		<ID>21</ID>
 		<DANIO>25</DANIO>
 	</MUNICION>
 </MUNICIONES>

@@ -16,6 +16,7 @@
 #include <tinyxml2.h>
 #include <time.h>
 #include <iomanip>
+#include "server_constants.h"
 
 FabricaRobots* FabricaRobots::instancia = NULL;
 
@@ -46,7 +47,7 @@ FabricaRobots::FabricaRobots () {
 		
 		//Caracteristicas de robot
 		armamentos[tipo] = armamento;
-		frecuencias[tipo] = frecuencia;
+		frecuencias[tipo] = TICKS/frecuencia;
 		alcances[tipo] = alcance;
 		vidas[tipo] = resistencia;
 		velocidades[tipo] = velocidad;
@@ -74,5 +75,5 @@ Robot* FabricaRobots::getRobot(int tipo) {
 	 //TODO
 	 //Agregar velocidad base
 	return new Robot(vidas[tipo],1,1,frecuencias[tipo],
-					 alcances[tipo],armamentos[tipo]);
+					 alcances[tipo],armamentos[tipo], velocidades[tipo],tipo);
 }

@@ -57,5 +57,6 @@ Municion* FabricaMuniciones::getMunicion(int tipo) {
 	//TODO
 	//Por ahora la vida de la bala es igual al daño que hace, y cuando impacta,
 	//se resta su propia vida
-	return new Municion(municiones[tipo],0.1,0.1,tipo,municiones[tipo]);
+	//Velocidad 1 por ahora
+	return new Municion(municiones[tipo],0.1,0.1,tipo,municiones[tipo],1);
 }

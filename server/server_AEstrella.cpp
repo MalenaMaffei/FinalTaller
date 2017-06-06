@@ -71,7 +71,7 @@ std::map <std::array<int,2>,std::array<int,2>>
 			double distancia = modulo(adyacencia);
 			
 			double nuevoCosto = costos[actual] + 
-								distancia/mapa.obtenerVelocidad(adyacente);
+								distancia/mapa.obtenerFactorTerreno(adyacente);
 						
 			bool nuevoCostoEsMenor = false;
 			

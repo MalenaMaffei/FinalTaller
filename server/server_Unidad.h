@@ -20,20 +20,33 @@
 #include "server_Armamento.h"
 #include "server_Bloque.h"
 
+enum estado {
+    DISPARAR,
+    REPOSO
+};
+
 class Unidad : public Movible {
     public:
         Unidad(int vida, double ancho, double alto, int frecuenciaDisparo,
-                    int alcance, int tipoArmamento);
-        Municion* dispararA(Objeto& objetivo);
+                    int alcance, int tipoArmamento, int velocidad, int tipo);
+        void dispararA(std::string);
+        std::string puedeDisparar() override;
+        bool obtuvoBandera() override;
         void colisionar(Municion& municion) override;
         void colisionar(Objeto& objeto) override;
         void colisionar (Unidad& personaje) override;
         void colisionar(Bloque& bloque) override;
+        void colisionar(Edificio& edificio) override;
+        void colisionar (Bandera& bandera) override;
+        bool superaMaxDistancia();
         virtual ~Unidad();
     private:
         Armamento armamento;
+        bool bandera;
         int frecuenciaDisparo;
+        int tiempoADisparo;
         int alcance;
+        int estado;
 };
 
 #endif /* UNIDAD_H */

@@ -1,11 +1,14 @@
 #include "server_Objeto.h"
 #include <iostream>
 
-Objeto::Objeto() : vida(0), ancho(0), alto(0) {}
+Objeto::Objeto() : vida(0), ancho(0), alto(0), tipo(0) {}
 
-Objeto::Objeto(int vida, double ancho, double alto) : vida(vida),
+Objeto::Objeto(int vida, double ancho, double alto, int tipo) :	
+														vidaTotal(vida),
+														vida(vida),
 														ancho(ancho),
-														alto(alto){}
+														alto(alto),
+														tipo(tipo){}
 
 bool Objeto::colisiona(Objeto& objeto) { 
 	std::array<double,2> posicionOtro = objeto.posicion;
@@ -21,7 +24,7 @@ bool Objeto::colisiona(Objeto& objeto) {
 	double derecha = posicion[0] + ancho;
 	double arriba = posicion[1];
 	double abajo = posicion[1] + alto;
-
+	
 	if (abajo <= arribaOtro)
 		return false;
 	if (arriba >= abajoOtro)
@@ -52,6 +55,10 @@ bool Objeto::recibirDanio(int danio) {
 
 bool Objeto::estaVivo() {
 	return (vida>0);
+}
+
+int Objeto::getTipo() {
+	return tipo;
 }
 
 

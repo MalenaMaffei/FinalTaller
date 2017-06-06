@@ -16,15 +16,21 @@
 
 Unidad::Unidad (int vida, double ancho, double alto, 
 					  int frecuenciaDisparo, int alcance, 
-					  int tipoArmamento) : Movible(vida, ancho, alto),
+					  int tipoArmamento, int velocidad, int tipo) : 
+										Movible(vida, ancho, alto, velocidad, 
+											 tipo),
 										frecuenciaDisparo(frecuenciaDisparo),
 										alcance(alcance),
-										armamento(Armamento(tipoArmamento)) { }
+										armamento(Armamento(tipoArmamento)),
+										estado(REPOSO),
+										tiempoADisparo(0),
+										bandera(false) { }
 
-Municion* Unidad::dispararA(Objeto& objetivo) {
-	Municion* municion = armamento.dispararA(getPosicion (), objetivo);
-	municion->setEquipo (idEquipo);
-	return municion;
+void Unidad::dispararA(std::string objetivo) {
+//	Municion* municion = armamento.dispararA(getPosicion (), objetivo);
+//	municion->setEquipo (idEquipo);
+	this->objetivo = objetivo;
+	estado = DISPARAR;
 }
 
 Unidad::~Unidad () { }
@@ -49,4 +55,37 @@ void Unidad::colisionar(Unidad& personaje) {
 void Unidad::colisionar(Bloque& bloque) {
 	this->retroceder ();
 	destino = posicion;
+}
+
+void Unidad::colisionar(Edificio& edificio) {
+	this->retroceder ();
+	destino = posicion;
+}
+
+void Unidad::colisionar(Bandera& bandera) {
+	if (bandera.getEquipo() != idEquipo)
+		this->bandera = true;
+}
+
+
+std::string Unidad::puedeDisparar () {
+	if (estado == DISPARAR && tiempoADisparo == 0 && !objetivo.empty()) {
+		tiempoADisparo = frecuenciaDisparo;
+		return objetivo;
+	}
+	if (tiempoADisparo)
+		tiempoADisparo--;
+	return std::string();	//empty string
+}
+
+bool Unidad::superaMaxDistancia () {
+	return false;
+}
+
+bool Unidad::obtuvoBandera () {
+	if (bandera) {
+		bandera = false;
+		return true;
+	}
+	return false;
 }

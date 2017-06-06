@@ -14,8 +14,9 @@
 #include "server_Bloque.h"
 #include <iostream>
 
-Bloque::Bloque (int vida, double ancho, double alto) : Inmovible(vida, ancho, 
-																 alto) { }
+Bloque::Bloque (int vida, double ancho, double alto, int tipo) : 
+														Inmovible(vida, ancho, 
+																alto, tipo) { }
 
 void Bloque::colisionar(Objeto& objeto) {
 	objeto.colisionar(*this);
@@ -32,6 +33,10 @@ void Bloque::colisionar (Unidad& personaje) {
 void Bloque::colisionar(Bloque& bloque) {
 	//No hago nada si colisiona bloque con bloque
 }
+
+void Bloque::colisionar(Bandera& bandera) {
+	//Nada
+} 
 
 
 Bloque::~Bloque () { }

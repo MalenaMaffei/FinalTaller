@@ -5,32 +5,32 @@
  */
 
 /* 
- * File:   Bloque.h
+ * File:   Bandera.h
  * Author: usuario
  *
- * Created on 30 de mayo de 2017, 14:55
+ * Created on 4 de junio de 2017, 17:23
  */
 
-#ifndef BLOQUE_H
-#define BLOQUE_H
+#ifndef BANDERA_H
+#define BANDERA_H
 
 #include "server_Inmovible.h"
-#include "server_Unidad.h"
-#include "server_Municion.h"
-#include "server_Bandera.h"
 
-class Bloque : public Inmovible {
+class Bandera : public Inmovible {
 public:
-    Bloque(int vida, double ancho, double alto, int tipo);
+    Bandera(double ancho, double alto, int tipo);
+    bool estaVivo() override;
     void colisionar(Municion& municion) override;
     void colisionar(Objeto& objeto) override;
-    void colisionar (Unidad& personaje) override;
+    void colisionar(Unidad& personaje) override;
     void colisionar(Bloque& bloque) override; 
     void colisionar(Bandera& bandera) override; 
-    virtual ~Bloque();
+    void colisionar(Edificio& edificio) override; 
+    int getEquipo();
+    virtual ~Bandera();
 private:
-    
+    int idEquipo;
 };
 
-#endif /* BLOQUE_H */
+#endif /* BANDERA_H */
 

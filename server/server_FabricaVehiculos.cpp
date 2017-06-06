@@ -17,6 +17,7 @@
 #include <time.h>
 #include <iomanip>
 #include <iostream>
+#include "server_constants.h"
 
 FabricaVehiculos* FabricaVehiculos::instancia = NULL;
 
@@ -41,18 +42,19 @@ FabricaVehiculos::FabricaVehiculos () {
 		struct tm tm;
 		std::istringstream ss(tiempoStr);
 		ss >> std::get_time(&tm, "%M:%S");
-		std::time_t tiempo = mktime(&tm);
+		int secs = tm.tm_min*60 + tm.tm_sec;
 		int nivel = atoi(robot->FirstChildElement ("NIVEL")->GetText());
+
 		
 		//Caracteristicas de robot
 		armamentos[tipo] = armamento;
-		frecuencias[tipo] = frecuencia;
+		frecuencias[tipo] = TICKS/frecuencia;
 		alcances[tipo] = alcance;
 		vidas[tipo] = resistencia;
 		velocidades[tipo] = velocidad;
 		//Reqisitos de creación
 		cantidades[tipo] = cantidad;
-		tiempos[tipo] = tiempo;
+		tiempos[tipo] = secs*TICKS;
 		niveles[tipo] = nivel;
 	}
 }
@@ -70,5 +72,13 @@ Vehiculo* FabricaVehiculos::getVehiculo(int tipo) {
 	//TODO
 	//El conductor se agrega en la fabrica fisica
 	return new Vehiculo(vidas[tipo],1,1,frecuencias[tipo],
-					 alcances[tipo],armamentos[tipo]);
+					 alcances[tipo],armamentos[tipo], velocidades[tipo], tipo);
+}
+
+int FabricaVehiculos::getCantidad(int tipo) {
+	return cantidades[tipo];
+}
+
+int FabricaVehiculos::getTiempo(int tipo) {
+	return tiempos[tipo];
 }

@@ -10,7 +10,7 @@ class Robot : public Unidad {
     public:
         Robot(int vida, double ancho, double alto, 
                 int frecuenciaDisparo, int alcance, 
-                int tipoArmamento);
+                int tipoArmamento, int velocidad, int tipo);
         bool subirA(Vehiculo* vehiculo);
         virtual ~Robot();        
     private:

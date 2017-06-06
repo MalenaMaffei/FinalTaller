@@ -16,10 +16,12 @@
 #include "server_Robot.h"
 
 Vehiculo::Vehiculo(int vida, double ancho, double alto, 
-            int frecuenciaDisparo, int alcance, int tipoArmamento) : 
+					int frecuenciaDisparo, int alcance, int tipoArmamento, 
+					int velocidad, int tipo) : 
 								Unidad(vida, ancho, alto,
 									frecuenciaDisparo, alcance, 
-									tipoArmamento), conductor(NULL) { }
+									tipoArmamento, velocidad, tipo), 
+									conductor(NULL) { }
 
 bool Vehiculo::addConductor(Robot* conductor) { 
 	//No me puedo subir a vehiculo ocupado

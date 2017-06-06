@@ -21,6 +21,12 @@
 #include "server_Armamento.h"
 #include "server_Juego.h"
 #include <iostream>
+#include <condition_variable>
+#include <mutex>
+#include <queue>
+#include <pthread.h>
+#include <iostream>
+#include "common_Socket.h"
 
 using namespace std;
 
@@ -29,46 +35,34 @@ using namespace std;
  */
 int
 main (int argc, char** argv)
-{
+{	
+	std::queue<std::string>* colaDeRecibidos = new std::queue<std::string> ();
+	std::mutex m;
+	std::condition_variable cond;
+	
+	Socket aceptor;
+    Socket socket;
+	
+	aceptor.setServerMode("8080");
+	socket = aceptor.Accept ();
   
-/*	Mapa mapa("mapa.map");
 	
-	AEstrella generadorDeCamino(mapa);	
+	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, &socket);
 	
-	std::map <std::array<int,2>,std::array<int,2>> origenes;
+	juego->start();
 	
-	std::array<int,2> origen = {0,0};
-	std::array<int,2> destino = {15,15};
-	
-	origenes = generadorDeCamino.getRecorrido (origen,destino);
+	while (1) {
+		std::unique_lock<std::mutex> lk(m);
+		std::string mensaje = socket.ReceiveStrWLen ();
+		colaDeRecibidos->push (mensaje);
+		lk.unlock ();
+		cond.notify_all ();
+	}
 		
-	std::array<int,2> actual = destino;
-	
-	while (actual != origenes[actual]) {
-		std::cout<<actual[0]<<","<<actual[1]<<std::endl;
-		actual = origenes[actual];
-	}*/
-  
-/*	std::array<double,2> origen = {0.0, 0.0};
-	std::array<double,2> destino = {15.0, 15.0};
 
-	Movible movible(100);	
-	movible.setPosicion (destino);
+	juego->join ();
 	
-	Armamento armamento;
-	Municion municion = armamento.dispararA (origen, movible);
-	
-	std::array<double,2> pos = municion.getPosicion ();
-	std::cout<<pos[0]<<","<<pos[1]<<std::endl;
-	
-	while (!municion.mover ()) {
-		pos = municion.getPosicion ();
-		std::cout<<pos[0]<<","<<pos[1]<<std::endl;		
-	}*/
-	
-	Juego juego;
-	
-	juego.run ();
+	delete juego;
 	
 	return 0;
 }

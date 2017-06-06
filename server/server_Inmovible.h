@@ -18,7 +18,7 @@
 
 class Inmovible : public Objeto{
     public:
-        Inmovible(int vida, double ancho, double alto);
+        Inmovible(int vida, double ancho, double alto, int tipo);
         Inmovible(const Inmovible& orig);
         Inmovible& operator=(const Inmovible& orig);
         

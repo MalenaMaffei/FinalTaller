@@ -9,7 +9,7 @@ class Mapa {
     public:
         Mapa(const std::string& archivoMapa);
         virtual ~Mapa();
-        double obtenerVelocidad(std::array<int,2> posicion);
+        double obtenerFactorTerreno(std::array<int,2> posicion);
         int obtenerDimensionX();
         int obtenerDimensionY();
     private:

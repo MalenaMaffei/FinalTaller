@@ -21,6 +21,8 @@ class FabricaVehiculos {
     public:
         static FabricaVehiculos* getInstancia();
         Vehiculo* getVehiculo(int tipo);
+        int getCantidad(int tipo);
+        int getTiempo(int tipo);
     private:
         static FabricaVehiculos* instancia;
         FabricaVehiculos();
@@ -33,7 +35,7 @@ class FabricaVehiculos {
         std::map<int,int> velocidades;
         //Reqisitos de creación
         std::map<int,int> cantidades;
-        std::map<int,time_t> tiempos;
+        std::map<int,int> tiempos;
         std::map<int,int> niveles;
 };
 

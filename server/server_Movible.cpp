@@ -1,6 +1,7 @@
 #include "server_Movible.h"
-#include <math.h>
+#include <cmath>
 #include <iostream>
+#include "server_constants.h"
 
 #define DIFF 0.0000001
 
@@ -23,36 +24,51 @@ bool esPosicionIntermedia(std::array<double,2> a,
 	return true;
 }
 
-Movible::Movible(int vida, double ancho, double alto) :	Objeto(vida, 
+Movible::Movible(int vida, double ancho, double alto, int velocidad, int tipo) :	
+															Objeto(vida, 
 															ancho, 
-															alto) {}
+															alto, tipo),
+															velocidad(velocidad),
+															objetivo(""),
+															distancia(0){}
 
 Movible::Movible (int vida, double ancho, double alto, 
 					std::vector<std::array<int,2>> trayectoria,
-					std::array<double,2> destino, int idEquipo) : Objeto(vida, 
-																		ancho, 
-																		alto), 
-															trayectoria(trayectoria),
-															destino(destino),
-															idEquipo(idEquipo) { }
+					std::array<double,2> destino, 
+					int idEquipo, int velocidad, std::string objetivo,
+					double distancia, int tipo) : 
+										Objeto(vida, ancho, alto, tipo), 
+										trayectoria(trayectoria),
+										destino(destino),
+										idEquipo(idEquipo), 
+										velocidad(velocidad),
+										objetivo(objetivo), 
+										distancia(distancia) { }
 
 Movible::Movible(const Movible& orig) : Objeto(orig.vida, orig.ancho, 
-											   orig.alto), 
-										idEquipo(orig.idEquipo) { }
+											   orig.alto, orig.tipo), 
+										idEquipo(orig.idEquipo),
+										velocidad(orig.velocidad),
+										objetivo(orig.objetivo),
+										distancia(orig.distancia){ }
 
 Movible& Movible::operator=(const Movible& orig) {
 	vida = orig.vida;
 	ancho = orig.ancho;
 	alto = orig.alto;
 	idEquipo = orig.idEquipo;
+	velocidad = orig.velocidad;
+	objetivo = orig.objetivo;
+	distancia = orig.distancia;
+	tipo = orig.tipo;
 	return *this;
 }
 
 
 bool Movible::mover (std::array<double,2> destino) {
 	this->destino = destino;
+//	std::cout<<"Destino: "<<destino[0]<<","<<destino[1]<<std::endl;
 	return true;
-//	return mover();
 }
 
 void Movible::setPosicion(std::array<double,2> posicion) {
@@ -61,32 +77,41 @@ void Movible::setPosicion(std::array<double,2> posicion) {
 	destino = posicion;
 }
 
-bool Movible::mover () {
+bool Movible::mover (double factorTerreno) {
 	std::array<double, 2> direccion = { (destino[0] - posicion[0]),
 										(destino[1] - posicion[1])};	
 	
-	float modulo = sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);
+	double modulo = sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);
 	
-	if (abs(modulo) < DIFF)
-		return true;
+	//Las balas llegan hasta destino y se frenan
+	//TODO (continuar trayectoria)
 	
+	if (std::abs(modulo) < DIFF) {
+		posicion = destino;
+		return false;
+	}
+	
+	
+	int velFinal = std::max(int(velocidad*factorTerreno),1);
+		
 	direccion = {direccion[0]/modulo, direccion[1]/modulo};
-	
-	//Se mueve de a una unidad, debería haber un diferencial
-	//TODO
-	
-	posicionAnterior = posicion;
-	posicion = {posicion[0] + direccion[0], posicion[1] + direccion[1]};
 
-	std::array<double,2> siguiente = {posicion[0] + direccion[0], 
-										posicion[1] + direccion[1]};
+	posicionAnterior = posicion;
+	posicion = {posicion[0] + direccion[0]*velFinal*CYCLE_TIME, 
+				posicion[1] + direccion[1]*velFinal*CYCLE_TIME};
+
+
+	std::array<double,2> siguiente = {posicion[0] + direccion[0]*velFinal*CYCLE_TIME, 
+										posicion[1] + direccion[1]*velFinal*CYCLE_TIME};
 	
 	if (esPosicionIntermedia(posicion,siguiente,destino)) {
 		posicion = destino;
 		return true;
 	}
 	
-	return false;
+	distancia += velFinal*CYCLE_TIME;
+	
+	return true;
 }
 
 bool Movible::retroceder() {
@@ -101,6 +126,10 @@ int Movible::getEquipo() {
 void Movible::setEquipo(int idEquipo) {
 	this->idEquipo = idEquipo;
 	
+}
+
+void Movible::setObjetivo(std::string objetivo) {
+	this->objetivo = objetivo;
 }
 
 Movible::~Movible() { }

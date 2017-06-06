@@ -17,8 +17,8 @@
 #include <iostream>
 
 Municion::Municion (int vida, double ancho, double alto,
-					int tipo, int danio) : 	Movible(vida, ancho, alto),
-											tipo(tipo), 
+					int tipo, int danio, int velocidad) : 	
+											Movible(vida, ancho, alto, velocidad, tipo),
 											danio(danio) { 
 	
 }
@@ -28,9 +28,11 @@ Municion::Municion(const Municion& orig) : Movible(	orig.vida,
 													orig.alto,
 													orig.trayectoria,
 													orig.destino,
-													orig.idEquipo),
-											objetivo(orig.objetivo),
-											tipo(orig.tipo), 
+													orig.idEquipo,
+													orig.velocidad,
+													orig.objetivo,
+													orig.distancia, 
+													orig.tipo),
 											danio (orig.danio) { }
 
 Municion &Municion::operator=(Municion &orig) {
@@ -41,15 +43,20 @@ Municion &Municion::operator=(Municion &orig) {
 	vida = orig.vida;
 	tipo = orig.tipo;
 	danio = orig.danio;
+	velocidad = orig.velocidad;
+	distancia = orig.distancia;
+	tipo = orig.tipo;
 	return *this;
 }
 
 Municion::Municion(Municion &&orig) : Movible(orig.vida, orig.ancho, orig.alto,
 												orig.trayectoria,
 												orig.destino,
-												orig.idEquipo),							
-										objetivo(orig.objetivo),
-										tipo(orig.tipo),
+												orig.idEquipo,
+												orig.velocidad,							
+												orig.objetivo,
+												orig.distancia,
+												orig.tipo),
 										danio(orig.danio) {
 }
 
@@ -61,14 +68,13 @@ Municion &Municion::operator=(Municion &&orig) {
 	vida = orig.vida;
 	tipo = orig.tipo;
 	danio = orig.danio;
+	velocidad = orig.velocidad;
+	distancia = orig.distancia;
+	tipo = orig.tipo;
 	return *this;
 }
 
 Municion::~Municion () { }
-
-void Municion::setObjetivo(Objeto& objetivo) {
-	this->objetivo = &objetivo;
-}
 
 int Municion::getDanio () {
 	return danio;
@@ -87,6 +93,7 @@ void Municion::colisionar(Unidad& personaje) {
 	if (idEquipo == personaje.getEquipo ()) {
 		return;
 	}
+	std::cout<<"colisiona municion con personaje"<<std::endl;
 	destino = posicion;
 	vida -= danio;
 	//Cuando colisiona, se resta también su danio, así se elimina luego
@@ -98,6 +105,33 @@ void Municion::colisionar(Bloque& bloque) {
 	vida -= danio;
 }
 
+void Municion::colisionar(Edificio& edificio) {
+	//Si colisiona con un edificio se elimina la bala luego
+	destino = posicion;
+	vida -= danio;
+}
+
+void Municion::colisionar (Bandera& bandera) {
+	//No hago nada si bandera colisiona con municion
+}
+
 void Municion::colisionar(Objeto& objeto) {
 	objeto.colisionar (*this);
+}
+
+std::string Municion::puedeDisparar() {
+	return std::string();
+}
+
+bool Municion::obtuvoBandera() {
+	return false;
+}
+
+bool Municion::superaMaxDistancia () {
+	//Por ahora todas las municiones tienen alcance maximo 10
+	//TODO
+	if (distancia > 10.0) {
+		return true;
+	}
+	return false;
 }
