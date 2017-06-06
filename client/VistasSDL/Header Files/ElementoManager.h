@@ -13,7 +13,8 @@ class PaqueteEntrada;
 
 class ElementoManager {
  public:
-  ElementoManager(VistaManager &vistaManager);
+  ElementoManager(VistaManager &vistaManager,
+                    int MiColor);
 
   void crear(Paquete &paquete);
   void mover(Paquete &paquete);
@@ -26,7 +27,7 @@ class ElementoManager {
   void fabricarUnidad(Paquete &paquete);
   void fabricarElemento(Paquete &paquete);
   void limpiarMuertos(std::vector<int> &muertos);
-
+  int miColor;
   std::map<int, Elemento *> elementos;
   std::map<int, ElementoUnidad *> unidades;
   CodigosPaquete codigos;

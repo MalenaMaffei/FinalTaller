@@ -202,7 +202,7 @@ void Canvas::run(){
 
 
     VistaManager vistaManager(gRenderer);
-    ElementoManager elementoManager(vistaManager);
+    ElementoManager elementoManager(vistaManager, miColor);
 
 //    VistaRoca rocaTextura(gRenderer);
 //    std::vector<Elemento*> elementos;

@@ -26,6 +26,8 @@ class Canvas : public Thread{
 
   ColaPaquetes& colaEntrada;
   ColaPaquetes& colaSalida;
+//  TODO falta ver que llegue con el mapa el color, por ahora hardcodeado
+  int miColor = 0;
 };
 
 #endif //TPFINAL_CANVAS_H

@@ -95,21 +95,21 @@ int Paquete::getTipo() const {
     return stoi(mensaje.substr(12,codigos.tipo));
 }
 
-bool Paquete::esMio() const {
-    if (getComando() != codigos.crear){
-        throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
-            "tiene campo esMio.");
-    }
-
-    return stoi(mensaje.substr(14,codigos.delCliente));
-}
+//bool Paquete::esMio() const {
+//    if (getComando() != codigos.crear){
+//        throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
+//            "tiene campo esMio.");
+//    }
+//
+//    return stoi(mensaje.substr(14,codigos.delCliente));
+//}
 
 int Paquete::getColor() const {
     if (getComando() != codigos.crear){
         throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
             "tiene campo Color.");
     }
-    return stoi(mensaje.substr(15,codigos.color));
+    return stoi(mensaje.substr(14,codigos.color));
 }
 
 

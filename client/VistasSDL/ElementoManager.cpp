@@ -7,8 +7,9 @@
 #include "Header Files/Mouse.h"
 #include "Header Files/Paquete.h"
 
-ElementoManager::ElementoManager(VistaManager &vistaManager) :
-    vistaManager(vistaManager) {}
+ElementoManager::ElementoManager(VistaManager &vistaManager,
+                                 int MiColor) :
+    vistaManager(vistaManager), miColor(MiColor) {}
 
 void ElementoManager::crear(Paquete &paquete) {
     if (codigos.esUnidad(paquete.getTipo())) {
@@ -27,7 +28,8 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
                                 vistaManager.getVistaCaminar(tipo),
                                 vistaManager.getVistaDisparo(tipo),
                                 vistaManager.getVista(tipo),
-                                paquete.esMio(), paquete.getColor());
+                                paquete.getColor() == miColor,
+                                paquete.getColor());
 
     unidades[id] = unidad;
     printf("creo en %i,%i\n", paquete.getX(), paquete.getY());
@@ -50,7 +52,7 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
         elemento = new ElementoPuente(id, x, y, vistaManager.getVista(tipo));
     } else if (tipo == codigos.fuerte){
         elemento = new ElementoFuerte(id, x, y, vistaManager.getVista(tipo),
-                                      paquete.esMio(), color);
+                                      color == miColor, color);
     }
 //        TODO faltarian los vehiculos y fabricas de robots
     elementos[id] = elemento;
