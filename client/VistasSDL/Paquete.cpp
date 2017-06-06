@@ -19,7 +19,7 @@ std::string Paquete::crearCampo(int campo, int contenido) {
 }
 
 void Paquete::atacar(int idAgresor, int idAgredido) {
-    CodigosPaquete codigos;
+//    CodigosPaquete codigos;
     string agresor = crearCampo(codigos.id, idAgresor);
     string agredido = crearCampo(codigos.id, idAgredido);
     string comando = crearCampo(codigos.comando, codigos.disparar);
@@ -27,7 +27,7 @@ void Paquete::atacar(int idAgresor, int idAgredido) {
 }
 
 void Paquete::crear(int id, int x, int y, int tipo) {
-    CodigosPaquete codigos;
+//    CodigosPaquete codigos;
     string creadorStr = crearCampo(codigos.id, id);
     string xStr = crearCampo(codigos.x, x);
     string yStr = crearCampo(codigos.y, y);
@@ -38,14 +38,14 @@ void Paquete::crear(int id, int x, int y, int tipo) {
 }
 
 void Paquete::pedirInfo(int id) {
-    CodigosPaquete codigos;
+//    CodigosPaquete codigos;
     string idStr = crearCampo(codigos.id, id);
     string comando = crearCampo(codigos.comando, codigos.info);
     mensaje = comando + idStr;
 }
 
 void Paquete::mover(int id, int x, int y) {
-    CodigosPaquete codigos;
+//    CodigosPaquete codigos;
     string idStr = crearCampo(codigos.id, id);
     string xStr = crearCampo(codigos.x, x);
     string yStr = crearCampo(codigos.y, y);
@@ -56,9 +56,60 @@ void Paquete::mover(int id, int x, int y) {
 string & Paquete::getMensaje()  {
     return mensaje;
 }
+
 void Paquete::setMensaje(const string &mensaje) {
     Paquete::mensaje = mensaje;
 }
 
+int Paquete::getId() const {
+    return stoi(mensaje.substr(1,codigos.id));
+}
+
+int Paquete::getComando() const {
+    return stoi(mensaje.substr(0,codigos.comando));
+}
+
+int Paquete::getX() const {
+//    CodigosPaquete codigos;
+    if (getComando() == codigos.matar){
+        throw std::invalid_argument("Paquete matar no tiene campo X.");
+    }
+    return stoi(mensaje.substr(4,codigos.x));
+//    y = stoi(mensaje.substr(8,4));;
+}
+
+int Paquete::getY() const {
+//    CodigosPaquete codigos;
+    if (getComando() == codigos.matar){
+        throw std::invalid_argument("Paquete matar no tiene campo Y.");
+    }
+    return stoi(mensaje.substr(8,codigos.y));
+}
+
+int Paquete::getTipo() const {
+//    CodigosPaquete codigos;
+    if (getComando() != codigos.crear){
+        throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
+            "tiene campo Tipo.");
+    }
+    return stoi(mensaje.substr(12,codigos.tipo));
+}
+
+bool Paquete::esMio() const {
+    if (getComando() != codigos.crear){
+        throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
+            "tiene campo esMio.");
+    }
+
+    return stoi(mensaje.substr(14,codigos.delCliente));
+}
+
+int Paquete::getColor() const {
+    if (getComando() != codigos.crear){
+        throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
+            "tiene campo Color.");
+    }
+    return stoi(mensaje.substr(15,codigos.color));
+}
 
 
