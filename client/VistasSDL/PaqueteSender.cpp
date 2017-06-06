@@ -13,7 +13,6 @@ void PaqueteSender::run() {
 //            socket.SendStrWLen(paquete.getMensaje());
             printf("el paquete mandado dice %s\n", paquete.getMensaje().c_str
                 ());
-
         }
     }
 }

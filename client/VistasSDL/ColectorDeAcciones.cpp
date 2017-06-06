@@ -64,7 +64,6 @@ void ColectorDeAcciones::crearAcciones() {
             paquete.atacar(unidad.getId(),clickeado->getId());
             colaSalida.encolar(paquete);
 //            printf("el paquete dice %s\n", paquete.getMensaje().c_str());
-
         });
         selectBox.vaciarSeleccionadas();
     }

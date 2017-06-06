@@ -6,7 +6,7 @@
 #include "Header Files/ElementoFuerte.h"
 #include "Header Files/Mouse.h"
 #include "Header Files/Paquete.h"
-
+#include <vector>
 ElementoManager::ElementoManager(VistaManager &vistaManager,
                                  int MiColor) :
     vistaManager(vistaManager), miColor(MiColor) {}
@@ -113,11 +113,10 @@ void ElementoManager::limpiarMuertos(std::vector<int> &muertos) {
 
 void ElementoManager::mover(Paquete &paquete) {
     ElementoUnidad* unidad = unidades.at(paquete.getId());
-    unidad->mover(Punto());
+    unidad->mover(Punto(paquete.getX(), paquete.getY()));
 }
 
 void ElementoManager::disparar(Paquete &paquete) {
 //    TODO terminar disparar
 //    ElementoUnidad* unidad = unidades.at(paquete.getId());
-
 }

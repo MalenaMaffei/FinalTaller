@@ -105,12 +105,10 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 }
 
 
-void Canvas::close()
-{
-
+void Canvas::close() {
     //Destroy window
-    SDL_DestroyRenderer( gRenderer );
-    SDL_DestroyWindow( gWindow );
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
     gWindow = NULL;
     gRenderer = NULL;
 
@@ -125,13 +123,13 @@ void Canvas::close()
 }
 
 int getTileType(int x, int y){
-    if(x < 50){
+    if (x < 50){
         return 0;
-    } else if(x < 100) {
+    } else if (x < 100) {
         return 1;
-    } else if(x < 150){
+    } else if (x < 150){
         return 2;
-    } else if(x < 200){
+    } else if (x < 200){
         return 3;
     }
 }
@@ -160,8 +158,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 
 void Canvas::run(){
-
-
     //Main loop flag
     bool quit = false;
 
@@ -193,7 +189,7 @@ void Canvas::run(){
     std::vector<Tile> tiles;
     for (int x = 0; x < LEVEL_WIDTH/TILE_WIDTH ; ++x) {
         for (int y = 0; y < LEVEL_HEIGHT/TILE_HEIGHT; ++y) {
-            Tile tile (x*TILE_WIDTH, y*TILE_HEIGHT, getTileType(x,y),
+            Tile tile(x*TILE_WIDTH, y*TILE_HEIGHT, getTileType(x,y),
                        &tilesTexture);
             tiles.push_back(tile);
         }
@@ -260,19 +256,19 @@ void Canvas::run(){
                                 hud,
                                 guiEdificio,
                                 colaSalida);
-    while( !quit ){
+    while (!quit){
         capTimer.start();
 
         manejarPaquetes(elementoManager, hud, guiEdificio);
 
         //Handle events on queue
-        while( SDL_PollEvent( &e ) != 0 ){
+        while (SDL_PollEvent( &e ) != 0){
             //User requests quit
-            if( e.type == SDL_QUIT ){
+            if (e.type == SDL_QUIT){
                 quit = true;
             }
             //Handle input for the dot
-            camara.handleEvent( e );
+            camara.handleEvent(e);
             mouse.setState(e.type, e, camara.getOffset());
         }
 
@@ -286,8 +282,8 @@ void Canvas::run(){
         stepTimer.start();
 
         //Clear screen
-        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        SDL_RenderClear( gRenderer );
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
 
 
 
@@ -334,7 +330,7 @@ void Canvas::run(){
         ++pos_robot;
         ++pos_tanque;
         //Update screen
-        SDL_RenderPresent( gRenderer );
+        SDL_RenderPresent(gRenderer);
         colector.crearAcciones();
         mouse.resetState();
 
@@ -351,7 +347,6 @@ void Canvas::run(){
 
     //Free resources and close SDL
     close();
-
 }
 
 void Canvas::gameLoop() {

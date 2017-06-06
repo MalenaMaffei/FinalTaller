@@ -8,8 +8,8 @@
 #include "../VistaManager.h"
 #include "Mouse.h"
 #include "Paquete.h"
+#include "ElementoBala.h"
 #include <map>
-class PaqueteEntrada;
 
 class ElementoManager {
  public:
@@ -30,6 +30,7 @@ class ElementoManager {
   int miColor;
   std::map<int, Elemento *> elementos;
   std::map<int, ElementoUnidad *> unidades;
+//  std::map<std::string, ElementoBala*> balas;
   CodigosPaquete codigos;
   VistaManager& vistaManager;
 };

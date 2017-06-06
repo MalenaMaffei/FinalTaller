@@ -15,7 +15,6 @@ class Paquete {
     int getX() const;
     int getY() const;
     int getTipo() const;
-//    bool esMio() const;
     int getColor() const;
 
  protected:

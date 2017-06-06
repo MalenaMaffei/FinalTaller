@@ -19,6 +19,7 @@ const char tankPath[] = "../client/VistasSDL/imgs/tank.png";
 const char tilePath[] = "../client/VistasSDL/imgs/ciudadTiles.png";
 const char rocaPath[] = "../client/VistasSDL/imgs/Rocas/roca_roca.png";
 const char hieloPath[] = "../client/VistasSDL/imgs/Rocas/roca_hielo.png";
+const char balaPath[] = "../client/VistasSDL/imgs/bala.png";
 const char fuertePath[] = "../client/VistasSDL/imgs/Edificios/fort.png";
 const char fabricaVehiculosPath[] = "../client/VistasSDL/imgs/Edificios/vehicle.png";
 const char fabricaRobotsPath[] = "../client/VistasSDL/imgs/Edificios/robot.png";
