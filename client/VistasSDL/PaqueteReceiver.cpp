@@ -30,7 +30,7 @@ void PaqueteReceiver::run() {
         cola.encolar(p6);
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-        Paquete m1, m2, m3, m4, m5, m6;
+        Paquete m1, m2, m3, m4, m5, m6, m3bis;
         m1.setMensaje("200100050001");
         m2.setMensaje("200100100001");
         m3.setMensaje("200100100006");
@@ -39,12 +39,16 @@ void PaqueteReceiver::run() {
         m5.setMensaje("201000500050");
         m6.setMensaje("201000550055");
 
+        m3bis.setMensaje("200100100011");
+
 
         cola.encolar(m1);
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         cola.encolar(m2);
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         cola.encolar(m3);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        cola.encolar(m3bis);
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         cola.encolar(m4);
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
