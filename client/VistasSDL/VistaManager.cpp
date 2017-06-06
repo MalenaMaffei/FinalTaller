@@ -46,8 +46,8 @@ VistaDireccionada *VistaManager::getVistaCaminar(int tipoUnidad) {
 Vista *VistaManager::getVista(int tipoElemento) {
     if (!vistas.count(tipoElemento)){
         fabricarVistasDeElemento(tipoElemento);
-        return vistas.at(tipoElemento);
     }
+    return vistas.at(tipoElemento);
 }
 
 void VistaManager::fabricarVistasDeElemento(int tipo) {

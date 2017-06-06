@@ -204,58 +204,47 @@ void Canvas::run(){
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager);
 
-    VistaRoca rocaTextura(gRenderer);
-    std::vector<Elemento*> elementos;
-    for (int j = 0; j <640; j+=32) {
-        Elemento* roca = new ElementoRoca(j, j+10, j+500,&rocaTextura);
-        elementos.push_back(roca);
-    }
-
-    VistaFuerte fuerteTextura(gRenderer);
-    Elemento* fuerte1 =
-        new ElementoFuerte(1, 100, 100, &fuerteTextura, true, 0);
-    elementos.push_back(fuerte1);
-    Elemento* fuerte2 =
-        new ElementoFuerte(1, 900, 900, &fuerteTextura, false, 0);
-    elementos.push_back(fuerte2);
-
-    VistaBandera banderaTextura(gRenderer);
-    for (int j = 0; j <640; j+=32) {
-        Elemento* bandera = new ElementoBandera(j, j + 60, j + 500,
-                                                &banderaTextura, 0);
-        elementos.push_back(bandera);
-    }
-
-    VistaPuente puenteTextura(gRenderer);
-    for (int j = 0; j <640; j+=64) {
-        Elemento* puente = new ElementoPuente(j, j+200, j+800,
-                                              &puenteTextura, j%3==0);
-        elementos.push_back(puente);
-    }
-
-    VistaRobotCaminar robotCaminarTextura(gRenderer);
-    VistaPyroDisparar pyroDispararTextura(gRenderer);
-//   VistaMuerteRobot robotMorirTextura(gRenderer);
-    VistaRobotMorir robotMorirTextura(gRenderer);
-    std::vector<ElementoUnidad*> unidades;
-    for (int i = 40; i < 40*2; i+=45) {
-        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
-                                             &pyroDispararTextura,
-                                             &robotMorirTextura, i%2==0));
-    }
-
-//    for (int i = 40; i <= 40*2; i+=40) {
-//        std::string id = "0" + std::to_string(i);
-//        std::string posX = "00"+std::to_string(i);
-//        std::string posY = "0020";
-//        std::string mio = std::to_string(i%2==0);
-//        std::string tipoColor = "91";
-//        std::string mensaje = id+"0"+posX+posY+mio+tipoColor;
-//        PaqueteEntrada paquete(mensaje);
-//    printf("tipo: %i, x,y: %i,%i\n", paquete.getTipo(), paquete.getX(),
-//           paquete.getY());
-//        elementoManager.crear(paquete);
+//    VistaRoca rocaTextura(gRenderer);
+//    std::vector<Elemento*> elementos;
+//    for (int j = 0; j <640; j+=32) {
+//        Elemento* roca = new ElementoRoca(j, j+10, j+500,&rocaTextura);
+//        elementos.push_back(roca);
 //    }
+//
+//    VistaFuerte fuerteTextura(gRenderer);
+//    Elemento* fuerte1 =
+//        new ElementoFuerte(1, 100, 100, &fuerteTextura, true, 0);
+//    elementos.push_back(fuerte1);
+//    Elemento* fuerte2 =
+//        new ElementoFuerte(1, 900, 900, &fuerteTextura, false, 0);
+//    elementos.push_back(fuerte2);
+//
+//    VistaBandera banderaTextura(gRenderer);
+//    for (int j = 0; j <640; j+=32) {
+//        Elemento* bandera = new ElementoBandera(j, j + 60, j + 500,
+//                                                &banderaTextura, 0);
+//        elementos.push_back(bandera);
+//    }
+//
+//    VistaPuente puenteTextura(gRenderer);
+//    for (int j = 0; j <640; j+=64) {
+//        Elemento* puente = new ElementoPuente(j, j+200, j+800,
+//                                              &puenteTextura, j%3==0);
+//        elementos.push_back(puente);
+//    }
+//
+//    VistaRobotCaminar robotCaminarTextura(gRenderer);
+//    VistaPyroDisparar pyroDispararTextura(gRenderer);
+////   VistaMuerteRobot robotMorirTextura(gRenderer);
+//    VistaRobotMorir robotMorirTextura(gRenderer);
+//    std::vector<ElementoUnidad*> unidades;
+//    for (int i = 40; i < 40*2; i+=45) {
+//        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
+//                                             &pyroDispararTextura,
+//                                             &robotMorirTextura, i%2==0));
+//    }
+
+
 
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);
@@ -313,19 +302,19 @@ void Canvas::run(){
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
-        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
-        elemento){
-          elemento->mostrar(camara);
-          elemento->clicked(click);
-        });
-//
-//
-        std::for_each(unidades.begin(), unidades.end(), [&]
-            (ElementoUnidad* unidad){
-          unidad->mostrar(camara);
-          unidad->chequearSeleccion(selectBox);
-          unidad->clicked(click);
-        });
+//        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
+//        elemento){
+//          elemento->mostrar(camara);
+//          elemento->clicked(click);
+//        });
+////
+////
+//        std::for_each(unidades.begin(), unidades.end(), [&]
+//            (ElementoUnidad* unidad){
+//          unidad->mostrar(camara);
+//          unidad->chequearSeleccion(selectBox);
+//          unidad->clicked(click);
+//        });
 
 
 
@@ -334,11 +323,11 @@ void Canvas::run(){
         guiEdificio.mostrar(camara.getOffset());
 
 
-        std::for_each(unidades.begin(), unidades.end(), [&]
-            (ElementoUnidad* unidad){
-          unidad->chequearSeleccion(selectBox);
-          unidad->clicked(click);
-        });
+//        std::for_each(unidades.begin(), unidades.end(), [&]
+//            (ElementoUnidad* unidad){
+//          unidad->chequearSeleccion(selectBox);
+//          unidad->clicked(click);
+//        });
 
 
 
