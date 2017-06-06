@@ -8,7 +8,8 @@ void PaqueteReceiver::run() {
     while (!salir){
         string mensaje;
         mensaje = socket.ReceiveStrWLen();
-        Paquete paquete(mensaje);
+        Paquete paquete;
+        paquete.setMensaje(mensaje);
         cola.encolar(paquete);
     }
 }

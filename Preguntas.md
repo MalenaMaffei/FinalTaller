@@ -1,8 +1,8 @@
 ## Martes 6/06 ##
 #### Cliente ####
 1. Creo todas las vistas de una o solo las que voy necesitando? op 1 es mas facil, op2 se vuelve un poco mas complejo, necesitaria comunicar fabrica de elementos con la de vistas.
-
-
+2. Elemento Manager es a la vez una fabrica y un manager de los paquetes... deberia hacer una fabrica tambien que la use eventoManager? Casi idem con vistaManager, pero en este caso sin la fabrica me quedaria solo un contenedor de vistas.
+3. Qué hago con el hud? siempre esta ahi mostrando algo.. pido info de lo que sea que este ahi todos los turnos?
 
 ## Martes 30/05 ##
 #### Male (Cliente) ####

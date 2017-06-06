@@ -1,13 +1,17 @@
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/GuiEdificio.h"
+#include "Paquete.h"
 #include <algorithm>
 #include <vector>
+
 ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
                                        Click &click,
                                        Hud &hud,
-                                       GuiEdificio &guiEdificio)
-    : selectBox(selectBox), click(click), guiEdificio(guiEdificio), hud(hud) {}
+                                       GuiEdificio &guiEdificio,
+                                       ColaPaquetes &salida)
+    : selectBox(selectBox), click(click), guiEdificio(guiEdificio), hud(hud),
+      colaSalida(salida){}
 
 void ColectorDeAcciones::crearAcciones() {
     if (!click.huboClick()){
@@ -21,7 +25,7 @@ void ColectorDeAcciones::crearAcciones() {
     }
 //    TODO hacer lo mismo con clicks sobre el hud
 
-
+    Paquete paquete;
 
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
@@ -30,6 +34,10 @@ void ColectorDeAcciones::crearAcciones() {
                                                                   unidad){
               printf("Unidad id: %i se mueve a: %i,%i\n", unidad.getId(),
                      click.getPoint().x, click.getPoint().y);
+              paquete.mover(unidad.getId(), click.getPoint().x, click
+                  .getPoint().y);
+              printf("el paquete dice %s\n", paquete.getMensaje().c_str());
+              colaSalida.encolar(paquete);
             });
             selectBox.vaciarSeleccionadas();
         }
@@ -43,6 +51,9 @@ void ColectorDeAcciones::crearAcciones() {
 
 //        TODO obviamente le voy a tener que pasar mas info o no, no se
         printf("request info MIO de id: %i\n", clickeado->getId());
+        paquete.pedirInfo(clickeado->getId());
+        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
+        colaSalida.encolar(paquete);
         clickeado->guiRequest(*this);
     } else if (selectBox.haySeleccion()){
         std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
@@ -50,6 +61,10 @@ void ColectorDeAcciones::crearAcciones() {
                                                               unidad){
             printf("Unidad id: %i ataca a Elemento id: %i\n", unidad.getId(),
                    clickeado->getId());
+            paquete.atacar(unidad.getId(),clickeado->getId());
+            colaSalida.encolar(paquete);
+            printf("el paquete dice %s\n", paquete.getMensaje().c_str());
+
         });
         selectBox.vaciarSeleccionadas();
     }

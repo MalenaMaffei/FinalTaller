@@ -9,7 +9,7 @@
 ElementoManager::ElementoManager(VistaManager &vistaManager) :
     vistaManager(vistaManager) {}
 
-void ElementoManager::fabricar(Paquete &paquete) {
+void ElementoManager::fabricar(PaqueteEntrada &paquete) {
     if (codigos.esUnidad(paquete.getTipo())) {
         fabricarUnidad(paquete);
     } else {
@@ -17,7 +17,7 @@ void ElementoManager::fabricar(Paquete &paquete) {
     }
 }
 
-void ElementoManager::fabricarUnidad(Paquete &paquete) {
+void ElementoManager::fabricarUnidad(PaqueteEntrada &paquete) {
 //    TODO mejor tengo unidades por un lado y elementos x el otro?
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
@@ -32,7 +32,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
     printf("creo en %i,%i\n", paquete.getX(), paquete.getY());
 }
 
-void ElementoManager::fabricarElemento(Paquete &paquete) {
+void ElementoManager::fabricarElemento(PaqueteEntrada &paquete) {
     Elemento *elemento;
     int tipo = paquete.getTipo();
     int id = paquete.getId();
@@ -57,16 +57,64 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
 
 void ElementoManager::elementosVivir(Camara &camara,Click &click,
                                      SelectBox &selectBox) {
+    std::vector<int> muertos;
     for (const auto& kv : elementos) {
         Elemento* elemento = elementos.at(kv.first);
-        elemento->mostrar(camara);
-        elemento->clicked(click);
+        if (elemento->estaMuerto()){
+            muertos.push_back(elemento->getId());
+        } else {
+            elemento->mostrar(camara);
+            elemento->clicked(click);
+        }
     }
 
     for (const auto& kv : unidades) {
         ElementoUnidad* unidad = unidades.at(kv.first);
-        unidad->mostrar(camara);
-        unidad->chequearSeleccion(selectBox);
-        unidad->clicked(click);
+        if (unidad->estaMuerto()){
+            muertos.push_back(unidad->getId());
+        } else {
+            unidad->mostrar(camara);
+            unidad->chequearSeleccion(selectBox);
+            unidad->clicked(click);
+        }
     }
+
+    limpiarMuertos(muertos);
+}
+
+void ElementoManager::matar(PaqueteEntrada &paquete) {
+    Elemento* elemento;
+    int id = paquete.getId();
+    if (elementos.count(id)){
+        elemento = elementos.at(id);
+    } else if (unidades.count(id)){
+        elemento = unidades.at(id);
+    }
+    elemento->matar();
+}
+
+void ElementoManager::limpiarMuertos(std::vector<int> &muertos) {
+    std::for_each(muertos.begin(), muertos.end(), [&](int id){
+        Elemento* elemento;
+        if (elementos.count(id)){
+            elemento = elementos.at(id);
+            elementos.erase(id);
+            delete(elemento);
+        }  else if (unidades.count(id)){
+            elemento = unidades.at(id);
+            unidades.erase(id);
+            delete(elemento);
+        }
+    });
+}
+
+void ElementoManager::mover(PaqueteEntrada &paquete) {
+    ElementoUnidad* unidad = unidades.at(paquete.getId());
+    unidad->mover(Punto());
+}
+
+void ElementoManager::disparar(PaqueteEntrada &paquete) {
+//    TODO terminar disparar
+//    ElementoUnidad* unidad = unidades.at(paquete.getId());
+
 }

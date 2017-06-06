@@ -4,22 +4,28 @@
 #include "Vista.h"
 #include "VistaDireccionada.h"
 #include "ElementoUnidad.h"
-#include "common_Paquete.h"
 #include "common_CodigosPaquete.h"
 #include "../VistaManager.h"
 #include "Mouse.h"
+#include "common_PaqueteEntrada.h"
 #include <map>
+class PaqueteEntrada;
+
 class ElementoManager {
  public:
   ElementoManager(VistaManager &vistaManager);
 
-  void fabricar(Paquete &paquete);
+  void fabricar(PaqueteEntrada &paquete);
+  void mover(PaqueteEntrada &paquete);
+  void matar(PaqueteEntrada &paquete);
+  void disparar(PaqueteEntrada &paquete);
   void elementosVivir(Camara &camara,
                       Click &click,
                       SelectBox &selectBox);
  private:
-  void fabricarUnidad(Paquete &paquete);
-  void fabricarElemento(Paquete &paquete);
+  void fabricarUnidad(PaqueteEntrada &paquete);
+  void fabricarElemento(PaqueteEntrada &paquete);
+  void limpiarMuertos(std::vector<int> &muertos);
 
   std::map<int, Elemento *> elementos;
   std::map<int, ElementoUnidad *> unidades;

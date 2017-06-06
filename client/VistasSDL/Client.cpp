@@ -9,6 +9,4 @@ int main (){
 
     canvas.start();
     canvas.join();
-
-
 }

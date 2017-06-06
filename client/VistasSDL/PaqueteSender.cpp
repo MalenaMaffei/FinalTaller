@@ -9,7 +9,7 @@ void PaqueteSender::run() {
     while (! salir){
         if (!cola.isEmpty()){
             Paquete paquete = cola.desencolar();
-//            socket.SendStrWLen(paquete.getString());
+            socket.SendStrWLen(paquete.getMensaje());
         }
     }
 }

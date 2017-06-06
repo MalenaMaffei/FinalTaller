@@ -18,3 +18,9 @@ bool Rect::hayColision(Rect otro) {
 Punto Rect::getPunto() {
     return Punto(x, y);
 }
+
+void Rect::setPunto(Punto p) {
+    x = p.x;
+    y = p.y;
+}
+

@@ -29,7 +29,11 @@
 #include "Header Files/Rect.h"
 #include "VistaManager.h"
 #include "Header Files/ElementoManager.h"
-
+#include "Header Files/common_PaqueteEntrada.h"
+#include "Header Files/ElementoRobot.h"
+#include "Header Files/VistaPyroDisparar.h"
+#include "Header Files/VistaRobotCaminar.h"
+#include "Header Files/VistaRobotMorir.h"
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
@@ -212,19 +216,29 @@ void Canvas::run(){
         elementos.push_back(puente);
     }
 
-
-    for (int i = 40; i <= 40*2; i+=40) {
-        std::string id = "0" + std::to_string(i);
-        std::string posX = "00"+std::to_string(i);
-        std::string posY = "0020";
-        std::string mio = std::to_string(i%2==0);
-        std::string tipoColor = "91";
-        std::string mensaje = id+"0"+posX+posY+mio+tipoColor;
-        Paquete paquete(mensaje);
-    printf("tipo: %i, x,y: %i,%i\n", paquete.getTipo(), paquete.getX(),
-           paquete.getY());
-        elementoManager.fabricar(paquete);
+    VistaRobotCaminar robotCaminarTextura(gRenderer);
+    VistaPyroDisparar pyroDispararTextura(gRenderer);
+//   VistaMuerteRobot robotMorirTextura(gRenderer);
+    VistaRobotMorir robotMorirTextura(gRenderer);
+    std::vector<ElementoUnidad*> unidades;
+    for (int i = 40; i < 40*2; i+=45) {
+        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
+                                             &pyroDispararTextura,
+                                             &robotMorirTextura, i%2==0));
     }
+
+//    for (int i = 40; i <= 40*2; i+=40) {
+//        std::string id = "0" + std::to_string(i);
+//        std::string posX = "00"+std::to_string(i);
+//        std::string posY = "0020";
+//        std::string mio = std::to_string(i%2==0);
+//        std::string tipoColor = "91";
+//        std::string mensaje = id+"0"+posX+posY+mio+tipoColor;
+//        PaqueteEntrada paquete(mensaje);
+//    printf("tipo: %i, x,y: %i,%i\n", paquete.getTipo(), paquete.getX(),
+//           paquete.getY());
+//        elementoManager.fabricar(paquete);
+//    }
 
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);
@@ -238,7 +252,8 @@ void Canvas::run(){
     ColectorDeAcciones colector(selectBox,
                                 click,
                                 hud,
-                                guiEdificio);
+                                guiEdificio,
+                                colaSalida);
     while( !quit ){
         capTimer.start();
         //Handle events on queue
@@ -279,19 +294,19 @@ void Canvas::run(){
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
-//        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
-//        elemento){
-//          elemento->mostrar(camara);
-//          elemento->clicked(click);
-//        });
+        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
+        elemento){
+          elemento->mostrar(camara);
+          elemento->clicked(click);
+        });
 //
 //
-//        std::for_each(unidades.begin(), unidades.end(), [&]
-//            (ElementoUnidad* unidad){
-//          unidad->mostrar(camara);
-//          unidad->chequearSeleccion(selectBox);
-//          unidad->clicked(click);
-//        });
+        std::for_each(unidades.begin(), unidades.end(), [&]
+            (ElementoUnidad* unidad){
+          unidad->mostrar(camara);
+          unidad->chequearSeleccion(selectBox);
+          unidad->clicked(click);
+        });
 
 
 
@@ -300,11 +315,11 @@ void Canvas::run(){
         guiEdificio.mostrar(camara.getOffset());
 
 
-//        std::for_each(unidades.begin(), unidades.end(), [&]
-//            (ElementoUnidad* unidad){
-//          unidad->chequearSeleccion(selectBox);
-//          unidad->clicked(click);
-//        });
+        std::for_each(unidades.begin(), unidades.end(), [&]
+            (ElementoUnidad* unidad){
+          unidad->chequearSeleccion(selectBox);
+          unidad->clicked(click);
+        });
 
 
 

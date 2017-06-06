@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <vector>
 void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
-//    TODO no dibujar cuando no hay colision, voy a tener que pasar la camara
+//    TODO BUG!!!! Se seleccionan unidades dos veces
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
 
 //    SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
@@ -31,11 +31,6 @@ void SelectBox::setRect(const Rect &rect) {
 }
 
 bool SelectBox::checkCollision(Rect b) {
-//    SDL_bool res = SDL_HasIntersection(&rect, &b);
-//    if (res == SDL_TRUE){
-//        return true;
-//    }
-//    return false;
     return rect.hayColision(b);
 }
 

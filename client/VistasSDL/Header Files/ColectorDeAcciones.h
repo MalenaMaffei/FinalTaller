@@ -5,12 +5,14 @@
 #include "Click.h"
 #include "Hud.h"
 #include "GuiEdificio.h"
+#include "ColaPaquetes.h"
 class ColectorDeAcciones {
  public:
   ColectorDeAcciones(SelectBox &selectBox,
                        Click &click,
                        Hud &hud,
-                       GuiEdificio &guiEdificio);
+                       GuiEdificio &guiEdificio,
+                       ColaPaquetes &salida);
 
   void crearAcciones();
   void showHud();
@@ -21,6 +23,8 @@ class ColectorDeAcciones {
   Click &click;
   GuiEdificio &guiEdificio;
   Hud &hud;
+//  ColaPaquetes& entrada;
+  ColaPaquetes& colaSalida;
 };
 
 #endif //TPFINAL_COLECTORDEACCIONES_H

@@ -17,10 +17,11 @@ class ElementoUnidad : public ElementoColoreado{
                    Vista *vistaMuerte,
                    bool esMio,
                    int color);
-  virtual void mover(int newX, int newY);
+  virtual void mover(Punto nuevo);
   void mostrar(Camara &camera);
   void chequearSeleccion(SelectBox &selectBox);
   void matar();
+  void disparar();
   void seleccionar();
   void deseleccionar();
   void guiRequest(ColectorDeAcciones& colector) const;
@@ -30,9 +31,26 @@ class ElementoUnidad : public ElementoColoreado{
   //  TODO seguramente tenga que usar un enum aca pero estoy probando rapido el
 // concepto
   int direccion;
-  bool enMovimiento;
-  bool disparando;
-  bool muriendo;
+//  bool enMovimiento;
+//  bool disparando;
+//  bool muriendo;
+  int estado;
+  enum {
+    enMovimiento = 0,
+    disparando = 1,
+    muriendo = 2,
+    haciendoNada = 3
+  };
+  enum {
+    norte = 2,
+    noroeste = 3,
+    oeste = 4,
+    suroeste = 5,
+    sur = 6,
+    sureste = 7,
+    este = 0,
+    noreste = 1
+  };
   VistaDireccionada* vistaMovimiento;
   VistaDireccionada* vistaDisparar;
   Vista* vistaMuerte;

@@ -1,6 +1,6 @@
 #ifndef TPFINAL_MONITORPAQUETES_H
 #define TPFINAL_MONITORPAQUETES_H
-#include "common_Paquete.h"
+#include "../Paquete.h"
 #include <queue>
 #include <mutex>
 class ColaPaquetes {
