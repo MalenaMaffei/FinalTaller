@@ -2,7 +2,8 @@
 #define TPFINAL_VISTABANDERA_H
 
 #include "Vista.h"
-class VistaBandera : public Vista {
+#include "../Vistas/VistaColoreada.h"
+class VistaBandera : public VistaColoreada {
  public:
   VistaBandera(SDL_Renderer *gRenderer);
 };

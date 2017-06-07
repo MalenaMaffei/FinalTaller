@@ -79,10 +79,11 @@ void ElementoUnidad::morir() {
     if (vistaMuerte->isLastClip(currentClip)){
         estado = haciendoNada;
         muerto = true;
+        printf("%i se murio\n", id);
         return;
     }
     ++currentClip;
-    currentClip = vistaMuerte->getClip(currentClip);
+    currentClip = vistaMuerte->getClip(currentClip, 0);
 }
 
 void ElementoUnidad::matar() {
@@ -98,14 +99,16 @@ void ElementoUnidad::matar() {
 }
 
 void ElementoUnidad::mostrar(Camara &camera) {
-    Elemento::mostrar(camera);
     if (estado == muriendo){
+        Elemento::mostrar(camera);
         morir();
+    } else {
+        ElementoColoreado::mostrar(camera);
     }
 }
 
 void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
-    if (!muerto){
+    if (estado != muriendo && !muerto){
         if (selectBox.checkCollision(rect) && Mio){
             selectBox.selectUnidad(*this);
         }

@@ -4,7 +4,7 @@
 //#define CLIPS 4
 
 VistaTiles::VistaTiles(SDL_Renderer *gRenderer) :
-    Vista(gRenderer,TILE_WIDTH,TILE_HEIGHT,TILE_CLIPS,tilePath) {}
+    Vista(gRenderer, TILE_WIDTH, TILE_HEIGHT, TILE_CLIPS, tilePath) {}
 
 //void VistaTiles::mostrar(int x, int y, int clip) {
 //    render(x, y, &gClips[clip]);

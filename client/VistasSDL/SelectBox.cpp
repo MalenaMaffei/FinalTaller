@@ -12,6 +12,9 @@ void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
     SDL_RenderDrawRect(renderer, &displayRect);
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
         (ElementoUnidad &unidad){
+        if (unidad.estaMuerto()){
+            return;
+        }
         Rect rectUnidad = unidad.getRect();
         displayRect = Rect(rectUnidad.getPunto() - offset, rectUnidad.w,
                            rectUnidad.h);

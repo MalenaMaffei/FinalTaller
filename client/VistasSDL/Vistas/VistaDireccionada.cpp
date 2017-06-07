@@ -1,4 +1,5 @@
 #include "../Header Files/VistaDireccionada.h"
+#define COLORES 4
 VistaDireccionada::VistaDireccionada(SDL_Renderer *gRenderer,
                                      int height,
                                      int width,
@@ -9,7 +10,7 @@ VistaDireccionada::VistaDireccionada(SDL_Renderer *gRenderer,
     height,
     width,
     clips,
-    fileName), largoAnimacion(largoAnimacion) {}
+    fileName, COLORES), largoAnimacion(largoAnimacion) {}
 
 int VistaDireccionada::getLargoAnimacion() const {
     return largoAnimacion;

@@ -3,12 +3,11 @@
 #define WIDTH 32
 #define CLIPS 7
 
-VistaTanqueMorir::VistaTanqueMorir(SDL_Renderer *gRenderer) : Vista(
-    gRenderer,
-    HEIGHT,
-    WIDTH,
-    CLIPS,
-    tanqueMuertePath) {}
+VistaTanqueMorir::VistaTanqueMorir(SDL_Renderer *gRenderer) : Vista(gRenderer,
+                                                                    HEIGHT,
+                                                                    WIDTH,
+                                                                    CLIPS,
+                                                                    tanqueMuertePath) {}
 
 //bool VistaTanqueMorir::isLastClip(int clip) const {
 //    return clip == clips-1 ;

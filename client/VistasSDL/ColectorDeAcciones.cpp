@@ -4,6 +4,8 @@
 #include "Header Files/Paquete.h"
 #include <algorithm>
 #include <vector>
+using std::vector;
+using std::for_each;
 
 ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
                                        Click &click,
@@ -29,14 +31,17 @@ void ColectorDeAcciones::crearAcciones() {
 
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
-            std::vector<ElementoUnidad> seleccion=selectBox.getSeleccionadas();
-            std::for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
+            vector<ElementoUnidad> seleccion=selectBox.getSeleccionadas();
+            for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
                                                                   unidad){
+              if (unidad.estaMuerto()){
+                  printf("unidad %i esta muerta\n", unidad.getId());
+                  return;
+              }
               printf("Unidad id: %i se mueve a: %i,%i\n", unidad.getId(),
                      click.getPoint().x, click.getPoint().y);
               paquete.mover(unidad.getId(), click.getPoint().x, click
                   .getPoint().y);
-//              printf("el paquete dice %s\n", paquete.getMensaje().c_str());
               colaSalida.encolar(paquete);
             });
             selectBox.vaciarSeleccionadas();
@@ -50,23 +55,30 @@ void ColectorDeAcciones::crearAcciones() {
         //        TODO dispatch para saber si fue edificio o unidad
 
 //        TODO obviamente le voy a tener que pasar mas info o no, no se
-        printf("request info MIO de id: %i\n", clickeado->getId());
+//        printf("request info MIO de id: %i\n", clickeado->getId());
         paquete.pedirInfo(clickeado->getId());
 //        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
         colaSalida.encolar(paquete);
         clickeado->guiRequest(*this);
     } else if (selectBox.haySeleccion()){
-        std::vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
-        std::for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
+        vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
+        for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad
                                                               unidad){
+              if (unidad.estaMuerto()){
+                  return;
+              }
             printf("Unidad id: %i ataca a Elemento id: %i\n", unidad.getId(),
                    clickeado->getId());
             paquete.atacar(unidad.getId(),clickeado->getId());
             colaSalida.encolar(paquete);
-//            printf("el paquete dice %s\n", paquete.getMensaje().c_str());
         });
         selectBox.vaciarSeleccionadas();
     }
+
+
+
+
+
     click.resetCoords();
 }
 

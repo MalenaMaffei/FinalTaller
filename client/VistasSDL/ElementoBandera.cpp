@@ -7,5 +7,5 @@ ElementoBandera::ElementoBandera(int id, int x, int y, Vista *textura,
 
 void ElementoBandera::mostrar(Camara &camera) {
     currentClip = textura->getClip(++currentClip);
-    Elemento::mostrar(camera);
+    ElementoColoreado::mostrar(camera);
 }

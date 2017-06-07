@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
 
 //    DESCOMENTAR PARA PROBAR CON SERVER
     Socket socket;
-    socket.setClientMode(argv[1], argv[2]);
+//    socket.setClientMode(argv[1], argv[2]);
 
 
 

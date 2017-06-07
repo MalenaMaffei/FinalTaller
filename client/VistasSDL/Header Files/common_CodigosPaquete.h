@@ -13,7 +13,8 @@ class CodigosPaquete {
     amarillo = 0,
     azul = 1,
     rojo = 2,
-    verde = 3
+    verde = 3,
+    gris = 4
   };
 
   enum comandos{
@@ -49,7 +50,6 @@ class CodigosPaquete {
     id = 3,
     x = 4,
     y = 4,
-    delCliente = 1,
     tipo = 2,
     color = 1
   };
