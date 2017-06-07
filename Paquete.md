@@ -42,11 +42,11 @@ comando | id | x | y
 ##### Crear ######
 Lo van a enviar las fabricas
 
-comando | id | x | y | tipo | delCliente? | color
---- | --- | --- | --- | --- | --- | --- 
-0 | 007 | 0001 | 0001 | 09 | 1 | 2 
-|||||| bool | color de 0 a 3 |
-1 char | 3 chars | 4 chars | 4 chars | 2 chars  | 1 char | 1 char
+comando | id | x | y | tipo | color
+--- | --- | --- | --- | --- | --- 
+0 | 007 | 0001 | 0001 | 09 | 2 
+|||||| color de 0 a 3 |
+1 char | 3 chars | 4 chars | 4 chars | 2 chars | 1 char
 
 ##### Disparar ######
 Solo necesito quien y a donde se dispara para poder calcular el sprite a usar
