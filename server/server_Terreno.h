@@ -21,6 +21,7 @@ public:
     Terreno(Terreno &&orig);
     Terreno& operator=(const Terreno& orig);
     double getFactor();
+    int getTipo();
     Terreno &operator=(Terreno &&orig);
     virtual ~Terreno();
 private:

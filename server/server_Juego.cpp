@@ -45,14 +45,36 @@ enum comandos {
 enum largos {
 	comando = 1,
 	id = 3,
-	x = 6,
-	y = 6,
+	x = 4,
+	y = 4,
 	delCliente = 1,
 	tipo = 2,
 	color = 1
 };
 
-
+std::string getMensaje(Movible* elemento, std::string clave){
+  	int mensajeX = elemento->getPosicion ()[0]*100;
+	std::string xStr = std::to_string(mensajeX);
+	int lenX = xStr.size ();
+	for (int i=0;i<(4-lenX);i++) {
+		xStr.insert (0,"0");
+	}
+	int mensajeY = elemento->getPosicion ()[1]*100;
+	std::string yStr = std::to_string(mensajeX);
+	int lenY = yStr.size();
+	for (int i=0;i<(4-lenY);i++) {
+		yStr.insert (0,"0");
+	}
+	std::string tipo = std::to_string(elemento->getTipo ());
+	int lenTipo = tipo.size();
+	for (int i=0;i<(2-lenTipo);i++) {
+		tipo.insert (0,"0");
+	}	
+	
+	std::string comando = "0";
+	std::string mensajeNuevo = comando+clave+xStr+yStr+tipo+std::to_string(elemento->getEquipo ());	
+	return mensajeNuevo;
+}
 
 Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m, 
 			  std::condition_variable* cond, Socket* socket) :	
@@ -65,19 +87,64 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	//Reemplazar por inicializar juego
 //	FabricaRobots* fabricaRobots = FabricaRobots::getInstancia ();
 
-	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
-	movibles["m0"] = (fabricaV->getVehiculo (0));
-	movibles["m1"] = (fabricaV->getVehiculo (0));
+	std::string mapaString = mapa.obtenerMensajeMapa ();
+	std::string mensaje = "5" + mapaString; //No se envia el tamaño porque es convención	
+	std::cout << mensaje.substr(0,1) << std::endl;
+	socket->SendStrWLen (mensaje); //Envio mapa
+	
+	mensaje = "6" + std::to_string(equipo_1);
+	
+	socket->SendStrWLen (mensaje); //Envio equipo
+		
+//	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
+//	movibles["m0"] = (fabricaV->getVehiculo (0));
+//	movibles["m1"] = (fabricaV->getVehiculo (0));
 	
 	banderasPorEquipo = {0,0,0,0};
 	
-	proximoIDMovible = 2;
+	proximoIDMovible = 0;
 	
 //	std::cout<<"creo bloque"<<std::endl;
 //	inmovibles["i0"] = (new Bloque(2,1,1)); //Agrego un bloque de 1x1
 //	edificios["v0"] = ((Edificio*) new EdificioFabricaVehiculo(2,1,1,EQUIPO_2));
 //	std::cout<<"exito"<<std::endl;
-	inmovibles["i0"] = new Bandera(0.4,0.4,2);
+	Bandera* bandera = new Bandera(0.4,0.4,2);
+	bandera->setPosicion ({0,0});
+	bandera->setEquipo(0);
+	inmovibles["i0"] = bandera;
+	
+	int mensajeX = bandera->getPosicion ()[0]*100;
+	std::string xStr = std::to_string(mensajeX);
+	int lenX = xStr.size ();
+	for (int i=0;i<(4-lenX);i++) {
+		xStr.insert (0,"0");
+	}
+	int mensajeY = bandera->getPosicion ()[1]*100;
+	std::string yStr = std::to_string(mensajeX);
+	int lenY = yStr.size();
+	for (int i=0;i<(4-lenY);i++) {
+		yStr.insert (0,"0");
+	}
+	std::string tipo = std::to_string(bandera->getTipo ());
+	int lenTipo = tipo.size();
+	for (int i=0;i<(2-lenTipo);i++) {
+		tipo.insert (0,"0");
+	}	
+	
+	std::string comando = "0001";
+	mensaje = comando+xStr+yStr+tipo+std::to_string(bandera->getEquipo ());	
+	socket->SendStrWLen (mensaje);
+	
+	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
+	Robot* robot = fabricaR->getRobot (9);
+	movibles["002"] = (robot);
+
+	robot->setPosicion ({0.5,0.5});
+	robot->setEquipo (0);
+	
+	mensaje = getMensaje(movibles["002"],"002");
+	socket->SendStrWLen (mensaje);
+	
 }
 
 void Juego::eliminarMuertos() {
@@ -140,12 +207,14 @@ void Juego::moverUnidades() {
 			pos = movible->getPosicion ();
 			int mensajeX = pos[0]*100;
 			std::string xStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-xStr.size ());i++) {
+			int lenX = xStr.size ();
+			for (int i=0;i<(4-lenX);i++) {
 				xStr.insert (0,"0");
 			}
 			int mensajeY = pos[1]*100;
-			std::string yStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-yStr.size ());i++) {
+			std::string yStr = std::to_string(mensajeY);
+			int lenY = yStr.size ();
+			for (int i=0;i<(4-lenY);i++) {
 				yStr.insert (0,"0");
 			}						
 			
@@ -327,14 +396,16 @@ void Juego::actualizarEdificios() {
 
 void Juego::actualizarRecibidos() {
 	std::unique_lock<std::mutex> lk(*m);
-	while (colaDeRecibidos->empty ()) {
-		cond->wait(lk);
-	}
+/*	while (colaDeRecibidos->empty ()) {
+		cond->wait_for(lk, std::chrono);
+		
+	}*/
 	while (!colaDeRecibidos->empty ()) {
 		//TODO parsear
 		//TODO realizar acciones recibidas
+//		std::cout<<"antes de hacer el front"<<std::endl;
 		std::string mensaje = colaDeRecibidos->front ();
-		
+//		std::cout<<"primer caracter: "<<mensaje[0]<<std::endl;
 		switch (mensaje[0]) {
 			case crear: //TODO
 						break;
@@ -379,7 +450,11 @@ void Juego::enviarInfo (std::string id) {
 	//Encolar en cola de enviados
 }
 
-void Juego::enviarMensajes() {
+void Juego::enviarCrear (Objeto* objeto) {
+
+}
+
+void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.empty ()) {
 		std::string mensaje = colaDeEnviados.front ();
 		colaDeEnviados.pop ();
@@ -392,34 +467,8 @@ void Juego::run() {
 	std::array<double, 2> intermedio = {2.0,2.0};
 	std::array<double, 2> destino = {5.0, 5.0};
 	
-	movibles["m0"]->setPosicion(origen);
-	movibles["m0"]->setEquipo(equipo_1);
-	movibles["m1"]->setPosicion(destino);
-	movibles["m1"]->setEquipo(equipo_2);
-
-//	edificios["v0"]->setPosicion(intermedio); //Bala deberia imapactar bloque
-
-	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
-	
-	int tipo = 0;
-	
-	//Territorios = 10
-	//TODO
-
-	inmovibles["i0"]->setPosicion (intermedio);
-	
-//	edificios["v0"]->setFabricacion (fabricaV->getTiempo (0),10,0);
-	
-//	((Unidad*) movibles["m0"])->dispararA ("m1"); //Pruebo disparar a otro personaje
-
-	movibles["m0"]->mover ({4.0,4.0});
-	
-	std::cout<<movibles["m1"]->getVida()<<std::endl;
-	
-	
 	while (!this->hayGanador()) {
 		clock_t tiempo1 = clock();
-//		std::cout<<"actualizo recibidos"<<std::endl;
 		this->actualizarRecibidos ();
 //		std::cout<<"actualizo edificios"<<std::endl;
 		this->actualizarEdificios();
@@ -432,7 +481,7 @@ void Juego::run() {
 //		std::cout<<"actualizo muertos"<<std::endl;
 		this->eliminarMuertos();
 //		std::cout<<movibles.size()<<std::endl;
-		this->enviarMensajes();
+		this->enviarMensajesEncolados();
 		clock_t tiempo2 = clock();
 		double intervaloDormir = CYCLE_TIME - 
 									double(tiempo2 - tiempo1)/CLOCKS_PER_SEC;

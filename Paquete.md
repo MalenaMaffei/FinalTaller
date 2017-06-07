@@ -66,6 +66,10 @@ comando | id |
 1 char | 3 chars |
 
 
+##### Enviar Mapa #####
+
+comando |  
+
 Esto es lo que estoy usando yo para definir los comandos que hay, los tipos de unidades, y los largos de cada comando:
 ```c++
 enum comandos{
@@ -73,7 +77,9 @@ enum comandos{
   matar = 1,
   mover = 2,
   disparar = 3,
-  info = 4
+  info = 4,
+  mapa = 5,
+  equipo = 6
 };
 
 enum tipos{

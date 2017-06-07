@@ -26,5 +26,9 @@ double Casillero::getFactorTerreno() {
 	return terreno.getFactor();
 }
 
+int Casillero::getTipoTerreno () {
+	return terreno.getTipo();
+}
+
 Casillero::~Casillero() {}
 

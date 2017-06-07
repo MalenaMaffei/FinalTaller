@@ -19,10 +19,11 @@ file(GLOB VISTA_SRC
 
 
 set(SDL2_INCLUDE_DIR /usr/include/SDL2)
-set(SDL2_LIBRARY /usr/lib64/libSDL2.so)
+#set(SDL2_LIBRARY /usr/lib64/libSDL2.so)
+set(SDL2_LIBRARY /usr/lib/x86_64-linux-gnu/libSDL2.so)
 
-set(SDL2_IMG_LIBRARY /usr/lib64/libSDL2_image.so)
-
+#set(SDL2_IMG_LIBRARY /usr/lib64/libSDL2_image.so)
+set(SDL2_IMG_LIBRARY /usr/lib/x86_64-linux-gnu/libSDL2_image.so)
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)

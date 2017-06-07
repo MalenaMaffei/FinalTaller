@@ -12,6 +12,7 @@ class Mapa {
         double obtenerFactorTerreno(std::array<int,2> posicion);
         int obtenerDimensionX();
         int obtenerDimensionY();
+        std::string obtenerMensajeMapa();
     private:
         unsigned int dimensionX;
         unsigned int dimensionY;

@@ -10,7 +10,7 @@ void PaqueteSender::run() {
     while (! salir){
         if (!cola.isEmpty()){
             Paquete paquete = cola.desencolar();
-//            socket.SendStrWLen(paquete.getMensaje());
+            socket.SendStrWLen(paquete.getMensaje());
             printf("el paquete mandado dice %s\n", paquete.getMensaje().c_str
                 ());
         }

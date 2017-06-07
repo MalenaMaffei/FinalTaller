@@ -52,14 +52,12 @@ main (int argc, char** argv)
 	juego->start();
 	
 	while (1) {
-		std::unique_lock<std::mutex> lk(m);
 		std::string mensaje = socket.ReceiveStrWLen ();
+		std::unique_lock<std::mutex> lk(m);
 		colaDeRecibidos->push (mensaje);
-		lk.unlock ();
 		cond.notify_all ();
 	}
 		
-
 	juego->join ();
 	
 	delete juego;

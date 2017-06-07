@@ -11,7 +11,7 @@
 #define CLIENT_MODE 0
 #define BACKLOG 10
 #define LENGTH_SIZE 4
-#define BUFFSIZE 300
+#define BUFFSIZE 300000
 
 int Socket::filladdrinfo(const char *ip, const char *port, int
 mode){

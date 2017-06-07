@@ -9,7 +9,7 @@ void PaqueteReceiver::run() {
 
     while (!salir){
 
-        Paquete p1, p2, p3, p4, p5, p6;
+/*        Paquete p1, p2, p3, p4, p5, p6;
         p1.setMensaje("0001000100010910");
         p2.setMensaje("0010004000400900");
         p3.setMensaje("0002000000600000");
@@ -60,14 +60,21 @@ void PaqueteReceiver::run() {
 
         Paquete muerte;
         muerte.setMensaje("1001");
-        cola.encolar(muerte);
+        cola.encolar(muerte);*/
 
-        salir = true;
+        //salir = true;
 
-//        string mensaje;
-//        mensaje = socket.ReceiveStrWLen();
-//        Paquete paquete;
-//        paquete.setMensaje(mensaje);
-//        cola.encolar(paquete);
+        string mensaje;
+		printf("recibir\n");
+        mensaje = socket.ReceiveStrWLen();
+		printf("paquete %s\n", mensaje.c_str());	
+        Paquete paquete;
+		paquete.setMensaje(mensaje);
+		if (paquete.getComando() == 5 || paquete.getComando() == 6){
+			continue;
+		  
+		}
+        paquete.setMensaje(mensaje);
+        cola.encolar(paquete);
     }
 }

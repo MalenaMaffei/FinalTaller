@@ -35,6 +35,9 @@ double Terreno::getFactor() {
 	return this->velocidadRobots;
 }
 
+int Terreno::getTipo() {
+	return this->tipo;
+}
 
 Terreno::~Terreno () { }
 

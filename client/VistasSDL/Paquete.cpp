@@ -67,6 +67,7 @@ int Paquete::getId() const {
 }
 
 int Paquete::getComando() const {
+  //printf("substr de comando:%s \n", mensaje.substr(0,codigos.comando).c_str());
     return stoi(mensaje.substr(0,codigos.comando));
 }
 

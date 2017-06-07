@@ -37,7 +37,7 @@ public:
     void actualizarDisparos();
     void actualizarEdificios();
     void actualizarRecibidos();
-    void enviarMensajes();
+    void enviarMensajesEncolados();
     void run() override;
     virtual ~Juego();
 private:
@@ -47,7 +47,7 @@ private:
     void recibirObtenerInfo(std::string mensaje);
     
     void enviarInfo(std::string id);
-    
+    void enviarCrear(Objeto* objeto);
     
     Mapa mapa;
     

@@ -26,8 +26,7 @@ Mapa::Mapa(const std::string& nombreArchivoMapa) {
 			buffer>>tipo;
 			if (j == 0) {
 				mapa.push_back (std::vector<Casillero>());
-			}
-			
+			}			
 			mapa[i].push_back(Casillero (fabrica.getTerreno (tipo)));
 			j++;
 		}
@@ -55,3 +54,13 @@ Mapa::~Mapa() {
 
 }
 
+std::string Mapa::obtenerMensajeMapa() {
+	std::string mapaString;
+	for (size_t i = 0; i<dimensionX; ++i) {
+		for (size_t j = 0; j<dimensionY; ++j) {
+			int tipo = mapa[i][j].getTipoTerreno();
+			mapaString += std::to_string(tipo);
+		}
+	}
+	return mapaString;
+}

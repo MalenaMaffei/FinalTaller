@@ -26,6 +26,7 @@ public:
     void colisionar(Bloque& bloque) override; 
     void colisionar(Bandera& bandera) override; 
     void colisionar(Edificio& edificio) override; 
+    void setEquipo(int equipo);
     int getEquipo();
     virtual ~Bandera();
 private:

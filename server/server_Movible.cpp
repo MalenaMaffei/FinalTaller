@@ -81,7 +81,7 @@ bool Movible::mover (double factorTerreno) {
 	std::array<double, 2> direccion = { (destino[0] - posicion[0]),
 										(destino[1] - posicion[1])};	
 	
-	double modulo = sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);
+	double modulo = std::sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);
 	
 	//Las balas llegan hasta destino y se frenan
 	//TODO (continuar trayectoria)

@@ -12,6 +12,7 @@ class Casillero {
         Casillero& operator=(const Casillero& orig);
         bool estaOcupado();
         double getFactorTerreno();
+        int getTipoTerreno();
         virtual ~Casillero();
 
     private:
