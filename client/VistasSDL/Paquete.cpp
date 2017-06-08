@@ -7,6 +7,20 @@ using std::to_string;
 
 std::string Paquete::crearCampo(int campo, int contenido) {
     string contenidoStr = to_string(contenido);
+    crearCampo(campo, contenidoStr);
+//    int filler = campo - contenidoStr.size();
+//    if (filler < 0){
+//        throw std::invalid_argument("Creando Paquete: El contenido: "+
+//            contenidoStr+" fue mayor al largo del campo "+to_string(campo));
+//    } else if (filler > 0){
+//        for (int i = 0; i < filler; ++i) {
+//            contenidoStr.insert(0,  "0");
+//        }
+//    }
+//    return contenidoStr;
+}
+
+std::string Paquete::crearCampo(int campo, std::string contenidoStr) {
     int filler = campo - contenidoStr.size();
     if (filler < 0){
         throw std::invalid_argument("Creando Paquete: El contenido: "+
@@ -19,7 +33,8 @@ std::string Paquete::crearCampo(int campo, int contenido) {
     return contenidoStr;
 }
 
-void Paquete::atacar(int idAgresor, int idAgredido) {
+
+void Paquete::atacar(string idAgresor, string idAgredido) {
 //    CodigosPaquete codigos;
     string agresor = crearCampo(codigos.id, idAgresor);
     string agredido = crearCampo(codigos.id, idAgredido);
@@ -27,7 +42,7 @@ void Paquete::atacar(int idAgresor, int idAgredido) {
     mensaje = comando + agresor + agredido;
 }
 
-void Paquete::crear(int id, int x, int y, int tipo) {
+void Paquete::crear(string id, int x, int y, int tipo) {
 //    CodigosPaquete codigos;
     string creadorStr = crearCampo(codigos.id, id);
     string xStr = crearCampo(codigos.x, x);
@@ -38,14 +53,14 @@ void Paquete::crear(int id, int x, int y, int tipo) {
     mensaje = comando + creadorStr + xStr + yStr + tipoStr;
 }
 
-void Paquete::pedirInfo(int id) {
+void Paquete::pedirInfo(string id) {
 //    CodigosPaquete codigos;
     string idStr = crearCampo(codigos.id, id);
     string comando = crearCampo(codigos.comando, codigos.info);
     mensaje = comando + idStr;
 }
 
-void Paquete::mover(int id, int x, int y) {
+void Paquete::mover(string id, int x, int y) {
 //    CodigosPaquete codigos;
     string idStr = crearCampo(codigos.id, id);
     string xStr = crearCampo(codigos.x, x);
@@ -62,8 +77,8 @@ void Paquete::setMensaje(const string &mensaje) {
     Paquete::mensaje = mensaje;
 }
 
-int Paquete::getId() const {
-    return stoi(mensaje.substr(1,codigos.id));
+std::string Paquete::getId() const {
+    return mensaje.substr(1,codigos.id);
 }
 
 int Paquete::getComando() const {
@@ -104,5 +119,6 @@ int Paquete::getColor() const {
     }
     return stoi(mensaje.substr(14,codigos.color));
 }
+
 
 

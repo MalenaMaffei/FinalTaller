@@ -9,14 +9,14 @@
 class SelectBox;
 class ElementoUnidad : public ElementoColoreado{
  public:
-  ElementoUnidad(int id,
-                   int x,
-                   int y,
-                   VistaDireccionada *movimiento,
-                   VistaDireccionada *disparar,
-                   Vista *vistaMuerte,
-                   bool esMio,
-                   int color);
+  ElementoUnidad(std::string id,
+                 int x,
+                 int y,
+                 VistaDireccionada *movimiento,
+                 VistaDireccionada *disparar,
+                 Vista *vistaMuerte,
+                 bool esMio,
+                 int color);
   virtual void mover(Punto nuevo);
   void mostrar(Camara &camera);
   void chequearSeleccion(SelectBox &selectBox);

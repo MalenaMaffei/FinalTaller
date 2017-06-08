@@ -2,7 +2,9 @@
 //TODO chequwar que todos tengan implementado el Mio
 #include "Header Files/Click.h"
 #include "Header Files/ColectorDeAcciones.h"
-Elemento::Elemento(int id, int x, int y, Vista *textura, bool esMio)
+using std::string;
+
+Elemento::Elemento(string id, int x, int y, Vista *textura, bool esMio)
     : textura(textura), id(id), currentClip(0), muerto(false), Mio(esMio) {
     rect.x = x;
     rect.y = y;
@@ -32,7 +34,7 @@ const Rect & Elemento::getRect() const {
     return rect;
 }
 
-int Elemento::getId() const {
+string Elemento::getId() const {
     return id;
 }
 

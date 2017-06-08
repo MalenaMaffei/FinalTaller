@@ -7,6 +7,8 @@
 #include "Header Files/Mouse.h"
 #include "Header Files/Paquete.h"
 #include <vector>
+#include <string>
+using std::string;
 ElementoManager::ElementoManager(VistaManager &vistaManager,
                                  int MiColor) :
     vistaManager(vistaManager), miColor(MiColor) {}
@@ -23,7 +25,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
 //    TODO mejor tengo unidades por un lado y elementos x el otro?
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
-    int id = paquete.getId();
+    string id = paquete.getId();
     unidad = new ElementoUnidad(id, paquete.getX(), paquete.getY(),
                                 vistaManager.getVistaCaminar(tipo),
                                 vistaManager.getVistaDisparo(tipo),
@@ -38,7 +40,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
 void ElementoManager::fabricarElemento(Paquete &paquete) {
     Elemento *elemento;
     int tipo = paquete.getTipo();
-    int id = paquete.getId();
+    string id = paquete.getId();
     int x = paquete.getX();
     int y = paquete.getY();
     int color = paquete.getColor();
@@ -60,7 +62,7 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
 
 void ElementoManager::elementosVivir(Camara &camara,Click &click,
                                      SelectBox &selectBox) {
-    std::vector<int> muertos;
+    std::vector<string> muertos;
     for (const auto& kv : elementos) {
         Elemento* elemento = elementos.at(kv.first);
         if (elemento->estaMuerto()){
@@ -87,7 +89,7 @@ void ElementoManager::elementosVivir(Camara &camara,Click &click,
 
 void ElementoManager::matar(Paquete &paquete) {
     Elemento* elemento;
-    int id = paquete.getId();
+    std::string id = paquete.getId();
     if (elementos.count(id)){
         elemento = elementos.at(id);
     } else if (unidades.count(id)){
@@ -96,8 +98,8 @@ void ElementoManager::matar(Paquete &paquete) {
     elemento->matar();
 }
 
-void ElementoManager::limpiarMuertos(std::vector<int> &muertos) {
-    std::for_each(muertos.begin(), muertos.end(), [&](int id){
+void ElementoManager::limpiarMuertos(std::vector<string> &muertos) {
+    std::for_each(muertos.begin(), muertos.end(), [&](string id){
         Elemento* elemento;
         if (elementos.count(id)){
             elemento = elementos.at(id);

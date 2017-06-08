@@ -2,7 +2,7 @@
 #include "Header Files/VistaFuerte.h"
 #define HEIGHT 192
 #define WIDTH 160
-ElementoFuerte::ElementoFuerte(int id,
+ElementoFuerte::ElementoFuerte(std::string id,
                                int x,
                                int y,
                                Vista *textura,

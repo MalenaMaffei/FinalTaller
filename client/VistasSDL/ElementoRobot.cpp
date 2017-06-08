@@ -1,5 +1,5 @@
 #include "Header Files/ElementoRobot.h"
-ElementoRobot::ElementoRobot(int id,
+ElementoRobot::ElementoRobot(std::string id,
                              int x,
                              int y,
                              VistaDireccionada *texturaCaminar,
