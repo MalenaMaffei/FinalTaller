@@ -5,12 +5,12 @@
 #include "VistaTanqueMorir.h"
 class ElementoTanque : public ElementoUnidad {
  public:
-  ElementoTanque(int id,
-                   int x,
-                   int y,
-                   VistaDireccionada *textura,
-                   Vista *texturaMuerte,
-                   bool esMio);
+  ElementoTanque(std::string id,
+                 int x,
+                 int y,
+                 VistaDireccionada *textura,
+                 Vista *texturaMuerte,
+                 bool esMio);
 
 
  private:

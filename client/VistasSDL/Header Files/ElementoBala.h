@@ -4,7 +4,7 @@
 #include "Elemento.h"
 class ElementoBala : public Elemento{
  public:
-    ElementoBala(int id,int x,int y,Vista *textura);
+    ElementoBala(std::string id, int x, int y, Vista *textura);
     void mover(Punto nuevo);
     void matar();
 };

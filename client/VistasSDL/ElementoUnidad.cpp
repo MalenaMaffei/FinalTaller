@@ -2,7 +2,7 @@
 #include "Header Files/VistaDireccionada.h"
 #include "Header Files/SelectBox.h"
 #include "Header Files/ColectorDeAcciones.h"
-ElementoUnidad::ElementoUnidad(int id,
+ElementoUnidad::ElementoUnidad(std::string id,
                                int x,
                                int y,
                                VistaDireccionada *movimiento,

@@ -6,8 +6,8 @@
 
 class ElementoEstructura : public ElementoColoreado{
  public:
-  ElementoEstructura(int id, int x, int y, Vista *textura,
-                       bool esMio, int color);
+  ElementoEstructura(std::string id, int x, int y, Vista *textura,
+                     bool esMio, int color);
   void guiRequest(ColectorDeAcciones& colector) const;
 
 };

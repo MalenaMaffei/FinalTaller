@@ -5,12 +5,12 @@
 #include "ElementoEstructura.h"
 class ElementoFuerte : public ElementoEstructura {
  public:
-  ElementoFuerte(int id,
-                   int x,
-                   int y,
-                   Vista *textura,
-                   bool esMio,
-                   int color);
+  ElementoFuerte(std::string id,
+                 int x,
+                 int y,
+                 Vista *textura,
+                 bool esMio,
+                 int color);
   void matar();
 };
 

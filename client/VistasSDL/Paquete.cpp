@@ -7,6 +7,20 @@ using std::to_string;
 
 std::string Paquete::crearCampo(int campo, int contenido) {
     string contenidoStr = to_string(contenido);
+    crearCampo(campo, contenidoStr);
+//    int filler = campo - contenidoStr.size();
+//    if (filler < 0){
+//        throw std::invalid_argument("Creando Paquete: El contenido: "+
+//            contenidoStr+" fue mayor al largo del campo "+to_string(campo));
+//    } else if (filler > 0){
+//        for (int i = 0; i < filler; ++i) {
+//            contenidoStr.insert(0,  "0");
+//        }
+//    }
+//    return contenidoStr;
+}
+
+std::string Paquete::crearCampo(int campo, std::string contenidoStr) {
     int filler = campo - contenidoStr.size();
     if (filler < 0){
         throw std::invalid_argument("Creando Paquete: El contenido: "+
@@ -18,6 +32,7 @@ std::string Paquete::crearCampo(int campo, int contenido) {
     }
     return contenidoStr;
 }
+
 
 void Paquete::atacar(string idAgresor, string idAgredido) {
 //    CodigosPaquete codigos;
@@ -103,5 +118,6 @@ int Paquete::getColor() const {
     }
     return stoi(mensaje.substr(14,codigos.color));
 }
+
 
 

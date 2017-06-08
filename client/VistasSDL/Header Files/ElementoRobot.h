@@ -6,13 +6,13 @@
 
 class ElementoRobot : public ElementoUnidad{
  public:
-  ElementoRobot(int id,
-                  int x,
-                  int y,
-                  VistaDireccionada *texturaCaminar,
-                  VistaDireccionada *texturaDisparar,
-                  Vista *vistaMuerte,
-                  bool esMio);
+  ElementoRobot(std::string id,
+                int x,
+                int y,
+                VistaDireccionada *texturaCaminar,
+                VistaDireccionada *texturaDisparar,
+                Vista *vistaMuerte,
+                bool esMio);
  private:
   Vista* texturaDisparar;
 //  Vista* currentVista;

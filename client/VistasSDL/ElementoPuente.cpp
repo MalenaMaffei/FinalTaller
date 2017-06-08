@@ -1,7 +1,7 @@
 #include "Header Files/ElementoPuente.h"
 #define HEIGHT 64
 #define WIDTH 64
-ElementoPuente::ElementoPuente(int id,
+ElementoPuente::ElementoPuente(std::string id,
                                int x,
                                int y,
                                Vista *textura,

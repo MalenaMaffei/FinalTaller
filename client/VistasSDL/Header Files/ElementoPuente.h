@@ -4,11 +4,11 @@
 #include "Elemento.h"
 class ElementoPuente : public Elemento {
  public:
-  ElementoPuente(int id,
-                   int x,
-                   int y,
-                   Vista *textura,
-                   bool vertical=false);
+  ElementoPuente(std::string id,
+                 int x,
+                 int y,
+                 Vista *textura,
+                 bool vertical = false);
 
 };
 

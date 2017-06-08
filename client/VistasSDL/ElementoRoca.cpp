@@ -2,5 +2,5 @@
 #include "Header Files/VistaRoca.h"
 #define WIDTH 32
 #define HEIGHT 32
-ElementoRoca::ElementoRoca(int id, int x, int y, Vista *textura)
+ElementoRoca::ElementoRoca(std::string id, int x, int y, Vista *textura)
     : Elemento(id, x, y, textura, false) {}
