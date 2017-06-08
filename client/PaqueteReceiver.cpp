@@ -12,7 +12,7 @@ void PaqueteReceiver::run() {
         int espera = 500;
         Paquete p1, p2, p3, p4, p5, p6;
         p1.setMensaje("000101010101061");
-        p2.setMensaje("001001400140090");
+        p2.setMensaje("00a001400140090");
 //        p3.setMensaje("0002000000600000");
 //        p4.setMensaje("0003008000000100");
 //        p5.setMensaje("0004020002000310");
@@ -61,7 +61,7 @@ void PaqueteReceiver::run() {
         disparar.setMensaje("300101020100");
         cola.encolar(disparar);
         std::this_thread::sleep_for(std::chrono::milliseconds(espera));
-        disparar.setMensaje("300101010100");
+        disparar.setMensaje("30a001010100");
         cola.encolar(disparar);
         std::this_thread::sleep_for(std::chrono::milliseconds(espera));
 
