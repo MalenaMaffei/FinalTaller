@@ -15,35 +15,35 @@ const int TILE_WIDTH = 16;
 const int TILE_HEIGHT = 16;
 const int TILE_CLIPS = 4;
 
-const char tankPath[] = "../client/VistasSDL/imgs/tank.png";
-const char tilePath[] = "../client/VistasSDL/imgs/ciudadTiles.png";
-const char rocaPath[] = "../client/VistasSDL/imgs/Rocas/roca_roca.png";
-const char hieloPath[] = "../client/VistasSDL/imgs/Rocas/roca_hielo.png";
-const char balaPath[] = "../client/VistasSDL/imgs/bala.png";
-const char fuertePath[] = "../client/VistasSDL/imgs/Edificios/fort.png";
-const char fabricaVehiculosPath[] = "../client/VistasSDL/imgs/Edificios/vehicle.png";
-const char fabricaRobotsPath[] = "../client/VistasSDL/imgs/Edificios/robot.png";
-const char puentePath[] = "../client/VistasSDL/imgs/Puentes/bridge_city.png";
-const char banderaPath[] = "../client/VistasSDL/imgs/Banderas/bandera.png";
-const char robotCaminarPath[] = "../client/VistasSDL/imgs/Robots/caminar_robot.png";
-const char robotPyroDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_pyro.png";
-const char robotGruntDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_grunt.png";
+const char tankPath[] = "../client/imgs/tank.png";
+const char tilePath[] = "../client/imgs/ciudadTiles.png";
+const char rocaPath[] = "../client/imgs/Rocas/roca_roca.png";
+const char hieloPath[] = "../client/imgs/Rocas/roca_hielo.png";
+const char balaPath[] = "../client/imgs/bala.png";
+const char fuertePath[] = "../client/imgs/Edificios/fort.png";
+const char fabricaVehiculosPath[] = "../client/imgs/Edificios/vehicle.png";
+const char fabricaRobotsPath[] = "../client/imgs/Edificios/robot.png";
+const char puentePath[] = "../client/imgs/Puentes/bridge_city.png";
+const char banderaPath[] = "../client/imgs/Banderas/bandera.png";
+const char robotCaminarPath[] = "../client/imgs/Robots/caminar_robot.png";
+const char robotPyroDisparar[] = "../client/imgs/Robots/disparo_pyro.png";
+const char robotGruntDisparar[] = "../client/imgs/Robots/disparo_grunt.png";
 const char robotToughDisparar[] = "."
-    "./client/VistasSDL/imgs/Robots/disparo_tough.png";
+    "./client/imgs/Robots/disparo_tough.png";
 const char robotLaserDisparar[] = "."
-    "./client/VistasSDL/imgs/Robots/disparo_laser.png";
-const char robotPsychoDisparar[] = "../client/VistasSDL/imgs/Robots/disparo_psycho.png";
+    "./client/imgs/Robots/disparo_laser.png";
+const char robotPsychoDisparar[] = "../client/imgs/Robots/disparo_psycho.png";
 const char robotSniperDisparar[] = "."
-    "./client/VistasSDL/imgs/Robots/disparo_sniper.png";
-const char robotMuertePath[] = "../client/VistasSDL/imgs/Robots/muerte.png";
-const char tanquePath[] = "../client/VistasSDL/imgs/Tanks/heavy.png";
-const char tanqueMuertePath[] = "../client/VistasSDL/imgs/Tanks/explosion.png";
-const char tanqueMissilePath[] = "../client/VistasSDL/imgs/Tanks/missile.png";
+    "./client/imgs/Robots/disparo_sniper.png";
+const char robotMuertePath[] = "../client/imgs/Robots/muerte.png";
+const char tanquePath[] = "../client/imgs/Tanks/heavy.png";
+const char tanqueMuertePath[] = "../client/imgs/Tanks/explosion.png";
+const char tanqueMissilePath[] = "../client/imgs/Tanks/missile.png";
 
 //---------------------HUD---------------------
-const char hudPath[] = "../client/VistasSDL/imgs/Gui/hud.png";
-const char carasPath[] = "../client/VistasSDL/imgs/Gui/Unidades/unidades.png";
-const char guiEdificioPath[] = "../client/VistasSDL/imgs/Gui/edificio.png";
+const char hudPath[] = "../client/imgs/Gui/hud.png";
+const char carasPath[] = "../client/imgs/Gui/Unidades/unidades.png";
+const char guiEdificioPath[] = "../client/imgs/Gui/edificio.png";
 
 
 

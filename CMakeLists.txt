@@ -12,9 +12,9 @@ set(CMAKE_CXX_STANDARD 11)
 #tuve que hardcodear sdl2 porque no pude hacerlo de la manera correcta.
 
 file(GLOB VISTA_SRC
-        "client/VistasSDL/Header Files/*.h"
-        "client/VistasSDL/*.cpp"
-	"client/VistasSDL/Vistas/*.cpp"
+        "client/Header Files/*.h"
+        "client/*.cpp"
+	"client/Vistas/*.cpp"
         )
 
 
