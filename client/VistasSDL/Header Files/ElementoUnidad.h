@@ -26,8 +26,8 @@ class ElementoUnidad : public ElementoColoreado{
   void deseleccionar();
   void guiRequest(ColectorDeAcciones& colector) const;
  protected:
-  void morir();
-
+  void avanzarMuerte();
+  void avanzarDisparo();
   //  TODO seguramente tenga que usar un enum aca pero estoy probando rapido el
 // concepto
   int direccion;

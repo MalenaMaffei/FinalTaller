@@ -117,6 +117,6 @@ void ElementoManager::mover(Paquete &paquete) {
 }
 
 void ElementoManager::disparar(Paquete &paquete) {
-//    TODO terminar disparar
-//    ElementoUnidad* unidad = unidades.at(paquete.getId());
+    ElementoUnidad* unidad = unidades.at(paquete.getId());
+    unidad->disparar();
 }

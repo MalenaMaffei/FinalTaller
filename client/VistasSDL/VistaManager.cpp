@@ -86,7 +86,7 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
             disparar = new VistaToughDisparar(gRenderer);
         }
         vistas[tipo] = morir;
-//        printf("guardo la morir\n");
+//        printf("guardo la avanzarMuerte\n");
         vistasDireccionadas[tipo].push_back(caminar);
 //        printf("guardo la caminar\n");
         vistasDireccionadas[tipo].push_back(disparar);

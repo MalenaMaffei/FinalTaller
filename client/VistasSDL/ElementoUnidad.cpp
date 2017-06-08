@@ -75,7 +75,7 @@ void ElementoUnidad::mover(Punto nuevo) {
 
 
 
-void ElementoUnidad::morir() {
+void ElementoUnidad::avanzarMuerte() {
     if (vistaMuerte->isLastClip(currentClip)){
         estado = haciendoNada;
         muerto = true;
@@ -83,7 +83,22 @@ void ElementoUnidad::morir() {
         return;
     }
     ++currentClip;
-    currentClip = vistaMuerte->getClip(currentClip, 0);
+    currentClip = vistaMuerte->getClip(currentClip);
+}
+
+void ElementoUnidad::avanzarDisparo() {
+    if (vistaDisparar->isLastClip(currentClip)){
+        estado = haciendoNada;
+        return;
+    }
+    ++currentClip;
+    currentClip = vistaMuerte->getClip(currentClip);
+}
+
+void ElementoUnidad::disparar() {
+    currentClip = 0;
+    estado = disparando;
+    textura = vistaDisparar;
 }
 
 void ElementoUnidad::matar() {
@@ -101,7 +116,7 @@ void ElementoUnidad::matar() {
 void ElementoUnidad::mostrar(Camara &camera) {
     if (estado == muriendo){
         Elemento::mostrar(camera);
-        morir();
+        avanzarMuerte();
     } else {
         ElementoColoreado::mostrar(camera);
     }
@@ -115,20 +130,11 @@ void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
     }
 }
 
-//void ElementoUnidad::seleccionar() {
-//    textura->setColor(0,255,0);
-//}
-//
-//void ElementoUnidad::deseleccionar() {
-//    textura->setColor(255,255,255);
-//}
-
 void ElementoUnidad::guiRequest(ColectorDeAcciones &colector) const {
     colector.showHud();
 }
 
-void ElementoUnidad::disparar() {
-//    TODO terminar disparar
-}
+
+
 
 //TODO clicked polimorfizar

@@ -31,6 +31,9 @@ void PaqueteReceiver::run() {
 //        cola.encolar(p6);
 //        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
 
+
+
+
         Paquete m1, m2, m3, m4, m5, m6, m3bis;
         m1.setMensaje("200101050101");
         m2.setMensaje("200101100101");
@@ -59,6 +62,40 @@ void PaqueteReceiver::run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(espera));
 //
 //
+
+
+
+        Paquete disparar;
+        disparar.setMensaje("300101010101");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101000100");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101000101");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101000102");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101010102");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101020102");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101020101");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101020100");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+        disparar.setMensaje("300101010100");
+        cola.encolar(disparar);
+        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+
+
+
         Paquete muerte;
         muerte.setMensaje("1001");
         cola.encolar(muerte);
