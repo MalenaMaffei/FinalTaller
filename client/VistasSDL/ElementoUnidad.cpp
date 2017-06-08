@@ -16,48 +16,7 @@ ElementoUnidad::ElementoUnidad(int id,
 
 
 void ElementoUnidad::mover(Punto nuevo) {
-//    int shiftX = rect.x - newX;
-//    int shiftY = rect.y - newY;
-//    Punto nuevo(newX, newY);
-    Punto shift = rect.getPunto() - nuevo;
-//    TODO horrible, crear clase coordenada
-    if (shift.x > 0){
-        if (shift.y > 0){
-//            direccion = 3;
-            direccion = noroeste;
-        } else if (shift.y == 0){
-//            direccion = 4;
-            direccion = oeste;
-        } else if (shift.y < 0){
-//            direccion = 5;
-            direccion = suroeste;
-        }
-    } else if (shift.x == 0){
-        if (shift.y > 0){
-//            direccion = 2;
-            direccion = norte;
-        } else if (shift.y == 0){
-            estado = haciendoNada;
-            return;
-        } else if (shift.y < 0){
-//            direccion = 6;
-            direccion = sur;
-        }
-    } else if (shift.x < 0){
-        if (shift.y > 0){
-//            direccion = 1;
-            direccion = noreste;
-        } else if (shift.y == 0){
-//            direccion = 0;
-            direccion = este;
-        } else if (shift.y < 0){
-//            direccion = 7;
-            direccion = sureste;
-        }
-    }
-
-//    rect.x = newX;
-//    rect.y = newY;
+    direccion = rect.getPunto().calcularDireccion(nuevo);
     rect.setPunto(nuevo);
 
     if (estado != enMovimiento) {
@@ -74,7 +33,6 @@ void ElementoUnidad::mover(Punto nuevo) {
 // robots, tambien revisar el tema de las texturas!
 
 
-
 void ElementoUnidad::avanzarMuerte() {
     if (vistaMuerte->isLastClip(currentClip)){
         estado = haciendoNada;
@@ -87,18 +45,26 @@ void ElementoUnidad::avanzarMuerte() {
 }
 
 void ElementoUnidad::avanzarDisparo() {
-    if (vistaDisparar->isLastClip(currentClip)){
+    printf("current clip: %i\n", currentClip);
+    if (vistaDisparar->isLastClip(currentClip, 0)){
         estado = haciendoNada;
+        textura = vistaMovimiento;
+        currentClip = 0;
+        vistaMovimiento->getClip(currentClip, direccion);
         return;
     }
+
+    currentClip = vistaDisparar->getClip(currentClip, direccion);
     ++currentClip;
-    currentClip = vistaMuerte->getClip(currentClip);
 }
 
-void ElementoUnidad::disparar() {
+void ElementoUnidad::disparar(Punto target) {
     currentClip = 0;
     estado = disparando;
     textura = vistaDisparar;
+    direccion = rect.getPunto().calcularDireccion(target);
+//    currentClip = vistaDisparar->getClip(currentClip, direccion);
+    printf("direccion: %i\n", direccion);
 }
 
 void ElementoUnidad::matar() {
@@ -117,9 +83,11 @@ void ElementoUnidad::mostrar(Camara &camera) {
     if (estado == muriendo){
         Elemento::mostrar(camera);
         avanzarMuerte();
-    } else {
-        ElementoColoreado::mostrar(camera);
+        return;
+    } else if (estado == disparando){
+        avanzarDisparo();
     }
+    ElementoColoreado::mostrar(camera);
 }
 
 void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
@@ -133,8 +101,5 @@ void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
 void ElementoUnidad::guiRequest(ColectorDeAcciones &colector) const {
     colector.showHud();
 }
-
-
-
 
 //TODO clicked polimorfizar

@@ -19,7 +19,7 @@ class Vista : public Texture{
   int getHeight() const;
   int getWidth() const;
   int getClip(int clip, int fila=0) const;
-  bool isLastClip(int clip) const;
+  virtual bool isLastClip(int clip) const;
 
  protected:
   virtual void recorrerImagen();

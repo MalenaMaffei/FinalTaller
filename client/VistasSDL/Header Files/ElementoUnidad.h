@@ -21,7 +21,7 @@ class ElementoUnidad : public ElementoColoreado{
   void mostrar(Camara &camera);
   void chequearSeleccion(SelectBox &selectBox);
   void matar();
-  void disparar();
+  void disparar(Punto target);
   void seleccionar();
   void deseleccionar();
   void guiRequest(ColectorDeAcciones& colector) const;
@@ -49,7 +49,8 @@ class ElementoUnidad : public ElementoColoreado{
     sur = 6,
     sureste = 7,
     este = 0,
-    noreste = 1
+    noreste = 1,
+    centro = 9
   };
   VistaDireccionada* vistaMovimiento;
   VistaDireccionada* vistaDisparar;

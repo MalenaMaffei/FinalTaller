@@ -118,5 +118,5 @@ void ElementoManager::mover(Paquete &paquete) {
 
 void ElementoManager::disparar(Paquete &paquete) {
     ElementoUnidad* unidad = unidades.at(paquete.getId());
-    unidad->disparar();
+    unidad->disparar(Punto(paquete.getX(), paquete.getY()));
 }

@@ -13,6 +13,7 @@ class VistaDireccionada : public Vista{
 //  void mostrar(int x, int y, int nrClip, int direccion);
   int getLargoAnimacion() const;
   int getClip(int clip, int direccion) const;
+  virtual bool isLastClip(int clip, int direccion) const;
  protected:
   int largoAnimacion;
 };

@@ -34,7 +34,7 @@
 #include "Header Files/VistaPyroDisparar.h"
 #include "Header Files/VistaRobotCaminar.h"
 #include "Header Files/VistaRobotMorir.h"
-const int SCREEN_FPS = 20;
+const int SCREEN_FPS = 30;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 
