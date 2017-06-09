@@ -77,9 +77,10 @@ enum comandos{
   matar = 1,
   mover = 2,
   disparar = 3,
-  info = 4,
+  infoUnidad = 4,
   mapa = 5,
-  equipo = 6
+  equipo = 6, 
+  infoFabrica = 7
 };
 
 enum tipos{
