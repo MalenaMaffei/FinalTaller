@@ -15,6 +15,8 @@ const int TILE_WIDTH = 16;
 const int TILE_HEIGHT = 16;
 const int TILE_CLIPS = 4;
 
+const int COLORES = 4;
+
 const char tankPath[] = "../client/imgs/tank.png";
 const char tilePath[] = "../client/imgs/ciudadTiles.png";
 const char rocaPath[] = "../client/imgs/Rocas/roca_roca.png";
@@ -42,7 +44,8 @@ const char tanqueMissilePath[] = "../client/imgs/Tanks/missile.png";
 
 //---------------------HUD---------------------
 const char hudPath[] = "../client/imgs/Gui/hud.png";
-const char carasPath[] = "../client/imgs/Gui/Unidades/unidades.png";
+const char carasPath[] = "../client/imgs/Gui/unidades.png";
+const char unidadesLabelPath[] = "../client/imgs/Gui/unit_labels.png";
 const char guiEdificioPath[] = "../client/imgs/Gui/edificio.png";
 
 
