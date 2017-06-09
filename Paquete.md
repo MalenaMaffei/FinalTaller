@@ -17,12 +17,16 @@ comando | id | x | y | tipo
 
 ##### PedirInfo ######
 Se va a enviar cuando el usuario hace click sobre una unidad para saber su vida
-
+###### Caso Unidad: ######
 comando | id |
 --- | --- |
 4 | 007 |
 1 char | 3 chars |
-
+###### Caso Fabrica: ######
+comando | id |
+--- | --- |
+7 | 007 |
+1 char | 3 chars |
 ##### Disparar ######
 comando | id | id
 --- | --- | ---
@@ -65,6 +69,20 @@ comando | id |
 || el/lo que murio |
 1 char | 3 chars |
 
+##### Informacion #####
+###### Caso Unidad: ######
+comando | id | tipo | vida | 
+--- | --- | --- | --- |
+4 | 007 | 09 | 999 |
+||| tipo unidad | vida que le queda |
+1 char | 3 chars | 2 chars | 3 chars |
+
+###### Caso Fabrica: ######
+comando | id | tipo | vida | cant q puede construir | tipo 1 | tipo 2 | ... |
+--- | --- | --- | --- | --- | --- | --- | --- |
+7 | 007 | 03 | 999 | 02 | 09 | 10 |
+||| fuerte | vida que le queda | cuantas unidades sabe construir | tipo pyro | tipo sniper |
+1 char | 3 chars | 2 chars | 3 chars | 2 chars | 2 chars | 2 chars |
 
 ##### Enviar Mapa #####
 
