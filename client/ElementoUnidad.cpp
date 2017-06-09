@@ -12,7 +12,9 @@ ElementoUnidad::ElementoUnidad(std::string id,
                                int color) :
         ElementoColoreado(id, x, y, movimiento, esMio, color),
     vistaMovimiento(movimiento), vistaDisparar(disparar), direccion(0),
-        estado(haciendoNada), vistaMuerte(vistaMuerte){}
+        estado(haciendoNada), vistaMuerte(vistaMuerte){
+    printf("el id que le llega a unidad: %s\n", id.c_str());
+}
 
 
 void ElementoUnidad::mover(Punto nuevo) {
@@ -45,7 +47,6 @@ void ElementoUnidad::avanzarMuerte() {
 }
 
 void ElementoUnidad::avanzarDisparo() {
-    printf("current clip: %i\n", currentClip);
     if (vistaDisparar->isLastClip(currentClip, 0)){
         estado = haciendoNada;
         textura = vistaMovimiento;
@@ -64,7 +65,6 @@ void ElementoUnidad::disparar(Punto target) {
     textura = vistaDisparar;
     direccion = rect.getPunto().calcularDireccion(target);
 //    currentClip = vistaDisparar->getClip(currentClip, direccion);
-    printf("direccion: %i\n", direccion);
 }
 
 void ElementoUnidad::matar() {

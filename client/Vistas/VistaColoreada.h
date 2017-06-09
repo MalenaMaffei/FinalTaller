@@ -11,7 +11,7 @@ class VistaColoreada : public Vista {
                      int clips,
                      const std::string &fileName,
                      int cantColores);
-//    virtual void mostrar(Punto p, int nrClip);
+//    virtual void mostrar(Punto ubicacion, int nrClip);
  protected:
   virtual void recorrerImagen();
   int cantColores;

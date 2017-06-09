@@ -4,18 +4,19 @@
 #define Y_CARA 58
 
 Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
-    (vistaCaras), seleccionado(false), p(SCREEN_WIDTH - hud.getWidth(), 0) {
-    hudRect = {p,hud.getWidth(),hud.getHeight()};
+    (vistaCaras), seleccionado(false), ubicacion(SCREEN_WIDTH - hud.getWidth(), 0) {
+    hudRect = {ubicacion,hud.getWidth(),hud.getHeight()};
 }
 
 void Hud::mostrar() {
-    vistaHud.mostrar(p, 0);
+    vistaHud.mostrar(ubicacion, 0);
     mostrarContenido();
 //    TODO sacar despues
     if (seleccionado){
+        printf("hubo seleccion\n");
 //        TODO hacer esto atributo
         Punto caraOffset(X_CARA,Y_CARA);
-        Punto caraPos = p + caraOffset;
+        Punto caraPos = ubicacion + caraOffset;
         vistaCaras.mostrar(caraPos, 0);
     }
 }

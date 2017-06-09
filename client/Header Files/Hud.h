@@ -13,7 +13,7 @@ class Hud {
   Vista& vistaCaras;
   Rect hudRect;
 //  int x, y;
-  Punto p;
+  Punto ubicacion;
   int tipoCara;
   bool seleccionado;
   int aMostrar;

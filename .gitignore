@@ -1,5 +1,6 @@
-/SonidoXML/build/
-/SonidoXML/dist/
+client/SonidoXML/
+client/SonidoXML/dist/
+client/SonidoXML/nbproject/
 /cliente/build/
 /cliente/dist/
 .*/

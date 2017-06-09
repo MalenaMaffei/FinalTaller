@@ -5,13 +5,16 @@
 using std::string;
 
 Elemento::Elemento(string id, int x, int y, Vista *textura, bool esMio)
-    : textura(textura), id(id), currentClip(0), muerto(false), Mio(esMio) {
+    : textura(textura),id(id), currentClip(0), muerto(false), Mio(esMio) {
     rect.x = x;
     rect.y = y;
 
     //Set the collision box
     rect.w = textura->getWidth();
     rect.h = textura->getHeight();
+
+    printf("el id que le llega al elemento: %s\n", id.c_str
+        ());
 }
 
 void Elemento::mostrar(Camara &camera) {

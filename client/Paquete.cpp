@@ -7,17 +7,7 @@ using std::to_string;
 
 std::string Paquete::crearCampo(int campo, int contenido) {
     string contenidoStr = to_string(contenido);
-    crearCampo(campo, contenidoStr);
-//    int filler = campo - contenidoStr.size();
-//    if (filler < 0){
-//        throw std::invalid_argument("Creando Paquete: El contenido: "+
-//            contenidoStr+" fue mayor al largo del campo "+to_string(campo));
-//    } else if (filler > 0){
-//        for (int i = 0; i < filler; ++i) {
-//            contenidoStr.insert(0,  "0");
-//        }
-//    }
-//    return contenidoStr;
+    return crearCampo(campo, contenidoStr);
 }
 
 std::string Paquete::crearCampo(int campo, std::string contenidoStr) {
@@ -35,7 +25,6 @@ std::string Paquete::crearCampo(int campo, std::string contenidoStr) {
 
 
 void Paquete::atacar(string idAgresor, string idAgredido) {
-//    CodigosPaquete codigos;
     string agresor = crearCampo(codigos.id, idAgresor);
     string agredido = crearCampo(codigos.id, idAgredido);
     string comando = crearCampo(codigos.comando, codigos.disparar);
@@ -43,7 +32,6 @@ void Paquete::atacar(string idAgresor, string idAgredido) {
 }
 
 void Paquete::crear(string id, int x, int y, int tipo) {
-//    CodigosPaquete codigos;
     string creadorStr = crearCampo(codigos.id, id);
     string xStr = crearCampo(codigos.x, x);
     string yStr = crearCampo(codigos.y, y);
@@ -54,14 +42,12 @@ void Paquete::crear(string id, int x, int y, int tipo) {
 }
 
 void Paquete::pedirInfo(string id) {
-//    CodigosPaquete codigos;
     string idStr = crearCampo(codigos.id, id);
     string comando = crearCampo(codigos.comando, codigos.info);
     mensaje = comando + idStr;
 }
 
 void Paquete::mover(string id, int x, int y) {
-//    CodigosPaquete codigos;
     string idStr = crearCampo(codigos.id, id);
     string xStr = crearCampo(codigos.x, x);
     string yStr = crearCampo(codigos.y, y);
@@ -75,6 +61,7 @@ string & Paquete::getMensaje()  {
 
 void Paquete::setMensaje(const string &mensaje) {
     Paquete::mensaje = mensaje;
+
 }
 
 std::string Paquete::getId() const {

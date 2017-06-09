@@ -55,11 +55,13 @@ void ColectorDeAcciones::crearAcciones() {
         //        TODO dispatch para saber si fue edificio o unidad
 
 //        TODO obviamente le voy a tener que pasar mas info o no, no se
-//        printf("request info MIO de id: %i\n", clickeado->getId());
+        printf("request info MIO de id: %s\n", clickeado->getId().c_str());
         paquete.pedirInfo(clickeado->getId());
 //        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
-        colaSalida.encolar(paquete);
+//        colaSalida.encolar(paquete);
+        printf("a punto de pedir gui\n");
         clickeado->guiRequest(*this);
+
     } else if (selectBox.haySeleccion()){
         vector<ElementoUnidad> seleccion = selectBox.getSeleccionadas();
         for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad

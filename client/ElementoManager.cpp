@@ -26,6 +26,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
     string id = paquete.getId();
+    printf("id en fabricar unidad: %s\n", id.c_str());
     unidad = new ElementoUnidad(id, paquete.getX(), paquete.getY(),
                                 vistaManager.getVistaCaminar(tipo),
                                 vistaManager.getVistaDisparo(tipo),
@@ -34,7 +35,6 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
                                 paquete.getColor());
 
     unidades[id] = unidad;
-    printf("creo en %i,%i\n", paquete.getX(), paquete.getY());
 }
 
 void ElementoManager::fabricarElemento(Paquete &paquete) {

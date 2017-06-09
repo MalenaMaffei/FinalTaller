@@ -12,8 +12,8 @@ VistaColoreada::VistaColoreada(SDL_Renderer *gRenderer,
                                                         cantColores),
                                                   cantColores(cantColores) {}
 
-//void VistaColoreada::mostrar(Punto p, int nrClip) {
-//    Vista::mostrar(p, nrClip + (color * clips));
+//void VistaColoreada::mostrar(Punto ubicacion, int nrClip) {
+//    Vista::mostrar(ubicacion, nrClip + (color * clips));
 //}
 
 void VistaColoreada::recorrerImagen() {

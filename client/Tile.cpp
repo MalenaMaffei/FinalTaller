@@ -20,7 +20,7 @@ void Tile::mostrar(Camara &camera){
     //If the tile is on screen
     if (camera.checkCollision(mBox)){
         //Show the tile
-//        Punto p = mBox.getPunto() - camera.getOffset();
+//        Punto ubicacion = mBox.getPunto() - camera.getOffset();
         textura->mostrar(mBox.getPunto() - camera.getOffset(), mType);
     }
 }

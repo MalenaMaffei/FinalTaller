@@ -8,12 +8,9 @@ class Click;
 class ColectorDeAcciones;
 class Elemento {
  public:
-//  TODO refactorizar la necesidad de pasar width height
   Elemento(std::string id, int x, int y, Vista *textura, bool esMio);
   virtual void mostrar(Camara &camera);
   virtual bool estaMuerto() const;
-//  TODO deberia ser virtual total pero por ahora lo dejo vacio porque no
-// tengo tiempo de ponerme hacer todos de un saque antes de probar
   virtual void matar();
   const Rect & getRect() const;
   std::string getId() const;
