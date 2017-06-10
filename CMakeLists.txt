@@ -28,12 +28,10 @@ set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
 
-add_definitions(${GTK3_CFLAGS_OTHER})
 
-include_directories(${SDL2_INCLUDE_DIR} ${GTK3_INCLUDE_DIRS}${TINYXL2_INCLUDE_DIR})
-link_directories(${GTK3_LIBRARY_DIRS}${TINYXML2_LIBRARIES})
+include_directories(${SDL2_INCLUDE_DIR} ${TINYXL2_INCLUDE_DIR})
+link_directories(${TINYXML2_LIBRARIES})
 
 file(GLOB VISTA_SRC
         "client/Header Files/*.h"
@@ -42,7 +40,7 @@ file(GLOB VISTA_SRC
         )
 
 add_executable(vista ${VISTA_SRC})
-target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} Threads::Threads ${GTK3_LIBRARIES})
+target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} Threads::Threads)
 
 file(GLOB SERVER_SRC
 		"server/*.h"
