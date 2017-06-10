@@ -38,6 +38,10 @@ void Bloque::colisionar(Bandera& bandera) {
 	//Nada
 } 
 
+void Bloque::colisionar(Edificio& edificio) {
+	//Nada
+} 
+
 
 Bloque::~Bloque () { }
 
