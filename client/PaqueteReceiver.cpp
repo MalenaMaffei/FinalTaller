@@ -9,6 +9,17 @@ void PaqueteReceiver::run() {
 
     while (!salir){
 
+
+        Paquete color;
+        color.setMensaje("61");
+        cola.encolar(color);
+        Paquete mapa;
+        mapa.setMensaje
+            ("50000000000111111111122222222223333333333000000000011111111112222222222333333333301230123013333333333");
+        cola.encolar(mapa);
+
+
+
         int espera = 200;
         Paquete p1, p2, p3, p4, p5, p6;
         p1.setMensaje("000101010101061");
@@ -117,6 +128,10 @@ void PaqueteReceiver::run() {
         cola.encolar(bandera);
         std::this_thread::sleep_for(std::chrono::milliseconds(espera));
         bandera.setMensaje("005201000001022");
+
+
+
+
 //        cola.encolar(bandera);
         salir = true;
 
