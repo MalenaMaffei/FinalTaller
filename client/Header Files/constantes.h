@@ -13,9 +13,6 @@ const int LEVEL_WIDTH = SCREEN_WIDTH*10;
 const int LEVEL_HEIGHT = SCREEN_HEIGHT*10;
 
 
-
-
-
 //Tile constants
 const int TILE_WIDTH = 16;
 const int TILE_HEIGHT = 16;

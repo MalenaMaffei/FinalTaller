@@ -1,7 +1,7 @@
 #include "Header Files/Hud.h"
 #include "Header Files/constantes.h"
-#define X_CARA 9
-#define Y_CARA 58
+#define X_CARA 8
+#define Y_CARA 46
 
 Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
     (vistaCaras), seleccionado(false), ubicacion(SCREEN_WIDTH - hud.getWidth(), 0) {
