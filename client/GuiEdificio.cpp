@@ -10,9 +10,10 @@ void GuiEdificio::mostrar(Punto offset) {
     if (seMuestra){
         Punto pReal = position - offset;
 //        TODO sacar numeros magicos
+
         cancel = Rect(pReal + Punto(OFF_CANCEL_X, OFF_CANCEL_Y), 40, 14);
         ok = Rect(pReal + Punto(OFF_OK_X, OFF_OK_Y), 40, 13);
-        vistaGui.mostrar(position, 0);
+        vistaGui.mostrar(pReal, 0);
     }
 }
 
