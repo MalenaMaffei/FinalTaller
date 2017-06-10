@@ -52,28 +52,13 @@ enum largos {
 	color = 1
 };
 
-std::string getMensaje(Movible* elemento, std::string clave){
-  	int mensajeX = elemento->getPosicion ()[0]*100;
-	std::string xStr = std::to_string(mensajeX);
-	int lenX = xStr.size ();
-	for (int i=0;i<(4-lenX);i++) {
-		xStr.insert (0,"0");
-	}
-	int mensajeY = elemento->getPosicion ()[1]*100;
-	std::string yStr = std::to_string(mensajeX);
-	int lenY = yStr.size();
-	for (int i=0;i<(4-lenY);i++) {
-		yStr.insert (0,"0");
-	}
-	std::string tipo = std::to_string(elemento->getTipo ());
-	int lenTipo = tipo.size();
-	for (int i=0;i<(2-lenTipo);i++) {
-		tipo.insert (0,"0");
-	}	
-	
-	std::string comando = "0";
-	std::string mensajeNuevo = comando+clave+xStr+yStr+tipo+std::to_string(elemento->getEquipo ());	
-	return mensajeNuevo;
+std::string agregarPadding(int n, int len) {
+	std::string nStr = std::to_string(n);
+	int lenN = nStr.size();
+	for (int i=0;i<(len-lenN);i++) {
+		nStr.insert (0,"0");
+	}  
+	return nStr;
 }
 
 Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m, 
@@ -101,39 +86,50 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	Bandera* bandera = new Bandera(0.4,0.4,2);
 	bandera->setPosicion ({0,0});
 	bandera->setEquipo(0);
-	inmovibles["i0"] = bandera;
+	inmovibles["i00"] = bandera;
 	
 	int mensajeX = bandera->getPosicion ()[0]*100;
-	std::string xStr = std::to_string(mensajeX);
-	int lenX = xStr.size ();
-	for (int i=0;i<(4-lenX);i++) {
-		xStr.insert (0,"0");
-	}
+	std::string xStr = agregarPadding(mensajeX,4);
+
 	int mensajeY = bandera->getPosicion ()[1]*100;
-	std::string yStr = std::to_string(mensajeX);
-	int lenY = yStr.size();
-	for (int i=0;i<(4-lenY);i++) {
-		yStr.insert (0,"0");
-	}
-	std::string tipo = std::to_string(bandera->getTipo ());
-	int lenTipo = tipo.size();
-	for (int i=0;i<(2-lenTipo);i++) {
-		tipo.insert (0,"0");
-	}	
-	
-	std::string comando = "0001";
+	std::string yStr = agregarPadding(mensajeY,4);
+
+	std::string tipo = agregarPadding(bandera->getTipo (),2);
+	std::string comando = "0i00";
+
 	mensaje = comando+xStr+yStr+tipo+std::to_string(bandera->getEquipo ());	
 	socket->SendStrWLen (mensaje);
 	
 	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
 	Robot* robot = fabricaR->getRobot (9);
-	movibles["002"] = (robot);
-
+	movibles["m00"] = (robot);
 	robot->setPosicion ({0.5,0.5});
 	robot->setEquipo (0);
 	
-	mensaje = getMensaje(movibles["002"],"002");
+	xStr = agregarPadding(0.5*100,4);
+	yStr = agregarPadding(0.5*100,4);
+	tipo = agregarPadding(robot->getTipo (),2);
+	comando = "0m00";
+	mensaje = comando+xStr+yStr+tipo+std::to_string(robot->getEquipo ());	
 	socket->SendStrWLen (mensaje);
+
+	proximoIDMovible++;
+	
+	Bloque* bloque = new Bloque(10,1,1,0);
+	inmovibles["i01"] = (bloque);
+
+	bloque->setPosicion ({4,4});
+
+	xStr = agregarPadding(4*100,4);
+	yStr = agregarPadding(4*100,4);
+	tipo = agregarPadding(bloque->getTipo (),2);
+	comando = "0i01";
+	mensaje = comando+xStr+yStr+tipo+std::string("0");	
+	socket->SendStrWLen (mensaje);
+
+	
+	socket->SendStrWLen (mensaje);
+
 	
 }
 
@@ -144,6 +140,8 @@ void Juego::eliminarMuertos() {
 	while (it1!=movibles.end()) {
 		Movible* movible = it1->second;
 		if (!movible->estaVivo () || movible->superaMaxDistancia ()) {
+			std::cout<<"Id: "<<it1->first<<std::endl;
+			std::cout<<"Vida: "<<movible->getVida ()<<std::endl;
 			std::cout<<"elimino un movible"<<std::endl;
 			std::string mensaje = "1"+it1->first;
 			colaDeEnviados.push(mensaje);
@@ -216,7 +214,7 @@ void Juego::moverUnidades() {
 }
 
 void Juego::chequearColisiones () {
-	//Cheque con objetos movibles
+	//Chequeo con objetos movibles
 	std::map<std::string, Movible*>::iterator it1 = movibles.begin ();
 	
 	while (it1 != movibles.end()) {
@@ -238,7 +236,10 @@ void Juego::chequearColisiones () {
 			}
 			Movible* mov2 = (it3)->second;
 			if (mov1->colisiona(*mov2)) {
+				std::cout<<it1->first<<" colision con "<<it3->first<<std::endl;
+				std::cout<<"Antes "<<mov1->getVida ()<<std::endl;
 				mov1->colisionar(*mov2);
+				std::cout<<"Despues " << mov1->getVida ()<<std::endl;
 			}
 			++it3;
 		}
@@ -281,24 +282,19 @@ void Juego::actualizarDisparos() {
 		}
 		  
 		if (objetivo) {
-			Municion* municion = fabricaMuniciones->getMunicion (0);
+			Municion* municion = fabricaMuniciones->getMunicion (17);
 			municion->setEquipo (movible->getEquipo ());
 			municion->setPosicion (movible->getPosicion ());
 			municion->setObjetivo (idObjetivo);
 			std::array<double,2> target = objetivo->getPosicion ();
 			municion->mover (target);
-			movibles["m"+std::to_string(proximoIDMovible)] = municion;
+			movibles["m"+agregarPadding(proximoIDMovible,2)] = municion;
 			int mensajeX = target[0]*100;
-			std::string xStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-xStr.size ());i++) {
-				xStr.insert (0,"0");
-			}
+			std::string xStr = agregarPadding(mensajeX,4);
 			int mensajeY = target[1]*100;
-			std::string yStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-yStr.size ());i++) {
-				yStr.insert (0,"0");
-			}						
+			std::string yStr = agregarPadding(mensajeX,4);
 			std::string mensaje = "3"+it1->first+xStr+yStr;
+			std::cout<<mensaje<<std::endl;
 			proximoIDMovible ++;
 		}
 		++it1;
@@ -320,26 +316,17 @@ void Juego::actualizarEdificios() {
 				continue;
 			}
 			Vehiculo* vehiculo = fabricaV->getVehiculo (tipo);
-			std::string id ="m"+std::to_string(proximoIDMovible);
+			std::string id ="m"+agregarPadding(proximoIDMovible,2);
 			movibles[id] = vehiculo;
 			//Posicion de creacion hardcodeada
 			//Todos se crean en la misma posicion
 			//TODO
 			vehiculo->setPosicion ({posEdificio[0]+1,posEdificio[1]+1});
 			int mensajeX = vehiculo->getPosicion ()[0]*100;
-			std::string xStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-xStr.size ());i++) {
-				xStr.insert (0,"0");
-			}
+			std::string xStr = agregarPadding(mensajeX,4);
 			int mensajeY = vehiculo->getPosicion ()[1]*100;
-			std::string yStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-yStr.size ());i++) {
-				yStr.insert (0,"0");
-			}
-			std::string tipo = std::to_string(vehiculo->getTipo ());
-			for (int i=0;i<(2-yStr.size ());i++) {
-				yStr.insert (0,"0");
-			}			
+			std::string yStr = agregarPadding(mensajeY,4);
+			std::string tipo = agregarPadding(vehiculo->getTipo (),2);
 			std::string mensaje = "0"+id+xStr+yStr+tipo+std::to_string(vehiculo->getEquipo ());
 			//Avisar al cliente que se creo un vehiculo
 			colaDeEnviados.push (mensaje);
@@ -353,26 +340,17 @@ void Juego::actualizarEdificios() {
 				continue;
 			}
 			Robot* robot = fabricaR->getRobot (tipo);
-			movibles["m"+std::to_string(proximoIDMovible)] = robot;
+			movibles["m"+agregarPadding(proximoIDMovible,2)] = robot;
 			
 			//Posicion de creacion hardcodeada
 			//Todos se crean en la misma posicion
 			//TODO
 			robot->setPosicion ({posEdificio[0]+1,posEdificio[1]+1});
 			int mensajeX = robot->getPosicion ()[0]*100;
-			std::string xStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-xStr.size ());i++) {
-				xStr.insert (0,"0");
-			}
+			std::string xStr = agregarPadding(mensajeX,4);
 			int mensajeY = robot->getPosicion ()[1]*100;
-			std::string yStr = std::to_string(mensajeX);
-			for (int i=0;i<(6-yStr.size ());i++) {
-				yStr.insert (0,"0");
-			}
-			std::string tipo = std::to_string(robot->getTipo ());
-			for (int i=0;i<(2-yStr.size ());i++) {
-				yStr.insert (0,"0");
-			}			
+			std::string yStr = agregarPadding(mensajeY,4);
+			std::string tipo = agregarPadding(robot->getTipo (),2);
 			std::string mensaje = "0"+id+xStr+yStr+tipo+std::to_string(robot->getEquipo ());
 			//Avisar al cliente que se creo un vehiculo
 			colaDeEnviados.push (mensaje);
@@ -426,7 +404,6 @@ void Juego::recibirMover(std::string mensaje) {
 void Juego::recibirDisparar(std::string mensaje) {
 	std::string idAgresor = mensaje.substr(1,id);
 	std::string idAgredido = mensaje.substr(4,id);
-
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 

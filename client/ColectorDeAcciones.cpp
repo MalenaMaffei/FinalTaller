@@ -2,6 +2,7 @@
 #include "Header Files/Hud.h"
 #include "Header Files/GuiEdificio.h"
 #include "Header Files/Paquete.h"
+#include <iostream>
 #include <algorithm>
 #include <vector>
 using std::vector;
@@ -69,8 +70,8 @@ void ColectorDeAcciones::crearAcciones() {
               if (unidad.estaMuerto()){
                   return;
               }
-            printf("Unidad id: %i ataca a Elemento id: %i\n", unidad.getId(),
-                   clickeado->getId());
+            std::cout<<"Unidad id: "<<unidad.getId()<<" ataca a Elemento id: "<<
+				clickeado->getId()<< std::endl;
             paquete.atacar(unidad.getId(),clickeado->getId());
             colaSalida.encolar(paquete);
         });

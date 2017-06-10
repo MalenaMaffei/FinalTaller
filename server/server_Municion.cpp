@@ -91,6 +91,7 @@ void Municion::colisionar(Municion& municion) {
 void Municion::colisionar(Unidad& personaje) {
 	//No colisiona con personajes del mismo equipo
 	if (idEquipo == personaje.getEquipo ()) {
+		std::cout<<"son del mismo equipo en municion"<<std::endl;
 		return;
 	}
 	std::cout<<"colisiona municion con personaje"<<std::endl;

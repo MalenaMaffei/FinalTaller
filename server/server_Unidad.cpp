@@ -41,6 +41,7 @@ void Unidad::colisionar(Objeto& objeto) {
 
 void Unidad::colisionar(Municion& municion) {
 	if (idEquipo == municion.getEquipo ()) {
+		std::cout<<"son delmismo eqiop en unidad"<<std::endl;
 		return;
 	}
 	this->recibirDanio(municion.getDanio ());

@@ -18,6 +18,7 @@
 #include "server_Unidad.h"
 #include "server_Municion.h"
 #include "server_Bandera.h"
+#include "server_Edificio.h"
 
 class Bloque : public Inmovible {
 public:
@@ -27,6 +28,7 @@ public:
     void colisionar (Unidad& personaje) override;
     void colisionar(Bloque& bloque) override; 
     void colisionar(Bandera& bandera) override; 
+    void colisionar (Edificio& edificio) override;
     virtual ~Bloque();
 private:
     

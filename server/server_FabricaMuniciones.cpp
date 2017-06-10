@@ -12,6 +12,7 @@
  */
 
 #include "server_FabricaMuniciones.h"
+#include <iostream>
 #include <tinyxml2.h>
 
 enum TipoDeMunicion{
@@ -58,5 +59,6 @@ Municion* FabricaMuniciones::getMunicion(int tipo) {
 	//Por ahora la vida de la bala es igual al daño que hace, y cuando impacta,
 	//se resta su propia vida
 	//Velocidad 1 por ahora
+	std::cout<<municiones[tipo]<<std::endl;
 	return new Municion(municiones[tipo],0.1,0.1,tipo,municiones[tipo],1);
 }
