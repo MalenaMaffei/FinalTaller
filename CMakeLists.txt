@@ -48,6 +48,7 @@ file(GLOB SERVER_SRC
 		)
 
 add_executable(server ${SERVER_SRC})
+set_target_properties(server PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../server/)
 target_link_libraries(server ${TINYXML2_LIBRARIES} Threads::Threads)
 
 

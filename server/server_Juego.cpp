@@ -84,8 +84,6 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 												mapa(Mapa("mapa.map")), 
 												proximoIDMovible(0),
 												socket(socket){ 
-	//Reemplazar por inicializar juego
-//	FabricaRobots* fabricaRobots = FabricaRobots::getInstancia ();
 
 	std::string mapaString = mapa.obtenerMensajeMapa ();
 	std::string mensaje = "5" + mapaString; //No se envia el tamaño porque es convención	
@@ -95,19 +93,11 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	mensaje = "6" + std::to_string(equipo_1);
 	
 	socket->SendStrWLen (mensaje); //Envio equipo
-		
-//	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
-//	movibles["m0"] = (fabricaV->getVehiculo (0));
-//	movibles["m1"] = (fabricaV->getVehiculo (0));
-	
+			
 	banderasPorEquipo = {0,0,0,0};
 	
 	proximoIDMovible = 0;
 	
-//	std::cout<<"creo bloque"<<std::endl;
-//	inmovibles["i0"] = (new Bloque(2,1,1)); //Agrego un bloque de 1x1
-//	edificios["v0"] = ((Edificio*) new EdificioFabricaVehiculo(2,1,1,EQUIPO_2));
-//	std::cout<<"exito"<<std::endl;
 	Bandera* bandera = new Bandera(0.4,0.4,2);
 	bandera->setPosicion ({0,0});
 	bandera->setEquipo(0);
@@ -427,9 +417,9 @@ void Juego::recibirMover(std::string mensaje) {
 	std::string xStr = mensaje.substr(4,x);
 	std::string yStr = mensaje.substr(8,y);
 	
-	double x = stod(xStr,NULL);
-	double y = stod(yStr,NULL);
-	
+	double x = stod(xStr,NULL)/100;
+	double y = stod(yStr,NULL)/100;
+		
 	movibles[idStr]->mover ({x,y});
 }
 
