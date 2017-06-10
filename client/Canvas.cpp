@@ -34,6 +34,8 @@
 #include "Header Files/VistaPyroDisparar.h"
 #include "Header Files/VistaRobotCaminar.h"
 #include "Header Files/VistaRobotMorir.h"
+#include "CreadorMapa.h"
+#include <string>
 const int SCREEN_FPS = 30;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
@@ -177,69 +179,28 @@ void Canvas::run(){
     //Current animation frame
     int frame = 0;
 
-    //While application is running
-    int pos_robot = 0;
-    int pos_tanque = 0;
-    int pos = 0;
-
-
-//        Texture gBGTexture(gRenderer);
-//        gBGTexture.loadFromFile("../VistasSDL/imgs/bg.png");
+    while (colaEntrada.isEmpty()){
+//        TODO fix pedorro hasta uqe se me ocurra una mejor manera
+    }
+    Paquete color = colaEntrada.desencolar();
+    if (color.getComando() == 6){
+        miColor = std::stoi(color.getMensaje().substr(1));
+        printf("mi color es: %i", miColor);
+    }
+    while (colaEntrada.isEmpty()){
+//        TODO fix pedorro hasta uqe se me ocurra una mejor manera
+    }
     VistaTiles tilesTexture(gRenderer);
     std::vector<Tile> tiles;
-    for (int x = 0; x < LEVEL_WIDTH/TILE_WIDTH ; ++x) {
-        for (int y = 0; y < LEVEL_HEIGHT/TILE_HEIGHT; ++y) {
-            Tile tile(x*TILE_WIDTH, y*TILE_HEIGHT, getTileType(x,y),
-                       &tilesTexture);
-            tiles.push_back(tile);
-        }
+    CreadorMapa creadorMapa;
+    Paquete mapa = colaEntrada.desencolar();
+//    TODO poner proper manejador de este tipo de paquetes aca.
+    if (mapa.getComando() == 5){
+        creadorMapa.crearMapa(mapa, tiles, tilesTexture);
     }
-
-
 
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
-
-//    VistaRoca rocaTextura(gRenderer);
-//    std::vector<Elemento*> elementos;
-//    for (int j = 0; j <640; j+=32) {
-//        Elemento* roca = new ElementoRoca(j, j+10, j+500,&rocaTextura);
-//        elementos.push_back(roca);
-//    }
-//
-//    VistaFuerte fuerteTextura(gRenderer);
-//    Elemento* fuerte1 =
-//        new ElementoFuerte(1, 100, 100, &fuerteTextura, true, 0);
-//    elementos.push_back(fuerte1);
-//    Elemento* fuerte2 =
-//        new ElementoFuerte(1, 900, 900, &fuerteTextura, false, 0);
-//    elementos.push_back(fuerte2);
-//
-//    VistaBandera banderaTextura(gRenderer);
-//    for (int j = 0; j <640; j+=32) {
-//        Elemento* bandera = new ElementoBandera(j, j + 60, j + 500,
-//                                                &banderaTextura, 0);
-//        elementos.push_back(bandera);
-//    }
-//
-//    VistaPuente puenteTextura(gRenderer);
-//    for (int j = 0; j <640; j+=64) {
-//        Elemento* puente = new ElementoPuente(j, j+200, j+800,
-//                                              &puenteTextura, j%3==0);
-//        elementos.push_back(puente);
-//    }
-//
-//    VistaRobotCaminar robotCaminarTextura(gRenderer);
-//    VistaPyroDisparar pyroDispararTextura(gRenderer);
-////   VistaMuerteRobot robotMorirTextura(gRenderer);
-//    VistaRobotMorir robotMorirTextura(gRenderer);
-//    std::vector<ElementoUnidad*> unidades;
-//    for (int i = 40; i < 40*2; i+=45) {
-//        unidades.push_back(new ElementoRobot(i,i,20,&robotCaminarTextura,
-//                                             &pyroDispararTextura,
-//                                             &robotMorirTextura, i%2==0));
-//    }
-
 
 
     VistaHud vistaHud(gRenderer);
@@ -298,20 +259,6 @@ void Canvas::run(){
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
-//        std::for_each(elementos.begin(), elementos.end(), [&](Elemento*
-//        elemento){
-//          elemento->mostrar(camara);
-//          elemento->clicked(click);
-//        });
-////
-////
-//        std::for_each(unidades.begin(), unidades.end(), [&]
-//            (ElementoUnidad* unidad){
-//          unidad->mostrar(camara);
-//          unidad->chequearSeleccion(selectBox);
-//          unidad->clicked(click);
-//        });
-
 
 
         selectBox.mostrar(gRenderer, camara.getOffset());
@@ -319,16 +266,6 @@ void Canvas::run(){
         guiEdificio.mostrar(camara.getOffset());
 
 
-//        std::for_each(unidades.begin(), unidades.end(), [&]
-//            (ElementoUnidad* unidad){
-//          unidad->chequearSeleccion(selectBox);
-//          unidad->clicked(click);
-//        });
-
-
-
-        ++pos_robot;
-        ++pos_tanque;
         //Update screen
         SDL_RenderPresent(gRenderer);
         colector.crearAcciones();

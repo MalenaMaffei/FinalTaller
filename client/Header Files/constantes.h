@@ -1,19 +1,21 @@
 #ifndef TPFINAL_CONSTANTES_H
 #define TPFINAL_CONSTANTES_H
 
-
-//Screen dimension constants
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-
-//The dimensions of the level
-const int LEVEL_WIDTH = SCREEN_WIDTH*4;
-const int LEVEL_HEIGHT = SCREEN_HEIGHT*6;
-
 //Tile constants
 const int TILE_WIDTH = 16;
 const int TILE_HEIGHT = 16;
 const int TILE_CLIPS = 4;
+const int TILESX = 400;
+const int TILESY = 400;
+
+//TODO sacar esos numeros magicos y reemplazar por cuenta con nuevos TILESXY
+//const int LEVEL_WIDTH = SCREEN_WIDTH*8;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 800;
+const int LEVEL_WIDTH = TILESX*TILE_WIDTH;
+const int LEVEL_HEIGHT = TILESY*TILE_HEIGHT;
+
+
 
 const int COLORES = 4;
 

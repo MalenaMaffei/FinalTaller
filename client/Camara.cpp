@@ -19,18 +19,18 @@ void Camara::handleEvent(SDL_Event& e){
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0){
         //Adjust the velocity
         switch (e.key.keysym.sym){
-            case SDLK_w: mVelY -= DOT_VEL; break;
-            case SDLK_s: mVelY += DOT_VEL; break;
-            case SDLK_a: mVelX -= DOT_VEL; break;
-            case SDLK_d: mVelX += DOT_VEL; break;
+            case SDLK_w: mVelY -= CAM_VEL; break;
+            case SDLK_s: mVelY += CAM_VEL; break;
+            case SDLK_a: mVelX -= CAM_VEL; break;
+            case SDLK_d: mVelX += CAM_VEL; break;
         }
     }else if (e.type == SDL_KEYUP && e.key.repeat == 0){
         //Adjust the velocity
         switch (e.key.keysym.sym){
-            case SDLK_w: mVelY += DOT_VEL; break;
-            case SDLK_s: mVelY -= DOT_VEL; break;
-            case SDLK_a: mVelX += DOT_VEL; break;
-            case SDLK_d: mVelX -= DOT_VEL; break;
+            case SDLK_w: mVelY += CAM_VEL; break;
+            case SDLK_s: mVelY -= CAM_VEL; break;
+            case SDLK_a: mVelX += CAM_VEL; break;
+            case SDLK_d: mVelX -= CAM_VEL; break;
         }
     }
 }

@@ -13,8 +13,8 @@ class Camara {
 //  static const int DOT_HEIGHT = 20;
 
   //Maximum axis velocity of the dot
-//  static const int DOT_VEL = 10;
-  static const int DOT_VEL = 640;
+//  static const int CAM_VEL = 10;
+  static const int CAM_VEL = 700;
 
   //Initializes the variables
   explicit Camara();
