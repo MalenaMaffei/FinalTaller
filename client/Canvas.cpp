@@ -337,11 +337,11 @@ void Canvas::run(){
 
 
 
-//        int frameTicks = capTimer.getTicks();
-//        if( frameTicks < SCREEN_TICK_PER_FRAME ){
-//            //Wait remaining time
-//            SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-//        }
+        int frameTicks = capTimer.getTicks();
+        if( frameTicks < SCREEN_TICK_PER_FRAME ){
+            //Wait remaining time
+            SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+        }
     }
 
 

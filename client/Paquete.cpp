@@ -5,12 +5,12 @@
 using std::string;
 using std::to_string;
 
-std::string Paquete::crearCampo(int campo, int contenido) {
+string Paquete::crearCampo(int campo, int contenido) {
     string contenidoStr = to_string(contenido);
     return crearCampo(campo, contenidoStr);
 }
 
-std::string Paquete::crearCampo(int campo, std::string contenidoStr) {
+string Paquete::crearCampo(int campo, std::string contenidoStr) {
     int filler = campo - contenidoStr.size();
     if (filler < 0){
         throw std::invalid_argument("Creando Paquete: El contenido: "+
@@ -64,26 +64,22 @@ void Paquete::setMensaje(const string &mensaje) {
 
 }
 
-std::string Paquete::getId() const {
+string Paquete::getId() const {
     return mensaje.substr(1,codigos.id);
 }
 
 int Paquete::getComando() const {
-  //printf("substr de comando:%s \n", mensaje.substr(0,codigos.comando).c_str());
     return stoi(mensaje.substr(0,codigos.comando));
 }
 
 int Paquete::getX() const {
-//    CodigosPaquete codigos;
     if (getComando() == codigos.matar){
         throw std::invalid_argument("Paquete matar no tiene campo X.");
     }
     return stoi(mensaje.substr(4,codigos.x));
-//    y = stoi(mensaje.substr(8,4));;
 }
 
 int Paquete::getY() const {
-//    CodigosPaquete codigos;
     if (getComando() == codigos.matar){
         throw std::invalid_argument("Paquete matar no tiene campo Y.");
     }
@@ -91,7 +87,6 @@ int Paquete::getY() const {
 }
 
 int Paquete::getTipo() const {
-//    CodigosPaquete codigos;
     if (getComando() != codigos.crear){
         throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
             "tiene campo Tipo.");
