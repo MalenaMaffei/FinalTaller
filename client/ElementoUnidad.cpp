@@ -13,7 +13,6 @@ ElementoUnidad::ElementoUnidad(std::string id,
         ElementoColoreado(id, x, y, movimiento, esMio, color),
     vistaMovimiento(movimiento), vistaDisparar(disparar), direccion(0),
         estado(haciendoNada), vistaMuerte(vistaMuerte){
-    printf("el id que le llega a unidad: %s\n", id.c_str());
 }
 
 
@@ -39,7 +38,6 @@ void ElementoUnidad::avanzarMuerte() {
     if (vistaMuerte->isLastClip(currentClip)){
         estado = haciendoNada;
         muerto = true;
-        printf("%i se murio\n", id);
         return;
     }
     ++currentClip;

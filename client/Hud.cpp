@@ -13,7 +13,6 @@ void Hud::mostrar() {
     mostrarContenido();
 //    TODO sacar despues
     if (seleccionado){
-        printf("hubo seleccion\n");
 //        TODO hacer esto atributo
         Punto caraOffset(X_CARA,Y_CARA);
         Punto caraPos = ubicacion + caraOffset;

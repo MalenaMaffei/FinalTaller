@@ -2,13 +2,19 @@
 #define TPFINAL_CONSTANTES_H
 
 
+//TODO 500x500 creo que es un poco mucho
+
 //Screen dimension constants
 const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-
+//const int SCREEN_HEIGHT = 600;
+const int SCREEN_HEIGHT = 800;
 //The dimensions of the level
-const int LEVEL_WIDTH = SCREEN_WIDTH*4;
-const int LEVEL_HEIGHT = SCREEN_HEIGHT*6;
+const int LEVEL_WIDTH = SCREEN_WIDTH*10;
+const int LEVEL_HEIGHT = SCREEN_HEIGHT*10;
+
+
+
+
 
 //Tile constants
 const int TILE_WIDTH = 16;

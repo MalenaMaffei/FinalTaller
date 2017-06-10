@@ -59,7 +59,6 @@ void ColectorDeAcciones::crearAcciones() {
         paquete.pedirInfo(clickeado->getId());
 //        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
 //        colaSalida.encolar(paquete);
-        printf("a punto de pedir gui\n");
         clickeado->guiRequest(*this);
 
     } else if (selectBox.haySeleccion()){
