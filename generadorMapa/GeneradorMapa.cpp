@@ -28,8 +28,8 @@ typedef enum {
 	CAMINO
 } territorios;
 
-#define H 500
-#define W 500
+#define H 400
+#define W 400
 #define PROBA 0.99
 
 GeneradorMapa::GeneradorMapa () { }

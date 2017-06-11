@@ -70,14 +70,14 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 												proximoIDMovible(0),
 												socket(socket){ 
 
+	std::string mensaje = "6" + std::to_string(equipo_1);
+	socket->SendStrWLen (mensaje); //Envio equipo
+  
 	std::string mapaString = mapa.obtenerMensajeMapa ();
-	std::string mensaje = "5" + mapaString; //No se envia el tamaño porque es convención	
+	mensaje = "5" + mapaString; //No se envia el tamaño porque es convención	
 	std::cout << mensaje.substr(0,1) << std::endl;
 	socket->SendStrWLen (mensaje); //Envio mapa
 	
-	mensaje = "6" + std::to_string(equipo_1);
-	
-	socket->SendStrWLen (mensaje); //Envio equipo
 			
 	banderasPorEquipo = {0,0,0,0};
 	

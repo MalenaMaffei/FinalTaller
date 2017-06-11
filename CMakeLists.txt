@@ -38,7 +38,6 @@ file(GLOB VISTA_SRC
         "client/*.cpp"
 		"client/Vistas/*.cpp"
         )
-
 add_executable(vista ${VISTA_SRC})
 target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} Threads::Threads)
 
@@ -46,9 +45,16 @@ file(GLOB SERVER_SRC
 		"server/*.h"
 		"server/*.cpp"
 		)
-
 add_executable(server ${SERVER_SRC})
 set_target_properties(server PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../server/)
 target_link_libraries(server ${TINYXML2_LIBRARIES} Threads::Threads)
+
+file(GLOB MAP_SRC
+		"generadorMapa/*.cpp"
+		"generadorMapa/*.h"
+		)
+add_executable(generador ${MAP_SRC})
+set_target_properties(generador PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../generadorMapa/)
+
 
 

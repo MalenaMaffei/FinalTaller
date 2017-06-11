@@ -20,6 +20,7 @@ class GeneradorMapa {
 public:
     GeneradorMapa();
     void generarMapa();
+    void generarMapa(const std::string& nombre);
     virtual ~GeneradorMapa();
 private:
 
