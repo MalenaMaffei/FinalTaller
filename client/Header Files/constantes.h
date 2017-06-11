@@ -20,7 +20,7 @@ const int LEVEL_HEIGHT = TILESY*TILE_HEIGHT;
 const int COLORES = 4;
 
 const char tankPath[] = "../client/imgs/tank.png";
-const char tilePath[] = "../client/imgs/ciudadTiles.png";
+const char tilePath[] = "../client/imgs/todosTiles.png";
 const char rocaPath[] = "../client/imgs/Rocas/roca_roca.png";
 const char hieloPath[] = "../client/imgs/Rocas/roca_hielo.png";
 const char balaPath[] = "../client/imgs/bala.png";
