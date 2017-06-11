@@ -83,7 +83,7 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	
 	proximoIDMovible = 0;
 	
-	Bandera* bandera = new Bandera(0.4,0.4,2);
+	Bandera* bandera = new Bandera(2,1.5,2);
 	bandera->setPosicion ({0,0});
 	bandera->setEquipo(0);
 	inmovibles["i00"] = bandera;
@@ -103,11 +103,11 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
 	Robot* robot = fabricaR->getRobot (9);
 	movibles["m00"] = (robot);
-	robot->setPosicion ({2,2});
+	robot->setPosicion ({2,0});
 	robot->setEquipo (0);
 	
-	xStr = agregarPadding(0.5*100,5);
-	yStr = agregarPadding(0.5*100,5);
+	xStr = agregarPadding(2*100,5);
+	yStr = agregarPadding(0*100,5);
 	tipo = agregarPadding(robot->getTipo (),2);
 	comando = "0m00";
 	mensaje = comando+xStr+yStr+tipo+std::to_string(robot->getEquipo ());	
@@ -115,7 +115,7 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 
 	proximoIDMovible++;
 	
-	Bloque* bloque = new Bloque(10,1,1,0);
+	Bloque* bloque = new Bloque(10,2,2,0);
 	inmovibles["i01"] = (bloque);
 
 	bloque->setPosicion ({4,4});
@@ -140,9 +140,9 @@ void Juego::eliminarMuertos() {
 	while (it1!=movibles.end()) {
 		Movible* movible = it1->second;
 		if (!movible->estaVivo () || movible->superaMaxDistancia ()) {
-			std::cout<<"Id: "<<it1->first<<std::endl;
-			std::cout<<"Vida: "<<movible->getVida ()<<std::endl;
-			std::cout<<"elimino un movible"<<std::endl;
+//			std::cout<<"Id: "<<it1->first<<std::endl;
+//			std::cout<<"Vida: "<<movible->getVida ()<<std::endl;
+//			std::cout<<"elimino un movible"<<std::endl;
 			std::string mensaje = "1"+it1->first;
 			colaDeEnviados.push(mensaje);
 			it1 = movibles.erase (it1);
@@ -187,15 +187,15 @@ void Juego::moverUnidades() {
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
-		std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
-		std::cout<<"casillero: "<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
+//		std::cout<<"casillero: "<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
 		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero);
-		std::cout<<"Factor de terreno "<<factorTerreno<<std::endl;
+//		std::cout<<"Factor de terreno "<<factorTerreno<<std::endl;
 		//Siempre devuelve el factor terreno de robot (agregar 2xDispatch)
 		//TODO
 		if (movible->mover (factorTerreno)) {
 			pos = movible->getPosicion ();
+			std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
 			int mensajeX = pos[0]*100;
 			std::string xStr = agregarPadding(mensajeX,5);
 
@@ -233,9 +233,9 @@ void Juego::chequearColisiones () {
 			Movible* mov2 = (it3)->second;
 			if (mov1->colisiona(*mov2)) {
 				std::cout<<it1->first<<" colision con "<<it3->first<<std::endl;
-				std::cout<<"Antes "<<mov1->getVida ()<<std::endl;
+//				std::cout<<"Antes "<<mov1->getVida ()<<std::endl;
 				mov1->colisionar(*mov2);
-				std::cout<<"Despues " << mov1->getVida ()<<std::endl;
+//				std::cout<<"Despues " << mov1->getVida ()<<std::endl;
 			}
 			++it3;
 		}
@@ -388,12 +388,11 @@ void Juego::actualizarRecibidos() {
 
 void Juego::recibirMover(std::string mensaje) {
 	std::string idStr = mensaje.substr(1,id);
-	std::string xStr = mensaje.substr(5,x);
+	std::string xStr = mensaje.substr(4,x);
 	std::string yStr = mensaje.substr(10,y);
 	
 	double x = stod(xStr,NULL)/100;
 	double y = stod(yStr,NULL)/100;
-		
 	movibles[idStr]->mover ({x,y});
 }
 
