@@ -387,9 +387,9 @@ void Juego::actualizarRecibidos() {
 }
 
 void Juego::recibirMover(std::string mensaje) {
-	std::string idStr = mensaje.substr(1,id);
-	std::string xStr = mensaje.substr(4,x);
-	std::string yStr = mensaje.substr(10,y);
+	std::string idStr = mensaje.substr(1,largos.id);
+	std::string xStr = mensaje.substr(4,largos.x);
+	std::string yStr = mensaje.substr(10,largos.y);
 	
 	double x = stod(xStr,NULL)/100;
 	double y = stod(yStr,NULL)/100;
@@ -397,13 +397,13 @@ void Juego::recibirMover(std::string mensaje) {
 }
 
 void Juego::recibirDisparar(std::string mensaje) {
-	std::string idAgresor = mensaje.substr(1,id);
-	std::string idAgredido = mensaje.substr(4,id);
+	std::string idAgresor = mensaje.substr(1,largos.id);
+	std::string idAgredido = mensaje.substr(4,largos.id);
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 
 void Juego::recibirObtenerInfo (std::string mensaje) {
-	std::string idStr = mensaje.substr(1,id);
+	std::string idStr = mensaje.substr(1,largos.id);
 	this->enviarInfo (idStr);
 }
 
