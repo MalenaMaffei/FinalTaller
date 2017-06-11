@@ -45,7 +45,7 @@ void GeneradorMapa::generarMapa(const std::string& nombre) {
 	myfile.open(nombre);
 	
 	std::default_random_engine generador (std::random_device{}());
-	std::uniform_int_distribution<int> distribucion_terrenos(0,7);
+	std::uniform_int_distribution<int> distribucion_terrenos(0,8);
 	std::uniform_real_distribution<double> probabilidad(0.0,1.0);
 	
 	for (size_t i = 0; i<H; i++){

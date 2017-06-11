@@ -4,7 +4,7 @@
 //Tile constants
 const int TILE_WIDTH = 16;
 const int TILE_HEIGHT = 16;
-const int TILE_CLIPS = 4;
+const int TILE_CLIPS = 8;
 const int TILESX = 400;
 const int TILESY = 400;
 

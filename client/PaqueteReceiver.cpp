@@ -15,11 +15,6 @@ void PaqueteReceiver::run() {
         mensaje = socket.ReceiveStrWLen();
 		printf("paquete %s\n", mensaje.c_str());
         Paquete paquete;
-		paquete.setMensaje(mensaje);
-		if (paquete.getComando() == 5 || paquete.getComando() == 6){
-			continue;
-
-		}
         paquete.setMensaje(mensaje);
         cola.encolar(paquete);
     }
