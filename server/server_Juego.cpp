@@ -45,8 +45,8 @@ enum comandos {
 enum largos {
 	comando = 1,
 	id = 3,
-	x = 4,
-	y = 4,
+	x = 5,
+	y = 5,
 	delCliente = 1,
 	tipo = 2,
 	color = 1
@@ -89,10 +89,10 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	inmovibles["i00"] = bandera;
 	
 	int mensajeX = bandera->getPosicion ()[0]*100;
-	std::string xStr = agregarPadding(mensajeX,4);
+	std::string xStr = agregarPadding(mensajeX,5);
 
 	int mensajeY = bandera->getPosicion ()[1]*100;
-	std::string yStr = agregarPadding(mensajeY,4);
+	std::string yStr = agregarPadding(mensajeY,5);
 
 	std::string tipo = agregarPadding(bandera->getTipo (),2);
 	std::string comando = "0i00";
@@ -103,11 +103,11 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
 	Robot* robot = fabricaR->getRobot (9);
 	movibles["m00"] = (robot);
-	robot->setPosicion ({0.5,0.5});
+	robot->setPosicion ({2,2});
 	robot->setEquipo (0);
 	
-	xStr = agregarPadding(0.5*100,4);
-	yStr = agregarPadding(0.5*100,4);
+	xStr = agregarPadding(0.5*100,5);
+	yStr = agregarPadding(0.5*100,5);
 	tipo = agregarPadding(robot->getTipo (),2);
 	comando = "0m00";
 	mensaje = comando+xStr+yStr+tipo+std::to_string(robot->getEquipo ());	
@@ -120,8 +120,8 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 
 	bloque->setPosicion ({4,4});
 
-	xStr = agregarPadding(4*100,4);
-	yStr = agregarPadding(4*100,4);
+	xStr = agregarPadding(4*100,5);
+	yStr = agregarPadding(4*100,5);
 	tipo = agregarPadding(bloque->getTipo (),2);
 	comando = "0i01";
 	mensaje = comando+xStr+yStr+tipo+std::string("0");	
@@ -197,10 +197,10 @@ void Juego::moverUnidades() {
 		if (movible->mover (factorTerreno)) {
 			pos = movible->getPosicion ();
 			int mensajeX = pos[0]*100;
-			std::string xStr = agregarPadding(mensajeX,4);
+			std::string xStr = agregarPadding(mensajeX,5);
 
 			int mensajeY = pos[1]*100;
-			std::string yStr = agregarPadding(mensajeY,4);
+			std::string yStr = agregarPadding(mensajeY,5);
 			
 			std::string mensaje = "2"+it1->first+xStr+yStr;
 			colaDeEnviados.push (mensaje);
@@ -286,9 +286,9 @@ void Juego::actualizarDisparos() {
 			municion->mover (target);
 			movibles["m"+agregarPadding(proximoIDMovible,2)] = municion;
 			int mensajeX = target[0]*100;
-			std::string xStr = agregarPadding(mensajeX,4);
+			std::string xStr = agregarPadding(mensajeX,5);
 			int mensajeY = target[1]*100;
-			std::string yStr = agregarPadding(mensajeX,4);
+			std::string yStr = agregarPadding(mensajeX,5);
 			std::string mensaje = "3"+it1->first+xStr+yStr;
 			std::cout<<mensaje<<std::endl;
 			proximoIDMovible ++;
@@ -319,9 +319,9 @@ void Juego::actualizarEdificios() {
 			//TODO
 			vehiculo->setPosicion ({posEdificio[0]+1,posEdificio[1]+1});
 			int mensajeX = vehiculo->getPosicion ()[0]*100;
-			std::string xStr = agregarPadding(mensajeX,4);
+			std::string xStr = agregarPadding(mensajeX,5);
 			int mensajeY = vehiculo->getPosicion ()[1]*100;
-			std::string yStr = agregarPadding(mensajeY,4);
+			std::string yStr = agregarPadding(mensajeY,5);
 			std::string tipo = agregarPadding(vehiculo->getTipo (),2);
 			std::string mensaje = "0"+id+xStr+yStr+tipo+std::to_string(vehiculo->getEquipo ());
 			//Avisar al cliente que se creo un vehiculo
@@ -343,9 +343,9 @@ void Juego::actualizarEdificios() {
 			//TODO
 			robot->setPosicion ({posEdificio[0]+1,posEdificio[1]+1});
 			int mensajeX = robot->getPosicion ()[0]*100;
-			std::string xStr = agregarPadding(mensajeX,4);
+			std::string xStr = agregarPadding(mensajeX,5);
 			int mensajeY = robot->getPosicion ()[1]*100;
-			std::string yStr = agregarPadding(mensajeY,4);
+			std::string yStr = agregarPadding(mensajeY,5);
 			std::string tipo = agregarPadding(robot->getTipo (),2);
 			std::string mensaje = "0"+id+xStr+yStr+tipo+std::to_string(robot->getEquipo ());
 			//Avisar al cliente que se creo un vehiculo
@@ -388,8 +388,8 @@ void Juego::actualizarRecibidos() {
 
 void Juego::recibirMover(std::string mensaje) {
 	std::string idStr = mensaje.substr(1,id);
-	std::string xStr = mensaje.substr(4,x);
-	std::string yStr = mensaje.substr(8,y);
+	std::string xStr = mensaje.substr(5,x);
+	std::string yStr = mensaje.substr(10,y);
 	
 	double x = stod(xStr,NULL)/100;
 	double y = stod(yStr,NULL)/100;
