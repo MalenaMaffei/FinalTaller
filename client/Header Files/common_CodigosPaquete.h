@@ -22,7 +22,10 @@ class CodigosPaquete {
     matar = 1,
     mover = 2,
     disparar = 3,
-    info = 4
+    infoUnidad = 4,
+    mapa = 5,
+    equipo = 6,
+    infoFabrica = 7
   };
 
   enum tipos{
@@ -48,10 +51,19 @@ class CodigosPaquete {
   enum largos{
     comando = 1,
     id = 3,
-    x = 4,
-    y = 4,
+    x = 5,
+    y = 5,
     tipo = 2,
     color = 1
+  };
+
+  enum posiciones{
+    posComando = 0,
+    posId = 1,
+    posX = 4,
+    posY = 9,
+    posTipo = 14,
+    posColor = 16
   };
 };
 

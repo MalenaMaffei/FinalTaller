@@ -35,6 +35,8 @@ void Paquete::atacar(string idAgresor, string idAgredido) {
 
 void Paquete::crear(string id, int x, int y, int tipo) {
     string creadorStr = crearCampo(codigos.id, id);
+    x = coordToServer(x);
+    y = coordToServer(y);
     string xStr = crearCampo(codigos.x, x);
     string yStr = crearCampo(codigos.y, y);
     string tipoStr = crearCampo(codigos.tipo, tipo);
@@ -45,7 +47,7 @@ void Paquete::crear(string id, int x, int y, int tipo) {
 
 void Paquete::pedirInfo(string id) {
     string idStr = crearCampo(codigos.id, id);
-    string comando = crearCampo(codigos.comando, codigos.info);
+    string comando = crearCampo(codigos.comando, codigos.infoUnidad);
     mensaje = comando + idStr;
 }
 
@@ -78,11 +80,11 @@ void Paquete::setMensaje(const string &mensaje) {
 }
 
 string Paquete::getId() const {
-    return mensaje.substr(1,codigos.id);
+    return mensaje.substr(codigos.posId,codigos.id);
 }
 
 int Paquete::getComando() const {
-    return stoi(mensaje.substr(0,codigos.comando));
+    return stoi(mensaje.substr(codigos.posComando,codigos.comando));
 }
 
 int Paquete::coordToClient(int coord) {
@@ -95,7 +97,7 @@ int Paquete::getX() {
     if (getComando() == codigos.matar){
         throw std::invalid_argument("Paquete matar no tiene campo X.");
     }
-    int xServer = stoi(mensaje.substr(4,codigos.x));
+    int xServer = stoi(mensaje.substr(codigos.posX,codigos.x));
     int xClient = coordToClient(xServer);
     return xClient;
 }
@@ -104,7 +106,7 @@ int Paquete::getY() {
     if (getComando() == codigos.matar){
         throw std::invalid_argument("Paquete matar no tiene campo Y.");
     }
-    int yServer = stoi(mensaje.substr(8,codigos.y));
+    int yServer = stoi(mensaje.substr(codigos.posY,codigos.y));
 //    int yClient = (yServer/ESCALA)*TILE_HEIGHT;
     int yClient = coordToClient(yServer);
     return yClient;
@@ -115,7 +117,7 @@ int Paquete::getTipo() const {
         throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
             "tiene campo Tipo.");
     }
-    return stoi(mensaje.substr(12,codigos.tipo));
+    return stoi(mensaje.substr(codigos.posTipo,codigos.tipo));
 }
 
 int Paquete::getColor() const {
@@ -123,5 +125,5 @@ int Paquete::getColor() const {
         throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
             "tiene campo Color.");
     }
-    return stoi(mensaje.substr(14,codigos.color));
+    return stoi(mensaje.substr(codigos.posColor,codigos.color));
 }
