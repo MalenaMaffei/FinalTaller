@@ -86,10 +86,22 @@ comando | id | tipo | vida | cant q puede construir | tipo 1 | tipo 2 | ... |
 
 ##### Enviar Mapa #####
 
-comando |  
+comando |  tiposTiles |
+--- | --- |
+1 char | 400x400 chars de ints| 
 
 Esto es lo que estoy usando yo para definir los comandos que hay, los tipos de unidades, y los largos de cada comando:
 ```c++
+enum tiles{
+  pantano = 0,
+  asfaltado = 1, 
+  lava = 3, 
+  tierra = 4,
+  agua = 5,
+  carretera = 6,
+  nieve = 7,
+  pradera = 8
+}
 enum comandos{
   crear = 0,
   matar = 1,
