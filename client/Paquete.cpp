@@ -3,7 +3,8 @@
 #include "Header Files/common_CodigosPaquete.h"
 #include "Header Files/constantes.h"
 #include <string>
-#define ESCALA 10
+#include <cmath>
+#define ESCALA 100
 using std::string;
 using std::to_string;
 
@@ -24,7 +25,6 @@ string Paquete::crearCampo(int campo, std::string contenidoStr) {
     }
     return contenidoStr;
 }
-
 
 void Paquete::atacar(string idAgresor, string idAgredido) {
     string agresor = crearCampo(codigos.id, idAgresor);
@@ -51,11 +51,13 @@ void Paquete::pedirInfo(string id) {
     mensaje = comando + idStr;
 }
 
-
-int Paquete::coordToServer(int coord) {
-    return  (coord/TILE_WIDTH)*ESCALA;
+int Paquete::coordToClient(double coord) {
+    return static_cast<int>(std::round((coord/ESCALA)*TILE_WIDTH));
 }
 
+int Paquete::coordToServer(double coord) {
+    return static_cast<int>(std::round((coord/TILE_WIDTH)*ESCALA));
+}
 
 void Paquete::mover(string id, int x, int y) {
     string idStr = crearCampo(codigos.id, id);
@@ -87,10 +89,6 @@ int Paquete::getComando() const {
     return stoi(mensaje.substr(codigos.posComando,codigos.comando));
 }
 
-int Paquete::coordToClient(int coord) {
-    return (coord/ESCALA)*TILE_WIDTH;
-}
-
 
 
 int Paquete::getX() {
@@ -98,6 +96,7 @@ int Paquete::getX() {
         throw std::invalid_argument("Paquete matar no tiene campo X.");
     }
     int xServer = stoi(mensaje.substr(codigos.posX,codigos.x));
+    printf("x del mensaje %i\n", xServer);
     int xClient = coordToClient(xServer);
     return xClient;
 }
@@ -107,7 +106,6 @@ int Paquete::getY() {
         throw std::invalid_argument("Paquete matar no tiene campo Y.");
     }
     int yServer = stoi(mensaje.substr(codigos.posY,codigos.y));
-//    int yClient = (yServer/ESCALA)*TILE_HEIGHT;
     int yClient = coordToClient(yServer);
     return yClient;
 }
@@ -127,3 +125,4 @@ int Paquete::getColor() const {
     }
     return stoi(mensaje.substr(codigos.posColor,codigos.color));
 }
+

@@ -18,8 +18,8 @@ class Paquete {
   int getColor() const;
 
  protected:
-  int coordToServer(int coord);
-  int coordToClient(int coord);
+  int coordToServer(double coord);
+  int coordToClient(double coord);
   std::string mensaje;
   CodigosPaquete codigos;
 //  TODO nombre horrible
