@@ -4,20 +4,22 @@
 #include "common_CodigosPaquete.h"
 class Paquete {
  public:
-    void atacar(std::string idAgresor, std::string idAgredido);
-    void crear(std::string id, int x, int y, int tipo);
-    void pedirInfo(std::string id);
-    void mover(std::string id, int x, int y);
-    std::string & getMensaje();
-    void setMensaje(const std::string &mensaje);
-    std::string getId() const;
-    int getComando() const;
-    int getX() const;
-    int getY() const;
-    int getTipo() const;
-    int getColor() const;
+  void atacar(std::string idAgresor, std::string idAgredido);
+  void crear(std::string id, int x, int y, int tipo);
+  void pedirInfo(std::string id);
+  void mover(std::string id, int x, int y);
+  std::string & getMensaje();
+  void setMensaje(const std::string &mensaje);
+  std::string getId() const;
+  int getComando() const;
+  int getX();
+  int getY();
+  int getTipo() const;
+  int getColor() const;
 
  protected:
+  int coordToServer(int coord);
+  int coordToClient(int coord);
   std::string mensaje;
   CodigosPaquete codigos;
 //  TODO nombre horrible
