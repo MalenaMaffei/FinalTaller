@@ -187,24 +187,20 @@ void Juego::moverUnidades() {
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
+		std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
+		std::cout<<"casillero: "<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
 		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero);
+		std::cout<<"Factor de terreno "<<factorTerreno<<std::endl;
 		//Siempre devuelve el factor terreno de robot (agregar 2xDispatch)
 		//TODO
 		if (movible->mover (factorTerreno)) {
 			pos = movible->getPosicion ();
 			int mensajeX = pos[0]*100;
-			std::string xStr = std::to_string(mensajeX);
-			int lenX = xStr.size ();
-			for (int i=0;i<(4-lenX);i++) {
-				xStr.insert (0,"0");
-			}
+			std::string xStr = agregarPadding(mensajeX,4);
+
 			int mensajeY = pos[1]*100;
-			std::string yStr = std::to_string(mensajeY);
-			int lenY = yStr.size ();
-			for (int i=0;i<(4-lenY);i++) {
-				yStr.insert (0,"0");
-			}						
+			std::string yStr = agregarPadding(mensajeY,4);
 			
 			std::string mensaje = "2"+it1->first+xStr+yStr;
 			colaDeEnviados.push (mensaje);

@@ -1,6 +1,7 @@
 
 #include "server_Casillero.h"
 #include <stdlib.h>
+#include <iostream>
 
 Casillero::Casillero(Terreno &&terreno) : 
 									terreno(std::move(terreno)) {
