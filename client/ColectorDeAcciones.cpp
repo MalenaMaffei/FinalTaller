@@ -60,6 +60,7 @@ void ColectorDeAcciones::crearAcciones() {
     if (clickeado->esMio()){
 //        printf("request info MIO de id: %s\n", clickeado->getId().c_str());
         paquete.pedirInfo(clickeado->getId());
+        colaSalida.encolar(paquete);
         clickeado->guiRequest(*this);
 
     } else if (selectBox.haySeleccion()){
