@@ -50,6 +50,6 @@ const char carasPath[] = "../client/imgs/Gui/unidades.png";
 const char unidadesLabelPath[] = "../client/imgs/Gui/unit_labels.png";
 const char guiEdificioPath[] = "../client/imgs/Gui/edificio.png";
 
-
+const char fuentePath[] = "../client/ttf/AUDIMRG_.TTF";
 
 #endif //TPFINAL_CONSTANTES_H

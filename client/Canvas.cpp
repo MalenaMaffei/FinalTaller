@@ -1,54 +1,25 @@
 #include "Header Files/Canvas.h"
 #include<SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 #include <algorithm>
 #include "Header Files/LTimer.h"
-#include "Header Files/Vista.h"
-#include "Header Files/Texture.h"
-#include "Header Files/Camara.h"
 #include "Header Files/VistaTiles.h"
 #include "Header Files/Tile.h"
-#include "Header Files/VistaRoca.h"
-#include "Header Files/Elemento.h"
-#include "Header Files/ElementoRoca.h"
-#include "Header Files/ElementoFuerte.h"
-#include "Header Files/VistaBandera.h"
-#include "Header Files/ElementoBandera.h"
-#include "Header Files/VistaPuente.h"
-#include "Header Files/ElementoPuente.h"
 
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/VistaHud.h"
 #include "Header Files/VistaHudCaras.h"
-#include "Header Files/common_CodigosPaquete.h"
 #include "Header Files/VistaGui.h"
-#include "Header Files/GuiEdificio.h"
-#include "Header Files/Rect.h"
-#include "VistaManager.h"
-#include "Header Files/ElementoManager.h"
-#include "Header Files/common_PaqueteEntrada.h"
-#include "Header Files/ElementoRobot.h"
-#include "Header Files/VistaPyroDisparar.h"
-#include "Header Files/VistaRobotCaminar.h"
-#include "Header Files/VistaRobotMorir.h"
 #include "CreadorMapa.h"
+#include "VistaTexto.h"
 #include <string>
+
 const int SCREEN_FPS = 30;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
-
-
-//TODO voy a necesitar un mapa de vistas, uno de vistas Dir, uno de
-// todos los elementos y otro con solo las unidades. Los de las vistas los
-// voy a tener que borrar los dos, pero los de elementos solo el de elementos
-// tengo que hacer delete de cada uno. Todos los mapas van a tener punteros.
-
-//TODO fabrica de vistas para no tener todos los include aca
-
-
-
 
 Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     colaEntrada(colaEntrada), colaSalida(colaSalida) {
@@ -70,7 +41,8 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
         }
 
         //Create window
-        gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        gWindow = SDL_CreateWindow( "Z Game", SDL_WINDOWPOS_UNDEFINED,
+                                    SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
         if( gWindow == NULL )
         {
             printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -97,6 +69,11 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
                     printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
                     success = false;
                 }
+                if( TTF_Init() == -1 )
+                {
+                    printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+                    success = false;
+                }
             }
         }
     }
@@ -108,6 +85,7 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 
 
 void Canvas::close() {
+
     //Destroy window
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
@@ -115,8 +93,6 @@ void Canvas::close() {
     gRenderer = NULL;
 
 //    TODO destruir a los elementos
-
-
 
 
     //Quit SDL subsystems
@@ -206,8 +182,8 @@ void Canvas::run(){
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);
     Hud hud(vistaHud, vistaCaras);
-    VistaGui vistaGui(gRenderer);
-    GuiEdificio guiEdificio(vistaGui);
+//    VistaGui vistaGui(gRenderer);
+    GuiEdificio guiEdificio(gRenderer);
 
     Mouse mouse;
     SelectBox selectBox;
@@ -217,6 +193,8 @@ void Canvas::run(){
                                 hud,
                                 guiEdificio,
                                 colaSalida);
+
+
     while (!quit){
         capTimer.start();
 
@@ -246,8 +224,6 @@ void Canvas::run(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
 
-
-
         //Render background
 
         std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
@@ -259,8 +235,6 @@ void Canvas::run(){
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
-
-
         selectBox.mostrar(gRenderer, camara.getOffset());
         hud.mostrar();
         guiEdificio.mostrar(camara.getOffset());
@@ -270,8 +244,6 @@ void Canvas::run(){
         SDL_RenderPresent(gRenderer);
         colector.crearAcciones();
         mouse.resetState();
-
-
 
 
         int frameTicks = capTimer.getTicks();

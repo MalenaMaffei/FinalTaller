@@ -13,6 +13,7 @@
 #include "Header Files/VistaToughDisparar.h"
 #include "Header Files/VistaHeavy.h"
 #include "Header Files/VistaTanqueMorir.h"
+#include "Header Files/VistaBala.h"
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
 
@@ -28,20 +29,12 @@ VistaDireccionada *VistaManager::getVistaDireccionada(int tipoUnidad,
 }
 
 VistaDireccionada *VistaManager::getVistaDisparo(int tipoUnidad) {
-//    printf("entro a disparo\n");
-
     return getVistaDireccionada(tipoUnidad, POS_DISPARO);
 }
 
 VistaDireccionada *VistaManager::getVistaCaminar(int tipoUnidad) {
-//    printf("entro a caminar\n");
     return getVistaDireccionada(tipoUnidad, POS_CAMINAR);
 }
-
-//TODO este metodo es necesario?
-//Vista *VistaManager::getVistaMuerte(int tipoUnidad) {
-//    return nullptr;
-//}
 
 Vista *VistaManager::getVista(int tipoElemento) {
     if (!vistas.count(tipoElemento)){
@@ -51,7 +44,6 @@ Vista *VistaManager::getVista(int tipoElemento) {
 }
 
 void VistaManager::fabricarVistasDeElemento(int tipo) {
-//    printf("crear vista de %i\n", tipo);
     if (!codigos.esUnidad(tipo)){
         Vista* vista;
         if (tipo == codigos.bandera){
@@ -61,7 +53,10 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         } else if (tipo == codigos.puente){
             vista = new VistaPuente(gRenderer);
         } else if (tipo == codigos.fuerte){
+            printf("se crea la vista de %i\n", tipo);
             vista = new VistaFuerte(gRenderer);
+        } else if (tipo == codigos.bala){
+            vista = new VistaBala(gRenderer);
         }
         vistas[tipo] = vista;
     }
@@ -79,19 +74,15 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         } else if (tipo == codigos.psycho){
             disparar = new VistaPsychoDisparar(gRenderer);
         } else if (tipo == codigos.pyro){
-//            printf("entro al creador correcto\n");
             disparar = new VistaPyroDisparar(gRenderer);
-//            printf("creo correcto\n");
         } else if (tipo == codigos.tough){
             disparar = new VistaToughDisparar(gRenderer);
         }
         vistas[tipo] = morir;
-//        printf("guardo la avanzarMuerte\n");
         vistasDireccionadas[tipo].push_back(caminar);
-//        printf("guardo la caminar\n");
         vistasDireccionadas[tipo].push_back(disparar);
-//        printf("guardo la disparar\n");
     }
+
 //    jeep = 12,
 //    light = 13,
 //    medium = 14,
@@ -111,4 +102,3 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         vistasDireccionadas[tipo].push_back(disparar);
     }
 }
-

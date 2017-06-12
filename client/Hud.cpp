@@ -4,7 +4,8 @@
 #define Y_CARA 46
 
 Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
-    (vistaCaras), seleccionado(false), ubicacion(SCREEN_WIDTH - hud.getWidth(), 0) {
+    (vistaCaras), seleccionado(false),
+    ubicacion(SCREEN_WIDTH - hud.getWidth(), 0) {
     hudRect = {ubicacion,hud.getWidth(),hud.getHeight()};
 }
 

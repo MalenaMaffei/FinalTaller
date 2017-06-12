@@ -1,7 +1,7 @@
 #ifndef TPFINAL_VISTACOLOREADA_H
 #define TPFINAL_VISTACOLOREADA_H
 
-#include "../Header Files/Vista.h"
+#include "Vista.h"
 
 class VistaColoreada : public Vista {
  public:

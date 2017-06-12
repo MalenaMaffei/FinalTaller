@@ -1,4 +1,5 @@
 #include "Header Files/ElementoBandera.h"
+#include <string>
 #define HEIGHT 24
 #define WIDTH 32
 ElementoBandera::ElementoBandera(std::string id, int x, int y, Vista *textura,

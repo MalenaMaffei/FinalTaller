@@ -7,7 +7,7 @@
 #define FIN_TANQUES 16
 
 bool CodigosPaquete::esUnidad(int tipo) {
-    return tipo >= COMIENZO_UNIDADES;
+    return tipo >= COMIENZO_UNIDADES && tipo <= FIN_UNIDADES;
 }
 
 int CodigosPaquete::unidadesBegin() {
@@ -24,4 +24,27 @@ bool CodigosPaquete::esRobot(int tipo) {
 
 bool CodigosPaquete::esTanque(int tipo) {
     return esUnidad(tipo) && tipo>=12;
+}
+
+bool CodigosPaquete::esBala(int tipo) {
+    return tipo >= bala;
+}
+
+std::string CodigosPaquete::nombreUnidad(int tipo) {
+    switch(tipo){
+        case fuerte:return "Fuerte";
+        case fabricaRobot:return "Fábrica Robot";
+        case fabricaVehiculo:return "Fábrica Vehículo";
+        case grunt:return "Grunt";
+        case psycho:return "Psychos";
+        case tough:return "Tough";
+        case pyro:return "Pyros";
+        case sniper:return "Sniper";
+        case laser:return "Laser";
+        case jeep:return "Jeep";
+        case light:return "Light";
+        case medium:return "Medium";
+        case heavy:return "Heavy";
+        case missile:return "Missile";
+    }
 }

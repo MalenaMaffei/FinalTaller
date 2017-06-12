@@ -16,7 +16,7 @@ class ColectorDeAcciones {
 
   void crearAcciones();
   void showHud();
-  void showEdificio();
+  void showEdificio(std::string id);
 
  private:
   SelectBox &selectBox;

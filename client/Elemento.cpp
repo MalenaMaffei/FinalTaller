@@ -2,6 +2,7 @@
 //TODO chequwar que todos tengan implementado el Mio
 #include "Header Files/Click.h"
 #include "Header Files/ColectorDeAcciones.h"
+#include <string>
 using std::string;
 
 Elemento::Elemento(string id, int x, int y, Vista *textura, bool esMio)
@@ -12,9 +13,6 @@ Elemento::Elemento(string id, int x, int y, Vista *textura, bool esMio)
     //Set the collision box
     rect.w = textura->getWidth();
     rect.h = textura->getHeight();
-
-    printf("el id que le llega al elemento: %s\n", id.c_str
-        ());
 }
 
 void Elemento::mostrar(Camara &camera) {

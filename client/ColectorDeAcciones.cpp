@@ -2,7 +2,6 @@
 #include "Header Files/Hud.h"
 #include "Header Files/GuiEdificio.h"
 #include "Header Files/Paquete.h"
-#include <iostream>
 #include <algorithm>
 #include <vector>
 using std::vector;
@@ -21,12 +20,18 @@ void ColectorDeAcciones::crearAcciones() {
         return;
     }
 
-//    TODO llevarme de aca el paquete que tenga que mandar al servidor
+    Punto clicked = click.getPoint();
     if (guiEdificio.click(click.getPoint())){
+        if (guiEdificio.huboSeleccion()){
+            Paquete crear;
+            crear.crear(guiEdificio.getFabricaId(),clicked.x,clicked.y,
+                        guiEdificio.getTipoSeleccionado());
+            colaSalida.encolar(crear);
+            printf("paquete crear: %s\n", crear.getMensaje().c_str());
+        }
         click.resetCoords();
         return;
     }
-//    TODO hacer lo mismo con clicks sobre el hud
 
     Paquete paquete;
 
@@ -53,14 +58,8 @@ void ColectorDeAcciones::crearAcciones() {
 
     Elemento* clickeado = click.getClicked();
     if (clickeado->esMio()){
-        //        TODO dispatch para saber si fue edificio o unidad
-
-//        TODO obviamente le voy a tener que pasar mas info o no, no se
-        printf("request info MIO de id: %s\n", clickeado->getId().c_str());
+//        printf("request info MIO de id: %s\n", clickeado->getId().c_str());
         paquete.pedirInfo(clickeado->getId());
-//        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
-//        colaSalida.encolar(paquete);
-        printf("a punto de pedir gui\n");
         clickeado->guiRequest(*this);
 
     } else if (selectBox.haySeleccion()){
@@ -70,23 +69,18 @@ void ColectorDeAcciones::crearAcciones() {
               if (unidad.estaMuerto()){
                   return;
               }
-            std::cout<<"Unidad id: "<<unidad.getId()<<" ataca a Elemento id: "<<
-				clickeado->getId()<< std::endl;
+            printf("Unidad id: %s ataca a Elemento id: %s",unidad.getId()
+                .c_str(), clickeado->getId().c_str() );
             paquete.atacar(unidad.getId(),clickeado->getId());
             colaSalida.encolar(paquete);
         });
         selectBox.vaciarSeleccionadas();
     }
-
-
-
-
-
     click.resetCoords();
 }
 
-void ColectorDeAcciones::showEdificio() {
-    guiEdificio.abrirGui(click.getPoint());
+void ColectorDeAcciones::showEdificio(std::string id) {
+    guiEdificio.abrirGui(click.getPoint(), id);
 }
 
 void ColectorDeAcciones::showHud() {
