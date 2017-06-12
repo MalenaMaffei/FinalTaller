@@ -107,7 +107,6 @@ bool Movible::mover (double factorTerreno) {
 										posicion[1] + direccion[1]*velFinal*CYCLE_TIME};
 	
 	if (esPosicionIntermedia(posicion,siguiente,destino)) {
-		std::cout<<"entro en posicion intermedia"<<std::endl;
 		posicion = destino;
 		return true;
 	}
@@ -137,12 +136,10 @@ void Movible::setObjetivo(std::string objetivo) {
 
 void Movible::setTrayectoria(std::vector< std::array<double,2> > trayectoria) {
 	this->trayectoria = trayectoria;
-	std::cout<<"size trayectoria: "<<trayectoria.size()<<std::endl;
 	if (!trayectoria.empty()) {
 		this->mover(trayectoria.back());
 		this->trayectoria.pop_back();
 	}
-	std::cout<<"size trayectoria despues: "<<this->trayectoria.size()<<std::endl;
 }
 
 

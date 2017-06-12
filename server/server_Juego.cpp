@@ -371,7 +371,6 @@ void Juego::actualizarRecibidos() {
 		//TODO realizar acciones recibidas
 //		std::cout<<"antes de hacer el front"<<std::endl;
 		std::string mensaje = colaDeRecibidos->front ();
-		std::cout<<"primer caracter: "<<mensaje[0]<<std::endl;
 		switch (mensaje[0]) {
 			case crear: //TODO
 						break;
@@ -429,7 +428,7 @@ void Juego::enviarInfoUnidad (std::string id) {
 	std::string vida = agregarPadding(movible->getPorcentajeVida (), 3);
 	mensaje += tipo + vida;
 	std::cout<<"envio: "<<mensaje<<std::endl;
-//	colaDeEnviados.push (mensaje);
+	colaDeEnviados.push (mensaje);
 }
 
 void Juego::enviarCrear (Objeto* objeto) {
