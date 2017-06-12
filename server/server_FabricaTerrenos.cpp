@@ -20,8 +20,8 @@ FabricaTerrenos::FabricaTerrenos () {
 		terreno != NULL; terreno = terreno->NextSiblingElement("TERRENO")) {
 		
 		int tipo = atoi(terreno->FirstChildElement("ID")->GetText ());
-		int velRobot = atoi(terreno->FirstChildElement ("VEL_ROBOTS")->GetText ());
-		int velVehiculo = atoi(terreno->FirstChildElement ("VEL_VEHICULOS")->GetText());
+		double velRobot = atof(terreno->FirstChildElement ("VEL_ROBOTS")->GetText ());
+		double velVehiculo = atof(terreno->FirstChildElement ("VEL_VEHICULOS")->GetText());
 		
 		velocidadesRobots[tipo] = velRobot;
 		velocidadesVehiculos[tipo] = velVehiculo;

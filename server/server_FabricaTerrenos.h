@@ -23,8 +23,8 @@ public:
     Terreno getTerreno(int tipo);
     virtual ~FabricaTerrenos();
 private:
-    std::map<int, int> velocidadesVehiculos;
-    std::map<int, int> velocidadesRobots;
+    std::map<int, double> velocidadesVehiculos;
+    std::map<int, double> velocidadesRobots;
 };
 
 #endif /* FABRICATERRENOS_H */

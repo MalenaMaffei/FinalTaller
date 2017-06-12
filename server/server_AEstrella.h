@@ -11,10 +11,10 @@
 
 class AEstrella {
     public:
-        AEstrella(const Mapa &mapa);
-        std::map <std::array<int,2>,std::array<int,2>> 
-            getRecorrido(const std::array<int, 2>& inicio, 
-                            const std::array<int, 2>& destino);        
+        AEstrella(const Mapa& mapa);
+        std::vector < std::array<double,2> > 
+            getRecorrido(const std::array<int,2>& inicio, 
+                            const std::array<int,2>& destino);        
         virtual ~AEstrella();
         
         

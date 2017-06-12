@@ -21,6 +21,7 @@ class Movible : public Objeto {
         void setObjetivo(std::string objetivo);
         int getEquipo();
         void setEquipo(int idEquipo);
+        void setTrayectoria(std::vector< std::array<double,2> > trayectoria);
         virtual void setPosicion(std::array<double,2> posicion) override;
         virtual bool superaMaxDistancia() = 0;
         virtual std::string puedeDisparar() = 0;
@@ -34,11 +35,11 @@ class Movible : public Objeto {
 
     protected:
         Movible (int vida, double ancho, double alto, 
-                std::vector<std::array<int,2>> trayectoria,
+                std::vector<std::array<double,2>> trayectoria,
                 std::array<double,2> destino, int idEquipo, int velocidad, 
                 std::string objetivo, double distancia, int tipo);
         std::string objetivo;   //id objetivo
-        std::vector<std::array<int,2>> trayectoria;
+        std::vector< std::array<double,2> > trayectoria;
         std::array<double,2> destino;
         std::array<double,2> posicionAnterior;
         int velocidad;

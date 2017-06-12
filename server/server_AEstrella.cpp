@@ -30,10 +30,12 @@ const double modulo(std::array<int, 2> vector) {
 
 AEstrella::AEstrella(const Mapa &mapa) : mapa(mapa) {}
 
-std::map <std::array<int,2>,std::array<int,2>>
+std::vector < std::array<double,2> >
 	AEstrella::getRecorrido(const std::array<int, 2>& origen, 
 							const std::array<int, 2>& destino) {
-
+				
+	std::vector< std::array<double,2> > recorrido;
+	std::cout<<"En getRecorrido"<<std::endl;
 	std::map <std::array<int,2>,double> costos;
 	std::map <std::array<int,2>,std::array<int,2>> origenes;
 	
@@ -52,29 +54,33 @@ std::map <std::array<int,2>,std::array<int,2>>
 	
 	int maxX = mapa.obtenerDimensionX();
 	int maxY = mapa.obtenerDimensionY();
-	
+	std::cout<<"antes de iterar"<<std::endl;
 	while (!listaAbierta.empty()) {
 		std::array<int,2> actual = listaAbierta.top ().first;
+//		std::cout<<"actual: "<<actual[0]<<","<<actual[1]<<std::endl;
 		double valor = listaAbierta.top().second;
 		listaAbierta.pop();
 		if (actual == destino)
 			break;
 		
+//		std::cout<<"no llegue"<<std::endl;
 		for (size_t i=0; i< 8; i++) {
 			std::array<int,2> adyacencia = adyacencias[i];
 			int adyX = actual[0]-adyacencia[0];
 			int adyY = actual[1]-adyacencia[1];
-			if (adyX < 0 || adyY < 0 || adyX > maxX || adyY > maxY) 
+			if (adyX < 0 || adyY < 0 || adyX >= maxX || adyY >= maxY) 
 				continue;
+//			std::cout<<"\tadyacente: "<<adyX<<","<<adyY<<std::endl;
 			std::array<int,2> adyacente = {adyX,adyY};
 						
 			double distancia = modulo(adyacencia);
-			
 			double nuevoCosto = costos[actual] + 
 								distancia/mapa.obtenerFactorTerreno(adyacente);
-						
+//			std::cout<<"\tcosto actual: "<<costos[actual]<<std::endl;
+//			std::cout<<"\tdistancia: "<<distancia<<std::endl;
+//			std::cout<<"\tfactor: "<<mapa.obtenerFactorTerreno(adyacente)<<std::endl;
+//			std::cout<<"\tnuevo costo: "<<nuevoCosto<<std::endl;
 			bool nuevoCostoEsMenor = false;
-			
 			if (costos.count (adyacente)) {
 				if (nuevoCosto<costos[adyacente]) {
 					nuevoCostoEsMenor = true;
@@ -90,7 +96,20 @@ std::map <std::array<int,2>,std::array<int,2>>
 		}	
 	}
 	
-	return origenes;	
+	if (!origenes.count(destino)) {
+		return recorrido;
+	}
+	
+	std::array<int,2> actual = destino;
+	std::cout<<"armo reocrrido"<<std::endl;
+	while (actual != origen) {
+		std::cout<<"y el recorrido?"<<std::endl;
+		recorrido.push_back({actual[0],actual[1]});
+		std::cout<<actual[0]<<","<<actual[1]<<std::endl;
+		actual = origenes[actual];
+	}
+	
+	return recorrido;	
 }
 
 AEstrella::~AEstrella() {}

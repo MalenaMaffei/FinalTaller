@@ -16,7 +16,7 @@
 
 class Terreno {
 public:
-    Terreno(int tipo, int velocidadRobots, int velocidadVehiculos);
+    Terreno(int tipo, double velocidadRobots, double velocidadVehiculos);
     Terreno(const Terreno& orig);
     Terreno(Terreno &&orig);
     Terreno& operator=(const Terreno& orig);

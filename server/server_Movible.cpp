@@ -33,7 +33,7 @@ Movible::Movible(int vida, double ancho, double alto, int velocidad, int tipo) :
 															distancia(0){}
 
 Movible::Movible (int vida, double ancho, double alto, 
-					std::vector<std::array<int,2>> trayectoria,
+					std::vector<std::array<double,2>> trayectoria,
 					std::array<double,2> destino, 
 					int idEquipo, int velocidad, std::string objetivo,
 					double distancia, int tipo) : 
@@ -85,12 +85,18 @@ bool Movible::mover (double factorTerreno) {
 	
 	//Las balas llegan hasta destino y se frenan
 	//TODO (continuar trayectoria)
-	
 	if (std::abs(modulo) < DIFF) {
+		std::cout<<"estoy en "<<destino[0]<<","<<destino[1]<<std::endl;
+		std::cout<<"largo trayectoria "<<trayectoria.size()<<std::endl;
 		posicion = destino;
+		if (!trayectoria.empty()) {
+			std::cout<<"queda trayectoria"<<std::endl;
+			destino = trayectoria.back();
+			trayectoria.pop_back();
+			std::cout<<"proximo destino: "<<destino[0]<<","<<destino[1]<<std::endl;
+		}
 		return false;
 	}
-	
 	
 	int velFinal = std::max(int(velocidad*factorTerreno),1);
 		
@@ -105,6 +111,7 @@ bool Movible::mover (double factorTerreno) {
 										posicion[1] + direccion[1]*velFinal*CYCLE_TIME};
 	
 	if (esPosicionIntermedia(posicion,siguiente,destino)) {
+		std::cout<<"entro en posicion intermedia"<<std::endl;
 		posicion = destino;
 		return true;
 	}
@@ -131,5 +138,16 @@ void Movible::setEquipo(int idEquipo) {
 void Movible::setObjetivo(std::string objetivo) {
 	this->objetivo = objetivo;
 }
+
+void Movible::setTrayectoria(std::vector< std::array<double,2> > trayectoria) {
+	this->trayectoria = trayectoria;
+	std::cout<<"size trayectoria: "<<trayectoria.size()<<std::endl;
+	if (!trayectoria.empty()) {
+		this->mover(trayectoria.back());
+		this->trayectoria.pop_back();
+	}
+	std::cout<<"size trayectoria despues: "<<this->trayectoria.size()<<std::endl;
+}
+
 
 Movible::~Movible() { }

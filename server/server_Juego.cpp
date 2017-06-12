@@ -13,6 +13,7 @@
 
 #include "server_Juego.h"
 #include "server_Mapa.h"
+#include "server_AEstrella.h"
 #include "server_Unidad.h"
 #include "server_FabricaRobots.h"
 #include "server_FabricaVehiculos.h"
@@ -129,8 +130,6 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 
 	
 	socket->SendStrWLen (mensaje);
-
-	
 }
 
 void Juego::eliminarMuertos() {
@@ -387,23 +386,34 @@ void Juego::actualizarRecibidos() {
 }
 
 void Juego::recibirMover(std::string mensaje) {
-	std::string idStr = mensaje.substr(1,largos.id);
-	std::string xStr = mensaje.substr(4,largos.x);
-	std::string yStr = mensaje.substr(10,largos.y);
+	std::string idStr = mensaje.substr(1,id);
+	std::string xStr = mensaje.substr(4,x);
+	std::string yStr = mensaje.substr(10,y);
 	
 	double x = stod(xStr,NULL)/100;
 	double y = stod(yStr,NULL)/100;
-	movibles[idStr]->mover ({x,y});
+	
+	std::array<double,2> inicio = movibles[idStr]->getPosicion ();
+	std::cout<<"busco trayectoria"<<std::endl;
+	std::cout<<"origen "<<inicio[0]<<","<<inicio[1]<<std::endl;
+	std::cout<<"destino "<<(int) x<<","<<(int) y<<std::endl;
+	std::cout<<"factor origen: "<<mapa.obtenerFactorTerreno ({inicio[0],inicio[1]})<<std::endl;;
+	AEstrella aEstrella(mapa);
+	std::vector< std::array<double,2> > recorrido = 
+								aEstrella.getRecorrido ({inicio[0],inicio[1]},
+														{(int) x,(int) y});
+	std::cout<<"termino trayectoria"<<std::endl;
+	movibles[idStr]->setTrayectoria(recorrido);
 }
 
 void Juego::recibirDisparar(std::string mensaje) {
-	std::string idAgresor = mensaje.substr(1,largos.id);
-	std::string idAgredido = mensaje.substr(4,largos.id);
+	std::string idAgresor = mensaje.substr(1,id);
+	std::string idAgredido = mensaje.substr(4,id);
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 
 void Juego::recibirObtenerInfo (std::string mensaje) {
-	std::string idStr = mensaje.substr(1,largos.id);
+	std::string idStr = mensaje.substr(1,id);
 	this->enviarInfo (idStr);
 }
 

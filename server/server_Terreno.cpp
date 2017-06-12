@@ -1,7 +1,8 @@
 
 #include "server_Terreno.h"
+#include <iostream>
 
-Terreno::Terreno(int tipo, int velocidadRobots, int velocidadVehiculos) : 
+Terreno::Terreno(int tipo, double velocidadRobots, double velocidadVehiculos) : 
 									tipo(tipo),
 									velocidadRobots(velocidadRobots),
 									velocidadVehiculos(velocidadVehiculos){ }
