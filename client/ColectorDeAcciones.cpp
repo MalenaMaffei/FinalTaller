@@ -58,9 +58,6 @@ void ColectorDeAcciones::crearAcciones() {
 //        TODO obviamente le voy a tener que pasar mas info o no, no se
         printf("request info MIO de id: %s\n", clickeado->getId().c_str());
         paquete.pedirInfo(clickeado->getId());
-//        printf("el paquete dice %s\n", paquete.getMensaje().c_str());
-//        colaSalida.encolar(paquete);
-        printf("a punto de pedir gui\n");
         clickeado->guiRequest(*this);
 
     } else if (selectBox.haySeleccion()){
@@ -78,14 +75,11 @@ void ColectorDeAcciones::crearAcciones() {
         selectBox.vaciarSeleccionadas();
     }
 
-
-
-
-
     click.resetCoords();
 }
 
 void ColectorDeAcciones::showEdificio() {
+    printf("se pidio que se habra la gui\n");
     guiEdificio.abrirGui(click.getPoint());
 }
 

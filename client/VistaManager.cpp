@@ -53,6 +53,7 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         } else if (tipo == codigos.puente){
             vista = new VistaPuente(gRenderer);
         } else if (tipo == codigos.fuerte){
+            printf("se crea la vista de %i\n", tipo);
             vista = new VistaFuerte(gRenderer);
         } else if (tipo == codigos.bala){
             vista = new VistaBala(gRenderer);

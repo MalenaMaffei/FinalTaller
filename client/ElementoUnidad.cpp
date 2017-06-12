@@ -13,9 +13,7 @@ ElementoUnidad::ElementoUnidad(std::string id,
                                int color) :
         ElementoColoreado(id, x, y, movimiento, esMio, color),
     vistaMovimiento(movimiento), vistaDisparar(disparar), direccion(0),
-        estado(haciendoNada), vistaMuerte(vistaMuerte){
-    printf("el id que le llega a unidad: %s\n", id.c_str());
-}
+        estado(haciendoNada), vistaMuerte(vistaMuerte){}
 
 
 void ElementoUnidad::mover(Punto nuevo) {

@@ -14,6 +14,8 @@ ElementoManager::ElementoManager(VistaManager &vistaManager,
     vistaManager(vistaManager), miColor(MiColor) {}
 
 void ElementoManager::crear(Paquete &paquete) {
+    printf("crear: %i\n", paquete.getTipo());
+    printf("en coords: %i,%i\n", paquete.getX(), paquete.getY());
     if (codigos.esUnidad(paquete.getTipo())) {
         fabricarUnidad(paquete);
     } else {
@@ -52,8 +54,11 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
     } else if (tipo == codigos.puente){
         elemento = new ElementoPuente(id, x, y, vistaManager.getVista(tipo));
     } else if (tipo == codigos.fuerte){
+
         elemento = new ElementoFuerte(id, x, y, vistaManager.getVista(tipo),
                                       color == miColor, color);
+        printf("se creo fuerte pos: %i,%i\n", elemento->getRect().x,
+               elemento->getRect().y);
     } else if (codigos.esBala(tipo)){
         ElementoBala* bala;
         bala = new ElementoBala(id, x, y, vistaManager.getVista(codigos

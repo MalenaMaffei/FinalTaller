@@ -93,7 +93,6 @@ int Paquete::getX() {
         throw std::invalid_argument("Paquete matar no tiene campo X.");
     }
     int xServer = stoi(mensaje.substr(codigos.posX,codigos.x));
-    printf("x del mensaje %i\n", xServer);
     int xClient = coordToClient(xServer);
     return xClient;
 }
