@@ -8,7 +8,7 @@ class CodigosPaquete {
   int unidadesEnd();
   bool esRobot(int tipo);
   bool esTanque(int tipo);
-
+  bool esBala(int tipo);
   enum colores{
     amarillo = 0,
     azul = 1,
@@ -45,7 +45,8 @@ class CodigosPaquete {
     light = 13,
     medium = 14,
     heavy = 15,
-    missile = 16
+    missile = 16,
+    bala = 17
   };
 
   enum largos{

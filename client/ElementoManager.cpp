@@ -22,7 +22,6 @@ void ElementoManager::crear(Paquete &paquete) {
 }
 
 void ElementoManager::fabricarUnidad(Paquete &paquete) {
-//    TODO mejor tengo unidades por un lado y elementos x el otro?
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
     string id = paquete.getId();
@@ -55,6 +54,12 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
     } else if (tipo == codigos.fuerte){
         elemento = new ElementoFuerte(id, x, y, vistaManager.getVista(tipo),
                                       color == miColor, color);
+    } else if (codigos.esBala(tipo)){
+        ElementoBala* bala;
+        bala = new ElementoBala(id, x, y, vistaManager.getVista(codigos
+                                                                    .bala));
+        balas[id] = bala;
+        return;
     }
 //        TODO faltarian los vehiculos y fabricas de robots
     elementos[id] = elemento;
@@ -70,6 +75,15 @@ void ElementoManager::elementosVivir(Camara &camara,Click &click,
         } else {
             elemento->mostrar(camara);
             elemento->clicked(click);
+        }
+    }
+
+    for (const auto& kv : balas) {
+        Elemento* elemento = balas.at(kv.first);
+        if (elemento->estaMuerto()){
+            muertos.push_back(elemento->getId());
+        } else {
+            elemento->mostrar(camara);
         }
     }
 
@@ -94,28 +108,41 @@ void ElementoManager::matar(Paquete &paquete) {
         elemento = elementos.at(id);
     } else if (unidades.count(id)){
         elemento = unidades.at(id);
+    }else if (balas.count(id)){
+        elemento = balas.at(id);
     }
     elemento->matar();
 }
 
 void ElementoManager::limpiarMuertos(std::vector<string> &muertos) {
     std::for_each(muertos.begin(), muertos.end(), [&](string id){
-        Elemento* elemento;
-        if (elementos.count(id)){
-            elemento = elementos.at(id);
-            elementos.erase(id);
-            delete(elemento);
-        }  else if (unidades.count(id)){
-            elemento = unidades.at(id);
-            unidades.erase(id);
-            delete(elemento);
-        }
+      Elemento* elemento;
+      if (elementos.count(id)){
+          elemento = elementos.at(id);
+          elementos.erase(id);
+          delete(elemento);
+      } else if (unidades.count(id)){
+          elemento = unidades.at(id);
+          unidades.erase(id);
+          delete(elemento);
+      } else if (balas.count(id)){
+          elemento = balas.at(id);
+          balas.erase(id);
+          delete(elemento);
+      }
     });
 }
 
 void ElementoManager::mover(Paquete &paquete) {
-    ElementoUnidad* unidad = unidades.at(paquete.getId());
-    unidad->mover(Punto(paquete.getX(), paquete.getY()));
+    string id = paquete.getId();
+    Punto destino = Punto(paquete.getX(), paquete.getY());
+    if (unidades.count(id)){
+        ElementoUnidad* unidad = unidades.at(id);
+        unidad->mover(destino);
+    } else if (balas.count(id)){
+        ElementoBala* bala = balas.at(id);
+        bala->mover(destino);
+    }
 }
 
 void ElementoManager::disparar(Paquete &paquete) {

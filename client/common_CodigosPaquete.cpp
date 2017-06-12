@@ -7,7 +7,7 @@
 #define FIN_TANQUES 16
 
 bool CodigosPaquete::esUnidad(int tipo) {
-    return tipo >= COMIENZO_UNIDADES;
+    return tipo >= COMIENZO_UNIDADES && tipo <= FIN_UNIDADES;
 }
 
 int CodigosPaquete::unidadesBegin() {
@@ -24,4 +24,8 @@ bool CodigosPaquete::esRobot(int tipo) {
 
 bool CodigosPaquete::esTanque(int tipo) {
     return esUnidad(tipo) && tipo>=12;
+}
+
+bool CodigosPaquete::esBala(int tipo) {
+    return tipo >= bala;
 }

@@ -14,7 +14,7 @@
 class ElementoManager {
  public:
   ElementoManager(VistaManager &vistaManager,
-                    int MiColor);
+                  int MiColor);
 
   void crear(Paquete &paquete);
   void mover(Paquete &paquete);
@@ -30,7 +30,7 @@ class ElementoManager {
   int miColor;
   std::map<std::string, Elemento *> elementos;
   std::map<std::string, ElementoUnidad *> unidades;
-//  std::map<std::string, ElementoBala*> balas;
+  std::map<std::string, ElementoBala*> balas;
   CodigosPaquete codigos;
   VistaManager& vistaManager;
 };
