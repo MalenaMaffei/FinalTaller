@@ -17,16 +17,12 @@ comando | id | x | y | tipo
 
 ##### PedirInfo ######
 Se va a enviar cuando el usuario hace click sobre una unidad para saber su vida
-###### Caso Unidad: ######
+###### Ambos Casos (Unidad o  Fabrica): ######
 comando | id |
 --- | --- |
 4 | 007 |
 1 char | 3 chars |
-###### Caso Fabrica: ######
-comando | id |
---- | --- |
-7 | 007 |
-1 char | 3 chars |
+
 ##### Disparar ######
 comando | id | id
 --- | --- | ---
