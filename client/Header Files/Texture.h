@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include <SDL2/SDL_ttf.h>
 class Texture
 {
  public:
@@ -14,7 +15,9 @@ class Texture
 
   //Loads image at specified path
   bool loadFromFile( std::string path );
-
+  bool loadFromRenderedText(std::string textureText,
+                              SDL_Color textColor,
+                              TTF_Font *gFont);
   //Deallocates texture
   void free();
 

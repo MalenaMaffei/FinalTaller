@@ -1,6 +1,7 @@
 #ifndef TPFINAL_CODIGOSPAQUETE_H
 #define TPFINAL_CODIGOSPAQUETE_H
-
+#include <string>
+#include <map>
 class CodigosPaquete {
  public:
   bool esUnidad(int tipo);
@@ -9,6 +10,7 @@ class CodigosPaquete {
   bool esRobot(int tipo);
   bool esTanque(int tipo);
   bool esBala(int tipo);
+  std::string nombreUnidad(int tipo);
   enum colores{
     amarillo = 0,
     azul = 1,
@@ -66,6 +68,8 @@ class CodigosPaquete {
     posTipo = 14,
     posColor = 16
   };
+ private:
+  std::map<int, std::string>  nombresUnidades;
 };
 
 #endif //TPFINAL_CODIGOSPAQUETE_H
