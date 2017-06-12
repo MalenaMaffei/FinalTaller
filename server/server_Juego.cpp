@@ -40,7 +40,10 @@ enum comandos {
 	matar = '1',
 	mover = '2',
 	disparar = '3',
-	info = '4'
+	infoUnidad = '4',
+	mapa = '5',
+	equipo = '6',
+	infoFabrica = '7'
 };
 
 enum largos {
@@ -194,7 +197,7 @@ void Juego::moverUnidades() {
 		//TODO
 		if (movible->mover (factorTerreno)) {
 			pos = movible->getPosicion ();
-			std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
+//			std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
 			int mensajeX = pos[0]*100;
 			std::string xStr = agregarPadding(mensajeX,5);
 
@@ -368,7 +371,7 @@ void Juego::actualizarRecibidos() {
 		//TODO realizar acciones recibidas
 //		std::cout<<"antes de hacer el front"<<std::endl;
 		std::string mensaje = colaDeRecibidos->front ();
-//		std::cout<<"primer caracter: "<<mensaje[0]<<std::endl;
+		std::cout<<"primer caracter: "<<mensaje[0]<<std::endl;
 		switch (mensaje[0]) {
 			case crear: //TODO
 						break;
@@ -376,7 +379,9 @@ void Juego::actualizarRecibidos() {
 						break;
 			case disparar: this->recibirDisparar(mensaje);
 						break;
-			case info: this->recibirObtenerInfo (mensaje);
+			case infoUnidad: this->recibirObtenerInfoUnidad(mensaje);
+						break;
+			case infoFabrica: this->recibirObtenerInfoFabrica(mensaje);
 						break;
 		}
 		
@@ -394,15 +399,10 @@ void Juego::recibirMover(std::string mensaje) {
 	double y = stod(yStr,NULL)/100;
 	
 	std::array<double,2> inicio = movibles[idStr]->getPosicion ();
-	std::cout<<"busco trayectoria"<<std::endl;
-	std::cout<<"origen "<<inicio[0]<<","<<inicio[1]<<std::endl;
-	std::cout<<"destino "<<(int) x<<","<<(int) y<<std::endl;
-	std::cout<<"factor origen: "<<mapa.obtenerFactorTerreno ({inicio[0],inicio[1]})<<std::endl;;
 	AEstrella aEstrella(mapa);
 	std::vector< std::array<double,2> > recorrido = 
 								aEstrella.getRecorrido ({inicio[0],inicio[1]},
 														{(int) x,(int) y});
-	std::cout<<"termino trayectoria"<<std::endl;
 	movibles[idStr]->setTrayectoria(recorrido);
 }
 
@@ -412,14 +412,24 @@ void Juego::recibirDisparar(std::string mensaje) {
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 
-void Juego::recibirObtenerInfo (std::string mensaje) {
+void Juego::recibirObtenerInfoUnidad (std::string mensaje) {
+	std::cout<<"recibo: "<<mensaje<<std::endl;
 	std::string idStr = mensaje.substr(1,id);
-	this->enviarInfo (idStr);
+	this->enviarInfoUnidad (idStr);
 }
 
-void Juego::enviarInfo (std::string id) {
-	//TODO MENSAJE A ENVIAR
-	//Encolar en cola de enviados
+void Juego::recibirObtenerInfoFabrica (std::string mensaje) {
+	//TODO
+}
+
+void Juego::enviarInfoUnidad (std::string id) {
+	std::string mensaje = "4" + id ;
+	Movible* movible = movibles[id];
+	std::string tipo = agregarPadding(movible->getTipo (),2);
+	std::string vida = agregarPadding(movible->getPorcentajeVida (), 3);
+	mensaje += tipo + vida;
+	std::cout<<"envio: "<<mensaje<<std::endl;
+//	colaDeEnviados.push (mensaje);
 }
 
 void Juego::enviarCrear (Objeto* objeto) {

@@ -21,6 +21,7 @@ class Objeto {
         virtual void colisionar(Objeto& objeto) = 0;
         virtual void colisionar(Edificio& edificio) = 0;
         virtual void colisionar(Bandera& bandera) = 0;
+        int getPorcentajeVida();
         int getVida();
         virtual bool estaVivo();
         std::array<double, 2> getPosicion();

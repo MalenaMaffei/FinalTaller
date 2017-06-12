@@ -35,7 +35,6 @@ std::vector < std::array<double,2> >
 							const std::array<int, 2>& destino) {
 				
 	std::vector< std::array<double,2> > recorrido;
-	std::cout<<"En getRecorrido"<<std::endl;
 	std::map <std::array<int,2>,double> costos;
 	std::map <std::array<int,2>,std::array<int,2>> origenes;
 	
@@ -54,7 +53,6 @@ std::vector < std::array<double,2> >
 	
 	int maxX = mapa.obtenerDimensionX();
 	int maxY = mapa.obtenerDimensionY();
-	std::cout<<"antes de iterar"<<std::endl;
 	while (!listaAbierta.empty()) {
 		std::array<int,2> actual = listaAbierta.top ().first;
 //		std::cout<<"actual: "<<actual[0]<<","<<actual[1]<<std::endl;
@@ -101,11 +99,8 @@ std::vector < std::array<double,2> >
 	}
 	
 	std::array<int,2> actual = destino;
-	std::cout<<"armo reocrrido"<<std::endl;
 	while (actual != origen) {
-		std::cout<<"y el recorrido?"<<std::endl;
 		recorrido.push_back({actual[0],actual[1]});
-		std::cout<<actual[0]<<","<<actual[1]<<std::endl;
 		actual = origenes[actual];
 	}
 	

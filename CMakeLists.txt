@@ -26,11 +26,11 @@ find_package(TinyXML2 REQUIRED)
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
-
+find_package(SDL2_ttf REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 
-include_directories(${SDL2_INCLUDE_DIR} ${TINYXL2_INCLUDE_DIR})
+include_directories(${SDL2_INCLUDE_DIR} ${TINYXL2_INCLUDE_DIR} )
 link_directories(${TINYXML2_LIBRARIES})
 
 file(GLOB VISTA_SRC
@@ -39,7 +39,8 @@ file(GLOB VISTA_SRC
 		"client/Vistas/*.cpp"
         )
 add_executable(vista ${VISTA_SRC})
-target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} Threads::Threads)
+target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}  
+					${SDL_TTF_LIBRARIES} ${SDL2_TTF_LIBRARIES} Threads::Threads)
 
 file(GLOB SERVER_SRC
 		"server/*.h"

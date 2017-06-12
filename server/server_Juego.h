@@ -44,9 +44,10 @@ private:
     
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
-    void recibirObtenerInfo(std::string mensaje);
-    
-    void enviarInfo(std::string id);
+    void recibirObtenerInfoUnidad(std::string mensaje);
+    void recibirObtenerInfoFabrica(std::string mensaje);
+        
+    void enviarInfoUnidad(std::string id);
     void enviarCrear(Objeto* objeto);
     
     Mapa mapa;

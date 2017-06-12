@@ -61,5 +61,8 @@ int Objeto::getTipo() {
 	return tipo;
 }
 
+int Objeto::getPorcentajeVida() {
+	return double(vida)/double(vidaTotal)*100;
+}
 
 Objeto::~Objeto() { }

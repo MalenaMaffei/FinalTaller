@@ -86,14 +86,10 @@ bool Movible::mover (double factorTerreno) {
 	//Las balas llegan hasta destino y se frenan
 	//TODO (continuar trayectoria)
 	if (std::abs(modulo) < DIFF) {
-		std::cout<<"estoy en "<<destino[0]<<","<<destino[1]<<std::endl;
-		std::cout<<"largo trayectoria "<<trayectoria.size()<<std::endl;
 		posicion = destino;
 		if (!trayectoria.empty()) {
-			std::cout<<"queda trayectoria"<<std::endl;
 			destino = trayectoria.back();
 			trayectoria.pop_back();
-			std::cout<<"proximo destino: "<<destino[0]<<","<<destino[1]<<std::endl;
 		}
 		return false;
 	}
