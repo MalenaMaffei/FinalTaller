@@ -28,4 +28,8 @@
 
 15. terminar de crear spritesheets para los vehiculos que faltan.
 
-16. crear interfaz movible para la clase bala.
+16. ver como refactorizar clase bala
+
+17. mandar paquetes de pedido de informacion.
+
+

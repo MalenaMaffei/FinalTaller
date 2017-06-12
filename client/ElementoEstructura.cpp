@@ -10,5 +10,5 @@ ElementoEstructura::ElementoEstructura(std::string id,
         ElementoColoreado(id,x,y,textura,esMio, color) {}
 
 void ElementoEstructura::guiRequest(ColectorDeAcciones &colector) const {
-    colector.showEdificio();
+    colector.showEdificio(id);
 }
