@@ -52,11 +52,11 @@ void Paquete::pedirInfo(string id) {
 }
 
 int Paquete::coordToClient(double coord) {
-    return static_cast<int>(std::round((coord/ESCALA)*TILE_WIDTH));
+    return static_cast<int>(std::round((double(coord)/double(ESCALA))*TILE_WIDTH));
 }
 
 int Paquete::coordToServer(double coord) {
-    return static_cast<int>(std::round((coord/TILE_WIDTH)*ESCALA));
+    return static_cast<int>(std::round((double(coord)/double(TILE_WIDTH))*ESCALA));
 }
 
 void Paquete::mover(string id, int x, int y) {
