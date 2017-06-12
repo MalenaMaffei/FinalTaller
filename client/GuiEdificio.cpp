@@ -12,6 +12,8 @@ void GuiEdificio::mostrar(Punto offset) {
 //        TODO sacar numeros magicos
         cancel = Rect(pReal + Punto(OFF_CANCEL_X, OFF_CANCEL_Y), 40, 14);
         ok = Rect(pReal + Punto(OFF_OK_X, OFF_OK_Y), 40, 13);
+        printf("ok vive en: %i, %i\n", ok.x, ok.y );
+        printf("cancel vive en: %i, %i\n", cancel.x, cancel.y );
         vistaGui.mostrar(pReal, 0);
     }
 }
@@ -22,6 +24,8 @@ void GuiEdificio::abrirGui(Punto pos) {
 }
 
 bool GuiEdificio::click(Punto click) {
+//    printf("click en: %i,%i\n", click.x, click.y);
+
     if (cancel.incluyePunto(click)){
         seMuestra = false;
         return true;
