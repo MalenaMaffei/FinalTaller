@@ -195,9 +195,6 @@ void Canvas::run(){
                                 colaSalida);
 
 
-//    VistaTexto texto(gRenderer);
-//    texto.loadFont(fuentePath, 28);
-
     while (!quit){
         capTimer.start();
 
@@ -227,8 +224,6 @@ void Canvas::run(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
 
-
-
         //Render background
 
         std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
@@ -240,21 +235,15 @@ void Canvas::run(){
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
-
-
         selectBox.mostrar(gRenderer, camara.getOffset());
         hud.mostrar();
         guiEdificio.mostrar(camara.getOffset());
 
 
-//        texto.mostrar("holi", {255,255,255}, Punto(100,100));
-
         //Update screen
         SDL_RenderPresent(gRenderer);
         colector.crearAcciones();
         mouse.resetState();
-
-
 
 
         int frameTicks = capTimer.getTicks();

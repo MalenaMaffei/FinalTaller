@@ -22,7 +22,6 @@ void ColectorDeAcciones::crearAcciones() {
 
     Punto clicked = click.getPoint();
     if (guiEdificio.click(click.getPoint())){
-
         if (guiEdificio.huboSeleccion()){
             Paquete crear;
             crear.crear(guiEdificio.getFabricaId(),clicked.x,clicked.y,

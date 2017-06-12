@@ -17,15 +17,11 @@ bool VistaTexto::loadFont(std::string fontPath, int fontSize) {
         success = false;
     }
 
-
-    printf("success en load font: %i\n", success);
     return success;
 }
 
 void VistaTexto::mostrar(std::string texto, SDL_Color color, Punto p) {
-    printf("antes de load from render paso\n");
     if(loadFromRenderedText(texto, color, gFont)){
-        printf("load from render paso\n");
         render(p.x, p.y);
     } else {
         printf( "Failed to render text texture!\n" );

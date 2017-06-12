@@ -57,11 +57,10 @@ bool GuiEdificio::click(Punto click) {
         seMuestra = false;
     } else if (ok.incluyePunto(click)){
         seMuestra = false;
-//        tipoSeleccionado = tiposConstruibles[posSeleccionada];
+        tipoSeleccionado = tiposConstruibles[posSeleccionada];
 //        Aca se tiene que crear un paquete de informacion.
         printf("se apreto ok en gui crear\n");
     } else if (next.incluyePunto(click)){
-//        TODO cilcar fotos aca
         ++posSeleccionada;
         posSeleccionada %= tiposConstruibles.size();
         printf("posSeleccionada: %i\n", posSeleccionada);
