@@ -1,4 +1,4 @@
-#include "VistaColoreada.h"
+#include "../Header Files/VistaColoreada.h"
 VistaColoreada::VistaColoreada(SDL_Renderer *gRenderer,
                                int height,
                                int width,

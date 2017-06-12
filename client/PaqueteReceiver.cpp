@@ -5,11 +5,7 @@ PaqueteReceiver::PaqueteReceiver(const Socket &socket, ColaPaquetes &cola)
     : PaqueteDelivery(socket, cola) {}
 
 void PaqueteReceiver::run() {
-
-
     while (!salir){
-
-
         string mensaje;
 		printf("recibir\n");
         mensaje = socket.ReceiveStrWLen();

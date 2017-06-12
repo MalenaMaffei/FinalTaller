@@ -2,6 +2,7 @@
 //TODO chequwar que todos tengan implementado el Mio
 #include "Header Files/Click.h"
 #include "Header Files/ColectorDeAcciones.h"
+#include <string>
 using std::string;
 
 Elemento::Elemento(string id, int x, int y, Vista *textura, bool esMio)

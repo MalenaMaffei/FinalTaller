@@ -1,5 +1,6 @@
 #include "Header Files/ElementoFuerte.h"
 #include "Header Files/VistaFuerte.h"
+#include <string>
 #define HEIGHT 192
 #define WIDTH 160
 ElementoFuerte::ElementoFuerte(std::string id,

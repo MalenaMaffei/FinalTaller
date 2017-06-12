@@ -52,11 +52,11 @@ void Paquete::pedirInfo(string id) {
 }
 
 int Paquete::coordToClient(double coord) {
-    return static_cast<int>(std::round((double(coord)/double(ESCALA))*TILE_WIDTH));
+    return static_cast<int>(std::round((coord/double(ESCALA))*TILE_WIDTH));
 }
 
 int Paquete::coordToServer(double coord) {
-    return static_cast<int>(std::round((double(coord)/double(TILE_WIDTH))*ESCALA));
+    return static_cast<int>(std::round((coord/double(TILE_WIDTH))*ESCALA));
 }
 
 void Paquete::mover(string id, int x, int y) {
@@ -78,7 +78,6 @@ string & Paquete::getMensaje()  {
 
 void Paquete::setMensaje(const string &mensaje) {
     Paquete::mensaje = mensaje;
-
 }
 
 string Paquete::getId() const {
@@ -88,8 +87,6 @@ string Paquete::getId() const {
 int Paquete::getComando() const {
     return stoi(mensaje.substr(codigos.posComando,codigos.comando));
 }
-
-
 
 int Paquete::getX() {
     if (getComando() == codigos.matar){
