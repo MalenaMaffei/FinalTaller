@@ -66,7 +66,7 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
         balas[id] = bala;
         return;
     }
-//        TODO faltarian los vehiculos y fabricas de robots
+//        TODO faltarian los vehiculos
     elementos[id] = elemento;
 }
 
