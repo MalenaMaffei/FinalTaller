@@ -24,6 +24,8 @@ int main(int argc, char *argv[]){
 
 //    Si llegue aca es porque se cerro la ventana
     receiver.shutdown();
+//    TODO cuando el sender esta bloqueado con condV, como hago para
+// despertarlo?
     sender.shutdown();
     socket.Shutdown(SHUT_RDWR);
 

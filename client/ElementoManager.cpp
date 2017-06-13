@@ -3,7 +3,7 @@
 #include "Header Files/ElementoBandera.h"
 #include "Header Files/ElementoRoca.h"
 #include "Header Files/ElementoPuente.h"
-#include "Header Files/ElementoFuerte.h"
+#include "Header Files/ElementoEstructura.h"
 #include "Header Files/Mouse.h"
 #include "Header Files/Paquete.h"
 #include <vector>

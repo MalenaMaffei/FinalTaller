@@ -83,5 +83,5 @@ void ColectorDeAcciones::showEdificio(std::string id) {
 
 void ColectorDeAcciones::showHud() {
 //TODO codigo para que le diga al hud que muestre otra foto
-    hud.setInfo(0);
+//    hud.setInfo(10);
 }
