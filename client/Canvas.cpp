@@ -129,6 +129,9 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             elementoManager.disparar(paquete);
         } else if (paquete.getComando() == codigos.matar){
             elementoManager.matar(paquete);
+        } else if (paquete.getComando() == codigos.infoFabrica){
+            PaqueteFabrica paqueteFabrica(paquete.getMensaje());
+            guiEdificio.setInfo(paqueteFabrica);
         }
 //        TODO manejar infos para el hud y la gui edificio
     }
