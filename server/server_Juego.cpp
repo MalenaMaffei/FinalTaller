@@ -200,9 +200,7 @@ void Juego::moverUnidades() {
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
-		std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
-		std::cout<<"casillero: "<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
 		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero);
 //		std::cout<<"Factor de terreno "<<factorTerreno<<std::endl;
 		//Siempre devuelve el factor terreno de robot (agregar 2xDispatch)
@@ -229,8 +227,8 @@ void Juego::chequearColisiones () {
 	
 	while (it1 != movibles.end()) {
 		Movible* mov1 = (it1)->second;
-		std::cout<<"unidad: "<<it1->first<<std::endl;
-		std::cout<<"colisiones con inmovibles "<<std::endl;
+//		std::cout<<"unidad: "<<it1->first<<std::endl;
+//		std::cout<<"colisiones con inmovibles "<<std::endl;
 		std::map<std::string,Inmovible*>::iterator it2 = inmovibles.begin ();
 		while (it2 != inmovibles.end()) {
 			Inmovible* inMov2 = (it2)->second;
@@ -240,7 +238,7 @@ void Juego::chequearColisiones () {
 			}
 			++it2;
 		}
-		std::cout<<"colisiones con movibles "<<std::endl;
+//		std::cout<<"colisiones con movibles "<<std::endl;
 		std::map<std::string, Movible*>::iterator it3 = movibles.begin ();
 		while (it3 != movibles.end()) {
 			if (it1 == it3) {
@@ -253,25 +251,18 @@ void Juego::chequearColisiones () {
 			}
 			++it3;
 		}
-		std::cout<<"colisiones con edificios "<<std::endl;
 		std::map<std::string, Edificio*>::iterator it4 = edificios.begin ();
 		while (it4 != edificios.end()) {
 			Edificio* edificio = (it4)->second;
-			std::cout<<"itero edificios"<<std::endl;
 			if (mov1->colisiona(*edificio)) {
-				std::cout<<"encuentro colision"<<std::endl;
 				mov1->colisionar(*edificio);
-				std::cout<<"colisiona unidad con edificio"<<std::endl;
 				edificio->colisionar(*mov1);
-				std::cout<<"colisiona edificio con unidad"<<std::endl;
 			}
 			++it4;
 		}
-		std::cout<<"termino de ver colisiones"<<std::endl;
 		if (mov1->obtuvoBandera ()) {
 			banderasPorEquipo[mov1->getEquipo ()] ++;
 		}
-		std::cout<<"termino de chequear banderas"<<std::endl;
 		++it1;
 	}
 }
@@ -332,7 +323,7 @@ void Juego::actualizarEdificios() {
 			++it;
 			continue;
 		}
-		std::cout<<"pos edificio: "<<posEdificio[0]<<","<<posEdificio[1]<<std::endl;
+//		std::cout<<"pos edificio: "<<posEdificio[0]<<","<<posEdificio[1]<<std::endl;
 		if (tipo>=11 && tipo<=16) {
 			Vehiculo* vehiculo = fabricaV->getVehiculo (tipo);
 			std::string id ="m"+agregarPadding(proximoIDMovible,2);
@@ -531,17 +522,17 @@ void Juego::run() {
 	while (!this->hayGanador()) {
 		clock_t tiempo1 = clock();
 		this->actualizarRecibidos ();
-		std::cout<<"actualizo edificios"<<std::endl;
+//		std::cout<<"actualizo edificios"<<std::endl;
 		this->actualizarEdificios();
-		std::cout<<"actualizo disparos"<<std::endl;
+//		std::cout<<"actualizo disparos"<<std::endl;
 		this->actualizarDisparos();
-		std::cout<<"actualizo mover unidades"<<std::endl;
+//		std::cout<<"actualizo mover unidades"<<std::endl;
 		this->moverUnidades ();
-		std::cout<<"actualizo chequear colisiones"<<std::endl;
+//		std::cout<<"actualizo chequear colisiones"<<std::endl;
 		this->chequearColisiones();
-		std::cout<<"actualizo muertos"<<std::endl;
+//		std::cout<<"actualizo muertos"<<std::endl;
 		this->eliminarMuertos();
-		std::cout<<movibles.size()<<std::endl;
+//		std::cout<<movibles.size()<<std::endl;
 		this->enviarMensajesEncolados();
 		clock_t tiempo2 = clock();
 		double intervaloDormir = CYCLE_TIME - 

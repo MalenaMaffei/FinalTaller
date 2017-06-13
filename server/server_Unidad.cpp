@@ -84,12 +84,9 @@ bool Unidad::superaMaxDistancia () {
 }
 
 bool Unidad::obtuvoBandera () {
-	std::cout<<"entro a obtuvo bandera"<<std::endl;
 	if (bandera) {
-		std::cout<<"obtuvo bandera"<<std::endl;
 		bandera = false;
 		return true;
 	}
-	std::cout<<"no obtuvo bandera"<<std::endl;
 	return false;
 }
