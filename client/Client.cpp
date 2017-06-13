@@ -6,7 +6,7 @@ int main(int argc, char *argv[]){
 
     //    DESCOMENTAR PARA PROBAR CON SERVER
     Socket socket;
-//    socket.setClientMode(argv[1], argv[2]);
+    socket.setClientMode(argv[1], argv[2]);
 
     std::mutex m;
     std::condition_variable cond;
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
 //    Si llegue aca es porque se cerro la ventana
     receiver.shutdown();
     sender.shutdown();
-//    socket.Shutdown(SHUT_RDWR);
+    socket.Shutdown(SHUT_RDWR);
 
     receiver.join();
     sender.join();
