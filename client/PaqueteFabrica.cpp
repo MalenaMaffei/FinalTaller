@@ -1,4 +1,4 @@
-#include "PaqueteFabrica.h"
+#include "Header Files/PaqueteFabrica.h"
 #include <map>
 using std::string;
 PaqueteFabrica::PaqueteFabrica(const std::string &mensaje) : mensaje(mensaje) {}
@@ -18,7 +18,6 @@ int PaqueteFabrica::getVidaFabrica() {
 }
 
 std::map<int,std::string> PaqueteFabrica::getConstruibles() {
-    printf("entro en construibles\n");
     std::map<int,std::string> construibles;
     int cant = getCantConstuibles();
     int currTipo;
@@ -27,8 +26,6 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
     int offset;
     for (int i = 0; i < cant; ++i) {
         offset = (tiempo + tipo)*i;
-        printf("intenta convertir a int %s\n", mensaje.substr(pos + offset,
-                                                              tipo).c_str());
         currTipo = std::stoi(mensaje.substr(pos + offset, tipo));
         currTiempo = mensaje.substr(pos + offset + tipo, tiempo);
         construibles[currTipo] = currTiempo;
@@ -46,7 +43,6 @@ int PaqueteFabrica::tipoEnConstruccion() {
 ////        TODO lanzar excepcion aca
 //    }
     int pos = getOffsetConstruibles() + isConstruyendo;
-    printf("pos de tipo condtruyendo %i\n", pos);
     return std::stoi(mensaje.substr(pos, tipo));
 }
 

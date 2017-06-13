@@ -14,8 +14,8 @@
 #include "Header Files/VistaHud.h"
 #include "Header Files/VistaHudCaras.h"
 #include "Header Files/VistaGui.h"
-#include "CreadorMapa.h"
-#include "VistaTexto.h"
+#include "Header Files/CreadorMapa.h"
+#include "Header Files/VistaTexto.h"
 #include <string>
 
 const int SCREEN_FPS = 30;

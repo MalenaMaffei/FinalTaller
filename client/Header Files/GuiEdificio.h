@@ -2,9 +2,9 @@
 #define TPFINAL_GUIEDIFICIO_H
 
 #include "Vista.h"
-#include "../VistaTexto.h"
+#include "VistaTexto.h"
 #include "VistaGui.h"
-#include "../PaqueteFabrica.h"
+#include "PaqueteFabrica.h"
 #include <vector>
 #include <map>
 //TODO van a faltar las vistas de los bichos

@@ -1,8 +1,8 @@
 #ifndef TPFINAL_CREADORMAPA_H
 #define TPFINAL_CREADORMAPA_H
 #include <vector>
-#include "Header Files/Paquete.h"
-#include "Header Files/Tile.h"
+#include "Paquete.h"
+#include "Tile.h"
 class CreadorMapa {
  public:
   void crearMapa(Paquete &paquete,

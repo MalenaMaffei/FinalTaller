@@ -14,7 +14,7 @@ class Elemento {
   virtual void matar();
   const Rect & getRect() const;
   std::string getId() const;
-  void clicked(Click& click);
+  virtual void clicked(Click& click);
   bool esMio() const;
   virtual void guiRequest(ColectorDeAcciones& colector) const;
  protected:

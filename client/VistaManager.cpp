@@ -1,4 +1,4 @@
-#include "VistaManager.h"
+#include "Header Files/VistaManager.h"
 #include "Header Files/VistaBandera.h"
 #include "Header Files/VistaRoca.h"
 #include "Header Files/VistaPuente.h"
@@ -14,6 +14,8 @@
 #include "Header Files/VistaHeavy.h"
 #include "Header Files/VistaTanqueMorir.h"
 #include "Header Files/VistaBala.h"
+#include "Header Files/VistaFabricaVehiculo.h"
+#include "Header Files/VistaFabricaRobot.h"
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
 
@@ -53,8 +55,11 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         } else if (tipo == codigos.puente){
             vista = new VistaPuente(gRenderer);
         } else if (tipo == codigos.fuerte){
-            printf("se crea la vista de %i\n", tipo);
             vista = new VistaFuerte(gRenderer);
+        } else if (tipo == codigos.fabricaVehiculo){
+            vista = new VistaFabricaVehiculo(gRenderer);
+        } else if (tipo == codigos.fabricaRobot){
+            vista = new VistaFabricaRobot(gRenderer);
         } else if (tipo == codigos.bala){
             vista = new VistaBala(gRenderer);
         }

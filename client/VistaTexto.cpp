@@ -1,4 +1,4 @@
-#include "VistaTexto.h"
+#include "Header Files/VistaTexto.h"
 #include "Header Files/constantes.h"
 #include "Header Files/Punto.h"
 
