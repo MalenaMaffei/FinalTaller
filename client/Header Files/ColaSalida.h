@@ -2,7 +2,7 @@
 #define TPFINAL_COLASALIDA_H
 
 #include <condition_variable>
-#include "Header Files/ColaPaquetes.h"
+#include "ColaPaquetes.h"
 class ColaSalida : public ColaPaquetes{
  public:
   ColaSalida(std::mutex *m, std::condition_variable *cond_v);

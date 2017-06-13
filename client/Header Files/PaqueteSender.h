@@ -5,7 +5,7 @@
 #include "ColaPaquetes.h"
 #include "common_Thread.h"
 #include "PaqueteDelivery.h"
-#include "../ColaSalida.h"
+#include "ColaSalida.h"
 
 class PaqueteSender : public PaqueteDelivery{
  public:

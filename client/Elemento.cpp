@@ -28,7 +28,7 @@ bool Elemento::estaMuerto() const {
 }
 
 void Elemento::matar() {
-    return;
+    muerto = true;
 }
 
 const Rect & Elemento::getRect() const {
