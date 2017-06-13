@@ -474,15 +474,19 @@ void Juego::enviarInfoFabrica (std::string id) {
 	std::string cantidadStr = agregarPadding(cantidad,2);
 	std::string unidadesStr = cantidadStr;
 	for (int idActual : vehiculosPosibles) {
-		int tiempo = fabricaV->getTiempo (idActual); //En segundos
+		int tiempo = fabricaV->getTiempo (idActual)/TICKS; //En segundos
 		std::string tiempoStr = agregarPadding(tiempo,4);
 		std::string idStr = agregarPadding(idActual,2);
+		std::cout<<idStr<<std::endl;
+		std::cout<<tiempoStr<<std::endl;
 		unidadesStr += idStr + tiempoStr;
 	}
 	for (int idActual : robotsPosibles) {
-		int tiempo = fabricaR->getTiempo (idActual); //En segundos
+		int tiempo = fabricaR->getTiempo (idActual)/TICKS; //En segundos 
 		std::string tiempoStr = agregarPadding(tiempo,4);
 		std::string idStr = agregarPadding(idActual,2);
+		std::cout<<idStr<<std::endl;
+		std::cout<<tiempoStr<<std::endl;
 		unidadesStr += idStr + tiempoStr;
 	}
 	
