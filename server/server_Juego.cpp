@@ -495,9 +495,17 @@ void Juego::enviarInfoFabrica (std::string id) {
 		unidadesStr += idStr + tiempoStr;
 	}
 	
-	std::string construyendo = std::to_string((int) edificio->estaCreando ());
+	int construyendo = (int) edificio->estaCreando ();
+	std::string construyendoStr = std::to_string(construyendo);
 	
-	mensaje += tipoStr + vidaStr + unidadesStr + construyendo;
+	mensaje += tipoStr + vidaStr + unidadesStr + construyendoStr;
+
+	if (construyendo) {
+		std::string tipoCreandoStr = agregarPadding(edificio->getTipoCreando (),2);
+		std::string porcentajeStr = agregarPadding(edificio->getPorcentajeConstruccion (),3);
+		mensaje += tipoCreandoStr + porcentajeStr;
+	}
+	
 	colaDeEnviados.push (mensaje);
 }	
 

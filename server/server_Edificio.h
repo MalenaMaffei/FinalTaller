@@ -15,6 +15,8 @@ public:
     void colisionar (Bandera& bandera) override;
     int getEquipo();
     void setFabricacion(int tiempoBase, int territorios, int tipo);
+    int getPorcentajeConstruccion();
+    int getTipoCreando();
     int getNivel();
     bool estaCreando();
     int debeCrear();
@@ -23,7 +25,7 @@ private:
     int tiempoFabricacion;
     int tiempoParaFabricacion;
     int idEquipo;
-    int tipo;   //Tipo de objeto a construir
+    int tipoCreando;   //Tipo de objeto a construir
     int territoriosTomados;
     int construccionesRealizadas; // Cuento la cantidad de construcciones 
                                   // y a partir de eso calculo el nivel
