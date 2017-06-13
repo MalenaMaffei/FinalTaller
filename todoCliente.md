@@ -43,3 +43,5 @@
 20. como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego
 
 21. Poner destructores de vistaManager y elementoManager
+
+22. clase mapa para mostrar mapa en vez de mostrar tiles
