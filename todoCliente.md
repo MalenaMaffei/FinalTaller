@@ -2,7 +2,7 @@
 
 2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
 
-3. Pasar SDL al main en un solo thread.
+3. ~~Pasar SDL al main en un solo thread.~~
 
 4. Crear cola bloqueante para el sender.
 
