@@ -36,7 +36,8 @@ link_directories(${TINYXML2_LIBRARIES})
 file(GLOB VISTA_SRC
         "client/Header Files/*.h"
         "client/*.cpp"
-		"client/Vistas/*.cpp"
+	"client/Vistas/*.cpp"
+	"client/Elementos/*.cpp"
         )
 add_executable(vista ${VISTA_SRC})
 target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}  

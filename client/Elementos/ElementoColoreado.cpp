@@ -1,4 +1,4 @@
-#include "Header Files/ElementoColoreado.h"
+#include "../Header Files/ElementoColoreado.h"
 #include <string>
 ElementoColoreado::ElementoColoreado(std::string id,int x,int y,Vista *textura,
                                      bool esMio,int color) :

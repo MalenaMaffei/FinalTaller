@@ -1,5 +1,5 @@
-#include "Header Files/ElementoRoca.h"
-#include "Header Files/VistaRoca.h"
+#include "../Header Files/ElementoRoca.h"
+#include "../Header Files/VistaRoca.h"
 #include <string>
 #define WIDTH 32
 #define HEIGHT 32
