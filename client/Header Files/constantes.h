@@ -24,7 +24,7 @@ const char tilePath[] = "../client/imgs/todosTiles.png";
 const char rocaPath[] = "../client/imgs/Rocas/roca_roca.png";
 const char hieloPath[] = "../client/imgs/Rocas/roca_hielo.png";
 const char balaPath[] = "../client/imgs/bala.png";
-const char fuertePath[] = "../client/imgs/Edificios/fort.png";
+const char fuertePath[] = "../client/imgs/Edificios/fuerte.png";
 const char fabricaVehiculosPath[] = ""
     "../client/imgs/Edificios/fabrica_vehiculos.png";
 const char fabricaRobotsPath[] = "../client/imgs/Edificios/fabrica_robots.png";

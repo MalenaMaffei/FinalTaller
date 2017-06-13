@@ -51,8 +51,7 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
     } else if (tipo == codigos.puente){
         elemento = new ElementoPuente(id, x, y, vistaManager.getVista(tipo));
     } else if (tipo == codigos.fuerte){
-
-        elemento = new ElementoFuerte(id, x, y, vistaManager.getVista(tipo),
+        elemento = new ElementoEstructura(id, x, y, vistaManager.getVista(tipo),
                                       color == miColor, color);
     } else if (tipo == codigos.fabricaVehiculo){
         elemento = new ElementoEstructura(id, x, y, vistaManager.getVista(tipo),
