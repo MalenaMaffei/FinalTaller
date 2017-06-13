@@ -23,55 +23,42 @@ const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     colaEntrada(colaEntrada), colaSalida(colaSalida) {
-    //Initialization flag
     bool success = true;
 
-    //Initialize SDL
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-    {
-        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+    if (SDL_Init( SDL_INIT_VIDEO ) < 0) {
+        printf( "No se pudo inicializar SDL. SDL Error: %s\n", SDL_GetError() );
         success = false;
     }
-    else
-    {
-        //Set texture filtering to linear
-        if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
-        {
-            printf( "Warning: Linear texture filtering not enabled!" );
+    else {
+        if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
+            printf("No se pudo activar filtro lineal a textura\n");
         }
 
         //Create window
         gWindow = SDL_CreateWindow( "Z Game", SDL_WINDOWPOS_UNDEFINED,
                                     SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-        if( gWindow == NULL )
-        {
-            printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
+        if (gWindow == NULL) {
+            printf( "No se pudo crear la ventana. SDL Error: %s\n", SDL_GetError
+                () );
             success = false;
         }
-        else
-        {
-            //Create vsynced renderer for window
+        else {
             gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-            if( gRenderer == NULL )
-            {
-                printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+            if (gRenderer == NULL){
+                printf( "No se pudo crear renderizador. SDL Error: %s\n",
+                        SDL_GetError() );
                 success = false;
-            }
-            else
-            {
-                //Initialize renderer color
+            } else {
                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
-                //Initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
-                if( !( IMG_Init( imgFlags ) & imgFlags ) )
-                {
-                    printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+                if (!(IMG_Init(imgFlags) & imgFlags)) {
+                    printf( "No se pudo inicializar a SDL_image could not SDL_image Error: %s\n", IMG_GetError() );
                     success = false;
                 }
-                if( TTF_Init() == -1 )
-                {
-                    printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+                if (TTF_Init() == -1){
+                    printf( "No se pudo inicializar a SDL_ttf. SDL_ttf Error:"
+                                " %s\n", TTF_GetError() );
                     success = false;
                 }
             }
@@ -79,7 +66,7 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     }
 
     if (!success){
-//        TODO lanzar excepcion aca, bah, no en cada instancia
+//        TODO lanzar excepcion aca, bah, no, en cada instancia
     }
 }
 
@@ -100,24 +87,10 @@ void Canvas::close() {
     SDL_Quit();
 }
 
-int getTileType(int x, int y){
-    if (x < 50){
-        return 0;
-    } else if (x < 100) {
-        return 1;
-    } else if (x < 150){
-        return 2;
-    } else if (x < 200){
-        return 3;
-    }
-}
-
 
 void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                              Hud &hud,
                              GuiEdificio &guiEdificio) {
-//    TODO esto deberia ser otro thread? se me puede llegar a quedar
-// bloqueado aca?
     CodigosPaquete codigos;
     while (!colaEntrada.isEmpty()){
         Paquete paquete = colaEntrada.desencolar();
@@ -169,6 +142,8 @@ void Canvas::startGame(){
     while (colaEntrada.isEmpty()){
 //        TODO fix pedorro hasta uqe se me ocurra una mejor manera
     }
+
+//    TODO crear clase mapa
     VistaTiles tilesTexture(gRenderer);
     std::vector<Tile> tiles;
     CreadorMapa creadorMapa;
@@ -185,7 +160,6 @@ void Canvas::startGame(){
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);
     Hud hud(vistaHud, vistaCaras);
-//    VistaGui vistaGui(gRenderer);
     GuiEdificio guiEdificio(gRenderer);
 
     Mouse mouse;
@@ -216,8 +190,7 @@ void Canvas::startGame(){
 
         float timeStep = stepTimer.getTicks() / 1000.f;
 
-        //Move the dot
-//            camara.move();
+
 
         camara.move(timeStep);
         //Restart step timer
@@ -227,7 +200,6 @@ void Canvas::startGame(){
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
 
-        //Render background
 
         std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
           tile.mostrar(camara);
@@ -258,8 +230,4 @@ void Canvas::startGame(){
 
     //Free resources and close SDL
     close();
-}
-
-void Canvas::gameLoop() {
-//todo pasar el loop aca
 }
