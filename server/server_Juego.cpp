@@ -19,7 +19,6 @@
 #include "server_FabricaVehiculos.h"
 #include "server_Bloque.h"
 #include "server_Edificio.h"
-#include "server_EdificioFabricaVehiculo.h"
 #include <array>
 #include <iostream>
 #include <time.h>
@@ -40,6 +39,7 @@ enum comandos {
 	matar = '1',
 	mover = '2',
 	disparar = '3',
+	info = '4',
 	infoUnidad = '4',
 	mapa = '5',
 	equipo = '6',
@@ -131,8 +131,19 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	mensaje = comando+xStr+yStr+tipo+std::string("0");	
 	socket->SendStrWLen (mensaje);
 
-	
+	//    Edificio(int vida, double ancho, double alto, int idEquipo, int tipo);
+	Edificio* edificio = new Edificio(10,10,12,0,3);
+	edificios["i02"] = (edificio);
+
+	bloque->setPosicion ({10,3});
+
+	xStr = agregarPadding(10*100,5);
+	yStr = agregarPadding(3*100,5);
+	tipo = agregarPadding(edificio->getTipo (),2);
+	comando = "0i02";
+	mensaje = comando+xStr+yStr+tipo+std::string("0");	
 	socket->SendStrWLen (mensaje);
+	
 }
 
 void Juego::eliminarMuertos() {
@@ -308,11 +319,12 @@ void Juego::actualizarEdificios() {
 		Edificio* edificio = (it)->second;
 		std::array<double,2> posEdificio = edificio->getPosicion ();
 		int tipo = edificio->debeCrear();
-		if (clave[0] == 'v') {
-			if (tipo == -1) {
-				++it;
-				continue;
-			}
+
+		if (tipo == -1) {
+			++it;
+			continue;
+		}		
+		if (tipo>=6 && tipo<=10) {
 			Vehiculo* vehiculo = fabricaV->getVehiculo (tipo);
 			std::string id ="m"+agregarPadding(proximoIDMovible,2);
 			movibles[id] = vehiculo;
@@ -332,11 +344,7 @@ void Juego::actualizarEdificios() {
 			std::cout<<"creo edificio"<<std::endl;
 			proximoIDMovible++;
 		}
-		if (clave[0] == 'r') {
-			if (tipo == -1) {
-				++it;
-				continue;
-			}
+		if (tipo>=11 && tipo<=16) {
 			Robot* robot = fabricaR->getRobot (tipo);
 			movibles["m"+agregarPadding(proximoIDMovible,2)] = robot;
 			
@@ -378,10 +386,14 @@ void Juego::actualizarRecibidos() {
 						break;
 			case disparar: this->recibirDisparar(mensaje);
 						break;
-			case infoUnidad: this->recibirObtenerInfoUnidad(mensaje);
+			case info: 
+						if (mensaje[1] == 'm')
+							this->recibirObtenerInfoUnidad(mensaje);
+						if (mensaje[1] == 'i')
+							this->recibirObtenerInfoFabrica(mensaje);
 						break;
-			case infoFabrica: this->recibirObtenerInfoFabrica(mensaje);
-						break;
+//			case infoFabrica: this->recibirObtenerInfoFabrica(mensaje);
+//						break;
 		}
 		
 		colaDeRecibidos->pop ();
@@ -412,24 +424,73 @@ void Juego::recibirDisparar(std::string mensaje) {
 }
 
 void Juego::recibirObtenerInfoUnidad (std::string mensaje) {
-	std::cout<<"recibo: "<<mensaje<<std::endl;
+	std::cout<<"recibo(unidad): "<<mensaje<<std::endl;
 	std::string idStr = mensaje.substr(1,id);
 	this->enviarInfoUnidad (idStr);
 }
 
 void Juego::recibirObtenerInfoFabrica (std::string mensaje) {
-	//TODO
+	std::cout<<"recibo(edificio): "<<mensaje<<std::endl;
+	std::string idStr = mensaje.substr(1,id);
+	this->enviarInfoFabrica (idStr);
 }
 
 void Juego::enviarInfoUnidad (std::string id) {
 	std::string mensaje = "4" + id ;
 	Movible* movible = movibles[id];
-	std::string tipo = agregarPadding(movible->getTipo (),2);
+	std::string tipo = agregarPadding(movible->getTipo(),2);
 	std::string vida = agregarPadding(movible->getPorcentajeVida (), 3);
 	mensaje += tipo + vida;
 	std::cout<<"envio: "<<mensaje<<std::endl;
 	colaDeEnviados.push (mensaje);
 }
+
+void Juego::enviarInfoFabrica (std::string id) {
+	std::cout<<"entro a enviar info fabrica"<<std::endl;
+	std::string mensaje = "7" + id;
+	Edificio* edificio = edificios[id];
+	std::string tipoStr = agregarPadding(edificio->getTipo(), 2);
+	std::string vidaStr = agregarPadding(edificio->getPorcentajeVida (), 3);
+	
+	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
+	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
+	
+	std::cout<<"tipo edificio: "<<tipoStr<<std::endl;
+	int tipo = edificio->getTipo ();
+	std::vector<int> vehiculosPosibles;
+	std::vector<int> robotsPosibles;
+	if (tipo == 5 || tipo == 3) {
+		std::cout<<"entro aca"<<std::endl;
+		vehiculosPosibles = 
+					fabricaV->getVehiculosPosibles (edificio->getNivel ());
+	}
+	if (tipo == 4 || tipo == 3) {
+		std::cout<<"y aca tambien"<<std::endl;
+		robotsPosibles = 
+					fabricaR->getRobotsPosibles (edificio->getNivel ());
+	}
+	
+	int cantidad = vehiculosPosibles.size() + robotsPosibles.size();
+	std::string cantidadStr = agregarPadding(cantidad,2);
+	std::string unidadesStr = cantidadStr;
+	for (int idActual : vehiculosPosibles) {
+		int tiempo = fabricaV->getTiempo (idActual); //En segundos
+		std::string tiempoStr = agregarPadding(tiempo,4);
+		std::string idStr = agregarPadding(idActual,2);
+		unidadesStr += idStr + tiempoStr;
+	}
+	for (int idActual : robotsPosibles) {
+		int tiempo = fabricaR->getTiempo (idActual); //En segundos
+		std::string tiempoStr = agregarPadding(tiempo,4);
+		std::string idStr = agregarPadding(idActual,2);
+		unidadesStr += idStr + tiempoStr;
+	}
+	
+	std::string construyendo = std::to_string((int) edificio->estaCreando ());
+	
+	mensaje += tipoStr + vidaStr + unidadesStr + construyendo;
+	colaDeEnviados.push (mensaje);
+}	
 
 void Juego::enviarCrear (Objeto* objeto) {
 

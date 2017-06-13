@@ -77,3 +77,24 @@ Robot* FabricaRobots::getRobot(int tipo) {
 	return new Robot(vidas[tipo],1,1,frecuencias[tipo],
 					 alcances[tipo],armamentos[tipo], velocidades[tipo],tipo);
 }
+
+int FabricaRobots::getCantidad(int tipo) {
+	return cantidades[tipo];
+}
+
+int FabricaRobots::getTiempo(int tipo) {
+	return tiempos[tipo];
+}
+
+std::vector<int> FabricaRobots::getRobotsPosibles(int nivel) {
+	std::vector<int> tiposPosibles;
+	for (const auto& actual: niveles) {
+		int nivelActual = actual.second;
+		if (nivelActual>nivel) {
+			continue;
+		}
+		int tipoActual = actual.first;
+		tiposPosibles.push_back(tipoActual);
+	}
+	return tiposPosibles;
+}

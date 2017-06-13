@@ -54,7 +54,7 @@ FabricaVehiculos::FabricaVehiculos () {
 		velocidades[tipo] = velocidad;
 		//Reqisitos de creación
 		cantidades[tipo] = cantidad;
-		tiempos[tipo] = secs*TICKS;
+		tiempos[tipo] = secs*TICKS; //Está en segundos
 		niveles[tipo] = nivel;
 	}
 }
@@ -81,4 +81,17 @@ int FabricaVehiculos::getCantidad(int tipo) {
 
 int FabricaVehiculos::getTiempo(int tipo) {
 	return tiempos[tipo];
+}
+
+std::vector<int> FabricaVehiculos::getVehiculosPosibles(int nivel) {
+	std::vector<int> tiposPosibles;
+	for (const auto& actual: niveles) {
+		int nivelActual = actual.second;
+		if (nivelActual>nivel) {
+			continue;
+		}
+		int tipoActual = actual.first;
+		tiposPosibles.push_back(tipoActual);
+	}
+	return tiposPosibles;
 }

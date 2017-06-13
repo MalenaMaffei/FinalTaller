@@ -16,6 +16,7 @@
 
 #include "server_Vehiculo.h"
 #include <map>
+#include <vector>
 
 class FabricaVehiculos {
     public:
@@ -23,6 +24,7 @@ class FabricaVehiculos {
         Vehiculo* getVehiculo(int tipo);
         int getCantidad(int tipo);
         int getTiempo(int tipo);
+        std::vector<int> getVehiculosPosibles(int nivel);
     private:
         static FabricaVehiculos* instancia;
         FabricaVehiculos();

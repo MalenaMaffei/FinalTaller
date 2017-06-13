@@ -12,7 +12,9 @@ Edificio::Edificio (int vida, double ancho, double alto,
 									Inmovible(vida,ancho,
 											alto, tipo),
 									idEquipo(idEquipo), 
-									tipo (-1) { }
+									tipo (-1),
+									construccionesRealizadas (0),
+									nivel (1) { }
 
 void Edificio::colisionar(Objeto& objeto) {
 	objeto.colisionar(*this);
@@ -48,12 +50,23 @@ Edificio::~Edificio () { }
 
 int Edificio::debeCrear () {
   	if (tiempoParaFabricacion == 0 && tipo!=-1) {
-		std::cout<<"Entro"<<std::endl;
 		tiempoParaFabricacion = tiempoFabricacion;
+		++construccionesRealizadas;
+		if (construccionesRealizadas%2) {
+			++nivel;
+		}
 		return tipo; //Devuelvo tipo a crear
 	}
 //	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)
 		tiempoParaFabricacion--;
 	return -1;	//empty string
+}
+
+int Edificio::getNivel() {
+	return nivel;
+}
+
+bool Edificio::estaCreando() {
+	return tipo!=-1; //Si esta en -1 no esta creando nada
 }

@@ -14,6 +14,8 @@ public:
     void colisionar (Edificio& edificio) override;
     void colisionar (Bandera& bandera) override;
     void setFabricacion(int tiempoBase, int territorios, int tipo);
+    int getNivel();
+    bool estaCreando();
     int debeCrear();
     virtual ~Edificio();
 private:
@@ -22,7 +24,9 @@ private:
     int idEquipo;
     int tipo;   //Tipo de objeto a construir
     int territoriosTomados;
-    int nivel;
+    int construccionesRealizadas; // Cuento la cantidad de construcciones 
+                                  // y a partir de eso calculo el nivel
+    int nivel; // Cada 2 personajes construidos aumento el nivel
 };
 
 #endif /* EDIFICIO_H */

@@ -22,6 +22,9 @@ class FabricaRobots {
 public:
     static FabricaRobots* getInstancia();
     Robot* getRobot(int tipo);
+    int getCantidad(int tipo);
+    int getTiempo(int tipo);
+    std::vector<int> getRobotsPosibles(int nivel);
 private:
     static FabricaRobots* instancia;
     FabricaRobots();
