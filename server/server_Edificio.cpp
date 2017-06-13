@@ -12,7 +12,7 @@ Edificio::Edificio (int vida, double ancho, double alto,
 									Inmovible(vida,ancho,
 											alto, tipo),
 									idEquipo(idEquipo), 
-									tipo (-1),
+									tipoCreando (-1),
 									construccionesRealizadas (0),
 									nivel (1) { }
 
@@ -44,13 +44,13 @@ void Edificio::setFabricacion(int tiempoBase, int territorios, int tipo) {
 	this->tiempoFabricacion = (double(tiempoBase)/double(territorios))/
 								std::sqrt(double(vida)/double(vidaTotal));
 	this->tiempoParaFabricacion = this->tiempoFabricacion;
-	this->tipo = tipo;
+	this->tipoCreando = tipo;
 }
 
 Edificio::~Edificio () { }
 
 int Edificio::debeCrear () {
-	if (tipo == -1) 
+	if (tipoCreando == -1) 
 		return -1;
   	if (tiempoParaFabricacion == 0) {
 		tiempoParaFabricacion = tiempoFabricacion;
@@ -58,7 +58,7 @@ int Edificio::debeCrear () {
 		if (construccionesRealizadas%2) {
 			++nivel;
 		}
-		return tipo; //Devuelvo tipo a crear
+		return tipoCreando; //Devuelvo tipo a crear
 	}
 	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)
@@ -71,9 +71,18 @@ int Edificio::getNivel() {
 }
 
 bool Edificio::estaCreando() {
-	return tipo!=-1; //Si esta en -1 no esta creando nada
+	return tipoCreando!=-1; //Si esta en -1 no esta creando nada
 }
 
 int Edificio::getEquipo() {
 	return idEquipo;
+}
+
+int Edificio::getPorcentajeConstruccion() {
+	return double(tiempoFabricacion-tiempoParaFabricacion)/
+												double(tiempoFabricacion)*100;
+}
+
+int Edificio::getTipoCreando() {
+	return tipoCreando;
 }
