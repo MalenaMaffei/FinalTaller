@@ -29,7 +29,7 @@ class Unidad : public Movible {
     public:
         Unidad(int vida, double ancho, double alto, int frecuenciaDisparo,
                     int alcance, int tipoArmamento, int velocidad, int tipo);
-        void dispararA(std::string);
+        void dispararA(std::string objetivo);
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
         void colisionar(Municion& municion) override;
