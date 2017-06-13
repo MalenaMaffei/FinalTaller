@@ -4,9 +4,9 @@
 
 3. ~~Pasar SDL al main en un solo thread.~~
 
-4. Crear cola bloqueante para el sender.
+4. ~~Crear cola bloqueante para el sender.~~
 
-5. ver que onda el uso del CPU.
+5. ~~ver que onda el uso del CPU.~~
 
 6. inhibir errores de valgrind de SDL.
 

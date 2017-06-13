@@ -83,7 +83,7 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	socket->SendStrWLen (mensaje); //Envio mapa
 	
 			
-	banderasPorEquipo = {0,0,0,0};
+	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
 	
 	proximoIDMovible = 0;
 	
@@ -135,7 +135,7 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	Edificio* edificio = new Edificio(10,10,12,0,3);
 	edificios["i02"] = (edificio);
 
-	bloque->setPosicion ({10,3});
+	edificio->setPosicion ({10,3});
 
 	xStr = agregarPadding(10*100,5);
 	yStr = agregarPadding(3*100,5);
@@ -200,8 +200,9 @@ void Juego::moverUnidades() {
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
+		std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
-//		std::cout<<"casillero: "<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
+		std::cout<<"casillero: "<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
 		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero);
 //		std::cout<<"Factor de terreno "<<factorTerreno<<std::endl;
 		//Siempre devuelve el factor terreno de robot (agregar 2xDispatch)
@@ -228,6 +229,8 @@ void Juego::chequearColisiones () {
 	
 	while (it1 != movibles.end()) {
 		Movible* mov1 = (it1)->second;
+		std::cout<<"unidad: "<<it1->first<<std::endl;
+		std::cout<<"colisiones con inmovibles "<<std::endl;
 		std::map<std::string,Inmovible*>::iterator it2 = inmovibles.begin ();
 		while (it2 != inmovibles.end()) {
 			Inmovible* inMov2 = (it2)->second;
@@ -237,6 +240,7 @@ void Juego::chequearColisiones () {
 			}
 			++it2;
 		}
+		std::cout<<"colisiones con movibles "<<std::endl;
 		std::map<std::string, Movible*>::iterator it3 = movibles.begin ();
 		while (it3 != movibles.end()) {
 			if (it1 == it3) {
@@ -245,25 +249,29 @@ void Juego::chequearColisiones () {
 			}
 			Movible* mov2 = (it3)->second;
 			if (mov1->colisiona(*mov2)) {
-				std::cout<<it1->first<<" colision con "<<it3->first<<std::endl;
-//				std::cout<<"Antes "<<mov1->getVida ()<<std::endl;
 				mov1->colisionar(*mov2);
-//				std::cout<<"Despues " << mov1->getVida ()<<std::endl;
 			}
 			++it3;
 		}
+		std::cout<<"colisiones con edificios "<<std::endl;
 		std::map<std::string, Edificio*>::iterator it4 = edificios.begin ();
 		while (it4 != edificios.end()) {
 			Edificio* edificio = (it4)->second;
+			std::cout<<"itero edificios"<<std::endl;
 			if (mov1->colisiona(*edificio)) {
+				std::cout<<"encuentro colision"<<std::endl;
 				mov1->colisionar(*edificio);
-				edificio->colisiona (*mov1);
+				std::cout<<"colisiona unidad con edificio"<<std::endl;
+				edificio->colisionar(*mov1);
+				std::cout<<"colisiona edificio con unidad"<<std::endl;
 			}
 			++it4;
-		}		
+		}
+		std::cout<<"termino de ver colisiones"<<std::endl;
 		if (mov1->obtuvoBandera ()) {
 			banderasPorEquipo[mov1->getEquipo ()] ++;
 		}
+		std::cout<<"termino de chequear banderas"<<std::endl;
 		++it1;
 	}
 }
@@ -323,15 +331,17 @@ void Juego::actualizarEdificios() {
 		if (tipo == -1) {
 			++it;
 			continue;
-		}		
-		if (tipo>=6 && tipo<=10) {
+		}
+		std::cout<<"pos edificio: "<<posEdificio[0]<<","<<posEdificio[1]<<std::endl;
+		if (tipo>=11 && tipo<=16) {
 			Vehiculo* vehiculo = fabricaV->getVehiculo (tipo);
 			std::string id ="m"+agregarPadding(proximoIDMovible,2);
 			movibles[id] = vehiculo;
+			vehiculo->setEquipo (edificio->getEquipo ());
 			//Posicion de creacion hardcodeada
 			//Todos se crean en la misma posicion
 			//TODO
-			vehiculo->setPosicion ({posEdificio[0]+1,posEdificio[1]+1});
+			vehiculo->setPosicion ({posEdificio[0]-2,posEdificio[1]-2});
 			int mensajeX = vehiculo->getPosicion ()[0]*100;
 			std::string xStr = agregarPadding(mensajeX,5);
 			int mensajeY = vehiculo->getPosicion ()[1]*100;
@@ -341,17 +351,18 @@ void Juego::actualizarEdificios() {
 			//Avisar al cliente que se creo un vehiculo
 			colaDeEnviados.push (mensaje);
 			
-			std::cout<<"creo edificio"<<std::endl;
+			std::cout<<"creo vehiculo"<<std::endl;
 			proximoIDMovible++;
 		}
-		if (tipo>=11 && tipo<=16) {
+		if (tipo>=6 && tipo<=10) {
 			Robot* robot = fabricaR->getRobot (tipo);
-			movibles["m"+agregarPadding(proximoIDMovible,2)] = robot;
-			
+			std::string id ="m"+agregarPadding(proximoIDMovible,2);
+			movibles[id] = robot;
+			robot->setEquipo (edificio->getEquipo ());
 			//Posicion de creacion hardcodeada
 			//Todos se crean en la misma posicion
 			//TODO
-			robot->setPosicion ({posEdificio[0]+1,posEdificio[1]+1});
+			robot->setPosicion ({posEdificio[0]-2,posEdificio[1]-2});
 			int mensajeX = robot->getPosicion ()[0]*100;
 			std::string xStr = agregarPadding(mensajeX,5);
 			int mensajeY = robot->getPosicion ()[1]*100;
@@ -370,17 +381,10 @@ void Juego::actualizarEdificios() {
 
 void Juego::actualizarRecibidos() {
 	std::unique_lock<std::mutex> lk(*m);
-/*	while (colaDeRecibidos->empty ()) {
-		cond->wait_for(lk, std::chrono);
-		
-	}*/
 	while (!colaDeRecibidos->empty ()) {
-		//TODO parsear
-		//TODO realizar acciones recibidas
-//		std::cout<<"antes de hacer el front"<<std::endl;
 		std::string mensaje = colaDeRecibidos->front ();
 		switch (mensaje[0]) {
-			case crear: //TODO
+			case crear: this->recibirCrear (mensaje);
 						break;
 			case mover: this->recibirMover(mensaje);
 						break;
@@ -392,13 +396,30 @@ void Juego::actualizarRecibidos() {
 						if (mensaje[1] == 'i')
 							this->recibirObtenerInfoFabrica(mensaje);
 						break;
-//			case infoFabrica: this->recibirObtenerInfoFabrica(mensaje);
-//						break;
 		}
 		
 		colaDeRecibidos->pop ();
 	}
 	lk.unlock ();
+}
+
+void Juego::recibirCrear(std::string mensaje) {
+	std::string idStr = mensaje.substr(1,id);
+	std::string tipoStr = mensaje.substr (4,tipo);
+	
+	int tipo = stoi(tipoStr);
+	int tiempo;
+	if (tipo>=6 && tipo<=10) {
+		FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
+		tiempo = fabricaR->getTiempo (tipo);
+	} else if (tipo>=11 && tipo<=16) {
+		FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
+		tiempo = fabricaV->getTiempo (tipo);
+	}
+	Edificio* edificio = edificios[idStr];
+	int equipo = edificio->getEquipo ();
+	int cantTerritorios = banderasPorEquipo[equipo];
+	edificio->setFabricacion (tiempo,cantTerritorios,tipo);
 }
 
 void Juego::recibirMover(std::string mensaje) {
@@ -455,17 +476,14 @@ void Juego::enviarInfoFabrica (std::string id) {
 	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
 	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
 	
-	std::cout<<"tipo edificio: "<<tipoStr<<std::endl;
 	int tipo = edificio->getTipo ();
 	std::vector<int> vehiculosPosibles;
 	std::vector<int> robotsPosibles;
 	if (tipo == 5 || tipo == 3) {
-		std::cout<<"entro aca"<<std::endl;
 		vehiculosPosibles = 
 					fabricaV->getVehiculosPosibles (edificio->getNivel ());
 	}
 	if (tipo == 4 || tipo == 3) {
-		std::cout<<"y aca tambien"<<std::endl;
 		robotsPosibles = 
 					fabricaR->getRobotsPosibles (edificio->getNivel ());
 	}
@@ -477,16 +495,12 @@ void Juego::enviarInfoFabrica (std::string id) {
 		int tiempo = fabricaV->getTiempo (idActual)/TICKS; //En segundos
 		std::string tiempoStr = agregarPadding(tiempo,4);
 		std::string idStr = agregarPadding(idActual,2);
-		std::cout<<idStr<<std::endl;
-		std::cout<<tiempoStr<<std::endl;
 		unidadesStr += idStr + tiempoStr;
 	}
 	for (int idActual : robotsPosibles) {
 		int tiempo = fabricaR->getTiempo (idActual)/TICKS; //En segundos 
 		std::string tiempoStr = agregarPadding(tiempo,4);
 		std::string idStr = agregarPadding(idActual,2);
-		std::cout<<idStr<<std::endl;
-		std::cout<<tiempoStr<<std::endl;
 		unidadesStr += idStr + tiempoStr;
 	}
 	
@@ -503,6 +517,7 @@ void Juego::enviarCrear (Objeto* objeto) {
 void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.empty ()) {
 		std::string mensaje = colaDeEnviados.front ();
+		std::cout<<"mensaje "<<mensaje<<std::endl;
 		colaDeEnviados.pop ();
 		socket->SendStrWLen (mensaje);
 	}
@@ -516,17 +531,17 @@ void Juego::run() {
 	while (!this->hayGanador()) {
 		clock_t tiempo1 = clock();
 		this->actualizarRecibidos ();
-//		std::cout<<"actualizo edificios"<<std::endl;
+		std::cout<<"actualizo edificios"<<std::endl;
 		this->actualizarEdificios();
-//		std::cout<<"actualizo disparos"<<std::endl;
+		std::cout<<"actualizo disparos"<<std::endl;
 		this->actualizarDisparos();
-//		std::cout<<"actualizo mover unidades"<<std::endl;
+		std::cout<<"actualizo mover unidades"<<std::endl;
 		this->moverUnidades ();
-//		std::cout<<"actualizo chequear colisiones"<<std::endl;
+		std::cout<<"actualizo chequear colisiones"<<std::endl;
 		this->chequearColisiones();
-//		std::cout<<"actualizo muertos"<<std::endl;
+		std::cout<<"actualizo muertos"<<std::endl;
 		this->eliminarMuertos();
-//		std::cout<<movibles.size()<<std::endl;
+		std::cout<<movibles.size()<<std::endl;
 		this->enviarMensajesEncolados();
 		clock_t tiempo2 = clock();
 		double intervaloDormir = CYCLE_TIME - 

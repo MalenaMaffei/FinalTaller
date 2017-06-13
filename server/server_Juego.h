@@ -46,7 +46,8 @@ private:
     void recibirDisparar(std::string mensaje);
     void recibirObtenerInfoUnidad(std::string mensaje);
     void recibirObtenerInfoFabrica(std::string mensaje);
-        
+    void recibirCrear(std::string mensaje);    
+    
     void enviarInfoFabrica(std::string id);
     void enviarInfoUnidad(std::string id);
     void enviarCrear(Objeto* objeto);

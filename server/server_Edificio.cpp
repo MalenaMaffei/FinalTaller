@@ -41,15 +41,18 @@ void Edificio::colisionar (Bandera& bandera) {
 }
 
 void Edificio::setFabricacion(int tiempoBase, int territorios, int tipo) {
-	tiempoFabricacion = (double(tiempoBase)/double(territorios))/
+	this->tiempoFabricacion = (double(tiempoBase)/double(territorios))/
 								std::sqrt(double(vida)/double(vidaTotal));
-	tiempoParaFabricacion = tiempoFabricacion;
+	this->tiempoParaFabricacion = this->tiempoFabricacion;
+	this->tipo = tipo;
 }
 
 Edificio::~Edificio () { }
 
 int Edificio::debeCrear () {
-  	if (tiempoParaFabricacion == 0 && tipo!=-1) {
+	if (tipo == -1) 
+		return -1;
+  	if (tiempoParaFabricacion == 0) {
 		tiempoParaFabricacion = tiempoFabricacion;
 		++construccionesRealizadas;
 		if (construccionesRealizadas%2) {
@@ -57,10 +60,10 @@ int Edificio::debeCrear () {
 		}
 		return tipo; //Devuelvo tipo a crear
 	}
-//	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
+	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)
 		tiempoParaFabricacion--;
-	return -1;	//empty string
+	return -1;
 }
 
 int Edificio::getNivel() {
@@ -69,4 +72,8 @@ int Edificio::getNivel() {
 
 bool Edificio::estaCreando() {
 	return tipo!=-1; //Si esta en -1 no esta creando nada
+}
+
+int Edificio::getEquipo() {
+	return idEquipo;
 }
