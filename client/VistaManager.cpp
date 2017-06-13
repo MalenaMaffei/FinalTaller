@@ -11,11 +11,12 @@
 #include "Header Files/VistaPyroDisparar.h"
 #include "Header Files/VistaSniperDisparar.h"
 #include "Header Files/VistaToughDisparar.h"
-#include "Header Files/VistaHeavy.h"
+#include "Header Files/VistaHeavyCaminar.h"
 #include "Header Files/VistaTanqueMorir.h"
 #include "Header Files/VistaBala.h"
 #include "Header Files/VistaFabricaVehiculo.h"
 #include "Header Files/VistaFabricaRobot.h"
+#include "Header Files/VistaHeavyDisparar.h"
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
 
@@ -98,8 +99,8 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         VistaDireccionada* disparar;
         Vista* morir;
 //        TODO armar aca con todas las vistas de todo el mundo
-        caminar = new VistaHeavy(gRenderer);
-        disparar = new VistaHeavy(gRenderer);
+        caminar = new VistaHeavyCaminar(gRenderer);
+        disparar = new VistaHeavyDisparar(gRenderer);
         morir = new VistaTanqueMorir(gRenderer);
 
         vistas[tipo] = morir;

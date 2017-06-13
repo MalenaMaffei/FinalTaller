@@ -30,6 +30,8 @@ const char fabricaVehiculosPath[] = ""
 const char fabricaRobotsPath[] = "../client/imgs/Edificios/fabrica_robots.png";
 const char puentePath[] = "../client/imgs/Puentes/bridge_city.png";
 const char banderaPath[] = "../client/imgs/Banderas/bandera.png";
+
+//------------ROBOTS------------------
 const char robotCaminarPath[] = "../client/imgs/Robots/caminar_robot.png";
 const char robotPyroDisparar[] = "../client/imgs/Robots/disparo_pyro.png";
 const char robotGruntDisparar[] = "../client/imgs/Robots/disparo_grunt.png";
@@ -41,7 +43,11 @@ const char robotPsychoDisparar[] = "../client/imgs/Robots/disparo_psycho.png";
 const char robotSniperDisparar[] = "."
     "./client/imgs/Robots/disparo_sniper.png";
 const char robotMuertePath[] = "../client/imgs/Robots/muerte.png";
-const char tanquePath[] = "../client/imgs/Tanks/heavy.png";
+
+//------------VEHICULOS------------------
+const char heavyCaminarPath[] = "../client/imgs/Tanks/caminar_heavy.png";
+const char heavyDispararPath[] = "../client/imgs/Tanks/disparar_heavy.png";
+
 const char tanqueMuertePath[] = "../client/imgs/Tanks/explosion.png";
 const char tanqueMissilePath[] = "../client/imgs/Tanks/missile.png";
 

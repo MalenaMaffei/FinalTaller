@@ -2,9 +2,9 @@
 #define TPFINAL_VISTAHEAVY_H
 
 #include "VistaDireccionada.h"
-class VistaHeavy : public VistaDireccionada {
+class VistaHeavyCaminar : public VistaDireccionada {
  public:
-  VistaHeavy(SDL_Renderer *gRenderer);
+  VistaHeavyCaminar(SDL_Renderer *gRenderer);
 
 };
 
