@@ -15,6 +15,9 @@
 #include "server_Unidad.h"
 #include "server_Bloque.h"
 #include <iostream>
+#include <cmath>
+
+#define DIFF 0.0000001
 
 Municion::Municion (int vida, double ancho, double alto,
 					int tipo, int danio, int velocidad) : 	
@@ -91,10 +94,8 @@ void Municion::colisionar(Municion& municion) {
 void Municion::colisionar(Unidad& personaje) {
 	//No colisiona con personajes del mismo equipo
 	if (idEquipo == personaje.getEquipo ()) {
-		std::cout<<"son del mismo equipo en municion"<<std::endl;
 		return;
 	}
-	std::cout<<"colisiona municion con personaje"<<std::endl;
 	destino = posicion;
 	vida -= danio;
 	//Cuando colisiona, se resta también su danio, así se elimina luego

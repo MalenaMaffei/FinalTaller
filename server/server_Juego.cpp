@@ -170,6 +170,7 @@ void Juego::eliminarMuertos() {
 		if (!inmovible->estaVivo()) {
 			std::cout<<"elimino un inmovible"<<std::endl;
 			std::string mensaje = "1"+it2->first;
+			std::cout<<mensaje<<std::endl;
 			colaDeEnviados.push(mensaje);
 			it2 = inmovibles.erase (it2);
 			delete inmovible;
@@ -538,17 +539,11 @@ void Juego::run() {
 	while (!this->hayGanador()) {
 		clock_t tiempo1 = clock();
 		this->actualizarRecibidos ();
-//		std::cout<<"actualizo edificios"<<std::endl;
 		this->actualizarEdificios();
-//		std::cout<<"actualizo disparos"<<std::endl;
 		this->actualizarDisparos();
-//		std::cout<<"actualizo mover unidades"<<std::endl;
 		this->moverUnidades ();
-//		std::cout<<"actualizo chequear colisiones"<<std::endl;
 		this->chequearColisiones();
-//		std::cout<<"actualizo muertos"<<std::endl;
 		this->eliminarMuertos();
-//		std::cout<<movibles.size()<<std::endl;
 		this->enviarMensajesEncolados();
 		clock_t tiempo2 = clock();
 		double intervaloDormir = CYCLE_TIME - 
