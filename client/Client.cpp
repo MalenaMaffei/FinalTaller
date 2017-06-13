@@ -3,17 +3,21 @@
 #include "Header Files/PaqueteSender.h"
 
 int main(int argc, char *argv[]){
-    printf("probando thread\n");
-    ColaPaquetes colaEntrada;
-    ColaPaquetes colaSalida;
 
-//    DESCOMENTAR PARA PROBAR CON SERVER
+    //    DESCOMENTAR PARA PROBAR CON SERVER
     Socket socket;
     socket.setClientMode(argv[1], argv[2]);
 
 
+    std::mutex m;
+    std::condition_variable cond;
+
+    printf("probando thread\n");
+    ColaPaquetes colaEntrada;
+    ColaSalida colaSalida(&m, &cond);
+
     PaqueteReceiver receiver(socket, colaEntrada);
-    PaqueteSender sender(socket, colaSalida);
+    PaqueteSender sender(socket, colaSalida, &m, &cond);
 
     receiver.start();
     sender.start();

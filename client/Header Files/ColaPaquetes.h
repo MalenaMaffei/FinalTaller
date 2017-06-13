@@ -5,11 +5,12 @@
 #include <mutex>
 class ColaPaquetes {
  public:
-    void encolar(Paquete paquete);
-    Paquete desencolar();
+    virtual void encolar(Paquete paquete);
+    virtual Paquete desencolar();
     bool isEmpty();
- private:
+ protected:
   std::queue<Paquete> paquetes;
+ private:
   std::mutex m;
 };
 

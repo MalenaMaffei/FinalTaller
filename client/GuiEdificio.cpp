@@ -27,7 +27,7 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
         offsetUNIT = Punto(OFF_UNIT_X, OFF_UNIT_Y);
         vistaTexto.loadFont(fuentePath, 12);
 
-        tiposConstruibles = {6,7,8,9,10,11,12,13,14,15,16};
+//        tiposConstruibles = {6,7,8,9,10,11,12,13,14,15,16};
 }
 
 void GuiEdificio::mostrar(Punto offset) {
@@ -47,7 +47,7 @@ void GuiEdificio::mostrar(Punto offset) {
 void GuiEdificio::abrirGui(Punto pos, std::string id) {
     resetSeleccion();
     fabricaId = id;
-    seMuestra = true;
+//    seMuestra = true;
     position = pos;
 }
 
