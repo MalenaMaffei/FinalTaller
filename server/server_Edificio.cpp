@@ -45,11 +45,6 @@ void Edificio::setFabricacion(int tiempoBase, int territorios, int tipo) {
 								std::sqrt(double(vida)/double(vidaTotal));
 	this->tiempoParaFabricacion = this->tiempoFabricacion;
 	this->tipo = tipo;
-	std::cout<<"seteo fabricacion"<<std::endl;
-	std::cout<<tiempoBase<<std::endl;
-	std::cout<<territorios<<std::endl;
-	std::cout<<vida<<std::endl;
-	std::cout<<vidaTotal<<std::endl;
 }
 
 Edificio::~Edificio () { }
@@ -65,7 +60,7 @@ int Edificio::debeCrear () {
 		}
 		return tipo; //Devuelvo tipo a crear
 	}
-//	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
+	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)
 		tiempoParaFabricacion--;
 	return -1;
