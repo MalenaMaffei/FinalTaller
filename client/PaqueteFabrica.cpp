@@ -19,12 +19,12 @@ int PaqueteFabrica::getVidaFabrica() {
 
 std::map<int,std::string> PaqueteFabrica::getConstruibles() {
     std::map<int,std::string> construibles;
-    int cant = getCantConstuibles();
+    int cantRecibida = getCantConstuibles();
     int currTipo;
     string currTiempo;
     int pos = posCant+cant;
     int offset;
-    for (int i = 0; i < cant; ++i) {
+    for (int i = 0; i < cantRecibida; ++i) {
         offset = (tiempo + tipo)*i;
         currTipo = std::stoi(mensaje.substr(pos + offset, tipo));
         currTiempo = mensaje.substr(pos + offset + tipo, tiempo);
@@ -61,6 +61,9 @@ int PaqueteFabrica::getOffsetConstruibles() {
 
 int PaqueteFabrica::getCantConstuibles() {
     return std::stoi(mensaje.substr(posCant, cant));;
+}
+const string &PaqueteFabrica::getMensaje() const {
+    return mensaje;
 }
 
 

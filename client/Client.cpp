@@ -8,7 +8,6 @@ int main(int argc, char *argv[]){
     Socket socket;
     socket.setClientMode(argv[1], argv[2]);
 
-
     std::mutex m;
     std::condition_variable cond;
 

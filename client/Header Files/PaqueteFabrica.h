@@ -14,6 +14,7 @@ class PaqueteFabrica {
   int tipoEnConstruccion();
   int porcentajeConstruido();
   int getCantConstuibles();
+  const std::string &getMensaje() const;
 
  private:
   int getOffsetConstruibles();

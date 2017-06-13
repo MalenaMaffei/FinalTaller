@@ -6,6 +6,7 @@ PaqueteReceiver::PaqueteReceiver(const Socket &socket, ColaPaquetes &cola)
 
 void PaqueteReceiver::run() {
     while (!salir){
+
 //        Paquete color;
 //        color.setMensaje("60");
 //        cola.encolar(color);
@@ -16,18 +17,49 @@ void PaqueteReceiver::run() {
 //
 //        int espera = 200;
 //
-//        Paquete fuerte;
-//        fuerte.setMensaje("00010010000100030");
-//
-//        cola.encolar(fuerte);
+//        Paquete fabrica;
+//        fabrica.setMensaje("00010010000100052");
+//        cola.encolar(fabrica);
+//        fabrica.setMensaje("00020050000500041");
+//        cola.encolar(fabrica);
 //        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+//        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+//        std::this_thread::sleep_for(std::chrono::milliseconds(espera*8));
 //
+//        fabrica.setMensaje("1001");
+//        cola.encolar(fabrica);
+//        fabrica.setMensaje("1002");
+//        cola.encolar(fabrica);
 //
+//        Paquete fuerte;
+//        fuerte.setMensaje("00030010000100030");
+//        cola.encolar(fuerte);
+//        Paquete infoFuerte;
+//        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+//        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+//        std::this_thread::sleep_for(std::chrono::milliseconds(espera*8));
+//        printf("listo para recibir\n");
+//        infoFuerte.setMensaje("70030599902090100101400109010");
+//        cola.encolar(infoFuerte);
+//
+//        std::this_thread::sleep_for(std::chrono::milliseconds(espera));
+////        fuerte.setMensaje("1003");
+////        cola.encolar(fuerte);
+////
+////        Paquete infoFuerte;
+////        infoFuerte.setMensaje("70010399902090100101400109010");
+////        PaqueteFabrica infoFabrica(infoFuerte.getMensaje());
+////
+////
+////        std::this_thread::sleep_for(std::chrono::milliseconds(espera*8));
+////        cola.encolar(infoFuerte);
+////        printf("se envio el paquete de info\n");
 //
 //        salir = true;
+
         string mensaje;
         mensaje = socket.ReceiveStrWLen();
-		printf("paquete %s\n", mensaje.c_str());
+		printf("paquete recibido: %s\n", mensaje.c_str());
         Paquete paquete;
         paquete.setMensaje(mensaje);
         cola.encolar(paquete);

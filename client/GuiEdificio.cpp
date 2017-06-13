@@ -47,7 +47,6 @@ void GuiEdificio::mostrar(Punto offset) {
 void GuiEdificio::abrirGui(Punto pos, std::string id) {
     resetSeleccion();
     fabricaId = id;
-//    seMuestra = true;
     position = pos;
 }
 
@@ -58,12 +57,9 @@ bool GuiEdificio::click(Punto click) {
     } else if (ok.incluyePunto(click)){
         seMuestra = false;
         tipoSeleccionado = tiposConstruibles[posSeleccionada];
-//        Aca se tiene que crear un paquete de informacion.
-//        printf("se apreto ok en gui crear\n");
     } else if (next.incluyePunto(click)){
         ++posSeleccionada;
         posSeleccionada %= tiposConstruibles.size();
-//        printf("posSeleccionada: %i\n", posSeleccionada);
     } else {
         return false;
     }

@@ -164,7 +164,7 @@ void Canvas::startGame(){
     Paquete color = colaEntrada.desencolar();
     if (color.getComando() == 6){
         miColor = std::stoi(color.getMensaje().substr(1));
-        printf("mi color es: %i", miColor);
+        printf("mi color es: %i\n", miColor);
     }
     while (colaEntrada.isEmpty()){
 //        TODO fix pedorro hasta uqe se me ocurra una mejor manera
@@ -241,7 +241,6 @@ void Canvas::startGame(){
         selectBox.mostrar(gRenderer, camara.getOffset());
         hud.mostrar();
         guiEdificio.mostrar(camara.getOffset());
-
 
         //Update screen
         SDL_RenderPresent(gRenderer);
