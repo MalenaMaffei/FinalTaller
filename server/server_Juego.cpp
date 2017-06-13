@@ -83,7 +83,7 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	socket->SendStrWLen (mensaje); //Envio mapa
 	
 			
-	banderasPorEquipo = {0,0,0,0};
+	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
 	
 	proximoIDMovible = 0;
 	
@@ -375,12 +375,9 @@ void Juego::actualizarRecibidos() {
 		
 	}*/
 	while (!colaDeRecibidos->empty ()) {
-		//TODO parsear
-		//TODO realizar acciones recibidas
-//		std::cout<<"antes de hacer el front"<<std::endl;
 		std::string mensaje = colaDeRecibidos->front ();
 		switch (mensaje[0]) {
-			case crear: //TODO
+			case crear: this->recibirCrear (mensaje);
 						break;
 			case mover: this->recibirMover(mensaje);
 						break;
@@ -392,13 +389,30 @@ void Juego::actualizarRecibidos() {
 						if (mensaje[1] == 'i')
 							this->recibirObtenerInfoFabrica(mensaje);
 						break;
-//			case infoFabrica: this->recibirObtenerInfoFabrica(mensaje);
-//						break;
 		}
 		
 		colaDeRecibidos->pop ();
 	}
 	lk.unlock ();
+}
+
+void Juego::recibirCrear(std::string mensaje) {
+	std::string idStr = mensaje.substr(1,id);
+	std::string tipoStr = mensaje.substr (4,tipo);
+	
+	int tipo = stoi(tipoStr);
+	int tiempo;
+	if (tipo>=6 && tipo<=10) {
+		FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
+		tiempo = fabricaR->getTiempo (tipo);
+	} else if (tipo>=11 && tipo<=16) {
+		FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
+		tiempo = fabricaV->getTiempo (tipo);
+	}
+	Edificio* edificio = edificios[idStr];
+	int equipo = edificio->getEquipo ();
+	int cantTerritorios = banderasPorEquipo[equipo];
+	edificio->setFabricacion (tiempo,cantTerritorios,tipo);
 }
 
 void Juego::recibirMover(std::string mensaje) {

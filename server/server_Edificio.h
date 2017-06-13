@@ -13,6 +13,7 @@ public:
     void colisionar(Bloque& bloque) override; 
     void colisionar (Edificio& edificio) override;
     void colisionar (Bandera& bandera) override;
+    int getEquipo();
     void setFabricacion(int tiempoBase, int territorios, int tipo);
     int getNivel();
     bool estaCreando();

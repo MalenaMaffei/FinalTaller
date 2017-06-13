@@ -43,9 +43,6 @@ FabricaRobots::FabricaRobots () {
 		struct tm tm;
 		std::istringstream ss(tiempoStr);
 		ss >> std::get_time(&tm, "%M:%S");
-		std::cout<<"tiempo: "<<std::endl;
-		std::cout<<tm.tm_min<<std::endl;
-		std::cout<<tm.tm_sec<<std::endl;
 		int secs = tm.tm_min*60 + tm.tm_sec;
 		int nivel = atoi(robot->FirstChildElement ("NIVEL")->GetText());
 		
@@ -58,8 +55,6 @@ FabricaRobots::FabricaRobots () {
 		//Reqisitos de creación
 		cantidades[tipo] = cantidad;
 		tiempos[tipo] = secs*TICKS;
-		std::cout<<tipo<<std::endl;
-		std::cout<<secs*TICKS<<std::endl;
 		niveles[tipo] = nivel;
 	}
 }

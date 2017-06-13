@@ -42,9 +42,6 @@ FabricaVehiculos::FabricaVehiculos () {
 		struct tm tm;
 		std::istringstream ss(tiempoStr);
 		ss >> std::get_time(&tm, "%M:%S");
-		std::cout<<"tiempo: "<<std::endl;
-		std::cout<<tm.tm_min<<std::endl;
-		std::cout<<tm.tm_sec<<std::endl;
 		int secs = tm.tm_min*60 + tm.tm_sec;
 		int nivel = atoi(robot->FirstChildElement ("NIVEL")->GetText());
 
