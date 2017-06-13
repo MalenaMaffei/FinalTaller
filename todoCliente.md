@@ -20,6 +20,10 @@
 
 11. barra de vida. 
 
+* en hud
+* en guiEdificio
+* para la construccion
+
 12. que se muestren armas
 
 13. que se muestren tanques
