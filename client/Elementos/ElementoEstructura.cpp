@@ -1,5 +1,5 @@
-#include "Header Files/ElementoEstructura.h"
-#include "Header Files/ColectorDeAcciones.h"
+#include "../Header Files/ElementoEstructura.h"
+#include "../Header Files/ColectorDeAcciones.h"
 #include <string>
 #define LARGO_ANIMACION 2
 #define CLIP_MUERTE 2

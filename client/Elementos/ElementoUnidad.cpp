@@ -1,7 +1,7 @@
-#include "Header Files/ElementoUnidad.h"
-#include "Header Files/VistaDireccionada.h"
-#include "Header Files/SelectBox.h"
-#include "Header Files/ColectorDeAcciones.h"
+#include "../Header Files/ElementoUnidad.h"
+#include "../Header Files/VistaDireccionada.h"
+#include "../Header Files/SelectBox.h"
+#include "../Header Files/ColectorDeAcciones.h"
 #include <string>
 ElementoUnidad::ElementoUnidad(std::string id,
                                int x,

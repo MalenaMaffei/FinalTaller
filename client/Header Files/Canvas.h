@@ -11,7 +11,6 @@ class Canvas{
   Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida);
   void close();
   void startGame();
-  void gameLoop();
   void manejarPaquetes(ElementoManager &elementoManager,
                          Hud &hud,
                          GuiEdificio &guiEdificio);

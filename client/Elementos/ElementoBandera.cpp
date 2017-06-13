@@ -1,4 +1,4 @@
-#include "Header Files/ElementoBandera.h"
+#include "../Header Files/ElementoBandera.h"
 #include <string>
 #define HEIGHT 24
 #define WIDTH 32

@@ -1,7 +1,7 @@
-#include "Header Files/Elemento.h"
+#include "../Header Files/Elemento.h"
 //TODO chequwar que todos tengan implementado el Mio
-#include "Header Files/Click.h"
-#include "Header Files/ColectorDeAcciones.h"
+#include "../Header Files/Click.h"
+#include "../Header Files/ColectorDeAcciones.h"
 #include <string>
 using std::string;
 

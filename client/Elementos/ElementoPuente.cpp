@@ -1,4 +1,4 @@
-#include "Header Files/ElementoPuente.h"
+#include "../Header Files/ElementoPuente.h"
 #include <string>
 #define HEIGHT 64
 #define WIDTH 64
