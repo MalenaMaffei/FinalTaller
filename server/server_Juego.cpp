@@ -290,19 +290,28 @@ void Juego::actualizarDisparos() {
 		}
 		  
 		if (objetivo) {
+			//TODO el tipo de municion es siempre 17
 			Municion* municion = fabricaMuniciones->getMunicion (17);
 			municion->setEquipo (movible->getEquipo ());
 			municion->setPosicion (movible->getPosicion ());
 			municion->setObjetivo (idObjetivo);
 			std::array<double,2> target = objetivo->getPosicion ();
 			municion->mover (target);
-			movibles["m"+agregarPadding(proximoIDMovible,2)] = municion;
+			std::string idMunicion = "m"+agregarPadding(proximoIDMovible,2);
+			movibles[idMunicion] = municion;
+			
+			//Envio mensaje de disparo
 			int mensajeX = target[0]*100;
 			std::string xStr = agregarPadding(mensajeX,5);
 			int mensajeY = target[1]*100;
-			std::string yStr = agregarPadding(mensajeX,5);
+			std::string yStr = agregarPadding(mensajeY,5);
 			std::string mensaje = "3"+it1->first+xStr+yStr;
-			std::cout<<mensaje<<std::endl;
+			colaDeEnviados.push(mensaje);
+
+			//Envio mensaje crear municion
+			mensaje = "0" + idMunicion + xStr + yStr + "17" + "0";
+			colaDeEnviados.push(mensaje);
+			
 			proximoIDMovible ++;
 		}
 		++it1;
@@ -516,7 +525,6 @@ void Juego::enviarCrear (Objeto* objeto) {
 void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.empty ()) {
 		std::string mensaje = colaDeEnviados.front ();
-		std::cout<<"mensaje "<<mensaje<<std::endl;
 		colaDeEnviados.pop ();
 		socket->SendStrWLen (mensaje);
 	}
