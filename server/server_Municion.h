@@ -32,6 +32,7 @@ class Municion : public Movible {
         Municion &operator=(Municion &&orig);
         int getTipo();
         int getDanio();
+        
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
         bool superaMaxDistancia() override;

@@ -27,8 +27,6 @@ Unidad::Unidad (int vida, double ancho, double alto,
 										bandera(false) { }
 
 void Unidad::dispararA(std::string objetivo) {
-//	Municion* municion = armamento.dispararA(getPosicion (), objetivo);
-//	municion->setEquipo (idEquipo);
 	this->objetivo = objetivo;
 	estado = DISPARAR;
 }
@@ -41,7 +39,6 @@ void Unidad::colisionar(Objeto& objeto) {
 
 void Unidad::colisionar(Municion& municion) {
 	if (idEquipo == municion.getEquipo ()) {
-		std::cout<<"son delmismo eqiop en unidad"<<std::endl;
 		return;
 	}
 	this->recibirDanio(municion.getDanio ());
@@ -80,7 +77,7 @@ std::string Unidad::puedeDisparar () {
 }
 
 bool Unidad::superaMaxDistancia () {
-	return false;
+	return false; //No tienen maxima distancia
 }
 
 bool Unidad::obtuvoBandera () {
