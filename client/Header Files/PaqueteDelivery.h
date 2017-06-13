@@ -8,6 +8,7 @@ class PaqueteDelivery  : public Thread{
  public:
   PaqueteDelivery(const Socket &socket, ColaPaquetes &cola);
   virtual void run() = 0;
+  void shutdown();
  protected:
   Socket socket;
   ColaPaquetes& cola;

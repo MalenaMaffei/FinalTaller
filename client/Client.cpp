@@ -12,7 +12,6 @@ int main(int argc, char *argv[]){
     std::mutex m;
     std::condition_variable cond;
 
-    printf("probando thread\n");
     ColaPaquetes colaEntrada;
     ColaSalida colaSalida(&m, &cond);
 
@@ -25,8 +24,10 @@ int main(int argc, char *argv[]){
     canvas.startGame();
 
 //    Si llegue aca es porque se cerro la ventana
-//    Agregar paquet Receiver quit y Sender quit.
+    receiver.shutdown();
+    sender.shutdown();
+    socket.Shutdown(SHUT_RDWR);
 
-
-//   TODO FALTA CONDICION DE QUIT!
+    receiver.join();
+    sender.join();
 }
