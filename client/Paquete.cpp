@@ -33,16 +33,16 @@ void Paquete::atacar(string idAgresor, string idAgredido) {
     mensaje = comando + agresor + agredido;
 }
 
-void Paquete::crear(string id, int x, int y, int tipo) {
+void Paquete::crear(string id, int tipo) {
     string creadorStr = crearCampo(codigos.id, id);
-    x = coordToServer(x);
-    y = coordToServer(y);
-    string xStr = crearCampo(codigos.x, x);
-    string yStr = crearCampo(codigos.y, y);
+//    x = coordToServer(x);
+//    y = coordToServer(y);
+//    string xStr = crearCampo(codigos.x, x);
+//    string yStr = crearCampo(codigos.y, y);
     string tipoStr = crearCampo(codigos.tipo, tipo);
     string comando = crearCampo(codigos.comando, codigos.crear);
 
-    mensaje = comando + creadorStr + xStr + yStr + tipoStr;
+    mensaje = comando + creadorStr + tipoStr;
 }
 
 void Paquete::pedirInfo(string id) {

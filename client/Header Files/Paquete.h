@@ -5,7 +5,7 @@
 class Paquete {
  public:
   void atacar(std::string idAgresor, std::string idAgredido);
-  void crear(std::string id, int x, int y, int tipo);
+  void crear(std::string id, int tipo);
   void pedirInfo(std::string id);
   void mover(std::string id, int x, int y);
   std::string & getMensaje();

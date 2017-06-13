@@ -21,19 +21,17 @@ void ColectorDeAcciones::crearAcciones() {
     }
 
     Punto clicked = click.getPoint();
+    Paquete paquete;
     if (guiEdificio.click(click.getPoint())){
         if (guiEdificio.huboSeleccion()){
-            Paquete crear;
-            crear.crear(guiEdificio.getFabricaId(),clicked.x,clicked.y,
+            paquete.crear(guiEdificio.getFabricaId(),
                         guiEdificio.getTipoSeleccionado());
-            colaSalida.encolar(crear);
-            printf("paquete crear: %s\n", crear.getMensaje().c_str());
+            colaSalida.encolar(paquete);
+            printf("paquete crear: %s\n", paquete.getMensaje().c_str());
         }
         click.resetCoords();
         return;
     }
-
-    Paquete paquete;
 
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
@@ -45,9 +43,8 @@ void ColectorDeAcciones::crearAcciones() {
                   return;
               }
               printf("Unidad id: %i se mueve a: %i,%i\n", unidad.getId(),
-                     click.getPoint().x, click.getPoint().y);
-              paquete.mover(unidad.getId(), click.getPoint().x, click
-                  .getPoint().y);
+                     clicked.x, clicked.y);
+              paquete.mover(unidad.getId(), clicked.x, clicked.y);
               colaSalida.encolar(paquete);
             });
             selectBox.vaciarSeleccionadas();
