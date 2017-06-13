@@ -19,8 +19,6 @@
 #include <iostream>
 #include "server_constants.h"
 
-FabricaVehiculos* FabricaVehiculos::instancia = NULL;
-
 FabricaVehiculos::FabricaVehiculos () { 
 	tinyxml2::XMLDocument xml;
 	if (xml.LoadFile ("vehiculos.xml")) {
@@ -59,20 +57,13 @@ FabricaVehiculos::FabricaVehiculos () {
 	}
 }
 
-FabricaVehiculos* FabricaVehiculos::getInstancia() {
-	if (!instancia) {
-		instancia = new FabricaVehiculos();
-	}
-	return instancia;
-}
-
 Vehiculo* FabricaVehiculos::getVehiculo(int tipo) {  
 	//Por ahora todos los vehiculos son de 1x1
 	//Agregar velocidad base
 	//TODO
 	//El conductor se agrega en la fabrica fisica
 	return new Vehiculo(vidas[tipo],1,1,frecuencias[tipo],
-					 alcances[tipo],armamentos[tipo], velocidades[tipo], tipo);
+					 alcances[tipo], velocidades[tipo], tipo);
 }
 
 int FabricaVehiculos::getCantidad(int tipo) {

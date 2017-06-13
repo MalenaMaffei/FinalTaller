@@ -21,7 +21,7 @@ class Robot;
 class Vehiculo : public Unidad {
 public:
     Vehiculo(int vida, double ancho, double alto, 
-            int frecuenciaDisparo, int alcance, int tipoArmamento, 
+            int frecuenciaDisparo, int alcance, 
             int velocidad, int tipo);
     
     bool addConductor(Robot* conductor);

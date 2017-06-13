@@ -20,11 +20,9 @@
 
 class FabricaMuniciones {
 public:
-    static FabricaMuniciones* getInstancia();
+    FabricaMuniciones(); 
     Municion* getMunicion(int tipo);
 private:
-    static FabricaMuniciones* instancia;
-    FabricaMuniciones(); 
     //Clave: tipo de municion
     //Valor: daño
     std::map<int,int> municiones;

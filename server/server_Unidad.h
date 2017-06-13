@@ -17,7 +17,7 @@
 #include "server_Objeto.h"
 #include "server_Movible.h"
 #include "server_Municion.h"
-#include "server_Armamento.h"
+
 #include "server_Bloque.h"
 
 enum estado {
@@ -28,7 +28,7 @@ enum estado {
 class Unidad : public Movible {
     public:
         Unidad(int vida, double ancho, double alto, int frecuenciaDisparo,
-                    int alcance, int tipoArmamento, int velocidad, int tipo);
+                    int alcance, int velocidad, int tipo);
         void dispararA(std::string objetivo);
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
@@ -41,7 +41,6 @@ class Unidad : public Movible {
         bool superaMaxDistancia();
         virtual ~Unidad();
     private:
-        Armamento armamento;
         bool bandera;
         int frecuenciaDisparo;
         int tiempoADisparo;

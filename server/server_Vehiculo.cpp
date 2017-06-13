@@ -16,11 +16,11 @@
 #include "server_Robot.h"
 
 Vehiculo::Vehiculo(int vida, double ancho, double alto, 
-					int frecuenciaDisparo, int alcance, int tipoArmamento, 
+					int frecuenciaDisparo, int alcance, 
 					int velocidad, int tipo) : 
 								Unidad(vida, ancho, alto,
 									frecuenciaDisparo, alcance, 
-									tipoArmamento, velocidad, tipo), 
+									velocidad, tipo), 
 									conductor(NULL) { }
 
 bool Vehiculo::addConductor(Robot* conductor) { 

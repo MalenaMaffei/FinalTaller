@@ -23,8 +23,6 @@ enum TipoDeMunicion{
 	MISIL
 };
 
-FabricaMuniciones* FabricaMuniciones::instancia = NULL;
-
 FabricaMuniciones::FabricaMuniciones() {
 	tinyxml2::XMLDocument xml;
  
@@ -42,15 +40,8 @@ FabricaMuniciones::FabricaMuniciones() {
 		int tipo = atoi(municion->FirstChildElement("ID")->GetText ());
 		int danio = atoi(municion->FirstChildElement ("DANIO")->GetText ());
 		
-		this->municiones[tipo] = danio;		
+		this->municiones[tipo] = danio;
 	}
-}
-
-FabricaMuniciones* FabricaMuniciones::getInstancia() {
-	if (!instancia) {
-		instancia = new FabricaMuniciones();
-	}
-	return instancia;
 }
 
 Municion* FabricaMuniciones::getMunicion(int tipo) {

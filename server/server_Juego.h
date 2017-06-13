@@ -14,6 +14,9 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include "server_FabricaRobots.h"
+#include "server_FabricaVehiculos.h"
+#include "server_FabricaMuniciones.h"
 #include "server_Mapa.h"
 #include "server_Movible.h"
 #include "server_Inmovible.h"
@@ -61,6 +64,10 @@ private:
     std::queue<std::string> colaDeEnviados;
 
     Socket* socket;
+    
+    FabricaVehiculos* fabricaV;
+    FabricaRobots* fabricaR;
+    FabricaMuniciones* fabricaMuniciones;
     
     //No puedo instanciar Movible porque es abstracto
     std::array<int,4> banderasPorEquipo;

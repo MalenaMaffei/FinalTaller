@@ -15,13 +15,12 @@
 #include <iostream>
 
 Unidad::Unidad (int vida, double ancho, double alto, 
-					  int frecuenciaDisparo, int alcance, 
-					  int tipoArmamento, int velocidad, int tipo) : 
+					int frecuenciaDisparo, int alcance, 
+					int velocidad, int tipo) : 
 										Movible(vida, ancho, alto, velocidad, 
 											 tipo),
 										frecuenciaDisparo(frecuenciaDisparo),
 										alcance(alcance),
-										armamento(Armamento(tipoArmamento)),
 										estado(REPOSO),
 										tiempoADisparo(0),
 										bandera(false) { }

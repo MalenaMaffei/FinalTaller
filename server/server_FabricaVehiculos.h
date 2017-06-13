@@ -20,15 +20,12 @@
 
 class FabricaVehiculos {
     public:
-        static FabricaVehiculos* getInstancia();
+        FabricaVehiculos();
         Vehiculo* getVehiculo(int tipo);
         int getCantidad(int tipo);
         int getTiempo(int tipo);
         std::vector<int> getVehiculosPosibles(int nivel);
     private:
-        static FabricaVehiculos* instancia;
-        FabricaVehiculos();
-
         //Caracteristicas de vehiculo
         std::map<int,int> armamentos;
         std::map<int,double> frecuencias;

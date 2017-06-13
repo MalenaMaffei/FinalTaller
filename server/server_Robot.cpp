@@ -18,9 +18,9 @@
 
 Robot::Robot(int vida, double ancho, double alto, 
             int frecuenciaDisparo, int alcance, 
-			 int tipoArmamento, int velocidad, int tipo) : Unidad(vida, ancho, alto,
+			int velocidad, int tipo) : Unidad(vida, ancho, alto,
 									frecuenciaDisparo, alcance, 
-									tipoArmamento, velocidad, tipo) { }
+									velocidad, tipo) { }
 
 bool Robot::subirA(Vehiculo* vehiculo) {
 	return vehiculo->addConductor (this);

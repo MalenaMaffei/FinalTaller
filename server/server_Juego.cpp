@@ -72,8 +72,11 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 												cond(cond),
 												mapa(Mapa("mapa.map")), 
 												proximoIDMovible(0),
-												socket(socket){ 
-
+												socket(socket),
+												fabricaV(new FabricaVehiculos()),
+												fabricaR(new FabricaRobots()), 
+												fabricaMuniciones(new FabricaMuniciones()){ 
+  
 	std::string mensaje = "6" + std::to_string(equipo_1);
 	socket->SendStrWLen (mensaje); //Envio equipo
   
@@ -104,7 +107,6 @@ Juego::Juego (std::queue<std::string>* colaDeRecibidos, std::mutex* m,
 	mensaje = comando+xStr+yStr+tipo+std::to_string(bandera->getEquipo ());	
 	socket->SendStrWLen (mensaje);
 	
-	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
 	Robot* robot = fabricaR->getRobot (9);
 	movibles["m00"] = (robot);
 	robot->setPosicion ({2,0});
@@ -269,7 +271,6 @@ void Juego::chequearColisiones () {
 }
 
 void Juego::actualizarDisparos() {
-	FabricaMuniciones* fabricaMuniciones = FabricaMuniciones::getInstancia();
 	std::map<std::string, Movible*>::iterator it1 = movibles.begin ();
 	
 	while (it1 != movibles.end()) {
@@ -292,6 +293,7 @@ void Juego::actualizarDisparos() {
 		  
 		if (objetivo) {
 			//TODO el tipo de municion es siempre 17
+			std::cout<<"antes de fabrica municiones"<<std::endl;
 			Municion* municion = fabricaMuniciones->getMunicion (17);
 			municion->setEquipo (movible->getEquipo ());
 			municion->setPosicion (movible->getPosicion ());
@@ -320,8 +322,6 @@ void Juego::actualizarDisparos() {
 }
 
 void Juego::actualizarEdificios() {
-	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
-	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
 	std::map<std::string, Edificio*>::iterator it = edificios.begin ();
 	while (it != edificios.end()) {
 		std::string clave = (it)->first;
@@ -411,10 +411,8 @@ void Juego::recibirCrear(std::string mensaje) {
 	int tipo = stoi(tipoStr);
 	int tiempo;
 	if (tipo>=6 && tipo<=10) {
-		FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
 		tiempo = fabricaR->getTiempo (tipo);
 	} else if (tipo>=11 && tipo<=16) {
-		FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
 		tiempo = fabricaV->getTiempo (tipo);
 	}
 	Edificio* edificio = edificios[idStr];
@@ -474,8 +472,6 @@ void Juego::enviarInfoFabrica (std::string id) {
 	std::string tipoStr = agregarPadding(edificio->getTipo(), 2);
 	std::string vidaStr = agregarPadding(edificio->getPorcentajeVida (), 3);
 	
-	FabricaRobots* fabricaR = FabricaRobots::getInstancia ();
-	FabricaVehiculos* fabricaV = FabricaVehiculos::getInstancia ();
 	
 	int tipo = edificio->getTipo ();
 	std::vector<int> vehiculosPosibles;

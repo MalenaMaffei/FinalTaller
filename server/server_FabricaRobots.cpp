@@ -19,8 +19,6 @@
 #include "server_constants.h"
 #include <iostream>
 
-FabricaRobots* FabricaRobots::instancia = NULL;
-
 FabricaRobots::FabricaRobots () { 
 	tinyxml2::XMLDocument xml;
 	if (xml.LoadFile ("robots.xml")) {
@@ -59,13 +57,6 @@ FabricaRobots::FabricaRobots () {
 	}
 }
 
-FabricaRobots* FabricaRobots::getInstancia() {
-	if (!instancia) {
-		instancia = new FabricaRobots();
-	}
-	return instancia;
-}
-
 Robot* FabricaRobots::getRobot(int tipo) {
 	/*        Robot(int vida, double ancho, double alto, 
                 int frecuenciaDisparo, int alcance, 
@@ -76,7 +67,7 @@ Robot* FabricaRobots::getRobot(int tipo) {
 	 //TODO
 	 //Agregar velocidad base
 	return new Robot(vidas[tipo],1,1,frecuencias[tipo],
-					 alcances[tipo],armamentos[tipo], velocidades[tipo],tipo);
+					 alcances[tipo], velocidades[tipo],tipo);
 }
 
 int FabricaRobots::getCantidad(int tipo) {
