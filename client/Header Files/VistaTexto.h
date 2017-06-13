@@ -1,8 +1,8 @@
 #ifndef TPFINAL_VISTATEXTO_H
 #define TPFINAL_VISTATEXTO_H
 
-#include "Header Files/Texture.h"
-#include "Header Files/Punto.h"
+#include "Texture.h"
+#include "Punto.h"
 
 class VistaTexto : public Texture {
  public:

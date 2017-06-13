@@ -14,7 +14,7 @@
 
 8. que el hud cree todas sus vistas.
 
-9. ver como pedir los tiempos en los paquetes.
+9. ~~ver como pedir los tiempos en los paquetes.~~
 
 10. display tiempo en gui fabrica.
 
@@ -30,6 +30,6 @@
 
 16. ver como refactorizar clase bala
 
-17. mandar paquetes de pedido de informacion.
+17. ~~mandar paquetes de pedido de informacion.~~
 
 

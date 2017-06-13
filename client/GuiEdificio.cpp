@@ -59,11 +59,11 @@ bool GuiEdificio::click(Punto click) {
         seMuestra = false;
         tipoSeleccionado = tiposConstruibles[posSeleccionada];
 //        Aca se tiene que crear un paquete de informacion.
-        printf("se apreto ok en gui crear\n");
+//        printf("se apreto ok en gui crear\n");
     } else if (next.incluyePunto(click)){
         ++posSeleccionada;
         posSeleccionada %= tiposConstruibles.size();
-        printf("posSeleccionada: %i\n", posSeleccionada);
+//        printf("posSeleccionada: %i\n", posSeleccionada);
     } else {
         return false;
     }
@@ -85,4 +85,13 @@ bool GuiEdificio::huboSeleccion() const {
 
 std::string GuiEdificio::getFabricaId() const {
     return fabricaId;
+}
+
+void GuiEdificio::setInfo(PaqueteFabrica paquete) {
+    tiemposConstruibles = paquete.getConstruibles();
+    tiposConstruibles.clear();
+    for (const auto& kv : tiemposConstruibles) {
+        tiposConstruibles.push_back(kv.first);
+    }
+    seMuestra = true;
 }

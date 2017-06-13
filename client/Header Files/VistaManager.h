@@ -2,9 +2,9 @@
 #define TPFINAL_FABRICAVISTA_H
 #include <map>
 #include <vector>
-#include "Header Files/Vista.h"
-#include "Header Files/VistaDireccionada.h"
-#include "Header Files/common_CodigosPaquete.h"
+#include "Vista.h"
+#include "VistaDireccionada.h"
+#include "common_CodigosPaquete.h"
 
 class VistaManager {
  public:

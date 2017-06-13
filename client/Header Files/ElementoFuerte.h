@@ -11,7 +11,7 @@ class ElementoFuerte : public ElementoEstructura {
                  Vista *textura,
                  bool esMio,
                  int color);
-  void matar();
+//  void matar();
 };
 
 #endif //TPFINAL_ELEMENTOFUERTE_H

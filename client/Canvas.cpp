@@ -14,8 +14,8 @@
 #include "Header Files/VistaHud.h"
 #include "Header Files/VistaHudCaras.h"
 #include "Header Files/VistaGui.h"
-#include "CreadorMapa.h"
-#include "VistaTexto.h"
+#include "Header Files/CreadorMapa.h"
+#include "Header Files/VistaTexto.h"
 #include <string>
 
 const int SCREEN_FPS = 30;
@@ -129,6 +129,9 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             elementoManager.disparar(paquete);
         } else if (paquete.getComando() == codigos.matar){
             elementoManager.matar(paquete);
+        } else if (paquete.getComando() == codigos.infoFabrica){
+            PaqueteFabrica paqueteFabrica(paquete.getMensaje());
+            guiEdificio.setInfo(paqueteFabrica);
         }
 //        TODO manejar infos para el hud y la gui edificio
     }

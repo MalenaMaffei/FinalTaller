@@ -5,7 +5,7 @@
 #include "VistaDireccionada.h"
 #include "ElementoUnidad.h"
 #include "common_CodigosPaquete.h"
-#include "../VistaManager.h"
+#include "VistaManager.h"
 #include "Mouse.h"
 #include "Paquete.h"
 #include "ElementoBala.h"

@@ -11,9 +11,10 @@ ElementoFuerte::ElementoFuerte(std::string id,
                                int color)
     : ElementoEstructura(id, x, y, textura, esMio, color) {}
 
-void ElementoFuerte::matar() {
-    if (!muerto){
-        ++currentClip;
-    }
-}
+//void ElementoFuerte::matar() {
+//    if (!muerto){
+//        ++currentClip;
+//        muerto = true;
+//    }
+//}
 

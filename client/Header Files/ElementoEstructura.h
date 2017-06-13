@@ -9,7 +9,11 @@ class ElementoEstructura : public ElementoColoreado{
   ElementoEstructura(std::string id, int x, int y, Vista *textura,
                      bool esMio, int color);
   void guiRequest(ColectorDeAcciones& colector) const;
-
+  void mostrar(Camara &camera);
+  void matar();
+  void clicked(Click& click);
+ private:
+  bool destruido;
 };
 
 #endif //TPFINAL_ELEMENTOESTRUCTURA_H

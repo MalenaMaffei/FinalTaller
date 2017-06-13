@@ -2,8 +2,9 @@
 #define TPFINAL_GUIEDIFICIO_H
 
 #include "Vista.h"
-#include "../VistaTexto.h"
+#include "VistaTexto.h"
 #include "VistaGui.h"
+#include "PaqueteFabrica.h"
 #include <vector>
 #include <map>
 //TODO van a faltar las vistas de los bichos
@@ -18,6 +19,7 @@ class GuiEdificio {
   int getTipoSeleccionado() const;
   bool huboSeleccion() const;
   std::string getFabricaId() const;
+  void setInfo(PaqueteFabrica paquete);
  private:
   void resetSeleccion();
   VistaGui vistaGui;
@@ -35,6 +37,7 @@ class GuiEdificio {
   int posSeleccionada;
   int tipoSeleccionado;
   std::vector<int> tiposConstruibles;
+  std::map<int, std::string> tiemposConstruibles;
   std::string fabricaId;
 };
 
