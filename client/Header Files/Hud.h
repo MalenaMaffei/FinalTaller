@@ -3,14 +3,21 @@
 #include "Vista.h"
 class Hud {
  public:
-  Hud(Vista &hud, Vista &vistaCaras);
+  Hud(SDL_Renderer *gRenderer,
+        Vista &hud,
+        Vista &vistaCaras,
+        Vista &labelsRobot,
+        Vista &labelsVehiculo);
   void mostrar();
   void setInfo(int tipo);
+
  private:
   void mostrarContenido();
-
+  int getPosLabel();
   Vista& vistaHud;
   Vista& vistaCaras;
+  Vista labelsRobot;
+  Vista labelsVehiculo;
   Rect hudRect;
 //  int x, y;
   Punto ubicacion;
@@ -21,6 +28,15 @@ class Hud {
     cara = 0,
     tanque = 1,
     caraYtanque = 2
+  };
+
+  enum posLabels {
+    labelGrunt = 0,
+    labelLaser = 1,
+    labelPsychos = 2,
+    labelPyros = 3,
+    labelSniper = 4,
+    labelTough = 5
   };
 };
 

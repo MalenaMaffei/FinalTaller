@@ -9,7 +9,6 @@ PaqueteSender::PaqueteSender(const Socket &socket,
     : PaqueteDelivery(socket, cola), m(m), cond_v(cond) {}
 
 void PaqueteSender::run() {
-
     std::chrono::duration<int> dosMinutos(120);
     while (! salir){
         std::unique_lock<std::mutex> lk(*m);

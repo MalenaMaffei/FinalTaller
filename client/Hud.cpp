@@ -1,11 +1,21 @@
 #include "Header Files/Hud.h"
 #include "Header Files/constantes.h"
+#include "Header Files/VistaHudVehiculoLabels.h"
+#include "Header Files/VistaHudRobotLabels.h"
+#include "Header Files/common_CodigosPaquete.h"
 #define X_CARA 8
 #define Y_CARA 46
-
-Hud::Hud(Vista &hud, Vista &vistaCaras) : vistaHud(hud), vistaCaras
+#define X_LABEL_ROBOT 2
+#define Y_LABEL_ROBOT 124
+Hud::Hud(SDL_Renderer *gRenderer,
+         Vista &hud,
+         Vista &vistaCaras,
+         Vista &labelsRobot,
+         Vista &labelsVehiculo) : vistaHud(hud), vistaCaras
     (vistaCaras), seleccionado(false),
-    ubicacion(SCREEN_WIDTH - hud.getWidth(), 0) {
+                                  ubicacion(SCREEN_WIDTH - hud.getWidth(), 0),
+                                  labelsRobot(labelsRobot), labelsVehiculo
+                                          (labelsVehiculo){
     hudRect = {ubicacion,hud.getWidth(),hud.getHeight()};
 }
 
@@ -17,12 +27,14 @@ void Hud::mostrar() {
 //        TODO hacer esto atributo
         Punto caraOffset(X_CARA,Y_CARA);
         Punto caraPos = ubicacion + caraOffset;
-        vistaCaras.mostrar(caraPos, 0);
+        vistaCaras.mostrar(caraPos, getPosLabel());
+        Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
+        Punto labelRobotPos = ubicacion + labelRobotOffset;
+        labelsRobot.mostrar(labelRobotPos, getPosLabel());
     }
 }
 
 //TODO TANQUE SI ESTA CON ALGUIEN ES SIEMPRE UN GRUNT!!!
-//tTODO fabricas tienen qeu ser mias
 
 //TODO todos los turnos pido info del id seleccionado
 //TODO en realidad me va a llegar un paquete y el me dira que hacer
@@ -33,6 +45,30 @@ void Hud::setInfo(int tipo) {
 
 void Hud::mostrarContenido() {
 //    TODO IF CARA IF ESTO IF LO OTRO
+}
+
+int Hud::getPosLabel() {
+    CodigosPaquete codigos;
+    if (!codigos.esRobot(tipoCara)){
+//        TODO todavia no se muestran otras cosas que no sean robots
+        return 0;
+    }
+//    TODO usar un mapa
+    if (tipoCara == codigos.grunt){
+        return labelGrunt;
+    } else if (tipoCara == codigos.laser){
+        return labelLaser;
+    } else if (tipoCara == codigos.pyro){
+        return labelPyros;
+    } else if (tipoCara == codigos.psycho){
+        return labelPsychos;
+    } else if (tipoCara == codigos.sniper){
+        return labelSniper;
+    } else if (tipoCara == codigos.tough){
+        return labelTough;
+    }
+
+
 }
 
 //void Hud::RenderHPBar(int x, int y, int w, int h, float Percent, SDL_Color FGColor, SDL_Color BGColor) {

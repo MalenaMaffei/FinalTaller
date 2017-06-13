@@ -16,6 +16,8 @@
 #include "Header Files/VistaGui.h"
 #include "Header Files/CreadorMapa.h"
 #include "Header Files/VistaTexto.h"
+#include "Header Files/VistaHudRobotLabels.h"
+#include "Header Files/VistaHudVehiculoLabels.h"
 #include <string>
 
 const int SCREEN_FPS = 30;
@@ -105,6 +107,10 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
         } else if (paquete.getComando() == codigos.infoFabrica){
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
             guiEdificio.setInfo(paqueteFabrica);
+        } else if (paquete.getComando() == codigos.infoUnidad){
+//            TODO refactorizar aca
+            int tipo = std::stoi(paquete.getMensaje().substr(4,codigos.tipo));
+            hud.setInfo(tipo);
         }
 //        TODO manejar infos para el hud y la gui edificio
     }
@@ -156,10 +162,13 @@ void Canvas::startGame(){
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 
-
+//TODO pasar esto adentro de hud como hice para guiEdificio
     VistaHud vistaHud(gRenderer);
     VistaHudCaras vistaCaras(gRenderer);
-    Hud hud(vistaHud, vistaCaras);
+    VistaHudRobotLabels labelsRobot(gRenderer);
+    VistaHudVehiculoLabels labelsVehiculo(gRenderer);
+    Hud hud(gRenderer, vistaHud, vistaCaras, labelsRobot, labelsVehiculo);
+
     GuiEdificio guiEdificio(gRenderer);
 
     Mouse mouse;
