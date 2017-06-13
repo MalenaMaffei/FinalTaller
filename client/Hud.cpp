@@ -27,7 +27,6 @@ void Hud::mostrar() {
 //        TODO hacer esto atributo
         Punto caraOffset(X_CARA,Y_CARA);
         Punto caraPos = ubicacion + caraOffset;
-        printf("pos label : %i\n", getPosLabel());
         vistaCaras.mostrar(caraPos, getPosLabel());
         Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
         Punto labelRobotPos = ubicacion + labelRobotOffset;
