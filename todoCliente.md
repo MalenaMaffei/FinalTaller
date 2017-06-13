@@ -32,4 +32,10 @@
 
 17. ~~mandar paquetes de pedido de informacion.~~
 
+18. mostrar al jugador que color le toco ni bien le llega el paquete.
 
+19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
+
+20. como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego
+
+21. Poner destructores de vistaManager y elementoManager
