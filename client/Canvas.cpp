@@ -138,7 +138,7 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 }
 
 
-void Canvas::run(){
+void Canvas::startGame(){
     //Main loop flag
     bool quit = false;
 

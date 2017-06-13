@@ -1,17 +1,16 @@
 #ifndef TPFINAL_CANVAS_H
 #define TPFINAL_CANVAS_H
 #include <SDL_render.h>
-#include "common_Thread.h"
 #include "ColaPaquetes.h"
 #include "ElementoManager.h"
 #include "Hud.h"
 #include "GuiEdificio.h"
 
-class Canvas : public Thread{
+class Canvas{
  public:
   Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida);
   void close();
-  void run();
+  void startGame();
   void gameLoop();
   void manejarPaquetes(ElementoManager &elementoManager,
                          Hud &hud,

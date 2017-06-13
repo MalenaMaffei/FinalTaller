@@ -12,16 +12,17 @@ int main(int argc, char *argv[]){
     socket.setClientMode(argv[1], argv[2]);
 
 
-
     PaqueteReceiver receiver(socket, colaEntrada);
     PaqueteSender sender(socket, colaSalida);
 
-
-    Canvas canvas(colaEntrada, colaSalida);
-
-    canvas.start();
     receiver.start();
     sender.start();
-    canvas.join();
+    Canvas canvas(colaEntrada, colaSalida);
+    canvas.startGame();
+
+//    Si llegue aca es porque se cerro la ventana
+//    Agregar paquet Receiver quit y Sender quit.
+
+
 //   TODO FALTA CONDICION DE QUIT!
 }
