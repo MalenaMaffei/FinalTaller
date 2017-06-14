@@ -45,3 +45,5 @@
 21. Poner destructores de vistaManager y elementoManager
 
 22. clase mapa para mostrar mapa en vez de mostrar tiles
+
+23. VistaColoreada heredada por vistabandera creo que no sirve para nada, revisar bien

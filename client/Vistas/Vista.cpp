@@ -1,5 +1,5 @@
 #include "../Header Files/Vista.h"
-
+#include <string>
 
 Vista::Vista(SDL_Renderer *gRenderer,
              int height,
@@ -13,37 +13,19 @@ Vista::Vista(SDL_Renderer *gRenderer,
 }
 
 bool Vista::loadMedia() {
-    //Loading success flag
     bool success = true;
 
-    //Load sprite sheet texture
-    if( !loadFromFile(fileName) ){
-        printf( "Failed to load tile texture!\n" );
+    if (!loadFromFile(fileName)){
+        printf("No se pudo cargar la textura: %s\n", fileName.c_str());
         success = false;
         return success;
-    }
-
-    else{
-
+    } else {
         recorrerImagen();
-//        int col = 0;
-//        for (size_t j = 0; j < clips; j++) {
-//            SDL_Rect rect;
-//            rect.x  =   col;
-//            rect.y = 0;
-//            rect.w = width;
-//            rect.h = height;
-//            gClips.push_back(rect);
-//
-//            col += width;
-//        }
     }
     return success;
 }
 
 void Vista::recorrerImagen() {
-//    int col = 0;
-
     for (size_t i = 0; i < filas; ++i) {
         for (size_t j = 0; j < clips; j++) {
             SDL_Rect rect;
@@ -52,8 +34,6 @@ void Vista::recorrerImagen() {
             rect.w = width;
             rect.h = height;
             gClips.push_back(rect);
-
-//            col += width;
         }
     }
 }
@@ -79,7 +59,7 @@ int Vista::getClip(int clip, int fila) const {
 }
 
 bool Vista::isLastClip(int clip) const {
-    return clip == clips-1 ;
+    return clip == clips-1;
 }
 
 

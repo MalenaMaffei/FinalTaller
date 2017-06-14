@@ -1,5 +1,5 @@
 #include "../Header Files/VistaDireccionada.h"
-#define COLORES 4
+#include <string>
 VistaDireccionada::VistaDireccionada(SDL_Renderer *gRenderer,
                                      int height,
                                      int width,
@@ -25,5 +25,5 @@ int VistaDireccionada::getClip(int clip, int direccion) const {
 bool VistaDireccionada::isLastClip(int clip, int direccion) const {
     clip = clip%largoAnimacion;
     clip = clip + (direccion*largoAnimacion);
-    return clip == largoAnimacion-1 ;
+    return clip == largoAnimacion-1;
 }
