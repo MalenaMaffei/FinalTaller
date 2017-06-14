@@ -110,7 +110,8 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
         } else if (paquete.getComando() == codigos.infoUnidad){
 //            TODO refactorizar aca
             int tipo = std::stoi(paquete.getMensaje().substr(4,codigos.tipo));
-            hud.setInfo(tipo);
+            int vida = std::stoi(paquete.getMensaje().substr(6,3));
+            hud.setInfo(tipo, vida);
         }
 //        TODO manejar infos para el hud y la gui edificio
     }
@@ -167,7 +168,14 @@ void Canvas::startGame(){
     VistaHudCaras vistaCaras(gRenderer);
     VistaHudRobotLabels labelsRobot(gRenderer);
     VistaHudVehiculoLabels labelsVehiculo(gRenderer);
-    Hud hud(gRenderer, vistaHud, vistaCaras, labelsRobot, labelsVehiculo);
+    VistaProgressBar barraVida({Punto(14, 20), 76,14}, gRenderer, {60,175,
+                                                                   23}, {99,71,71});
+    Hud hud(gRenderer,
+            vistaHud,
+            vistaCaras,
+            labelsRobot,
+            labelsVehiculo,
+            barraVida);
 
     GuiEdificio guiEdificio(gRenderer);
 

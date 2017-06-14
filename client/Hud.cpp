@@ -7,15 +7,23 @@
 #define Y_CARA 46
 #define X_LABEL_ROBOT 2
 #define Y_LABEL_ROBOT 124
+#define X_HPBAR 14
+#define Y_HPBAR 210
+#define HEIGHT_HPBAR 14
+#define WIDTH_HPBAR 76
 Hud::Hud(SDL_Renderer *gRenderer,
          Vista &hud,
          Vista &vistaCaras,
          Vista &labelsRobot,
-         Vista &labelsVehiculo) : vistaHud(hud), vistaCaras
-    (vistaCaras), seleccionado(false),
-                                  ubicacion(SCREEN_WIDTH - hud.getWidth(), 0),
-                                  labelsRobot(labelsRobot), labelsVehiculo
-                                          (labelsVehiculo){
+         Vista &labelsVehiculo,
+         VistaProgressBar &barraVida) : vistaHud(hud), vistaCaras
+    (vistaCaras),
+//                                  barraVida({Punto(X_HPBAR, Y_HPBAR), WIDTH_HPBAR,HEIGHT_HPBAR},
+//    gRenderer, {60,175,23}, {99,71,71}),
+                                        barraVida(barraVida),
+                                  seleccionado(false),
+                                        ubicacion(SCREEN_WIDTH - hud.getWidth(), 0), labelsRobot(labelsRobot),
+                                        labelsVehiculo(labelsVehiculo){
     hudRect = {ubicacion,hud.getWidth(),hud.getHeight()};
 }
 
@@ -31,6 +39,7 @@ void Hud::mostrar() {
         Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
         Punto labelRobotPos = ubicacion + labelRobotOffset;
         labelsRobot.mostrar(labelRobotPos, getPosLabel());
+        barraVida.llenarHorizontal(vida, Punto(X_HPBAR, Y_HPBAR)+ubicacion);
     }
 }
 
@@ -38,8 +47,10 @@ void Hud::mostrar() {
 
 //TODO todos los turnos pido info del id seleccionado
 //TODO en realidad me va a llegar un paquete y el me dira que hacer
-void Hud::setInfo(int tipo) {
+void Hud::setInfo(int tipo, int porcentajeVida) {
     tipoCara = tipo;
+    float cienporciento = 100;
+    vida = porcentajeVida/cienporciento;
     seleccionado = true;
 }
 
@@ -67,21 +78,5 @@ int Hud::getPosLabel() {
     } else if (tipoCara == codigos.tough){
         return labelTough;
     }
-
-
 }
 
-//void Hud::RenderHPBar(int x, int y, int w, int h, float Percent, SDL_Color FGColor, SDL_Color BGColor) {
-//    Percent = Percent > 1.f ? 1.f : Percent < 0.f ? 0.f : Percent;
-//    SDL_Color old;
-//    SDL_GetRenderDrawColor(Renderer, &old.r, &old.g, &old.g, &old.a);
-//    SDL_Rect bgrect = { x, y, w, h };
-//    SDL_SetRenderDrawColor(Renderer, BGColor.r, BGColor.g, BGColor.b, BGColor.a);
-//    SDL_RenderFillRect(Renderer, &bgrect);
-//    SDL_SetRenderDrawColor(Renderer, FGColor.r, FGColor.g, FGColor.b, FGColor.a);
-//    int pw = (int)((float)w * Percent);
-//    int px = x + (w - pw);
-//    SDL_Rect fgrect = { px, y, pw, h };
-//    SDL_RenderFillRect(Renderer, &fgrect);
-//    SDL_SetRenderDrawColor(Renderer, old.r, old.g, old.b, old.a);
-//}

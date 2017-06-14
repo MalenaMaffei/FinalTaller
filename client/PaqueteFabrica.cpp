@@ -1,5 +1,6 @@
 #include "Header Files/PaqueteFabrica.h"
 #include <map>
+#include <string>
 using std::string;
 PaqueteFabrica::PaqueteFabrica(const std::string &mensaje) : mensaje(mensaje) {}
 

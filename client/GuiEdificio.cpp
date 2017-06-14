@@ -2,6 +2,7 @@
 #include "Header Files/VistaGui.h"
 #include "Header Files/constantes.h"
 #include "Header Files/common_CodigosPaquete.h"
+#include <string>
 #define OFF_CANCEL_X 67
 #define OFF_CANCEL_Y 47
 #define OFF_OK_X 67

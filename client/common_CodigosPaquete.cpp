@@ -1,4 +1,5 @@
 #include "Header Files/common_CodigosPaquete.h"
+#include <string>
 #define COMIENZO_UNIDADES 6
 #define FIN_UNIDADES 16
 #define COMIENZO_ROBOTS 6
@@ -31,7 +32,7 @@ bool CodigosPaquete::esBala(int tipo) {
 }
 
 std::string CodigosPaquete::nombreUnidad(int tipo) {
-    switch(tipo){
+    switch (tipo){
         case fuerte:return "Fuerte";
         case fabricaRobot:return "Fábrica Robot";
         case fabricaVehiculo:return "Fábrica Vehículo";

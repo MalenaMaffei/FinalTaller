@@ -4,6 +4,7 @@
 #include "Header Files/Paquete.h"
 #include <algorithm>
 #include <vector>
+#include <string>
 using std::vector;
 using std::for_each;
 
