@@ -5,14 +5,17 @@
 #include "Rect.h"
 class VistaProgressBar {
  public:
-  VistaProgressBar(const Rect &barra,
-                   SDL_Renderer *gRenderer,
-                   const SDL_Color &FGColor,
-                   const SDL_Color &BGColor);
+  VistaProgressBar(int width,
+                     int height,
+                     SDL_Renderer *gRenderer,
+                     const SDL_Color &FGColor,
+                     const SDL_Color &BGColor);
   void llenarHorizontal(float porcentaje, Punto ubicacion);
 
  private:
-  Rect barra;
+  int width;
+  int height;
+//  Rect barra;
   SDL_Renderer* gRenderer;
   SDL_Color FGColor;
   SDL_Color BGColor;

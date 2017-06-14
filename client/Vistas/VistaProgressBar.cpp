@@ -1,23 +1,30 @@
 #include <SDL_render.h>
 #include "../Header Files/VistaProgressBar.h"
 
-VistaProgressBar::VistaProgressBar(const Rect &barra,
+VistaProgressBar::VistaProgressBar(int width,
+                                   int height,
                                    SDL_Renderer *gRenderer,
                                    const SDL_Color &FGColor,
                                    const SDL_Color &BGColor)
-    : barra(barra), gRenderer(gRenderer), FGColor(FGColor), BGColor(BGColor) {}
+    : width(width), height(height),gRenderer(gRenderer), FGColor(FGColor),
+BGColor
+    (BGColor) {}
 
 void VistaProgressBar::llenarHorizontal(float porcentaje, Punto ubicacion) {
 //    porcentaje = porcentaje > 1.f ? 1.f : porcentaje < 0.f ? 0.f : porcentaje;
 
-    Rect renderRect = {ubicacion, barra.w, barra.h};
+//    TODO usar dos texturas, la del fondo y la verde... aunque en ese caso
+// deberia hacer distintas vistas para las distintas barras, no se si vale la
+// pena
+//    TODO darle un borde al rectangulo
+    Rect renderRect = {ubicacion, width, height};
     SDL_Color old;
     SDL_GetRenderDrawColor(gRenderer, &old.r, &old.g, &old.g, &old.a);
     SDL_SetRenderDrawColor(gRenderer, BGColor.r, BGColor.g, BGColor.b, BGColor.a);
     SDL_RenderFillRect(gRenderer, &renderRect);
     SDL_SetRenderDrawColor(gRenderer, FGColor.r, FGColor.g, FGColor.b, FGColor.a);
-    int pw = barra.w * porcentaje;
-    SDL_Rect porcentajeRect = { renderRect.x, renderRect.y, pw, barra.h };
+    int pw = width * porcentaje;
+    SDL_Rect porcentajeRect = { renderRect.x, renderRect.y, pw, height };
     SDL_RenderFillRect(gRenderer, &porcentajeRect);
     SDL_SetRenderDrawColor(gRenderer, old.r, old.g, old.b, old.a);
 }

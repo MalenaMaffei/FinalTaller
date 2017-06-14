@@ -168,8 +168,7 @@ void Canvas::startGame(){
     VistaHudCaras vistaCaras(gRenderer);
     VistaHudRobotLabels labelsRobot(gRenderer);
     VistaHudVehiculoLabels labelsVehiculo(gRenderer);
-    VistaProgressBar barraVida({Punto(14, 20), 76,14}, gRenderer, {60,175,
-                                                                   23}, {99,71,71});
+    VistaProgressBar barraVida(76, 14, gRenderer,{60, 175,23},{99, 71, 71});
     Hud hud(gRenderer,
             vistaHud,
             vistaCaras,
