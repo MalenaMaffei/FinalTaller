@@ -2,6 +2,7 @@
 #define TPFINAL_VISTADIRECCIONADA_H
 
 #include "Vista.h"
+#include <string>
 class VistaDireccionada : public Vista{
  public:
   VistaDireccionada(SDL_Renderer *gRenderer,

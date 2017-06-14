@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Header Files/ColaPaquetes.h"
-#include "Header Files/common_PaqueteEntrada.h"
 
 void ColaPaquetes::encolar(Paquete paquete){
     std::unique_lock<std::mutex> mlock(m);

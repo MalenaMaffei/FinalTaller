@@ -1,6 +1,6 @@
 #ifndef TPFINAL_ELEMENTOBALA_H
 #define TPFINAL_ELEMENTOBALA_H
-
+#include <string> 
 #include "Elemento.h"
 class ElementoBala : public Elemento{
  public:

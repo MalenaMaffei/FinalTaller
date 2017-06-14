@@ -4,8 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaMissilelauncher : public VistaDireccionada {
  public:
-  VistaMissilelauncher(SDL_Renderer *gRenderer);
-
+  explicit VistaMissilelauncher(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAMISSILELAUNCHER_H

@@ -1,6 +1,7 @@
 #ifndef TPFINAL_VISTATILE_H
 #define TPFINAL_VISTATILE_H
 #include <vector>
+#include <string> 
 #include "Texture.h"
 #include "Camara.h"
 

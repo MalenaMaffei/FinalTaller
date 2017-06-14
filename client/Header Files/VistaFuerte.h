@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaFuerte : public Vista {
  public:
-  VistaFuerte(SDL_Renderer *gRenderer);
-
+  explicit VistaFuerte(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAFUERTE_H

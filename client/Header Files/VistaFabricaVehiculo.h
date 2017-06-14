@@ -5,8 +5,7 @@
 
 class VistaFabricaVehiculo : public Vista {
  public:
-  VistaFabricaVehiculo(SDL_Renderer *gRenderer);
-
+  explicit VistaFabricaVehiculo(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAFABRICAVEHICULO_H

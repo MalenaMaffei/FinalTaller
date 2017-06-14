@@ -1,6 +1,6 @@
 #ifndef TPFINAL_ELEMENTOPUENTE_H
 #define TPFINAL_ELEMENTOPUENTE_H
-
+#include <string> 
 #include "Elemento.h"
 class ElementoPuente : public Elemento {
  public:
@@ -9,7 +9,6 @@ class ElementoPuente : public Elemento {
                  int y,
                  Vista *textura,
                  bool vertical = false);
-
 };
 
 #endif //TPFINAL_ELEMENTOPUENTE_H

@@ -4,8 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaGruntDisparar: public VistaDireccionada {
  public:
-  VistaGruntDisparar(SDL_Renderer *gRenderer);
-
+  explicit VistaGruntDisparar(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAGRUNTDISPARAR_H

@@ -6,7 +6,6 @@
 
 //class ElementoUnidad;
 class SelectBox {
-
    public:
   SelectBox();
 
@@ -23,7 +22,6 @@ class SelectBox {
 
  private:
   Rect rect;
-
   std::vector<ElementoUnidad> seleccionadas;
 };
 

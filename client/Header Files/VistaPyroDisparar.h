@@ -4,8 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaPyroDisparar : public VistaDireccionada {
  public:
-  VistaPyroDisparar(SDL_Renderer *gRenderer);
-
+  explicit VistaPyroDisparar(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAPYRODISPARAR_H

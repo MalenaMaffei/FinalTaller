@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaHud  : public Vista{
  public:
-  VistaHud(SDL_Renderer *gRenderer);
-
+  explicit VistaHud(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUD_H

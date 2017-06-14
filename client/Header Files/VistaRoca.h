@@ -4,8 +4,7 @@
 
 class VistaRoca : public Vista{
  public:
-  VistaRoca(SDL_Renderer *gRenderer);
-
+  explicit VistaRoca(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAROCA_H

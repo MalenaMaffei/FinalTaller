@@ -3,7 +3,7 @@
 
 #include "Elemento.h"
 #include "ElementoColoreado.h"
-
+#include <string>
 class ElementoEstructura : public ElementoColoreado{
  public:
   ElementoEstructura(std::string id, int x, int y, Vista *textura,

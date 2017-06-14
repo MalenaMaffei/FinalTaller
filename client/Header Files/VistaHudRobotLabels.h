@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaHudRobotLabels : public Vista{
  public:
-  VistaHudRobotLabels(SDL_Renderer *gRenderer);
-
+  explicit VistaHudRobotLabels(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUDROBOTLABELS_H

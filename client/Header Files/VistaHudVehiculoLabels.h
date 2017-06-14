@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaHudVehiculoLabels : public Vista{
  public:
-  VistaHudVehiculoLabels(SDL_Renderer *gRenderer);
-
+  explicit VistaHudVehiculoLabels(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUDVEHICULOLABELS_H

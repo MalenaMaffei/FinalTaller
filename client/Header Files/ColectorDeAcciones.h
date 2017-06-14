@@ -1,6 +1,6 @@
 #ifndef TPFINAL_COLECTORDEACCIONES_H
 #define TPFINAL_COLECTORDEACCIONES_H
-
+#include <string> 
 #include "SelectBox.h"
 #include "Click.h"
 #include "Hud.h"

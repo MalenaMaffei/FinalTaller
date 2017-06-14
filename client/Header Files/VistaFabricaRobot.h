@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaFabricaRobot : public Vista {
  public:
-  VistaFabricaRobot(SDL_Renderer *gRenderer);
-
+  explicit VistaFabricaRobot(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAFABRICAROBOT_H

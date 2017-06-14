@@ -4,7 +4,7 @@
 #include "Vista.h"
 class VistaTanqueMorir : public Vista{
  public:
-  VistaTanqueMorir(SDL_Renderer *gRenderer);
+  explicit VistaTanqueMorir(SDL_Renderer *gRenderer);
 //  bool isLastClip(int clip) const;
 };
 

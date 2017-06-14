@@ -1,10 +1,9 @@
 #ifndef TPFINAL_ELEMENTOMOVIL_H
 #define TPFINAL_ELEMENTOMOVIL_H
-
+#include <string>
 #include "Elemento.h"
 #include "VistaDireccionada.h"
 #include "ElementoColoreado.h"
-//#include "SelectBox.h"
 
 class SelectBox;
 class ElementoUnidad : public ElementoColoreado{
@@ -25,6 +24,7 @@ class ElementoUnidad : public ElementoColoreado{
   void seleccionar();
   void deseleccionar();
   void guiRequest(ColectorDeAcciones& colector) const;
+  
  protected:
   void avanzarMuerte();
   void avanzarDisparo();
@@ -55,7 +55,6 @@ class ElementoUnidad : public ElementoColoreado{
   VistaDireccionada* vistaMovimiento;
   VistaDireccionada* vistaDisparar;
   Vista* vistaMuerte;
-
 };
 
 #endif //TPFINAL_ELEMENTOMOVIL_H

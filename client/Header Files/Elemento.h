@@ -3,7 +3,8 @@
 
 #include <SDL_rect.h>
 #include "Vista.h"
-//#include "Click.h"
+#include <string>
+
 class Click;
 class ColectorDeAcciones;
 class Elemento {

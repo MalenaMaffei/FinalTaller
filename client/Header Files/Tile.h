@@ -3,7 +3,6 @@
 #include "VistaTiles.h"
 #include "Camara.h"
 class Tile {
-
    public:
     //Initializes position and type
     Tile(int x, int y, int tileType, VistaTiles *textura);

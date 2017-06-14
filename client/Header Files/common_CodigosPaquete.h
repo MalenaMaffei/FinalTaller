@@ -68,6 +68,7 @@ class CodigosPaquete {
     posTipo = 14,
     posColor = 16
   };
+
  private:
   std::map<int, std::string>  nombresUnidades;
 };

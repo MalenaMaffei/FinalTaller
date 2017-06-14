@@ -4,10 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaRobotCaminar : public VistaDireccionada{
  public:
-  VistaRobotCaminar(SDL_Renderer *gRenderer);
- public:
-
-
+  explicit VistaRobotCaminar(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAROBOTCAMINAR_H

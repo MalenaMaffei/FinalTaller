@@ -5,7 +5,7 @@
 #include <map>
 class PaqueteFabrica {
  public:
-  PaqueteFabrica(const std::string &mensaje);
+  explicit PaqueteFabrica(const std::string &mensaje);
   std::string getId();
   int getTipoFabrica();
   int getVidaFabrica();

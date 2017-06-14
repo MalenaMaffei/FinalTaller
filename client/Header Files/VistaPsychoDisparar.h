@@ -4,8 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaPsychoDisparar : public VistaDireccionada {
  public:
-  VistaPsychoDisparar(SDL_Renderer *gRenderer);
-
+  explicit VistaPsychoDisparar(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAPSYCHODISPARAR_H

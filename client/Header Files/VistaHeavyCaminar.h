@@ -4,8 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaHeavyCaminar : public VistaDireccionada {
  public:
-  VistaHeavyCaminar(SDL_Renderer *gRenderer);
-
+  explicit VistaHeavyCaminar(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHEAVY_H

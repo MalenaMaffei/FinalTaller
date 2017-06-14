@@ -4,11 +4,8 @@
 
 class VistaTiles : public Vista {
  public:
-  VistaTiles(SDL_Renderer *gRenderer);
+  explicit VistaTiles(SDL_Renderer *gRenderer);
 //  void mostrar(int x, int y, int clip);
-
- private:
-
 };
 
 #endif //TPFINAL_VISTATILES_H

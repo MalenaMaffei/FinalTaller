@@ -5,7 +5,7 @@
 #include "VistaColoreada.h"
 class VistaBandera : public VistaColoreada {
  public:
-  VistaBandera(SDL_Renderer *gRenderer);
+  explicit VistaBandera(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTABANDERA_H

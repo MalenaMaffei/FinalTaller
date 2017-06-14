@@ -4,7 +4,6 @@
 #include "SelectBox.h"
 #include "Click.h"
 class Mouse {
-
  public:
 //  struct MouseCoords {
 //    int x = -1;
@@ -28,7 +27,6 @@ class Mouse {
   void setMouseAction(SelectBox &selectBox, Click &click);
 
  private:
-
 //  bool rightButtonDown = false;
 //  bool leftButtonDown = false;
   bool mouseMoves = false;

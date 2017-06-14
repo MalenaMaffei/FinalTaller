@@ -4,8 +4,7 @@
 #include "VistaDireccionada.h"
 class VistaSniperDisparar: public VistaDireccionada {
  public:
-  VistaSniperDisparar(SDL_Renderer *gRenderer);
-
+  explicit VistaSniperDisparar(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTASNIPERDISPARAR_H

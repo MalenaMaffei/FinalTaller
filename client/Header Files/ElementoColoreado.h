@@ -1,8 +1,7 @@
 #ifndef TPFINAL_ELEMENTOCOLOREADO_H
 #define TPFINAL_ELEMENTOCOLOREADO_H
-
-
 #include "Elemento.h"
+#include <string>
 
 class ElementoColoreado : public Elemento{
 public:

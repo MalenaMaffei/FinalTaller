@@ -6,17 +6,17 @@
 #include <SDL2/SDL_ttf.h>
 class Texture {
  public:
-  Texture(SDL_Renderer *gRenderer);
+  explicit Texture(SDL_Renderer *gRenderer);
 
   ~Texture();
 
-  bool loadFromFile( std::string path );
+  bool loadFromFile(std::string path);
   bool loadFromRenderedText(std::string textureText,
                               SDL_Color textColor,
                               TTF_Font *gFont);
   void free();
 
-  void render( int x, int y, SDL_Rect* clip = NULL );
+  void render(int x, int y, SDL_Rect* clip = NULL);
 
   int getWidth();
   int getHeight();

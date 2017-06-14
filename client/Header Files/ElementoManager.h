@@ -10,7 +10,8 @@
 #include "Paquete.h"
 #include "ElementoBala.h"
 #include <map>
-
+#include <string>
+#include <vector>
 class ElementoManager {
  public:
   ElementoManager(VistaManager &vistaManager,

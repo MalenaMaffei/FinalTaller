@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaGui : public Vista{
  public:
-  VistaGui(SDL_Renderer *gRenderer);
-
+  explicit VistaGui(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAGUI_H
