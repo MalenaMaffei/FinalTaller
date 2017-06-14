@@ -20,6 +20,10 @@
 
 11. barra de vida. 
 
+* en hud
+* en guiEdificio
+* para la construccion
+
 12. que se muestren armas
 
 13. que se muestren tanques
@@ -32,4 +36,12 @@
 
 17. ~~mandar paquetes de pedido de informacion.~~
 
+18. mostrar al jugador que color le toco ni bien le llega el paquete.
 
+19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
+
+20. como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego
+
+21. Poner destructores de vistaManager y elementoManager
+
+22. clase mapa para mostrar mapa en vez de mostrar tiles
