@@ -33,7 +33,7 @@
 class Juego : public Thread {
 public:
     Juego(ColaMensajes& colaDeRecibidos, std::mutex* m, 
-            std::condition_variable* cond, Socket socket);
+            std::condition_variable* cond, std::vector<Socket>& socket);
     void moverUnidades();
     bool hayGanador();
     void chequearColisiones();
@@ -64,7 +64,7 @@ private:
 
     std::queue<std::string> colaDeEnviados;
 
-    Socket socket;
+    std::vector<Socket>& sockets;
     
     FabricaVehiculos* fabricaV;
     FabricaRobots* fabricaR;

@@ -48,14 +48,15 @@ main (int argc, char** argv)
 	
 	std::vector<Jugador*> jugadores;
 	
-	Socket socket;
+	std::vector<Socket> sockets;
 	
-	for (int i=0; i<1; i++) {
-		socket = aceptor.Accept ();
+	for (int i=0; i<2; i++) {
+		Socket socket = aceptor.Accept ();
 		jugadores.push_back(new Jugador(socket, colaDeRecibidos));
+		sockets.push_back(socket);
 	}
 	
-	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, socket);
+	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, sockets);
 
 	juego->start();
 	
