@@ -12,6 +12,7 @@
  */
 
 #include <cstdlib>
+#include "server_Jugador.h"
 #include "server_AEstrella.h"
 #include "server_Mapa.h"
 #include "server_Movible.h"
@@ -35,29 +36,49 @@ using namespace std;
 int
 main (int argc, char** argv)
 {	
-	std::queue<std::string>* colaDeRecibidos = new std::queue<std::string> ();
+
+	ColaMensajes colaDeRecibidos;
+//	std::queue<std::string>* colaDeRecibidos = new std::queue<std::string> ();
 	std::mutex m;
 	std::condition_variable cond;
 	
 	Socket aceptor;
-    Socket socket;
 	
 	aceptor.setServerMode("8080");
-	socket = aceptor.Accept ();
-  
 	
-	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, &socket);
+	std::vector<Jugador*> jugadores;
 	
+	Socket socket;
+	
+	for (int i=0; i<1; i++) {
+		socket = aceptor.Accept ();
+		jugadores.push_back(new Jugador(socket, colaDeRecibidos));
+	}
+	
+	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, socket);
+
 	juego->start();
 	
-	while (1) {
+	for (Jugador* jugador : jugadores) {
+		jugador->start();
+	}
+	
+/*	while (1) {
 		std::string mensaje = socket.ReceiveStrWLen ();
 		std::unique_lock<std::mutex> lk(m);
-		colaDeRecibidos->push (mensaje);
-		cond.notify_all ();
-	}
+		colaDeRecibidos->encolar (mensaje);
+//		cond.notify_all ();
+	}*/
 		
+	for (Jugador* jugador : jugadores) {
+		jugador->join();
+	}
+	
 	juego->join ();
+	
+	for (Jugador* jugador : jugadores) {
+		delete jugador;
+	}
 	
 	delete juego;
 	

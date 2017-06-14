@@ -28,11 +28,12 @@
 #include <mutex>
 #include <condition_variable>
 #include <pthread.h>
+#include "ColaMensajes.h"
 
 class Juego : public Thread {
 public:
-    Juego(std::queue<std::string>* colaDeRecibidos, std::mutex* m, 
-            std::condition_variable* cond, Socket* socket);
+    Juego(ColaMensajes& colaDeRecibidos, std::mutex* m, 
+            std::condition_variable* cond, Socket socket);
     void moverUnidades();
     bool hayGanador();
     void chequearColisiones();
@@ -41,7 +42,7 @@ public:
     void actualizarEdificios();
     void actualizarRecibidos();
     void enviarMensajesEncolados();
-    void run() override;
+    void run();
     virtual ~Juego();
 private:
     
@@ -57,13 +58,13 @@ private:
     
     Mapa mapa;
     
-    std::queue<std::string>* colaDeRecibidos;
+    ColaMensajes& colaDeRecibidos;
     std::mutex* m;
     std::condition_variable* cond;
 
     std::queue<std::string> colaDeEnviados;
 
-    Socket* socket;
+    Socket socket;
     
     FabricaVehiculos* fabricaV;
     FabricaRobots* fabricaR;
