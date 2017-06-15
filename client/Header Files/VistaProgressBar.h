@@ -3,6 +3,7 @@
 
 #include <SDL_pixels.h>
 #include "Rect.h"
+#include "Vista.h"
 class VistaProgressBar {
  public:
   VistaProgressBar(int width,
@@ -10,9 +11,12 @@ class VistaProgressBar {
                      SDL_Renderer *gRenderer,
                      const SDL_Color &FGColor,
                      const SDL_Color &BGColor);
-  void llenarHorizontal(float porcentaje, Punto ubicacion);
+  void mostrarHorizontal(float porcentaje, Punto ubicacion);
+  void mostrarVertical(float porcentaje, Punto ubicacion);
 
  private:
+  void llenarBarra(Punto ubicacion, Rect porcentajeRect);
+  void dibujarRect(Rect rect, SDL_Color color);
   int width;
   int height;
 //  Rect barra;

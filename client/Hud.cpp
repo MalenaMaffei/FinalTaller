@@ -8,9 +8,9 @@
 #define X_LABEL_ROBOT 2
 #define Y_LABEL_ROBOT 124
 #define X_HPBAR 14
-#define Y_HPBAR 210
-#define HEIGHT_HPBAR 14
-#define WIDTH_HPBAR 76
+#define Y_HPBAR 213
+#define HEIGHT_HPBAR 7
+#define WIDTH_HPBAR 73
 Hud::Hud(SDL_Renderer *gRenderer,
          Vista &hud,
          Vista &vistaCaras,
@@ -39,7 +39,7 @@ void Hud::mostrar() {
         Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
         Punto labelRobotPos = ubicacion + labelRobotOffset;
         labelsRobot.mostrar(labelRobotPos, getPosLabel());
-        barraVida.llenarHorizontal(vida, Punto(X_HPBAR, Y_HPBAR)+ubicacion);
+        barraVida.mostrarHorizontal(vida, Punto(X_HPBAR, Y_HPBAR) + ubicacion);
     }
 }
 
