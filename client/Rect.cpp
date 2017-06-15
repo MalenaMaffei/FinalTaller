@@ -24,3 +24,11 @@ void Rect::setPunto(Punto p) {
     y = p.y;
 }
 
+Rect Rect::negativeShift(Punto shift) {
+    return Rect(getPunto() - shift, w, h);
+}
+
+Rect Rect::positiveShift(Punto shift) {
+    return Rect(getPunto() + shift, w, h);
+}
+

@@ -19,7 +19,6 @@ class VistaProgressBar {
   void dibujarRect(Rect rect, SDL_Color color);
   int width;
   int height;
-//  Rect barra;
   SDL_Renderer* gRenderer;
   SDL_Color FGColor;
   SDL_Color BGColor;

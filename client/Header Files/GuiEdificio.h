@@ -30,11 +30,12 @@ class GuiEdificio {
   Rect cancel;
   Rect next;
   bool seMuestra;
+  Punto posUNIT;
   Punto position;
-  Punto offsetOK;
-  Punto offsetCANCEL;
-  Punto offsetNEXT;
-  Punto offsetUNIT;
+  Rect relPosOK;
+  Rect relPosCANCEL;
+  Rect relPosNEXT;
+
 
   int posSeleccionada;
   int tipoSeleccionado;

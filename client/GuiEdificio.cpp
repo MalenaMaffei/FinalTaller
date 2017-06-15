@@ -3,18 +3,18 @@
 #include "Header Files/constantes.h"
 #include "Header Files/common_CodigosPaquete.h"
 #include <string>
-#define OFF_CANCEL_X 67
-#define OFF_CANCEL_Y 47
-#define OFF_OK_X 67
-#define OFF_OK_Y 61
+#define CANCEL_RELX 67
+#define CANCEL_RELY 47
+#define OK_RELX 67
+#define OK_RELY 61
 #define HEIGHT_BUTTON 14
 #define WIDTH_BUTTON 40
 #define HEIGHT_ARROW 8
 #define WIDTH_ARROW 11
-#define OFF_ARROW_X 52
-#define OFF_ARROW_Y 65
-#define OFF_UNIT_X 7
-#define OFF_UNIT_Y 58
+#define ARROW_RELX 52
+#define ARROW_RELY 65
+#define UNIT_RELX 7
+#define UNIT_RELY 58
 
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
     : vistaGui(VistaGui(gRenderer)),
@@ -22,10 +22,10 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
       seMuestra(false),
       tipoSeleccionado(-1),
       posSeleccionada(0){
-        offsetCANCEL = Punto(OFF_CANCEL_X, OFF_CANCEL_Y);
-        offsetNEXT = Punto(OFF_ARROW_X, OFF_ARROW_Y);
-        offsetOK = Punto(OFF_OK_X, OFF_OK_Y);
-        offsetUNIT = Punto(OFF_UNIT_X, OFF_UNIT_Y);
+        relPosCANCEL = {{CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON};
+        relPosNEXT = {{ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW};
+        relPosOK = {{OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON};
+        posUNIT = {UNIT_RELX, UNIT_RELY};
         vistaTexto.loadFont(fuentePath, 12);
 
 //        tiposConstruibles = {6,7,8,9,10,11,12,13,14,15,16};
@@ -34,14 +34,17 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
 void GuiEdificio::mostrar(Punto offset) {
     if (seMuestra){
         Punto pReal = position - offset;
-        cancel = Rect(position + offsetCANCEL, WIDTH_BUTTON, HEIGHT_BUTTON);
-        ok = Rect(position + offsetOK, WIDTH_BUTTON, HEIGHT_BUTTON);
-        next = Rect(position + offsetNEXT, WIDTH_ARROW,HEIGHT_ARROW);
+//        cancel = Rect(position + relPosCANCEL, WIDTH_BUTTON, HEIGHT_BUTTON);
+        cancel = relPosCANCEL.positiveShift(position);
+//        ok = Rect(position + relPosOK, WIDTH_BUTTON, HEIGHT_BUTTON);
+        ok = relPosOK.positiveShift(position);
+//        next = Rect(position + relPosNEXT, WIDTH_ARROW,HEIGHT_ARROW);
+        next = relPosNEXT.positiveShift(position);
         vistaGui.mostrar(pReal, 0);
         CodigosPaquete codigos;
         std::string nombreUnidad = codigos.nombreUnidad
             (tiposConstruibles[posSeleccionada]);
-        vistaTexto.mostrar(nombreUnidad, {255,255,255}, pReal + offsetUNIT);
+        vistaTexto.mostrar(nombreUnidad, {255,255,255}, pReal + posUNIT);
     }
 }
 
@@ -49,6 +52,7 @@ void GuiEdificio::abrirGui(Punto pos, std::string id) {
     resetSeleccion();
     fabricaId = id;
     position = pos;
+//    seMuestra = true;
 }
 
 bool GuiEdificio::click(Punto click) {
