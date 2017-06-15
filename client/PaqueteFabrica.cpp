@@ -2,8 +2,8 @@
 #include <map>
 #include <string>
 using std::string;
+using std::stoi;
 PaqueteFabrica::PaqueteFabrica(const std::string &mensaje) : mensaje(mensaje) {}
-
 
 
 string PaqueteFabrica::getId() {
@@ -11,11 +11,12 @@ string PaqueteFabrica::getId() {
 }
 
 int PaqueteFabrica::getTipoFabrica() {
-    return std::stoi(mensaje.substr(posTipoFabrica, tipo));
+    return stoi(mensaje.substr(posTipoFabrica, tipo));
 }
 
-int PaqueteFabrica::getVidaFabrica() {
-    return std::stoi(mensaje.substr(posVida, vida));
+string PaqueteFabrica::getVidaFabrica() {
+    return std::to_string(stoi(mensaje.substr(posVida, vida)));
+//    return mensaje.substr(posVida, vida);
 }
 
 std::map<int,std::string> PaqueteFabrica::getConstruibles() {
@@ -27,7 +28,7 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
     int offset;
     for (int i = 0; i < cantRecibida; ++i) {
         offset = (tiempo + tipo)*i;
-        currTipo = std::stoi(mensaje.substr(pos + offset, tipo));
+        currTipo = stoi(mensaje.substr(pos + offset, tipo));
         currTiempo = mensaje.substr(pos + offset + tipo, tiempo);
         construibles[currTipo] = currTiempo;
     }
@@ -36,7 +37,7 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
 
 bool PaqueteFabrica::estaConstruyendo() {
     int pos = getOffsetConstruibles();
-    return std::stoi(mensaje.substr(pos, isConstruyendo));
+    return stoi(mensaje.substr(pos, isConstruyendo));
 }
 
 int PaqueteFabrica::tipoEnConstruccion() {
@@ -44,7 +45,7 @@ int PaqueteFabrica::tipoEnConstruccion() {
 ////        TODO lanzar excepcion aca
 //    }
     int pos = getOffsetConstruibles() + isConstruyendo;
-    return std::stoi(mensaje.substr(pos, tipo));
+    return stoi(mensaje.substr(pos, tipo));
 }
 
 int PaqueteFabrica::porcentajeConstruido() {
@@ -52,7 +53,7 @@ int PaqueteFabrica::porcentajeConstruido() {
 ////        TODO lanzar excepcion aca
 //    }
     int pos = getOffsetConstruibles() + isConstruyendo + tipo;
-    return std::stoi(mensaje.substr(pos, porConstruido));
+    return stoi(mensaje.substr(pos, porConstruido));
 }
 
 int PaqueteFabrica::getOffsetConstruibles() {
@@ -61,7 +62,7 @@ int PaqueteFabrica::getOffsetConstruibles() {
 }
 
 int PaqueteFabrica::getCantConstuibles() {
-    return std::stoi(mensaje.substr(posCant, cant));;
+    return stoi(mensaje.substr(posCant, cant));;
 }
 const string &PaqueteFabrica::getMensaje() const {
     return mensaje;

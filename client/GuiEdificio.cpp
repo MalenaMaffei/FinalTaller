@@ -15,6 +15,9 @@
 #define ARROW_RELY 65
 #define UNIT_RELX 7
 #define UNIT_RELY 58
+#define VIDA_RELX 84
+#define VIDA_RELY 4
+using std::string;
 
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
     : vistaGui(VistaGui(gRenderer)),
@@ -26,6 +29,7 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
         relPosNEXT = {{ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW};
         relPosOK = {{OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON};
         posUNIT = {UNIT_RELX, UNIT_RELY};
+        posVida = {VIDA_RELX, VIDA_RELY};
         vistaTexto.loadFont(fuentePath, 12);
 
 //        tiposConstruibles = {6,7,8,9,10,11,12,13,14,15,16};
@@ -42,9 +46,10 @@ void GuiEdificio::mostrar(Punto offset) {
         next = relPosNEXT.positiveShift(position);
         vistaGui.mostrar(pReal, 0);
         CodigosPaquete codigos;
-        std::string nombreUnidad = codigos.nombreUnidad
+        string nombreUnidad = codigos.nombreUnidad
             (tiposConstruibles[posSeleccionada]);
         vistaTexto.mostrar(nombreUnidad, {255,255,255}, pReal + posUNIT);
+        vistaTexto.mostrar(vida, {255,255,255}, pReal + posVida);
     }
 }
 
@@ -94,5 +99,6 @@ void GuiEdificio::setInfo(PaqueteFabrica paquete) {
     for (const auto& kv : tiemposConstruibles) {
         tiposConstruibles.push_back(kv.first);
     }
+    vida = paquete.getVidaFabrica() + "%";
     seMuestra = true;
 }

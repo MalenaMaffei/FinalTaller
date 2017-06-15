@@ -4,6 +4,7 @@
 #include "VistaTexto.h"
 #include "VistaGui.h"
 #include "PaqueteFabrica.h"
+#include "VistaProgressBar.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -26,11 +27,13 @@ class GuiEdificio {
   void resetSeleccion();
   VistaGui vistaGui;
   VistaTexto vistaTexto;
+//  VistaProgressBar barraConstr;
   Rect ok;
   Rect cancel;
   Rect next;
   bool seMuestra;
   Punto posUNIT;
+  Punto posVida;
   Punto position;
   Rect relPosOK;
   Rect relPosCANCEL;
@@ -42,6 +45,7 @@ class GuiEdificio {
   std::vector<int> tiposConstruibles;
   std::map<int, std::string> tiemposConstruibles;
   std::string fabricaId;
+  std::string vida;
 };
 
 #endif //TPFINAL_GUIEDIFICIO_H

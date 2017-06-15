@@ -8,7 +8,7 @@ class PaqueteFabrica {
   explicit PaqueteFabrica(const std::string &mensaje);
   std::string getId();
   int getTipoFabrica();
-  int getVidaFabrica();
+  std::string getVidaFabrica();
   std::map<int, std::string>  getConstruibles();
   bool estaConstruyendo();
   int tipoEnConstruccion();
