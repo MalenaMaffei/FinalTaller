@@ -17,6 +17,8 @@
 #define UNIT_RELY 58
 #define VIDA_RELX 84
 #define VIDA_RELY 4
+#define TIEMPO_RELX 89
+#define TIEMPO_RELY 36
 using std::string;
 
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
@@ -50,6 +52,10 @@ void GuiEdificio::mostrar(Punto offset) {
             (tiposConstruibles[posSeleccionada]);
         vistaTexto.mostrar(nombreUnidad, {255,255,255}, pReal + posUNIT);
         vistaTexto.mostrar(vida, {255,255,255}, pReal + posVida);
+        string tiempo = tiemposConstruibles.at
+            (tiposConstruibles[posSeleccionada]);
+        vistaTexto.mostrar(tiempo, {255,255,255}, pReal + Punto(TIEMPO_RELX,
+                                                           TIEMPO_RELY));
     }
 }
 

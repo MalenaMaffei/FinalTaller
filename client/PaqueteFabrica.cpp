@@ -23,14 +23,22 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
     std::map<int,std::string> construibles;
     int cantRecibida = getCantConstuibles();
     int currTipo;
-    string currTiempo;
+    int currTiempo;
     int pos = posCant+cant;
     int offset;
     for (int i = 0; i < cantRecibida; ++i) {
         offset = (tiempo + tipo)*i;
         currTipo = stoi(mensaje.substr(pos + offset, tipo));
-        currTiempo = mensaje.substr(pos + offset + tipo, tiempo);
-        construibles[currTipo] = currTiempo;
+        currTiempo = stoi((mensaje.substr(pos + offset + tipo, tiempo)));
+        printf("curr tiempo %i\n", currTiempo);
+        time_t seconds(currTiempo);
+        tm *p = gmtime(&seconds);
+//        printf("minutos: %i, secs: %i\n", p->tm_min , p->tm_sec);
+        string minSec = std::to_string(p->tm_min) + ":" + std::to_string
+            (p->tm_sec);
+//        string minSec = "mm:ss";
+
+        construibles[currTipo] = minSec;
     }
     return construibles;
 }
