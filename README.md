@@ -29,7 +29,13 @@ make
 ##### Ejecución #####
 Esto generara el ejecutable **vista** dentro de la misma carpeta build y el ejecutable **server** dentro de la carpeta server.
 
-Por ahora para correr el TP se debe correr primero al servidor y luego dos clientes ejecutando consecutivamente:
+Por ahora para correr el TP se debe correr primero al servidor 
+```
+cd server
+./server
+```
+
+y luego dos clientes ejecutando consecutivamente:
 ```
 cd build
 ./vista 127.0.0.1 8080
