@@ -60,4 +60,8 @@ const char guiEdificioPath[] = "../client/imgs/Gui/edificio.png";
 
 const char fuentePath[] = "../client/ttf/AUDIMRG_.TTF";
 
+
+//--------------MISC----------------------
+const char greeterPath[] = "../client/imgs/greeting.txt";
+
 #endif //TPFINAL_CONSTANTES_H
