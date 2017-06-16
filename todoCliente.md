@@ -16,12 +16,12 @@
 
 9. ~~ver como pedir los tiempos en los paquetes.~~
 
-10. display tiempo en gui fabrica.
+10. ~~display tiempo en gui fabrica.~~
 
 11. barra de vida. 
 
-* en hud
-* en guiEdificio
+* ~~en hud~~
+* ~~en guiEdificio~~
 * para la construccion
 
 12. que se muestren armas
@@ -40,10 +40,12 @@
 
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 
-20. como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego
+20. ~~como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego~~ 
 
 21. Poner destructores de vistaManager y elementoManager
 
 22. clase mapa para mostrar mapa en vez de mostrar tiles
 
 23. VistaColoreada heredada por vistabandera creo que no sirve para nada, revisar bien
+
+24. in lieu de gui, mostrar mensajes amigables por consola para setear ip y puerto.
