@@ -1,6 +1,6 @@
 # FinalTaller
 
-##### SDL #####
+#### SDL ####
 Para correr el TP es necesario tener SDL2 instalado. 
 ```
 yum install SDL2-devel
@@ -18,7 +18,7 @@ yum install SDL2_mixer-devel
 
 ```
 
-##### Make #####
+#### Make ####
 Una vez instaladas las librerias
 ```
 cd build
@@ -26,7 +26,7 @@ cmake ..
 make
 ```
 
-##### Ejecución #####
+#### Ejecución ####
 Esto generara el ejecutable **vista** dentro de la misma carpeta build y el ejecutable **server** dentro de la carpeta server.
 
 Por ahora para correr el TP se debe correr primero al servidor 
