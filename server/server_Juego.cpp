@@ -66,31 +66,29 @@ std::string agregarPadding(int n, int len) {
 }
 
 Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m, 
-			  std::condition_variable* cond, std::vector<Socket>& sockets) :	
+			  std::condition_variable* cond, std::vector<Jugador*>& jugadores) :	
 												colaDeRecibidos(colaDeRecibidos),
 												m(m),		
 												cond(cond),
 												mapa(Mapa("mapa.map")), 
 												proximoIDMovible(0),
-												sockets(sockets),
+												jugadores(jugadores),
 												fabricaV(new FabricaVehiculos()),
 												fabricaR(new FabricaRobots()), 
 												fabricaMuniciones(new FabricaMuniciones()){ 
   
 	std::string mensaje = "6" + std::to_string(equipo_1);
-	for (Socket socket: sockets) {
-		socket.SendStrWLen (mensaje); //Envio equipo		
+	for (Jugador *jugador: jugadores) {
+		jugador->enviarMensaje (mensaje); //Envio equipo		
 	}
   
 	std::string mapaString = mapa.obtenerMensajeMapa ();
 	mensaje = "5" + mapaString; //No se envia el tamaño porque es convención	
 	std::cout << mensaje.substr(0,1) << std::endl;
-	for (Socket socket: sockets) {
-		socket.SendStrWLen (mensaje); //Envio mapa		
+	for (Jugador *jugador: jugadores) {
+		jugador->enviarMensaje (mensaje); //Envio mapa		
 	}
 
-	
-			
 	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
 	
 	proximoIDMovible = 0;
@@ -110,8 +108,8 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	std::string comando = "0i00";
 
 	mensaje = comando+xStr+yStr+tipo+std::to_string(bandera->getEquipo ());	
-	for (Socket socket : sockets) {
-		socket.SendStrWLen (mensaje);		
+	for (Jugador *jugador : jugadores) {
+		jugador->enviarMensaje (mensaje);		
 	}
 
 	
@@ -125,10 +123,9 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	tipo = agregarPadding(robot->getTipo (),2);
 	comando = "0m00";
 	mensaje = comando+xStr+yStr+tipo+std::to_string(robot->getEquipo ());	
-	for (Socket socket: sockets) {
-		socket.SendStrWLen (mensaje);		
+	for (Jugador *jugador : jugadores) {
+		jugador->enviarMensaje (mensaje);		
 	}
-
 
 	proximoIDMovible++;
 	
@@ -142,8 +139,8 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	tipo = agregarPadding(bloque->getTipo (),2);
 	comando = "0i01";
 	mensaje = comando+xStr+yStr+tipo+std::string("0");	
-	for (Socket socket: sockets) {
-		socket.SendStrWLen (mensaje);		
+	for (Jugador *jugador : jugadores) {
+		jugador->enviarMensaje (mensaje);		
 	}
 
 
@@ -158,9 +155,9 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	tipo = agregarPadding(edificio->getTipo (),2);
 	comando = "0i02";
 	mensaje = comando+xStr+yStr+tipo+std::string("0");	
-	for (Socket socket: sockets) {
-		socket.SendStrWLen (mensaje);		
-	}	
+	for (Jugador *jugador : jugadores) {
+		jugador->enviarMensaje (mensaje);		
+	}
 }
 
 void Juego::eliminarMuertos() {
@@ -538,8 +535,8 @@ void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.empty ()) {
 		std::string mensaje = colaDeEnviados.front ();
 		colaDeEnviados.pop ();
-		for (Socket socket: sockets) {
-			socket.SendStrWLen (mensaje);		
+		for (Jugador *jugador : jugadores) {
+			jugador->enviarMensaje (mensaje);		
 		}
 	}
 }

@@ -44,19 +44,21 @@ main (int argc, char** argv)
 	
 	Socket aceptor;
 	
+	int n = stoi(argv[1]);
+	
 	aceptor.setServerMode("8080");
 	
 	std::vector<Jugador*> jugadores;
 	
 	std::vector<Socket> sockets;
 	
-	for (int i=0; i<2; i++) {
+	for (int i=0; i<n; i++) {
 		Socket socket = aceptor.Accept ();
 		jugadores.push_back(new Jugador(socket, colaDeRecibidos));
 		sockets.push_back(socket);
 	}
 	
-	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, sockets);
+	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, jugadores);
 
 	juego->start();
 	
@@ -64,18 +66,11 @@ main (int argc, char** argv)
 		jugador->start();
 	}
 	
-/*	while (1) {
-		std::string mensaje = socket.ReceiveStrWLen ();
-		std::unique_lock<std::mutex> lk(m);
-		colaDeRecibidos->encolar (mensaje);
-//		cond.notify_all ();
-	}*/
-		
+	juego->join ();
+	
 	for (Jugador* jugador : jugadores) {
 		jugador->join();
 	}
-	
-	juego->join ();
 	
 	for (Jugador* jugador : jugadores) {
 		delete jugador;

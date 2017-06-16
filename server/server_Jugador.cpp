@@ -21,8 +21,11 @@ void Jugador::run () {
 	while (1) {
 		std::string mensaje = socket.ReceiveStrWLen ();
 		colaDeRecibidos.encolar (mensaje);
-//		cond.notify_all ();
 	}
+}
+
+void Jugador::enviarMensaje(std::string& mensaje) {
+	socket.SendStrWLen(mensaje);
 }
 
 Jugador::~Jugador () { }
