@@ -18,11 +18,11 @@
 
 10. ~~display tiempo en gui fabrica.~~
 
-11. barra de vida. 
+11. ~~barra de vida.~~
 
 * ~~en hud~~
 * ~~en guiEdificio~~
-* para la construccion
+* ~~para la construccion~~
 
 12. que se muestren armas
 
@@ -49,3 +49,5 @@
 23. VistaColoreada heredada por vistabandera creo que no sirve para nada, revisar bien
 
 24. in lieu de gui, mostrar mensajes amigables por consola para setear ip y puerto.
+
+25. Refactor en edificioGui
