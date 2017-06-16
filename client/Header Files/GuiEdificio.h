@@ -27,7 +27,7 @@ class GuiEdificio {
   void resetSeleccion();
   VistaGui vistaGui;
   VistaTexto vistaTexto;
-//  VistaProgressBar barraConstr;
+  VistaProgressBar barraConstr;
   Rect ok;
   Rect cancel;
   Rect next;
@@ -46,6 +46,9 @@ class GuiEdificio {
   std::map<int, std::string> tiemposConstruibles;
   std::string fabricaId;
   std::string vida;
+  float porcentajeConstruido;
+  int tipoEnConstruccion;
+  bool hayEnConstruccion;
 };
 
 #endif //TPFINAL_GUIEDIFICIO_H

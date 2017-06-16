@@ -19,11 +19,14 @@
 #define VIDA_RELY 4
 #define TIEMPO_RELX 89
 #define TIEMPO_RELY 36
+#define CONSTR_RELX 54
+#define CONSTR_RELY 22
 using std::string;
 
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
     : vistaGui(VistaGui(gRenderer)),
       vistaTexto(VistaTexto(gRenderer)),
+      barraConstr(VistaProgressBar(7,37,gRenderer,{3,91,11}, {223,175,75})),
       seMuestra(false),
       tipoSeleccionado(-1),
       posSeleccionada(0){
@@ -48,14 +51,20 @@ void GuiEdificio::mostrar(Punto offset) {
         next = relPosNEXT.positiveShift(position);
         vistaGui.mostrar(pReal, 0);
         CodigosPaquete codigos;
-        string nombreUnidad = codigos.nombreUnidad
-            (tiposConstruibles[posSeleccionada]);
+
+        int tipoSeleccionado = tiposConstruibles[posSeleccionada];
+
+        string nombreUnidad = codigos.nombreUnidad(tipoSeleccionado);
         vistaTexto.mostrar(nombreUnidad, {255,255,255}, pReal + posUNIT);
         vistaTexto.mostrar(vida, {255,255,255}, pReal + posVida);
-        string tiempo = tiemposConstruibles.at
-            (tiposConstruibles[posSeleccionada]);
+        string tiempo = tiemposConstruibles.at(tipoSeleccionado);
         vistaTexto.mostrar(tiempo, {255,255,255}, pReal + Punto(TIEMPO_RELX,
                                                            TIEMPO_RELY));
+        if (hayEnConstruccion && tipoSeleccionado == tipoEnConstruccion){
+            barraConstr.mostrarVertical(porcentajeConstruido, {CONSTR_RELX,CONSTR_RELY});
+//            TODO mensaje "en construccion"
+        }
+
     }
 }
 
@@ -106,5 +115,13 @@ void GuiEdificio::setInfo(PaqueteFabrica paquete) {
         tiposConstruibles.push_back(kv.first);
     }
     vida = paquete.getVidaFabrica() + "%";
+    if (paquete.estaConstruyendo()){
+        hayEnConstruccion = true;
+        float cienporciento = 100;
+        porcentajeConstruido = paquete.porcentajeConstruido()/cienporciento;
+        tipoEnConstruccion = paquete.tipoEnConstruccion();
+    } else {
+        hayEnConstruccion = false;
+    }
     seMuestra = true;
 }
