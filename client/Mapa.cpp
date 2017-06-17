@@ -1,14 +1,13 @@
-#include "Header Files/CreadorMapa.h"
+#include "Header Files/Mapa.h"
 #include "Header Files/constantes.h"
 #include "Header Files/Paquete.h"
 #include <string>
 #include <stdexcept>
 #include <vector>
+#include <algorithm>
 using std::string;
 
-void CreadorMapa::crearMapa(Paquete &paquete,
-                            std::vector<Tile> &tiles,
-                            VistaTiles &tilesTexture) {
+void Mapa::crearMapa(Paquete &paquete, VistaTiles &tilesTexture) {
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
     int y = 0;
@@ -35,4 +34,9 @@ void CreadorMapa::crearMapa(Paquete &paquete,
             }
         }
     }
+}
+void Mapa::mostrar(Camara &camara) {
+    std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
+      tile.mostrar(camara);
+    });
 }

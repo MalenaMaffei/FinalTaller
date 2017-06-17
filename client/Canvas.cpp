@@ -14,7 +14,7 @@
 #include "Header Files/VistaHud.h"
 #include "Header Files/VistaHudCaras.h"
 #include "Header Files/VistaGui.h"
-#include "Header Files/CreadorMapa.h"
+#include "Header Files/Mapa.h"
 #include "Header Files/VistaTexto.h"
 #include "Header Files/VistaHudRobotLabels.h"
 #include "Header Files/VistaHudVehiculoLabels.h"
@@ -152,12 +152,12 @@ void Canvas::startGame(){
 
 //    TODO crear clase mapa
     VistaTiles tilesTexture(gRenderer);
-    std::vector<Tile> tiles;
-    CreadorMapa creadorMapa;
-    Paquete mapa = colaEntrada.desencolar();
+//    std::vector<Tile> tiles;
+    Mapa mapa;
+    Paquete pMapa = colaEntrada.desencolar();
 //    TODO poner proper manejador de este tipo de paquetes aca.
-    if (mapa.getComando() == 5){
-        creadorMapa.crearMapa(mapa, tiles, tilesTexture);
+    if (pMapa.getComando() == 5){
+        mapa.crearMapa(pMapa, tilesTexture);
     }
 
     VistaManager vistaManager(gRenderer);
@@ -217,9 +217,10 @@ void Canvas::startGame(){
         SDL_RenderClear(gRenderer);
 
 
-        std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
-          tile.mostrar(camara);
-        });
+        mapa.mostrar(camara);
+//        std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
+//          tile.mostrar(camara);
+//        });
 
 
         mouse.setMouseAction(selectBox, click);

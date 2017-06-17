@@ -12,7 +12,7 @@ void PaqueteSender::run() {
     std::chrono::duration<int> dosMinutos(120);
     while (! salir){
         std::unique_lock<std::mutex> lk(*m);
-        while (cola.isEmpty()) {
+        if (cola.isEmpty()) {
             cond_v->wait_for(lk, dosMinutos);
         }
 

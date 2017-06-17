@@ -20,32 +20,36 @@ class GuiEdificio {
   bool click(Punto click);
   int getTipoSeleccionado() const;
   bool huboSeleccion() const;
-  std::string getFabricaId() const;
+  std::string getIdFabrica() const;
   void setInfo(PaqueteFabrica paquete);
 
  private:
   void resetSeleccion();
   VistaGui vistaGui;
   VistaTexto vistaTexto;
-//  VistaProgressBar barraConstr;
+  VistaProgressBar barraConstr;
   Rect ok;
   Rect cancel;
   Rect next;
   bool seMuestra;
   Punto posUNIT;
   Punto posVida;
+  Punto posNombre;
   Punto position;
   Rect relPosOK;
   Rect relPosCANCEL;
   Rect relPosNEXT;
 
-
+  std::string idFabrica;
   int posSeleccionada;
   int tipoSeleccionado;
   std::vector<int> tiposConstruibles;
   std::map<int, std::string> tiemposConstruibles;
-  std::string fabricaId;
+  int tipoFabrica;
   std::string vida;
+  float porcentajeConstruido;
+  int tipoEnConstruccion;
+  bool hayEnConstruccion;
 };
 
 #endif //TPFINAL_GUIEDIFICIO_H

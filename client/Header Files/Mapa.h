@@ -3,11 +3,12 @@
 #include <vector>
 #include "Paquete.h"
 #include "Tile.h"
-class CreadorMapa {
+class Mapa {
  public:
-  void crearMapa(Paquete &paquete,
-                   std::vector<Tile> &tiles,
-                   VistaTiles &tilesTexture);
+  void crearMapa(Paquete &paquete, VistaTiles &tilesTexture);
+  void mostrar(Camara &camara);
+ private:
+  std::vector<Tile> tiles;
 };
 
 #endif //TPFINAL_CREADORMAPA_H

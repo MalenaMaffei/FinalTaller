@@ -1,29 +1,13 @@
 1. Arreglar Bug Seleccion de muertos y moribundos.
 
-2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
-
-3. ~~Pasar SDL al main en un solo thread.~~
-
-4. ~~Crear cola bloqueante para el sender.~~
-
-5. ~~ver que onda el uso del CPU.~~
-
 6. inhibir errores de valgrind de SDL.
 
 7. spcket reuseaddrinfo.
 
 8. que el hud cree todas sus vistas.
 
-9. ~~ver como pedir los tiempos en los paquetes.~~
-
-10. display tiempo en gui fabrica.
-
-11. barra de vida. 
-
-* en hud
-* en guiEdificio
-* para la construccion
-
+11. poner para los items de abajo en su clase vista que codigo se corresponde con que posicion en el spritesheet.
+ 
 12. que se muestren armas
 
 13. que se muestren tanques
@@ -34,16 +18,45 @@
 
 16. ver como refactorizar clase bala
 
-17. ~~mandar paquetes de pedido de informacion.~~
-
 18. mostrar al jugador que color le toco ni bien le llega el paquete.
 
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 
-20. como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego
-
 21. Poner destructores de vistaManager y elementoManager
 
-22. clase mapa para mostrar mapa en vez de mostrar tiles
+22. ~~clase mapa para mostrar mapa en vez de mostrar tiles~~
 
 23. VistaColoreada heredada por vistabandera creo que no sirve para nada, revisar bien
+
+24. in lieu de gui, mostrar mensajes amigables por consola para setear ip y puerto.
+
+25. Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
+
+26. mostrar el tiempo de una manera mas elegante.
+
+
+
+
+
+
+
+2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
+
+3. ~~Pasar SDL al main en un solo thread.~~
+
+4. ~~Crear cola bloqueante para el sender.~~
+
+5. ~~ver que onda el uso del CPU.~~
+9. ~~ver como pedir los tiempos en los paquetes.~~
+
+10. ~~display tiempo en gui fabrica.~~
+
+11. ~~barra de vida.~~
+
+* ~~en hud~~
+* ~~en guiEdificio~~
+* ~~para la construccion~~
+
+17. ~~mandar paquetes de pedido de informacion.~~
+
+20. ~~como despertrar a la cola sender cuando esta durmiendo para poder cerrar el juego~~ 

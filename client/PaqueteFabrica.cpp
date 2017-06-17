@@ -30,13 +30,13 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
         offset = (tiempo + tipo)*i;
         currTipo = stoi(mensaje.substr(pos + offset, tipo));
         currTiempo = stoi((mensaje.substr(pos + offset + tipo, tiempo)));
-        printf("curr tiempo %i\n", currTiempo);
+
         time_t seconds(currTiempo);
         tm *p = gmtime(&seconds);
-//        printf("minutos: %i, secs: %i\n", p->tm_min , p->tm_sec);
+//        TODO esta bien formatear aca? 
         string minSec = std::to_string(p->tm_min) + ":" + std::to_string
             (p->tm_sec);
-//        string minSec = "mm:ss";
+
 
         construibles[currTipo] = minSec;
     }
