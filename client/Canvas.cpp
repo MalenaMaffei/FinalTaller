@@ -193,13 +193,10 @@ void Canvas::startGame(){
 
         manejarPaquetes(elementoManager, hud, guiEdificio);
 
-        //Handle events on queue
         while (SDL_PollEvent( &e ) != 0){
-            //User requests quit
             if (e.type == SDL_QUIT){
                 quit = true;
             }
-            //Handle input for the dot
             camara.handleEvent(e);
             mouse.setState(e.type, e, camara.getOffset());
         }
@@ -218,18 +215,16 @@ void Canvas::startGame(){
 
 
         mapa.mostrar(camara);
-//        std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
-//          tile.mostrar(camara);
-//        });
-
 
         mouse.setMouseAction(selectBox, click);
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
+//        TODO cambiar offset por camara! la gracia es que no se dibuje si no
+// se ve
         selectBox.mostrar(gRenderer, camara.getOffset());
         hud.mostrar();
-        guiEdificio.mostrar(camara.getOffset());
+        guiEdificio.mostrar(camara);
 
         //Update screen
         SDL_RenderPresent(gRenderer);

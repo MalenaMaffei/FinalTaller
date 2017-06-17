@@ -15,7 +15,7 @@
 class GuiEdificio {
  public:
   explicit GuiEdificio(SDL_Renderer *gRenderer);
-  void mostrar(Punto offset);
+  void mostrar(Camara &camara);
   void abrirGui(Punto pos, std::string id);
   bool click(Punto click);
   int getTipoSeleccionado() const;
