@@ -25,7 +25,7 @@ void ColectorDeAcciones::crearAcciones() {
     Paquete paquete;
     if (guiEdificio.click(click.getPoint())){
         if (guiEdificio.huboSeleccion()){
-            paquete.crear(guiEdificio.getFabricaId(),
+            paquete.crear(guiEdificio.getIdFabrica(),
                         guiEdificio.getTipoSeleccionado());
             colaSalida.encolar(paquete);
             printf("paquete crear: %s\n", paquete.getMensaje().c_str());

@@ -64,7 +64,7 @@ int Hud::getPosLabel() {
 //        TODO todavia no se muestran otras cosas que no sean robots
         return 0;
     }
-//    TODO usar un mapa
+//    TODO usar un mapa o pasar esto a VistaCaras
     if (tipoCara == codigos.grunt){
         return labelGrunt;
     } else if (tipoCara == codigos.laser){

@@ -24,13 +24,19 @@
 
 21. Poner destructores de vistaManager y elementoManager
 
-22. clase mapa para mostrar mapa en vez de mostrar tiles
+22. ~~clase mapa para mostrar mapa en vez de mostrar tiles~~
 
 23. VistaColoreada heredada por vistabandera creo que no sirve para nada, revisar bien
 
 24. in lieu de gui, mostrar mensajes amigables por consola para setear ip y puerto.
 
 25. Refactor en edificioGui
+
+26. mostrar el tiempo de una manera mas elegante.
+
+
+
+
 
 
 

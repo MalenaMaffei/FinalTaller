@@ -56,6 +56,11 @@ const char hudPath[] = "../client/imgs/Gui/hud.png";
 const char carasPath[] = "../client/imgs/Gui/unidades.png";
 const char robotsLabelPath[] = "../client/imgs/Gui/robot_labels.png";
 const char vehiculosLabelPath[] = "../client/imgs/Gui/vehiculos_labels.png";
+const char vehiculosPath[] = "../client/imgs/Gui/vehiculos.png";
+
+
+
+//----------------GUI EDIFICIO ---------------
 const char guiEdificioPath[] = "../client/imgs/Gui/edificio.png";
 
 const char fuentePath[] = "../client/ttf/AUDIMRG_.TTF";
