@@ -34,6 +34,9 @@
 
 26. mostrar el tiempo de una manera mas elegante.
 
+27. Si sobra tiempo, mensaje en la ventana misma "esperando que se conecte el resto de los jugadores" y despues que muestre el color que te toco. Ideal seria que el servidor te pase un color ni bien te conectas, asi te dice que color sos mientras que esperas al resto.
+
+28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
 
 
 

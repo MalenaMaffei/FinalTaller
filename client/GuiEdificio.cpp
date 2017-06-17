@@ -38,14 +38,13 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
 //        tiposConstruibles = {6,7,8,9,10,11,12,13,14,15,16};
 }
 
-void GuiEdificio::mostrar(Punto offset) {
-    if (seMuestra){
+void GuiEdificio::mostrar(Camara &camara) {
+    if (seMuestra && camara.checkCollision(Rect(position, vistaGui.getWidth()
+        , vistaGui.getHeight()))){
+        Punto offset = camara.getOffset();
         Punto pReal = position - offset;
-//        cancel = Rect(position + relPosCANCEL, WIDTH_BUTTON, HEIGHT_BUTTON);
         cancel = relPosCANCEL.positiveShift(position);
-//        ok = Rect(position + relPosOK, WIDTH_BUTTON, HEIGHT_BUTTON);
         ok = relPosOK.positiveShift(position);
-//        next = Rect(position + relPosNEXT, WIDTH_ARROW,HEIGHT_ARROW);
         next = relPosNEXT.positiveShift(position);
         vistaGui.mostrar(pReal, 0);
         CodigosPaquete codigos;
@@ -55,12 +54,12 @@ void GuiEdificio::mostrar(Punto offset) {
         string nombreUnidad = codigos.nombreUnidad(tipoSeleccionado);
         vistaTexto.mostrar(nombreUnidad, {255,255,255}, pReal + posUNIT);
         vistaTexto.mostrar(vida, {255,255,255}, pReal + posVida);
-//        vistaTex
         string tiempo = tiemposConstruibles.at(tipoSeleccionado);
         vistaTexto.mostrar(tiempo, {255,255,255}, pReal + Punto(TIEMPO_RELX,
                                                            TIEMPO_RELY));
         if (hayEnConstruccion && tipoSeleccionado == tipoEnConstruccion){
-            barraConstr.mostrarVertical(porcentajeConstruido, {CONSTR_RELX,CONSTR_RELY});
+            barraConstr.mostrarVertical(porcentajeConstruido, pReal +
+                Punto(CONSTR_RELX, CONSTR_RELY));
 //            TODO mensaje "en construccion"
         }
 
