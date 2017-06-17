@@ -30,7 +30,7 @@
 
 24. in lieu de gui, mostrar mensajes amigables por consola para setear ip y puerto.
 
-25. Refactor en edificioGui
+25. Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
 
 26. mostrar el tiempo de una manera mas elegante.
 
