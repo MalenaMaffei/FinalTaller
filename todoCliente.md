@@ -38,7 +38,7 @@
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
 
-29. Catch exceciponmes de socket, en particular cuando no te podes conectar, que diga server lleno conectese mas tarde o algo asi.
+29. ~~Catch exceciponmes de socket, en particular cuando no te podes conectar, que diga server lleno conectese mas tarde o algo asi.~~
 
 
 
