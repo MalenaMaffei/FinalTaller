@@ -26,6 +26,7 @@
 #include "server_FabricaMuniciones.h"
 #include <chrono>
 #include <string>
+#include "Mensaje.h"
 
 enum equipos {
 	equipo_1,
@@ -79,14 +80,14 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
   
 	std::string mensaje = "6" + std::to_string(equipo_1);
 	for (Jugador *jugador: jugadores) {
-		jugador->enviarMensaje (mensaje); //Envio equipo		
+		jugador->enviarMensaje (mensaje,jugador->getId()); //Envio equipo		
 	}
   
 	std::string mapaString = mapa.obtenerMensajeMapa ();
 	mensaje = "5" + mapaString; //No se envia el tamaño porque es convención	
 	std::cout << mensaje.substr(0,1) << std::endl;
 	for (Jugador *jugador: jugadores) {
-		jugador->enviarMensaje (mensaje); //Envio mapa		
+		jugador->enviarMensaje (mensaje, -1); //Envio mapa		
 	}
 
 	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
@@ -109,7 +110,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 
 	mensaje = comando+xStr+yStr+tipo+std::to_string(bandera->getEquipo ());	
 	for (Jugador *jugador : jugadores) {
-		jugador->enviarMensaje (mensaje);		
+		jugador->enviarMensaje (mensaje, -1);		
 	}
 
 	
@@ -124,7 +125,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	comando = "0m00";
 	mensaje = comando+xStr+yStr+tipo+std::to_string(robot->getEquipo ());	
 	for (Jugador *jugador : jugadores) {
-		jugador->enviarMensaje (mensaje);		
+		jugador->enviarMensaje (mensaje, -1);		
 	}
 
 	proximoIDMovible++;
@@ -140,7 +141,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	comando = "0i01";
 	mensaje = comando+xStr+yStr+tipo+std::string("0");	
 	for (Jugador *jugador : jugadores) {
-		jugador->enviarMensaje (mensaje);		
+		jugador->enviarMensaje (mensaje, -1);		
 	}
 
 
@@ -156,7 +157,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m,
 	comando = "0i02";
 	mensaje = comando+xStr+yStr+tipo+std::string("0");	
 	for (Jugador *jugador : jugadores) {
-		jugador->enviarMensaje (mensaje);		
+		jugador->enviarMensaje (mensaje, -1);		
 	}
 }
 
@@ -171,7 +172,9 @@ void Juego::eliminarMuertos() {
 //			std::cout<<"Vida: "<<movible->getVida ()<<std::endl;
 //			std::cout<<"elimino un movible"<<std::endl;
 			std::string mensaje = "1"+it1->first;
-			colaDeEnviados.push(mensaje);
+			Mensaje paquete(mensaje, -1);
+			colaDeEnviados.encolar (paquete);
+//			colaDeEnviados.push(mensaje);
 			it1 = movibles.erase (it1);
 			delete movible;
 			continue;
@@ -184,8 +187,10 @@ void Juego::eliminarMuertos() {
 		if (!inmovible->estaVivo()) {
 			std::cout<<"elimino un inmovible"<<std::endl;
 			std::string mensaje = "1"+it2->first;
+			Mensaje paquete(mensaje, -1);
 			std::cout<<mensaje<<std::endl;
-			colaDeEnviados.push(mensaje);
+//			colaDeEnviados.push(mensaje);
+			colaDeEnviados.encolar (paquete);
 			it2 = inmovibles.erase (it2);
 			delete inmovible;
 			continue;
@@ -198,7 +203,9 @@ void Juego::eliminarMuertos() {
 		if (!edificio->estaVivo()) {
 			std::cout<<"elimino un edificio"<<std::endl;
 			std::string mensaje = "1"+it3->first;
-			colaDeEnviados.push(mensaje);
+//			colaDeEnviados.push(mensaje);
+			Mensaje paquete(mensaje, -1);
+			colaDeEnviados.encolar (paquete);
 			it3 = edificios.erase (it3);
 			delete edificio;
 			continue;
@@ -230,7 +237,9 @@ void Juego::moverUnidades() {
 			std::string yStr = agregarPadding(mensajeY,5);
 			
 			std::string mensaje = "2"+it1->first+xStr+yStr;
-			colaDeEnviados.push (mensaje);
+//			colaDeEnviados.push (mensaje);
+			Mensaje paquete(mensaje, -1);
+			colaDeEnviados.encolar (paquete);
 		}
 		++it1;
 	}
@@ -321,11 +330,15 @@ void Juego::actualizarDisparos() {
 			int mensajeY = target[1]*100;
 			std::string yStr = agregarPadding(mensajeY,5);
 			std::string mensaje = "3"+it1->first+xStr+yStr;
-			colaDeEnviados.push(mensaje);
-
+//			colaDeEnviados.push(mensaje);
+			Mensaje paquete1(mensaje, -1);
+			colaDeEnviados.encolar (paquete1);
+			
 			//Envio mensaje crear municion
 			mensaje = "0" + idMunicion + xStr + yStr + "17" + "0";
-			colaDeEnviados.push(mensaje);
+//			colaDeEnviados.push(mensaje);
+			Mensaje paquete2(mensaje, -1);
+			colaDeEnviados.encolar (paquete2);
 			
 			proximoIDMovible ++;
 		}
@@ -362,7 +375,9 @@ void Juego::actualizarEdificios() {
 			std::string tipo = agregarPadding(vehiculo->getTipo (),2);
 			std::string mensaje = "0"+id+xStr+yStr+tipo+std::to_string(vehiculo->getEquipo ());
 			//Avisar al cliente que se creo un vehiculo
-			colaDeEnviados.push (mensaje);
+//			colaDeEnviados.push (mensaje);
+			Mensaje paquete(mensaje,-1);
+			colaDeEnviados.encolar (paquete);
 			
 			std::cout<<"creo vehiculo"<<std::endl;
 			proximoIDMovible++;
@@ -383,8 +398,10 @@ void Juego::actualizarEdificios() {
 			std::string tipo = agregarPadding(robot->getTipo (),2);
 			std::string mensaje = "0"+id+xStr+yStr+tipo+std::to_string(robot->getEquipo ());
 			//Avisar al cliente que se creo un vehiculo
-			colaDeEnviados.push (mensaje);
-
+//			colaDeEnviados.push (mensaje);
+			Mensaje paquete(mensaje, -1);
+			colaDeEnviados.encolar (paquete);
+			
 			std::cout<<"creo robot"<<std::endl;
 			proximoIDMovible++;
 		}
@@ -395,7 +412,9 @@ void Juego::actualizarEdificios() {
 void Juego::actualizarRecibidos() {
 //	std::unique_lock<std::mutex> lk(*m);
 	while (!colaDeRecibidos.isEmpty ()) {
-		std::string mensaje = colaDeRecibidos.desencolar ();
+		Mensaje paquete = colaDeRecibidos.desencolar ();
+		std::string mensaje = paquete.getMensaje ();
+		int src = paquete.getId ();
 		switch (mensaje[0]) {
 			case crear: this->recibirCrear (mensaje);
 						break;
@@ -405,9 +424,9 @@ void Juego::actualizarRecibidos() {
 						break;
 			case info: 
 						if (mensaje[1] == 'm')
-							this->recibirObtenerInfoUnidad(mensaje);
+							this->recibirObtenerInfoUnidad(mensaje, src);
 						if (mensaje[1] == 'i')
-							this->recibirObtenerInfoFabrica(mensaje);
+							this->recibirObtenerInfoFabrica(mensaje, src);
 						break;
 		}
 		
@@ -455,35 +474,36 @@ void Juego::recibirDisparar(std::string mensaje) {
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 
-void Juego::recibirObtenerInfoUnidad (std::string mensaje) {
+void Juego::recibirObtenerInfoUnidad (std::string mensaje, int src) {
 	std::cout<<"recibo(unidad): "<<mensaje<<std::endl;
 	std::string idStr = mensaje.substr(1,id);
-	this->enviarInfoUnidad (idStr);
+	this->enviarInfoUnidad (idStr, src);
 }
 
-void Juego::recibirObtenerInfoFabrica (std::string mensaje) {
+void Juego::recibirObtenerInfoFabrica (std::string mensaje, int src) {
 	std::cout<<"recibo(edificio): "<<mensaje<<std::endl;
 	std::string idStr = mensaje.substr(1,id);
-	this->enviarInfoFabrica (idStr);
+	this->enviarInfoFabrica (idStr, src);
 }
 
-void Juego::enviarInfoUnidad (std::string id) {
+void Juego::enviarInfoUnidad (std::string id, int dst) {
 	std::string mensaje = "4" + id ;
 	Movible* movible = movibles[id];
 	std::string tipo = agregarPadding(movible->getTipo(),2);
 	std::string vida = agregarPadding(movible->getPorcentajeVida (), 3);
 	mensaje += tipo + vida;
 	std::cout<<"envio: "<<mensaje<<std::endl;
-	colaDeEnviados.push (mensaje);
+	Mensaje paquete(mensaje, dst);
+//	colaDeEnviados.push (mensaje);
+	colaDeEnviados.encolar (paquete);
 }
 
-void Juego::enviarInfoFabrica (std::string id) {
+void Juego::enviarInfoFabrica (std::string id, int dst) {
 	std::cout<<"entro a enviar info fabrica"<<std::endl;
 	std::string mensaje = "7" + id;
 	Edificio* edificio = edificios[id];
 	std::string tipoStr = agregarPadding(edificio->getTipo(), 2);
 	std::string vidaStr = agregarPadding(edificio->getPorcentajeVida (), 3);
-	
 	
 	int tipo = edificio->getTipo ();
 	std::vector<int> vehiculosPosibles;
@@ -524,19 +544,21 @@ void Juego::enviarInfoFabrica (std::string id) {
 		mensaje += tipoCreandoStr + porcentajeStr;
 	}
 	
-	colaDeEnviados.push (mensaje);
-}	
+//	colaDeEnviados.push (mensaje);
+	Mensaje paquete(mensaje, dst);
+	colaDeEnviados.encolar (paquete);
+}
 
 void Juego::enviarCrear (Objeto* objeto) {
 
 }
 
 void Juego::enviarMensajesEncolados() {
-	while (!colaDeEnviados.empty ()) {
-		std::string mensaje = colaDeEnviados.front ();
-		colaDeEnviados.pop ();
+	while (!colaDeEnviados.isEmpty ()) {
+		Mensaje mensaje = colaDeEnviados.desencolar ();
 		for (Jugador *jugador : jugadores) {
-			jugador->enviarMensaje (mensaje);		
+			std::string mensajeStr = mensaje.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
 		}
 	}
 }

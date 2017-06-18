@@ -3,14 +3,14 @@
 #include "ColaMensajes.h"
 
 
-void ColaMensajes::encolar(const std::string& paquete){
+void ColaMensajes::encolar(Mensaje paquete){
     std::unique_lock<std::mutex> mlock(m);
     paquetes.push(paquete);
 }
 
-std::string ColaMensajes::desencolar() {
+Mensaje ColaMensajes::desencolar() {
     std::unique_lock<std::mutex> mlock(m);
-    std::string paquete = paquetes.front();
+    Mensaje paquete = paquetes.front();
     paquetes.pop();
     return paquete;
 }
