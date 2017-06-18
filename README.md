@@ -18,6 +18,13 @@ yum install SDL2_mixer-devel
 
 ```
 
+#### tinyXML2 #####
+También es necesario tener TinyXML2 instalado.
+
+```
+sudo apt-get install libtinyxml2-dev
+```
+
 #### Make ####
 Una vez instaladas las librerias
 ```
