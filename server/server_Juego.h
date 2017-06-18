@@ -49,12 +49,12 @@ private:
     
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
-    void recibirObtenerInfoUnidad(std::string mensaje);
-    void recibirObtenerInfoFabrica(std::string mensaje);
+    void recibirObtenerInfoUnidad(std::string mensaje, int src);
+    void recibirObtenerInfoFabrica(std::string mensaje, int src);
     void recibirCrear(std::string mensaje);    
     
-    void enviarInfoFabrica(std::string id);
-    void enviarInfoUnidad(std::string id);
+    void enviarInfoFabrica(std::string id, int dst);
+    void enviarInfoUnidad(std::string id, int dst);
     void enviarCrear(Objeto* objeto);
     
     Mapa mapa;
@@ -63,8 +63,10 @@ private:
     std::mutex* m;
     std::condition_variable* cond;
 
-    std::queue<std::string> colaDeEnviados;
-
+//    std::queue<std::string> colaDeEnviados;
+    
+    ColaMensajes colaDeEnviados;
+    
     std::vector<Jugador*>& jugadores;
     
     FabricaVehiculos* fabricaV;

@@ -38,7 +38,7 @@ main (int argc, char** argv)
 {	
 
 	ColaMensajes colaDeRecibidos;
-//	std::queue<std::string>* colaDeRecibidos = new std::queue<std::string> ();
+
 	std::mutex m;
 	std::condition_variable cond;
 	
@@ -54,7 +54,7 @@ main (int argc, char** argv)
 	
 	for (int i=0; i<n; i++) {
 		Socket socket = aceptor.Accept ();
-		jugadores.push_back(new Jugador(socket, colaDeRecibidos));
+		jugadores.push_back(new Jugador(socket, colaDeRecibidos, i));
 		sockets.push_back(socket);
 	}
 	

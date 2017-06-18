@@ -20,8 +20,9 @@
 
 class Jugador : public Thread {
 public:
-    Jugador(Socket &socket, ColaMensajes &colaDeRecibidos);
-    void enviarMensaje(std::string& mensaje);
+    Jugador(Socket &socket, ColaMensajes &colaDeRecibidos, int id);
+    void enviarMensaje(std::string& mensaje, int id);
+    int getId();
     void run();
     virtual ~Jugador();
 private:

@@ -12,20 +12,33 @@
  */
 
 #include "server_Jugador.h"
+#include <iostream>
 
-Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos) : 
+Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) : 
 												socket(socket),
-												colaDeRecibidos(colaDeRecibidos) { }
+												colaDeRecibidos(colaDeRecibidos),
+												id(id) { }
 
 void Jugador::run () {
 	while (1) {
 		std::string mensaje = socket.ReceiveStrWLen ();
-		colaDeRecibidos.encolar (mensaje);
+		Mensaje paquete(mensaje, id);
+		colaDeRecibidos.encolar (paquete);
 	}
 }
 
-void Jugador::enviarMensaje(std::string& mensaje) {
+void Jugador::enviarMensaje(std::string& mensaje, int id) {
+	std::cout<<"Mensaje: "<<mensaje<<std::endl;
+	std::cout<<"Id mensaje: "<<id<<std::endl;
+	std::cout<<"Id jugador: "<<this->id<<std::endl;
+	if (id != this->id && id != -1)
+		return;
+	std::cout<<"envio mensaje"<<std::endl;
 	socket.SendStrWLen(mensaje);
+}
+
+int Jugador::getId() {
+	return id;
 }
 
 Jugador::~Jugador () { }
