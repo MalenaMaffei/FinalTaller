@@ -154,3 +154,17 @@ void ElementoManager::disparar(Paquete &paquete) {
     ElementoUnidad* unidad = unidades.at(paquete.getId());
     unidad->disparar(Punto(paquete.getX(), paquete.getY()));
 }
+
+ElementoManager::~ElementoManager() {
+    for (const auto& kv : elementos) {
+        delete kv.second;
+    }
+
+    for (const auto& kv : unidades) {
+        delete kv.second;
+    }
+
+    for (const auto& kv : balas) {
+        delete kv.second;
+    }
+}

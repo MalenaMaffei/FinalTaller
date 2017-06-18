@@ -13,6 +13,7 @@ class VistaManager {
   VistaDireccionada* getVistaCaminar(int tipoUnidad);
 //  Vista* getVistaMuerte(int tipoUnidad);
   Vista* getVista(int tipoElemento);
+  virtual ~VistaManager();
 
  private:
   std::map<int, Vista *> vistas;
