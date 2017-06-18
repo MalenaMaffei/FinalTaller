@@ -41,7 +41,7 @@ void Socket::Create(const char *ip, const char *port, int mode){
     skt = socket(res->ai_family, res->ai_socktype,
                  res->ai_protocol);
     if (skt == NOK) {
-        throw SocketException("Error creando socket", fD);
+        throw SocketException("Error creando socket\n", fD);
     }
     fD = skt;
 }
@@ -58,7 +58,7 @@ void Socket::CreateAndConnect(const char *ip, const char *port){
         skt = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 
         if (skt == NOK) {
-            throw SocketException("Error creando socket", fD);
+            throw SocketException("Error creando socket\n", fD);
         } else {
             fD = skt;
             status = connect(fD,  ptr->ai_addr, ptr->ai_addrlen);
@@ -79,11 +79,13 @@ void Socket::Send(unsigned char *source, size_t length){
     unsigned char *buffer_ptr = source;
     for (bytes_left = length; bytes_left>0; bytes_left-=bytes_sent) {
         if (!isConnected()) {
-            throw SocketException("Tried sending, but socket was closed", fD);
+            throw SocketException("Intentaba enviar, pero se cerro el "
+                                      "socket\n",
+                                  fD);
         }
         bytes_sent=send(fD, buffer_ptr, bytes_left, MSG_NO_SIGNAL);
         if (bytes_sent<=0) {
-            throw SocketException("Tried sending", fD);
+            throw SocketException("Se intentaba enviar.\n", fD);
         } else {
             buffer_ptr+=bytes_sent;
         }
@@ -92,9 +94,9 @@ void Socket::Send(unsigned char *source, size_t length){
 
 void Socket::BindAndListen(int backlog){
     int s_bind = bind(fD, res->ai_addr, res->ai_addrlen);
-    if (s_bind < 0){ throw SocketException("error en bind", fD); }
+    if (s_bind < 0){ throw SocketException("Error en bind.\n", fD); }
     int s_lis = listen(fD, backlog);
-    if (s_lis <0){ throw SocketException("error en listen", fD); }
+    if (s_lis <0){ throw SocketException("Error en listen.\n", fD); }
 }
 
 Socket Socket::Accept() {
@@ -107,7 +109,7 @@ Socket Socket::Accept() {
     l= &addr_s;
     int new_fd = accept(fD, a, l);
     if (new_fd < 0){
-        throw SocketException("Error en Accept", fD);
+        throw SocketException("Error en Accept\n", fD);
     }
     Socket newSocket;
     newSocket.fD = new_fd;
@@ -118,18 +120,19 @@ Socket Socket::Accept() {
 int Socket::Receive(unsigned char *buffer, size_t length){
     int bytes_read = recv(fD, buffer, length, MSG_NO_SIGNAL);
     if (bytes_read == MSG_NO_SIGNAL){
-        throw SocketException("Intentaba recibir pero se cerro el socket", fD);
+        throw SocketException("Intentaba recibir pero se cerro el socket\n",
+                              fD);
     }
     return bytes_read;
 }
 
 void Socket::Shutdown(int mode){
     if (mode != SHUT_RDWR && mode != SHUT_RD && mode != SHUT_WR){
-        throw SocketException("Modo de shutdown incorrecto", fD);
+        throw SocketException("Modo de shutdown incorrecto.\n", fD);
     }
     int status = shutdown(fD, mode);
     if (status<0){
-        throw SocketException("Error en shutdown", fD);
+        throw SocketException("Error en shutdown.\n", fD);
     }
 }
 
@@ -139,7 +142,7 @@ void Socket::Close(){
     }
     int status = close(fD);
     if (status<0){
-        throw SocketException("Error en close", fD);
+        throw SocketException("Error en close.\n", fD);
     }
 }
 

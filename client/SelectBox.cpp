@@ -7,7 +7,8 @@ void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
 
 //    SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
 //                            rect.h};
-    Rect displayRect(rect.getPunto() - offset, rect.w, rect.h);
+//    Rect displayRect(rect.getPunto() - offset, rect.w, rect.h);
+    Rect displayRect = rect.negativeShift(offset);
 
     SDL_RenderDrawRect(renderer, &displayRect);
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]

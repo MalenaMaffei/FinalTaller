@@ -16,7 +16,8 @@ int main(int argc, char *argv[]){
         ip = argv[1];
         puerto = argv[2];
     } else {
-//        TODO pedir por consola
+        ip = greeter.pedirIp();
+        puerto = greeter.pedirPuerto();
     }
 
 
