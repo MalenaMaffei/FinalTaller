@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Header Files/PaqueteDelivery.h"
 PaqueteDelivery::PaqueteDelivery(const Socket &socket, ColaPaquetes &cola)
     : socket(socket), cola(cola), salir(false) {}
@@ -5,3 +6,8 @@ PaqueteDelivery::PaqueteDelivery(const Socket &socket, ColaPaquetes &cola)
 void PaqueteDelivery::shutdown() {
     salir = true;
 }
+
+void PaqueteDelivery::displayError(SocketException &e) {
+    std::cerr << e.what() << std::endl;
+}
+

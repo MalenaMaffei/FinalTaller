@@ -4,6 +4,7 @@
 #include "common_Thread.h"
 #include "ColaPaquetes.h"
 #include "common_Socket.h"
+#include "common_SocketException.h"
 class PaqueteDelivery  : public Thread{
  public:
   PaqueteDelivery(const Socket &socket, ColaPaquetes &cola);
@@ -13,6 +14,7 @@ class PaqueteDelivery  : public Thread{
   Socket socket;
   ColaPaquetes& cola;
   bool salir;
+  void displayError(SocketException &e);
 };
 
 #endif //TPFINAL_PAQUETEDELIVERY_H

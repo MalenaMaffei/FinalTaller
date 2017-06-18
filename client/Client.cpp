@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Header Files/Canvas.h"
 #include "Header Files/PaqueteReceiver.h"
 #include "Header Files/PaqueteSender.h"
@@ -20,7 +21,14 @@ int main(int argc, char *argv[]){
 
 
     Socket socket;
-    socket.setClientMode(ip, puerto);
+    try {
+        socket.setClientMode(ip, puerto);
+    } catch (SocketException &e){
+        std::cout << "No se pudo establecer una conexión con el Servidor, "
+            "inténtelo más tarde." << std::endl;
+        std::cerr << e.what() << std::endl;
+    }
+
 
     std::mutex m;
     std::condition_variable cond;
