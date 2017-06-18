@@ -19,7 +19,7 @@ ElementoUnidad::ElementoUnidad(std::string id,
 void ElementoUnidad::mover(Punto nuevo) {
     direccion = rect.getPunto().calcularDireccion(nuevo);
     rect.setPunto(nuevo);
-
+    printf("me movi a: %i, %i\n", this->getRect().x, this->getRect().y);
     if (estado != enMovimiento) {
         currentClip = 0;
         estado = enMovimiento;
@@ -29,10 +29,6 @@ void ElementoUnidad::mover(Punto nuevo) {
     }
     currentClip = vistaMovimiento->getClip(currentClip, direccion);
 }
-
-//TODO terminar de refactorizar bien aca para usar esto para tanques y
-// robots, tambien revisar el tema de las texturas!
-
 
 void ElementoUnidad::avanzarMuerte() {
     if (vistaMuerte->isLastClip(currentClip)){
@@ -92,7 +88,7 @@ void ElementoUnidad::mostrar(Camara &camera) {
 void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
     if (estado != muriendo && !muerto){
         if (selectBox.checkCollision(rect) && Mio){
-            selectBox.selectUnidad(*this);
+            selectBox.selectUnidad(this);
         }
     }
 }

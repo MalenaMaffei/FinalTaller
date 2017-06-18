@@ -9,8 +9,6 @@ int main(int argc, char *argv[]){
     Greeter greeter;
     greeter.greet();
 
-    //    DESCOMENTAR PARA PROBAR CON SERVER
-    std::string ip;
     std::string puerto;
     if (argc >= 3){
         ip = argv[1];
