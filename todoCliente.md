@@ -32,7 +32,7 @@
 
 25. Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
 
-26. mostrar el tiempo de una manera mas elegante.
+26. ~~mostrar el tiempo de una manera mas elegante.~~
 
 27. Si sobra tiempo, mensaje en la ventana misma "esperando que se conecte el resto de los jugadores" y despues que muestre el color que te toco. Ideal seria que el servidor te pase un color ni bien te conectas, asi te dice que color sos mientras que esperas al resto.
 

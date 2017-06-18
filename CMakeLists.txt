@@ -14,6 +14,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${TPFinal_SOURCE_DIR}/cmakeFind")
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 find_package(TinyXML2 REQUIRED)
 
 #set(SDL2_INCLUDE_DIR /usr/include/SDL2)
@@ -41,7 +42,7 @@ file(GLOB VISTA_SRC
         )
 add_executable(vista ${VISTA_SRC})
 target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}  
-					${SDL_TTF_LIBRARIES} ${SDL2_TTF_LIBRARIES} Threads::Threads)
+					${SDL_TTF_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES} Threads::Threads)
 
 file(GLOB SERVER_SRC
 		"server/*.h"

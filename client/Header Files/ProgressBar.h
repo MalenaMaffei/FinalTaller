@@ -4,9 +4,9 @@
 #include <SDL_pixels.h>
 #include "Rect.h"
 #include "Vista.h"
-class VistaProgressBar {
+class ProgressBar {
  public:
-  VistaProgressBar(int width,
+  ProgressBar(int width,
                      int height,
                      SDL_Renderer *gRenderer,
                      const SDL_Color &FGColor,

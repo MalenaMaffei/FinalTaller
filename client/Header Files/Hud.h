@@ -1,7 +1,7 @@
 #ifndef TPFINAL_HUD_H
 #define TPFINAL_HUD_H
 #include "Vista.h"
-#include "VistaProgressBar.h"
+#include "ProgressBar.h"
 class Hud {
  public:
   Hud(SDL_Renderer *gRenderer,
@@ -9,7 +9,7 @@ class Hud {
         Vista &vistaCaras,
         Vista &labelsRobot,
         Vista &labelsVehiculo,
-        VistaProgressBar &barraVida);
+        ProgressBar &barraVida);
   void mostrar();
   void setInfo(int tipo, int porcentajeVida);
 
@@ -21,7 +21,7 @@ class Hud {
   Vista labelsRobot;
   Vista labelsVehiculo;
   Rect hudRect;
-  VistaProgressBar barraVida;
+  ProgressBar barraVida;
 //  int x, y;
   Punto ubicacion;
   int tipoCara;

@@ -1,7 +1,7 @@
 #include "Header Files/Canvas.h"
 #include "Header Files/PaqueteReceiver.h"
 #include "Header Files/PaqueteSender.h"
-#include "Greeter.h"
+#include "Header Files/Greeter.h"
 
 int main(int argc, char *argv[]){
 

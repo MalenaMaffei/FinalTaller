@@ -18,6 +18,7 @@
 #include "Header Files/VistaTexto.h"
 #include "Header Files/VistaHudRobotLabels.h"
 #include "Header Files/VistaHudVehiculoLabels.h"
+#include "Header Files/Reproductor.h"
 #include <string>
 
 const int SCREEN_FPS = 30;
@@ -93,11 +94,19 @@ void Canvas::close() {
 void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                              Hud &hud,
                              GuiEdificio &guiEdificio) {
+    Reproductor reproductor;
     CodigosPaquete codigos;
     while (!colaEntrada.isEmpty()){
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
             elementoManager.crear(paquete);
+//            TODO crashea despues de reprodicr
+//            if (codigos.esRobot(paquete.getTipo())){
+//                reproductor.reproducirFX
+//                    ("../client/sounds"
+//                         "/comp_robot_manufactured.wav");
+//            }
+
         } else if (paquete.getComando() == codigos.mover){
             elementoManager.mover(paquete);
         } else if (paquete.getComando() == codigos.disparar){
@@ -113,7 +122,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             int vida = std::stoi(paquete.getMensaje().substr(6,3));
             hud.setInfo(tipo, vida);
         }
-//        TODO manejar infos para el hud y la gui edificio
     }
 }
 
@@ -168,7 +176,7 @@ void Canvas::startGame(){
     VistaHudCaras vistaCaras(gRenderer);
     VistaHudRobotLabels labelsRobot(gRenderer);
     VistaHudVehiculoLabels labelsVehiculo(gRenderer);
-    VistaProgressBar barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71});
+    ProgressBar barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71});
     Hud hud(gRenderer,
             vistaHud,
             vistaCaras,
