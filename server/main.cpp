@@ -45,9 +45,6 @@ main (int argc, char** argv)
 
 	ColaMensajes colaDeRecibidos;
 
-	std::mutex m;
-	std::condition_variable cond;
-	
 	Socket aceptor;
 	
 	int n = stoi(argv[2]);
@@ -66,7 +63,7 @@ main (int argc, char** argv)
 		sockets.push_back(socket);
 	}
 	
-	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, jugadores);
+	Juego* juego = new Juego(colaDeRecibidos, jugadores);
 
 	juego->start();
 		

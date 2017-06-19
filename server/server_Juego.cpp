@@ -66,11 +66,8 @@ std::string agregarPadding(int n, int len) {
 	return nStr;
 }
 
-Juego::Juego (ColaMensajes& colaDeRecibidos, std::mutex* m, 
-			  std::condition_variable* cond, std::vector<Jugador*>& jugadores) :	
+Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :	
 												colaDeRecibidos(colaDeRecibidos),
-												m(m),		
-												cond(cond),
 												mapa(Mapa("mapa.map")), 
 												proximoIDMovible(0),
 												jugadores(jugadores),

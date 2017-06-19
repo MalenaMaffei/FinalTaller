@@ -33,8 +33,7 @@
 
 class Juego : public Thread {
 public:
-    Juego(ColaMensajes& colaDeRecibidos, std::mutex* m, 
-            std::condition_variable* cond, std::vector<Jugador*>& jugadores);
+    Juego(ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores);
     void moverUnidades();
     bool hayGanador();
     void chequearColisiones();
@@ -60,9 +59,6 @@ private:
     Mapa mapa;
     
     ColaMensajes& colaDeRecibidos;
-    std::mutex* m;
-    std::condition_variable* cond;
-
 //    std::queue<std::string> colaDeEnviados;
     
     ColaMensajes colaDeEnviados;
