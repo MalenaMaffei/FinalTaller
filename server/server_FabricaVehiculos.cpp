@@ -58,11 +58,10 @@ FabricaVehiculos::FabricaVehiculos () {
 }
 
 Vehiculo* FabricaVehiculos::getVehiculo(int tipo) {  
-	//Por ahora todos los vehiculos son de 1x1
-	//Agregar velocidad base
+	//Por ahora todos los vehiculos son de 2x2
 	//TODO
 	//El conductor se agrega en la fabrica fisica
-	return new Vehiculo(vidas[tipo],1,1,frecuencias[tipo],
+	return new Vehiculo(vidas[tipo],2,2,frecuencias[tipo],
 					 alcances[tipo], velocidades[tipo], tipo, armamentos[tipo]);
 }
 

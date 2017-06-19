@@ -4,12 +4,13 @@
 #include <vector>
 #include "server_Casillero.h"
 #include <array>
+#include "server_Movible.h"
 
 class Mapa {
     public:
         Mapa(const std::string& archivoMapa);
         virtual ~Mapa();
-        double obtenerFactorTerreno(std::array<int,2> posicion);
+        double obtenerFactorTerreno(std::array<int,2> posicion, Movible* movible);
         int obtenerDimensionX();
         int obtenerDimensionY();
         std::string obtenerMensajeMapa();

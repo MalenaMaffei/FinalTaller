@@ -31,7 +31,8 @@ const double modulo(std::array<int, 2> vector) {
 AEstrella::AEstrella(const Mapa &mapa) : mapa(mapa) {}
 
 std::vector < std::array<double,2> >
-	AEstrella::getRecorrido(const std::array<int, 2>& origen, 
+	AEstrella::getRecorrido(Movible* movible,
+							const std::array<int, 2>& origen, 
 							const std::array<int, 2>& destino) {
 				
 	std::vector< std::array<double,2> > recorrido;
@@ -73,7 +74,7 @@ std::vector < std::array<double,2> >
 						
 			double distancia = modulo(adyacencia);
 			double nuevoCosto = costos[actual] + 
-								distancia/mapa.obtenerFactorTerreno(adyacente);
+								distancia/mapa.obtenerFactorTerreno(adyacente, movible);
 //			std::cout<<"\tcosto actual: "<<costos[actual]<<std::endl;
 //			std::cout<<"\tdistancia: "<<distancia<<std::endl;
 //			std::cout<<"\tfactor: "<<mapa.obtenerFactorTerreno(adyacente)<<std::endl;

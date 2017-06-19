@@ -26,5 +26,9 @@ bool Robot::subirA(Vehiculo* vehiculo) {
 	return vehiculo->addConductor (this);
 }
 
+double Robot::factorTerrenoEn(Terreno* terreno) {
+	return terreno->getFactor(this);
+}
+
 Robot::~Robot () { }
 

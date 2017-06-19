@@ -5,6 +5,8 @@
 #include <array>
 #include <vector>
 
+class Terreno;
+
 class Movible : public Objeto {
     public:
         Movible(int vida, double ancho, double alto, int velocidad, int tipo);
@@ -22,6 +24,7 @@ class Movible : public Objeto {
         int getEquipo();
         void setEquipo(int idEquipo);
         void setTrayectoria(std::vector< std::array<double,2> > trayectoria);
+        virtual double factorTerrenoEn(Terreno* terreno) = 0;
         virtual void setPosicion(std::array<double,2> posicion) override;
         virtual std::string puedeDisparar() = 0;
         virtual bool obtuvoBandera() = 0;

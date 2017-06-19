@@ -14,6 +14,7 @@
 #include "server_Municion.h"
 #include "server_Unidad.h"
 #include "server_Bloque.h"
+#include "server_Terreno.h"
 #include <iostream>
 #include <cmath>
 
@@ -146,4 +147,8 @@ bool Municion::estaVivo() {
 
 void Municion::setAlcance(double alcance) {
 	this->alcance = alcance;
+}
+
+double Municion::factorTerrenoEn(Terreno* terreno) {
+	return terreno->getFactor(this);
 }

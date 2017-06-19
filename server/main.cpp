@@ -44,9 +44,11 @@ main (int argc, char** argv)
 	
 	Socket aceptor;
 	
-	int n = stoi(argv[1]);
+	int n = stoi(argv[2]);
 	
-	aceptor.setServerMode("8080");
+	std::string port = argv[1];
+	
+	aceptor.setServerMode(port);
 	
 	std::vector<Jugador*> jugadores;
 	

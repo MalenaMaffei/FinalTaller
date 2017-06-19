@@ -13,7 +13,8 @@ class AEstrella {
     public:
         AEstrella(const Mapa& mapa);
         std::vector < std::array<double,2> > 
-            getRecorrido(const std::array<int,2>& inicio, 
+            getRecorrido(Movible* movible,
+                            const std::array<int,2>& inicio, 
                             const std::array<int,2>& destino);        
         virtual ~AEstrella();
         

@@ -37,8 +37,8 @@ Mapa::Mapa(const std::string& nombreArchivoMapa) {
 	dimensionY = mapa[0].size();
 }
 
-double Mapa::obtenerFactorTerreno(std::array<int,2> posicion) {
-  return mapa[posicion[0]][posicion[1]].getFactorTerreno();
+double Mapa::obtenerFactorTerreno(std::array<int,2> posicion, Movible* movible) {
+  return mapa[posicion[0]][posicion[1]].getFactorTerreno(movible);
 }
 
 int Mapa::obtenerDimensionX() {

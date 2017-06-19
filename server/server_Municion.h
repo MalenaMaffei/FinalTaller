@@ -17,6 +17,7 @@
 
 #include "server_Objeto.h"
 #include "server_Movible.h"
+#include "server_Terreno.h"
 
 class Unidad;
 class Bloque;
@@ -32,6 +33,7 @@ class Municion : public Movible {
         Municion &operator=(Municion &&orig);
         int getTipo();
         int getDanio();
+        double factorTerrenoEn(Terreno* terreno);
         void setAlcance(double alcance);
         bool mover (std::array<double,2> destino) override;
         std::string puedeDisparar() override;

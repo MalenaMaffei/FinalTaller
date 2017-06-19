@@ -83,8 +83,6 @@ bool Movible::mover (double factorTerreno) {
 	
 	double modulo = std::sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);
 	
-	//Las balas llegan hasta destino y se frenan
-	//TODO (continuar trayectoria)
 	if (std::abs(modulo) < DIFF) {
 		posicion = destino;
 		if (!trayectoria.empty()) {
@@ -94,6 +92,7 @@ bool Movible::mover (double factorTerreno) {
 		return false;
 	}
 	
+	//TODO tomar en cuenta daño relativo en vehiculos
 	int velFinal = std::max(int(velocidad*factorTerreno),1);
 		
 	direccion = {direccion[0]/modulo, direccion[1]/modulo};
