@@ -37,6 +37,7 @@
 * Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso?
 * Updates de hud y factoryGui? Por ahora reciben la info cada vez que se hace un click, pero si me queda seleccionada no es que se actualiza. 
 * Clase bala. no la tuve en cuenta al diseñar y ahora me quedo un hibirido malisimo.
+* Clase ElementoGui, asi en hud y el oyto tengo una lista y nada mas les paso los paquetes que me llegan y cada uno se enciende o se apaga o setea sus atributos de acuerdo a eso. Me da miedo que me lleve mucho trabajo y sea dificil de debugguear
 -----
 ##### COMENTAR CODIGO #####
 
