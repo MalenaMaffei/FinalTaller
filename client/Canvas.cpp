@@ -67,7 +67,7 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     }
 
     if (!success){
-//        TODO lanzar excepcion aca, bah, no, en cada instancia
+//        TODO lanzar excepcion, en este caso si porque sino el juego no va
     }
 }
 
@@ -79,7 +79,7 @@ void Canvas::close() {
     gWindow = NULL;
     gRenderer = NULL;
 
-//    TODO destruir a los elementos
+//    TODO chequear que mas hace falta destruir o cerrar
 
 
     //Quit SDL subsystems
@@ -144,7 +144,7 @@ void Canvas::startGame(){
     int frame = 0;
 
     while (colaEntrada.isEmpty()){
-//        TODO fix pedorro hasta uqe se me ocurra una mejor manera
+//        TODO fix MALO hasta uqe se me ocurra una mejor manera
     }
     Paquete color = colaEntrada.desencolar();
     if (color.getComando() == 6){
@@ -152,12 +152,10 @@ void Canvas::startGame(){
         printf("mi color es: %i\n", miColor);
     }
     while (colaEntrada.isEmpty()){
-//        TODO fix pedorro hasta uqe se me ocurra una mejor manera
+//        TODO fix MALO hasta uqe se me ocurra una mejor manera
     }
 
-//    TODO crear clase mapa
     VistaTiles tilesTexture(gRenderer);
-//    std::vector<Tile> tiles;
     Mapa mapa;
     Paquete pMapa = colaEntrada.desencolar();
 //    TODO poner proper manejador de este tipo de paquetes aca.

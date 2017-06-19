@@ -1,5 +1,4 @@
 #include "../Header Files/Elemento.h"
-//TODO chequwar que todos tengan implementado el Mio
 #include "../Header Files/Click.h"
 #include "../Header Files/ColectorDeAcciones.h"
 #include <string>
@@ -10,7 +9,6 @@ Elemento::Elemento(string id, int x, int y, Vista *textura, bool esMio)
     rect.x = x;
     rect.y = y;
 
-    //Set the collision box
     rect.w = textura->getWidth();
     rect.h = textura->getHeight();
 }
@@ -50,4 +48,3 @@ bool Elemento::esMio() const {
 }
 
 void Elemento::guiRequest(ColectorDeAcciones &colector) const {}
-

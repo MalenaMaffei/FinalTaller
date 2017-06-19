@@ -1,7 +1,7 @@
 #ifndef TPFINAL_VISTATILE_H
 #define TPFINAL_VISTATILE_H
 #include <vector>
-#include <string> 
+#include <string>
 #include "Texture.h"
 #include "Camara.h"
 
@@ -26,14 +26,11 @@ class Vista : public Texture{
   virtual void recorrerImagen();
   std::vector<SDL_Rect> gClips;
 
-//  TODO va a depender de cada vista
   int height;
   int width;
   int clips;
   int filas;
   std::string fileName;
-//  short frame;
-//  SDL_Rect* currentClip;
 };
 
 #endif //TPFINAL_VISTATILE_H

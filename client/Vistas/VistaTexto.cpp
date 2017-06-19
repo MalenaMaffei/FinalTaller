@@ -23,7 +23,7 @@ void VistaTexto::mostrar(std::string texto, SDL_Color color, Punto p) {
         render(p.x, p.y);
     } else {
         printf("No se pudo renderizar el texto\n");
-//        TODO lanzar excep
+//        TODO lanzar excep? O dejar que el juego siga sin texto?
     }
 }
 
@@ -38,4 +38,3 @@ VistaTexto::~VistaTexto() {
     //Quit SDL subsystems
     TTF_Quit();
 }
-

@@ -1,3 +1,49 @@
+## Cliente
+
+* *Canvas.cpp*:
+
+    * ~~**"Fix pedorro"**~~ Cambiado a fix malo
+
+    * Explicar los timers utilizados
+
+    * Separar la carga del juego del *main loop*
+
+* *Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe? -> Creo que es thread safe, supongo que con referencias se refiere a los mutexes, confirmar. 
+
+* Realizar los *TODO*s
+
+    * Funcionalidad faltante
+
+    * Código no performante, poco claro, sin RAII, etc -> Preguntar por sin RAII
+
+* ~~Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.~~ tiene los try catch necesarios e imprime mensajes mas amigables cuando pasa algo y  si no le pasas los parametros, te los pide. 
+
+
+* **ELIMINAR BUSY WAITS** -> Preguntar donde
+
+* Hay mucho código comentado, hay código "complejo" sin comentar.
+
+* Falta comentar headers, describir clases y métodos no triviales.
+
+* Falta loggear actividad. -> Preguntar
+
+* Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?
+//            TODO se podria decir, si ya estaba salir==true, es que cerre yo
+// al socket entonces no muestro nada. si salir==false, se cerro desde el server
+
+* Consumo alto de cpu sobre todo en el cliente.
+
+### PREGUNTAS ###
+* Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso?
+* Updates de hud y factoryGui? Por ahora reciben la info cada vez que se hace un click, pero si me queda seleccionada no es que se actualiza. 
+* Clase bala. no la tuve en cuenta al diseñar y ahora me quedo un hibirido malisimo.
+* Clase ElementoGui, asi en hud y el oyto tengo una lista y nada mas les paso los paquetes que me llegan y cada uno se enciende o se apaga o setea sus atributos de acuerdo a eso. Me da miedo que me lleve mucho trabajo y sea dificil de debugguear
+* Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun
+-----
+##### COMENTAR CODIGO #####
+
+
+
 6. inhibir errores de valgrind de SDL.
 
 7. spcket reuseaddrinfo.
@@ -14,7 +60,7 @@
 
 15. terminar de crear spritesheets para los vehiculos que faltan.
 
-16. ver como refactorizar clase bala
+16. ver como refactorizar clase bala. 
 
 18. mostrar al jugador que color le toco ni bien le llega el paquete.
 
@@ -36,13 +82,11 @@
 
 33. Hacer pruebas definitivas de no seleccion de muertos.
 
-34. cliente se queda trabado cuando no hay server, en vez de crashear. 
+34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
 
+#### Resuletos ####
 
-
-
-
-
+34. ~~cliente se queda trabado cuando no hay server, en vez de crashear. ~~
 1. ~~Arreglar Bug Seleccion de muertos y moribundos.~~
 2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
 3. ~~Pasar SDL al main en un solo thread.~~

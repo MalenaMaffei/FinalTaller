@@ -11,3 +11,7 @@ void ElementoBala::mover(Punto nuevo) {
 void ElementoBala::matar() {
     muerto = true;
 }
+
+void ElementoBala::clicked(Click &click) {
+    return;
+}

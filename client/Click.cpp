@@ -29,11 +29,9 @@ bool Click::hayClickeado() {
 }
 
 void Click::resetCoords() {
-//    printf("reseting coords\n");
     coords = {-1,-1};
 }
 bool Click::huboClick() {
-//    printf("mis coords son %i,%i\n", coords.x, coords.y);
     return coords.x >= 0;
 }
 
