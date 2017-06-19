@@ -14,12 +14,22 @@
 
     * Funcionalidad faltante
 
-    * Código no performante, poco claro, sin RAII, etc
+    * Código no performante, poco claro, sin RAII, etc -> Preguntar por sin RAII
 
 * ~~Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.~~ tiene los try catch necesarios e imprime mensajes mas amigables cuando pasa algo y  si no le pasas los parametros, te los pide. 
 
 
 * **ELIMINAR BUSY WAITS**
+
+* Hay mucho código comentado, hay código "complejo" sin comentar.
+
+* Falta comentar headers, describir clases y métodos no triviales.
+
+* Falta loggear actividad. -> Preguntar
+
+* Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?
+
+* Consumo alto de cpu sobre todo en el cliente.
 
 -----
 
