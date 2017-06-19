@@ -36,6 +36,12 @@ using namespace std;
 int
 main (int argc, char** argv)
 {	
+	if (argc != 3) {
+		std::cout<<"Iniciar el server con: "<<std::endl;
+		std::cout<<"./server <puerto> <#clientes>"<<std::endl;
+		std::cout<<"Intentelo nuevamente"<<std::endl;
+		return -1;
+	}
 
 	ColaMensajes colaDeRecibidos;
 
@@ -63,7 +69,7 @@ main (int argc, char** argv)
 	Juego* juego = new Juego(colaDeRecibidos, &m, &cond, jugadores);
 
 	juego->start();
-	
+		
 	for (Jugador* jugador : jugadores) {
 		jugador->start();
 	}
