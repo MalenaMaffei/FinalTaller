@@ -8,7 +8,7 @@
 
     * Separar la carga del juego del *main loop*
 
-* *Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?
+* *Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe? -> Creo que es thread safe, supongo que con referencias se refiere a los mutexes, confirmar. 
 
 * Realizar los *TODO*s
 
@@ -32,6 +32,9 @@
 * Consumo alto de cpu sobre todo en el cliente.
 
 -----
+##### COMENTAR CODIGO #####
+
+
 
 6. inhibir errores de valgrind de SDL.
 
