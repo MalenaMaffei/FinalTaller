@@ -2,7 +2,7 @@
 
 * *Canvas.cpp*:
 
-    * **"Fix pedorro"**
+    * ~~**"Fix pedorro"**~~ Cambiado a fix malo
 
     * Explicar los timers utilizados
 
