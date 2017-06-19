@@ -5,11 +5,6 @@
 #include "Click.h"
 class Mouse {
  public:
-//  struct MouseCoords {
-//    int x = -1;
-//    int y = -1;
-//  };
-
   enum ButtonPressed{
     none = -1,
     rightButtonDown = 0,
@@ -20,15 +15,16 @@ class Mouse {
 
   Mouse();
 
+//  Setea el estado del mouse dependiendo al evento recibido
   void setState(Uint32 eventType, SDL_Event event, Punto offset);
   void resetState();
   Punto getCoordinates();
 
+//  Dependiendo la secuencia de eventos registrados modifica a Click o a
+// selectBox (buttonDOWN, drag, buttonUP seria seleccionar unidades por ejemplo)
   void setMouseAction(SelectBox &selectBox, Click &click);
 
  private:
-//  bool rightButtonDown = false;
-//  bool leftButtonDown = false;
   bool mouseMoves = false;
   Punto start_coords;
   Punto move_coords;

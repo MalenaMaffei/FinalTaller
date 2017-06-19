@@ -6,11 +6,11 @@
 #include "Vista.h"
 class ProgressBar {
  public:
-  ProgressBar(int width,
-                     int height,
-                     SDL_Renderer *gRenderer,
-                     const SDL_Color &FGColor,
-                     const SDL_Color &BGColor);
+  ProgressBar(int width,int height,SDL_Renderer *gRenderer,
+              const SDL_Color &FGColor,const SDL_Color &BGColor);
+
+//  Dibujan una progress bar horizontal o vertical en la ubicacion y con el
+// porcentaje lleno pasados.
   void mostrarHorizontal(float porcentaje, Punto ubicacion);
   void mostrarVertical(float porcentaje, Punto ubicacion);
 

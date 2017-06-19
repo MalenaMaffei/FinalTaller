@@ -5,6 +5,9 @@
 #include "ColaPaquetes.h"
 #include "common_Socket.h"
 #include "common_SocketException.h"
+
+// Interfaz y funcionalidad comun para PaqueteReceiver y PaqueteSender que
+// son los encargados de recibir y mandar paquetes respectivamente.
 class PaqueteDelivery  : public Thread{
  public:
   PaqueteDelivery(const Socket &socket, ColaPaquetes &cola);

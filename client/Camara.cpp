@@ -36,65 +36,23 @@ void Camara::handleEvent(SDL_Event& e){
 }
 
 
-void Camara::move(float timeStep)
-{
-    //Move the dot left or right
+void Camara::move(float timeStep) {
     mBox.x += mVelX * timeStep;
 
-    //If the dot went too far to the left or right
     if (mBox.x < 0){
         mBox.x = 0;
     } else if (mBox.x > LEVEL_WIDTH - mBox.w){
         mBox.x = LEVEL_WIDTH - mBox.w;
     }
-    //If the dot went too far to the left or right or touched a wall
-//    if( ( rect.x < 0 ) || ( rect.x + rect.w > LEVEL_WIDTH ))
-//    {
-//        //move back
-//        rect.x -= mVelX;
-//    }
 
-    //Move the dot up or down
     mBox.y += mVelY * timeStep;
 
-//    //If the dot went too far up or down or touched a wall
-//    if( ( rect.y < 0 ) || ( rect.y + rect.h  > LEVEL_HEIGHT ))
-//    {
-//        //move back
-//        rect.y -= mVelY;
-//    }
-
-    //If the dot went too far up or down
     if (mBox.y < 0){
         mBox.y = 0;
     }else if (mBox.y > LEVEL_HEIGHT - mBox.h){
         mBox.y  = LEVEL_HEIGHT - mBox.h;
     }
 }
-//
-//void Camara::move()
-//{
-//    //Move the dot left or right
-//    rect.x += mVelX;
-//
-//    //If the dot went too far to the left or right or touched a wall
-//    if( ( rect.x < 0 ) || ( rect.x + rect.w > LEVEL_WIDTH ))
-//    {
-//        //move back
-//        rect.x -= mVelX;
-//    }
-//
-//    //Move the dot up or down
-//    rect.y += mVelY;
-//
-//    //If the dot went too far up or down or touched a wall
-//    if( ( rect.y < 0 ) || ( rect.y + rect.h  > LEVEL_HEIGHT ))
-//    {
-//        //move back
-//        rect.y -= mVelY;
-//    }
-//}
-
 
 bool Camara::checkCollision(Rect b) {
     return mBox.hayColision(b);
