@@ -11,6 +11,8 @@ class Hud {
         Vista &labelsVehiculo,
         ProgressBar &barraVida);
   void mostrar();
+
+//  Se setea la informacion que va  a necesitar el Hud para mostrarse
   void setInfo(int tipo, int porcentajeVida);
 
  private:

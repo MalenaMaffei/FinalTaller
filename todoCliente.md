@@ -8,7 +8,7 @@
 
     * Separar la carga del juego del *main loop*
 
-* *Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe? -> Creo que es thread safe, supongo que con referencias se refiere a los mutexes, confirmar. 
+* ~~*Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?~~ -> Creo que es thread safe, supongo que con referencias se refiere a los mutexes, confirmar. 
 
 * Realizar los *TODO*s
 
@@ -19,13 +19,13 @@
 * ~~Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.~~ tiene los try catch necesarios e imprime mensajes mas amigables cuando pasa algo y  si no le pasas los parametros, te los pide. 
 
 
-* **ELIMINAR BUSY WAITS** -> Preguntar donde
+* **ELIMINAR BUSY WAITS** -> Preguntar donde, creo que es cuando espero al mapa y al color.
 
 * Hay mucho código comentado, hay código "complejo" sin comentar.
 
 * Falta comentar headers, describir clases y métodos no triviales.
 
-* Falta loggear actividad. -> Preguntar
+* Falta loggear actividad. -> Preguntar. Redirijo todo el stderr a un log? por ahi eso responde a lo que viene abajo. Por consola imprimo cosas tipo servcidor down, cliente cerrado y en el log pongo los errores.
 
 * Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?
 //            TODO se podria decir, si ya estaba salir==true, es que cerre yo

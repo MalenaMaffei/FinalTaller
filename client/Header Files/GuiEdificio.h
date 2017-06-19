@@ -15,12 +15,24 @@
 class GuiEdificio {
  public:
   explicit GuiEdificio(SDL_Renderer *gRenderer);
+
   void mostrar(Camara &camara);
+
+//  Se setea que fabrica hizo el pedido de abrir gui y en donde se hizo el
+// click para mostrar despues ahi al gui
   void abrirGui(Punto pos, std::string id);
+
+//  Se chequea si algun boton fue clickeado
   bool click(Punto click);
+
   int getTipoSeleccionado() const;
+
+//  Se selecciono alguna unidad para construir?
   bool huboSeleccion() const;
+
   std::string getIdFabrica() const;
+
+//  Setea los distintos elementos a mostrar usando el paquete.
   void setInfo(PaqueteFabrica paquete);
 
  private:

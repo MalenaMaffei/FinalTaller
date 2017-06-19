@@ -8,10 +8,21 @@ class ElementoEstructura : public ElementoColoreado{
  public:
   ElementoEstructura(std::string id, int x, int y, Vista *textura,
                      bool esMio, int color);
+
+  //  En este caso (Estructura) pide que se muestre el gui para crear unidades
   void guiRequest(ColectorDeAcciones& colector) const;
+
+//  Override de mostrar Elemento, en este caso se deben mostar las animaciones
   void mostrar(Camara &camera);
+
+//  Override de matar de Elemento, en este caso, no desaparece ni muere la
+// estructura, sino que se destruye y cambia la imagen.
   void matar();
+
+//  Override del clicked de Elemento, en este caso se chequea que no este
+// destruida la estructura.
   void clicked(Click& click);
+
  private:
   bool destruido;
 };

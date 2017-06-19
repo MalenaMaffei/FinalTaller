@@ -15,11 +15,17 @@ class Elemento {
   virtual void matar();
   const Rect & getRect() const;
   std::string getId() const;
-  virtual void clicked(Click& click);
   bool esMio() const;
+
+// Polimorfismo: Depende sobre que elemento se hizo click, ellos saben que
+// hacer al respecto.
+  virtual void clicked(Click& click);
+
+//  Polimorfismo: Llaman a la gui correspondiente depende que Elemento fue
+// clickeado.
   virtual void guiRequest(ColectorDeAcciones& colector) const;
+
  protected:
-  //The attributes of the tile
   bool Mio;
   bool muerto;
   Rect rect;

@@ -10,8 +10,11 @@ class Camara {
   static const int CAM_VEL = 700;
   explicit Camara();
 
+//  Chequea si el evento es w, a, s, d y setea direccion y velocidad del
+// movimiento
   void handleEvent(SDL_Event& e);
 
+//  Mueve la camara con la velocidad y direccion seteadas por handleEvent.
   void move(float timeStep);
 
   int getCamaraX();
@@ -19,6 +22,7 @@ class Camara {
   Punto getOffset();
   SDL_Rect* getCamara();
 
+//  Chequea si el Rect pasado esta dentro de la camara.
   bool checkCollision(Rect b);
  private:
     Rect mBox;
