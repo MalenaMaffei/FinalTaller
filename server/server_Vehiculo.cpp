@@ -23,6 +23,10 @@ Vehiculo::Vehiculo(int vida, double ancho, double alto,
 									velocidad, tipo, armamento), 
 									conductor(NULL) { }
 
+double Vehiculo::factorTerrenoEn(Terreno* terreno) {
+	return terreno->getFactor(this);
+}
+
 bool Vehiculo::addConductor(Robot* conductor) { 
 	//No me puedo subir a vehiculo ocupado
 	if (this->conductor) {

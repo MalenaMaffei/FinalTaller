@@ -15,6 +15,7 @@
 #define VEHICULO_H
 
 #include "server_Unidad.h"
+#include "server_Terreno.h"
 
 class Robot;
 
@@ -24,6 +25,7 @@ public:
             int frecuenciaDisparo, int alcance, 
             int velocidad, int tipo, int armamento);
     
+    double factorTerrenoEn(Terreno* terreno);
     bool addConductor(Robot* conductor);
     virtual ~Vehiculo();
 private:

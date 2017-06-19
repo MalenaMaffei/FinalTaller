@@ -223,10 +223,7 @@ void Juego::moverUnidades() {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
-		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero);
-//		std::cout<<"Factor de terreno "<<factorTerreno<<std::endl;
-		//Siempre devuelve el factor terreno de robot (agregar 2xDispatch)
-		//TODO
+		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero, movible);
 		if (movible->mover (factorTerreno)) {
 			pos = movible->getPosicion ();
 //			std::cout<<"pos: "<<pos[0]<<","<<pos[1]<<std::endl;
@@ -467,7 +464,8 @@ void Juego::recibirMover(std::string mensaje) {
 	std::array<double,2> inicio = movibles[idStr]->getPosicion ();
 	AEstrella aEstrella(mapa);
 	std::vector< std::array<double,2> > recorrido = 
-								aEstrella.getRecorrido ({inicio[0],inicio[1]},
+								aEstrella.getRecorrido (movibles[idStr],
+														{inicio[0],inicio[1]},
 														{(int) x,(int) y});
 	movibles[idStr]->setTrayectoria(recorrido);
 }

@@ -23,8 +23,8 @@ bool Casillero::estaOcupado() {
 	return ocupado;
 }
 
-double Casillero::getFactorTerreno() {
-	return terreno.getFactor();
+double Casillero::getFactorTerreno(Movible* movible) {
+	return terreno.getFactor(movible);
 }
 
 int Casillero::getTipoTerreno () {

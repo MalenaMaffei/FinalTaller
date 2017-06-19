@@ -4,6 +4,7 @@
 
 #include <tuple>
 #include "server_Terreno.h"
+#include "server_Movible.h"
 
 class Casillero {
     public:
@@ -11,7 +12,7 @@ class Casillero {
         Casillero(const Casillero& orig);
         Casillero& operator=(const Casillero& orig);
         bool estaOcupado();
-        double getFactorTerreno();
+        double getFactorTerreno(Movible* movible);
         int getTipoTerreno();
         virtual ~Casillero();
 

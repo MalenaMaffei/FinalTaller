@@ -14,13 +14,22 @@
 #ifndef TERRENO_H
 #define TERRENO_H
 
+#include "server_Movible.h"
+
+class Municion;
+class Robot;
+class Vehiculo;
+
 class Terreno {
 public:
     Terreno(int tipo, double velocidadRobots, double velocidadVehiculos);
     Terreno(const Terreno& orig);
     Terreno(Terreno &&orig);
     Terreno& operator=(const Terreno& orig);
-    double getFactor();
+    double getFactor(Movible* movible);
+    double getFactor(Robot* robot);
+    double getFactor(Vehiculo* vehiculo);
+    double getFactor(Municion* municion);
     int getTipo();
     Terreno &operator=(Terreno &&orig);
     virtual ~Terreno();

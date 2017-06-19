@@ -1,6 +1,11 @@
 
 #include "server_Terreno.h"
+#include "server_Municion.h"
+#include "server_Robot.h"
+#include "server_Vehiculo.h"
 #include <iostream>
+
+#define VEL_MUNICIONES 1
 
 Terreno::Terreno(int tipo, double velocidadRobots, double velocidadVehiculos) : 
 									tipo(tipo),
@@ -32,8 +37,20 @@ Terreno &Terreno::operator=(Terreno &&orig) {
 	return *this;
 }
 
-double Terreno::getFactor() {
+double Terreno::getFactor(Movible* movible) {
+	return movible->factorTerrenoEn(this);
+}
+
+double Terreno::getFactor(Robot* robot) {
 	return this->velocidadRobots;
+}
+
+double Terreno::getFactor(Vehiculo* vehiculo) {
+	return this->velocidadVehiculos;
+}
+
+double Terreno::getFactor(Municion* municion) {
+	return VEL_MUNICIONES;
 }
 
 int Terreno::getTipo() {
