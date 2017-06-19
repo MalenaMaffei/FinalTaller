@@ -36,6 +36,7 @@
 ### PREGUNTAS ###
 * Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso?
 * Updates de hud y factoryGui? Por ahora reciben la info cada vez que se hace un click, pero si me queda seleccionada no es que se actualiza. 
+* Clase bala. no la tuve en cuenta al diseñar y ahora me quedo un hibirido malisimo.
 -----
 ##### COMENTAR CODIGO #####
 
@@ -57,7 +58,7 @@
 
 15. terminar de crear spritesheets para los vehiculos que faltan.
 
-16. ver como refactorizar clase bala
+16. ver como refactorizar clase bala. 
 
 18. mostrar al jugador que color le toco ni bien le llega el paquete.
 
@@ -79,6 +80,7 @@
 
 33. Hacer pruebas definitivas de no seleccion de muertos.
 
+34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
 
 #### Resuletos ####
 
