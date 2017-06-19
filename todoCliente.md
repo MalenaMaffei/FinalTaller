@@ -8,7 +8,7 @@
 
     * Separar la carga del juego del *main loop*
 
-* ~~*Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?~~ -> Creo que es thread safe, supongo que con referencias se refiere a los mutexes, confirmar. 
+* ~~*Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?~~ -> ojo que pop tiene mutex 
 
 * Realizar los *TODO*s
 
