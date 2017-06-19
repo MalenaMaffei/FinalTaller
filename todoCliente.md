@@ -31,6 +31,9 @@
 
 * Consumo alto de cpu sobre todo en el cliente.
 
+### PREGUNTAS ###
+* Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso?
+* Updates de hud y factoryGui? Por ahora reciben la info cada vez que se hace un click, pero si me queda seleccionada no es que se actualiza. 
 -----
 ##### COMENTAR CODIGO #####
 
