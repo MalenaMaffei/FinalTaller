@@ -313,9 +313,10 @@ void Juego::actualizarDisparos() {
 		}
 		  
 		if (objetivo) {
-			//TODO el tipo de municion es siempre 17
+			//Si tiene el movible puede disparar entonces es una unidad
+			int armamento = ((Unidad*) movible)->getArmamento ();
 			std::cout<<"antes de fabrica municiones"<<std::endl;
-			Municion* municion = fabricaMuniciones->getMunicion (17);
+			Municion* municion = fabricaMuniciones->getMunicion (armamento);
 			//TODO siempre busca en fabrica de robots, verificar para vehiculos tambien
 			double alcance = fabricaR->getAlcance (movible->getTipo ());
 			municion->setEquipo (movible->getEquipo ());

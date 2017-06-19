@@ -16,14 +16,15 @@
 
 Unidad::Unidad (int vida, double ancho, double alto, 
 					int frecuenciaDisparo, int alcance, 
-					int velocidad, int tipo) : 
+					int velocidad, int tipo, int armamento) : 
 										Movible(vida, ancho, alto, velocidad, 
 											 tipo),
 										frecuenciaDisparo(frecuenciaDisparo),
 										alcance(alcance),
 										estado(REPOSO),
 										tiempoADisparo(0),
-										bandera(false) { }
+										bandera(false), 
+										armamento(armamento) { }
 
 void Unidad::dispararA(std::string objetivo) {
 	this->objetivo = objetivo;
@@ -81,4 +82,8 @@ bool Unidad::obtuvoBandera () {
 		return true;
 	}
 	return false;
+}
+
+int Unidad::getArmamento () {
+	return armamento;
 }

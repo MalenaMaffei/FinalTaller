@@ -28,8 +28,9 @@ enum estado {
 class Unidad : public Movible {
     public:
         Unidad(int vida, double ancho, double alto, int frecuenciaDisparo,
-                    int alcance, int velocidad, int tipo);
+                    int alcance, int velocidad, int tipo, int armamento);
         void dispararA(std::string objetivo);
+        int getArmamento();
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
         void colisionar(Municion& municion) override;
@@ -45,6 +46,7 @@ class Unidad : public Movible {
         int tiempoADisparo;
         int alcance;
         int estado;
+        int armamento;
 };
 
 #endif /* UNIDAD_H */

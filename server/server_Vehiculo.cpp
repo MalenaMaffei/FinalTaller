@@ -17,10 +17,10 @@
 
 Vehiculo::Vehiculo(int vida, double ancho, double alto, 
 					int frecuenciaDisparo, int alcance, 
-					int velocidad, int tipo) : 
+					int velocidad, int tipo, int armamento) : 
 								Unidad(vida, ancho, alto,
 									frecuenciaDisparo, alcance, 
-									velocidad, tipo), 
+									velocidad, tipo, armamento), 
 									conductor(NULL) { }
 
 bool Vehiculo::addConductor(Robot* conductor) { 

@@ -22,7 +22,7 @@ class Vehiculo : public Unidad {
 public:
     Vehiculo(int vida, double ancho, double alto, 
             int frecuenciaDisparo, int alcance, 
-            int velocidad, int tipo);
+            int velocidad, int tipo, int armamento);
     
     bool addConductor(Robot* conductor);
     virtual ~Vehiculo();

@@ -57,17 +57,12 @@ FabricaRobots::FabricaRobots () {
 	}
 }
 
-Robot* FabricaRobots::getRobot(int tipo) {
-	/*        Robot(int vida, double ancho, double alto, 
-                int frecuenciaDisparo, int alcance, 
-                int tipoArmamento);
-	 */
-  
+Robot* FabricaRobots::getRobot(int tipo) {  
 	 //Por ahora todos los robots son de 1x1
 	 //TODO
 	 //Agregar velocidad base
 	return new Robot(vidas[tipo],1,1,frecuencias[tipo],
-					 alcances[tipo], velocidades[tipo],tipo);
+					 alcances[tipo], velocidades[tipo],tipo, armamentos[tipo]);
 }
 
 int FabricaRobots::getCantidad(int tipo) {

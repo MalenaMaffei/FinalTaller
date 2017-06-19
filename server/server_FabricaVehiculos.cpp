@@ -63,7 +63,7 @@ Vehiculo* FabricaVehiculos::getVehiculo(int tipo) {
 	//TODO
 	//El conductor se agrega en la fabrica fisica
 	return new Vehiculo(vidas[tipo],1,1,frecuencias[tipo],
-					 alcances[tipo], velocidades[tipo], tipo);
+					 alcances[tipo], velocidades[tipo], tipo, armamentos[tipo]);
 }
 
 int FabricaVehiculos::getCantidad(int tipo) {
