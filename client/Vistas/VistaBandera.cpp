@@ -4,7 +4,7 @@
 #define CLIPS 4
 #define COLORES 5
 
-VistaBandera::VistaBandera(SDL_Renderer *gRenderer) : VistaColoreada(gRenderer,
+VistaBandera::VistaBandera(SDL_Renderer *gRenderer) : Vista(gRenderer,
                                                          HEIGHT,
                                                          WIDTH,
                                                          CLIPS,

@@ -24,6 +24,7 @@ class ElementoManager {
   void elementosVivir(Camara &camara,
                       Click &click,
                       SelectBox &selectBox);
+  virtual ~ElementoManager();
  private:
   void fabricarUnidad(Paquete &paquete);
   void fabricarElemento(Paquete &paquete);

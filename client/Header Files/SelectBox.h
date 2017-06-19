@@ -15,14 +15,14 @@ class SelectBox {
 
   bool checkCollision(Rect b);
   void setRect(const Rect &rect);
-  void selectUnidad(ElementoUnidad &unidad);
+  void selectUnidad(ElementoUnidad *unidad);
   void vaciarSeleccionadas();
   bool haySeleccion();
-  const std::vector<ElementoUnidad> &getSeleccionadas() const;
+  const std::vector<ElementoUnidad*> &getSeleccionadas() const;
 
  private:
   Rect rect;
-  std::vector<ElementoUnidad> seleccionadas;
+  std::vector<ElementoUnidad* > seleccionadas;
 };
 
 #endif //TPFINAL_SELECTBOX_H

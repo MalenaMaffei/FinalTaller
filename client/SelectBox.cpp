@@ -2,22 +2,24 @@
 #include <algorithm>
 #include <vector>
 void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
-//    TODO BUG!!!! Se seleccionan unidades dos veces
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
 
 //    SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
 //                            rect.h};
-    Rect displayRect(rect.getPunto() - offset, rect.w, rect.h);
+//    Rect displayRect(rect.getPunto() - offset, rect.w, rect.h);
+    Rect displayRect = rect.negativeShift(offset);
 
     SDL_RenderDrawRect(renderer, &displayRect);
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
-        (ElementoUnidad &unidad){
-        if (unidad.estaMuerto()){
+        (ElementoUnidad* unidad){
+        if (unidad->estaMuerto()){
             return;
         }
-        Rect rectUnidad = unidad.getRect();
-        displayRect = Rect(rectUnidad.getPunto() - offset, rectUnidad.w,
-                           rectUnidad.h);
+//        Rect rectUnidad = unidad.getRect();
+//        displayRect = Rect(rectUnidad.getPunto() - offset, rectUnidad.w,
+//                           rectUnidad.h);
+
+        displayRect = unidad->getRect().negativeShift(offset);
         SDL_RenderDrawRect(renderer, &displayRect);
     });
 }
@@ -45,7 +47,7 @@ int SelectBox::getY() {
     return rect.y;
 }
 
-void SelectBox::selectUnidad(ElementoUnidad &unidad) {
+void SelectBox::selectUnidad(ElementoUnidad *unidad) {
 //    unidad.seleccionar();
     seleccionadas.push_back(unidad);
 //    printf("seleccionado: %i\n", unidad.getId());
@@ -53,10 +55,10 @@ void SelectBox::selectUnidad(ElementoUnidad &unidad) {
 }
 
 void SelectBox::vaciarSeleccionadas() {
-    std::for_each(seleccionadas.begin(), seleccionadas.end(), []
-        (ElementoUnidad &unidad){
-//      unidad.deseleccionar();
-    });
+//    std::for_each(seleccionadas.begin(), seleccionadas.end(), []
+//        (ElementoUnidad &unidad){
+////      unidad.deseleccionar();
+//    });
     seleccionadas.clear();
 }
 
@@ -64,6 +66,6 @@ bool SelectBox::haySeleccion() {
     return !seleccionadas.empty();
 }
 
-const std::vector<ElementoUnidad> &SelectBox::getSeleccionadas() const {
+const std::vector<ElementoUnidad*> &SelectBox::getSeleccionadas() const {
     return seleccionadas;
 }

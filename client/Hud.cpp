@@ -16,7 +16,7 @@ Hud::Hud(SDL_Renderer *gRenderer,
          Vista &vistaCaras,
          Vista &labelsRobot,
          Vista &labelsVehiculo,
-         VistaProgressBar &barraVida) : vistaHud(hud), vistaCaras
+         ProgressBar &barraVida) : vistaHud(hud), vistaCaras
     (vistaCaras),
 //                                  barraVida({Punto(X_HPBAR, Y_HPBAR), WIDTH_HPBAR,HEIGHT_HPBAR},
 //    gRenderer, {60,175,23}, {99,71,71}),

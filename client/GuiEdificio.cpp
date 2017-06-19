@@ -17,15 +17,15 @@
 #define UNIT_RELY 58
 #define VIDA_RELX 84
 #define VIDA_RELY 4
-#define TIEMPO_RELX 89
-#define TIEMPO_RELY 36
+#define TIEMPO_RELX 73
+#define TIEMPO_RELY 32
 #define CONSTR_RELX 54
 #define CONSTR_RELY 22
 using std::string;
 
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
     : vistaGui(VistaGui(gRenderer)),vistaTexto(VistaTexto(gRenderer)),
-      barraConstr(VistaProgressBar(7,37,gRenderer,{3,91,11}, {223,175,75})),
+      barraConstr(ProgressBar(7,37,gRenderer,{3,91,11}, {223,175,75})),
       seMuestra(false),tipoSeleccionado(-1),posSeleccionada(0){
         relPosCANCEL = {{CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON};
         relPosNEXT = {{ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW};

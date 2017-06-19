@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Header Files/Canvas.h"
 #include "Header Files/PaqueteReceiver.h"
 #include "Header Files/PaqueteSender.h"
@@ -8,19 +9,26 @@ int main(int argc, char *argv[]){
     Greeter greeter;
     greeter.greet();
 
-    //    DESCOMENTAR PARA PROBAR CON SERVER
     std::string ip;
     std::string puerto;
     if (argc >= 3){
         ip = argv[1];
         puerto = argv[2];
     } else {
-//        TODO pedir por consola
+        ip = greeter.pedirIp();
+        puerto = greeter.pedirPuerto();
     }
 
 
     Socket socket;
-    socket.setClientMode(ip, puerto);
+    try {
+        socket.setClientMode(ip, puerto);
+    } catch (SocketException &e){
+        std::cout << "No se pudo establecer una conexión con el Servidor, "
+            "inténtelo más tarde." << std::endl;
+        std::cerr << e.what() << std::endl;
+    }
+
 
     std::mutex m;
     std::condition_variable cond;

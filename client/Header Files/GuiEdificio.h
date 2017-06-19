@@ -4,7 +4,7 @@
 #include "VistaTexto.h"
 #include "VistaGui.h"
 #include "PaqueteFabrica.h"
-#include "VistaProgressBar.h"
+#include "ProgressBar.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -27,7 +27,7 @@ class GuiEdificio {
   void resetSeleccion();
   VistaGui vistaGui;
   VistaTexto vistaTexto;
-  VistaProgressBar barraConstr;
+  ProgressBar barraConstr;
   Rect ok;
   Rect cancel;
   Rect next;
