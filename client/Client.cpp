@@ -23,7 +23,8 @@ int main(int argc, char *argv[]){
         socket.setClientMode(ip, puerto);
     } catch(SocketException &e){
         std::cout << "No se pudo establecer una conexión con el Servidor, "
-            "inténtelo más tarde." << std::endl;
+            "inténtelo más tarde. IP: " << ip << " puerto: " << puerto <<
+            "." << std::endl;
         std::cerr << e.what() << std::endl;
         return -1;
     }

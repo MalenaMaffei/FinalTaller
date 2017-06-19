@@ -60,7 +60,7 @@ void GuiEdificio::mostrar(Camara &camara) {
         if (hayEnConstruccion && tipoSeleccionado == tipoEnConstruccion){
             barraConstr.mostrarVertical(porcentajeConstruido, pReal +
                 Punto(CONSTR_RELX, CONSTR_RELY));
-//            TODO mensaje "en construccion"
+//            TODO mensaje "en construccion"-> hace falta?
         }
 
 //        TODO elegir label de la fabrica para poner

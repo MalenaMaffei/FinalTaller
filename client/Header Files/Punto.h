@@ -7,7 +7,6 @@ class Punto : public SDL_Point{
   Punto(int x = 0, int y = 0);
   Punto operator+(Punto otro);
   Punto operator-(Punto otro);
-//  TODO un mejor nombre no hay?
   int calcularDireccion(Punto otro);
   enum {
     norte = 2,

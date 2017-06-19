@@ -22,7 +22,6 @@ class Paquete {
   int coordToClient(double coord);
   std::string mensaje;
   CodigosPaquete codigos;
-//  TODO nombre horrible
   std::string crearCampo(int campo, int contenido);
   std::string crearCampo(int campo, std::string contenidoStr);
 };

@@ -7,6 +7,7 @@ class ElementoBala : public Elemento{
     ElementoBala(std::string id, int x, int y, Vista *textura);
     void mover(Punto nuevo);
     void matar();
+    void clicked(Click& click);
 };
 
 #endif //TPFINAL_ELEMENTOBALA_H

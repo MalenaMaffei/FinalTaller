@@ -10,3 +10,7 @@ void ElementoBandera::mostrar(Camara &camera) {
     currentClip = textura->getClip(++currentClip);
     ElementoColoreado::mostrar(camera);
 }
+
+void ElementoBandera::clicked(Click &click) {
+    return;
+}

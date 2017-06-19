@@ -9,6 +9,7 @@ class ElementoBandera : public ElementoColoreado {
   ElementoBandera(std::string id, int x, int y, Vista *textura,
                   int color);
   void mostrar(Camara &camera);
+  void clicked(Click& click);
 };
 
 #endif //TPFINAL_ELEMENTOBANDERA_H

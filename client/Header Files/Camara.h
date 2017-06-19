@@ -5,7 +5,6 @@
 #include "constantes.h"
 #include "Punto.h"
 #include "Rect.h"
-//TODO meter mostrar del background en camara? ver como esta hecho en tiles
 class Camara {
  public:
   static const int CAM_VEL = 700;

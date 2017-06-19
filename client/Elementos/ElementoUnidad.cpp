@@ -19,7 +19,6 @@ ElementoUnidad::ElementoUnidad(std::string id,
 void ElementoUnidad::mover(Punto nuevo) {
     direccion = rect.getPunto().calcularDireccion(nuevo);
     rect.setPunto(nuevo);
-    printf("me movi a: %i, %i\n", this->getRect().x, this->getRect().y);
     if (estado != enMovimiento) {
         currentClip = 0;
         estado = enMovimiento;
@@ -34,7 +33,6 @@ void ElementoUnidad::avanzarMuerte() {
     if (vistaMuerte->isLastClip(currentClip)){
         estado = haciendoNada;
         muerto = true;
-        printf("%i se murio\n", id);
         return;
     }
     ++currentClip;
@@ -68,9 +66,6 @@ void ElementoUnidad::matar() {
     }
     currentClip = 0;
     estado = muriendo;
-//    muriendo = true;
-//    enMovimiento = false;
-//    disparando = false;
     textura = vistaMuerte;
 }
 
@@ -96,5 +91,3 @@ void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
 void ElementoUnidad::guiRequest(ColectorDeAcciones &colector) const {
     colector.showHud();
 }
-
-//TODO clicked polimorfizar

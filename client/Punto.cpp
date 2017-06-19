@@ -20,7 +20,6 @@ Punto::Punto(int x, int y) {
 
 int Punto::calcularDireccion(Punto otro) {
     Punto shift = *this - otro;
-//    TODO horrible, crear clase coordenada
     if (shift.x > 0){
         if (shift.y > 0){
             return noroeste;

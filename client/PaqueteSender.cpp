@@ -21,8 +21,8 @@ void PaqueteSender::run() {
             Paquete paquete = cola.desencolar();
             try {
                 socket.SendStrWLen(paquete.getMensaje());
-                printf("el paquete mandado dice %s\n", paquete.getMensaje().c_str
-                    ());
+                printf("el paquete mandado dice %s\n",
+                       paquete.getMensaje().c_str());
             } catch(SocketException& e){
                 displayError(e);
                 shutdown();

@@ -8,8 +8,6 @@ const int TILE_CLIPS = 8;
 const int TILESX = 400;
 const int TILESY = 400;
 
-//TODO sacar esos numeros magicos y reemplazar por cuenta con nuevos TILESXY
-//const int LEVEL_WIDTH = SCREEN_WIDTH*8;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 800;
 const int LEVEL_WIDTH = TILESX*TILE_WIDTH;
