@@ -81,6 +81,7 @@
 
 
 ####Resuletos####
+
 34. ~~cliente se queda trabado cuando no hay server, en vez de crashear. ~~
 1. ~~Arreglar Bug Seleccion de muertos y moribundos.~~
 2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
