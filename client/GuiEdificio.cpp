@@ -64,7 +64,6 @@ void GuiEdificio::mostrar(Camara &camara) {
         }
 
 //        TODO elegir label de la fabrica para poner
-
     }
 }
 

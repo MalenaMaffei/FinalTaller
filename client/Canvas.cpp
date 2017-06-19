@@ -28,11 +28,10 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     colaEntrada(colaEntrada), colaSalida(colaSalida) {
     bool success = true;
 
-    if (SDL_Init( SDL_INIT_VIDEO ) < 0) {
-        printf( "No se pudo inicializar SDL. SDL Error: %s\n", SDL_GetError() );
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        printf("No se pudo inicializar SDL. SDL Error: %s\n", SDL_GetError());
         success = false;
-    }
-    else {
+    } else {
         if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
             printf("No se pudo activar filtro lineal a textura\n");
         }
@@ -44,8 +43,7 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
             printf( "No se pudo crear la ventana. SDL Error: %s\n", SDL_GetError
                 () );
             success = false;
-        }
-        else {
+        } else {
             gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
             if (gRenderer == NULL){
                 printf( "No se pudo crear renderizador. SDL Error: %s\n",
@@ -56,12 +54,12 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 
                 int imgFlags = IMG_INIT_PNG;
                 if (!(IMG_Init(imgFlags) & imgFlags)) {
-                    printf( "No se pudo inicializar a SDL_image could not SDL_image Error: %s\n", IMG_GetError() );
+                    printf("No se pudo inicializar a SDL_image could not SDL_image Error: %s\n", IMG_GetError());
                     success = false;
                 }
                 if (TTF_Init() == -1){
-                    printf( "No se pudo inicializar a SDL_ttf. SDL_ttf Error:"
-                                " %s\n", TTF_GetError() );
+                    printf("No se pudo inicializar a SDL_ttf. SDL_ttf Error:"
+                                " %s\n", TTF_GetError());
                     success = false;
                 }
             }
@@ -75,7 +73,6 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 
 
 void Canvas::close() {
-
     //Destroy window
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
@@ -201,7 +198,7 @@ void Canvas::startGame(){
 
         manejarPaquetes(elementoManager, hud, guiEdificio);
 
-        while (SDL_PollEvent( &e ) != 0){
+        while (SDL_PollEvent(&e) != 0){
             if (e.type == SDL_QUIT){
                 quit = true;
             }
@@ -241,9 +238,9 @@ void Canvas::startGame(){
 
 
         int frameTicks = capTimer.getTicks();
-        if( frameTicks < SCREEN_TICK_PER_FRAME ){
+        if (frameTicks < SCREEN_TICK_PER_FRAME){
             //Wait remaining time
-            SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+            SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
     }
 

@@ -20,9 +20,8 @@ Hud::Hud(SDL_Renderer *gRenderer,
     (vistaCaras),
 //                                  barraVida({Punto(X_HPBAR, Y_HPBAR), WIDTH_HPBAR,HEIGHT_HPBAR},
 //    gRenderer, {60,175,23}, {99,71,71}),
-                                        barraVida(barraVida),
-                                  seleccionado(false),
-                                        ubicacion(SCREEN_WIDTH - hud.getWidth(), 0), labelsRobot(labelsRobot),
+    barraVida(barraVida), seleccionado(false),
+    ubicacion(SCREEN_WIDTH - hud.getWidth(), 0), labelsRobot(labelsRobot),
                                         labelsVehiculo(labelsVehiculo){
     hudRect = {ubicacion,hud.getWidth(),hud.getHeight()};
 }

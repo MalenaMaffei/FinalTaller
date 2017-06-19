@@ -23,7 +23,7 @@ void PaqueteSender::run() {
                 socket.SendStrWLen(paquete.getMensaje());
                 printf("el paquete mandado dice %s\n", paquete.getMensaje().c_str
                     ());
-            } catch (SocketException& e){
+            } catch(SocketException& e){
                 displayError(e);
                 shutdown();
                 continue;

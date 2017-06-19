@@ -70,6 +70,10 @@ void Socket::CreateAndConnect(const char *ip, const char *port){
         }
     }
 
+    if (!connected){
+        throw SocketException("No se pudo conectar al Socket\n");
+    }
+
     fD = skt;
 }
 

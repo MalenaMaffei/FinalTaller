@@ -33,10 +33,11 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
 
         time_t seconds(currTiempo);
         tm *p = gmtime(&seconds);
+
 //        TODO esta bien formatear aca?
         char buffer [80];
 
-        strftime (buffer,80,"%M:%S",p);
+        strftime(buffer,80,"%M:%S",p);
         string minSec = string(buffer);
 //        puts (buffer);
 //        string minSec = std::to_string(p->tm_min) + ":" + std::to_string

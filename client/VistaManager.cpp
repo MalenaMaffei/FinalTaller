@@ -19,6 +19,7 @@
 #include "Header Files/VistaHeavyDisparar.h"
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
+#include <vector>
 
 VistaManager::VistaManager(SDL_Renderer *gRenderer) : gRenderer(gRenderer) {}
 
