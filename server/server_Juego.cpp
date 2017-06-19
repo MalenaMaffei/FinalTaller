@@ -408,7 +408,6 @@ void Juego::actualizarEdificios() {
 }
 
 void Juego::actualizarRecibidos() {
-//	std::unique_lock<std::mutex> lk(*m);
 	while (!colaDeRecibidos.isEmpty ()) {
 		Mensaje paquete = colaDeRecibidos.desencolar ();
 		std::string mensaje = paquete.getMensaje ();
@@ -426,11 +425,8 @@ void Juego::actualizarRecibidos() {
 						if (mensaje[1] == 'i')
 							this->recibirObtenerInfoFabrica(mensaje, src);
 						break;
-		}
-		
-//		colaDeRecibidos->pop ();
+		}		
 	}
-//	lk.unlock ();
 }
 
 void Juego::recibirCrear(std::string mensaje) {
