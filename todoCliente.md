@@ -1,24 +1,24 @@
-Cliente
+## Cliente
 
-Canvas.cpp:
+* *Canvas.cpp*:
 
-"Fix pedorro"
+    * **"Fix pedorro"**
 
-Explicar los timers utilizados
+    * Explicar los timers utilizados
 
-Separar la carga del juego del main loop
+    * Separar la carga del juego del *main loop*
 
-Cola Salida: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?
+* *Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?
 
-Realizar los TODOs
+* Realizar los *TODO*s
 
-Funcionalidad faltante
+    * Funcionalidad faltante
 
-Código no performante, poco claro, sin RAII, etc
+    * Código no performante, poco claro, sin RAII, etc
 
-Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.
+* Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.
 
-ELIMINAR BUSY WAITS
+* **ELIMINAR BUSY WAITS**
 
 -----
 
