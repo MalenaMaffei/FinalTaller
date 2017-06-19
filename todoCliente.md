@@ -16,7 +16,8 @@
 
     * Código no performante, poco claro, sin RAII, etc
 
-* Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.
+* ~~Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.~~ tiene los try catch necesarios e imprime mensajes mas amigables cuando pasa algo y  si no le pasas los parametros, te los pide. 
+
 
 * **ELIMINAR BUSY WAITS**
 
