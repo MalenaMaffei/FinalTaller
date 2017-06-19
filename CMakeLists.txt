@@ -41,6 +41,7 @@ file(GLOB VISTA_SRC
 	"client/Elementos/*.cpp"
         )
 add_executable(vista ${VISTA_SRC})
+set_target_properties(vista PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../client/)
 target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}  
 					${SDL_TTF_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES} Threads::Threads)
 
