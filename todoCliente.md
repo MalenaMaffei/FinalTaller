@@ -1,3 +1,27 @@
+Cliente
+
+Canvas.cpp:
+
+"Fix pedorro"
+
+Explicar los timers utilizados
+
+Separar la carga del juego del main loop
+
+Cola Salida: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?
+
+Realizar los TODOs
+
+Funcionalidad faltante
+
+Código no performante, poco claro, sin RAII, etc
+
+Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.
+
+ELIMINAR BUSY WAITS
+
+-----
+
 6. inhibir errores de valgrind de SDL.
 
 7. spcket reuseaddrinfo.
