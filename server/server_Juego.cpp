@@ -167,7 +167,7 @@ void Juego::eliminarMuertos() {
 
 	while (it1!=movibles.end()) {
 		Movible* movible = it1->second;
-		if (!movible->estaVivo () || movible->superaMaxDistancia ()) {
+		if (!movible->estaVivo ()) {
 //			std::cout<<"Id: "<<it1->first<<std::endl;
 //			std::cout<<"Vida: "<<movible->getVida ()<<std::endl;
 //			std::cout<<"elimino un movible"<<std::endl;
@@ -316,9 +316,12 @@ void Juego::actualizarDisparos() {
 			//TODO el tipo de municion es siempre 17
 			std::cout<<"antes de fabrica municiones"<<std::endl;
 			Municion* municion = fabricaMuniciones->getMunicion (17);
+			//TODO siempre busca en fabrica de robots, verificar para vehiculos tambien
+			double alcance = fabricaR->getAlcance (movible->getTipo ());
 			municion->setEquipo (movible->getEquipo ());
 			municion->setPosicion (movible->getPosicion ());
 			municion->setObjetivo (idObjetivo);
+			municion->setAlcance (alcance);
 			std::array<double,2> target = objetivo->getPosicion ();
 			municion->mover (target);
 			std::string idMunicion = "m"+agregarPadding(proximoIDMovible,2);
@@ -580,12 +583,15 @@ void Juego::run() {
 		clock_t tiempo2 = clock();
 		double intervaloDormir = CYCLE_TIME - 
 									double(tiempo2 - tiempo1)/CLOCKS_PER_SEC;
+		while (intervaloDormir<0) {
+			intervaloDormir+=CYCLE_TIME;
+		}
+		std::cout<<intervaloDormir<<std::endl;
 		struct timespec req = {0};
 		req.tv_sec = 0;
 		req.tv_nsec = intervaloDormir*NANO;
 		while (nanosleep(&req, &req) == -1); 
 	}
-	
 }
 
 bool Juego::hayGanador() {

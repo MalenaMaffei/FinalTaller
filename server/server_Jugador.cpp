@@ -28,12 +28,8 @@ void Jugador::run () {
 }
 
 void Jugador::enviarMensaje(std::string& mensaje, int id) {
-	std::cout<<"Mensaje: "<<mensaje<<std::endl;
-	std::cout<<"Id mensaje: "<<id<<std::endl;
-	std::cout<<"Id jugador: "<<this->id<<std::endl;
 	if (id != this->id && id != -1)
 		return;
-	std::cout<<"envio mensaje"<<std::endl;
 	socket.SendStrWLen(mensaje);
 }
 

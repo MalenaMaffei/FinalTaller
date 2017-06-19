@@ -90,3 +90,7 @@ std::vector<int> FabricaRobots::getRobotsPosibles(int nivel) {
 	}
 	return tiposPosibles;
 }
+
+double FabricaRobots::getAlcance(int tipo) {
+	return (double) alcances[tipo];
+}

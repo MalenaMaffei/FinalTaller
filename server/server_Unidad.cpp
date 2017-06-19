@@ -75,10 +75,6 @@ std::string Unidad::puedeDisparar () {
 	return std::string();	//empty string
 }
 
-bool Unidad::superaMaxDistancia () {
-	return false; //No tienen maxima distancia
-}
-
 bool Unidad::obtuvoBandera () {
 	if (bandera) {
 		bandera = false;

@@ -22,7 +22,8 @@
 Municion::Municion (int vida, double ancho, double alto,
 					int tipo, int danio, int velocidad) : 	
 											Movible(vida, ancho, alto, velocidad, tipo),
-											danio(danio) { 
+											danio(danio),
+											alcance(alcance) { 
 	
 }
 
@@ -49,6 +50,7 @@ Municion &Municion::operator=(Municion &orig) {
 	velocidad = orig.velocidad;
 	distancia = orig.distancia;
 	tipo = orig.tipo;
+	alcance = orig.alcance;
 	return *this;
 }
 
@@ -60,8 +62,8 @@ Municion::Municion(Municion &&orig) : Movible(orig.vida, orig.ancho, orig.alto,
 												orig.objetivo,
 												orig.distancia,
 												orig.tipo),
-										danio(orig.danio) {
-}
+										danio(orig.danio),
+										alcance(orig.alcance) { }
 
 Municion &Municion::operator=(Municion &&orig) {
 	objetivo = orig.objetivo;
@@ -74,6 +76,7 @@ Municion &Municion::operator=(Municion &&orig) {
 	velocidad = orig.velocidad;
 	distancia = orig.distancia;
 	tipo = orig.tipo;
+	alcance = orig.alcance;
 	return *this;
 }
 
@@ -85,6 +88,14 @@ int Municion::getDanio () {
 
 int Municion::getTipo () {
 	return tipo;
+}
+
+bool Municion::mover (std::array<double,2> destino) {
+	std::array<double, 2> direccion = { (destino[0] - this->posicion[0]),
+										(destino[1] - this->posicion[1])};	
+	double modulo = std::sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);
+	direccion = {direccion[0]*alcance/modulo, direccion[1]*alcance/modulo};
+	this->destino = {this->posicion[0]+direccion[0], this->posicion[1]+direccion[1]};
 }
 
 void Municion::colisionar(Municion& municion) {
@@ -129,11 +140,10 @@ bool Municion::obtuvoBandera() {
 	return false;
 }
 
-bool Municion::superaMaxDistancia () {
-	//Por ahora todas las municiones tienen alcance maximo 10
-	//TODO
-	if (distancia > 10.0) {
-		return true;
-	}
-	return false;
+bool Municion::estaVivo() {
+	return (vida>0 && posicion != destino);
+}
+
+void Municion::setAlcance(double alcance) {
+	this->alcance = alcance;
 }

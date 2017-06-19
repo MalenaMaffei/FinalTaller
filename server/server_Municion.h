@@ -32,21 +32,23 @@ class Municion : public Movible {
         Municion &operator=(Municion &&orig);
         int getTipo();
         int getDanio();
-        
+        void setAlcance(double alcance);
+        bool mover (std::array<double,2> destino) override;
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
-        bool superaMaxDistancia() override;
         void colisionar(Municion& municion) override;
         void colisionar(Unidad& personaje) override;
         void colisionar(Bloque& bloque) override;
         void colisionar(Objeto& objeto) override;
         void colisionar(Edificio& edificio) override;
         void colisionar(Bandera& bandera) override;
+        bool estaVivo() override;
         virtual ~Municion();
     private:
 //        Objeto* objetivo; //No se puede guardar un Objeto porque es abstracto, 
                             //si se puede un puntero a Objeto.
         int danio;
+        double alcance;
 };
 
 #endif /* MUNICION_H */

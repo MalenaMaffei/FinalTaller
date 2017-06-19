@@ -10,10 +10,10 @@ class Movible : public Objeto {
         Movible(int vida, double ancho, double alto, int velocidad, int tipo);
         Movible(const Movible& orig);
         Movible& operator=(const Movible& orig);
-        /* Recibe un destino final y realiza un paso hacia el destino, 
+        /* Recibe un destino final, 
          * guarda el destino para luego realizar pasos hacia el.
          */
-        bool mover (std::array<double,2> destino);
+        virtual bool mover (std::array<double,2> destino);
         /* Realiza un paso hacia el destino.
          */
         bool mover(double factorTerreno);
@@ -23,7 +23,6 @@ class Movible : public Objeto {
         void setEquipo(int idEquipo);
         void setTrayectoria(std::vector< std::array<double,2> > trayectoria);
         virtual void setPosicion(std::array<double,2> posicion) override;
-        virtual bool superaMaxDistancia() = 0;
         virtual std::string puedeDisparar() = 0;
         virtual bool obtuvoBandera() = 0;
         virtual void colisionar(Objeto& objeto) = 0;

@@ -24,6 +24,7 @@ public:
     Robot* getRobot(int tipo);
     int getCantidad(int tipo);
     int getTiempo(int tipo);
+    double getAlcance(int tipo);
     std::vector<int> getRobotsPosibles(int nivel);
 private:    
     //Caracteristicas de robot

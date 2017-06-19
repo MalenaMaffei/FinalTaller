@@ -38,7 +38,6 @@ class Unidad : public Movible {
         void colisionar(Bloque& bloque) override;
         void colisionar(Edificio& edificio) override;
         void colisionar (Bandera& bandera) override;
-        bool superaMaxDistancia();
         virtual ~Unidad();
     private:
         bool bandera;
