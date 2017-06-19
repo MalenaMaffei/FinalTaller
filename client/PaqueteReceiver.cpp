@@ -10,7 +10,7 @@ void PaqueteReceiver::run() {
         string mensaje;
         try {
             mensaje = socket.ReceiveStrWLen();
-        } catch (SocketException& e ){
+        } catch(SocketException& e ){
             displayError(e);
             shutdown();
             continue;

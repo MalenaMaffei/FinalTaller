@@ -1,6 +1,6 @@
 #ifndef TPFINAL_GREETER_H
 #define TPFINAL_GREETER_H
-
+#include <string>
 class Greeter {
  public:
     void greet();

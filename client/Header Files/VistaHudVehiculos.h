@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaHudVehiculos : public Vista {
  public:
-  VistaHudVehiculos(SDL_Renderer *gRenderer);
-
+  explicit VistaHudVehiculos(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUDVEHICULOS_H

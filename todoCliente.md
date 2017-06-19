@@ -36,6 +36,11 @@
 
 33. Hacer pruebas definitivas de no seleccion de muertos.
 
+34. cliente se queda trabado cuando no hay server, en vez de crashear. 
+
+
+
+
 
 
 1. ~~Arreglar Bug Seleccion de muertos y moribundos.~~
