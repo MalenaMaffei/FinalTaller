@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
     std::condition_variable cond;
 
     ColaPaquetes colaEntrada;
-    ColaSalida colaSalida(&m, &cond);
+    ColaSalida colaSalida(m, cond);
 
     PaqueteReceiver receiver(socket, colaEntrada);
     PaqueteSender sender(socket, colaSalida, &m, &cond);

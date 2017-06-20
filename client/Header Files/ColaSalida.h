@@ -5,13 +5,13 @@
 #include "ColaPaquetes.h"
 class ColaSalida : public ColaPaquetes{
  public:
-  ColaSalida(std::mutex *m, std::condition_variable *cond_v);
+  ColaSalida(std::mutex &m, std::condition_variable &cond_v);
   void encolar(Paquete paquete);
   Paquete desencolar();
 
  private:
-  std::mutex *m;
-  std::condition_variable *cond_v;
+  std::mutex &m;
+  std::condition_variable &cond_v;
 };
 
 #endif //TPFINAL_COLASALIDA_H
