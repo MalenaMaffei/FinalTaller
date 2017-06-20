@@ -19,11 +19,11 @@ class Camara {
 
   int getCamaraX();
   int getCamaraY();
-  Punto getOffset();
+  Punto getPos();
   SDL_Rect* getCamara();
 
 //  Chequea si el Rect pasado esta dentro de la camara.
-  bool checkCollision(Rect b);
+  bool estaEnfocado(Rect b);
  private:
     Rect mBox;
 

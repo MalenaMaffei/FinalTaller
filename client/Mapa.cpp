@@ -35,8 +35,32 @@ void Mapa::crearMapa(Paquete &paquete, VistaTiles &tilesTexture) {
         }
     }
 }
+
 void Mapa::mostrar(Camara &camara) {
-    std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
-      tile.mostrar(camara);
-    });
+//    std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
+//      tile.mostrar(camara);
+//    });
+
+//    TODO REFACTOR Y REVISAR XQ SE ITERAN 100 TILES DE MAS
+    Punto camStart = camara.getPos();
+    Punto camEnd = camStart + Punto(SCREEN_WIDTH, SCREEN_HEIGHT);
+    int col = camStart.x / TILE_WIDTH;
+    int fil = camStart.y / TILE_HEIGHT;
+    int headRowTile = col + fil*TILESX;
+
+    col = camEnd.x / TILE_WIDTH;
+    int tailRowTile = col + fil*TILESX;
+    fil = camEnd.y / TILE_HEIGHT;
+    int lastTile = col + fil*TILESX;
+    int iteradas = 0;
+    for (int i = headRowTile; i <= lastTile; i += TILESX) {
+        for (int j = 0; j <= tailRowTile - headRowTile; ++j) {
+            Tile tile = tiles[j+i];
+            tile.mostrar(camara);
+            ++iteradas;
+        }
+    }
+    printf("se iteraron: %i tiles\n", iteradas);
+
 }
+

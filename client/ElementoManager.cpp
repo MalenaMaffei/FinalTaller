@@ -72,6 +72,7 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
 
 void ElementoManager::elementosVivir(Camara &camara,Click &click,
                                      SelectBox &selectBox) {
+//    TODO remove_if remove_copy_if, ver si estos no son mejores.
     std::vector<string> muertos;
     for (const auto& kv : elementos) {
         Elemento* elemento = elementos.at(kv.first);

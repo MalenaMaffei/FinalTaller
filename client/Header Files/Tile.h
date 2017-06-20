@@ -10,7 +10,7 @@ class Tile {
 
     int getType();
 
-    SDL_Rect getBox();
+    Rect getRect();
 
    private:
     Rect mBox;

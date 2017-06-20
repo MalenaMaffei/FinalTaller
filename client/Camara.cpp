@@ -54,7 +54,7 @@ void Camara::move(float timeStep) {
     }
 }
 
-bool Camara::checkCollision(Rect b) {
+bool Camara::estaEnfocado(Rect b) {
     return mBox.hayColision(b);
 }
 
@@ -70,6 +70,6 @@ SDL_Rect *Camara::getCamara() {
     &mBox;
 }
 
-Punto Camara::getOffset() {
+Punto Camara::getPos() {
     return mBox.getPunto();
 }

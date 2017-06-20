@@ -2,13 +2,12 @@
 
 * *Canvas.cpp*:
 
-    * ~~**"Fix pedorro"**~~ Cambiado a fix malo
+    * ~~**"Fix pedorro"**~~ Cambiado a fix malo * **ELIMINAR BUSY WAITS** -> Preguntar donde, creo que es cuando espero al mapa y al color.
 
     * Explicar los timers utilizados
 
     * Separar la carga del juego del *main loop*
 
-* ~~*Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?~~ -> ojo que pop tiene mutex 
 
 * Realizar los *TODO*s
 
@@ -16,10 +15,6 @@
 
     * Código no performante, poco claro, sin RAII, etc -> Preguntar por sin RAII
 
-* ~~Crashea si no le paso los parámetros correctamente, no hay texto de ayuda.~~ tiene los try catch necesarios e imprime mensajes mas amigables cuando pasa algo y  si no le pasas los parametros, te los pide. 
-
-
-* **ELIMINAR BUSY WAITS** -> Preguntar donde, creo que es cuando espero al mapa y al color.
 
 * Hay mucho código comentado, hay código "complejo" sin comentar.
 
@@ -83,6 +78,11 @@
 33. Hacer pruebas definitivas de no seleccion de muertos.
 
 34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
+	Usar interfaz movible
+
+35. Que las guis pidan paquetes todo el tiempo
+
+36. consumo algo cpu, chequear que sean los tiles
 
 #### Resuletos ####
 

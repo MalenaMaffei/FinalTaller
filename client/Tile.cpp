@@ -11,8 +11,8 @@ Tile::Tile(int x, int y, int tileType, VistaTiles *textura) : mType(tileType)
 }
 
 void Tile::mostrar(Camara &camera){
-    if (camera.checkCollision(mBox)){
-        textura->mostrar(mBox.getPunto() - camera.getOffset(), mType);
+    if (camera.estaEnfocado(mBox)){
+        textura->mostrar(mBox.getPunto() - camera.getPos(), mType);
     }
 }
 
@@ -20,6 +20,6 @@ int Tile::getType(){
     return mType;
 }
 
-SDL_Rect Tile::getBox(){
+Rect Tile::getRect(){
     return mBox;
 }

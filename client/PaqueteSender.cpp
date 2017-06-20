@@ -9,9 +9,9 @@ PaqueteSender::PaqueteSender(const Socket &socket,
 
 void PaqueteSender::run() {
     while (! salir){
-//        Se va a quedar bloqueado aca hasta que haya algo para desencolar.
         Paquete paquete;
         try {
+//        Se va a quedar bloqueado aca hasta que haya algo para desencolar.
             paquete = cola.desencolar();
         } catch(std::runtime_error& e) {
             shutdown();

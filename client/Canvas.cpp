@@ -21,7 +21,7 @@
 #include "Header Files/Reproductor.h"
 #include <string>
 
-const int SCREEN_FPS = 30;
+const int SCREEN_FPS = 25;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
@@ -207,7 +207,7 @@ void Canvas::startGame(){
                 quit = true;
             }
             camara.handleEvent(e);
-            mouse.setState(e.type, e, camara.getOffset());
+            mouse.setState(e.type, e, camara.getPos());
         }
 
         float timeStep = stepTimer.getTicks() / 1000.f;
@@ -231,7 +231,7 @@ void Canvas::startGame(){
 
 //        TODO cambiar offset por camara! la gracia es que no se dibuje si no
 // se ve
-        selectBox.mostrar(gRenderer, camara.getOffset());
+        selectBox.mostrar(gRenderer, camara.getPos());
         hud.mostrar();
         guiEdificio.mostrar(camara);
 

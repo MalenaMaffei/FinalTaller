@@ -40,9 +40,10 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
 
 void GuiEdificio::mostrar(Camara &camara) {
 //    TODO REFACTORIZAR ESTO POR AMOR A DIOS y despues documentar
-    if (seMuestra && camara.checkCollision(Rect(position, vistaGui.getWidth()
-        , vistaGui.getHeight()))){
-        Punto offset = camara.getOffset();
+    if (seMuestra && camara.estaEnfocado(Rect(position,
+                                              vistaGui.getWidth(),
+                                              vistaGui.getHeight()))){
+        Punto offset = camara.getPos();
         Punto pReal = position - offset;
         cancel = relPosCANCEL.positiveShift(position);
         ok = relPosOK.positiveShift(position);
