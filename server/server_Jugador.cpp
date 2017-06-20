@@ -34,12 +34,15 @@ void Jugador::run () {
 		} catch (SocketException &e) {
 			if (!salir.get_value()) { //Se salio desde el cliente
 				std::cout<<"Un cliente fue cerrado"<<std::endl;
+				std::cout<<"Todos los clientes serán desconectados"<<std::endl;
+				mensaje = "8";
+				Mensaje paquete(mensaje, -1);
+				colaDeRecibidos.encolar(paquete);
 				this->finalizar();
 			}
 			// Si no, se salio del servidor
 			continue;
 		}
-		//Try/Catch
 		Mensaje paquete(mensaje, id);
 		colaDeRecibidos.encolar (paquete);
 	}
@@ -48,7 +51,11 @@ void Jugador::run () {
 void Jugador::enviarMensaje(std::string& mensaje, int id) {
 	if (id != this->id && id != -1)
 		return;
-	socket.SendStrWLen(mensaje);
+	try {
+		socket.SendStrWLen(mensaje);
+	} catch (SocketException &e) {
+		throw e;
+	}
 }
 
 int Jugador::getId() {
@@ -56,6 +63,9 @@ int Jugador::getId() {
 }
 
 void Jugador::finalizar() {
+	if (salir.get_value()) {
+		return;
+	}
 	salir.set_value(true);
 	socket.Shutdown(SHUT_RDWR);
 }

@@ -24,6 +24,7 @@
 #include <time.h>
 #include "server_constants.h"
 #include "server_FabricaMuniciones.h"
+#include "common_SocketException.h"
 #include <chrono>
 #include <string>
 #include "Mensaje.h"
@@ -44,7 +45,8 @@ enum comandos {
 	infoUnidad = '4',
 	mapa = '5',
 	equipo = '6',
-	infoFabrica = '7'
+	infoFabrica = '7',
+	desconectar = '8'
 };
 
 enum largos {
@@ -429,6 +431,9 @@ void Juego::actualizarRecibidos() {
 						if (mensaje[1] == 'i')
 							this->recibirObtenerInfoFabrica(mensaje, src);
 						break;
+		  case desconectar: 
+						this->finalizar();
+						break;
 		}		
 	}
 }
@@ -557,7 +562,12 @@ void Juego::enviarMensajesEncolados() {
 		Mensaje mensaje = colaDeEnviados.desencolar ();
 		for (Jugador *jugador : jugadores) {
 			std::string mensajeStr = mensaje.getMensaje ();
-			jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
+			try {
+				jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
+			} catch (SocketException &e) {
+				std::cout<<"Se desconectará el servidor"<<std::endl;
+				this->finalizar ();
+			}	
 		}
 	}
 }
