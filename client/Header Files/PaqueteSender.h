@@ -10,13 +10,8 @@
 class PaqueteSender : public PaqueteDelivery{
  public:
   PaqueteSender(const Socket &socket,
-                ColaSalida &cola,
-                std::mutex *m,
-                std::condition_variable *cond);
+                  ColaSalida &cola);
   void run();
- private:
-  std::mutex *m;
-  std::condition_variable *cond_v;
 };
 
 #endif //TPFINAL_PAQUETESENDER_H

@@ -4,21 +4,11 @@
 #include "Header Files/common_SocketException.h"
 #include <chrono>
 PaqueteSender::PaqueteSender(const Socket &socket,
-                             ColaSalida &cola,
-                             std::mutex *m,
-                             std::condition_variable *cond)
-    : PaqueteDelivery(socket, cola), m(m), cond_v(cond) {}
+                             ColaSalida &cola)
+    : PaqueteDelivery(socket, cola) {}
 
 void PaqueteSender::run() {
-//    std::chrono::duration<int> dosMinutos(120);
     while (! salir){
-//        std::unique_lock<std::mutex> lk(*m);
-//        if (cola.isEmpty()) {
-//            cond_v->wait_for(lk, dosMinutos);
-//        }
-
-//        if (!cola.isEmpty()){
-
 //        Se va a quedar bloqueado aca hasta que haya algo para desencolar.
         Paquete paquete;
         try {
@@ -27,7 +17,6 @@ void PaqueteSender::run() {
             shutdown();
             continue;
         }
-
 
         try {
             socket.SendStrWLen(paquete.getMensaje());
@@ -38,7 +27,6 @@ void PaqueteSender::run() {
             shutdown();
             continue;
         }
-//        }
     }
 }
 

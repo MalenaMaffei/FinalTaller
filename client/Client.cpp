@@ -29,15 +29,11 @@ int main(int argc, char *argv[]){
         return -1;
     }
 
-
-    std::mutex m;
-    std::condition_variable cond;
-
     ColaPaquetes colaEntrada;
-    ColaSalida colaSalida(m, cond);
+    ColaSalida colaSalida;
 
     PaqueteReceiver receiver(socket, colaEntrada);
-    PaqueteSender sender(socket, colaSalida, &m, &cond);
+    PaqueteSender sender(socket, colaSalida);
 
     receiver.start();
     sender.start();
@@ -46,8 +42,7 @@ int main(int argc, char *argv[]){
 //    Si llegue aca es porque se cerro la ventana
     receiver.shutdown();
     sender.shutdown();
-//    despierto al sender para que chequee condicion de salida.
-//    cond.notify_all();
+
 
     socket.Shutdown(SHUT_RDWR);
 

@@ -1,7 +1,6 @@
 #include "Header Files/ColaSalida.h"
 //TODO refactorizar para que pueda usar mutex madre
-ColaSalida::ColaSalida(std::mutex &m, std::condition_variable &cond_v)
-    : m(m), cond_v(cond_v) {}
+ColaSalida::ColaSalida() {}
 
 void ColaSalida::encolar(Paquete paquete) {
     bool estabaVAcia = paquetes.empty();
@@ -14,7 +13,6 @@ void ColaSalida::encolar(Paquete paquete) {
 
 Paquete ColaSalida::desencolar() {
     std::unique_lock<std::mutex> lk(m);
-//    std::chrono::duration<int> dosMinutos(120);
     if (isEmpty()) {
         cond_v.wait(lk);
     }
