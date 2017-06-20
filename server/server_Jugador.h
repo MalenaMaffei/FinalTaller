@@ -17,15 +17,18 @@
 #include "common_Thread.h"
 #include "common_Socket.h"
 #include "ColaMensajes.h"
+#include "server_BoolProtected.h"
 
 class Jugador : public Thread {
 public:
     Jugador(Socket &socket, ColaMensajes &colaDeRecibidos, int id);
     void enviarMensaje(std::string& mensaje, int id);
+    void finalizar();
     int getId();
     void run();
     virtual ~Jugador();
 private:
+    BoolProtected salir;
     Socket socket;
     int id;
     int equipo;

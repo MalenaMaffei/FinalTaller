@@ -68,14 +68,14 @@ main (int argc, char** argv)
 		jugador->start();
 	}
 
-/*	std::string salir;
+	std::string salir;
 	while (salir != "q") {
 		std::cin>>salir;
 	}
 	
 	if (!juego->hayGanador()) {
 		juego->finalizar();
-	}*/
+	}
 	
 	juego->join ();
 	

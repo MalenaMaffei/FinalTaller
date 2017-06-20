@@ -30,11 +30,14 @@
 #include <pthread.h>
 #include "server_Jugador.h"
 #include "ColaMensajes.h"
+#include "server_BoolProtected.h"
 
 class Juego : public Thread {
 public:
     Juego(ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores);
     void moverUnidades();
+    void finalizar();
+    bool yaFinalizo();
     bool hayGanador();
     void chequearColisiones();
     void eliminarMuertos();
@@ -57,6 +60,8 @@ private:
     void enviarCrear(Objeto* objeto);
     
     Mapa mapa;
+
+    BoolProtected finalizado;
     
     ColaMensajes& colaDeRecibidos;
 //    std::queue<std::string> colaDeEnviados;

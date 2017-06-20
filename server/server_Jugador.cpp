@@ -13,6 +13,7 @@
 
 #include "server_Jugador.h"
 #include <iostream>
+#include "common_SocketException.h"
 
 //TODO Move semantics
 //Implementar constructor por movimiento en socket
@@ -25,8 +26,19 @@ Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) :
 
 void Jugador::run () {
 	//TODO agregar bool salir
-	while (1) {
-		std::string mensaje = socket.ReceiveStrWLen ();
+	salir.set_value(false);
+	while (!salir.get_value()) {
+		std::string mensaje;
+		try {
+			mensaje = socket.ReceiveStrWLen ();
+		} catch (SocketException &e) {
+			if (!salir.get_value()) { //Se salio desde el cliente
+				std::cout<<"Un cliente fue cerrado"<<std::endl;
+				this->finalizar();
+			}
+			// Si no, se salio del servidor
+			continue;
+		}
 		//Try/Catch
 		Mensaje paquete(mensaje, id);
 		colaDeRecibidos.encolar (paquete);
@@ -41,6 +53,11 @@ void Jugador::enviarMensaje(std::string& mensaje, int id) {
 
 int Jugador::getId() {
 	return id;
+}
+
+void Jugador::finalizar() {
+	salir.set_value(true);
+	socket.Shutdown(SHUT_RDWR);
 }
 
 Jugador::~Jugador () { }

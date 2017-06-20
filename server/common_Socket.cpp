@@ -194,4 +194,8 @@ void Socket::setClientMode(string ip, string port) {
     CreateAndConnect(ip.c_str(), port.c_str());
 }
 
-Socket::~Socket() {}
+Socket::~Socket() {
+	if (fD == -1)
+		return;
+	this->Close();
+}

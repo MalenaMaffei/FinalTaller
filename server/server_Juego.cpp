@@ -73,8 +73,12 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 												jugadores(jugadores),
 												fabricaV(new FabricaVehiculos()),
 												fabricaR(new FabricaRobots()), 
-												fabricaMuniciones(new FabricaMuniciones()){ 
+												fabricaMuniciones(new FabricaMuniciones())
+												 { 
   
+	
+	finalizado.set_value (false);  
+	
 	std::string mensaje = "6" + std::to_string(equipo_1);
 	for (Jugador *jugador: jugadores) {
 		jugador->enviarMensaje (mensaje,jugador->getId()); //Envio equipo		
@@ -563,7 +567,7 @@ void Juego::run() {
 	std::array<double, 2> intermedio = {2.0,2.0};
 	std::array<double, 2> destino = {5.0, 5.0};
 	
-	while (!this->hayGanador()) {
+	while (!this->yaFinalizo()) {
 		clock_t tiempo1 = clock();
 		this->actualizarRecibidos ();
 		this->actualizarEdificios();
@@ -572,6 +576,9 @@ void Juego::run() {
 		this->chequearColisiones();
 		this->eliminarMuertos();
 		this->enviarMensajesEncolados();
+		if (this->hayGanador ()) {
+			this->finalizar();
+		}
 		clock_t tiempo2 = clock();
 		double intervaloDormir = CYCLE_TIME - 
 									double(tiempo2 - tiempo1)/CLOCKS_PER_SEC;
@@ -584,10 +591,22 @@ void Juego::run() {
 		req.tv_nsec = intervaloDormir*NANO;
 		while (nanosleep(&req, &req) == -1); 
 	}
+	
+	for (Jugador* jugador : jugadores) {
+		jugador->finalizar();
+	}
 }
 
 bool Juego::hayGanador() {
 	return false;
+}
+
+bool Juego::yaFinalizo () {
+	return finalizado.get_value ();
+}
+
+void Juego::finalizar() {
+	finalizado.set_value (true);
 }
 
 Juego::~Juego () { 
