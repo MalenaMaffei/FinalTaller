@@ -14,14 +14,20 @@
 #include "server_Jugador.h"
 #include <iostream>
 
+//TODO Move semantics
+//Implementar constructor por movimiento en socket
+//Agregar close en destructor de socket
+//Pasar por movimiento
 Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) : 
-												socket(socket),
+												socket(std::move(socket)),
 												colaDeRecibidos(colaDeRecibidos),
 												id(id) { }
 
 void Jugador::run () {
+	//TODO agregar bool salir
 	while (1) {
 		std::string mensaje = socket.ReceiveStrWLen ();
+		//Try/Catch
 		Mensaje paquete(mensaje, id);
 		colaDeRecibidos.encolar (paquete);
 	}

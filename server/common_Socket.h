@@ -19,6 +19,8 @@ class Socket {
   mode);
 
  public:
+    Socket();
+    Socket(Socket&& orig);
 //  abre un socket y luego realiza bind seguido de listen asi queda listo
 // para aceptar.
   void setServerMode(string port);

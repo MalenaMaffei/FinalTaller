@@ -55,12 +55,9 @@ main (int argc, char** argv)
 	
 	std::vector<Jugador*> jugadores;
 	
-	std::vector<Socket> sockets;
-	
 	for (int i=0; i<n; i++) {
 		Socket socket = aceptor.Accept ();
 		jugadores.push_back(new Jugador(socket, colaDeRecibidos, i));
-		sockets.push_back(socket);
 	}
 	
 	Juego* juego = new Juego(colaDeRecibidos, jugadores);
@@ -70,6 +67,11 @@ main (int argc, char** argv)
 	for (Jugador* jugador : jugadores) {
 		jugador->start();
 	}
+
+/*	std::string salir;
+	while (salir != "q") {
+		std::cin>>salir;
+	}*/
 	
 	juego->join ();
 	

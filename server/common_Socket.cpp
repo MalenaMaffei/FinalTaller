@@ -13,6 +13,8 @@
 #define LENGTH_SIZE 4
 #define BUFFSIZE 300
 
+Socket::Socket() { }
+
 int Socket::filladdrinfo(const char *ip, const char *port, int
 mode){
     int status = 0;
@@ -33,6 +35,10 @@ mode){
     if (status < 0) { return (NOK); }
     if (!res) { return NOK; }
     return OK;
+}
+
+Socket::Socket(Socket &&orig) : fD(orig.fD), res(orig.res) {
+	orig.fD = -1;
 }
 
 void Socket::Create(const char *ip, const char *port, int mode){
