@@ -25,7 +25,7 @@ const int SCREEN_FPS = 30;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
-    colaEntrada(colaEntrada), colaSalida(colaSalida) {
+    colaEntrada(colaEntrada), colaSalida(colaSalida), quit(false) {
     bool success = true;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -120,12 +120,18 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             hud.setInfo(tipo, vida);
         }
     }
+//    No lo pongo antes del while asi termina de desempaquetar todo. Aunque
+// en realidad no tiene sentido porque ni lo va a mostrar
+//    TODO decidir que hacer con esto
+    if (colaEntrada.estaCerrada()){
+        quit = true;
+    }
 }
 
 
 void Canvas::startGame(){
-    //Main loop flag
-    bool quit = false;
+
+
 
     //Event handler
     SDL_Event e;

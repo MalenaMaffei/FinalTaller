@@ -10,25 +10,35 @@ PaqueteSender::PaqueteSender(const Socket &socket,
     : PaqueteDelivery(socket, cola), m(m), cond_v(cond) {}
 
 void PaqueteSender::run() {
-    std::chrono::duration<int> dosMinutos(120);
+//    std::chrono::duration<int> dosMinutos(120);
     while (! salir){
-        std::unique_lock<std::mutex> lk(*m);
-        if (cola.isEmpty()) {
-            cond_v->wait_for(lk, dosMinutos);
+//        std::unique_lock<std::mutex> lk(*m);
+//        if (cola.isEmpty()) {
+//            cond_v->wait_for(lk, dosMinutos);
+//        }
+
+//        if (!cola.isEmpty()){
+
+//        Se va a quedar bloqueado aca hasta que haya algo para desencolar.
+        Paquete paquete;
+        try {
+            paquete = cola.desencolar();
+        } catch(std::runtime_error& e) {
+            shutdown();
+            continue;
         }
 
-        if (!cola.isEmpty()){
-            Paquete paquete = cola.desencolar();
-            try {
-                socket.SendStrWLen(paquete.getMensaje());
-                printf("el paquete mandado dice %s\n",
-                       paquete.getMensaje().c_str());
-            } catch(SocketException& e){
-                displayError(e);
-                shutdown();
-                continue;
-            }
+
+        try {
+            socket.SendStrWLen(paquete.getMensaje());
+            printf("el paquete mandado dice %s\n",
+                   paquete.getMensaje().c_str());
+        } catch(SocketException& e){
+            displayError(e);
+            shutdown();
+            continue;
         }
+//        }
     }
 }
 

@@ -5,6 +5,7 @@ PaqueteDelivery::PaqueteDelivery(const Socket &socket, ColaPaquetes &cola)
 
 void PaqueteDelivery::shutdown() {
     salir = true;
+    cola.cerrar();
 }
 
 void PaqueteDelivery::displayError(SocketException &e) {

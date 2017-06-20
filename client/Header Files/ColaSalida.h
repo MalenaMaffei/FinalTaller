@@ -8,7 +8,7 @@ class ColaSalida : public ColaPaquetes{
   ColaSalida(std::mutex &m, std::condition_variable &cond_v);
   void encolar(Paquete paquete);
   Paquete desencolar();
-
+  void cerrar();
  private:
   std::mutex &m;
   std::condition_variable &cond_v;

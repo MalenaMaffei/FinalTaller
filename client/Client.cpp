@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
     receiver.shutdown();
     sender.shutdown();
 //    despierto al sender para que chequee condicion de salida.
-    cond.notify_all();
+//    cond.notify_all();
 
     socket.Shutdown(SHUT_RDWR);
 

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Header Files/ColaPaquetes.h"
 
+ColaPaquetes::ColaPaquetes() : salir(false){}
+
 void ColaPaquetes::encolar(Paquete paquete){
     std::unique_lock<std::mutex> mlock(m);
     paquetes.push(paquete);
@@ -16,3 +18,12 @@ Paquete ColaPaquetes::desencolar() {
 bool ColaPaquetes::isEmpty() {
     return paquetes.empty();
 }
+
+void ColaPaquetes::cerrar() {
+    salir = true;
+}
+
+bool ColaPaquetes::estaCerrada() {
+    return salir;
+}
+
