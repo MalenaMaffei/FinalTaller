@@ -60,7 +60,7 @@ void Mapa::mostrar(Camara &camara) {
             ++iteradas;
         }
     }
-    printf("se iteraron: %i tiles\n", iteradas);
+//    printf("se iteraron: %i tiles\n", iteradas);
 
 }
 
