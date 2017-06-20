@@ -8,7 +8,7 @@
 
     * Separar la carga del juego del *main loop*
 
-* ~~*Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?~~ -> Creo que es thread safe, supongo que con referencias se refiere a los mutexes, confirmar. 
+* ~~*Cola Salida*: Usar referencias en vez de punteros... ¿Para qué se usa? ¿Es Thread safe?~~ -> ojo que pop tiene mutex 
 
 * Realizar los *TODO*s
 
@@ -34,11 +34,11 @@
 * Consumo alto de cpu sobre todo en el cliente.
 
 ### PREGUNTAS ###
-* Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso?
-* Updates de hud y factoryGui? Por ahora reciben la info cada vez que se hace un click, pero si me queda seleccionada no es que se actualiza. 
-* Clase bala. no la tuve en cuenta al diseñar y ahora me quedo un hibirido malisimo.
+* Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso? si
+* Updates de hud y factoryGui? Por ahora reciben la info cada vez que se hace un click, pero si me queda seleccionada no es que se actualiza. si
+* Clase bala. no la tuve en cuenta al diseñar y ahora me quedo un hibirido malisimo. interfaz  movible 
 * Clase ElementoGui, asi en hud y el oyto tengo una lista y nada mas les paso los paquetes que me llegan y cada uno se enciende o se apaga o setea sus atributos de acuerdo a eso. Me da miedo que me lleve mucho trabajo y sea dificil de debugguear
-* Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun
+* Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun OK
 -----
 ##### COMENTAR CODIGO #####
 
