@@ -71,6 +71,10 @@ main (int argc, char** argv)
 /*	std::string salir;
 	while (salir != "q") {
 		std::cin>>salir;
+	}
+	
+	if (!juego->hayGanador()) {
+		juego->finalizar();
 	}*/
 	
 	juego->join ();

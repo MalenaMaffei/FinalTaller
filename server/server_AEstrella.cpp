@@ -21,7 +21,10 @@ class compararElementosConPrioridad {
 
 
 const int heuristica(std::array<int, 2> origen, std::array<int, 2> destino) {
-	return sqrt(pow(origen[0]-destino[0],2) + pow(origen[1]-destino[1],2)); //Manhattan
+//	Euclideana
+//	return sqrt(pow(origen[0]-destino[0],2) + pow(origen[1]-destino[1],2)); 
+//	Manhattan
+	return abs(origen[0]-destino[0]) + abs(origen[1]-destino[1]);
 }
 
 const double modulo(std::array<int, 2> vector) {
