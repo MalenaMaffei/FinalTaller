@@ -9,7 +9,7 @@ const int TILESX = 400;
 const int TILESY = 400;
 
 const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 800;
+const int SCREEN_HEIGHT = 600;
 const int LEVEL_WIDTH = TILESX*TILE_WIDTH;
 const int LEVEL_HEIGHT = TILESY*TILE_HEIGHT;
 

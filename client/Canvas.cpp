@@ -21,7 +21,7 @@
 #include "Header Files/Reproductor.h"
 #include <string>
 
-const int SCREEN_FPS = 25;
+const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
@@ -130,7 +130,10 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 
 void Canvas::startGame(){
-
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+                             "Holi",
+                             "File is missing. Please reinstall the program.",
+                             NULL);
 
 
     //Event handler

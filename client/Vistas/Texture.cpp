@@ -21,10 +21,17 @@ bool Texture::loadFromFile(std::string path){
         printf("No se pudo cargar la imagen: %s. SDL_image Error: %s\n", path
             .c_str(), IMG_GetError());
     } else{
+        SDL_PixelFormat* fmt;
+        SDL_Surface* nueva = SDL_ConvertSurfaceFormat(loadedSurface,
+                                                      SDL_PIXELFORMAT_INDEX8,
+                                                      0);
         SDL_SetColorKey(loadedSurface, SDL_TRUE,
                         SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-
+//        SDL_SetColorKey(nueva, SDL_TRUE,
+//                        SDL_MapRGB(nueva->format, 0, 0xFF, 0xFF));
         newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
+//        newTexture = SDL_CreateTextureFromSurface(gRenderer, nueva);
+
         if (newTexture == NULL){
             printf("No se pudo crear textura de imagen: %s. SDL Error: %s\n",
                     path.c_str(), SDL_GetError());
@@ -34,6 +41,7 @@ bool Texture::loadFromFile(std::string path){
         }
 
         SDL_FreeSurface(loadedSurface);
+        SDL_FreeSurface(nueva);
     }
 
     mTexture = newTexture;
