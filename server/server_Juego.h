@@ -57,7 +57,6 @@ private:
     
     void enviarInfoFabrica(std::string id, int dst);
     void enviarInfoUnidad(std::string id, int dst);
-    void enviarCrear(Objeto* objeto);
     
     Mapa mapa;
 

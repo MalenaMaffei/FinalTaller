@@ -62,6 +62,14 @@ int Jugador::getId() {
 	return id;
 }
 
+void Jugador::setEquipo(int equipo) {
+	this->equipo = equipo;
+}
+
+int Jugador::getEquipo() {
+	return equipo;
+}
+
 void Jugador::finalizar() {
 	if (salir.get_value()) {
 		return;

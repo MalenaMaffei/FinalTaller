@@ -15,10 +15,31 @@
 #define MENSAJE_H
 
 #include <string>
+#include "server_Mapa.h"
+#include "server_Objeto.h"
+#include "server_Movible.h"
+#include "server_Unidad.h"
+#include "server_FabricaRobots.h"
+#include "server_FabricaVehiculos.h"
+#include <array>
+#include <vector>
+
+class Jugador;
 
 class Mensaje {
 public:
+    Mensaje();
     Mensaje(std::string mensaje, int id);
+    void mensajeDeEquipo(Jugador* jugador);
+    void mensajeDeMapa(Mapa& mapa);
+    void mensajeDeCrear(Objeto* objeto, std::string id, int equipo);
+    void mensajeDeMatar(std::string id);
+    void mensajeDeMover(Movible* movible, std::string id);
+    void mensajeDeDisparar(std::string id, Objeto* objetivo);
+    void mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst);
+    void mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
+                                FabricaRobots* fabricaR,
+                                FabricaVehiculos* fabricaV, int dst);
     std::string getMensaje();
     int getId();
     virtual ~Mensaje();

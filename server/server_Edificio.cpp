@@ -8,10 +8,10 @@
 #include <cmath>
 
 Edificio::Edificio (int vida, double ancho, double alto, 
-					int idEquipo, int tipo) :	
+					int equipo, int tipo) :	
 									Inmovible(vida,ancho,
 											alto, tipo),
-									idEquipo(idEquipo), 
+									equipo(equipo), 
 									tipoCreando (-1),
 									construccionesRealizadas (0),
 									nivel (1) { }
@@ -74,8 +74,12 @@ bool Edificio::estaCreando() {
 	return tipoCreando!=-1; //Si esta en -1 no esta creando nada
 }
 
+void Edificio::setEquipo(int equipo) {
+	this->equipo = equipo;
+}
+
 int Edificio::getEquipo() {
-	return idEquipo;
+	return equipo;
 }
 
 int Edificio::getPorcentajeConstruccion() {
