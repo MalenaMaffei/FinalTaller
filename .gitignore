@@ -1,6 +1,7 @@
 client/SonidoXML/
 client/SonidoXML/dist/
 client/SonidoXML/nbproject/
+client/vista
 /cliente/build/
 /cliente/dist/
 .*/

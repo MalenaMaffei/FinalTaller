@@ -43,6 +43,9 @@ void Mapa::mostrar(Camara &camara) {
 
 //    TODO REFACTOR Y REVISAR XQ SE ITERAN 100 TILES DE MAS
     Punto camStart = camara.getPos();
+//q
+
+
     Punto camEnd = camStart + Punto(SCREEN_WIDTH, SCREEN_HEIGHT);
     int col = camStart.x / TILE_WIDTH;
     int fil = camStart.y / TILE_HEIGHT;
@@ -63,4 +66,5 @@ void Mapa::mostrar(Camara &camara) {
 //    printf("se iteraron: %i tiles\n", iteradas);
 
 }
+Mapa::Mapa() : prevCamPos({-1,-1}) {}
 

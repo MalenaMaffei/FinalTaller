@@ -46,3 +46,7 @@ int Punto::calcularDireccion(Punto otro) {
         }
     }
 }
+
+bool Punto::operator==(Punto otro) {
+    return x == otro.x && y == otro.y;
+}
