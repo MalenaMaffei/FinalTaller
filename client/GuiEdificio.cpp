@@ -26,10 +26,10 @@ using std::string;
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
     : vistaGui(VistaGui(gRenderer)),vistaTexto(VistaTexto(gRenderer)),
       barraConstr(ProgressBar(7,37,gRenderer,{3,91,11}, {223,175,75})),
-      seMuestra(false),tipoSeleccionado(-1),posSeleccionada(0){
-        relPosCANCEL = {{CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON};
-        relPosNEXT = {{ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW};
-        relPosOK = {{OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON};
+      seMuestra(false),tipoSeleccionado(-1),posSeleccionada(0),
+      ok(Boton({OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON)),
+      cancel(Boton({CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON)),
+      next(Boton({ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW)){
         posUNIT = {UNIT_RELX, UNIT_RELY};
         posVida = {VIDA_RELX, VIDA_RELY};
         posNombre = {5,7};
@@ -45,9 +45,9 @@ void GuiEdificio::mostrar(Camara &camara) {
                                               vistaGui.getHeight()))){
         Punto offset = camara.getPos();
         Punto pReal = position - offset;
-        cancel = relPosCANCEL.positiveShift(position);
-        ok = relPosOK.positiveShift(position);
-        next = relPosNEXT.positiveShift(position);
+        cancel.ubicar(position);
+        ok.ubicar(position);
+        next.ubicar(position);
         vistaGui.mostrar(pReal, 0);
         CodigosPaquete codigos;
 
@@ -77,13 +77,13 @@ void GuiEdificio::abrirGui(Punto pos, std::string id) {
 }
 
 bool GuiEdificio::click(Punto click) {
-    if (cancel.incluyePunto(click)){
+    if (cancel.wasPressed(click)){
         resetSeleccion();
         seMuestra = false;
-    } else if (ok.incluyePunto(click)){
+    } else if (ok.wasPressed(click)){
         seMuestra = false;
         tipoSeleccionado = tiposConstruibles[posSeleccionada];
-    } else if (next.incluyePunto(click)){
+    } else if (next.wasPressed(click)){
         ++posSeleccionada;
         posSeleccionada %= tiposConstruibles.size();
     } else {

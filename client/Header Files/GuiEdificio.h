@@ -5,6 +5,7 @@
 #include "VistaGui.h"
 #include "PaqueteFabrica.h"
 #include "ProgressBar.h"
+#include "../Boton.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -40,17 +41,17 @@ class GuiEdificio {
   VistaGui vistaGui;
   VistaTexto vistaTexto;
   ProgressBar barraConstr;
-  Rect ok;
-  Rect cancel;
-  Rect next;
+
+  Boton ok;
+  Boton cancel;
+  Boton next;
+
   bool seMuestra;
   Punto posUNIT;
   Punto posVida;
   Punto posNombre;
   Punto position;
-  Rect relPosOK;
-  Rect relPosCANCEL;
-  Rect relPosNEXT;
+
 
   std::string idFabrica;
   int posSeleccionada;
