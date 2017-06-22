@@ -37,21 +37,8 @@ void Camara::handleEvent(SDL_Event& e){
 
 
 void Camara::move(float timeStep) {
-    mBox.x += mVelX * timeStep;
-
-    if (mBox.x < 0){
-        mBox.x = 0;
-    } else if (mBox.x > LEVEL_WIDTH - mBox.w){
-        mBox.x = LEVEL_WIDTH - mBox.w;
-    }
-
-    mBox.y += mVelY * timeStep;
-
-    if (mBox.y < 0){
-        mBox.y = 0;
-    }else if (mBox.y > LEVEL_HEIGHT - mBox.h){
-        mBox.y  = LEVEL_HEIGHT - mBox.h;
-    }
+    mBox = mBox.positiveShift(Punto(mVelX * timeStep, mVelY * timeStep));
+    Camara::ajustar();
 }
 
 bool Camara::estaEnfocado(Rect b) {
@@ -72,4 +59,30 @@ SDL_Rect *Camara::getCamara() {
 
 Punto Camara::getPos() {
     return mBox.getPunto();
+}
+
+void Camara::centrar() {
+    Punto origenCamara;
+    origenCamara = centro - Punto(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+    mBox.setPunto(origenCamara);
+    Camara::ajustar();
+}
+
+void Camara::setCentro(const Punto &centro) {
+    Camara::centro = centro;
+    Camara::centrar();
+}
+
+void Camara::ajustar() {
+    if (mBox.x < 0){
+        mBox.x = 0;
+    } else if (mBox.x > LEVEL_WIDTH - mBox.w){
+        mBox.x = LEVEL_WIDTH - mBox.w;
+    }
+
+    if (mBox.y < 0){
+        mBox.y = 0;
+    } else if (mBox.y > LEVEL_HEIGHT - mBox.h){
+        mBox.y  = LEVEL_HEIGHT - mBox.h;
+    }
 }

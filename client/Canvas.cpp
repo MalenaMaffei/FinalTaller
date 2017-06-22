@@ -97,6 +97,10 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
             elementoManager.crear(paquete);
+            if (paquete.getTipo() == codigos.fuerte && paquete.getColor() ==
+                miColor){
+                camara.setCentro(Punto(paquete.getX(), paquete.getY()));
+            }
 //            TODO crashea despues de reprodicr
 //            if (codigos.esRobot(paquete.getTipo())){
 //                reproductor.reproducirFX
@@ -139,7 +143,7 @@ void Canvas::startGame(){
     //Event handler
     SDL_Event e;
 
-    Camara camara;
+//    Camara camara;
 
 
 //Keeps track of time between steps
