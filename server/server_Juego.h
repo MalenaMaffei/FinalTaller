@@ -49,7 +49,7 @@ public:
     void run();
     virtual ~Juego();
 private:
-    
+    void inicializarJuego(const std::string& nombreArchivo);
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
     void recibirObtenerInfoUnidad(std::string mensaje, int src);
@@ -64,15 +64,11 @@ private:
     BoolProtected finalizado;
     
     ColaMensajes& colaDeRecibidos;
-//    std::queue<std::string> colaDeEnviados;
-    
     ColaMensajes colaDeEnviados;
     
     std::vector<Jugador*>& jugadores;
 
     FabricaUnidades* fabricaUnidades;
-//    FabricaVehiculos* fabricaV;
-//    FabricaRobots* fabricaR;
     FabricaMuniciones* fabricaMuniciones;
     
     //No puedo instanciar Movible porque es abstracto
@@ -81,6 +77,7 @@ private:
     std::map<std::string,Inmovible*> inmovibles; //Bloques, puentes, banderas
     std::map<std::string,Edificio*> edificios; //Edificio
     int proximoIDMovible;
+    int proximoIDInmovible;
 
     
 };

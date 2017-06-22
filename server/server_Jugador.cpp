@@ -31,9 +31,9 @@ void Jugador::run () {
 			if (!salir.get_value()) { //Se salio desde el cliente
 				std::cout<<"Un cliente fue cerrado"<<std::endl;
 				std::cout<<"Todos los clientes serán desconectados"<<std::endl;
-				mensaje = "8";
-				Mensaje paquete(mensaje, -1);
-				colaDeRecibidos.encolar(paquete);
+				Mensaje mensajeSalir;
+				mensajeSalir.mensajeDeSalir();
+				colaDeRecibidos.encolar(mensajeSalir);
 				this->finalizar();
 			}
 			// Si no, se salio del servidor

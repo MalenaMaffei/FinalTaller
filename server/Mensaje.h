@@ -39,6 +39,7 @@ public:
     void mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
                                 FabricaUnidades* fabricaUnidades,
                                 int dst);
+    void mensajeDeSalir();
     std::string getMensaje();
     int getId();
     virtual ~Mensaje();
