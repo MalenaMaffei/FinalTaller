@@ -31,6 +31,7 @@ void Camara::handleEvent(SDL_Event& e){
             case SDLK_s: mVelY -= CAM_VEL; break;
             case SDLK_a: mVelX += CAM_VEL; break;
             case SDLK_d: mVelX -= CAM_VEL; break;
+            case SDLK_SPACE: Camara::centrar(); break;
         }
     }
 }
