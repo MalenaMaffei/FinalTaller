@@ -130,10 +130,10 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 
 void Canvas::startGame(){
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-                             "Holi",
-                             "File is missing. Please reinstall the program.",
-                             NULL);
+//    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+//                             "Holi",
+//                             "File is missing. Please reinstall the program.",
+//                             NULL);
 
 
     //Event handler
