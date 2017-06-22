@@ -178,7 +178,7 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		int equipo = atoi(fuerte->FirstChildElement("EQUIPO")->GetText ());
 		int x = atoi(fuerte->FirstChildElement("X")->GetText ());
 		int y = atoi(fuerte->FirstChildElement("Y")->GetText ());
-		Edificio* edificio = new Edificio(10,x,y,equipo,3);
+		Edificio* edificio = new Edificio(10,10,12,equipo,3);
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
 		edificios[id] = edificio;
 		proximoIDInmovible++;
