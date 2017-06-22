@@ -17,6 +17,7 @@
 #include <sstream>
 #include <string>
 #include <array>
+#include <iostream>
 
 #define TODOS -1	//Si el mensaje estará destino a todos los clientes
 #define ESCALA 100	//Al enviar las posiciones al cliente se envian con 
@@ -136,8 +137,8 @@ void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
 
 //TODO refactorizar
 void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
-									FabricaRobots* fabricaR,
-									FabricaVehiculos* fabricaV, int dst) {
+									FabricaUnidades* fabricaUnidades,
+									int dst) {
   
 	std::string comando = charToStr(comandoInfoFabrica);
 	std::string tipoStr = agregarPadding2(edificio->getTipo(), largoTipo);
@@ -145,32 +146,17 @@ void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id,
 										largoVida);
 
 	int tipo = edificio->getTipo ();
-	std::vector<int> vehiculosPosibles;
-	std::vector<int> robotsPosibles;
-	if (tipo == 5 || tipo == 3) {
-		vehiculosPosibles = 
-					fabricaV->getVehiculosPosibles (edificio->getNivel ());
-	}
-	if (tipo == 4 || tipo == 3) {
-		robotsPosibles = 
-					fabricaR->getRobotsPosibles (edificio->getNivel ());
-	}
-
-	std::string cantidad = agregarPadding2(vehiculosPosibles.size() + 
-											robotsPosibles.size(), 
-										largoConstrucciones);
-
+	std::vector<int> unidadesPosibles;
+	unidadesPosibles = fabricaUnidades->getUnidadesPosibles(tipo,
+														 edificio->getNivel());
 	
+	std::string cantidad = agregarPadding2(unidadesPosibles.size(), 
+											largoConstrucciones);
+
 	std::string unidadesStr = "";
 	
-	for (int idActual : vehiculosPosibles) {
-		int tiempo = fabricaV->getTiempo (idActual)/TICKS; //En segundos
-		std::string tiempoStr = agregarPadding2(tiempo,4);
-		std::string idStr = agregarPadding2(idActual,2);
-		unidadesStr += idStr + tiempoStr;
-	}
-	for (int idActual : robotsPosibles) {
-		int tiempo = fabricaR->getTiempo (idActual)/TICKS; //En segundos 
+	for (int idActual : unidadesPosibles) {
+		int tiempo = fabricaUnidades->getTiempo (idActual)/TICKS; //En segundos
 		std::string tiempoStr = agregarPadding2(tiempo,4);
 		std::string idStr = agregarPadding2(idActual,2);
 		unidadesStr += idStr + tiempoStr;

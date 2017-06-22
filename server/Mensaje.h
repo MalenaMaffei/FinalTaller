@@ -19,8 +19,7 @@
 #include "server_Objeto.h"
 #include "server_Movible.h"
 #include "server_Unidad.h"
-#include "server_FabricaRobots.h"
-#include "server_FabricaVehiculos.h"
+#include "FabricaUnidades.h"
 #include <array>
 #include <vector>
 
@@ -38,8 +37,8 @@ public:
     void mensajeDeDisparar(std::string id, Objeto* objetivo);
     void mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst);
     void mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
-                                FabricaRobots* fabricaR,
-                                FabricaVehiculos* fabricaV, int dst);
+                                FabricaUnidades* fabricaUnidades,
+                                int dst);
     std::string getMensaje();
     int getId();
     virtual ~Mensaje();

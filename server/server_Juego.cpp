@@ -75,8 +75,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 												mapa(Mapa("mapa.map")), 
 												proximoIDMovible(0),
 												jugadores(jugadores),
-												fabricaV(new FabricaVehiculos()),
-												fabricaR(new FabricaRobots()), 
+												fabricaUnidades(new FabricaUnidades()),
 												fabricaMuniciones(new FabricaMuniciones())
 												 { 
   
@@ -117,7 +116,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 		jugador->enviarMensaje (mensajeStr, mensajeBandera.getId ());		
 	}
 	
-	Robot* robot = fabricaR->getRobot (9);
+	Robot* robot = fabricaUnidades->getRobot (9);
 	movibles["m00"] = (robot);
 	robot->setPosicion ({2,0});
 	robot->setEquipo (0);
@@ -291,7 +290,7 @@ void Juego::actualizarDisparos() {
 			std::cout<<"antes de fabrica municiones"<<std::endl;
 			Municion* municion = fabricaMuniciones->getMunicion (armamento);
 			//TODO siempre busca en fabrica de robots, verificar para vehiculos tambien
-			double alcance = fabricaR->getAlcance (movible->getTipo ());
+			double alcance = fabricaUnidades->getAlcance (movible->getTipo ());
 			municion->setEquipo (movible->getEquipo ());
 			municion->setPosicion (movible->getPosicion ());
 			municion->setObjetivo (idObjetivo);
@@ -331,7 +330,7 @@ void Juego::actualizarEdificios() {
 			continue;
 		}
 		if (tipo>=11 && tipo<=16) {
-			Vehiculo* vehiculo = fabricaV->getVehiculo (tipo);
+			Vehiculo* vehiculo = fabricaUnidades->getVehiculo (tipo);
 			std::string id ="m"+agregarPadding(proximoIDMovible,2);
 			movibles[id] = vehiculo;
 			vehiculo->setEquipo (edificio->getEquipo ());
@@ -347,7 +346,7 @@ void Juego::actualizarEdificios() {
 			proximoIDMovible++;
 		}
 		if (tipo>=6 && tipo<=10) {
-			Robot* robot = fabricaR->getRobot (tipo);
+			Robot* robot = fabricaUnidades->getRobot (tipo);
 			std::string id ="m"+agregarPadding(proximoIDMovible,2);
 			movibles[id] = robot;
 			robot->setEquipo (edificio->getEquipo ());
@@ -398,9 +397,9 @@ void Juego::recibirCrear(std::string mensaje) {
 	int tipo = stoi(tipoStr);
 	int tiempo;
 	if (tipo>=6 && tipo<=10) {
-		tiempo = fabricaR->getTiempo (tipo);
+		tiempo = fabricaUnidades->getTiempo (tipo);
 	} else if (tipo>=11 && tipo<=16) {
-		tiempo = fabricaV->getTiempo (tipo);
+		tiempo = fabricaUnidades->getTiempo (tipo);
 	}
 	Edificio* edificio = edificios[idStr];
 	int equipo = edificio->getEquipo ();
@@ -451,7 +450,7 @@ void Juego::enviarInfoUnidad (std::string id, int dst) {
 void Juego::enviarInfoFabrica (std::string id, int dst) {
 	Edificio* edificio = edificios[id];
 	Mensaje mensajeInfoFabrica;
-	mensajeInfoFabrica.mensajeDeInfoFabrica (edificio,id,fabricaR,fabricaV,dst);
+	mensajeInfoFabrica.mensajeDeInfoFabrica (edificio,id,fabricaUnidades,dst);
 	colaDeEnviados.encolar (mensajeInfoFabrica);
 }
 
@@ -471,10 +470,6 @@ void Juego::enviarMensajesEncolados() {
 }
 
 void Juego::run() {
-	std::array<double, 2> origen = {0.0,0.0};
-	std::array<double, 2> intermedio = {2.0,2.0};
-	std::array<double, 2> destino = {5.0, 5.0};
-	
 	while (!this->yaFinalizo()) {
 		clock_t tiempo1 = clock();
 		this->actualizarRecibidos ();
@@ -493,7 +488,6 @@ void Juego::run() {
 		while (intervaloDormir<0) {
 			intervaloDormir+=CYCLE_TIME;
 		}
-		std::cout<<intervaloDormir<<std::endl;
 		struct timespec req = {0};
 		req.tv_sec = 0;
 		req.tv_nsec = intervaloDormir*NANO;

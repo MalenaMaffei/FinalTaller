@@ -14,6 +14,7 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include "FabricaUnidades.h"
 #include "server_FabricaRobots.h"
 #include "server_FabricaVehiculos.h"
 #include "server_FabricaMuniciones.h"
@@ -68,9 +69,10 @@ private:
     ColaMensajes colaDeEnviados;
     
     std::vector<Jugador*>& jugadores;
-    
-    FabricaVehiculos* fabricaV;
-    FabricaRobots* fabricaR;
+
+    FabricaUnidades* fabricaUnidades;
+//    FabricaVehiculos* fabricaV;
+//    FabricaRobots* fabricaR;
     FabricaMuniciones* fabricaMuniciones;
     
     //No puedo instanciar Movible porque es abstracto

@@ -15,10 +15,6 @@
 #include <iostream>
 #include "common_SocketException.h"
 
-//TODO Move semantics
-//Implementar constructor por movimiento en socket
-//Agregar close en destructor de socket
-//Pasar por movimiento
 Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) : 
 												socket(std::move(socket)),
 												colaDeRecibidos(colaDeRecibidos),

@@ -24,7 +24,8 @@ class FabricaVehiculos {
         Vehiculo* getVehiculo(int tipo);
         int getCantidad(int tipo);
         int getTiempo(int tipo);
-        std::vector<int> getVehiculosPosibles(int nivel);
+        double getAlcance(int tipo);
+        void getVehiculosPosibles(int nivel, std::vector<int>& tiposPosibles);
     private:
         //Caracteristicas de vehiculo
         std::map<int,int> armamentos;
