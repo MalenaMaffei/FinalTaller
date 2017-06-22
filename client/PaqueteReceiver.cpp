@@ -18,9 +18,11 @@ void PaqueteReceiver::run() {
             continue;
         }
 
-		printf("paquete recibido: %s\n", mensaje.c_str());
         Paquete paquete;
         paquete.setMensaje(mensaje);
+        if (paquete.getComando() != 5){
+            printf("paquete recibido: %s\n", mensaje.c_str());
+        }
         cola.encolar(paquete);
 
 

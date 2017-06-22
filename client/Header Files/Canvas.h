@@ -25,7 +25,7 @@ class Canvas{
   ColaPaquetes& colaEntrada;
   ColaPaquetes& colaSalida;
 //  TODO falta ver que llegue con el mapa el color, por ahora hardcodeado
-  int miColor = 0;
+  int miColor;
   bool quit;
 };
 
