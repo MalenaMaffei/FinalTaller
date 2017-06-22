@@ -64,15 +64,11 @@ private:
     BoolProtected finalizado;
     
     ColaMensajes& colaDeRecibidos;
-//    std::queue<std::string> colaDeEnviados;
-    
     ColaMensajes colaDeEnviados;
     
     std::vector<Jugador*>& jugadores;
 
     FabricaUnidades* fabricaUnidades;
-//    FabricaVehiculos* fabricaV;
-//    FabricaRobots* fabricaR;
     FabricaMuniciones* fabricaMuniciones;
     
     //No puedo instanciar Movible porque es abstracto

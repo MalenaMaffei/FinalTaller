@@ -134,8 +134,6 @@ void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
 	this->id = dst;
 }
 
-
-//TODO refactorizar
 void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
 									FabricaUnidades* fabricaUnidades,
 									int dst) {
@@ -174,6 +172,12 @@ void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id,
 	this->mensaje = comando + id + tipoStr + vida + cantidad + unidadesStr +
 					construyendoStr;
 	this->id = dst;
+}
+
+void Mensaje::mensajeDeSalir() {
+	std::string comando = charToStr(comandoDesconectar);
+	this->mensaje = comando;
+	this->id = TODOS;
 }
 
 std::string Mensaje::getMensaje() {
