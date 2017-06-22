@@ -6,4 +6,5 @@ VistaFuerte::VistaFuerte(SDL_Renderer *gRenderer) : Vista(gRenderer,
                                                           HEIGHT,
                                                           WIDTH,
                                                           CLIPS,
-                                                          fuertePath) {}
+                                                          fuertePath,
+                                                          COLORES) {}

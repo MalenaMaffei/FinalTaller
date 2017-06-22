@@ -28,7 +28,7 @@ void PaqueteReceiver::run() {
 
 
 
-
+//
 //        Paquete color;
 //        color.setMensaje("60");
 //        cola.encolar(color);
@@ -57,7 +57,7 @@ void PaqueteReceiver::run() {
 //
 //
 //        Paquete fabrica;
-//        fabrica.setMensaje("00070010000100052");
+//        fabrica.setMensaje("0i010500002500031");
 //        cola.encolar(fabrica);
 ////        fabrica.setMensaje("00020050000500041");
 ////        cola.encolar(fabrica);
