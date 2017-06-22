@@ -28,6 +28,7 @@
 #include <chrono>
 #include <string>
 #include "Mensaje.h"
+#include <tinyxml2.h>
 
 #define SIN_EQUIPO 4
 
@@ -102,8 +103,10 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 	proximoIDMovible = 0;
 
 	//TODO inicializar juego (no hardcodeado)
+
+	this->inicializarJuego ("configuracion.xml");
 	
-	Bandera* bandera = new Bandera(2,1.5,2);
+/*	Bandera* bandera = new Bandera(2,1.5,2);
 	bandera->setPosicion ({0,0});
 	bandera->setEquipo(0);
 	inmovibles["i00"] = bandera;
@@ -155,8 +158,46 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 	for (Jugador *jugador : jugadores) {
 		std::string mensajeStr = mensajeEdificio.getMensaje ();
 		jugador->enviarMensaje (mensajeStr, mensajeBloque.getId());		
-	}
+	}*/
 }
+
+void Juego::inicializarJuego(const std::string& nombreArchivo) {
+	tinyxml2::XMLDocument xml;
+ 
+ 	if (xml.LoadFile(nombreArchivo.c_str())) {
+ 		xml.PrintError ();
+ 		return ;
+ 	}
+	
+	tinyxml2::XMLElement* config = xml.FirstChildElement ("CONFIGURACION");
+	tinyxml2::XMLElement* fuertes = config->FirstChildElement ("FUERTES");
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	tinyxml2::XMLElement* fuerte = fuertes->FirstChildElement ("FUERTE");
+	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
+		int equipo = atoi(fuerte->FirstChildElement("EQUIPO")->GetText ());
+		int x = atoi(fuerte->FirstChildElement("X")->GetText ());
+		int y = atoi(fuerte->FirstChildElement("Y")->GetText ());
+		Edificio* edificio = new Edificio(10,x,y,equipo,3);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		edificios[id] = edificio;
+		proximoIDInmovible++;
+		edificio->setPosicion ({x,y});
+		edificio->setEquipo(equipo);
+
+		Mensaje mensajeEdificio;
+		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
+		for (Jugador *jugador : jugadores) {
+			std::string mensajeStr = mensajeEdificio.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
+		}
+		fuerte = fuerte->NextSiblingElement ("FUERTE");
+	}
+	
+	
+	
+}
+
 
 void Juego::eliminarMuertos() {
 

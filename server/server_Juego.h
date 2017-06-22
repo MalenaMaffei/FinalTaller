@@ -49,7 +49,7 @@ public:
     void run();
     virtual ~Juego();
 private:
-    
+    void inicializarJuego(const std::string& nombreArchivo);
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
     void recibirObtenerInfoUnidad(std::string mensaje, int src);
@@ -77,6 +77,7 @@ private:
     std::map<std::string,Inmovible*> inmovibles; //Bloques, puentes, banderas
     std::map<std::string,Edificio*> edificios; //Edificio
     int proximoIDMovible;
+    int proximoIDInmovible;
 
     
 };
