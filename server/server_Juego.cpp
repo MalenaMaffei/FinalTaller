@@ -82,14 +82,15 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
   
 	
 	finalizado.set_value (false);  
-	
+	int i = 0;
 	for (Jugador *jugador: jugadores) {
 		//TODO le asigno a todos los juegadores el mismo equipo
-		jugador->setEquipo (equipo_1); 
+		jugador->setEquipo (i%4); 
 		Mensaje mensaje;
 		mensaje.mensajeDeEquipo(jugador);
 		std::string mensajeStr = mensaje.getMensaje ();
 		jugador->enviarMensaje (mensajeStr,mensaje.getId ()); //Envio equipo		
+		++i;
 	}
   
 	Mensaje mensajeMapa;
@@ -107,59 +108,6 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 
 	this->inicializarJuego ("configuracion.xml");
 	
-/*	Bandera* bandera = new Bandera(2,1.5,2);
-	bandera->setPosicion ({0,0});
-	bandera->setEquipo(0);
-	inmovibles["i00"] = bandera;
-	
-	Mensaje mensajeBandera;
-	// TODO reemplazar id hardcodeado
-	mensajeBandera.mensajeDeCrear (bandera,std::string("i00"),bandera->getEquipo ());
-	for (Jugador *jugador : jugadores) {
-		std::string mensajeStr = mensajeBandera.getMensaje ();
-		jugador->enviarMensaje (mensajeStr, mensajeBandera.getId ());		
-	}
-	
-	Robot* robot = fabricaUnidades->getRobot (9);
-	movibles["m00"] = (robot);
-	robot->setPosicion ({2,0});
-	robot->setEquipo (0);
-	
-	Mensaje mensajeRobot;
-	// TODO reemplazar id hardcodeado
-	mensajeRobot.mensajeDeCrear (robot,std::string("m00"), robot->getEquipo ());
-	for (Jugador *jugador : jugadores) {
-		std::string mensajeStr = mensajeRobot.getMensaje ();
-		jugador->enviarMensaje (mensajeStr, mensajeRobot.getId ());		
-	}
-
-	proximoIDMovible++;
-	
-	Bloque* bloque = new Bloque(10,2,2,0);
-	inmovibles["i01"] = (bloque);
-	bloque->setPosicion ({4,4});
-	
-	Mensaje mensajeBloque;
-	// TODO reemplazar SIN_EQUIPO
-	// TODO reemplazar id hardcodeado
-	mensajeBloque.mensajeDeCrear (bloque,std::string("i01"), SIN_EQUIPO);
-	for (Jugador *jugador : jugadores) {
-		std::string mensajeStr = mensajeBloque.getMensaje ();
-		jugador->enviarMensaje (mensajeStr, mensajeBloque.getId ());		
-	}
-
-	Edificio* edificio = new Edificio(10,10,12,0,3);
-	edificios["i02"] = (edificio);
-	edificio->setPosicion ({10,3});
-	edificio->setEquipo(0);
-	
-	Mensaje mensajeEdificio;
-	// TODO reemplzar id hardcodeado
-	mensajeEdificio.mensajeDeCrear (edificio,std::string("i02"), edificio->getEquipo ());
-	for (Jugador *jugador : jugadores) {
-		std::string mensajeStr = mensajeEdificio.getMensaje ();
-		jugador->enviarMensaje (mensajeStr, mensajeBloque.getId());		
-	}*/
 }
 
 void Juego::inicializarJuego(const std::string& nombreArchivo) {
