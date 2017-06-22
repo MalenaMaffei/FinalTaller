@@ -84,7 +84,8 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 	finalizado.set_value (false);  
 	
 	for (Jugador *jugador: jugadores) {
-		jugador->setEquipo (equipo_1);
+		//TODO le asigno a todos los juegadores el mismo equipo
+		jugador->setEquipo (equipo_1); 
 		Mensaje mensaje;
 		mensaje.mensajeDeEquipo(jugador);
 		std::string mensajeStr = mensaje.getMensaje ();
@@ -194,8 +195,98 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		fuerte = fuerte->NextSiblingElement ("FUERTE");
 	}
 	
+	tinyxml2::XMLElement* fabricasRobots = config->FirstChildElement ("FABRICAS_ROBOTS");
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	tinyxml2::XMLElement* fabrica = fabricasRobots->FirstChildElement ("FABRICA");
+	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
+		int equipo = atoi(fabrica->FirstChildElement("EQUIPO")->GetText ());
+		int x = atoi(fabrica->FirstChildElement("X")->GetText ());
+		int y = atoi(fabrica->FirstChildElement("Y")->GetText ());
+		Edificio* edificio = new Edificio(10,5,5,equipo,4);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		edificios[id] = edificio;
+		proximoIDInmovible++;
+		edificio->setPosicion ({x,y});
+		edificio->setEquipo(equipo);
+
+		Mensaje mensajeEdificio;
+		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
+		for (Jugador *jugador : jugadores) {
+			std::string mensajeStr = mensajeEdificio.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
+		}
+		fabrica = fabrica->NextSiblingElement ("FABRICA");
+	}
+
+	tinyxml2::XMLElement* fabricasVehiculos = config->FirstChildElement ("FABRICAS_VEHICULOS");
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	fabrica = fabricasVehiculos->FirstChildElement ("FABRICA");
+	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
+		int equipo = atoi(fabrica->FirstChildElement("EQUIPO")->GetText ());
+		int x = atoi(fabrica->FirstChildElement("X")->GetText ());
+		int y = atoi(fabrica->FirstChildElement("Y")->GetText ());
+		Edificio* edificio = new Edificio(10,5,5,equipo,5);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		edificios[id] = edificio;
+		proximoIDInmovible++;
+		edificio->setPosicion ({x,y});
+		edificio->setEquipo(equipo);
+
+		Mensaje mensajeEdificio;
+		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
+		for (Jugador *jugador : jugadores) {
+			std::string mensajeStr = mensajeEdificio.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
+		}
+		fabrica = fabrica->NextSiblingElement ("FABRICA");
+	}
 	
+	tinyxml2::XMLElement* banderas = config->FirstChildElement ("BANDERAS");
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	tinyxml2::XMLElement* banderaXML = banderas->FirstChildElement ("BANDERA");
+	for (int i = 0; banderaXML != NULL; ++i) {
+		int x = atoi(banderaXML->FirstChildElement("X")->GetText ());
+		int y = atoi(banderaXML->FirstChildElement("Y")->GetText ());
+		Bandera* bandera = new Bandera(2,1.5,2);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		inmovibles[id] = bandera;
+		proximoIDInmovible++;
+		bandera->setPosicion ({x,y});
+		bandera->setEquipo(SIN_EQUIPO);
+
+		Mensaje mensajeEdificio;
+		mensajeEdificio.mensajeDeCrear (bandera,id, bandera->getEquipo ());
+		for (Jugador *jugador : jugadores) {
+			std::string mensajeStr = mensajeEdificio.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
+		}
+		banderaXML = banderaXML->NextSiblingElement ("BANDERA");
+	}
 	
+	tinyxml2::XMLElement* rocas = config->FirstChildElement ("ROCAS");
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de bloques hardcodeados, fabricaEdificios
+	tinyxml2::XMLElement* roca = rocas->FirstChildElement ("ROCA");
+	for (int i = 0; roca != NULL; ++i) {
+		int x = atoi(roca->FirstChildElement("X")->GetText ());
+		int y = atoi(roca->FirstChildElement("Y")->GetText ());
+		Bloque* bloque = new Bloque(10,2,2,0);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		inmovibles[id] = bloque;
+		proximoIDInmovible++;
+		bloque->setPosicion ({x,y});
+
+		Mensaje mensajeEdificio;
+		mensajeEdificio.mensajeDeCrear (bloque,id, SIN_EQUIPO);
+		for (Jugador *jugador : jugadores) {
+			std::string mensajeStr = mensajeEdificio.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
+		}
+		roca = roca->NextSiblingElement ("ROCA");
+	}
 }
 
 
