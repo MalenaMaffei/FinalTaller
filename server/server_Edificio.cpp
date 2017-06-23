@@ -55,10 +55,12 @@ int Edificio::debeCrear () {
   	if (tiempoParaFabricacion == 0) {
 		tiempoParaFabricacion = tiempoFabricacion;
 		++construccionesRealizadas;
+		int aux = tipoCreando;
+		tipoCreando = -1; //Hago que cree de a uno
 		if (construccionesRealizadas%2) {
 			++nivel;
 		}
-		return tipoCreando; //Devuelvo tipo a crear
+		return aux; //Devuelvo tipo a crear
 	}
 //	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)

@@ -494,8 +494,10 @@ void Juego::recibirCrear(std::string mensaje) {
 void Juego::recibirMover(std::string mensaje) {
 	std::string idStr = mensaje.substr(1,id);
 	std::string xStr = mensaje.substr(4,x);
-	std::string yStr = mensaje.substr(10,y);
-	
+	std::cout<<xStr<<std::endl;
+	std::string yStr = mensaje.substr(9,y);
+	std::cout<<yStr<<std::endl;
+
 	double x = stod(xStr,NULL)/100;
 	double y = stod(yStr,NULL)/100;
 	
