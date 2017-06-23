@@ -60,7 +60,7 @@ int Edificio::debeCrear () {
 		}
 		return tipoCreando; //Devuelvo tipo a crear
 	}
-	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
+//	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)
 		tiempoParaFabricacion--;
 	return -1;

@@ -49,6 +49,10 @@ int Mapa::obtenerDimensionY() {
   return dimensionY;
 }
 
+int Mapa::obtenerTipo(std::array<int,2> posicion) {
+  return mapa[posicion[0]][posicion[1]].getTipoTerreno();
+}
+
 
 Mapa::~Mapa() {
 
@@ -56,8 +60,8 @@ Mapa::~Mapa() {
 
 std::string Mapa::obtenerMensajeMapa() {
 	std::string mapaString;
-	for (size_t i = 0; i<dimensionX; ++i) {
-		for (size_t j = 0; j<dimensionY; ++j) {
+	for (size_t j = 0; j<dimensionY; ++j) {
+		for (size_t i = 0; i<dimensionX; ++i) {
 			int tipo = mapa[i][j].getTipoTerreno();
 			mapaString += std::to_string(tipo);
 		}

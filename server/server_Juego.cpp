@@ -289,8 +289,12 @@ void Juego::moverUnidades() {
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
+		std::cout<<pos[0]<<","<<pos[1]<<std::endl;
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
+		std::cout<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
 		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero, movible);
+		std::cout<<"Tipo terreno: "<<mapa.obtenerTipo (posCasillero)<<std::endl;
+		std::cout<<"Factor terreno: "<<factorTerreno<<std::endl;
 		if (movible->mover (factorTerreno)) {
 			Mensaje mensajeMover;
 			mensajeMover.mensajeDeMover (movible, it1->first);
