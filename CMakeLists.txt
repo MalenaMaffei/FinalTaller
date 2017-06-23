@@ -58,6 +58,7 @@ file(GLOB MAP_SRC
 		"generadorMapa/*.h"
 		)
 add_executable(generador ${MAP_SRC})
+target_link_libraries(generador ${TINYXML2_LIBRARIES})
 set_target_properties(generador PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../generadorMapa/)
 
 

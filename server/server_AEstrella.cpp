@@ -75,9 +75,12 @@ std::vector < std::array<double,2> >
 //			std::cout<<"\tadyacente: "<<adyX<<","<<adyY<<std::endl;
 			std::array<int,2> adyacente = {adyX,adyY};
 						
+			double factorTerreno = mapa.obtenerFactorTerreno(adyacente, movible);
+			if (factorTerreno <= 0.001)
+				continue;
 			double distancia = modulo(adyacencia);
 			double nuevoCosto = costos[actual] + 
-								distancia/mapa.obtenerFactorTerreno(adyacente, movible);
+								distancia/factorTerreno;
 //			std::cout<<"\tcosto actual: "<<costos[actual]<<std::endl;
 //			std::cout<<"\tdistancia: "<<distancia<<std::endl;
 //			std::cout<<"\tfactor: "<<mapa.obtenerFactorTerreno(adyacente)<<std::endl;

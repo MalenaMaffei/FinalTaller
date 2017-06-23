@@ -21,17 +21,9 @@ bool Texture::loadFromFile(std::string path){
         printf("No se pudo cargar la imagen: %s. SDL_image Error: %s\n", path
             .c_str(), IMG_GetError());
     } else{
-        SDL_PixelFormat* fmt;
-        SDL_Surface* nueva = SDL_ConvertSurfaceFormat(loadedSurface,
-                                                      SDL_PIXELFORMAT_INDEX8,
-                                                      0);
         SDL_SetColorKey(loadedSurface, SDL_TRUE,
                         SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-//        SDL_SetColorKey(nueva, SDL_TRUE,
-//                        SDL_MapRGB(nueva->format, 0, 0xFF, 0xFF));
         newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
-//        newTexture = SDL_CreateTextureFromSurface(gRenderer, nueva);
-
         if (newTexture == NULL){
             printf("No se pudo crear textura de imagen: %s. SDL Error: %s\n",
                     path.c_str(), SDL_GetError());
@@ -41,7 +33,6 @@ bool Texture::loadFromFile(std::string path){
         }
 
         SDL_FreeSurface(loadedSurface);
-        SDL_FreeSurface(nueva);
     }
 
     mTexture = newTexture;
@@ -104,4 +95,25 @@ int Texture::getWidth(){
 
 int Texture::getHeight(){
     return mHeight;
+}
+
+void Texture::setAsRenderTarget() {
+    SDL_SetRenderTarget(gRenderer, mTexture);
+}
+
+bool Texture::createBlank(int width, int height, SDL_TextureAccess access) {
+    //Create uninitialized texture
+    mTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGBA8888, access, width, height );
+    if(mTexture == NULL) {
+        printf("Unable to create blank texture! SDL Error: %s\n", SDL_GetError());
+    }
+    else {
+        mWidth = width;
+        mHeight = height;
+    }
+
+    return mTexture != NULL;
+}
+void Texture::setBlendMode(SDL_BlendMode blending) {
+    SDL_SetTextureBlendMode( mTexture, blending );
 }

@@ -21,6 +21,8 @@ class Objeto {
         virtual void colisionar(Objeto& objeto) = 0;
         virtual void colisionar(Edificio& edificio) = 0;
         virtual void colisionar(Bandera& bandera) = 0;
+        void setId(std::string id);
+        std::string getId();
         int getPorcentajeVida();
         int getVida();
         virtual bool estaVivo();
@@ -29,6 +31,7 @@ class Objeto {
         bool recibirDanio(int danio);
         virtual ~Objeto();
     protected:
+        std::string id;
         int vidaTotal;
         int vida;
         double ancho;

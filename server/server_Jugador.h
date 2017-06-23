@@ -24,6 +24,8 @@ public:
     Jugador(Socket &socket, ColaMensajes &colaDeRecibidos, int id);
     void enviarMensaje(std::string& mensaje, int id);
     void finalizar();
+    void setEquipo(int equipo);
+    int getEquipo();
     int getId();
     void run();
     virtual ~Jugador();

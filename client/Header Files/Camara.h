@@ -15,7 +15,7 @@ class Camara {
   void handleEvent(SDL_Event& e);
 
 //  Mueve la camara con la velocidad y direccion seteadas por handleEvent.
-  void move(float timeStep);
+  void mover(float timeStep);
 
   int getCamaraX();
   int getCamaraY();
@@ -24,10 +24,13 @@ class Camara {
 
 //  Chequea si el Rect pasado esta dentro de la camara.
   bool estaEnfocado(Rect b);
+  void setCentro(const Punto &centro);
  private:
     Rect mBox;
-
-  float mVelX, mVelY;
+    Punto centro;
+    float velX, velY;
+    void centrar();
+    void ajustar();
 };
 
 #endif //TPFINAL_CAMARA_H

@@ -14,6 +14,7 @@ class Mapa {
         int obtenerDimensionX();
         int obtenerDimensionY();
         std::string obtenerMensajeMapa();
+        int obtenerTipo(std::array<int,2> posicion);
     private:
         unsigned int dimensionX;
         unsigned int dimensionY;

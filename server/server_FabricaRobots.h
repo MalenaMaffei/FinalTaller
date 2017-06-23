@@ -25,7 +25,7 @@ public:
     int getCantidad(int tipo);
     int getTiempo(int tipo);
     double getAlcance(int tipo);
-    std::vector<int> getRobotsPosibles(int nivel);
+    void getRobotsPosibles(int nivel, std::vector<int>& tiposPosibles);
 private:    
     //Caracteristicas de robot
     std::map<int,int> armamentos;

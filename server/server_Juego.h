@@ -14,8 +14,8 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
-#include "server_FabricaRobots.h"
-#include "server_FabricaVehiculos.h"
+#include "FabricaEdificios.h"
+#include "FabricaUnidades.h"
 #include "server_FabricaMuniciones.h"
 #include "server_Mapa.h"
 #include "server_Movible.h"
@@ -48,7 +48,7 @@ public:
     void run();
     virtual ~Juego();
 private:
-    
+    void inicializarJuego(const std::string& nombreArchivo);
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
     void recibirObtenerInfoUnidad(std::string mensaje, int src);
@@ -57,22 +57,19 @@ private:
     
     void enviarInfoFabrica(std::string id, int dst);
     void enviarInfoUnidad(std::string id, int dst);
-    void enviarCrear(Objeto* objeto);
     
     Mapa mapa;
 
     BoolProtected finalizado;
     
     ColaMensajes& colaDeRecibidos;
-//    std::queue<std::string> colaDeEnviados;
-    
     ColaMensajes colaDeEnviados;
     
     std::vector<Jugador*>& jugadores;
-    
-    FabricaVehiculos* fabricaV;
-    FabricaRobots* fabricaR;
+
+    FabricaUnidades* fabricaUnidades;
     FabricaMuniciones* fabricaMuniciones;
+    FabricaEdificios* fabricaEdificios;
     
     //No puedo instanciar Movible porque es abstracto
     std::array<int,4> banderasPorEquipo;
@@ -80,6 +77,8 @@ private:
     std::map<std::string,Inmovible*> inmovibles; //Bloques, puentes, banderas
     std::map<std::string,Edificio*> edificios; //Edificio
     int proximoIDMovible;
+    int proximoIDInmovible;
+    int proximoIDBala;
 
     
 };

@@ -8,10 +8,10 @@
 #include <cmath>
 
 Edificio::Edificio (int vida, double ancho, double alto, 
-					int idEquipo, int tipo) :	
+					int equipo, int tipo) :	
 									Inmovible(vida,ancho,
 											alto, tipo),
-									idEquipo(idEquipo), 
+									equipo(equipo), 
 									tipoCreando (-1),
 									construccionesRealizadas (0),
 									nivel (1) { }
@@ -55,12 +55,14 @@ int Edificio::debeCrear () {
   	if (tiempoParaFabricacion == 0) {
 		tiempoParaFabricacion = tiempoFabricacion;
 		++construccionesRealizadas;
+		int aux = tipoCreando;
+		tipoCreando = -1; //Hago que cree de a uno
 		if (construccionesRealizadas%2) {
 			++nivel;
 		}
-		return tipoCreando; //Devuelvo tipo a crear
+		return aux; //Devuelvo tipo a crear
 	}
-	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
+//	std::cout<<tiempoParaFabricacion<<"/"<<tiempoFabricacion<<std::endl;
 	if (tiempoParaFabricacion)
 		tiempoParaFabricacion--;
 	return -1;
@@ -74,8 +76,12 @@ bool Edificio::estaCreando() {
 	return tipoCreando!=-1; //Si esta en -1 no esta creando nada
 }
 
+void Edificio::setEquipo(int equipo) {
+	this->equipo = equipo;
+}
+
 int Edificio::getEquipo() {
-	return idEquipo;
+	return equipo;
 }
 
 int Edificio::getPorcentajeConstruccion() {

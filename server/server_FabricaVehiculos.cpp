@@ -73,8 +73,7 @@ int FabricaVehiculos::getTiempo(int tipo) {
 	return tiempos[tipo];
 }
 
-std::vector<int> FabricaVehiculos::getVehiculosPosibles(int nivel) {
-	std::vector<int> tiposPosibles;
+void FabricaVehiculos::getVehiculosPosibles(int nivel, std::vector<int>& tiposPosibles) {
 	for (const auto& actual: niveles) {
 		int nivelActual = actual.second;
 		if (nivelActual>nivel) {
@@ -83,5 +82,8 @@ std::vector<int> FabricaVehiculos::getVehiculosPosibles(int nivel) {
 		int tipoActual = actual.first;
 		tiposPosibles.push_back(tipoActual);
 	}
-	return tiposPosibles;
+}
+
+double FabricaVehiculos::getAlcance(int tipo) {
+	return (double) alcances[tipo];
 }

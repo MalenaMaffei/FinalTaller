@@ -37,14 +37,15 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
         }
 
         //Create window
-        gWindow = SDL_CreateWindow( "Z Game", SDL_WINDOWPOS_UNDEFINED,
+        gWindow = SDL_CreateWindow( "Z: El Ejercicio Final",
+                                    SDL_WINDOWPOS_UNDEFINED,
                                     SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
         if (gWindow == NULL) {
             printf( "No se pudo crear la ventana. SDL Error: %s\n", SDL_GetError
                 () );
             success = false;
         } else {
-            gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+            gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE );
             if (gRenderer == NULL){
                 printf( "No se pudo crear renderizador. SDL Error: %s\n",
                         SDL_GetError() );
@@ -97,6 +98,10 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
             elementoManager.crear(paquete);
+            if (paquete.getTipo() == codigos.fuerte && paquete.getColor() ==
+                miColor){
+                camara.setCentro(Punto(paquete.getX(), paquete.getY()));
+            }
 //            TODO crashea despues de reprodicr
 //            if (codigos.esRobot(paquete.getTipo())){
 //                reproductor.reproducirFX
@@ -139,7 +144,7 @@ void Canvas::startGame(){
     //Event handler
     SDL_Event e;
 
-    Camara camara;
+//    Camara camara;
 
 
 //Keeps track of time between steps
@@ -164,12 +169,12 @@ void Canvas::startGame(){
 //        TODO fix MALO hasta uqe se me ocurra una mejor manera
     }
 
-    VistaTiles tilesTexture(gRenderer);
-    Mapa mapa;
+
+    Mapa mapa(gRenderer);
     Paquete pMapa = colaEntrada.desencolar();
 //    TODO poner proper manejador de este tipo de paquetes aca.
     if (pMapa.getComando() == 5){
-        mapa.crearMapa(pMapa, tilesTexture);
+        mapa.crearMapa(pMapa);
     }
 
     VistaManager vistaManager(gRenderer);
@@ -200,6 +205,15 @@ void Canvas::startGame(){
                                 colaSalida);
 
 
+//    Texture target(gRenderer);
+//    if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
+//        printf( "Failed to create target texture!\n" );
+//    }
+//    target.setBlendMode(SDL_BLENDMODE_BLEND);
+
+
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
     while (!quit){
         capTimer.start();
 
@@ -215,9 +229,7 @@ void Canvas::startGame(){
 
         float timeStep = stepTimer.getTicks() / 1000.f;
 
-
-
-        camara.move(timeStep);
+        camara.mover(timeStep);
         //Restart step timer
         stepTimer.start();
 
@@ -228,9 +240,33 @@ void Canvas::startGame(){
 
         mapa.mostrar(camara);
 
+
+
+
+
+
         mouse.setMouseAction(selectBox, click);
 
+
+//        if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
+//            printf( "Failed to create target texture!\n" );
+//        }
+//        target.setBlendMode(SDL_BLENDMODE_BLEND);
+//
+//
+//        target.setAsRenderTarget();
+
+
+////tell render to use colore with alpha 0
+//        SDL_SetRenderDrawColor(gRenderer, 0,0,0,0);
+//
+////fill texture with transparent pixels
+//        SDL_RenderClear(gRenderer);
+
+
         elementoManager.elementosVivir(camara, click, selectBox);
+
+
 
 //        TODO cambiar offset por camara! la gracia es que no se dibuje si no
 // se ve
@@ -238,10 +274,20 @@ void Canvas::startGame(){
         hud.mostrar();
         guiEdificio.mostrar(camara);
 
+
+
+//        SDL_SetRenderTarget( gRenderer, NULL );
+//        target.render( 0, 0, NULL);
+
+
+
+
         //Update screen
         SDL_RenderPresent(gRenderer);
         colector.crearAcciones();
         mouse.resetState();
+
+
 
 
         int frameTicks = capTimer.getTicks();

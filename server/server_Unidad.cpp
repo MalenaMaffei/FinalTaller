@@ -23,7 +23,7 @@ Unidad::Unidad (int vida, double ancho, double alto,
 										alcance(alcance),
 										estado(REPOSO),
 										tiempoADisparo(0),
-										bandera(false), 
+										bandera(std::string()), 
 										armamento(armamento) { }
 
 void Unidad::dispararA(std::string objetivo) {
@@ -45,6 +45,8 @@ void Unidad::colisionar(Municion& municion) {
 }
 
 void Unidad::colisionar(Unidad& personaje) {
+	if (this->idEquipo == personaje.idEquipo) 
+		return;
 	this->retroceder ();
 	destino = posicion; //Si colisiono con otro personaje me quedo quieto
 	//En un futuro podría recalcular camino a destino
@@ -61,8 +63,13 @@ void Unidad::colisionar(Edificio& edificio) {
 }
 
 void Unidad::colisionar(Bandera& bandera) {
-	if (bandera.getEquipo() != idEquipo)
-		this->bandera = true;
+	std::cout<<"colisiono con bandera"<<std::endl;
+	std::cout<<bandera.getEquipo()<<std::endl;
+	std::cout<<idEquipo<<std::endl;
+	if (bandera.getEquipo() != idEquipo) {
+		std::cout<<"capturo bandera"<<std::endl;
+		this->bandera = bandera.getId();
+	}
 }
 
 
@@ -77,11 +84,16 @@ std::string Unidad::puedeDisparar () {
 }
 
 bool Unidad::obtuvoBandera () {
-	if (bandera) {
-		bandera = false;
+	if (!bandera.empty()) {
 		return true;
 	}
 	return false;
+}
+
+std::string Unidad::getBandera() {
+	std::string banderaAux = bandera;
+	bandera = std::string();
+	return banderaAux;
 }
 
 int Unidad::getArmamento () {

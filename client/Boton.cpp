@@ -1,4 +1,4 @@
-#include "Boton.h"
+#include "Header Files/Boton.h"
 
 Boton::Boton(Punto posRel, int w, int h) {
     botonRelativo = Rect(posRel, w, h);

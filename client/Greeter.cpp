@@ -20,7 +20,7 @@ void Greeter::greet() {
 
 std::string Greeter::pedirIp() {
     string input = "";
-    std::cout << "Ingrese la dirección IP [default "<< DEFAULT_IP"]:\n>";
+    std::cout << "\nIngrese la dirección IP [default "<< DEFAULT_IP"]:\n> ";
     getline(std::cin, input);
     if (input.empty()){
         return DEFAULT_IP;
@@ -30,7 +30,7 @@ std::string Greeter::pedirIp() {
 
 std::string Greeter::pedirPuerto() {
     string input = "";
-    std::cout << "Ingrese el puerto [default "<< DEFAULT_PORT"]:\n>";
+    std::cout << "Ingrese el puerto [default "<< DEFAULT_PORT"]:\n> ";
     getline(std::cin, input);
     if (input.empty()){
         return DEFAULT_PORT;

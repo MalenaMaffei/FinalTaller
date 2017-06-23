@@ -18,9 +18,11 @@ void PaqueteReceiver::run() {
             continue;
         }
 
-		printf("paquete recibido: %s\n", mensaje.c_str());
         Paquete paquete;
         paquete.setMensaje(mensaje);
+        if (paquete.getComando() != 5){
+            printf("paquete recibido: %s\n", mensaje.c_str());
+        }
         cola.encolar(paquete);
 
 
@@ -28,7 +30,7 @@ void PaqueteReceiver::run() {
 
 
 
-
+//
 //        Paquete color;
 //        color.setMensaje("60");
 //        cola.encolar(color);
@@ -57,7 +59,7 @@ void PaqueteReceiver::run() {
 //
 //
 //        Paquete fabrica;
-//        fabrica.setMensaje("00070010000100052");
+//        fabrica.setMensaje("0i010500002500031");
 //        cola.encolar(fabrica);
 ////        fabrica.setMensaje("00020050000500041");
 ////        cola.encolar(fabrica);

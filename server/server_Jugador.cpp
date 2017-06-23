@@ -15,10 +15,6 @@
 #include <iostream>
 #include "common_SocketException.h"
 
-//TODO Move semantics
-//Implementar constructor por movimiento en socket
-//Agregar close en destructor de socket
-//Pasar por movimiento
 Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) : 
 												socket(std::move(socket)),
 												colaDeRecibidos(colaDeRecibidos),
@@ -35,9 +31,9 @@ void Jugador::run () {
 			if (!salir.get_value()) { //Se salio desde el cliente
 				std::cout<<"Un cliente fue cerrado"<<std::endl;
 				std::cout<<"Todos los clientes serán desconectados"<<std::endl;
-				mensaje = "8";
-				Mensaje paquete(mensaje, -1);
-				colaDeRecibidos.encolar(paquete);
+				Mensaje mensajeSalir;
+				mensajeSalir.mensajeDeSalir();
+				colaDeRecibidos.encolar(mensajeSalir);
 				this->finalizar();
 			}
 			// Si no, se salio del servidor
@@ -60,6 +56,14 @@ void Jugador::enviarMensaje(std::string& mensaje, int id) {
 
 int Jugador::getId() {
 	return id;
+}
+
+void Jugador::setEquipo(int equipo) {
+	this->equipo = equipo;
+}
+
+int Jugador::getEquipo() {
+	return equipo;
 }
 
 void Jugador::finalizar() {
