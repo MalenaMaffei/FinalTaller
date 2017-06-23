@@ -26,7 +26,6 @@ private:
     //Clave: tipo de municion
     //Valor: daño
     std::map<int,int> municiones;
-
 };
 
 #endif /* FABRICAMUNICIONES_H */

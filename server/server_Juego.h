@@ -14,9 +14,8 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include "FabricaEdificios.h"
 #include "FabricaUnidades.h"
-#include "server_FabricaRobots.h"
-#include "server_FabricaVehiculos.h"
 #include "server_FabricaMuniciones.h"
 #include "server_Mapa.h"
 #include "server_Movible.h"
@@ -70,6 +69,7 @@ private:
 
     FabricaUnidades* fabricaUnidades;
     FabricaMuniciones* fabricaMuniciones;
+    FabricaEdificios* fabricaEdificios;
     
     //No puedo instanciar Movible porque es abstracto
     std::array<int,4> banderasPorEquipo;

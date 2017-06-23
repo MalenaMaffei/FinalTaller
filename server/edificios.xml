@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<EDIFICIOS>
+	<EDIFICIO>
+		<!--FUERTE-->
+		<ID>3</ID>
+		<VIDA>1000</VIDA>
+		<ANCHO>10</ANCHO>
+		<ALTO>12</ALTO>
+	</EDIFICIO>
+	<EDIFICIO>
+		<!--FABRICA ROBOTS-->
+		<ID>4</ID>
+		<VIDA>1000</VIDA>
+		<ANCHO>5</ANCHO>
+		<ALTO>5</ALTO>
+	</EDIFICIO>
+	<EDIFICIO>
+		<!--FABRICA VEHICULOS-->
+		<ID>5</ID>
+		<VIDA>1000</VIDA>
+		<ANCHO>5</ANCHO>
+		<ALTO>5</ALTO>
+	</EDIFICIO>
+</EDIFICIOS>

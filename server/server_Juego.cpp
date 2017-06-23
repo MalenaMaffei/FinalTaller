@@ -79,14 +79,15 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 												proximoIDBala(0),
 												jugadores(jugadores),
 												fabricaUnidades(new FabricaUnidades()),
-												fabricaMuniciones(new FabricaMuniciones())
+												fabricaMuniciones(new FabricaMuniciones()),
+												fabricaEdificios(new FabricaEdificios())
 												 { 
   
 	
 	finalizado.set_value (false);  
 	int i = 0;
 	for (Jugador *jugador: jugadores) {
-		//TODO le asigno a todos los juegadores el mismo equipo
+		//TODO emprolijar asignacion de equipos
 		jugador->setEquipo (i%4); 
 		Mensaje mensaje;
 		mensaje.mensajeDeEquipo(jugador);
@@ -104,8 +105,6 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 
 	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
 
-	//TODO inicializar juego (no hardcodeado)
-
 	this->inicializarJuego ("configuracion.xml");
 	
 }
@@ -120,21 +119,17 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 	
 	tinyxml2::XMLElement* config = xml.FirstChildElement ("CONFIGURACION");
 	tinyxml2::XMLElement* fuertes = config->FirstChildElement ("FUERTES");
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	//TODO reemplazar tipo hardcodeado
 	tinyxml2::XMLElement* fuerte = fuertes->FirstChildElement ("FUERTE");
 	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
 		int equipo = atoi(fuerte->FirstChildElement("EQUIPO")->GetText ());
-		int x = atoi(fuerte->FirstChildElement("X")->GetText ());
-		int y = atoi(fuerte->FirstChildElement("Y")->GetText ());
-		Edificio* edificio = new Edificio(10,10,12,equipo,3);
+		double x = atof(fuerte->FirstChildElement("X")->GetText ());
+		double y = atof(fuerte->FirstChildElement("Y")->GetText ());
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		edificio->setId (id);
+		proximoIDInmovible++;		
+		Edificio* edificio = fabricaEdificios->getEdificio (3,equipo,x,y,id);
 		edificios[id] = edificio;
-		proximoIDInmovible++;
-		edificio->setPosicion ({x,y});
-		edificio->setEquipo(equipo);
-
+		
 		Mensaje mensajeEdificio;
 		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
 		for (Jugador *jugador : jugadores) {
@@ -145,21 +140,17 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 	}
 	
 	tinyxml2::XMLElement* fabricasRobots = config->FirstChildElement ("FABRICAS_ROBOTS");
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	//TODO reemplazar tipo hardcodeado
 	tinyxml2::XMLElement* fabrica = fabricasRobots->FirstChildElement ("FABRICA");
 	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
 		int equipo = atoi(fabrica->FirstChildElement("EQUIPO")->GetText ());
-		int x = atoi(fabrica->FirstChildElement("X")->GetText ());
-		int y = atoi(fabrica->FirstChildElement("Y")->GetText ());
-		Edificio* edificio = new Edificio(10,5,5,equipo,4);
+		double x = atof(fabrica->FirstChildElement("X")->GetText ());
+		double y = atof(fabrica->FirstChildElement("Y")->GetText ());
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		edificio->setId(id);
-		edificios[id] = edificio;
 		proximoIDInmovible++;
-		edificio->setPosicion ({x,y});
-		edificio->setEquipo(equipo);
-
+		Edificio* edificio = fabricaEdificios->getEdificio (4,equipo,x,y,id);
+		edificios[id] = edificio;
+		
 		Mensaje mensajeEdificio;
 		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
 		for (Jugador *jugador : jugadores) {
@@ -170,20 +161,16 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 	}
 
 	tinyxml2::XMLElement* fabricasVehiculos = config->FirstChildElement ("FABRICAS_VEHICULOS");
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	//TODO reemplazar tipo hardcodeado
 	fabrica = fabricasVehiculos->FirstChildElement ("FABRICA");
 	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
 		int equipo = atoi(fabrica->FirstChildElement("EQUIPO")->GetText ());
-		int x = atoi(fabrica->FirstChildElement("X")->GetText ());
-		int y = atoi(fabrica->FirstChildElement("Y")->GetText ());
-		Edificio* edificio = new Edificio(10,5,5,equipo,5);
+		double x = atof(fabrica->FirstChildElement("X")->GetText ());
+		double y = atof(fabrica->FirstChildElement("Y")->GetText ());
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		edificio->setId(id);
-		edificios[id] = edificio;
 		proximoIDInmovible++;
-		edificio->setPosicion ({x,y});
-		edificio->setEquipo(equipo);
+		Edificio* edificio = fabricaEdificios->getEdificio (5,equipo,x,y,id);
+		edificios[id] = edificio;
 
 		Mensaje mensajeEdificio;
 		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
