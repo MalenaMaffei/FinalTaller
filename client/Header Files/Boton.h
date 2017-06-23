@@ -1,7 +1,7 @@
 #ifndef TPFINAL_BOTON_H
 #define TPFINAL_BOTON_H
 
-#include "Header Files/Rect.h"
+#include "Rect.h"
 class Boton {
  public:
   Boton(Punto posRel, int w, int h);

@@ -49,7 +49,6 @@ Punto Camara::getPos() {
 }
 
 void Camara::centrar() {
-    printf("centrando..\n");
     Punto origenCamara;
     origenCamara = centro - Punto(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
     mBox.setPunto(origenCamara);
