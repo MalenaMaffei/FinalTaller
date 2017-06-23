@@ -28,7 +28,6 @@
 #include <chrono>
 #include <string>
 #include "Mensaje.h"
-#include <tinyxml2.h>
 
 #define SIN_EQUIPO 4
 
@@ -71,6 +70,88 @@ std::string agregarPadding(int n, int len) {
 	return nStr;
 }
 
+void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
+									std::string nombreXML) {
+	
+	tinyxml2::XMLElement* edificiosXML = padre->FirstChildElement (nombreXML.c_str());
+	tinyxml2::XMLElement* edificioXML = edificiosXML->FirstChildElement ("EDIFICIO");
+	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
+		int equipo = atoi(edificioXML->FirstChildElement("EQUIPO")->GetText ());
+		double x = atof(edificioXML->FirstChildElement("X")->GetText ());
+		double y = atof(edificioXML->FirstChildElement("Y")->GetText ());
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		proximoIDInmovible++;		
+		Edificio* edificio = fabricaEdificios->getEdificio (tipo,equipo,x,y,id);
+		edificios[id] = edificio;
+		
+		Mensaje mensajeEdificio;
+		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
+		this->enviarMensaje(mensajeEdificio);
+		edificioXML = edificioXML->NextSiblingElement ("EDIFICIO");
+	}
+}
+
+void Juego::inicializarBanderas(int tipo, tinyxml2::XMLElement* padre, 
+								std::string nombreXML) {
+  	tinyxml2::XMLElement* banderas = padre->FirstChildElement (nombreXML.c_str ());
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
+	tinyxml2::XMLElement* banderaXML = banderas->FirstChildElement ("BANDERA");
+	for (int i = 0; banderaXML != NULL; ++i) {
+		int x = atoi(banderaXML->FirstChildElement("X")->GetText ());
+		int y = atoi(banderaXML->FirstChildElement("Y")->GetText ());
+		Bandera* bandera = new Bandera(2,1.5,tipo);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		bandera->setId (id);
+		inmovibles[id] = bandera;
+		proximoIDInmovible++;
+		bandera->setPosicion ({x,y});
+		bandera->setEquipo(SIN_EQUIPO);
+
+		Mensaje mensajeBandera;
+		mensajeBandera.mensajeDeCrear (bandera,id, bandera->getEquipo ());
+		this->enviarMensaje (mensajeBandera);
+		banderaXML = banderaXML->NextSiblingElement ("BANDERA");
+	}
+
+}
+
+void Juego::inicializarRocas(int tipo, tinyxml2::XMLElement* padre,
+								std::string nombreXML) {
+	tinyxml2::XMLElement* rocas = padre->FirstChildElement (nombreXML.c_str ());
+	//TODO reemplazar 4 hardcodeado
+	//TODO reemplazar parametros de bloques hardcodeados, fabricaEdificios
+	tinyxml2::XMLElement* roca = rocas->FirstChildElement ("ROCA");
+	for (int i = 0; roca != NULL; ++i) {
+		int x = atoi(roca->FirstChildElement("X")->GetText ());
+		int y = atoi(roca->FirstChildElement("Y")->GetText ());
+		Bloque* bloque = new Bloque(10,2,2,tipo);
+		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		bloque->setId (id);
+		inmovibles[id] = bloque;
+		proximoIDInmovible++;
+		bloque->setPosicion ({x,y});
+
+		Mensaje mensajeRoca;
+		mensajeRoca.mensajeDeCrear (bloque,id, SIN_EQUIPO);
+		this->enviarMensaje (mensajeRoca);
+		roca = roca->NextSiblingElement ("ROCA");
+	}  
+}
+
+void Juego::enviarMensaje(Mensaje& mensaje) {
+	for (Jugador *jugador: jugadores) {
+		std::string mensajeStr = mensaje.getMensaje();
+		jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
+		try {
+			jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
+		} catch (SocketException &e) {
+			std::cout<<"Se desconectará el servidor"<<std::endl;
+			this->finalizar (); 
+		}
+	}
+}
+
 Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :	
 												colaDeRecibidos(colaDeRecibidos),
 												mapa(Mapa("mapa.map")), 
@@ -98,10 +179,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
   
 	Mensaje mensajeMapa;
 	mensajeMapa.mensajeDeMapa (mapa);
-	for (Jugador *jugador: jugadores) {
-		std::string mensajeStr = mensajeMapa.getMensaje();
-		jugador->enviarMensaje (mensajeStr, mensajeMapa.getId ()); //Envio mapa		
-	}
+	this->enviarMensaje (mensajeMapa);
 
 	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
 
@@ -116,119 +194,14 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
  		xml.PrintError ();
  		return ;
  	}
-	
-	tinyxml2::XMLElement* config = xml.FirstChildElement ("CONFIGURACION");
-	tinyxml2::XMLElement* fuertes = config->FirstChildElement ("FUERTES");
-	//TODO reemplazar tipo hardcodeado
-	tinyxml2::XMLElement* fuerte = fuertes->FirstChildElement ("FUERTE");
-	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
-		int equipo = atoi(fuerte->FirstChildElement("EQUIPO")->GetText ());
-		double x = atof(fuerte->FirstChildElement("X")->GetText ());
-		double y = atof(fuerte->FirstChildElement("Y")->GetText ());
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		proximoIDInmovible++;		
-		Edificio* edificio = fabricaEdificios->getEdificio (3,equipo,x,y,id);
-		edificios[id] = edificio;
-		
-		Mensaje mensajeEdificio;
-		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
-		for (Jugador *jugador : jugadores) {
-			std::string mensajeStr = mensajeEdificio.getMensaje ();
-			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
-		}
-		fuerte = fuerte->NextSiblingElement ("FUERTE");
-	}
-	
-	tinyxml2::XMLElement* fabricasRobots = config->FirstChildElement ("FABRICAS_ROBOTS");
-	//TODO reemplazar tipo hardcodeado
-	tinyxml2::XMLElement* fabrica = fabricasRobots->FirstChildElement ("FABRICA");
-	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
-		int equipo = atoi(fabrica->FirstChildElement("EQUIPO")->GetText ());
-		double x = atof(fabrica->FirstChildElement("X")->GetText ());
-		double y = atof(fabrica->FirstChildElement("Y")->GetText ());
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		proximoIDInmovible++;
-		Edificio* edificio = fabricaEdificios->getEdificio (4,equipo,x,y,id);
-		edificios[id] = edificio;
-		
-		Mensaje mensajeEdificio;
-		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
-		for (Jugador *jugador : jugadores) {
-			std::string mensajeStr = mensajeEdificio.getMensaje ();
-			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
-		}
-		fabrica = fabrica->NextSiblingElement ("FABRICA");
-	}
 
-	tinyxml2::XMLElement* fabricasVehiculos = config->FirstChildElement ("FABRICAS_VEHICULOS");
-	//TODO reemplazar tipo hardcodeado
-	fabrica = fabricasVehiculos->FirstChildElement ("FABRICA");
-	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
-		int equipo = atoi(fabrica->FirstChildElement("EQUIPO")->GetText ());
-		double x = atof(fabrica->FirstChildElement("X")->GetText ());
-		double y = atof(fabrica->FirstChildElement("Y")->GetText ());
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		proximoIDInmovible++;
-		Edificio* edificio = fabricaEdificios->getEdificio (5,equipo,x,y,id);
-		edificios[id] = edificio;
-
-		Mensaje mensajeEdificio;
-		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
-		for (Jugador *jugador : jugadores) {
-			std::string mensajeStr = mensajeEdificio.getMensaje ();
-			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
-		}
-		fabrica = fabrica->NextSiblingElement ("FABRICA");
-	}
-	
-	tinyxml2::XMLElement* banderas = config->FirstChildElement ("BANDERAS");
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
-	tinyxml2::XMLElement* banderaXML = banderas->FirstChildElement ("BANDERA");
-	for (int i = 0; banderaXML != NULL; ++i) {
-		int x = atoi(banderaXML->FirstChildElement("X")->GetText ());
-		int y = atoi(banderaXML->FirstChildElement("Y")->GetText ());
-		Bandera* bandera = new Bandera(2,1.5,2);
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		bandera->setId (id);
-		inmovibles[id] = bandera;
-		proximoIDInmovible++;
-		bandera->setPosicion ({x,y});
-		bandera->setEquipo(SIN_EQUIPO);
-
-		Mensaje mensajeEdificio;
-		mensajeEdificio.mensajeDeCrear (bandera,id, bandera->getEquipo ());
-		for (Jugador *jugador : jugadores) {
-			std::string mensajeStr = mensajeEdificio.getMensaje ();
-			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
-		}
-		banderaXML = banderaXML->NextSiblingElement ("BANDERA");
-	}
-	
-	tinyxml2::XMLElement* rocas = config->FirstChildElement ("ROCAS");
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de bloques hardcodeados, fabricaEdificios
-	tinyxml2::XMLElement* roca = rocas->FirstChildElement ("ROCA");
-	for (int i = 0; roca != NULL; ++i) {
-		int x = atoi(roca->FirstChildElement("X")->GetText ());
-		int y = atoi(roca->FirstChildElement("Y")->GetText ());
-		Bloque* bloque = new Bloque(10,2,2,0);
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		bloque->setId (id);
-		inmovibles[id] = bloque;
-		proximoIDInmovible++;
-		bloque->setPosicion ({x,y});
-
-		Mensaje mensajeEdificio;
-		mensajeEdificio.mensajeDeCrear (bloque,id, SIN_EQUIPO);
-		for (Jugador *jugador : jugadores) {
-			std::string mensajeStr = mensajeEdificio.getMensaje ();
-			jugador->enviarMensaje (mensajeStr, mensajeEdificio.getId());
-		}
-		roca = roca->NextSiblingElement ("ROCA");
-	}
+	tinyxml2::XMLElement* config = xml.FirstChildElement ("CONFIGURACION");	
+	this->inicializarEdificios (3,config,"FUERTES");
+	this->inicializarEdificios (4,config,"FABRICAS_ROBOTS");
+	this->inicializarEdificios (5,config,"FABRICAS_VEHICULOS");
+	this->inicializarBanderas (2,config,"BANDERAS");
+	this->inicializarRocas (0,config,"ROCAS");
 }
-
 
 void Juego::eliminarMuertos() {
 
@@ -539,15 +512,7 @@ void Juego::enviarInfoFabrica (std::string id, int dst) {
 void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.isEmpty ()) {
 		Mensaje mensaje = colaDeEnviados.desencolar ();
-		for (Jugador *jugador : jugadores) {
-			std::string mensajeStr = mensaje.getMensaje ();
-			try {
-				jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
-			} catch (SocketException &e) {
-				std::cout<<"Se desconectará el servidor"<<std::endl;
-				this->finalizar ();
-			}	
-		}
+		this->enviarMensaje (mensaje);
 	}
 }
 
