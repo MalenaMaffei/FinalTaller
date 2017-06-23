@@ -75,6 +75,8 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 												colaDeRecibidos(colaDeRecibidos),
 												mapa(Mapa("mapa.map")), 
 												proximoIDMovible(0),
+												proximoIDInmovible(0),
+												proximoIDBala(0),
 												jugadores(jugadores),
 												fabricaUnidades(new FabricaUnidades()),
 												fabricaMuniciones(new FabricaMuniciones())
@@ -101,8 +103,6 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 	}
 
 	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
-	
-	proximoIDMovible = 0;
 
 	//TODO inicializar juego (no hardcodeado)
 
@@ -381,7 +381,7 @@ void Juego::actualizarDisparos() {
 			municion->setAlcance (alcance);
 			std::array<double,2> target = objetivo->getPosicion ();
 			municion->mover (target);
-			std::string idMunicion = "m"+agregarPadding(proximoIDMovible,2);
+			std::string idMunicion = agregarPadding(proximoIDBala,3);
 			movibles[idMunicion] = municion;
 			
 			//Envio mensaje de disparo
@@ -395,7 +395,7 @@ void Juego::actualizarDisparos() {
 										 municion->getEquipo ());
 			colaDeEnviados.encolar (mensajeCrear);
 			
-			proximoIDMovible ++;
+			proximoIDBala ++;
 		}
 		++it1;
 	}

@@ -78,6 +78,7 @@ private:
     std::map<std::string,Edificio*> edificios; //Edificio
     int proximoIDMovible;
     int proximoIDInmovible;
+    int proximoIDBala;
 
     
 };
