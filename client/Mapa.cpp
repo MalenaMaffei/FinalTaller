@@ -9,7 +9,6 @@ using std::string;
 
 void Mapa::crearMapa(Paquete &paquete) {
 
-//    TODO destruir esta textura al final
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
     int y = 0;
@@ -39,13 +38,8 @@ void Mapa::crearMapa(Paquete &paquete) {
 }
 
 void Mapa::mostrar(Camara &camara) {
-//    std::for_each(tiles.begin(), tiles.end(), [&](Tile& tile){
-//      tile.mostrar(camara);
-//    });
 
 //    TODO REFACTOR Y REVISAR XQ SE ITERAN 100 TILES DE MAS
-
-
 
 
     Punto camStart = camara.getPos();
@@ -57,8 +51,6 @@ void Mapa::mostrar(Camara &camara) {
     prevCamPos = camStart;
 
     target.setAsRenderTarget();
-
-
 
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -98,5 +90,9 @@ Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
     }
     target.setBlendMode(SDL_BLENDMODE_BLEND);
 
+}
+
+Mapa::~Mapa() {
+    delete vistaTiles;
 }
 

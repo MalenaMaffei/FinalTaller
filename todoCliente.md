@@ -26,7 +26,7 @@
 //            TODO se podria decir, si ya estaba salir==true, es que cerre yo
 // al socket entonces no muestro nada. si salir==false, se cerro desde el server
 
-* Consumo alto de cpu sobre todo en el cliente.
+~~* Consumo alto de cpu sobre todo en el cliente.~~
 
 ### PREGUNTAS ###
 * Hago excepciones para cuando no se puede cargar una imagen y cosas asi o dejo que el juego siga su curso? si
@@ -76,7 +76,6 @@
 
 35. Que las guis pidan paquetes todo el tiempo
 
-36. consumo algo cpu, chequear que sean los tiles
 
 #### Resuletos ####
 
@@ -103,3 +102,5 @@
 29. ~~SelectBox se vacia solo cuando se hace una nueva seleccion. Preguntar por las dudas.~~
 30. ~~Capturar ubicacion del fuerte al comienzo y qye empuece la pantalla alli.~~
 31. ~~shortcut para ir a tu fuerte de una.~~
+36. ~~consumo algo cpu, chequear que sean los tiles~~
+

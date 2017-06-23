@@ -5,7 +5,7 @@
 #include "VistaGui.h"
 #include "PaqueteFabrica.h"
 #include "ProgressBar.h"
-#include "../Boton.h"
+#include "Boton.h"
 #include <vector>
 #include <map>
 #include <string>

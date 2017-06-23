@@ -8,6 +8,7 @@ class Mapa {
   Mapa(SDL_Renderer *gRenderer);
   void crearMapa(Paquete &paquete);
   void mostrar(Camara &camara);
+  virtual ~Mapa();
  private:
   std::vector<Tile> tiles;
   Punto prevCamPos;
