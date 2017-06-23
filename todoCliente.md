@@ -67,12 +67,6 @@
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
 
-29. SelectBox se vacia solo cuando se hace una nueva seleccion. Preguntar por las dudas.
-
-30. Capturar ubicacion del fuerte al comienzo y qye empuece la pantalla alli.
-
-31. shortcut para ir a tu fuerte de una.
-
 32. Mouse sprite cuando se hace click?
 
 33. Hacer pruebas definitivas de no seleccion de muertos.
@@ -106,3 +100,6 @@
 24. ~~in lieu de gui, mostrar mensajes amigables por consola para setear ip y puerto.~~
 26. ~~mostrar el tiempo de una manera mas elegante.~~
 29. ~~Catch exceciponmes de socket, en particular cuando no te podes conectar, que diga server lleno conectese mas tarde o algo asi.~~
+29. ~~SelectBox se vacia solo cuando se hace una nueva seleccion. Preguntar por las dudas.~~
+30. ~~Capturar ubicacion del fuerte al comienzo y qye empuece la pantalla alli.~~
+31. ~~shortcut para ir a tu fuerte de una.~~

@@ -7,7 +7,9 @@
 #include <algorithm>
 using std::string;
 
-void Mapa::crearMapa(Paquete &paquete, VistaTiles &tilesTexture) {
+void Mapa::crearMapa(Paquete &paquete) {
+
+//    TODO destruir esta textura al final
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
     int y = 0;
@@ -16,7 +18,7 @@ void Mapa::crearMapa(Paquete &paquete, VistaTiles &tilesTexture) {
         tileType = std::stoi(string(1,c));
 
         if ((tileType >= 0) && (tileType < TILE_CLIPS)){
-            Tile tile(x*TILE_WIDTH, y*TILE_HEIGHT, tileType,&tilesTexture);
+            Tile tile(x*TILE_WIDTH, y*TILE_HEIGHT, tileType,vistaTiles);
             tiles.push_back(tile);
         } else {
             throw std::invalid_argument("Error generando mapa, "
@@ -42,8 +44,25 @@ void Mapa::mostrar(Camara &camara) {
 //    });
 
 //    TODO REFACTOR Y REVISAR XQ SE ITERAN 100 TILES DE MAS
+
+
+
+
     Punto camStart = camara.getPos();
-//q
+    if (camStart == prevCamPos){
+        target.render( 0, 0, NULL);
+        return;
+    }
+
+    prevCamPos = camStart;
+
+    target.setAsRenderTarget();
+
+
+
+
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
 
 
     Punto camEnd = camStart + Punto(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -64,7 +83,20 @@ void Mapa::mostrar(Camara &camara) {
         }
     }
 //    printf("se iteraron: %i tiles\n", iteradas);
+    SDL_SetRenderTarget( gRenderer, NULL );
+
+//    Show rendered to texture
+    target.render( 0, 0, NULL);
 
 }
-Mapa::Mapa() : prevCamPos({-1,-1}) {}
+
+Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
+    , gRenderer(gRenderer) {
+    vistaTiles = new VistaTiles(gRenderer);
+    if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
+        printf( "Failed to create target texture!\n" );
+    }
+    target.setBlendMode(SDL_BLENDMODE_BLEND);
+
+}
 
