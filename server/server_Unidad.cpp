@@ -45,6 +45,8 @@ void Unidad::colisionar(Municion& municion) {
 }
 
 void Unidad::colisionar(Unidad& personaje) {
+	if (this->idEquipo == personaje.idEquipo) 
+		return;
 	this->retroceder ();
 	destino = posicion; //Si colisiono con otro personaje me quedo quieto
 	//En un futuro podría recalcular camino a destino
