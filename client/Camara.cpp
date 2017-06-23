@@ -1,44 +1,30 @@
 #include "Header Files/Camara.h"
 #include "Header Files/Texture.h"
 #include "Header Files/Punto.h"
-Camara::Camara(){
-    //Initialize the collision box
-    mBox.x = 0;
-    mBox.y = 0;
-    mBox.w = SCREEN_WIDTH;
-    mBox.h = SCREEN_HEIGHT;
-
-    //Initialize the velocity
-    mVelX = 0;
-    mVelY = 0;
-//    SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-}
+Camara::Camara() : mBox(Punto(), SCREEN_WIDTH,SCREEN_HEIGHT), velX(0), velY(0){}
 
 void Camara::handleEvent(SDL_Event& e){
-    //If a key was pressed
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0){
-        //Adjust the velocity
         switch (e.key.keysym.sym){
-            case SDLK_w: mVelY -= CAM_VEL; break;
-            case SDLK_s: mVelY += CAM_VEL; break;
-            case SDLK_a: mVelX -= CAM_VEL; break;
-            case SDLK_d: mVelX += CAM_VEL; break;
+            case SDLK_w: velY -= CAM_VEL; break;
+            case SDLK_s: velY += CAM_VEL; break;
+            case SDLK_a: velX -= CAM_VEL; break;
+            case SDLK_d: velX += CAM_VEL; break;
         }
     }else if (e.type == SDL_KEYUP && e.key.repeat == 0){
-        //Adjust the velocity
         switch (e.key.keysym.sym){
-            case SDLK_w: mVelY += CAM_VEL; break;
-            case SDLK_s: mVelY -= CAM_VEL; break;
-            case SDLK_a: mVelX += CAM_VEL; break;
-            case SDLK_d: mVelX -= CAM_VEL; break;
+            case SDLK_w: velY += CAM_VEL; break;
+            case SDLK_s: velY -= CAM_VEL; break;
+            case SDLK_a: velX += CAM_VEL; break;
+            case SDLK_d: velX -= CAM_VEL; break;
             case SDLK_SPACE: Camara::centrar(); break;
         }
     }
 }
 
 
-void Camara::move(float timeStep) {
-    mBox = mBox.positiveShift(Punto(mVelX * timeStep, mVelY * timeStep));
+void Camara::mover(float timeStep) {
+    mBox = mBox.positiveShift(Punto(velX * timeStep, velY * timeStep));
     Camara::ajustar();
 }
 
@@ -63,6 +49,7 @@ Punto Camara::getPos() {
 }
 
 void Camara::centrar() {
+    printf("centrando..\n");
     Punto origenCamara;
     origenCamara = centro - Punto(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
     mBox.setPunto(origenCamara);
