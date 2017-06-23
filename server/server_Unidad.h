@@ -31,6 +31,7 @@ class Unidad : public Movible {
                     int alcance, int velocidad, int tipo, int armamento);
         void dispararA(std::string objetivo);
         int getArmamento();
+        std::string getBandera();
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
         void colisionar(Municion& municion) override;
@@ -41,7 +42,7 @@ class Unidad : public Movible {
         void colisionar (Bandera& bandera) override;
         virtual ~Unidad();
     private:
-        bool bandera;
+        std::string bandera;
         int frecuenciaDisparo;
         int tiempoADisparo;
         int alcance;

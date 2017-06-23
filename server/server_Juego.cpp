@@ -129,6 +129,7 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		int y = atoi(fuerte->FirstChildElement("Y")->GetText ());
 		Edificio* edificio = new Edificio(10,10,12,equipo,3);
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		edificio->setId (id);
 		edificios[id] = edificio;
 		proximoIDInmovible++;
 		edificio->setPosicion ({x,y});
@@ -153,6 +154,7 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		int y = atoi(fabrica->FirstChildElement("Y")->GetText ());
 		Edificio* edificio = new Edificio(10,5,5,equipo,4);
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		edificio->setId(id);
 		edificios[id] = edificio;
 		proximoIDInmovible++;
 		edificio->setPosicion ({x,y});
@@ -177,6 +179,7 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		int y = atoi(fabrica->FirstChildElement("Y")->GetText ());
 		Edificio* edificio = new Edificio(10,5,5,equipo,5);
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		edificio->setId(id);
 		edificios[id] = edificio;
 		proximoIDInmovible++;
 		edificio->setPosicion ({x,y});
@@ -200,6 +203,7 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		int y = atoi(banderaXML->FirstChildElement("Y")->GetText ());
 		Bandera* bandera = new Bandera(2,1.5,2);
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		bandera->setId (id);
 		inmovibles[id] = bandera;
 		proximoIDInmovible++;
 		bandera->setPosicion ({x,y});
@@ -223,6 +227,7 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 		int y = atoi(roca->FirstChildElement("Y")->GetText ());
 		Bloque* bloque = new Bloque(10,2,2,0);
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
+		bloque->setId (id);
 		inmovibles[id] = bloque;
 		proximoIDInmovible++;
 		bloque->setPosicion ({x,y});
@@ -289,12 +294,8 @@ void Juego::moverUnidades() {
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
-		std::cout<<pos[0]<<","<<pos[1]<<std::endl;
 		std::array<int,2> posCasillero = {(int) pos[0], (int) pos[1]};
-		std::cout<<posCasillero[0]<<","<<posCasillero[1]<<std::endl;
 		double factorTerreno = mapa.obtenerFactorTerreno (posCasillero, movible);
-		std::cout<<"Tipo terreno: "<<mapa.obtenerTipo (posCasillero)<<std::endl;
-		std::cout<<"Factor terreno: "<<factorTerreno<<std::endl;
 		if (movible->mover (factorTerreno)) {
 			Mensaje mensajeMover;
 			mensajeMover.mensajeDeMover (movible, it1->first);
@@ -341,6 +342,14 @@ void Juego::chequearColisiones () {
 			++it4;
 		}
 		if (mov1->obtuvoBandera ()) {
+			std::string idBandera = ((Unidad*) mov1)->getBandera ();
+			Mensaje mensajeBorrar;
+			mensajeBorrar.mensajeDeMatar (idBandera);
+			colaDeEnviados.encolar (mensajeBorrar);
+			Mensaje mensajeCrear;
+			Bandera* bandera = (Bandera*) inmovibles[idBandera];
+			mensajeCrear.mensajeDeCrear (bandera,idBandera,bandera->getEquipo ());
+			colaDeEnviados.encolar (mensajeCrear);
 			banderasPorEquipo[mov1->getEquipo ()] ++;
 		}
 		++it1;

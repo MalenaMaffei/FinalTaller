@@ -65,4 +65,12 @@ int Objeto::getPorcentajeVida() {
 	return double(vida)/double(vidaTotal)*100;
 }
 
+void Objeto::setId(std::string id) {
+	this->id = id;
+}
+
+std::string Objeto::getId() {
+	return this->id;
+}
+
 Objeto::~Objeto() { }

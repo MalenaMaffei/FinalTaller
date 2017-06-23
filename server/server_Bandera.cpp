@@ -21,7 +21,7 @@ Bandera::Bandera (double ancho, double alto, int tipo) : Inmovible(0, ancho,
 												idEquipo(-1) { }
 
 void Bandera::setEquipo (int equipo) {
-  idEquipo = 0;
+	idEquipo = equipo;
 }
 
 bool Bandera::estaVivo() {
