@@ -219,9 +219,7 @@ void Canvas::startGame(){
 
         float timeStep = stepTimer.getTicks() / 1000.f;
 
-
-
-        camara.move(timeStep);
+        camara.mover(timeStep);
         //Restart step timer
         stepTimer.start();
 

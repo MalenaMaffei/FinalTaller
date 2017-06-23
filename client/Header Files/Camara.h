@@ -15,7 +15,7 @@ class Camara {
   void handleEvent(SDL_Event& e);
 
 //  Mueve la camara con la velocidad y direccion seteadas por handleEvent.
-  void move(float timeStep);
+  void mover(float timeStep);
 
   int getCamaraX();
   int getCamaraY();
@@ -28,7 +28,7 @@ class Camara {
  private:
     Rect mBox;
     Punto centro;
-    float mVelX, mVelY;
+    float velX, velY;
     void centrar();
     void ajustar();
 };
