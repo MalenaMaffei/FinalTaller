@@ -44,21 +44,9 @@
 
 15. terminar de crear spritesheets para los vehiculos que faltan.
 
-16. ver como refactorizar clase bala. 
-
-18. mostrar al jugador que color le toco ni bien le llega el paquete.
-
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 
 25. Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
-
-27. Si sobra tiempo, mensaje en la ventana misma "esperando que se conecte el resto de los jugadores" y despues que muestre el color que te toco. Ideal seria que el servidor te pase un color ni bien te conectas, asi te dice que color sos mientras que esperas al resto.
-
-28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
-
-32. Mouse sprite cuando se hace click?
-
-33. Hacer pruebas definitivas de no seleccion de muertos.
 
 34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
 	Usar interfaz movible
@@ -66,6 +54,17 @@
 35. Que las guis pidan paquetes todo el tiempo
 
 36. Mostrar ventanitas de error
+
+
+##### "Opcional" #####
+
+28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
+
+32. Mouse sprite cuando se hace click?
+
+33. Hacer pruebas definitivas de no seleccion de muertos.
+
+27. Si sobra tiempo, mensaje en la ventana misma "esperando que se conecte el resto de los jugadores" y despues que muestre el color que te toco. Ideal seria que el servidor te pase un color ni bien te conectas, asi te dice que color sos mientras que esperas al resto. No es esencial porque al comenzar te lleva a tu fuerte.
 
 #### Resuletos ####
 
