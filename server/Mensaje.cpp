@@ -20,37 +20,6 @@
 #include <array>
 #include <iostream>
 
-#define TODOS -1	//Si el mensaje estará destino a todos los clientes
-#define ESCALA 100	//Al enviar las posiciones al cliente se envian con 
-					//coordenadas enteras, para no perder totalmente la	
-					//precisión se multiplican los double por 100.
-
-enum largos {
-	largoComando = 1,
-	largoId = 3,
-	largoX = 5,
-	largoY = 5,
-	largoDelCliente = 1,
-	largoTipo = 2,
-	largoColor = 1,
-	largoEquipo = 1,
-	largoVida = 3,
-	largoConstrucciones = 2
-};
-
-enum comandos {
-	comandoCrear = '0',
-	comandoMatar = '1',
-	comandoMover = '2',
-	comandoDisparar = '3',
-	comandoInfo = '4',
-	comandoInfoUnidad = '4',
-	comandoMapa = '5',
-	comandoEquipo = '6',
-	comandoInfoFabrica = '7',
-	comandoDesconectar = '8'
-};
-
 std::string charToStr(char c) {
 	std::stringstream ss;
 	std::string s;

@@ -15,14 +15,6 @@
 #include <iostream>
 #include <tinyxml2.h>
 
-enum TipoDeMunicion{
-	BALA,
-	LANZALLAMA,
-	ALTO_CALIBRE,
-	LASER,
-	MISIL
-};
-
 FabricaMuniciones::FabricaMuniciones() {
 	tinyxml2::XMLDocument xml;
  
