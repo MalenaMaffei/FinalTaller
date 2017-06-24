@@ -18,17 +18,9 @@
 
 #include <algorithm>
 Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
-//                                    vistaCaras
-//    (VistaIconoRobot(gRenderer)),
-    barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71}),
-                                    seleccionado(false),
-    ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0)
-//    ,
-//                                    labelsRobot(labelsRobot),
-//    labelsVehiculo(labelsVehiculo)
-{
+    barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71}),seleccionado(false),
+    ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0) {
     hudRect = {ubicacion,vistaHud.getWidth(),vistaHud.getHeight()};
-
 
     ElementoGui* elementoGui = new LabelRobot(gRenderer);
     elementos.push_back(elementoGui);
@@ -43,32 +35,18 @@ Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
 }
 
 void Hud::mostrar() {
-    vistaHud.mostrar(ubicacion, 0);
-    mostrarContenido();
-//    TODO sacar despues
     if (seleccionado){
-//        TODO hacer esto atributo
-//        Punto caraOffset(X_CARA,Y_CARA);
-//        Punto caraPos = ubicacion + caraOffset;
-//        vistaCaras.mostrar(caraPos, getPosLabel());
-
+        vistaHud.mostrar(ubicacion, 0);
         std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
           ele->mostrar(ubicacion);
         });
-//        Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
-//        Punto labelRobotPos = ubicacion + labelRobotOffset;
-//        labelsRobot.mostrar(labelRobotPos, getPosLabel());
-
         barraVida.mostrarHorizontal(vida, Punto(X_HPBAR, Y_HPBAR) + ubicacion);
     }
 }
 
-
 void Hud::setInfo(Paquete paquete) {
     CodigosPaquete codigos;
-//    int tipo = std::stoi(paquete.getMensaje().substr(4,codigos.tipo));
     int porcentajeVida = std::stoi(paquete.getMensaje().substr(6,3));
-//    tipoCara = tipo;
     float cienporciento = 100;
     vida = porcentajeVida/cienporciento;
     seleccionado = true;
@@ -76,32 +54,4 @@ void Hud::setInfo(Paquete paquete) {
     std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
       ele->setInfo(paquete);
     });
-
-
-}
-
-void Hud::mostrarContenido() {
-//    TODO IF CARA IF ESTO IF LO OTRO
-}
-
-int Hud::getPosLabel() {
-    CodigosPaquete codigos;
-    if (!codigos.esRobot(tipoCara)){
-//        TODO todavia no se muestran otras cosas que no sean robots
-        return 0;
-    }
-//    TODO usar un mapa o pasar esto a VistaCaras
-    if (tipoCara == codigos.grunt){
-        return labelGrunt;
-    } else if (tipoCara == codigos.laser){
-        return labelLaser;
-    } else if (tipoCara == codigos.pyro){
-        return labelPyros;
-    } else if (tipoCara == codigos.psycho){
-        return labelPsychos;
-    } else if (tipoCara == codigos.sniper){
-        return labelSniper;
-    } else if (tipoCara == codigos.tough){
-        return labelTough;
-    }
 }

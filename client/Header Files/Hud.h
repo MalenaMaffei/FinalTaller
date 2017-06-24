@@ -14,8 +14,6 @@ class Hud {
   void setInfo(Paquete paquete);
 
  private:
-  void mostrarContenido();
-  int getPosLabel();
   VistaHud vistaHud;
 //  Vista vistaCaras;
 //  Vista labelsRobot;
