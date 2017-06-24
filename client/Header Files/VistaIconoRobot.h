@@ -2,9 +2,9 @@
 #define TPFINAL_VISTAHUDCARAS_H
 
 #include "Vista.h"
-class VistaHudCaras  : public Vista {
+class VistaIconoRobot  : public Vista {
  public:
-  explicit VistaHudCaras(SDL_Renderer *gRenderer);
+  explicit VistaIconoRobot(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUDCARAS_H

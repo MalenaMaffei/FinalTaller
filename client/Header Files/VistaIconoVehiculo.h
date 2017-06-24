@@ -2,9 +2,9 @@
 #define TPFINAL_VISTAHUDVEHICULOS_H
 
 #include "Vista.h"
-class VistaHudVehiculos : public Vista {
+class VistaIconoVehiculo : public Vista {
  public:
-  explicit VistaHudVehiculos(SDL_Renderer *gRenderer);
+  explicit VistaIconoVehiculo(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUDVEHICULOS_H

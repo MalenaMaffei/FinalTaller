@@ -12,12 +12,12 @@
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/VistaHud.h"
-#include "Header Files/VistaHudCaras.h"
+#include "Header Files/VistaIconoRobot.h"
 #include "Header Files/VistaGui.h"
 #include "Header Files/Mapa.h"
 #include "Header Files/VistaTexto.h"
-#include "Header Files/VistaHudRobotLabels.h"
-#include "Header Files/VistaHudVehiculoLabels.h"
+#include "Header Files/VistaLabelRobot.h"
+#include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/Reproductor.h"
 #include <string>
 
@@ -119,10 +119,9 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
             guiEdificio.setInfo(paqueteFabrica);
         } else if (paquete.getComando() == codigos.infoUnidad){
-//            TODO refactorizar aca
-            int tipo = std::stoi(paquete.getMensaje().substr(4,codigos.tipo));
-            int vida = std::stoi(paquete.getMensaje().substr(6,3));
-            hud.setInfo(tipo, vida);
+//            TODO refactorizar aca crear clase Paquete Unidad
+
+            hud.setInfo(paquete);
         }
     }
 //    No lo pongo antes del while asi termina de desempaquetar todo. Aunque
@@ -180,20 +179,17 @@ void Canvas::startGame(){
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 
-//TODO pasar esto adentro de hud como hice para guiEdificio
-    VistaHud vistaHud(gRenderer);
-    VistaHudCaras vistaCaras(gRenderer);
-    VistaHudRobotLabels labelsRobot(gRenderer);
-    VistaHudVehiculoLabels labelsVehiculo(gRenderer);
-    ProgressBar barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71});
-    Hud hud(gRenderer,
-            vistaHud,
-            vistaCaras,
-            labelsRobot,
-            labelsVehiculo,
-            barraVida);
 
+
+//TODO pasar esto adentro de hud como hice para guiEdificio
+//    VistaHud vistaHud(gRenderer);
+////    VistaHudCaras vistaCaras(gRenderer);
+//    VistaLabelRobot labelsRobot(gRenderer);
+//    VistaLabelVehiculo labelsVehiculo(gRenderer);
+//    ProgressBar barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71});
+    Hud hud(gRenderer);
     GuiEdificio guiEdificio(gRenderer);
+
 
     Mouse mouse;
     SelectBox selectBox;

@@ -55,6 +55,7 @@ const char carasPath[] = "../client/imgs/Gui/unidades.png";
 const char robotsLabelPath[] = "../client/imgs/Gui/robot_labels.png";
 const char vehiculosLabelPath[] = "../client/imgs/Gui/vehiculos_labels.png";
 const char vehiculosPath[] = "../client/imgs/Gui/vehiculos.png";
+const char armasPath[] = "../client/imgs/Gui/armas.png";
 
 
 

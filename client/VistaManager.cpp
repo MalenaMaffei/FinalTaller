@@ -95,7 +95,7 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
 //    medium = 14,
 //    heavy = 15,
 //    missile = 16
-    if (codigos.esTanque(tipo)){
+    if (codigos.esVehiculo(tipo)){
         VistaDireccionada* caminar;
         VistaDireccionada* disparar;
         Vista* morir;
