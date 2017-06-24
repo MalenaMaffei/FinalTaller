@@ -20,6 +20,8 @@
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/Reproductor.h"
 #include <string>
+#include <sstream>
+#include <fstream>
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -139,9 +141,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 
 void Canvas::startGame(){
-
-
-
     //Event handler
     SDL_Event e;
 

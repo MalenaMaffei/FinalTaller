@@ -65,6 +65,7 @@
 
 35. Que las guis pidan paquetes todo el tiempo
 
+36. Mostrar ventanitas de error
 
 #### Resuletos ####
 
