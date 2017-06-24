@@ -29,8 +29,6 @@
 #include <string>
 #include "Mensaje.h"
 
-#define SIN_EQUIPO 4
-
 enum equipos {
 	equipo_1,
 	equipo_2,
@@ -61,15 +59,6 @@ enum largos {
 	color = 1
 };
 
-std::string agregarPadding(int n, int len) {
-	std::string nStr = std::to_string(n);
-	int lenN = nStr.size();
-	for (int i=0;i<(len-lenN);i++) {
-		nStr.insert (0,"0");
-	}  
-	return nStr;
-}
-
 void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
 									std::string nombreXML) {
 	
@@ -79,8 +68,7 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 		int equipo = atoi(edificioXML->FirstChildElement("EQUIPO")->GetText ());
 		double x = atof(edificioXML->FirstChildElement("X")->GetText ());
 		double y = atof(edificioXML->FirstChildElement("Y")->GetText ());
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		proximoIDInmovible++;		
+		std::string id = manejadorIDs.getIDEdificio ();
 		Edificio* edificio = fabricaEdificios->getEdificio (tipo,equipo,x,y,id);
 		edificios[id] = edificio;
 		
@@ -91,58 +79,26 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 	}
 }
 
-void Juego::inicializarBanderas(int tipo, tinyxml2::XMLElement* padre, 
-								std::string nombreXML) {
-  	tinyxml2::XMLElement* banderas = padre->FirstChildElement (nombreXML.c_str ());
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
-	tinyxml2::XMLElement* banderaXML = banderas->FirstChildElement ("BANDERA");
-	for (int i = 0; banderaXML != NULL; ++i) {
-		int x = atoi(banderaXML->FirstChildElement("X")->GetText ());
-		int y = atoi(banderaXML->FirstChildElement("Y")->GetText ());
-		Bandera* bandera = new Bandera(2,1.5,tipo);
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		bandera->setId (id);
-		inmovibles[id] = bandera;
-		proximoIDInmovible++;
-		bandera->setPosicion ({x,y});
-		bandera->setEquipo(SIN_EQUIPO);
-
-		Mensaje mensajeBandera;
-		mensajeBandera.mensajeDeCrear (bandera,id, bandera->getEquipo ());
-		this->enviarMensaje (mensajeBandera);
-		banderaXML = banderaXML->NextSiblingElement ("BANDERA");
+void Juego::inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre, 
+								std::string nombreXML, std::string nombreObjetos) {
+  	tinyxml2::XMLElement* inmoviblesXML = padre->FirstChildElement (nombreXML.c_str ());
+	tinyxml2::XMLElement* inmovibleXML = inmoviblesXML->FirstChildElement (nombreObjetos.c_str());
+	for (int i = 0; inmovibleXML != NULL; ++i) {
+		double x = atof(inmovibleXML->FirstChildElement("X")->GetText ());
+		double y = atof(inmovibleXML->FirstChildElement("Y")->GetText ());
+		std::string id = manejadorIDs.getIDInmovible ();
+		Inmovible* inmovible = fabricaInmovibles->getInmovible (tipo,x,y,id);
+		inmovibles[id] = inmovible;
+		Mensaje mensajeInmovible;
+		mensajeInmovible.mensajeDeCrear (inmovible,id, SIN_EQUIPO);
+		this->enviarMensaje (mensajeInmovible);
+		inmovibleXML = inmovibleXML->NextSiblingElement (nombreObjetos.c_str());
 	}
-
-}
-
-void Juego::inicializarRocas(int tipo, tinyxml2::XMLElement* padre,
-								std::string nombreXML) {
-	tinyxml2::XMLElement* rocas = padre->FirstChildElement (nombreXML.c_str ());
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de bloques hardcodeados, fabricaEdificios
-	tinyxml2::XMLElement* roca = rocas->FirstChildElement ("ROCA");
-	for (int i = 0; roca != NULL; ++i) {
-		int x = atoi(roca->FirstChildElement("X")->GetText ());
-		int y = atoi(roca->FirstChildElement("Y")->GetText ());
-		Bloque* bloque = new Bloque(10,2,2,tipo);
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		bloque->setId (id);
-		inmovibles[id] = bloque;
-		proximoIDInmovible++;
-		bloque->setPosicion ({x,y});
-
-		Mensaje mensajeRoca;
-		mensajeRoca.mensajeDeCrear (bloque,id, SIN_EQUIPO);
-		this->enviarMensaje (mensajeRoca);
-		roca = roca->NextSiblingElement ("ROCA");
-	}  
 }
 
 void Juego::enviarMensaje(Mensaje& mensaje) {
 	for (Jugador *jugador: jugadores) {
 		std::string mensajeStr = mensaje.getMensaje();
-		jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
 		try {
 			jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
 		} catch (SocketException &e) {
@@ -155,13 +111,11 @@ void Juego::enviarMensaje(Mensaje& mensaje) {
 Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :	
 												colaDeRecibidos(colaDeRecibidos),
 												mapa(Mapa("mapa.map")), 
-												proximoIDMovible(0),
-												proximoIDInmovible(0),
-												proximoIDBala(0),
 												jugadores(jugadores),
 												fabricaUnidades(new FabricaUnidades()),
 												fabricaMuniciones(new FabricaMuniciones()),
-												fabricaEdificios(new FabricaEdificios())
+												fabricaEdificios(new FabricaEdificios()),
+												fabricaInmovibles(new FabricaInmovibles())
 												 { 
   
 	
@@ -199,8 +153,8 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 	this->inicializarEdificios (3,config,"FUERTES");
 	this->inicializarEdificios (4,config,"FABRICAS_ROBOTS");
 	this->inicializarEdificios (5,config,"FABRICAS_VEHICULOS");
-	this->inicializarBanderas (2,config,"BANDERAS");
-	this->inicializarRocas (0,config,"ROCAS");
+	this->inicializarInmovibles (2,config,"BANDERAS","BANDERA");
+	this->inicializarInmovibles (0,config,"ROCAS","ROCA");
 }
 
 void Juego::eliminarMuertos() {
@@ -350,7 +304,7 @@ void Juego::actualizarDisparos() {
 			municion->setAlcance (alcance);
 			std::array<double,2> target = objetivo->getPosicion ();
 			municion->mover (target);
-			std::string idMunicion = agregarPadding(proximoIDBala,3);
+			std::string idMunicion = manejadorIDs.getIDMunicion ();
 			movibles[idMunicion] = municion;
 			
 			//Envio mensaje de disparo
@@ -363,8 +317,6 @@ void Juego::actualizarDisparos() {
 			mensajeCrear.mensajeDeCrear (municion,idMunicion,
 										 municion->getEquipo ());
 			colaDeEnviados.encolar (mensajeCrear);
-			
-			proximoIDBala ++;
 		}
 		++it1;
 	}
@@ -382,38 +334,18 @@ void Juego::actualizarEdificios() {
 			++it;
 			continue;
 		}
-		if (tipo>=11 && tipo<=16) {
-			Vehiculo* vehiculo = fabricaUnidades->getVehiculo (tipo);
-			std::string id ="m"+agregarPadding(proximoIDMovible,2);
-			movibles[id] = vehiculo;
-			vehiculo->setEquipo (edificio->getEquipo ());
-			//Posicion de creacion hardcodeada
-			//Todos se crean en la misma posicion
-			//TODO
-			vehiculo->setPosicion ({posEdificio[0]-2,posEdificio[1]-2});
-			Mensaje mensajeCrear;
-			mensajeCrear.mensajeDeCrear (vehiculo,id,vehiculo->getEquipo ());
-			colaDeEnviados.encolar (mensajeCrear);
-			
-			std::cout<<"creo vehiculo"<<std::endl;
-			proximoIDMovible++;
-		}
-		if (tipo>=6 && tipo<=10) {
-			Robot* robot = fabricaUnidades->getRobot (tipo);
-			std::string id ="m"+agregarPadding(proximoIDMovible,2);
-			movibles[id] = robot;
-			robot->setEquipo (edificio->getEquipo ());
-			//Posicion de creacion hardcodeada
-			//Todos se crean en la misma posicion
-			//TODO
-			robot->setPosicion ({posEdificio[0]-2,posEdificio[1]-2});
-			Mensaje mensajeCrear;
-			mensajeCrear.mensajeDeCrear (robot,id,robot->getEquipo ());
-			colaDeEnviados.encolar (mensajeCrear);
-			
-			std::cout<<"creo robot"<<std::endl;
-			proximoIDMovible++;
-		}
+		Unidad* unidad = fabricaUnidades->getUnidad (tipo);
+		std::string id = manejadorIDs.getIDMovible ();
+		unidad->setId (id);
+		unidad->setEquipo (edificio->getEquipo ());
+		movibles[id] = unidad;
+		//Posicion de creacion hardcodeada
+		//Todos se crean en la misma posicion
+		//TODO
+		unidad->setPosicion ({posEdificio[0]-2,posEdificio[1]-2});
+		Mensaje mensajeCrear;
+		mensajeCrear.mensajeDeCrear (unidad,id,unidad->getEquipo ());
+		colaDeEnviados.encolar (mensajeCrear);
 		++it;
 	}
 }
@@ -428,15 +360,11 @@ void Juego::actualizarRecibidos() {
 						break;
 			case mover: this->recibirMover(mensaje);
 						break;
-			case disparar: this->recibirDisparar(mensaje);
+			case disparar:	this->recibirDisparar(mensaje);
+							break;
+			case info:	this->recibirObtenerInfo(mensaje, src);
 						break;
-			case info: 
-						if (mensaje[1] == 'm')
-							this->recibirObtenerInfoUnidad(mensaje, src);
-						if (mensaje[1] == 'i')
-							this->recibirObtenerInfoFabrica(mensaje, src);
-						break;
-		  case desconectar: 
+			case desconectar: 
 						this->finalizar();
 						break;
 		}		
@@ -485,14 +413,13 @@ void Juego::recibirDisparar(std::string mensaje) {
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 
-void Juego::recibirObtenerInfoUnidad (std::string mensaje, int src) {
+void Juego::recibirObtenerInfo (std::string mensaje, int src) {
 	std::string idStr = mensaje.substr(1,id);
-	this->enviarInfoUnidad (idStr, src);
-}
-
-void Juego::recibirObtenerInfoFabrica (std::string mensaje, int src) {
-	std::string idStr = mensaje.substr(1,id);
-	this->enviarInfoFabrica (idStr, src);
+	if (movibles.count(idStr)) {
+		this->enviarInfoUnidad(idStr,src);
+	} else if (edificios.count(idStr)) {
+		this->enviarInfoFabrica(idStr,src);
+	}
 }
 
 void Juego::enviarInfoUnidad (std::string id, int dst) {

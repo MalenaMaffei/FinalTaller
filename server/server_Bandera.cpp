@@ -14,11 +14,12 @@
 #include "server_Bandera.h"
 #include "server_Movible.h"
 #include "server_Unidad.h"
+#include "server_constants.h"
 #include <iostream>
 
 Bandera::Bandera (double ancho, double alto, int tipo) : Inmovible(0, ancho, 
 															alto, tipo), 
-												idEquipo(-1) { }
+												idEquipo(SIN_EQUIPO) { }
 
 void Bandera::setEquipo (int equipo) {
 	idEquipo = equipo;
