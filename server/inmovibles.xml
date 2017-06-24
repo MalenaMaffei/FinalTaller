@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<INMOVIBLES>
+	<INMOVIBLE>
+		<!--ROCA-->
+		<ID>0</ID>
+		<VIDA>10</VIDA>
+		<ANCHO>2</ANCHO>
+		<ALTO>2</ALTO>
+	</INMOVIBLE>
+	<INMOVIBLE>
+		<!--BANDERA-->
+		<ID>2</ID>
+		<ANCHO>2</ANCHO>
+		<ALTO>1.5</ALTO>
+	</INMOVIBLE>
+</INMOVIBLES>

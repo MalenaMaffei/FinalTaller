@@ -18,6 +18,9 @@
 #define CYCLE_TIME (1.0/TICKS) //in seconds
 #define NANO 1000000000ULL
 
+#define SIN_EQUIPO 4
+
+
 
 #endif /* SERVER_CONSTANTS_H */
 

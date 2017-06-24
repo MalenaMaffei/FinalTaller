@@ -29,8 +29,6 @@
 #include <string>
 #include "Mensaje.h"
 
-#define SIN_EQUIPO 4
-
 enum equipos {
 	equipo_1,
 	equipo_2,
@@ -91,52 +89,22 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 	}
 }
 
-void Juego::inicializarBanderas(int tipo, tinyxml2::XMLElement* padre, 
-								std::string nombreXML) {
-  	tinyxml2::XMLElement* banderas = padre->FirstChildElement (nombreXML.c_str ());
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de edificios hardcodeados, fabricaEdificios
-	tinyxml2::XMLElement* banderaXML = banderas->FirstChildElement ("BANDERA");
-	for (int i = 0; banderaXML != NULL; ++i) {
-		int x = atoi(banderaXML->FirstChildElement("X")->GetText ());
-		int y = atoi(banderaXML->FirstChildElement("Y")->GetText ());
-		Bandera* bandera = new Bandera(2,1.5,tipo);
+void Juego::inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre, 
+								std::string nombreXML, std::string nombreObjetos) {
+  	tinyxml2::XMLElement* inmoviblesXML = padre->FirstChildElement (nombreXML.c_str ());
+	tinyxml2::XMLElement* inmovibleXML = inmoviblesXML->FirstChildElement (nombreObjetos.c_str());
+	for (int i = 0; inmovibleXML != NULL; ++i) {
+		double x = atof(inmovibleXML->FirstChildElement("X")->GetText ());
+		double y = atof(inmovibleXML->FirstChildElement("Y")->GetText ());
 		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		bandera->setId (id);
-		inmovibles[id] = bandera;
 		proximoIDInmovible++;
-		bandera->setPosicion ({x,y});
-		bandera->setEquipo(SIN_EQUIPO);
-
-		Mensaje mensajeBandera;
-		mensajeBandera.mensajeDeCrear (bandera,id, bandera->getEquipo ());
-		this->enviarMensaje (mensajeBandera);
-		banderaXML = banderaXML->NextSiblingElement ("BANDERA");
+		Inmovible* inmovible = fabricaInmovibles->getInmovible (tipo,x,y,id);
+		inmovibles[id] = inmovible;
+		Mensaje mensajeInmovible;
+		mensajeInmovible.mensajeDeCrear (inmovible,id, SIN_EQUIPO);
+		this->enviarMensaje (mensajeInmovible);
+		inmovibleXML = inmovibleXML->NextSiblingElement (nombreObjetos.c_str());
 	}
-
-}
-
-void Juego::inicializarRocas(int tipo, tinyxml2::XMLElement* padre,
-								std::string nombreXML) {
-	tinyxml2::XMLElement* rocas = padre->FirstChildElement (nombreXML.c_str ());
-	//TODO reemplazar 4 hardcodeado
-	//TODO reemplazar parametros de bloques hardcodeados, fabricaEdificios
-	tinyxml2::XMLElement* roca = rocas->FirstChildElement ("ROCA");
-	for (int i = 0; roca != NULL; ++i) {
-		int x = atoi(roca->FirstChildElement("X")->GetText ());
-		int y = atoi(roca->FirstChildElement("Y")->GetText ());
-		Bloque* bloque = new Bloque(10,2,2,tipo);
-		std::string id = std::string("i") + agregarPadding(proximoIDInmovible,2);
-		bloque->setId (id);
-		inmovibles[id] = bloque;
-		proximoIDInmovible++;
-		bloque->setPosicion ({x,y});
-
-		Mensaje mensajeRoca;
-		mensajeRoca.mensajeDeCrear (bloque,id, SIN_EQUIPO);
-		this->enviarMensaje (mensajeRoca);
-		roca = roca->NextSiblingElement ("ROCA");
-	}  
 }
 
 void Juego::enviarMensaje(Mensaje& mensaje) {
@@ -161,7 +129,8 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 												jugadores(jugadores),
 												fabricaUnidades(new FabricaUnidades()),
 												fabricaMuniciones(new FabricaMuniciones()),
-												fabricaEdificios(new FabricaEdificios())
+												fabricaEdificios(new FabricaEdificios()),
+												fabricaInmovibles(new FabricaInmovibles())
 												 { 
   
 	
@@ -199,8 +168,8 @@ void Juego::inicializarJuego(const std::string& nombreArchivo) {
 	this->inicializarEdificios (3,config,"FUERTES");
 	this->inicializarEdificios (4,config,"FABRICAS_ROBOTS");
 	this->inicializarEdificios (5,config,"FABRICAS_VEHICULOS");
-	this->inicializarBanderas (2,config,"BANDERAS");
-	this->inicializarRocas (0,config,"ROCAS");
+	this->inicializarInmovibles (2,config,"BANDERAS","BANDERA");
+	this->inicializarInmovibles (0,config,"ROCAS","ROCA");
 }
 
 void Juego::eliminarMuertos() {

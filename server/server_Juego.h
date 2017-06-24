@@ -14,6 +14,7 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include "FabricaInmovibles.h"
 #include "FabricaEdificios.h"
 #include "FabricaUnidades.h"
 #include "server_FabricaMuniciones.h"
@@ -52,10 +53,8 @@ private:
     void inicializarJuego(const std::string& nombreArchivo);
     void inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
                                 std::string nombreXML);
-    void inicializarBanderas(int tipo, tinyxml2::XMLElement* padre, 
-                                std::string nombreXML);
-    void inicializarRocas(int tipo, tinyxml2::XMLElement* padre,
-                            std::string nombreXML);
+    void inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre, 
+                                std::string nombreXML, std::string nombreObjetos);
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
     void recibirObtenerInfoUnidad(std::string mensaje, int src);
@@ -78,7 +77,8 @@ private:
     FabricaUnidades* fabricaUnidades;
     FabricaMuniciones* fabricaMuniciones;
     FabricaEdificios* fabricaEdificios;
-    
+    FabricaInmovibles* fabricaInmovibles;
+        
     //No puedo instanciar Movible porque es abstracto
     std::array<int,4> banderasPorEquipo;
     std::map<std::string,Movible*> movibles; //Robots, vehiculos, balas
@@ -87,7 +87,6 @@ private:
     int proximoIDMovible;
     int proximoIDInmovible;
     int proximoIDBala;
-
     
 };
 
