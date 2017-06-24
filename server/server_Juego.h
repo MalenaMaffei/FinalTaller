@@ -14,6 +14,7 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include "ManejadorIDs.h"
 #include "FabricaInmovibles.h"
 #include "FabricaEdificios.h"
 #include "FabricaUnidades.h"
@@ -57,8 +58,7 @@ private:
                                 std::string nombreXML, std::string nombreObjetos);
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
-    void recibirObtenerInfoUnidad(std::string mensaje, int src);
-    void recibirObtenerInfoFabrica(std::string mensaje, int src);
+    void recibirObtenerInfo(std::string mensaje, int src);
     void recibirCrear(std::string mensaje);    
 
     void enviarMensaje(Mensaje& mensaje);
@@ -79,14 +79,13 @@ private:
     FabricaEdificios* fabricaEdificios;
     FabricaInmovibles* fabricaInmovibles;
         
-    //No puedo instanciar Movible porque es abstracto
     std::array<int,4> banderasPorEquipo;
+
     std::map<std::string,Movible*> movibles; //Robots, vehiculos, balas
     std::map<std::string,Inmovible*> inmovibles; //Bloques, puentes, banderas
     std::map<std::string,Edificio*> edificios; //Edificio
-    int proximoIDMovible;
-    int proximoIDInmovible;
-    int proximoIDBala;
+
+    ManejadorIDs manejadorIDs;
     
 };
 

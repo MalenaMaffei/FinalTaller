@@ -14,6 +14,7 @@
 #include "Mensaje.h"
 #include "server_Jugador.h"
 #include "server_constants.h"
+#include "RellenadorDeNumeros.h"
 #include <sstream>
 #include <string>
 #include <array>
@@ -58,16 +59,6 @@ std::string charToStr(char c) {
 	return s;
 }
 
-//TODO cambiar nombre a agregarPadding
-std::string agregarPadding2(int n, int len) {
-	std::string nStr = std::to_string(n);
-	int lenN = nStr.size();
-	for (int i=0;i<(len-lenN);i++) {
-		nStr.insert (0,"0");
-	}  
-	return nStr;
-}
-
 Mensaje::Mensaje() { }
 
 Mensaje::Mensaje(std::string mensaje, int id) : mensaje(mensaje), id(id) { }
@@ -88,12 +79,13 @@ void Mensaje::mensajeDeMapa(Mapa& mapa) {
 }
 
 void Mensaje::mensajeDeCrear(Objeto* objeto, std::string id, int equipo) {
+	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoCrear);
 	std::array<double, 2> posicion = objeto->getPosicion();
-	std::string x = agregarPadding2((int) (posicion[0]*ESCALA), largoX);
-	std::string y = agregarPadding2((int) (posicion[1]*ESCALA), largoY);
-	std::string tipo = agregarPadding2(objeto->getTipo (), largoTipo);
-	std::string equipoStr = agregarPadding2(equipo, largoEquipo);
+	std::string x = rellenador.rellenar((int) (posicion[0]*ESCALA), largoX);
+	std::string y = rellenador.rellenar((int) (posicion[1]*ESCALA), largoY);
+	std::string tipo = rellenador.rellenar(objeto->getTipo (), largoTipo);
+	std::string equipoStr = rellenador.rellenar(equipo, largoEquipo);
 		
 	this->mensaje = comando+id+x+y+tipo+equipoStr;	
 	this->id = TODOS;
@@ -106,29 +98,32 @@ void Mensaje::mensajeDeMatar(std::string id) {
 }
 
 void Mensaje::mensajeDeMover(Movible* movible, std::string id) {
+	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoMover);
 	std::array<double, 2> posicion = movible->getPosicion();
-	std::string x = agregarPadding2((int) (posicion[0]*ESCALA), largoX);
-	std::string y = agregarPadding2((int) (posicion[1]*ESCALA), largoY);
+	std::string x = rellenador.rellenar((int) (posicion[0]*ESCALA), largoX);
+	std::string y = rellenador.rellenar((int) (posicion[1]*ESCALA), largoY);
 	
 	this->mensaje = comando+id+x+y;
 	this->id = TODOS;
 }
 
 void Mensaje::mensajeDeDisparar(std::string id, Objeto* objetivo) {
+	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoDisparar);
 	std::array<double,2> destino = objetivo->getPosicion();
-	std::string x = agregarPadding2((int) (destino[0]*ESCALA), largoX);
-	std::string y = agregarPadding2((int) (destino[1]*ESCALA), largoY);
+	std::string x = rellenador.rellenar((int) (destino[0]*ESCALA), largoX);
+	std::string y = rellenador.rellenar((int) (destino[1]*ESCALA), largoY);
 
 	this->mensaje = comando+id+x+y;
 	this->id = TODOS;
 }
 
 void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
+	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoInfoUnidad);
-	std::string tipo = agregarPadding2(unidad->getTipo(), largoTipo);
-	std::string vida = agregarPadding2(unidad->getPorcentajeVida (), largoVida);
+	std::string tipo = rellenador.rellenar(unidad->getTipo(), largoTipo);
+	std::string vida = rellenador.rellenar(unidad->getPorcentajeVida (), largoVida);
 	
 	this->mensaje = comando+id+tipo+vida;
 	this->id = dst;
@@ -137,10 +132,10 @@ void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
 void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
 									FabricaUnidades* fabricaUnidades,
 									int dst) {
-  
+  	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoInfoFabrica);
-	std::string tipoStr = agregarPadding2(edificio->getTipo(), largoTipo);
-	std::string vida = agregarPadding2(edificio->getPorcentajeVida (), 
+	std::string tipoStr = rellenador.rellenar(edificio->getTipo(), largoTipo);
+	std::string vida = rellenador.rellenar(edificio->getPorcentajeVida (), 
 										largoVida);
 
 	int tipo = edificio->getTipo ();
@@ -148,15 +143,15 @@ void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id,
 	unidadesPosibles = fabricaUnidades->getUnidadesPosibles(tipo,
 														 edificio->getNivel());
 	
-	std::string cantidad = agregarPadding2(unidadesPosibles.size(), 
+	std::string cantidad = rellenador.rellenar(unidadesPosibles.size(), 
 											largoConstrucciones);
 
 	std::string unidadesStr = "";
 	
 	for (int idActual : unidadesPosibles) {
 		int tiempo = fabricaUnidades->getTiempo (idActual)/TICKS; //En segundos
-		std::string tiempoStr = agregarPadding2(tiempo,4);
-		std::string idStr = agregarPadding2(idActual,2);
+		std::string tiempoStr = rellenador.rellenar(tiempo,4);
+		std::string idStr = rellenador.rellenar(idActual,2);
 		unidadesStr += idStr + tiempoStr;
 	}
 
@@ -164,8 +159,8 @@ void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id,
 	std::string construyendoStr = std::to_string(construyendo);
 	
 	if (construyendo) {
-		std::string tipoCreandoStr = agregarPadding2(edificio->getTipoCreando (), largoTipo);
-		std::string porcentajeStr = agregarPadding2(edificio->getPorcentajeConstruccion (), largoVida);
+		std::string tipoCreandoStr = rellenador.rellenar(edificio->getTipoCreando (), largoTipo);
+		std::string porcentajeStr = rellenador.rellenar(edificio->getPorcentajeConstruccion (), largoVida);
 		construyendoStr += tipoCreandoStr + porcentajeStr;
 	}
 	
