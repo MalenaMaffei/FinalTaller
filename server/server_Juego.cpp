@@ -29,36 +29,6 @@
 #include <string>
 #include "Mensaje.h"
 
-enum equipos {
-	equipo_1,
-	equipo_2,
-	equipo_3,
-	equipo_4
-};
-
-enum comandos {
-	crear = '0',
-	matar = '1',
-	mover = '2',
-	disparar = '3',
-	info = '4',
-	infoUnidad = '4',
-	mapa = '5',
-	equipo = '6',
-	infoFabrica = '7',
-	desconectar = '8'
-};
-
-enum largos {
-	comando = 1,
-	id = 3,
-	x = 5,
-	y = 5,
-	delCliente = 1,
-	tipo = 2,
-	color = 1
-};
-
 void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
 									std::string nombreXML) {
 	
@@ -120,15 +90,14 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
   
 	
 	finalizado.set_value (false);  
-	int i = 0;
+	int equipo = equipo_1;
 	for (Jugador *jugador: jugadores) {
-		//TODO emprolijar asignacion de equipos
-		jugador->setEquipo (i%4); 
+		jugador->setEquipo (equipo%NUM_EQUIPOS); 
 		Mensaje mensaje;
 		mensaje.mensajeDeEquipo(jugador);
 		std::string mensajeStr = mensaje.getMensaje ();
 		jugador->enviarMensaje (mensajeStr,mensaje.getId ()); //Envio equipo		
-		++i;
+		++equipo;
 	}
   
 	Mensaje mensajeMapa;
@@ -356,24 +325,23 @@ void Juego::actualizarRecibidos() {
 		std::string mensaje = paquete.getMensaje ();
 		int src = paquete.getId ();
 		switch (mensaje[0]) {
-			case crear: this->recibirCrear (mensaje);
-						break;
-			case mover: this->recibirMover(mensaje);
-						break;
-			case disparar:	this->recibirDisparar(mensaje);
-							break;
-			case info:	this->recibirObtenerInfo(mensaje, src);
-						break;
-			case desconectar: 
-						this->finalizar();
-						break;
+			case comandoCrear:			this->recibirCrear (mensaje);
+										break;
+			case comandoMover:			this->recibirMover(mensaje);
+										break;
+			case comandoDisparar:		this->recibirDisparar(mensaje);
+										break;
+			case comandoInfo:			this->recibirObtenerInfo(mensaje, src);
+										break;
+			case comandoDesconectar:	this->finalizar();
+										break;
 		}		
 	}
 }
 
 void Juego::recibirCrear(std::string mensaje) {
-	std::string idStr = mensaje.substr(1,id);
-	std::string tipoStr = mensaje.substr (4,tipo);
+	std::string idStr = mensaje.substr(1, largoId);
+	std::string tipoStr = mensaje.substr (4, largoTipo);
 	
 	int tipo = stoi(tipoStr);
 	int tiempo;
@@ -389,10 +357,10 @@ void Juego::recibirCrear(std::string mensaje) {
 }
 
 void Juego::recibirMover(std::string mensaje) {
-	std::string idStr = mensaje.substr(1,id);
-	std::string xStr = mensaje.substr(4,x);
+	std::string idStr = mensaje.substr(1,largoId);
+	std::string xStr = mensaje.substr(4,largoX);
 	std::cout<<xStr<<std::endl;
-	std::string yStr = mensaje.substr(9,y);
+	std::string yStr = mensaje.substr(9,largoY);
 	std::cout<<yStr<<std::endl;
 
 	double x = stod(xStr,NULL)/100;
@@ -408,13 +376,13 @@ void Juego::recibirMover(std::string mensaje) {
 }
 
 void Juego::recibirDisparar(std::string mensaje) {
-	std::string idAgresor = mensaje.substr(1,id);
-	std::string idAgredido = mensaje.substr(4,id);
+	std::string idAgresor = mensaje.substr(1,largoId);
+	std::string idAgredido = mensaje.substr(4, largoId);
 	((Unidad*) movibles[idAgresor])->dispararA (idAgredido);
 }
 
 void Juego::recibirObtenerInfo (std::string mensaje, int src) {
-	std::string idStr = mensaje.substr(1,id);
+	std::string idStr = mensaje.substr(1,largoId);
 	if (movibles.count(idStr)) {
 		this->enviarInfoUnidad(idStr,src);
 	} else if (edificios.count(idStr)) {

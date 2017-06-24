@@ -82,8 +82,8 @@ private:
     std::array<int,4> banderasPorEquipo;
 
     std::map<std::string,Movible*> movibles; //Robots, vehiculos, balas
-    std::map<std::string,Inmovible*> inmovibles; //Bloques, puentes, banderas
-    std::map<std::string,Edificio*> edificios; //Edificio
+    std::map<std::string,Inmovible*> inmovibles; //Bloques, banderas
+    std::map<std::string,Edificio*> edificios; //Edificios
 
     ManejadorIDs manejadorIDs;
     
