@@ -13,7 +13,7 @@ apt-get install libsdl2-image-dev
 ```
 Y por último SDL_ttf y SDL_Mixer
 ```
-yum install SDL2_image-devel
+yum install SDL2_ttf-devel
 yum install SDL2_mixer-devel
 
 ```
