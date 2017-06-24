@@ -55,7 +55,7 @@
 
 36. Mostrar ventanitas de error
 
-
+37. Sacar al hud cuando haces click en otra cosa.
 ##### "Opcional" #####
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
