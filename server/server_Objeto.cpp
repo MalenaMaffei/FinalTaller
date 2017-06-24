@@ -73,4 +73,10 @@ std::string Objeto::getId() {
 	return this->id;
 }
 
+double Objeto::distanciaCuadrada(Objeto* objeto) {
+	double distancia = (posicion[0]-objeto->posicion[0])*(posicion[0]-objeto->posicion[0])
+						+ (posicion[1]-objeto->posicion[1])*(posicion[1]-objeto->posicion[1]);
+	return distancia;
+}
+
 Objeto::~Objeto() { }
