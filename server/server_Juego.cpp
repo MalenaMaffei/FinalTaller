@@ -259,34 +259,38 @@ void Juego::actualizarDisparos() {
 			++it1;
 			continue;
 		}
-		  
-		if (objetivo) {
-			//Si tiene el movible puede disparar entonces es una unidad
-			int armamento = ((Unidad*) movible)->getArmamento ();
-			std::cout<<"antes de fabrica municiones"<<std::endl;
-			Municion* municion = fabricaMuniciones->getMunicion (armamento);
-			//TODO siempre busca en fabrica de robots, verificar para vehiculos tambien
-			double alcance = fabricaUnidades->getAlcance (movible->getTipo ());
-			municion->setEquipo (movible->getEquipo ());
-			municion->setPosicion (movible->getPosicion ());
-			municion->setObjetivo (idObjetivo);
-			municion->setAlcance (alcance);
-			std::array<double,2> target = objetivo->getPosicion ();
-			municion->mover (target);
-			std::string idMunicion = manejadorIDs.getIDMunicion ();
-			movibles[idMunicion] = municion;
-			
-			//Envio mensaje de disparo
-			Mensaje mensajeDisparar;
-			mensajeDisparar.mensajeDeDisparar (it1->first, objetivo);
-			colaDeEnviados.encolar (mensajeDisparar);
-			
-			//Envio mensaje crear municion
-			Mensaje mensajeCrear;
-			mensajeCrear.mensajeDeCrear (municion,idMunicion,
-										 municion->getEquipo ());
-			colaDeEnviados.encolar (mensajeCrear);
+		
+		double alcance = fabricaUnidades->getAlcance (movible->getTipo ());
+		if (movible->distanciaCuadrada (objetivo)>alcance*alcance) {
+			movible->setObjetivo(std::string());
+			++it1;
+			continue;
 		}
+		
+		//Si tiene el movible puede disparar entonces es una unidad
+		int armamento = ((Unidad*) movible)->getArmamento ();
+		std::cout<<"antes de fabrica municiones"<<std::endl;
+		Municion* municion = fabricaMuniciones->getMunicion (armamento);
+		municion->setEquipo (movible->getEquipo ());
+		municion->setPosicion (movible->getPosicion ());
+		municion->setObjetivo (idObjetivo);
+		municion->setAlcance (alcance);
+		std::array<double,2> target = objetivo->getPosicion ();
+		municion->mover (target);
+		std::string idMunicion = manejadorIDs.getIDMunicion ();
+		movibles[idMunicion] = municion;
+
+		//Envio mensaje de disparo
+		Mensaje mensajeDisparar;
+		mensajeDisparar.mensajeDeDisparar (it1->first, objetivo);
+		colaDeEnviados.encolar (mensajeDisparar);
+
+		//Envio mensaje crear municion
+		Mensaje mensajeCrear;
+		mensajeCrear.mensajeDeCrear (municion,idMunicion,
+									 municion->getEquipo ());
+		colaDeEnviados.encolar (mensajeCrear);
+
 		++it1;
 	}
 }

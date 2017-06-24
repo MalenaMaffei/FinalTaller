@@ -25,6 +25,7 @@ class Objeto {
         std::string getId();
         int getPorcentajeVida();
         int getVida();
+        double distanciaCuadrada(Objeto* objeto);
         virtual bool estaVivo();
         std::array<double, 2> getPosicion();
         virtual void setPosicion (std::array<double,2> posicion);
