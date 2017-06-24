@@ -1,8 +1,9 @@
     #include "../Header Files/ElementoColoreado.h"
 #include <string>
-ElementoColoreado::ElementoColoreado(std::string id,int x,int y,Vista *textura,
-                                     bool esMio,int color) :
-    Elemento(id, x, y,textura,esMio),color(color) {}
+ElementoColoreado::ElementoColoreado(std::string id,Punto pos,Vista *textura,
+                                     bool esMio,
+                                     int color) :
+    Elemento(id, pos, textura, esMio), color(color) {}
 
 void ElementoColoreado::mostrar(Camara &camera) {
     currentClip = textura->getClip(currentClip,color);

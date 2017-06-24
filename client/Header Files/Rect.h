@@ -25,6 +25,8 @@ class Rect : public SDL_Rect{
   Punto getPunto() const;
 
   void setPunto(Punto p);
+
+  Punto getCentro() const;
 };
 
 #endif //TPFINAL_RECT_H

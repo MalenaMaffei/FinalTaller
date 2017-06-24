@@ -4,19 +4,19 @@
 #include "../Header Files/ColectorDeAcciones.h"
 #include <string>
 ElementoUnidad::ElementoUnidad(std::string id,
-                               int x,
-                               int y,
+                               Punto pos,
                                VistaDireccionada *movimiento,
                                VistaDireccionada *disparar,
                                Vista *vistaMuerte,
                                bool esMio,
                                int color) :
-        ElementoColoreado(id, x, y, movimiento, esMio, color),
+    ElementoColoreado(id, pos, movimiento, esMio, color),
     vistaMovimiento(movimiento), vistaDisparar(disparar), direccion(0),
         estado(haciendoNada), vistaMuerte(vistaMuerte){}
 
 
 void ElementoUnidad::mover(Punto nuevo) {
+//    direccion = rect.getCentro().calcularDireccion(nuevo);
     direccion = rect.getPunto().calcularDireccion(nuevo);
     rect.setPunto(nuevo);
     if (estado != enMovimiento) {
@@ -57,6 +57,7 @@ void ElementoUnidad::disparar(Punto target) {
     estado = disparando;
     textura = vistaDisparar;
     direccion = rect.getPunto().calcularDireccion(target);
+//    direccion = rect.getCentro().calcularDireccion(target);
 //    currentClip = vistaDisparar->getClip(currentClip, direccion);
 }
 

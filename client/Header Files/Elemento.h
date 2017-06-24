@@ -9,7 +9,10 @@ class Click;
 class ColectorDeAcciones;
 class Elemento {
  public:
-  Elemento(std::string id, int x, int y, Vista *textura, bool esMio);
+  Elemento(std::string id,
+             Punto pos,
+             Vista *textura,
+             bool esMio);
   virtual void mostrar(Camara &camera);
   virtual bool estaMuerto() const;
   virtual void matar();

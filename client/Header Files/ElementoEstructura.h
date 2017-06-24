@@ -6,8 +6,11 @@
 #include <string>
 class ElementoEstructura : public ElementoColoreado{
  public:
-  ElementoEstructura(std::string id, int x, int y, Vista *textura,
-                     bool esMio, int color);
+  ElementoEstructura(std::string id,
+                       Punto pos,
+                       Vista *textura,
+                       bool esMio,
+                       int color);
 
   //  En este caso (Estructura) pide que se muestre el gui para crear unidades
   void guiRequest(ColectorDeAcciones& colector) const;

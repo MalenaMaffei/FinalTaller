@@ -32,3 +32,7 @@ Rect Rect::positiveShift(Punto shift) const{
     return Rect(getPunto() + shift, w, h);
 }
 
+Punto Rect::getCentro() const {
+    return Punto(x + w/2, y + h/2);
+}
+

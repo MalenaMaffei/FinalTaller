@@ -4,12 +4,11 @@
 #define LARGO_ANIMACION 2
 #define CLIP_MUERTE 2
 ElementoEstructura::ElementoEstructura(std::string id,
-                                       int x,
-                                       int y,
+                                       Punto pos,
                                        Vista *textura,
                                        bool esMio,
                                        int color) :
-        ElementoColoreado(id,x,y,textura,esMio, color), destruido(false) {}
+    ElementoColoreado(id, pos, textura, esMio, color), destruido(false) {}
 
 void ElementoEstructura::guiRequest(ColectorDeAcciones &colector) const {
     if (!destruido){

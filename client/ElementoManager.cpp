@@ -25,7 +25,8 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
     string id = paquete.getId();
-    unidad = new ElementoUnidad(id, paquete.getX(), paquete.getY(),
+    Punto pos = {paquete.getX(), paquete.getY()};
+    unidad = new ElementoUnidad(id,pos,
                                 vistaManager.getVistaCaminar(tipo),
                                 vistaManager.getVistaDisparo(tipo),
                                 vistaManager.getVista(tipo),
@@ -39,30 +40,38 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
     Elemento *elemento;
     int tipo = paquete.getTipo();
     string id = paquete.getId();
-    int x = paquete.getX();
-    int y = paquete.getY();
+    Punto pos = {paquete.getX(), paquete.getY()};
     int color = paquete.getColor();
 
     if (tipo == codigos.bandera){
-        elemento = new ElementoBandera(id, x, y, vistaManager.getVista(tipo),
-                                       color);
+        elemento =
+            new ElementoBandera(id, pos, vistaManager.getVista(tipo), color);
     } else if (tipo == codigos.roca){
-        elemento = new ElementoRoca(id, x, y, vistaManager.getVista(tipo));
+        elemento = new ElementoRoca(id, pos, vistaManager.getVista(tipo));
     } else if (tipo == codigos.puente){
-        elemento = new ElementoPuente(id, x, y, vistaManager.getVista(tipo));
+        elemento =
+            new ElementoPuente(id, pos, vistaManager.getVista(tipo), false);
     } else if (tipo == codigos.fuerte){
-        elemento = new ElementoEstructura(id, x, y, vistaManager.getVista(tipo),
-                                      color == miColor, color);
+        elemento = new ElementoEstructura(id,
+                                          pos,
+                                          vistaManager.getVista(tipo),
+                                          color == miColor,
+                                          color);
     } else if (tipo == codigos.fabricaVehiculo){
-        elemento = new ElementoEstructura(id, x, y, vistaManager.getVista(tipo),
-                                               color == miColor, color);
+        elemento = new ElementoEstructura(id,
+                                          pos,
+                                          vistaManager.getVista(tipo),
+                                          color == miColor,
+                                          color);
     } else if (tipo == codigos.fabricaRobot){
-        elemento = new ElementoEstructura(id, x, y, vistaManager.getVista(tipo),
-                                          color == miColor, color);
+        elemento = new ElementoEstructura(id,
+                                          pos,
+                                          vistaManager.getVista(tipo),
+                                          color == miColor,
+                                          color);
     } else if (codigos.esBala(tipo)){
         ElementoBala* bala;
-        bala = new ElementoBala(id, x, y, vistaManager.getVista(codigos
-                                                                    .bala));
+        bala = new ElementoBala(id, pos, vistaManager.getVista(codigos.bala));
         balas[id] = bala;
         return;
     }

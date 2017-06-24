@@ -28,7 +28,6 @@ void ColectorDeAcciones::crearAcciones() {
             paquete.crear(guiEdificio.getIdFabrica(),
                         guiEdificio.getTipoSeleccionado());
             colaSalida.encolar(paquete);
-//            printf("paquete crear: %s\n", paquete.getMensaje().c_str());
         }
         click.resetCoords();
         return;
@@ -39,16 +38,12 @@ void ColectorDeAcciones::crearAcciones() {
             vector<ElementoUnidad*> seleccion=selectBox.getSeleccionadas();
             for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad*
                                                                   unidad){
-              if (unidad->estaMuerto()){
-//                  printf("unidad %i esta muerta\n", unidad->getId());
-                  return;
+              if (!unidad->estaMuerto()){
+                  paquete.mover(unidad->getId(), clicked.x, clicked.y);
+                  colaSalida.encolar(paquete);
               }
-//              printf("Unidad id: %i se mueve a: %i,%i\n", unidad->getId(),
-//                     clicked.x, clicked.y);
-              paquete.mover(unidad->getId(), clicked.x, clicked.y);
-              colaSalida.encolar(paquete);
+
             });
-//            selectBox.vaciarSeleccionadas();
         }
         click.resetCoords();
         return;
@@ -56,7 +51,6 @@ void ColectorDeAcciones::crearAcciones() {
 
     Elemento* clickeado = click.getClicked();
     if (clickeado->esMio()){
-//        printf("request info MIO de id: %s\n", clickeado->getId().c_str());
         paquete.pedirInfo(clickeado->getId());
         colaSalida.encolar(paquete);
         clickeado->guiRequest(*this);
@@ -68,12 +62,9 @@ void ColectorDeAcciones::crearAcciones() {
               if (unidad->estaMuerto()){
                   return;
               }
-//            printf("Unidad id: %s ataca a Elemento id: %s",unidad->getId()
-//                .c_str(), clickeado->getId().c_str() );
             paquete.atacar(unidad->getId(),clickeado->getId());
             colaSalida.encolar(paquete);
         });
-//        selectBox.vaciarSeleccionadas();
     }
     click.resetCoords();
 }

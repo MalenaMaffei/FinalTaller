@@ -57,6 +57,7 @@
 
 37. Sacar al hud cuando haces click en otra cosa.
 ##### "Opcional" #####
+38. Que el calculo de la dureccion lo haga RECT, no Punto y que tenga en cuenta desde el centro y los bordes del rectangulo.
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
 

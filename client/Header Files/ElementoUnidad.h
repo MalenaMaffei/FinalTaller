@@ -9,13 +9,12 @@ class SelectBox;
 class ElementoUnidad : public ElementoColoreado{
  public:
   ElementoUnidad(std::string id,
-                 int x,
-                 int y,
-                 VistaDireccionada *movimiento,
-                 VistaDireccionada *disparar,
-                 Vista *vistaMuerte,
-                 bool esMio,
-                 int color);
+                   Punto pos,
+                   VistaDireccionada *movimiento,
+                   VistaDireccionada *disparar,
+                   Vista *vistaMuerte,
+                   bool esMio,
+                   int color);
 
   void mover(Punto nuevo);
 

@@ -5,8 +5,11 @@
 
 class ElementoColoreado : public Elemento{
 public:
-    ElementoColoreado(std::string id, int x, int y, Vista *textura, bool esMio,
-                      int color);
+    ElementoColoreado(std::string id,
+                          Punto pos,
+                          Vista *textura,
+                          bool esMio,
+                          int color);
     virtual void mostrar(Camara &camera);
 protected:
     int color;
