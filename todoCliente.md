@@ -2,7 +2,7 @@
 
 * *Canvas.cpp*:
 
-    * ~~**"Fix pedorro"**~~ Cambiado a fix malo * **ELIMINAR BUSY WAITS** -> Preguntar donde, creo que es cuando espero al mapa y al color.
+    * ~~**"Fix pedorro"**~~ Cambiado a fix malo * **ELIMINAR BUSY WAITS**
 
     * Explicar los timers utilizados
 
@@ -22,7 +22,7 @@
 
 * Falta loggear actividad. -> Preguntar. Redirijo todo el stderr a un log? por ahi eso responde a lo que viene abajo. Por consola imprimo cosas tipo servcidor down, cliente cerrado y en el log pongo los errores.
 
-* Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?
+* ~~Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?~~
 //            TODO se podria decir, si ya estaba salir==true, es que cerre yo
 // al socket entonces no muestro nada. si salir==false, se cerro desde el server
 
@@ -36,20 +36,9 @@
 * Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun OK
 -----
 ##### COMENTAR CODIGO #####
-
-
-
 6. inhibir errores de valgrind de SDL.
 
 7. spcket reuseaddrinfo.
-
-8. que el hud cree todas sus vistas.
-
-11. poner para los items de abajo en su clase vista que codigo se corresponde con que posicion en el spritesheet.
- 
-12. que se muestren armas
-
-13. que se muestren tanques
 
 14. qye se muestren construibles
 
@@ -76,6 +65,7 @@
 
 35. Que las guis pidan paquetes todo el tiempo
 
+36. Mostrar ventanitas de error
 
 #### Resuletos ####
 
@@ -103,4 +93,8 @@
 30. ~~Capturar ubicacion del fuerte al comienzo y qye empuece la pantalla alli.~~
 31. ~~shortcut para ir a tu fuerte de una.~~
 36. ~~consumo algo cpu, chequear que sean los tiles~~
+8. ~~que el hud cree todas sus vistas.~~
+11. ~~poner para los items de abajo en su clase vista que codigo se corresponde con que posicion en el spritesheet.~~
+12. ~~que se muestren armas~~
+13. ~~que se muestren tanques~~
 

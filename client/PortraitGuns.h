@@ -1,0 +1,8 @@
+#ifndef TPFINAL_PORTRAITGUNS_H
+#define TPFINAL_PORTRAITGUNS_H
+
+class PortraitGuns {
+
+};
+
+#endif //TPFINAL_PORTRAITGUNS_H

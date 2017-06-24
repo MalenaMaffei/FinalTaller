@@ -1,0 +1,8 @@
+#ifndef TPFINAL_PORTRAITROBOT_H
+#define TPFINAL_PORTRAITROBOT_H
+
+class PortraitRobot {
+
+};
+
+#endif //TPFINAL_PORTRAITROBOT_H

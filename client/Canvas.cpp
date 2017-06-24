@@ -12,14 +12,16 @@
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/VistaHud.h"
-#include "Header Files/VistaHudCaras.h"
+#include "Header Files/VistaIconoRobot.h"
 #include "Header Files/VistaGui.h"
 #include "Header Files/Mapa.h"
 #include "Header Files/VistaTexto.h"
-#include "Header Files/VistaHudRobotLabels.h"
-#include "Header Files/VistaHudVehiculoLabels.h"
+#include "Header Files/VistaLabelRobot.h"
+#include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/Reproductor.h"
 #include <string>
+#include <sstream>
+#include <fstream>
 
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -119,33 +121,28 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
             guiEdificio.setInfo(paqueteFabrica);
         } else if (paquete.getComando() == codigos.infoUnidad){
-//            TODO refactorizar aca
-            int tipo = std::stoi(paquete.getMensaje().substr(4,codigos.tipo));
-            int vida = std::stoi(paquete.getMensaje().substr(6,3));
-            hud.setInfo(tipo, vida);
+//            TODO refactorizar aca crear clase Paquete Unidad
+
+            hud.setInfo(paquete);
         }
     }
+
 //    No lo pongo antes del while asi termina de desempaquetar todo. Aunque
 // en realidad no tiene sentido porque ni lo va a mostrar
 //    TODO decidir que hacer con esto
     if (colaEntrada.estaCerrada()){
         quit = true;
+//        Esto quiere decir que yo no fui la que cerre.
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+            "Servidor Cerrado", "El servidor se ha desconectado, el juego se "
+             "cerrará", NULL);
     }
 }
 
 
 void Canvas::startGame(){
-//    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-//                             "Holi",
-//                             "File is missing. Please reinstall the program.",
-//                             NULL);
-
-
     //Event handler
     SDL_Event e;
-
-//    Camara camara;
-
 
 //Keeps track of time between steps
     LTimer stepTimer;
@@ -157,6 +154,9 @@ void Canvas::startGame(){
     //Current animation frame
     int frame = 0;
 
+
+//    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi
+// puedo probar con SDL_onEvent o algo asi
     while (colaEntrada.isEmpty()){
 //        TODO fix MALO hasta uqe se me ocurra una mejor manera
     }
@@ -180,20 +180,10 @@ void Canvas::startGame(){
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 
-//TODO pasar esto adentro de hud como hice para guiEdificio
-    VistaHud vistaHud(gRenderer);
-    VistaHudCaras vistaCaras(gRenderer);
-    VistaHudRobotLabels labelsRobot(gRenderer);
-    VistaHudVehiculoLabels labelsVehiculo(gRenderer);
-    ProgressBar barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71});
-    Hud hud(gRenderer,
-            vistaHud,
-            vistaCaras,
-            labelsRobot,
-            labelsVehiculo,
-            barraVida);
 
+    Hud hud(gRenderer);
     GuiEdificio guiEdificio(gRenderer);
+
 
     Mouse mouse;
     SelectBox selectBox;
@@ -203,13 +193,6 @@ void Canvas::startGame(){
                                 hud,
                                 guiEdificio,
                                 colaSalida);
-
-
-//    Texture target(gRenderer);
-//    if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
-//        printf( "Failed to create target texture!\n" );
-//    }
-//    target.setBlendMode(SDL_BLENDMODE_BLEND);
 
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -240,33 +223,9 @@ void Canvas::startGame(){
 
         mapa.mostrar(camara);
 
-
-
-
-
-
         mouse.setMouseAction(selectBox, click);
 
-
-//        if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
-//            printf( "Failed to create target texture!\n" );
-//        }
-//        target.setBlendMode(SDL_BLENDMODE_BLEND);
-//
-//
-//        target.setAsRenderTarget();
-
-
-////tell render to use colore with alpha 0
-//        SDL_SetRenderDrawColor(gRenderer, 0,0,0,0);
-//
-////fill texture with transparent pixels
-//        SDL_RenderClear(gRenderer);
-
-
         elementoManager.elementosVivir(camara, click, selectBox);
-
-
 
 //        TODO cambiar offset por camara! la gracia es que no se dibuje si no
 // se ve
@@ -274,20 +233,10 @@ void Canvas::startGame(){
         hud.mostrar();
         guiEdificio.mostrar(camara);
 
-
-
-//        SDL_SetRenderTarget( gRenderer, NULL );
-//        target.render( 0, 0, NULL);
-
-
-
-
         //Update screen
         SDL_RenderPresent(gRenderer);
         colector.crearAcciones();
         mouse.resetState();
-
-
 
 
         int frameTicks = capTimer.getTicks();
