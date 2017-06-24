@@ -50,6 +50,7 @@ void Jugador::enviarMensaje(std::string& mensaje, int id) {
 	try {
 		socket.SendStrWLen(mensaje);
 	} catch (SocketException &e) {
+		std::cout<<e.what()<<std::endl;
 		throw e;
 	}
 }

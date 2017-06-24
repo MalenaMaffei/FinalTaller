@@ -410,6 +410,7 @@ void Juego::enviarInfoFabrica (std::string id, int dst) {
 
 void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.isEmpty ()) {
+		std::cout<<colaDeEnviados.size()<<std::endl;
 		Mensaje mensaje = colaDeEnviados.desencolar ();
 		this->enviarMensaje (mensaje);
 	}
@@ -418,12 +419,19 @@ void Juego::enviarMensajesEncolados() {
 void Juego::run() {
 	while (!this->yaFinalizo()) {
 		clock_t tiempo1 = clock();
+		std::cout<<"actualizarRecibidos"<<std::endl;
 		this->actualizarRecibidos ();
+		std::cout<<"actualizarEdificios"<<std::endl;
 		this->actualizarEdificios();
+		std::cout<<"actualizarDisparos"<<std::endl;
 		this->actualizarDisparos();
+		std::cout<<"moverUnidades"<<std::endl;
 		this->moverUnidades ();
+		std::cout<<"chequearColisiones"<<std::endl;
 		this->chequearColisiones();
+		std::cout<<"eliminarMuertos"<<std::endl;
 		this->eliminarMuertos();
+		std::cout<<"enviarMensajesEncolados"<<std::endl;
 		this->enviarMensajesEncolados();
 		if (this->hayGanador ()) {
 			this->finalizar();

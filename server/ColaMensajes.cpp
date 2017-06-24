@@ -15,6 +15,10 @@ Mensaje ColaMensajes::desencolar() {
     return paquete;
 }
 
+int ColaMensajes::size() {
+	return paquetes.size();
+}
+
 bool ColaMensajes::isEmpty() {
     return paquetes.empty();
 }

@@ -8,6 +8,7 @@ class ColaMensajes {
     public:
         void encolar(Mensaje paquete);
         Mensaje desencolar();
+        int size();
         bool isEmpty();
     private:
         std::queue<Mensaje> paquetes;
