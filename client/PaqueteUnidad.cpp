@@ -7,8 +7,7 @@ int PaqueteUnidad::getTipo() {
 }
 
 float PaqueteUnidad::getVida() {
-//    float vida  = std::stoi(mensaje.substr(6,3));
-    float vida  = std::stoi("050");
+    float vida  = std::stoi(mensaje.substr(6,3));
     float cienporciento = 100;
     return vida/cienporciento;
 }
