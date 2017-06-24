@@ -8,7 +8,7 @@ class CodigosPaquete {
   int unidadesBegin();
   int unidadesEnd();
   bool esRobot(int tipo);
-  bool esTanque(int tipo);
+  bool esVehiculo(int tipo);
   bool esBala(int tipo);
   std::string nombreUnidad(int tipo);
   enum colores{

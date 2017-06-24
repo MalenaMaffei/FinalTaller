@@ -20,11 +20,11 @@ int CodigosPaquete::unidadesEnd() {
 }
 
 bool CodigosPaquete::esRobot(int tipo) {
-    return esUnidad(tipo) && tipo<= 11;
+    return esUnidad(tipo) && tipo<= FIN_ROBOTS;
 }
 
-bool CodigosPaquete::esTanque(int tipo) {
-    return esUnidad(tipo) && tipo>=12;
+bool CodigosPaquete::esVehiculo(int tipo) {
+    return esUnidad(tipo) && tipo>=COMIENZO_TANQUES;
 }
 
 bool CodigosPaquete::esBala(int tipo) {

@@ -2,9 +2,9 @@
 #define TPFINAL_VISTAHUDVEHICULOLABELS_H
 
 #include "Vista.h"
-class VistaHudVehiculoLabels : public Vista{
+class VistaLabelVehiculo : public Vista{
  public:
-  explicit VistaHudVehiculoLabels(SDL_Renderer *gRenderer);
+  explicit VistaLabelVehiculo(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAHUDVEHICULOLABELS_H

@@ -1,29 +1,45 @@
 #include "Header Files/Hud.h"
 #include "Header Files/constantes.h"
-#include "Header Files/VistaHudVehiculoLabels.h"
-#include "Header Files/VistaHudRobotLabels.h"
+#include "Header Files/VistaLabelVehiculo.h"
+#include "Header Files/VistaLabelRobot.h"
 #include "Header Files/common_CodigosPaquete.h"
-#define X_CARA 8
-#define Y_CARA 46
-#define X_LABEL_ROBOT 2
-#define Y_LABEL_ROBOT 124
+#include "Header Files/Paquete.h"
+#include "LabelRobot.h"
+#include "Header Files/VistaIconoRobot.h"
+#include "Header Files/VistaHud.h"
+#include "LabelVehiculo.h"
+#include "IconoRobot.h"
+#include "IconoVehiculo.h"
+#include "IconoArma.h"
 #define X_HPBAR 14
 #define Y_HPBAR 213
 #define HEIGHT_HPBAR 7
 #define WIDTH_HPBAR 73
-Hud::Hud(SDL_Renderer *gRenderer,
-         Vista &hud,
-         Vista &vistaCaras,
-         Vista &labelsRobot,
-         Vista &labelsVehiculo,
-         ProgressBar &barraVida) : vistaHud(hud), vistaCaras
-    (vistaCaras),
-//                                  barraVida({Punto(X_HPBAR, Y_HPBAR), WIDTH_HPBAR,HEIGHT_HPBAR},
-//    gRenderer, {60,175,23}, {99,71,71}),
-    barraVida(barraVida), seleccionado(false),
-    ubicacion(SCREEN_WIDTH - hud.getWidth(), 0), labelsRobot(labelsRobot),
-                                        labelsVehiculo(labelsVehiculo){
-    hudRect = {ubicacion,hud.getWidth(),hud.getHeight()};
+
+#include <algorithm>
+Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
+//                                    vistaCaras
+//    (VistaIconoRobot(gRenderer)),
+    barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71}),
+                                    seleccionado(false),
+    ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0)
+//    ,
+//                                    labelsRobot(labelsRobot),
+//    labelsVehiculo(labelsVehiculo)
+{
+    hudRect = {ubicacion,vistaHud.getWidth(),vistaHud.getHeight()};
+
+
+    ElementoGui* elementoGui = new LabelRobot(gRenderer);
+    elementos.push_back(elementoGui);
+    elementoGui = new LabelVehiculo(gRenderer);
+    elementos.push_back(elementoGui);
+    elementoGui = new IconoRobot(gRenderer);
+    elementos.push_back(elementoGui);
+    elementoGui = new IconoVehiculo(gRenderer);
+    elementos.push_back(elementoGui);
+    elementoGui = new IconoArma(gRenderer);
+    elementos.push_back(elementoGui);
 }
 
 void Hud::mostrar() {
@@ -32,22 +48,36 @@ void Hud::mostrar() {
 //    TODO sacar despues
     if (seleccionado){
 //        TODO hacer esto atributo
-        Punto caraOffset(X_CARA,Y_CARA);
-        Punto caraPos = ubicacion + caraOffset;
-        vistaCaras.mostrar(caraPos, getPosLabel());
-        Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
-        Punto labelRobotPos = ubicacion + labelRobotOffset;
-        labelsRobot.mostrar(labelRobotPos, getPosLabel());
+//        Punto caraOffset(X_CARA,Y_CARA);
+//        Punto caraPos = ubicacion + caraOffset;
+//        vistaCaras.mostrar(caraPos, getPosLabel());
+
+        std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
+          ele->mostrar(ubicacion);
+        });
+//        Punto labelRobotOffset(X_LABEL_ROBOT, Y_LABEL_ROBOT);
+//        Punto labelRobotPos = ubicacion + labelRobotOffset;
+//        labelsRobot.mostrar(labelRobotPos, getPosLabel());
+
         barraVida.mostrarHorizontal(vida, Punto(X_HPBAR, Y_HPBAR) + ubicacion);
     }
 }
 
 
-void Hud::setInfo(int tipo, int porcentajeVida) {
-    tipoCara = tipo;
+void Hud::setInfo(Paquete paquete) {
+    CodigosPaquete codigos;
+//    int tipo = std::stoi(paquete.getMensaje().substr(4,codigos.tipo));
+    int porcentajeVida = std::stoi(paquete.getMensaje().substr(6,3));
+//    tipoCara = tipo;
     float cienporciento = 100;
     vida = porcentajeVida/cienporciento;
     seleccionado = true;
+
+    std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
+      ele->setInfo(paquete);
+    });
+
+
 }
 
 void Hud::mostrarContenido() {
