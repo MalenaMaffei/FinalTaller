@@ -2,7 +2,7 @@
 
 * *Canvas.cpp*:
 
-    * ~~**"Fix pedorro"**~~ Cambiado a fix malo * **ELIMINAR BUSY WAITS** -> Preguntar donde, creo que es cuando espero al mapa y al color.
+    * ~~**"Fix pedorro"**~~ Cambiado a fix malo * **ELIMINAR BUSY WAITS**
 
     * Explicar los timers utilizados
 
@@ -36,20 +36,9 @@
 * Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun OK
 -----
 ##### COMENTAR CODIGO #####
-
-
-
 6. inhibir errores de valgrind de SDL.
 
 7. spcket reuseaddrinfo.
-
-8. que el hud cree todas sus vistas.
-
-11. poner para los items de abajo en su clase vista que codigo se corresponde con que posicion en el spritesheet.
- 
-12. que se muestren armas
-
-13. que se muestren tanques
 
 14. qye se muestren construibles
 
@@ -103,4 +92,8 @@
 30. ~~Capturar ubicacion del fuerte al comienzo y qye empuece la pantalla alli.~~
 31. ~~shortcut para ir a tu fuerte de una.~~
 36. ~~consumo algo cpu, chequear que sean los tiles~~
+8. ~~que el hud cree todas sus vistas.~~
+11. ~~poner para los items de abajo en su clase vista que codigo se corresponde con que posicion en el spritesheet.~~
+12. ~~que se muestren armas~~
+13. ~~que se muestren tanques~~
 

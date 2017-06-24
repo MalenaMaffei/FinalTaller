@@ -156,6 +156,9 @@ void Canvas::startGame(){
     //Current animation frame
     int frame = 0;
 
+
+//    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi
+// puedo probar con SDL_onEvent o algo asi
     while (colaEntrada.isEmpty()){
 //        TODO fix MALO hasta uqe se me ocurra una mejor manera
     }
@@ -180,13 +183,6 @@ void Canvas::startGame(){
     ElementoManager elementoManager(vistaManager, miColor);
 
 
-
-//TODO pasar esto adentro de hud como hice para guiEdificio
-//    VistaHud vistaHud(gRenderer);
-////    VistaHudCaras vistaCaras(gRenderer);
-//    VistaLabelRobot labelsRobot(gRenderer);
-//    VistaLabelVehiculo labelsVehiculo(gRenderer);
-//    ProgressBar barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71});
     Hud hud(gRenderer);
     GuiEdificio guiEdificio(gRenderer);
 
@@ -199,13 +195,6 @@ void Canvas::startGame(){
                                 hud,
                                 guiEdificio,
                                 colaSalida);
-
-
-//    Texture target(gRenderer);
-//    if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
-//        printf( "Failed to create target texture!\n" );
-//    }
-//    target.setBlendMode(SDL_BLENDMODE_BLEND);
 
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -236,33 +225,9 @@ void Canvas::startGame(){
 
         mapa.mostrar(camara);
 
-
-
-
-
-
         mouse.setMouseAction(selectBox, click);
 
-
-//        if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
-//            printf( "Failed to create target texture!\n" );
-//        }
-//        target.setBlendMode(SDL_BLENDMODE_BLEND);
-//
-//
-//        target.setAsRenderTarget();
-
-
-////tell render to use colore with alpha 0
-//        SDL_SetRenderDrawColor(gRenderer, 0,0,0,0);
-//
-////fill texture with transparent pixels
-//        SDL_RenderClear(gRenderer);
-
-
         elementoManager.elementosVivir(camara, click, selectBox);
-
-
 
 //        TODO cambiar offset por camara! la gracia es que no se dibuje si no
 // se ve
@@ -270,20 +235,10 @@ void Canvas::startGame(){
         hud.mostrar();
         guiEdificio.mostrar(camara);
 
-
-
-//        SDL_SetRenderTarget( gRenderer, NULL );
-//        target.render( 0, 0, NULL);
-
-
-
-
         //Update screen
         SDL_RenderPresent(gRenderer);
         colector.crearAcciones();
         mouse.resetState();
-
-
 
 
         int frameTicks = capTimer.getTicks();
