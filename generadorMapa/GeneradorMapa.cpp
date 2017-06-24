@@ -242,7 +242,7 @@ void GeneradorMapa::guardarConfiguracion(const std::string& nombre,
 	xml.InsertFirstChild(rootXML);
 	tinyxml2::XMLElement* fuertesXML = xml.NewElement("FUERTES");
 	for (int i = 0; i<NUM_EQUIPOS; ++i) {
-		tinyxml2::XMLElement* fuerteXML = xml.NewElement("FUERTE");
+		tinyxml2::XMLElement* fuerteXML = xml.NewElement("EDIFICIO");
 		tinyxml2::XMLElement* equipo = xml.NewElement("EQUIPO");
 		equipo->SetText(i);
 		tinyxml2::XMLElement* x = xml.NewElement("X");
@@ -259,7 +259,7 @@ void GeneradorMapa::guardarConfiguracion(const std::string& nombre,
 	//Agrego fabricas robots
 	tinyxml2::XMLElement* fabricasRXML = xml.NewElement("FABRICAS_ROBOTS");
 	for (int i = 0; i<NUM_EQUIPOS; ++i) {
-		tinyxml2::XMLElement* fabricaXML = xml.NewElement("FABRICA");
+		tinyxml2::XMLElement* fabricaXML = xml.NewElement("EDIFICIO");
 		tinyxml2::XMLElement* equipo = xml.NewElement("EQUIPO");
 		equipo->SetText(i);
 		tinyxml2::XMLElement* x = xml.NewElement("X");
@@ -276,7 +276,7 @@ void GeneradorMapa::guardarConfiguracion(const std::string& nombre,
 	//Agrego fabricas vehiculos
 	tinyxml2::XMLElement* fabricasVXML = xml.NewElement("FABRICAS_VEHICULOS");
 	for (int i = 0; i<NUM_EQUIPOS; ++i) {
-		tinyxml2::XMLElement* fabricaXML = xml.NewElement("FABRICA");
+		tinyxml2::XMLElement* fabricaXML = xml.NewElement("EDIFICIO");
 		tinyxml2::XMLElement* equipo = xml.NewElement("EQUIPO");
 		equipo->SetText(i);
 		tinyxml2::XMLElement* x = xml.NewElement("X");

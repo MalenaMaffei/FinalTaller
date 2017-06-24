@@ -31,6 +31,7 @@
 #include "server_Jugador.h"
 #include "ColaMensajes.h"
 #include "server_BoolProtected.h"
+#include <tinyxml2.h>
 
 class Juego : public Thread {
 public:
@@ -49,12 +50,19 @@ public:
     virtual ~Juego();
 private:
     void inicializarJuego(const std::string& nombreArchivo);
+    void inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
+                                std::string nombreXML);
+    void inicializarBanderas(int tipo, tinyxml2::XMLElement* padre, 
+                                std::string nombreXML);
+    void inicializarRocas(int tipo, tinyxml2::XMLElement* padre,
+                            std::string nombreXML);
     void recibirMover(std::string mensaje);
     void recibirDisparar(std::string mensaje);
     void recibirObtenerInfoUnidad(std::string mensaje, int src);
     void recibirObtenerInfoFabrica(std::string mensaje, int src);
     void recibirCrear(std::string mensaje);    
-    
+
+    void enviarMensaje(Mensaje& mensaje);
     void enviarInfoFabrica(std::string id, int dst);
     void enviarInfoUnidad(std::string id, int dst);
     
