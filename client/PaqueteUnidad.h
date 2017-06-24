@@ -6,7 +6,7 @@ class PaqueteUnidad {
  public:
   PaqueteUnidad(const std::string &mensaje);
   int getTipo();
-  int getVida();
+  float getVida();
  private:
   CodigosPaquete codigos;
   std::string mensaje;

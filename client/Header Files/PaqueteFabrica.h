@@ -12,7 +12,7 @@ class PaqueteFabrica {
   std::map<int, std::string>  getConstruibles();
   bool estaConstruyendo();
   int tipoEnConstruccion();
-  int porcentajeConstruido();
+  float porcentajeConstruido();
   int getCantConstuibles();
   const std::string &getMensaje() const;
 

@@ -23,7 +23,7 @@ class Hud {
 //  int x, y;
   Punto ubicacion;
   int tipoCara;
-  float vida;
+//  float vida;
   bool seleccionado;
   int aMostrar;
   enum posibilidades{
