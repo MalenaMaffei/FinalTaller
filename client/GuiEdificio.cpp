@@ -25,7 +25,11 @@ using std::string;
 
 GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
     : vistaGui(VistaGui(gRenderer)),vistaTexto(VistaTexto(gRenderer)),
-      barraConstr(ProgressBar(7,37,gRenderer,{3,91,11}, {223,175,75})),
+      barraConstr(ProgressBar(gRenderer,
+                              {3, 91, 11},
+                              {223, 175, 75},
+                              Rect({CONSTR_RELX, CONSTR_RELY}, 7,37),
+                              true)),
       seMuestra(false),tipoSeleccionado(-1),posSeleccionada(0),
       ok(Boton({OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON)),
       cancel(Boton({CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON)),
@@ -60,8 +64,7 @@ void GuiEdificio::mostrar(Camara &camara) {
         vistaTexto.mostrar(tiempo, {255,255,255}, pReal + Punto(TIEMPO_RELX,
                                                            TIEMPO_RELY));
         if (hayEnConstruccion && tipoSeleccionado == tipoEnConstruccion){
-            barraConstr.mostrarVertical(porcentajeConstruido, pReal +
-                Punto(CONSTR_RELX, CONSTR_RELY));
+            barraConstr.mostrar(pReal);
 //            TODO mensaje "en construccion"-> hace falta?
         }
 
@@ -119,8 +122,7 @@ void GuiEdificio::setInfo(PaqueteFabrica paquete) {
     tipoFabrica = paquete.getTipoFabrica();
     if (paquete.estaConstruyendo()){
         hayEnConstruccion = true;
-        float cienporciento = 100;
-        porcentajeConstruido = paquete.porcentajeConstruido()/cienporciento;
+        barraConstr.setInfo(paquete.porcentajeConstruido());
         tipoEnConstruccion = paquete.tipoEnConstruccion();
     } else {
         hayEnConstruccion = false;

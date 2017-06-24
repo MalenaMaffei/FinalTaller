@@ -11,6 +11,7 @@
 #include "IconoRobot.h"
 #include "IconoVehiculo.h"
 #include "IconoArma.h"
+#include "PaqueteUnidad.h"
 #define X_HPBAR 14
 #define Y_HPBAR 213
 #define HEIGHT_HPBAR 7
@@ -18,8 +19,13 @@
 
 #include <algorithm>
 Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
-    barraVida(76, 8, gRenderer,{60, 175,23},{99, 71, 71}),seleccionado(false),
-    ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0) {
+                                    barraVida(gRenderer,
+                                              {60, 175, 23},
+                                              {99, 71, 71},
+                                              Rect(Punto(X_HPBAR, Y_HPBAR),
+                                              WIDTH_HPBAR, HEIGHT_HPBAR))
+    , seleccionado(false),
+                                    ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0) {
     hudRect = {ubicacion,vistaHud.getWidth(),vistaHud.getHeight()};
 
     ElementoGui* elementoGui = new LabelRobot(gRenderer);
@@ -40,15 +46,14 @@ void Hud::mostrar() {
         std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
           ele->mostrar(ubicacion);
         });
-        barraVida.mostrarHorizontal(vida, Punto(X_HPBAR, Y_HPBAR) + ubicacion);
+        barraVida.mostrar(ubicacion);
     }
 }
 
 void Hud::setInfo(Paquete paquete) {
     CodigosPaquete codigos;
-    int porcentajeVida = std::stoi(paquete.getMensaje().substr(6,3));
-    float cienporciento = 100;
-    vida = porcentajeVida/cienporciento;
+    PaqueteUnidad paqueteUnidad(paquete.getMensaje());
+    barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
 
     std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
