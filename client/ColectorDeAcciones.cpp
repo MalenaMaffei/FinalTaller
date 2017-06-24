@@ -39,8 +39,10 @@ void ColectorDeAcciones::crearAcciones() {
             for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad*
                                                                   unidad){
               if (!unidad->estaMuerto()){
+                  printf("por encolar mover.");
                   paquete.mover(unidad->getId(), clicked.x, clicked.y);
                   colaSalida.encolar(paquete);
+                  printf("se encolo mover\n");
               }
 
             });
@@ -59,11 +61,11 @@ void ColectorDeAcciones::crearAcciones() {
         vector<ElementoUnidad*> seleccion = selectBox.getSeleccionadas();
         for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad*
                                                               unidad){
-              if (unidad->estaMuerto()){
-                  return;
+              if (! unidad->estaMuerto()){
+                  paquete.atacar(unidad->getId(),clickeado->getId());
+                  colaSalida.encolar(paquete);
               }
-            paquete.atacar(unidad->getId(),clickeado->getId());
-            colaSalida.encolar(paquete);
+
         });
     }
     click.resetCoords();

@@ -14,14 +14,16 @@ void PaqueteSender::run() {
 //        Se va a quedar bloqueado aca hasta que haya algo para desencolar.
             paquete = cola.desencolar();
         } catch(std::runtime_error& e) {
+            printf("error en la cola: %s\n", e.what());
             shutdown();
             continue;
         }
 
         try {
-            socket.SendStrWLen(paquete.getMensaje());
-            printf("el paquete mandado dice %s\n",
+            printf("el paquete a mandadar dice %s.",
                    paquete.getMensaje().c_str());
+            socket.SendStrWLen(paquete.getMensaje());
+            printf(" y ya se mando\n");
         } catch(SocketException& e){
             displayError(e);
             shutdown();
