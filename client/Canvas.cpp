@@ -124,27 +124,26 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             hud.setInfo(paquete);
         }
     }
+
 //    No lo pongo antes del while asi termina de desempaquetar todo. Aunque
 // en realidad no tiene sentido porque ni lo va a mostrar
 //    TODO decidir que hacer con esto
     if (colaEntrada.estaCerrada()){
         quit = true;
+//        Esto quiere decir que yo no fui la que cerre.
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+            "Servidor Cerrado", "El servidor se ha desconectado, el juego se "
+             "cerrará", NULL);
     }
 }
 
 
 void Canvas::startGame(){
-//    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-//                             "Holi",
-//                             "File is missing. Please reinstall the program.",
-//                             NULL);
+
 
 
     //Event handler
     SDL_Event e;
-
-//    Camara camara;
-
 
 //Keeps track of time between steps
     LTimer stepTimer;

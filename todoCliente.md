@@ -22,7 +22,7 @@
 
 * Falta loggear actividad. -> Preguntar. Redirijo todo el stderr a un log? por ahi eso responde a lo que viene abajo. Por consola imprimo cosas tipo servcidor down, cliente cerrado y en el log pongo los errores.
 
-* Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?
+* ~~Clientes y servidores frágiles, el crash en uno termina con todos. -> del lado del cliente ahora se cierra grácilmente si el servidor se cae, con eso basta? Preguntar qué mensaje amigable se puede mostrar al margen de  "Se cerro el socket" y en esa linea... hace falta que muestre los errores? O directamente digo, se cerro la conexión en todos los casos y chau?~~
 //            TODO se podria decir, si ya estaba salir==true, es que cerre yo
 // al socket entonces no muestro nada. si salir==false, se cerro desde el server
 
