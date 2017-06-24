@@ -97,6 +97,10 @@ void Socket::Send(unsigned char *source, size_t length){
 }
 
 void Socket::BindAndListen(int backlog){
+    int reuse = 1;
+    int err = setsockopt(fD, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+    if (0 != err)
+        throw SocketException("No se pudo setear reuseaddr.\n");
     int s_bind = bind(fD, res->ai_addr, res->ai_addrlen);
     if (s_bind < 0){ throw SocketException("error en bind", fD); }
     int s_lis = listen(fD, backlog);
