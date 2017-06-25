@@ -40,6 +40,7 @@ public:
                                 FabricaUnidades* fabricaUnidades,
                                 int dst);
     void mensajeDePerdedor(int id);
+    void mensajeDeGanador(int id);
     void mensajeDeSalir();
     std::string getMensaje();
     int getId();

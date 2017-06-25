@@ -76,6 +76,7 @@ private:
     
     std::vector<Jugador*>& jugadores;
     std::vector<Jugador*> perdedores;
+    int equiposActivos;
     
     FabricaUnidades* fabricaUnidades;
     FabricaMuniciones* fabricaMuniciones;

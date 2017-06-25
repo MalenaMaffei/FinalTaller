@@ -150,6 +150,12 @@ void Mensaje::mensajeDePerdedor(int id) {
 	this->id = id;
 }
 
+void Mensaje::mensajeDeGanador(int id) {
+	std::string comando = charToStr(comandoGanador);
+	this->mensaje = comando;
+	this->id = id;
+}
+
 std::string Mensaje::getMensaje() {
 	return mensaje;
 }

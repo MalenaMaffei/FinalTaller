@@ -72,16 +72,18 @@ void Juego::eliminarPerdedores(int equipoPerdedor) {
 		if ((*it)->getEquipo () == equipoPerdedor) {
 			Jugador* perdedor = (*it);
 			it = jugadores.erase (it);
-			(perdedor)->salir ();
 			perdedores.push_back(perdedor);
 			int id = perdedor->getId ();
 			Mensaje mensajePerdedor;
 			mensajePerdedor.mensajeDePerdedor (id);
-			colaDeEnviados.encolar (mensajePerdedor);
+			std::string mensajeStr = mensajePerdedor.getMensaje ();
+			perdedor->enviarMensaje (mensajeStr, mensajePerdedor.getId());
+			perdedor->finalizar();
 			continue;
 		}
 		++it;
 	}
+	--equiposActivos;
 }
 
 void Juego::enviarMensaje(Mensaje& mensaje) {
@@ -109,6 +111,7 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 	
 	finalizado.set_value (false);  
 	int equipo = equipo_1;
+	equiposActivos = 0;
 	for (Jugador *jugador: jugadores) {
 		jugador->setEquipo (equipo%NUM_EQUIPOS); 
 		Mensaje mensaje;
@@ -116,7 +119,9 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 		std::string mensajeStr = mensaje.getMensaje ();
 		jugador->enviarMensaje (mensajeStr,mensaje.getId ()); //Envio equipo		
 		++equipo;
+		++equiposActivos;
 	}
+
   
 	Mensaje mensajeMapa;
 	mensajeMapa.mensajeDeMapa (mapa);
@@ -475,11 +480,16 @@ void Juego::run() {
 	
 	for (Jugador* jugador : jugadores) {
 		jugador->finalizar();
+		//TODO enviar mensaje de ganador
+//		Mensaje mensajeGanador;
+//		mensajeGanador.mensajeDeGanador (jugador->getId ());
+//		std::string mensajeStr = mensajeGanador.getMensaje ();
+//		jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
 	}
 }
 
 bool Juego::hayGanador() {
-	return false;
+	return equiposActivos == 1;
 }
 
 bool Juego::yaFinalizo () {
