@@ -8,7 +8,6 @@
 using std::string;
 
 void Mapa::crearMapa(Paquete &paquete) {
-
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
     int y = 0;
@@ -38,13 +37,12 @@ void Mapa::crearMapa(Paquete &paquete) {
 }
 
 void Mapa::mostrar(Camara &camara) {
-
 //    TODO REFACTOR Y REVISAR XQ SE ITERAN 100 TILES DE MAS
 
 
     Punto camStart = camara.getPos();
     if (camStart == prevCamPos){
-        target.render( 0, 0, NULL);
+        target.render(0, 0, NULL);
         return;
     }
 
@@ -75,21 +73,20 @@ void Mapa::mostrar(Camara &camara) {
         }
     }
 //    printf("se iteraron: %i tiles\n", iteradas);
-    SDL_SetRenderTarget( gRenderer, NULL );
+    SDL_SetRenderTarget(gRenderer, NULL);
 
 //    Show rendered to texture
-    target.render( 0, 0, NULL);
-
+    target.render(0, 0, NULL);
 }
 
 Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
     , gRenderer(gRenderer) {
     vistaTiles = new VistaTiles(gRenderer);
-    if(!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_TARGET)) {
-        printf( "Failed to create target texture!\n" );
+    if (!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT,
+                            SDL_TEXTUREACCESS_TARGET)) {
+        printf("Failed to create target texture!\n");
     }
     target.setBlendMode(SDL_BLENDMODE_BLEND);
-
 }
 
 Mapa::~Mapa() {

@@ -48,7 +48,6 @@ void ColectorDeAcciones::crearAcciones() {
                   colaSalida.encolar(paquete);
                   printf("se encolo mover\n");
               }
-
             });
         }
         click.resetCoords();
@@ -69,7 +68,6 @@ void ColectorDeAcciones::crearAcciones() {
                   paquete.atacar(unidad->getId(),clickeado->getId());
                   colaSalida.encolar(paquete);
               }
-
         });
     }
     click.resetCoords();

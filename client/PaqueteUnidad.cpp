@@ -1,5 +1,5 @@
 #include "PaqueteUnidad.h"
-
+#include <string>
 PaqueteUnidad::PaqueteUnidad(const std::string &mensaje) : mensaje(mensaje) {}
 //TODO poner los enums correspondientes
 int PaqueteUnidad::getTipo() {

@@ -19,10 +19,12 @@ class Texture {
   void render(int x, int y, SDL_Rect* clip = NULL);
 //Set self as render target
   void setAsRenderTarget();
-  bool createBlank( int width, int height, SDL_TextureAccess = SDL_TEXTUREACCESS_STREAMING );
+  bool createBlank(int width, int height,
+                   SDL_TextureAccess = SDL_TEXTUREACCESS_STREAMING);
   int getWidth();
   int getHeight();
-  void setBlendMode( SDL_BlendMode blending );
+  void setBlendMode(SDL_BlendMode blending);
+
  protected:
   //The actual hardware texture
   SDL_Texture* mTexture;

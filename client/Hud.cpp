@@ -16,7 +16,7 @@
 #define Y_HPBAR 213
 #define HEIGHT_HPBAR 7
 #define WIDTH_HPBAR 73
-
+#include <string>
 #include <algorithm>
 Hud::Hud(SDL_Renderer *gRenderer, int color) : vistaHud(VistaHud(gRenderer)),
                                                barraVida(gRenderer,

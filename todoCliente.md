@@ -53,7 +53,7 @@
 	*clase error monitor -> singleton
 	*clase SDL_exception
 
-
+39. Mostrar cartel diciendo esperando a otros jugadores.
 ##### "Opcional" #####
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 
