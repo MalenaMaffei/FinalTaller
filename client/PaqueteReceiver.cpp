@@ -20,7 +20,7 @@ void PaqueteReceiver::run() {
 
         Paquete paquete;
         paquete.setMensaje(mensaje);
-        if (paquete.getComando() != 5){
+        if (paquete.getComando() != 5 && paquete.getComando()!=2){
             printf("paquete recibido: %s\n", mensaje.c_str());
         }
         cola.encolar(paquete);

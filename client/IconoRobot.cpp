@@ -19,9 +19,12 @@ void IconoRobot::setInfo(Paquete paquete) {
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esRobot(tipo)){
         clip = labels.at(tipo);
+        clip = vista->getClip(clip,paqueteUnidad.getColor());
         seMuestra = true;
     } else if (codigos.esVehiculo(tipo)){
         clip = labels.at(codigos.grunt);
+
+        clip = vista->getClip(clip,paqueteUnidad.getColor());
         seMuestra = true;
     } else{
         seMuestra = false;

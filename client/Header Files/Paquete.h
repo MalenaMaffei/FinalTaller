@@ -20,6 +20,7 @@ class Paquete {
  protected:
   int coordToServer(double coord);
   int coordToClient(double coord);
+  int toInt(std::string str) const;
   std::string mensaje;
   CodigosPaquete codigos;
   std::string crearCampo(int campo, int contenido);

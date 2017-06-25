@@ -23,12 +23,16 @@ void ColectorDeAcciones::crearAcciones() {
 
     Punto clicked = click.getPoint();
     Paquete paquete;
-    if (guiEdificio.click(click.getPoint())){
+//    TODO refactor esto
+    if (guiEdificio.click(clicked)){
         if (guiEdificio.huboSeleccion()){
             paquete.crear(guiEdificio.getIdFabrica(),
                         guiEdificio.getTipoSeleccionado());
             colaSalida.encolar(paquete);
         }
+        click.resetCoords();
+        return;
+    } else if (hud.click(clicked)){
         click.resetCoords();
         return;
     }

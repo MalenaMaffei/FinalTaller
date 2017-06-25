@@ -27,7 +27,8 @@ class CodigosPaquete {
     infoUnidad = 4,
     mapa = 5,
     equipo = 6,
-    infoFabrica = 7
+    infoFabrica = 7,
+    perdedor = 9
   };
 
   enum tipos{

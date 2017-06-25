@@ -35,10 +35,6 @@ void Paquete::atacar(string idAgresor, string idAgredido) {
 
 void Paquete::crear(string id, int tipo) {
     string creadorStr = crearCampo(codigos.id, id);
-//    x = coordToServer(x);
-//    y = coordToServer(y);
-//    string xStr = crearCampo(codigos.x, x);
-//    string yStr = crearCampo(codigos.y, y);
     string tipoStr = crearCampo(codigos.tipo, tipo);
     string comando = crearCampo(codigos.comando, codigos.crear);
 
@@ -119,6 +115,15 @@ int Paquete::getColor() const {
         throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
             "tiene campo Color.");
     }
-    return stoi(mensaje.substr(codigos.posColor,codigos.color));
+    return toInt(mensaje.substr(codigos.posColor,codigos.color));
+}
+
+int Paquete::toInt(std::string str) const{
+    try {
+        stoi(str);
+    } catch (std::invalid_argument& e){
+        printf("se intento trannsformar: %s a int\n", str.c_str());
+    }
+
 }
 

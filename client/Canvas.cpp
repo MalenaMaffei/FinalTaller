@@ -70,7 +70,9 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     }
 
     if (!success){
-//        TODO lanzar excepcion, en este caso si porque sino el juego no va
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+            "Juego Abortado", "El Juego no se pudo inicializar correctamente.",
+                                 NULL);
     }
 }
 
@@ -121,9 +123,12 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
             guiEdificio.setInfo(paqueteFabrica);
         } else if (paquete.getComando() == codigos.infoUnidad){
-//            TODO refactorizar aca crear clase Paquete Unidad
-
             hud.setInfo(paquete);
+        } else if (paquete.getComando() == codigos.perdedor){
+            quit = true;
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
+                 "Game Over", "Tu fuerte fue destruido y perdiste, el juego se "
+                                         "cerrará", NULL);
         }
     }
 
@@ -181,7 +186,7 @@ void Canvas::startGame(){
     ElementoManager elementoManager(vistaManager, miColor);
 
 
-    Hud hud(gRenderer);
+    Hud hud(gRenderer, miColor);
     GuiEdificio guiEdificio(gRenderer);
 
 

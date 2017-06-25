@@ -18,14 +18,14 @@
 #define WIDTH_HPBAR 73
 
 #include <algorithm>
-Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
-                                    barraVida(gRenderer,
+Hud::Hud(SDL_Renderer *gRenderer, int color) : vistaHud(VistaHud(gRenderer)),
+                                               barraVida(gRenderer,
                                               {60, 175, 23},
                                               {99, 71, 71},
                                               Rect(Punto(X_HPBAR, Y_HPBAR),
                                               WIDTH_HPBAR, HEIGHT_HPBAR))
-    , seleccionado(false),
-                                    ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0) {
+    , seleccionado(false),ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0),
+                                               color(color) {
     hudRect = {ubicacion,vistaHud.getWidth(),vistaHud.getHeight()};
 
     ElementoGui* elementoGui = new LabelRobot(gRenderer);
@@ -55,8 +55,17 @@ void Hud::setInfo(Paquete paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
-
+    Paquete nuevo;
+    std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
+    printf("nuevo mensaje: %s\n", nuevoMensaje.c_str());
+    nuevo.setMensaje(nuevoMensaje);
     std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
-      ele->setInfo(paquete);
+      ele->setInfo(nuevo);
     });
+}
+
+bool Hud::click(Punto click) {
+    bool huboClick = hudRect.incluyePunto(click);
+    seleccionado = huboClick;
+    return huboClick;
 }

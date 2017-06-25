@@ -17,6 +17,7 @@ void IconoVehiculo::setInfo(Paquete paquete) {
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esVehiculo(tipo)){
         clip = labels.at(tipo);
+        clip = vista->getClip(clip,paqueteUnidad.getColor());
         seMuestra = true;
     } else{
         seMuestra = false;

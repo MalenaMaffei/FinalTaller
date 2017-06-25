@@ -38,15 +38,11 @@
 ##### COMENTAR CODIGO #####
 6. inhibir errores de valgrind de SDL.
 
-7. spcket reuseaddrinfo.
-
 14. qye se muestren construibles
 
 15. terminar de crear spritesheets para los vehiculos que faltan.
 
-19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
-
-25. Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
+25. Terminar Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
 
 34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
 	Usar interfaz movible
@@ -54,9 +50,13 @@
 35. Que las guis pidan paquetes todo el tiempo
 
 36. Mostrar ventanitas de error
+	*clase error monitor -> singleton
+	*clase SDL_exception
 
-37. Sacar al hud cuando haces click en otra cosa.
+
 ##### "Opcional" #####
+19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
+
 38. Que el calculo de la dureccion lo haga RECT, no Punto y que tenga en cuenta desde el centro y los bordes del rectangulo.
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
@@ -68,7 +68,7 @@
 27. Si sobra tiempo, mensaje en la ventana misma "esperando que se conecte el resto de los jugadores" y despues que muestre el color que te toco. Ideal seria que el servidor te pase un color ni bien te conectas, asi te dice que color sos mientras que esperas al resto. No es esencial porque al comenzar te lleva a tu fuerte.
 
 #### Resuletos ####
-
+37. ~~Sacar al hud cuando haces click en otra cosa.~~
 34. ~~cliente se queda trabado cuando no hay server, en vez de crashear. ~~
 1. ~~Arreglar Bug Seleccion de muertos y moribundos.~~
 2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
@@ -97,4 +97,5 @@
 11. ~~poner para los items de abajo en su clase vista que codigo se corresponde con que posicion en el spritesheet.~~
 12. ~~que se muestren armas~~
 13. ~~que se muestren tanques~~
+7. ~~spcket reuseaddrinfo.~~
 
