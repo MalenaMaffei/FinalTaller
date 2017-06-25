@@ -82,11 +82,11 @@ void Socket::Send(unsigned char *source, size_t length){
     int bytes_sent = 0;
     unsigned char *buffer_ptr = source;
     for (bytes_left = length; bytes_left>0; bytes_left-=bytes_sent) {
-        if (!isConnected()) {
-            throw SocketException("Intentaba enviar, pero se cerro el "
-                                      "socket\n",
-                                  fD);
-        }
+//        if (!isConnected()) {
+//            throw SocketException("Intentaba enviar, pero se cerro el "
+//                                      "socket\n",
+//                                  fD);
+//        }
         bytes_sent=send(fD, buffer_ptr, bytes_left, MSG_NO_SIGNAL);
         if (bytes_sent<=0) {
             throw SocketException("Se intentaba enviar.\n", fD);
