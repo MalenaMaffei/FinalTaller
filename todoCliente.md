@@ -50,10 +50,9 @@
 35. Que las guis pidan paquetes todo el tiempo
 
 36. Mostrar ventanitas de error
-	*clase error monitor
+	*clase error monitor -> singleton
 	*clase SDL_exception
 
-37. Sacar al hud cuando haces click en otra cosa.
 
 ##### "Opcional" #####
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
@@ -69,7 +68,7 @@
 27. Si sobra tiempo, mensaje en la ventana misma "esperando que se conecte el resto de los jugadores" y despues que muestre el color que te toco. Ideal seria que el servidor te pase un color ni bien te conectas, asi te dice que color sos mientras que esperas al resto. No es esencial porque al comenzar te lleva a tu fuerte.
 
 #### Resuletos ####
-
+37. ~~Sacar al hud cuando haces click en otra cosa.~~
 34. ~~cliente se queda trabado cuando no hay server, en vez de crashear. ~~
 1. ~~Arreglar Bug Seleccion de muertos y moribundos.~~
 2. ~~Arreglar bugs de offset para botones del gui del edificio.~~
