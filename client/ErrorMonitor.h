@@ -7,7 +7,6 @@ class ErrorMonitor {
  public:
   ErrorMonitor();
   void outputError(string error);
-  void outputCommand(string user, string command);
  private:
   std::mutex m;
 };

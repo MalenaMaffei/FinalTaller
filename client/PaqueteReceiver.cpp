@@ -24,6 +24,5 @@ void PaqueteReceiver::run() {
             printf("paquete recibido: %s\n", mensaje.c_str());
         }
         cola.encolar(paquete);
-
     }
 }

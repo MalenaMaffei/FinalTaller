@@ -4,7 +4,7 @@
 #include "Header Files/common_CodigosPaquete.h"
 class PaqueteUnidad {
  public:
-  PaqueteUnidad(const std::string &mensaje);
+  explicit PaqueteUnidad(const std::string &mensaje);
   int getTipo();
   float getVida();
   int getColor();

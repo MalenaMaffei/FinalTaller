@@ -5,7 +5,7 @@
 #include "Tile.h"
 class Mapa {
  public:
-  Mapa(SDL_Renderer *gRenderer);
+  explicit Mapa(SDL_Renderer *gRenderer);
   void crearMapa(Paquete &paquete);
   void mostrar(Camara &camara);
   virtual ~Mapa();

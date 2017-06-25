@@ -121,9 +121,8 @@ int Paquete::getColor() const {
 int Paquete::toInt(std::string str) const{
     try {
         stoi(str);
-    } catch (std::invalid_argument& e){
+    } catch(std::invalid_argument& e){
         printf("se intento trannsformar: %s a int\n", str.c_str());
     }
-
 }
 

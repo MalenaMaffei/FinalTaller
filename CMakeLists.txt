@@ -31,6 +31,38 @@ find_package(SDL2_ttf REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 
+
+
+
+
+#include(CheckCXXCompilerFlag)
+
+#function(enable_cxx_compiler_flag_if_supported flag)
+#    string(FIND "${CMAKE_CXX_FLAGS}" "${flag}" flag_already_set)
+#    if(flag_already_set EQUAL -1)
+#        check_cxx_compiler_flag("${flag}" flag_supported)
+#        if(flag_supported)
+#            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
+#        endif()
+#    endif()
+#endfunction()
+
+#enable_cxx_compiler_flag_if_supported("-Wall")
+
+#enable_cxx_compiler_flag_if_supported("-pedantic")
+
+
+
+
+
+
+
+
+
+
+
+
+
 include_directories(${SDL2_INCLUDE_DIR} ${TINYXL2_INCLUDE_DIR} )
 link_directories(${TINYXML2_LIBRARIES})
 
