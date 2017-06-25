@@ -79,6 +79,8 @@ main (int argc, char** argv)
 	
 	juego->join ();
 	
+	delete juego;
+	
 	for (Jugador* jugador : jugadores) {
 		jugador->join();
 	}
@@ -86,8 +88,6 @@ main (int argc, char** argv)
 	for (Jugador* jugador : jugadores) {
 		delete jugador;
 	}
-	
-	delete juego;
 	
 	return 0;
 }

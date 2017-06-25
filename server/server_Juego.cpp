@@ -436,7 +436,6 @@ void Juego::enviarInfoFabrica (std::string id, int dst) {
 
 void Juego::enviarMensajesEncolados() {
 	while (!colaDeEnviados.isEmpty ()) {
-		std::cout<<colaDeEnviados.size()<<std::endl;
 		Mensaje mensaje = colaDeEnviados.desencolar ();
 		this->enviarMensaje (mensaje);
 	}
