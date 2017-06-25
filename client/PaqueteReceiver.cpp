@@ -2,7 +2,7 @@
 #include "Header Files/common_SocketException.h"
 #include <string>
 #include <chrono>
-PaqueteReceiver::PaqueteReceiver(const Socket &socket, ColaPaquetes &cola)
+PaqueteReceiver::PaqueteReceiver(Socket &socket, ColaPaquetes &cola)
     : PaqueteDelivery(socket, cola) {}
 
 void PaqueteReceiver::run() {
@@ -10,9 +10,8 @@ void PaqueteReceiver::run() {
         string mensaje;
         try {
             mensaje = socket.ReceiveStrWLen();
+//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         } catch(SocketException& e ){
-//            TODO se podria decir, si ya estaba salir==true, es que cerre yo
-// al socket entonces no muestro nada. si salir==false, se cerro desde el server
             displayError(e);
             shutdown();
             continue;
@@ -20,9 +19,9 @@ void PaqueteReceiver::run() {
 
         Paquete paquete;
         paquete.setMensaje(mensaje);
-//        if (paquete.getComando() != 5){
-//            printf("paquete recibido: %s\n", mensaje.c_str());
-//        }
+        if (paquete.getComando() != 5){
+            printf("paquete recibido: %s\n", mensaje.c_str());
+        }
         cola.encolar(paquete);
 
     }

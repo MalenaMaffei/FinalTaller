@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   Juego.cpp
  * Author: usuario
- * 
+ *
  * Created on 29 de mayo de 2017, 10:00
  */
 
@@ -29,9 +29,9 @@
 #include <string>
 #include "Mensaje.h"
 
-void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
+void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 									std::string nombreXML) {
-	
+
 	tinyxml2::XMLElement* edificiosXML = padre->FirstChildElement (nombreXML.c_str());
 	tinyxml2::XMLElement* edificioXML = edificiosXML->FirstChildElement ("EDIFICIO");
 	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
@@ -41,7 +41,7 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 		std::string id = manejadorIDs.getIDEdificio ();
 		Edificio* edificio = fabricaEdificios->getEdificio (tipo,equipo,x,y,id);
 		edificios[id] = edificio;
-		
+
 		Mensaje mensajeEdificio;
 		mensajeEdificio.mensajeDeCrear (edificio,id, edificio->getEquipo ());
 		this->enviarMensaje(mensajeEdificio);
@@ -49,7 +49,7 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 	}
 }
 
-void Juego::inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre, 
+void Juego::inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre,
 								std::string nombreXML, std::string nombreObjetos) {
   	tinyxml2::XMLElement* inmoviblesXML = padre->FirstChildElement (nombreXML.c_str ());
 	tinyxml2::XMLElement* inmovibleXML = inmoviblesXML->FirstChildElement (nombreObjetos.c_str());
@@ -88,36 +88,37 @@ void Juego::enviarMensaje(Mensaje& mensaje) {
 	for (Jugador *jugador: jugadores) {
 		std::string mensajeStr = mensaje.getMensaje();
 		try {
-			jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
+			jugador->enviarMensaje (mensajeStr, mensaje.getId ());
 		} catch (SocketException &e) {
 			std::cout<<"Se desconectará el servidor"<<std::endl;
-			this->finalizar (); 
+			std::cout<<e.what()<<std::endl;
+			this->finalizar ();
 		}
 	}
 }
 
-Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :	
+Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 												colaDeRecibidos(colaDeRecibidos),
-												mapa(Mapa("mapa.map")), 
+												mapa(Mapa("mapa.map")),
 												jugadores(jugadores),
 												fabricaUnidades(new FabricaUnidades()),
 												fabricaMuniciones(new FabricaMuniciones()),
 												fabricaEdificios(new FabricaEdificios()),
 												fabricaInmovibles(new FabricaInmovibles())
-												 { 
-  
-	
-	finalizado.set_value (false);  
+												 {
+
+
+	finalizado.set_value (false);
 	int equipo = equipo_1;
 	for (Jugador *jugador: jugadores) {
-		jugador->setEquipo (equipo%NUM_EQUIPOS); 
+		jugador->setEquipo (equipo%NUM_EQUIPOS);
 		Mensaje mensaje;
 		mensaje.mensajeDeEquipo(jugador);
 		std::string mensajeStr = mensaje.getMensaje ();
-		jugador->enviarMensaje (mensajeStr,mensaje.getId ()); //Envio equipo		
+		jugador->enviarMensaje (mensajeStr,mensaje.getId ()); //Envio equipo
 		++equipo;
 	}
-  
+
 	Mensaje mensajeMapa;
 	mensajeMapa.mensajeDeMapa (mapa);
 	this->enviarMensaje (mensajeMapa);
@@ -125,18 +126,18 @@ Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :
 	banderasPorEquipo = {1,1,1,1}; //Lleva noción de territorios
 
 	this->inicializarJuego ("configuracion.xml");
-	
+
 }
 
 void Juego::inicializarJuego(const std::string& nombreArchivo) {
 	tinyxml2::XMLDocument xml;
- 
+
  	if (xml.LoadFile(nombreArchivo.c_str())) {
  		xml.PrintError ();
  		return ;
  	}
 
-	tinyxml2::XMLElement* config = xml.FirstChildElement ("CONFIGURACION");	
+	tinyxml2::XMLElement* config = xml.FirstChildElement ("CONFIGURACION");
 	this->inicializarEdificios (3,config,"FUERTES");
 	this->inicializarEdificios (4,config,"FABRICAS_ROBOTS");
 	this->inicializarEdificios (5,config,"FABRICAS_VEHICULOS");
@@ -191,12 +192,12 @@ void Juego::eliminarMuertos() {
 		}
 		++it3;
 	}
-	
+
 }
 
 void Juego::moverUnidades() {
 	std::map<std::string, Movible*>::iterator it1 = movibles.begin ();
-	
+
 	while (it1 != movibles.end()) {
 		Movible* movible = it1->second;
 		std::array<double,2> pos = movible->getPosicion ();
@@ -214,7 +215,7 @@ void Juego::moverUnidades() {
 void Juego::chequearColisiones () {
 	//Chequeo con objetos movibles
 	std::map<std::string, Movible*>::iterator it1 = movibles.begin ();
-	
+
 	while (it1 != movibles.end()) {
 		Movible* mov1 = (it1)->second;
 		std::map<std::string,Inmovible*>::iterator it2 = inmovibles.begin ();
@@ -230,7 +231,7 @@ void Juego::chequearColisiones () {
 		while (it3 != movibles.end()) {
 			if (it1 == it3) {
 				++it3;
-				continue;	//No comparo con si mismo	
+				continue;	//No comparo con si mismo
 			}
 			Movible* mov2 = (it3)->second;
 			if (mov1->colisiona(*mov2)) {
@@ -264,7 +265,7 @@ void Juego::chequearColisiones () {
 
 void Juego::actualizarDisparos() {
 	std::map<std::string, Movible*>::iterator it1 = movibles.begin ();
-	
+
 	while (it1 != movibles.end()) {
 		Movible* movible = (it1)->second;
 		std::string idObjetivo = movible->puedeDisparar ();
@@ -284,14 +285,14 @@ void Juego::actualizarDisparos() {
 			++it1;
 			continue;
 		}
-		
+
 		double alcance = fabricaUnidades->getAlcance (movible->getTipo ());
 		if (movible->distanciaCuadrada (objetivo)>alcance*alcance) {
 			movible->setObjetivo(std::string());
 			++it1;
 			continue;
 		}
-		
+
 		//Si tiene el movible puede disparar entonces es una unidad
 		int armamento = ((Unidad*) movible)->getArmamento ();
 		std::cout<<"antes de fabrica municiones"<<std::endl;
@@ -364,14 +365,14 @@ void Juego::actualizarRecibidos() {
 										break;
 			case comandoDesconectar:	this->finalizar();
 										break;
-		}		
+		}
 	}
 }
 
 void Juego::recibirCrear(std::string mensaje) {
 	std::string idStr = mensaje.substr(1, largoId);
 	std::string tipoStr = mensaje.substr (4, largoTipo);
-	
+
 	int tipo = stoi(tipoStr);
 	int tiempo;
 	if (tipo>=6 && tipo<=10) {
@@ -394,10 +395,10 @@ void Juego::recibirMover(std::string mensaje) {
 
 	double x = stod(xStr,NULL)/100;
 	double y = stod(yStr,NULL)/100;
-	
+
 	std::array<double,2> inicio = movibles[idStr]->getPosicion ();
 	AEstrella aEstrella(mapa);
-	std::vector< std::array<double,2> > recorrido = 
+	std::vector< std::array<double,2> > recorrido =
 								aEstrella.getRecorrido (movibles[idStr],
 														{inicio[0],inicio[1]},
 														{(int) x,(int) y});
@@ -462,7 +463,7 @@ void Juego::run() {
 			this->finalizar();
 		}
 		clock_t tiempo2 = clock();
-		double intervaloDormir = CYCLE_TIME - 
+		double intervaloDormir = CYCLE_TIME -
 									double(tiempo2 - tiempo1)/CLOCKS_PER_SEC;
 		while (intervaloDormir<0) {
 			intervaloDormir+=CYCLE_TIME;
@@ -470,9 +471,9 @@ void Juego::run() {
 		struct timespec req = {0};
 		req.tv_sec = 0;
 		req.tv_nsec = intervaloDormir*NANO;
-		while (nanosleep(&req, &req) == -1); 
+		while (nanosleep(&req, &req) == -1);
 	}
-	
+
 	for (Jugador* jugador : jugadores) {
 		jugador->finalizar();
 	}
@@ -490,7 +491,7 @@ void Juego::finalizar() {
 	finalizado.set_value (true);
 }
 
-Juego::~Juego () { 
+Juego::~Juego () {
 	//Limpiar movibles, porque son punteros
 	//Limpiar inmovibles, porque son punteros
 }

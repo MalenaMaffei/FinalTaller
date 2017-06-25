@@ -3,7 +3,7 @@
 #include "Header Files/PaqueteSender.h"
 #include "Header Files/common_SocketException.h"
 #include <chrono>
-PaqueteSender::PaqueteSender(const Socket &socket,
+PaqueteSender::PaqueteSender(Socket &socket,
                              ColaSalida &cola)
     : PaqueteDelivery(socket, cola) {}
 
@@ -23,10 +23,11 @@ void PaqueteSender::run() {
             printf("el paquete a mandadar dice %s.",
                    paquete.getMensaje().c_str());
             socket.SendStrWLen(paquete.getMensaje());
+//            std::this_thread::sleep_for(std::chrono::milliseconds(500));
             printf(" y ya se mando\n");
         } catch(SocketException& e){
             displayError(e);
-            shutdown();
+//            shutdown();
             continue;
         }
     }

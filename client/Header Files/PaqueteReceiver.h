@@ -7,7 +7,7 @@
 #include "PaqueteDelivery.h"
 class PaqueteReceiver : public PaqueteDelivery{
  public:
-  PaqueteReceiver(const Socket &socket, ColaPaquetes &cola);
+  PaqueteReceiver(Socket &socket, ColaPaquetes &cola);
   void run();
 };
 

@@ -6,6 +6,7 @@ void ColaSalida::encolar(Paquete paquete) {
     bool estabaVAcia = paquetes.empty();
     std::unique_lock<std::mutex> mlock(m);
     paquetes.push(paquete);
+    printf("encolar de la flamante cola salida");
     if (estabaVAcia){
         cond_v.notify_one();
     }

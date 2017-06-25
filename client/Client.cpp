@@ -29,6 +29,7 @@ int main(int argc, char *argv[]){
         return -1;
     }
 
+
     ColaPaquetes colaEntrada;
     ColaSalida colaSalida;
 
@@ -40,6 +41,7 @@ int main(int argc, char *argv[]){
     Canvas canvas(colaEntrada, colaSalida);
     canvas.startGame();
 //    Si llegue aca es porque se cerro la ventana
+    printf("canvas se cerro\n");
     receiver.shutdown();
     sender.shutdown();
 

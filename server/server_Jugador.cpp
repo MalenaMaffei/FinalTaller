@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   ReceptorCliente.cpp
  * Author: usuario
- * 
+ *
  * Created on 13 de junio de 2017, 19:45
  */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 #include "common_SocketException.h"
 
-Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) : 
+Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) :
 												socket(std::move(socket)),
 												colaDeRecibidos(colaDeRecibidos),
 												id(id) { }
@@ -31,6 +31,7 @@ void Jugador::run () {
 			if (!debeSalir.get_value()) { //Se salio desde el cliente
 				std::cout<<"Un cliente fue cerrado"<<std::endl;
 				std::cout<<"Todos los clientes serán desconectados"<<std::endl;
+				std::cout<<e.what()<<std::endl;
 				Mensaje mensajeSalir;
 				mensajeSalir.mensajeDeSalir();
 				colaDeRecibidos.encolar(mensajeSalir);
@@ -80,4 +81,3 @@ void Jugador::finalizar() {
 }
 
 Jugador::~Jugador () { }
-

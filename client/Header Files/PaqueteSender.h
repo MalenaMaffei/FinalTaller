@@ -9,8 +9,8 @@
 
 class PaqueteSender : public PaqueteDelivery{
  public:
-  PaqueteSender(const Socket &socket,
-                  ColaSalida &cola);
+  PaqueteSender(Socket &socket,
+                ColaSalida &cola);
   void run();
 };
 

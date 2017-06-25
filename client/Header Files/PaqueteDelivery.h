@@ -10,11 +10,11 @@
 // son los encargados de recibir y mandar paquetes respectivamente.
 class PaqueteDelivery  : public Thread{
  public:
-  PaqueteDelivery(const Socket &socket, ColaPaquetes &cola);
+  PaqueteDelivery(Socket &socket, ColaPaquetes &cola);
   virtual void run() = 0;
   void shutdown();
  protected:
-  Socket socket;
+  Socket& socket;
   ColaPaquetes& cola;
   bool salir;
   void displayError(SocketException &e);

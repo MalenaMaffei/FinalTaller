@@ -15,7 +15,7 @@ class ColaPaquetes {
   std::queue<Paquete> paquetes;
   bool salir;
  private:
-  std::mutex m;
+  std::mutex mutex;
 };
 
 #endif //TPFINAL_MONITORPAQUETES_H

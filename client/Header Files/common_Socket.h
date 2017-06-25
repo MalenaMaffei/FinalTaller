@@ -17,8 +17,10 @@ class Socket {
   struct addrinfo *res;
   int filladdrinfo(const char *ip,const char *port, int
   mode);
+  std::mutex m;
 
  public:
+  Socket();
 //  abre un socket y luego realiza bind seguido de listen asi queda listo
 // para aceptar.
   void setServerMode(string port);
@@ -37,7 +39,7 @@ class Socket {
   void BindAndListen(int backlog);
 
 //Devuelve un nuevo socket para comunicarse con el cliente
-  Socket Accept();
+//  Socket Accept();
 
   void Send(unsigned char *source, size_t length);
 

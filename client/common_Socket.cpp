@@ -1,5 +1,5 @@
 #include "Header Files/common_Socket.h"
-// #define _POSIX_C_SOURCE 200112L
+#define _POSIX_C_SOURCE 200112L
 #include "Header Files/common_SocketException.h"
 #include <sys/socket.h>
 #include <unistd.h>
@@ -34,6 +34,7 @@ mode){
     if (!res) { return NOK; }
     return OK;
 }
+Socket::Socket() {}
 
 void Socket::Create(const char *ip, const char *port, int mode){
     int skt = 0;
@@ -84,12 +85,11 @@ void Socket::Send(unsigned char *source, size_t length){
     for (bytes_left = length; bytes_left>0; bytes_left-=bytes_sent) {
         if (!isConnected()) {
             throw SocketException("Intentaba enviar, pero se cerro el "
-                                      "socket\n",
-                                  fD);
+                                      "socket\n");
         }
-        bytes_sent=send(fD, buffer_ptr, bytes_left, MSG_NO_SIGNAL);
+        bytes_sent=send(fD, buffer_ptr, bytes_left, 0);
         if (bytes_sent<=0) {
-            throw SocketException("Se intentaba enviar.\n", fD);
+            throw SocketException("Se intentaba enviar.\n");
         } else {
             buffer_ptr+=bytes_sent;
         }
@@ -107,26 +107,26 @@ void Socket::BindAndListen(int backlog){
     if (s_lis <0){ throw SocketException("Error en listen.\n", fD); }
 }
 
-Socket Socket::Accept() {
-    struct sockaddr_storage c_addr;
-    struct sockaddr *a;
-    socklen_t *l;
-    socklen_t addr_s = sizeof c_addr;
-
-    a = (struct sockaddr *)&c_addr;
-    l= &addr_s;
-    int new_fd = accept(fD, a, l);
-    if (new_fd < 0){
-        throw SocketException("Error en Accept\n", fD);
-    }
-    Socket newSocket;
-    newSocket.fD = new_fd;
-    newSocket.res = nullptr;
-    return newSocket;
-}
+//Socket Socket::Accept() {
+//    struct sockaddr_storage c_addr;
+//    struct sockaddr *a;
+//    socklen_t *l;
+//    socklen_t addr_s = sizeof c_addr;
+//
+//    a = (struct sockaddr *)&c_addr;
+//    l= &addr_s;
+//    int new_fd = accept(fD, a, l);
+//    if (new_fd < 0){
+//        throw SocketException("Error en Accept\n", fD);
+//    }
+//    Socket newSocket;
+//    newSocket.fD = new_fd;
+//    newSocket.res = nullptr;
+//    return newSocket;
+//}
 
 int Socket::Receive(unsigned char *buffer, size_t length){
-    int bytes_read = recv(fD, buffer, length, MSG_NO_SIGNAL);
+    int bytes_read = recv(fD, buffer, length, 0);
     if (bytes_read == MSG_NO_SIGNAL){
         throw SocketException("Intentaba recibir pero se cerro el socket\n",
                               fD);
@@ -155,6 +155,9 @@ void Socket::Close(){
 }
 
 string Socket::ReceiveStrWLen() {
+//    printf("abajo del lock RECV -------");
+//    std::unique_lock<std::mutex> mlock(m);
+//    printf("    dsp lock RECV\n");
     int read = 0;
     unsigned char buffer_leer[BUFFSIZE] = {0};
     while (read < LENGTH_SIZE){
@@ -163,7 +166,13 @@ string Socket::ReceiveStrWLen() {
 
     int net_length;
     std::memcpy(&net_length, buffer_leer, sizeof net_length);
-    int normal_length = ntohl(net_length);
+    int normal_length;
+    try {
+        normal_length = ntohl(net_length);
+    } catch (std::invalid_argument& e){
+        printf("se intento trannsformar: %i a int desde el socket\n", net_length);
+    }
+//    int normal_length = ntohl(net_length);
     int bytes_read = 0;
     int left_to_read = normal_length;
     unsigned char *buffer_ptr = buffer_leer;
@@ -178,11 +187,17 @@ string Socket::ReceiveStrWLen() {
 }
 
 void Socket::SendStrWLen(string &str) {
+//    printf("abajo del lock SEND -------");
+//    std::unique_lock<std::mutex> mlock(m);
+//    printf("    dsp lock SEND\n");
     int normal_length = str.size();
     int net_length = htonl(normal_length);
+    printf("antes de send\n");
     Send((unsigned char*)&net_length, LENGTH_SIZE);
+    printf("dsp de send largo\n");
     char *char_message = &str[0];
     Send((unsigned char *)char_message, str.size());
+    printf("dsp de send content\n");
 }
 
 bool Socket::isConnected() {
