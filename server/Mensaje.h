@@ -37,7 +37,7 @@ public:
     void mensajeDeDisparar(std::string id, Objeto* objetivo);
     void mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst);
     void mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
-                                FabricaUnidades* fabricaUnidades,
+                                FabricaUnidades& fabricaUnidades,
                                 int dst);
     void mensajeDePerdedor(int id);
     void mensajeDeGanador(int id);

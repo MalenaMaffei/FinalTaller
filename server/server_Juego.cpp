@@ -39,7 +39,7 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 		double x = atof(edificioXML->FirstChildElement("X")->GetText ());
 		double y = atof(edificioXML->FirstChildElement("Y")->GetText ());
 		std::string id = manejadorIDs.getIDEdificio ();
-		Edificio* edificio = fabricaEdificios->getEdificio (tipo,equipo,x,y,id);
+		Edificio* edificio = fabricaEdificios.getEdificio (tipo,equipo,x,y,id);
 		edificios[id] = edificio;
 		
 		Mensaje mensajeEdificio;
@@ -57,7 +57,7 @@ void Juego::inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre,
 		double x = atof(inmovibleXML->FirstChildElement("X")->GetText ());
 		double y = atof(inmovibleXML->FirstChildElement("Y")->GetText ());
 		std::string id = manejadorIDs.getIDInmovible ();
-		Inmovible* inmovible = fabricaInmovibles->getInmovible (tipo,x,y,id);
+		Inmovible* inmovible = fabricaInmovibles.getInmovible (tipo,x,y,id);
 		inmovibles[id] = inmovible;
 		Mensaje mensajeInmovible;
 		mensajeInmovible.mensajeDeCrear (inmovible,id, SIN_EQUIPO);
@@ -101,11 +101,7 @@ void Juego::enviarMensaje(Mensaje& mensaje) {
 Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :	
 												colaDeRecibidos(colaDeRecibidos),
 												mapa(Mapa("mapa.map")), 
-												jugadores(jugadores),
-												fabricaUnidades(new FabricaUnidades()),
-												fabricaMuniciones(new FabricaMuniciones()),
-												fabricaEdificios(new FabricaEdificios()),
-												fabricaInmovibles(new FabricaInmovibles())
+												jugadores(jugadores)
 												 { 
   
 	
@@ -290,7 +286,7 @@ void Juego::actualizarDisparos() {
 			continue;
 		}
 		
-		double alcance = fabricaUnidades->getAlcance (movible->getTipo ());
+		double alcance = fabricaUnidades.getAlcance (movible->getTipo ());
 		if (movible->distanciaCuadrada (objetivo)>alcance*alcance) {
 			movible->setObjetivo(std::string());
 			++it1;
@@ -300,7 +296,7 @@ void Juego::actualizarDisparos() {
 		//Si tiene el movible puede disparar entonces es una unidad
 		int armamento = ((Unidad*) movible)->getArmamento ();
 		std::cout<<"antes de fabrica municiones"<<std::endl;
-		Municion* municion = fabricaMuniciones->getMunicion (armamento);
+		Municion* municion = fabricaMuniciones.getMunicion (armamento);
 		municion->setEquipo (movible->getEquipo ());
 		municion->setPosicion (movible->getPosicion ());
 		municion->setObjetivo (idObjetivo);
@@ -337,7 +333,7 @@ void Juego::actualizarEdificios() {
 			++it;
 			continue;
 		}
-		Unidad* unidad = fabricaUnidades->getUnidad (tipo);
+		Unidad* unidad = fabricaUnidades.getUnidad (tipo);
 		std::string id = manejadorIDs.getIDMovible ();
 		unidad->setId (id);
 		unidad->setEquipo (edificio->getEquipo ());
@@ -380,9 +376,9 @@ void Juego::recibirCrear(std::string mensaje) {
 	int tipo = stoi(tipoStr);
 	int tiempo;
 	if (tipo>=6 && tipo<=10) {
-		tiempo = fabricaUnidades->getTiempo (tipo);
+		tiempo = fabricaUnidades.getTiempo (tipo);
 	} else if (tipo>=11 && tipo<=16) {
-		tiempo = fabricaUnidades->getTiempo (tipo);
+		tiempo = fabricaUnidades.getTiempo (tipo);
 	}
 	Edificio* edificio = edificios[idStr];
 	int equipo = edificio->getEquipo ();
@@ -449,19 +445,12 @@ void Juego::enviarMensajesEncolados() {
 void Juego::run() {
 	while (!this->yaFinalizo()) {
 		clock_t tiempo1 = clock();
-//		std::cout<<"actualizarRecibidos"<<std::endl;
 		this->actualizarRecibidos ();
-//		std::cout<<"actualizarEdificios"<<std::endl;
 		this->actualizarEdificios();
-//		std::cout<<"actualizarDisparos"<<std::endl;
 		this->actualizarDisparos();
-//		std::cout<<"moverUnidades"<<std::endl;
 		this->moverUnidades ();
-//		std::cout<<"chequearColisiones"<<std::endl;
 		this->chequearColisiones();
-//		std::cout<<"eliminarMuertos"<<std::endl;
 		this->eliminarMuertos();
-//		std::cout<<"enviarMensajesEncolados"<<std::endl;
 		this->enviarMensajesEncolados();
 		if (this->hayGanador ()) {
 			this->finalizar();
@@ -480,7 +469,6 @@ void Juego::run() {
 	
 	for (Jugador* jugador : jugadores) {
 		jugador->finalizar();
-		//TODO enviar mensaje de ganador
 		Mensaje mensajeGanador;
 		mensajeGanador.mensajeDeGanador (jugador->getId ());
 		std::string mensajeStr = mensajeGanador.getMensaje ();
@@ -501,6 +489,27 @@ void Juego::finalizar() {
 }
 
 Juego::~Juego () { 
-	//Limpiar movibles, porque son punteros
-	//Limpiar inmovibles, porque son punteros
+	// Limpiar movibles
+	auto it_movibles = movibles.begin();
+	while (it_movibles != movibles.end()) {
+		delete it_movibles->second;
+		it_movibles = movibles.erase(it_movibles);
+	}
+	// Limpiar inmovibles
+	auto it_inmovibles = inmovibles.begin();
+	while (it_inmovibles != inmovibles.end()) {
+		delete it_inmovibles->second;
+		it_inmovibles = inmovibles.erase(it_inmovibles);
+	}
+	// Limpiar edificios
+	auto it_edificios = edificios.begin ();
+	while (it_edificios != edificios.end()) {
+		delete it_edificios->second;
+		it_edificios = edificios.erase (it_edificios);
+	}
+	// Vuelvo a poner perdedores en lista de jugadores para que puedan ser 
+	// eliminados de forma externa
+	for (Jugador* perdedor : perdedores) {
+		jugadores.push_back (perdedor);
+	}
 }

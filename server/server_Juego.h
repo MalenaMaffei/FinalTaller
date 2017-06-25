@@ -78,10 +78,10 @@ private:
     std::vector<Jugador*> perdedores;
     int equiposActivos;
     
-    FabricaUnidades* fabricaUnidades;
-    FabricaMuniciones* fabricaMuniciones;
-    FabricaEdificios* fabricaEdificios;
-    FabricaInmovibles* fabricaInmovibles;
+    FabricaUnidades fabricaUnidades;
+    FabricaMuniciones fabricaMuniciones;
+    FabricaEdificios fabricaEdificios;
+    FabricaInmovibles fabricaInmovibles;
         
     std::array<int,4> banderasPorEquipo;
 
