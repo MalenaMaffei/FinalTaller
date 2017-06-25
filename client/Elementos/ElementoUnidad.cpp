@@ -57,8 +57,6 @@ void ElementoUnidad::disparar(Punto target) {
     estado = disparando;
     textura = vistaDisparar;
     direccion = rect.getPunto().calcularDireccion(target);
-//    direccion = rect.getCentro().calcularDireccion(target);
-//    currentClip = vistaDisparar->getClip(currentClip, direccion);
 }
 
 void ElementoUnidad::matar() {
@@ -74,6 +72,7 @@ void ElementoUnidad::mostrar(Camara &camera) {
     if (estado == muriendo){
         Elemento::mostrar(camera);
         avanzarMuerte();
+
         return;
     } else if (estado == disparando){
         avanzarDisparo();
@@ -91,4 +90,8 @@ void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
 
 void ElementoUnidad::guiRequest(ColectorDeAcciones &colector) const {
     colector.showHud();
+}
+
+bool ElementoUnidad::estaMuriendo() {
+    return estado == muriendo;
 }

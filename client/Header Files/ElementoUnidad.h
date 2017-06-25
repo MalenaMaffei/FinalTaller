@@ -27,7 +27,7 @@ class ElementoUnidad : public ElementoColoreado{
 
   void matar();
   void disparar(Punto target);
-
+  bool estaMuriendo();
 //  En este caso (unidad) pide que se muestre el HUD
   void guiRequest(ColectorDeAcciones& colector) const;
 

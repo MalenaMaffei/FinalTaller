@@ -69,3 +69,9 @@ bool Hud::click(Punto click) {
     seleccionado = huboClick;
     return huboClick;
 }
+
+Hud::~Hud() {
+    std::for_each(elementos.begin(), elementos.end(), [&](ElementoGui* ele){
+      delete ele;
+    });
+}

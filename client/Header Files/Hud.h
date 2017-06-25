@@ -9,6 +9,7 @@
 class Hud {
  public:
   Hud(SDL_Renderer *gRenderer, int color);
+  virtual ~Hud();
   void mostrar();
 
 //  Se setea la informacion que va  a necesitar el Hud para mostrarse

@@ -3,24 +3,15 @@
 #include <vector>
 void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
     SDL_SetRenderDrawColor(renderer , 0 , 255 , 0 , 255);
-
-//    SDL_Rect displayRect = {rect.x - offset.x, rect.y - offset.y, rect.w,
-//                            rect.h};
-//    Rect displayRect(rect.getPunto() - offset, rect.w, rect.h);
     Rect displayRect = rect.negativeShift(offset);
 
     SDL_RenderDrawRect(renderer, &displayRect);
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
         (ElementoUnidad* unidad){
-        if (unidad->estaMuerto()){
-            return;
+        if (!unidad->estaMuriendo()){
+            displayRect = unidad->getRect().negativeShift(offset);
+            SDL_RenderDrawRect(renderer, &displayRect);
         }
-//        Rect rectUnidad = unidad.getRect();
-//        displayRect = Rect(rectUnidad.getPunto() - offset, rectUnidad.w,
-//                           rectUnidad.h);
-
-        displayRect = unidad->getRect().negativeShift(offset);
-        SDL_RenderDrawRect(renderer, &displayRect);
     });
 }
 
