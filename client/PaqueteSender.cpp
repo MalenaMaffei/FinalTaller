@@ -27,7 +27,7 @@ void PaqueteSender::run() {
             printf(" y ya se mando\n");
         } catch(SocketException& e){
             displayError(e);
-//            shutdown();
+            shutdown();
             continue;
         }
     }
