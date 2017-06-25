@@ -65,6 +65,8 @@ private:
     void enviarInfoFabrica(std::string id, int dst);
     void enviarInfoUnidad(std::string id, int dst);
     
+    void eliminarPerdedores(int equipoPerdedor);
+    
     Mapa mapa;
 
     BoolProtected finalizado;
@@ -73,7 +75,8 @@ private:
     ColaMensajes colaDeEnviados;
     
     std::vector<Jugador*>& jugadores;
-
+    std::vector<Jugador*> perdedores;
+    
     FabricaUnidades* fabricaUnidades;
     FabricaMuniciones* fabricaMuniciones;
     FabricaEdificios* fabricaEdificios;

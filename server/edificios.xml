@@ -4,7 +4,8 @@
 	<EDIFICIO>
 		<!--FUERTE-->
 		<ID>3</ID>
-		<VIDA>1000</VIDA>
+		<!--1000-->
+		<VIDA>10</VIDA>
 		<ANCHO>10</ANCHO>
 		<ALTO>12</ALTO>
 	</EDIFICIO>

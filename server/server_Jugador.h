@@ -27,10 +27,11 @@ public:
     void setEquipo(int equipo);
     int getEquipo();
     int getId();
+    void salir();
     void run();
     virtual ~Jugador();
 private:
-    BoolProtected salir;
+    BoolProtected debeSalir;
     Socket socket;
     int id;
     int equipo;

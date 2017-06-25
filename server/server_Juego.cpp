@@ -66,6 +66,24 @@ void Juego::inicializarInmovibles(int tipo, tinyxml2::XMLElement* padre,
 	}
 }
 
+void Juego::eliminarPerdedores(int equipoPerdedor) {
+	std::vector<Jugador*>::iterator it = jugadores.begin();
+	while(it != jugadores.end()) {
+		if ((*it)->getEquipo () == equipoPerdedor) {
+			Jugador* perdedor = (*it);
+			it = jugadores.erase (it);
+			(perdedor)->salir ();
+			perdedores.push_back(perdedor);
+			int id = perdedor->getId ();
+			Mensaje mensajePerdedor;
+			mensajePerdedor.mensajeDePerdedor (id);
+			colaDeEnviados.encolar (mensajePerdedor);
+			continue;
+		}
+		++it;
+	}
+}
+
 void Juego::enviarMensaje(Mensaje& mensaje) {
 	for (Jugador *jugador: jugadores) {
 		std::string mensajeStr = mensaje.getMensaje();
@@ -159,6 +177,11 @@ void Juego::eliminarMuertos() {
 	while (it3!=edificios.end()) {
 		Edificio* edificio = it3->second;
 		if (!edificio->estaVivo()) {
+			//Fuerte
+			if (edificio->getTipo () == 3) {
+				int equipoPerdedor = edificio->getEquipo ();
+				this->eliminarPerdedores (equipoPerdedor);
+			}
 			Mensaje mensajeMatar;
 			mensajeMatar.mensajeDeMatar (it3->first);
 			colaDeEnviados.encolar (mensajeMatar);
@@ -254,6 +277,8 @@ void Juego::actualizarDisparos() {
 			objetivo = movibles[idObjetivo];
 		} else if (inmovibles.count(idObjetivo)) {
 			objetivo = inmovibles[idObjetivo];
+		} else if (edificios.count(idObjetivo)) {
+			objetivo = edificios[idObjetivo];
 		} else {
 			movible->setObjetivo(std::string());
 			++it1;
@@ -419,19 +444,19 @@ void Juego::enviarMensajesEncolados() {
 void Juego::run() {
 	while (!this->yaFinalizo()) {
 		clock_t tiempo1 = clock();
-		std::cout<<"actualizarRecibidos"<<std::endl;
+//		std::cout<<"actualizarRecibidos"<<std::endl;
 		this->actualizarRecibidos ();
-		std::cout<<"actualizarEdificios"<<std::endl;
+//		std::cout<<"actualizarEdificios"<<std::endl;
 		this->actualizarEdificios();
-		std::cout<<"actualizarDisparos"<<std::endl;
+//		std::cout<<"actualizarDisparos"<<std::endl;
 		this->actualizarDisparos();
-		std::cout<<"moverUnidades"<<std::endl;
+//		std::cout<<"moverUnidades"<<std::endl;
 		this->moverUnidades ();
-		std::cout<<"chequearColisiones"<<std::endl;
+//		std::cout<<"chequearColisiones"<<std::endl;
 		this->chequearColisiones();
-		std::cout<<"eliminarMuertos"<<std::endl;
+//		std::cout<<"eliminarMuertos"<<std::endl;
 		this->eliminarMuertos();
-		std::cout<<"enviarMensajesEncolados"<<std::endl;
+//		std::cout<<"enviarMensajesEncolados"<<std::endl;
 		this->enviarMensajesEncolados();
 		if (this->hayGanador ()) {
 			this->finalizar();

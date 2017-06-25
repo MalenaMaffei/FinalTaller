@@ -57,7 +57,8 @@ enum comandos {
 	comandoMapa = '5',
 	comandoEquipo = '6',
 	comandoInfoFabrica = '7',
-	comandoDesconectar = '8'
+	comandoDesconectar = '8',
+        comandoPerdedor = '9'
 };
 
 
