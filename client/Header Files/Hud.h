@@ -7,7 +7,7 @@
 #include "VistaHud.h"
 class Hud {
  public:
-  Hud(SDL_Renderer *gRenderer);
+  Hud(SDL_Renderer *gRenderer, int color);
   void mostrar();
 
 //  Se setea la informacion que va  a necesitar el Hud para mostrarse
@@ -26,6 +26,7 @@ class Hud {
 //  float vida;
   bool seleccionado;
   int aMostrar;
+  int color;
   enum posibilidades{
     cara = 0,
     tanque = 1,
