@@ -63,3 +63,9 @@ void Hud::setInfo(Paquete paquete) {
       ele->setInfo(nuevo);
     });
 }
+
+bool Hud::click(Punto click) {
+    bool huboClick = hudRect.incluyePunto(click);
+    seleccionado = huboClick;
+    return huboClick;
+}

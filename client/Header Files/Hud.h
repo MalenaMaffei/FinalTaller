@@ -12,7 +12,7 @@ class Hud {
 
 //  Se setea la informacion que va  a necesitar el Hud para mostrarse
   void setInfo(Paquete paquete);
-
+  bool click(Punto click);
  private:
   VistaHud vistaHud;
 //  Vista vistaCaras;

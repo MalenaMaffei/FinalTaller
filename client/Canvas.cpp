@@ -70,7 +70,9 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     }
 
     if (!success){
-//        TODO lanzar excepcion, en este caso si porque sino el juego no va
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+            "Juego Abortado", "El Juego no se pudo inicializar correctamente.",
+                                 NULL);
     }
 }
 
