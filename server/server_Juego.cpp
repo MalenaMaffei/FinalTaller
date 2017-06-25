@@ -481,10 +481,10 @@ void Juego::run() {
 	for (Jugador* jugador : jugadores) {
 		jugador->finalizar();
 		//TODO enviar mensaje de ganador
-//		Mensaje mensajeGanador;
-//		mensajeGanador.mensajeDeGanador (jugador->getId ());
-//		std::string mensajeStr = mensajeGanador.getMensaje ();
-//		jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
+		Mensaje mensajeGanador;
+		mensajeGanador.mensajeDeGanador (jugador->getId ());
+		std::string mensajeStr = mensajeGanador.getMensaje ();
+		jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
 	}
 }
 
