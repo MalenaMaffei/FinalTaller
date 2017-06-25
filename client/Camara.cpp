@@ -32,18 +32,6 @@ bool Camara::estaEnfocado(Rect b) {
     return mBox.hayColision(b);
 }
 
-int Camara::getCamaraX() {
-    return mBox.x;
-}
-
-int Camara::getCamaraY() {
-    return mBox.y;
-}
-
-SDL_Rect *Camara::getCamara() {
-    &mBox;
-}
-
 Punto Camara::getPos() {
     return mBox.getPunto();
 }

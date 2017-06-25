@@ -17,10 +17,7 @@ class Camara {
 //  Mueve la camara con la velocidad y direccion seteadas por handleEvent.
   void mover(float timeStep);
 
-  int getCamaraX();
-  int getCamaraY();
   Punto getPos();
-  SDL_Rect* getCamara();
 
 //  Chequea si el Rect pasado esta dentro de la camara.
   bool estaEnfocado(Rect b);

@@ -15,5 +15,6 @@ client/CMakeLists.txt
 client/VistasSDL/.*
 client/VistasSDL/cmake-build-debug/
 client/VistasSDL/CMakeLists.txt
+client/client
 server/server
 generadorMapa/generador

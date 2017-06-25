@@ -81,14 +81,14 @@ string Paquete::getId() const {
 }
 
 int Paquete::getComando() const {
-    return stoi(mensaje.substr(codigos.posComando,codigos.comando));
+    return toInt(mensaje.substr(codigos.posComando,codigos.comando));
 }
 
 int Paquete::getX() {
     if (getComando() == codigos.matar){
         throw std::invalid_argument("Paquete matar no tiene campo X.");
     }
-    int xServer = stoi(mensaje.substr(codigos.posX,codigos.x));
+    int xServer = toInt(mensaje.substr(codigos.posX,codigos.x));
     int xClient = coordToClient(xServer);
     return xClient;
 }
@@ -97,7 +97,7 @@ int Paquete::getY() {
     if (getComando() == codigos.matar){
         throw std::invalid_argument("Paquete matar no tiene campo Y.");
     }
-    int yServer = stoi(mensaje.substr(codigos.posY,codigos.y));
+    int yServer = toInt(mensaje.substr(codigos.posY,codigos.y));
     int yClient = coordToClient(yServer);
     return yClient;
 }
@@ -107,7 +107,7 @@ int Paquete::getTipo() const {
         throw std::invalid_argument("Paquete "+to_string(getComando())+" no "
             "tiene campo Tipo.");
     }
-    return stoi(mensaje.substr(codigos.posTipo,codigos.tipo));
+    return toInt(mensaje.substr(codigos.posTipo,codigos.tipo));
 }
 
 int Paquete::getColor() const {
@@ -120,9 +120,10 @@ int Paquete::getColor() const {
 
 int Paquete::toInt(std::string str) const{
     try {
-        stoi(str);
+        return stoi(str);
     } catch(std::invalid_argument& e){
-        printf("se intento trannsformar: %s a int\n", str.c_str());
+        throw std::invalid_argument("se intento transformar: "+str+" a int en"
+            " un Paquete con mensaje: "+ mensaje);
     }
 }
 

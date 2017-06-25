@@ -21,12 +21,12 @@ class ProgressBar {
   void dibujarRect(Rect rect, SDL_Color color);
   void mostrarHorizontal(Punto offset);
   void mostrarVertical(Punto offset);
-  float porcentaje;
   Rect barra;
-  bool vertical;
   SDL_Renderer* gRenderer;
   SDL_Color FGColor;
   SDL_Color BGColor;
+  bool vertical;
+  float porcentaje;
 };
 
 #endif //TPFINAL_VISTAPROGRESSBAR_H

@@ -10,6 +10,9 @@ Elemento::Elemento(string id,Punto pos,Vista *textura,bool esMio)
     rect.w = textura->getWidth();
     rect.h = textura->getHeight();
 }
+Elemento::~Elemento() {
+
+}
 
 void Elemento::mostrar(Camara &camera) {
     if (!muerto){

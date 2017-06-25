@@ -11,10 +11,11 @@ class ElementoGui {
   void mostrar(Punto p);
   virtual void setInfo(Paquete paquete)=0;
   virtual ~ElementoGui();
+
  protected:
+  Vista* vista;
   Punto relPos;
   bool seMuestra;
-  Vista* vista;
   int clip;
   CodigosPaquete codigos;
 };

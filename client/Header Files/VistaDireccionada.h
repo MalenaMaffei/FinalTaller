@@ -13,7 +13,7 @@ class VistaDireccionada : public Vista{
                       const std::string &fileName);
 //  void mostrar(int x, int y, int nrClip, int direccion);
   int getLargoAnimacion() const;
-  int getClip(int clip, int direccion) const;
+  size_t getClip(size_t clip, size_t direccion) const;
   virtual bool isLastClip(int clip, int direccion) const;
  protected:
   int largoAnimacion;

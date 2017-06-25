@@ -27,15 +27,15 @@ class Elemento {
 //  Polimorfismo: Llaman a la gui correspondiente depende que Elemento fue
 // clickeado.
   virtual void guiRequest(ColectorDeAcciones& colector) const;
+  virtual ~Elemento();
 
  protected:
-  bool Mio;
-  bool muerto;
-  Rect rect;
-
   Vista* textura;
   std::string id;
   int currentClip;
+  bool muerto;
+  bool Mio;
+  Rect rect;
 };
 
 #endif //TPFINAL_ELEMENTO_H

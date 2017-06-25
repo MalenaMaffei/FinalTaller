@@ -4,9 +4,9 @@
 Vista::Vista(SDL_Renderer *gRenderer,
              int height,
              int width,
-             int clips,
+             size_t clips,
              std::string fileName,
-             int filas)
+             size_t filas)
     : Texture(gRenderer), height(height), width(width), clips(clips),
       fileName(fileName), filas(filas){
     loadMedia();
@@ -42,7 +42,7 @@ Vista::~Vista() {
 //gSpriteSheetTextureTank.free(); TODO no se si hay que ponerlo
 }
 
-void Vista::mostrar(Punto p, int nrClip) {
+void Vista::mostrar(Punto p, size_t nrClip) {
     render(p.x, p.y, &gClips[nrClip]);
 }
 
@@ -54,12 +54,12 @@ int Vista::getWidth() const {
     return width;
 }
 
-int Vista::getClip(int clip, int fila) const {
+size_t Vista::getClip(size_t clip, size_t fila) const {
     return clip%clips + (clips*fila);
 }
 
-bool Vista::isLastClip(int clip) const {
-    return clip == clips-1;
+bool Vista::isLastClip(size_t clip) const {
+    return clip + 1 == clips;
 }
 
 

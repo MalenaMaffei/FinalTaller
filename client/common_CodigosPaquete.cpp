@@ -47,5 +47,6 @@ std::string CodigosPaquete::nombreUnidad(int tipo) {
         case medium:return "Medium";
         case heavy:return "Heavy";
         case missile:return "Missile";
+        default:return "tipo desconocido";
     }
 }

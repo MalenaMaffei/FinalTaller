@@ -16,7 +16,7 @@ int VistaDireccionada::getLargoAnimacion() const {
     return largoAnimacion;
 }
 
-int VistaDireccionada::getClip(int clip, int direccion) const {
+size_t VistaDireccionada::getClip(size_t clip, size_t direccion) const {
     clip = clip%largoAnimacion;
     clip = clip + (direccion*largoAnimacion);
     return clip;

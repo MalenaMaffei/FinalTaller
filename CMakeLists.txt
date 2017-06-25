@@ -30,38 +30,23 @@ find_package(Threads REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+include(CheckCXXCompilerFlag)
 
+function(enable_cxx_compiler_flag_if_supported flag)
+    string(FIND "${CMAKE_CXX_FLAGS}" "${flag}" flag_already_set)
+    if(flag_already_set EQUAL -1)
+        check_cxx_compiler_flag("${flag}" flag_supported)
+        if(flag_supported)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
+        endif()
+    endif()
+endfunction()
 
+enable_cxx_compiler_flag_if_supported("-Wall")
+#enable_cxx_compiler_flag_if_supported("-Werror")
 
-
-
-#include(CheckCXXCompilerFlag)
-
-#function(enable_cxx_compiler_flag_if_supported flag)
-#    string(FIND "${CMAKE_CXX_FLAGS}" "${flag}" flag_already_set)
-#    if(flag_already_set EQUAL -1)
-#        check_cxx_compiler_flag("${flag}" flag_supported)
-#        if(flag_supported)
-#            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
-#        endif()
-#    endif()
-#endfunction()
-
-#enable_cxx_compiler_flag_if_supported("-Wall")
-
-#enable_cxx_compiler_flag_if_supported("-pedantic")
-
-
-
-
-
-
-
-
-
-
-
-
+enable_cxx_compiler_flag_if_supported("-pedantic")
+#enable_cxx_compiler_flag_if_supported("-pedantic-errors")
 
 include_directories(${SDL2_INCLUDE_DIR} ${TINYXL2_INCLUDE_DIR} )
 link_directories(${TINYXML2_LIBRARIES})
@@ -72,9 +57,9 @@ file(GLOB VISTA_SRC
 	"client/Vistas/*.cpp"
 	"client/Elementos/*.cpp"
         )
-add_executable(vista ${VISTA_SRC})
-set_target_properties(vista PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../client/)
-target_link_libraries(vista ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}  
+add_executable(client ${VISTA_SRC})
+set_target_properties(client PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../client/)
+target_link_libraries(client ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES}  
 					${SDL_TTF_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES} Threads::Threads)
 
 file(GLOB SERVER_SRC
@@ -92,6 +77,4 @@ file(GLOB MAP_SRC
 add_executable(generador ${MAP_SRC})
 target_link_libraries(generador ${TINYXML2_LIBRARIES})
 set_target_properties(generador PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../generadorMapa/)
-
-
 

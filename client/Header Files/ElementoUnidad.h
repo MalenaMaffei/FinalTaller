@@ -34,30 +34,17 @@ class ElementoUnidad : public ElementoColoreado{
  protected:
   void avanzarMuerte();
   void avanzarDisparo();
+  VistaDireccionada* vistaMovimiento;
+  VistaDireccionada* vistaDisparar;
   int direccion;
   int estado;
-
+  Vista* vistaMuerte;
   enum estados {
     enMovimiento = 0,
     disparando = 1,
     muriendo = 2,
     haciendoNada = 3
   };
-//  TODO esto ya nbo se usa mas, comprobar y borrar
-  enum {
-    norte = 2,
-    noroeste = 3,
-    oeste = 4,
-    suroeste = 5,
-    sur = 6,
-    sureste = 7,
-    este = 0,
-    noreste = 1,
-    centro = 9
-  };
-  VistaDireccionada* vistaMovimiento;
-  VistaDireccionada* vistaDisparar;
-  Vista* vistaMuerte;
 };
 
 #endif //TPFINAL_ELEMENTOMOVIL_H

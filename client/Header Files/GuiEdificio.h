@@ -41,12 +41,12 @@ class GuiEdificio {
   VistaGui vistaGui;
   VistaTexto vistaTexto;
   ProgressBar barraConstr;
-
+  bool seMuestra;
+  int tipoSeleccionado;
+  int posSeleccionada;
   Boton ok;
   Boton cancel;
   Boton next;
-
-  bool seMuestra;
   Punto posUNIT;
   Punto posVida;
   Punto posNombre;
@@ -54,8 +54,8 @@ class GuiEdificio {
 
 
   std::string idFabrica;
-  int posSeleccionada;
-  int tipoSeleccionado;
+
+
   std::vector<int> tiposConstruibles;
   std::map<int, std::string> tiemposConstruibles;
   int tipoFabrica;

@@ -164,7 +164,7 @@ void Canvas::startGame(){
     //The frames per second cap timer
     LTimer capTimer;
     //Current animation frame
-    int frame = 0;
+
 
 
 //    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi

@@ -32,13 +32,13 @@ class ElementoManager {
   void fabricarUnidad(Paquete &paquete);
   void fabricarElemento(Paquete &paquete);
   void limpiarMuertos(std::vector<std::string> &muertos);
+  VistaManager& vistaManager;
   int miColor;
-
   std::map<std::string, Elemento *> elementos;
   std::map<std::string, ElementoUnidad *> unidades;
   std::map<std::string, ElementoBala*> balas;
   CodigosPaquete codigos;
-  VistaManager& vistaManager;
+
 };
 
 #endif //TPFINAL_FABRICAUNIDAD_H
