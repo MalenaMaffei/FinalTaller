@@ -71,7 +71,8 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 
     if (!success){
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-            "Juego Abortado", "El Juego no se pudo inicializar correctamente.",
+            "Juego Abortado", "El Juego no se pudo inicializar correctamente."
+                                     " Se cerrará a continuación.",
                                  NULL);
     }
 }
@@ -128,7 +129,13 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             quit = true;
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
                  "Game Over", "Tu fuerte fue destruido y perdiste, el juego se "
-                                         "cerrará", NULL);
+                                         "cerrará a continuación.", NULL);
+        } else if (paquete.getComando() == codigos.ganador){
+            quit = true;
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
+                                     "Ganaste el Juego!", "Felicitaciones, "
+                                         "fuiste el ganador! El juego se "
+                                         "cerrará a continuación.", NULL);
         }
     }
 
@@ -140,7 +147,7 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 //        Esto quiere decir que yo no fui la que cerre.
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
             "Servidor Cerrado", "El servidor se ha desconectado, el juego se "
-             "cerrará", NULL);
+             "cerrará a continuación.", NULL);
     }
 }
 

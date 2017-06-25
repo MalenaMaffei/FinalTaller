@@ -28,7 +28,8 @@ class CodigosPaquete {
     mapa = 5,
     equipo = 6,
     infoFabrica = 7,
-    perdedor = 9
+    perdedor = 8,
+    ganador = 9
   };
 
   enum tipos{
