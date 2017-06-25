@@ -22,13 +22,13 @@ Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) :
 
 void Jugador::run () {
 	//TODO agregar bool salir
-	salir.set_value(false);
-	while (!salir.get_value()) {
+	debeSalir.set_value(false);
+	while (!debeSalir.get_value()) {
 		std::string mensaje;
 		try {
 			mensaje = socket.ReceiveStrWLen ();
 		} catch (SocketException &e) {
-			if (!salir.get_value()) { //Se salio desde el cliente
+			if (!debeSalir.get_value()) { //Se salio desde el cliente
 				std::cout<<"Un cliente fue cerrado"<<std::endl;
 				std::cout<<"Todos los clientes serán desconectados"<<std::endl;
 				Mensaje mensajeSalir;
@@ -67,11 +67,15 @@ int Jugador::getEquipo() {
 	return equipo;
 }
 
-void Jugador::finalizar() {
-	if (salir.get_value()) {
+void Jugador::salir() {
+	if (debeSalir.get_value()) {
 		return;
 	}
-	salir.set_value(true);
+	debeSalir.set_value(true);  
+}
+
+void Jugador::finalizar() {
+	this->salir();
 	socket.Shutdown(SHUT_RDWR);
 }
 

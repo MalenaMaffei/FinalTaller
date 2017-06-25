@@ -144,6 +144,12 @@ void Mensaje::mensajeDeSalir() {
 	this->id = TODOS;
 }
 
+void Mensaje::mensajeDePerdedor(int id) {
+	std::string comando = charToStr(comandoPerdedor);
+	this->mensaje = comando;
+	this->id = id;
+}
+
 std::string Mensaje::getMensaje() {
 	return mensaje;
 }
