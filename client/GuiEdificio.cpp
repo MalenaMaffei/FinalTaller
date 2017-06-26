@@ -33,7 +33,8 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
       seMuestra(false),tipoSeleccionado(-1),posSeleccionada(0),
       ok(Boton({OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON)),
       cancel(Boton({CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON)),
-      next(Boton({ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW)){
+      next(Boton({ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW)),
+      esperandoInfo(false){
         posUNIT = {UNIT_RELX, UNIT_RELY};
         posVida = {VIDA_RELX, VIDA_RELY};
         posNombre = {5,7};
@@ -76,15 +77,17 @@ void GuiEdificio::abrirGui(Punto pos, std::string id) {
     resetSeleccion();
     idFabrica = id;
     position = pos;
-//    seMuestra = true;
+    esperandoInfo = true;
 }
 
 bool GuiEdificio::click(Punto click) {
     if (cancel.wasPressed(click)){
         resetSeleccion();
         seMuestra = false;
+        esperandoInfo = false;
     } else if (ok.wasPressed(click)){
         seMuestra = false;
+        esperandoInfo = false;
         tipoSeleccionado = tiposConstruibles[posSeleccionada];
     } else if (next.wasPressed(click)){
         ++posSeleccionada;
@@ -113,6 +116,9 @@ std::string GuiEdificio::getIdFabrica() const {
 }
 
 void GuiEdificio::setInfo(PaqueteFabrica paquete) {
+    if (!esperandoInfo){
+        return;
+    }
     tiemposConstruibles = paquete.getConstruibles();
     tiposConstruibles.clear();
     for (const auto& kv : tiemposConstruibles) {
@@ -128,4 +134,8 @@ void GuiEdificio::setInfo(PaqueteFabrica paquete) {
         hayEnConstruccion = false;
     }
     seMuestra = true;
+}
+
+bool GuiEdificio::activo() {
+    return seMuestra;
 }

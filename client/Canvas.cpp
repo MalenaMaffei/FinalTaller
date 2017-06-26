@@ -105,10 +105,11 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
     while (!colaEntrada.isEmpty()){
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
-            elementoManager.crear(paquete);
-            if (paquete.getTipo() == codigos.fuerte && paquete.getColor() ==
+            PaqueteAccion paqueteAccion(paquete);
+            elementoManager.crear(paqueteAccion);
+            if (paqueteAccion.getTipo() == codigos.fuerte && paqueteAccion.getColor() ==
                 miColor){
-                camara.setCentro(Punto(paquete.getX(), paquete.getY()));
+                camara.setCentro(Punto(paqueteAccion.getX(), paqueteAccion.getY()));
             }
 //            TODO crashea despues de reprodicr
 //            if (codigos.esRobot(paquete.getTipo())){
@@ -118,13 +119,17 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 //            }
 
         } else if (paquete.getComando() == codigos.mover){
-            elementoManager.mover(paquete);
+            PaqueteAccion paqueteAccion(paquete);
+            elementoManager.mover(paqueteAccion);
         } else if (paquete.getComando() == codigos.disparar){
-            elementoManager.disparar(paquete);
+            PaqueteAccion paqueteAccion(paquete);
+            elementoManager.disparar(paqueteAccion);
         } else if (paquete.getComando() == codigos.matar){
-            elementoManager.matar(paquete);
+            PaqueteAccion paqueteAccion(paquete);
+            elementoManager.matar(paqueteAccion);
         } else if (paquete.getComando() == codigos.infoFabrica){
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
+            printf("llego un paquete farbica\n");
             guiEdificio.setInfo(paqueteFabrica);
         } else if (paquete.getComando() == codigos.infoUnidad){
             hud.setInfo(paquete);
@@ -156,13 +161,13 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 void Canvas::inicializarDatos(Mapa &mapa) {
     CodigosPaquete codigos;
-    Paquete color = colaEntrada.desencolarBloqueante();
+    PaqueteAccion color = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.equipo){
 //        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
     }
     miColor = std::stoi(color.getMensaje().substr(1));
     printf("mi color es: %i\n", miColor);
-    Paquete pMapa = colaEntrada.desencolarBloqueante();
+    PaqueteAccion pMapa = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.mapa){
 //        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
     }

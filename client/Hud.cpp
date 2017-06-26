@@ -3,7 +3,7 @@
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/VistaLabelRobot.h"
 #include "Header Files/common_CodigosPaquete.h"
-#include "Header Files/Paquete.h"
+#include "Header Files/PaqueteAccion.h"
 #include "LabelRobot.h"
 #include "Header Files/VistaIconoRobot.h"
 #include "Header Files/VistaHud.h"
@@ -11,7 +11,7 @@
 #include "IconoRobot.h"
 #include "IconoVehiculo.h"
 #include "IconoArma.h"
-#include "PaqueteUnidad.h"
+#include "Header Files/PaqueteUnidad.h"
 #define X_HPBAR 14
 #define Y_HPBAR 213
 #define HEIGHT_HPBAR 7
@@ -55,7 +55,7 @@ void Hud::setInfo(Paquete paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
-    Paquete nuevo;
+    PaqueteAccion nuevo;
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
     nuevo.setMensaje(nuevoMensaje);
     std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){

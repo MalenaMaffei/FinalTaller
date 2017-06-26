@@ -1,6 +1,6 @@
 #include "LabelRobot.h"
 #include "Header Files/VistaLabelRobot.h"
-#include "PaqueteUnidad.h"
+#include "Header Files/PaqueteUnidad.h"
 #include <map>
 #define X 3
 #define Y 124
@@ -16,7 +16,7 @@ LabelRobot::LabelRobot(SDL_Renderer *gRenderer) : ElementoGui
     labels[codigos.tough] = labelTough;
 }
 
-void LabelRobot::setInfo(Paquete paquete) {
+void LabelRobot::setInfo(PaqueteAccion paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esRobot(tipo)){

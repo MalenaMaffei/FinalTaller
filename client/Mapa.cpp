@@ -1,13 +1,13 @@
 #include "Header Files/Mapa.h"
 #include "Header Files/constantes.h"
-#include "Header Files/Paquete.h"
+#include "Header Files/PaqueteAccion.h"
 #include <string>
 #include <stdexcept>
 #include <vector>
 #include <algorithm>
 using std::string;
 
-void Mapa::crearMapa(Paquete &paquete) {
+void Mapa::crearMapa(PaqueteAccion &paquete) {
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
     int y = 0;

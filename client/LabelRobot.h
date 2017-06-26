@@ -7,7 +7,7 @@ class LabelRobot : public ElementoGui {
 
  public:
   LabelRobot(SDL_Renderer *gRenderer);
-  void setInfo(Paquete paquete);
+  void setInfo(PaqueteAccion paquete);
  private:
   enum posLabels {
     labelGrunt = 0,

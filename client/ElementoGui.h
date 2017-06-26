@@ -3,13 +3,13 @@
 
 #include "Header Files/Punto.h"
 #include "Header Files/Vista.h"
-#include "Header Files/Paquete.h"
+#include "Header Files/PaqueteAccion.h"
 class ElementoGui {
  public:
   ElementoGui(Vista *vista,
               Punto relPos);
   void mostrar(Punto p);
-  virtual void setInfo(Paquete paquete)=0;
+  virtual void setInfo(PaqueteAccion paquete)=0;
   virtual ~ElementoGui();
 
  protected:

@@ -1,12 +1,12 @@
 #ifndef TPFINAL_CREADORMAPA_H
 #define TPFINAL_CREADORMAPA_H
 #include <vector>
-#include "Paquete.h"
+#include "PaqueteAccion.h"
 #include "Tile.h"
 class Mapa {
  public:
   explicit Mapa(SDL_Renderer *gRenderer);
-  void crearMapa(Paquete &paquete);
+  void crearMapa(PaqueteAccion &paquete);
   void mostrar(Camara &camara);
   virtual ~Mapa();
  private:

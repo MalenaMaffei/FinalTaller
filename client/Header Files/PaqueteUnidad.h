@@ -1,7 +1,7 @@
 #ifndef TPFINAL_PAQUETEUNIDAD_H
 #define TPFINAL_PAQUETEUNIDAD_H
 #include <string>
-#include "Header Files/common_CodigosPaquete.h"
+#include "common_CodigosPaquete.h"
 class PaqueteUnidad {
  public:
   explicit PaqueteUnidad(const std::string &mensaje);

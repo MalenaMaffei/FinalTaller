@@ -1,6 +1,6 @@
 #include "IconoRobot.h"
 #include "Header Files/VistaIconoRobot.h"
-#include "PaqueteUnidad.h"
+#include "Header Files/PaqueteUnidad.h"
 #define X 8
 #define Y 46
 IconoRobot::IconoRobot(SDL_Renderer *gRenderer) : ElementoGui(new
@@ -14,7 +14,7 @@ IconoRobot::IconoRobot(SDL_Renderer *gRenderer) : ElementoGui(new
     labels[codigos.tough] = labelTough;
 }
 
-void IconoRobot::setInfo(Paquete paquete) {
+void IconoRobot::setInfo(PaqueteAccion paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esRobot(tipo)){

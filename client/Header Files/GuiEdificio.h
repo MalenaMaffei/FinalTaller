@@ -6,6 +6,7 @@
 #include "PaqueteFabrica.h"
 #include "ProgressBar.h"
 #include "Boton.h"
+#include "Paquete.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -35,6 +36,7 @@ class GuiEdificio {
 
 //  Setea los distintos elementos a mostrar usando el paquete.
   void setInfo(PaqueteFabrica paquete);
+  bool activo();
 
  private:
   void resetSeleccion();
@@ -52,9 +54,8 @@ class GuiEdificio {
   Punto posNombre;
   Punto position;
 
-
   std::string idFabrica;
-
+  Paquete paquete;
 
   std::vector<int> tiposConstruibles;
   std::map<int, std::string> tiemposConstruibles;
@@ -63,6 +64,7 @@ class GuiEdificio {
   float porcentajeConstruido;
   int tipoEnConstruccion;
   bool hayEnConstruccion;
+  bool esperandoInfo;
 };
 
 #endif //TPFINAL_GUIEDIFICIO_H

@@ -5,7 +5,7 @@
 class LabelVehiculo : public ElementoGui  {
  public:
   LabelVehiculo(SDL_Renderer *gRenderer);
-  void setInfo(Paquete paquete);
+  void setInfo(PaqueteAccion paquete);
   void mostrar();
  private:
   enum posLabels {

@@ -1,7 +1,7 @@
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
 #include "Header Files/GuiEdificio.h"
-#include "Header Files/Paquete.h"
+#include "Header Files/PaqueteAccion.h"
 #include "Header Files/ColaPaquetes.h"
 #include <algorithm>
 #include <vector>
@@ -18,12 +18,21 @@ ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
       colaSalida(salida){}
 
 void ColectorDeAcciones::crearAcciones() {
+
+
+    if (guiEdificio.activo()){
+        PaqueteAccion paquete;
+        printf("se encola info\n");
+        paquete.pedirInfo(guiEdificio.getIdFabrica());
+        colaSalida.encolar(paquete);
+    }
+
     if (!click.huboClick()){
         return;
     }
 
     Punto clicked = click.getPoint();
-    Paquete paquete;
+    PaqueteAccion paquete;
 //    TODO refactor esto
     if (guiEdificio.click(clicked)){
         if (guiEdificio.huboSeleccion()){

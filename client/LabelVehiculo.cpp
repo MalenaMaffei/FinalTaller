@@ -1,6 +1,6 @@
 #include "LabelVehiculo.h"
 #include "Header Files/VistaLabelVehiculo.h"
-#include "PaqueteUnidad.h"
+#include "Header Files/PaqueteUnidad.h"
 #define X 2
 #define Y 230
 LabelVehiculo::LabelVehiculo(SDL_Renderer *gRenderer) :
@@ -12,7 +12,7 @@ LabelVehiculo::LabelVehiculo(SDL_Renderer *gRenderer) :
     labels[codigos.missile] = labelMissile;
 }
 
-void LabelVehiculo::setInfo(Paquete paquete) {
+void LabelVehiculo::setInfo(PaqueteAccion paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esVehiculo(tipo)){

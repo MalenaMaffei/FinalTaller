@@ -5,7 +5,7 @@
 #include "Header Files/ElementoPuente.h"
 #include "Header Files/ElementoEstructura.h"
 #include "Header Files/Mouse.h"
-#include "Header Files/Paquete.h"
+#include "Header Files/PaqueteAccion.h"
 #include <vector>
 #include <string>
 using std::string;
@@ -13,7 +13,7 @@ ElementoManager::ElementoManager(VistaManager &vistaManager,
                                  int MiColor) :
     vistaManager(vistaManager), miColor(MiColor) {}
 
-void ElementoManager::crear(Paquete &paquete) {
+void ElementoManager::crear(PaqueteAccion &paquete) {
     if (codigos.esUnidad(paquete.getTipo())) {
         fabricarUnidad(paquete);
     } else {
@@ -21,7 +21,7 @@ void ElementoManager::crear(Paquete &paquete) {
     }
 }
 
-void ElementoManager::fabricarUnidad(Paquete &paquete) {
+void ElementoManager::fabricarUnidad(PaqueteAccion &paquete) {
     ElementoUnidad* unidad;
     int tipo = paquete.getTipo();
     string id = paquete.getId();
@@ -36,7 +36,7 @@ void ElementoManager::fabricarUnidad(Paquete &paquete) {
     unidades[id] = unidad;
 }
 
-void ElementoManager::fabricarElemento(Paquete &paquete) {
+void ElementoManager::fabricarElemento(PaqueteAccion &paquete) {
     Elemento *elemento;
     int tipo = paquete.getTipo();
     string id = paquete.getId();
@@ -106,7 +106,7 @@ void ElementoManager::elementosVivir(Camara &camara,Click &click,
     limpiarMuertos(muertos);
 }
 
-void ElementoManager::matar(Paquete &paquete) {
+void ElementoManager::matar(PaqueteAccion &paquete) {
     Elemento* elemento;
     std::string id = paquete.getId();
     if (elementos.count(id)){
@@ -139,7 +139,7 @@ void ElementoManager::limpiarMuertos(std::vector<string> &muertos) {
     });
 }
 
-void ElementoManager::mover(Paquete &paquete) {
+void ElementoManager::mover(PaqueteAccion &paquete) {
     string id = paquete.getId();
     Punto destino = Punto(paquete.getX(), paquete.getY());
     if (unidades.count(id)){
@@ -151,7 +151,7 @@ void ElementoManager::mover(Paquete &paquete) {
     }
 }
 
-void ElementoManager::disparar(Paquete &paquete) {
+void ElementoManager::disparar(PaqueteAccion &paquete) {
     ElementoUnidad* unidad = unidades.at(paquete.getId());
     unidad->disparar(Punto(paquete.getX(), paquete.getY()));
 }

@@ -5,7 +5,7 @@
 class IconoRobot  : public ElementoGui{
  public:
   IconoRobot(SDL_Renderer *gRenderer);
-  void setInfo(Paquete paquete);
+  void setInfo(PaqueteAccion paquete);
  private:
   enum posLabels {
     labelGrunt = 0,

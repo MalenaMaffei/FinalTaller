@@ -5,7 +5,7 @@
 class IconoVehiculo : public ElementoGui {
  public:
   IconoVehiculo(SDL_Renderer *gRenderer);
-  void setInfo(Paquete paquete);
+  void setInfo(PaqueteAccion paquete);
   void mostrar();
  private:
   enum posLabels {

@@ -2,7 +2,7 @@
 #define TPFINAL_HUD_H
 #include "Vista.h"
 #include "ProgressBar.h"
-#include "Paquete.h"
+#include "PaqueteAccion.h"
 #include "../ElementoGui.h"
 #include "VistaHud.h"
 #include <vector>

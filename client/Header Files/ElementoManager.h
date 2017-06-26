@@ -7,7 +7,7 @@
 #include "common_CodigosPaquete.h"
 #include "VistaManager.h"
 #include "Mouse.h"
-#include "Paquete.h"
+#include "PaqueteAccion.h"
 #include "ElementoBala.h"
 #include <map>
 #include <string>
@@ -19,18 +19,18 @@ class ElementoManager {
   virtual ~ElementoManager();
 
 //  Aplican los distintos tipos de paquetes que conciernen a un elemento
-  void crear(Paquete &paquete);
-  void mover(Paquete &paquete);
-  void matar(Paquete &paquete);
-  void disparar(Paquete &paquete);
+  void crear(PaqueteAccion &paquete);
+  void mover(PaqueteAccion &paquete);
+  void matar(PaqueteAccion &paquete);
+  void disparar(PaqueteAccion &paquete);
 
 //  Recorre todos los elementos chequeando si fueron clickeados,
 // seleccionados o muertos.
   void elementosVivir(Camara &camara, Click &click, SelectBox &selectBox);
 
  private:
-  void fabricarUnidad(Paquete &paquete);
-  void fabricarElemento(Paquete &paquete);
+  void fabricarUnidad(PaqueteAccion &paquete);
+  void fabricarElemento(PaqueteAccion &paquete);
   void limpiarMuertos(std::vector<std::string> &muertos);
   VistaManager& vistaManager;
   int miColor;
