@@ -8,7 +8,7 @@
 #include <vector>
 class Hud {
  public:
-  Hud(SDL_Renderer *gRenderer, int color);
+  Hud(SDL_Renderer *gRenderer);
   virtual ~Hud();
   void mostrar();
 

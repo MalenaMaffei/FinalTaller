@@ -18,14 +18,13 @@
 #define WIDTH_HPBAR 73
 #include <string>
 #include <algorithm>
-Hud::Hud(SDL_Renderer *gRenderer, int color) : vistaHud(VistaHud(gRenderer)),
-                                               barraVida(gRenderer,
+Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
+                                    barraVida(gRenderer,
                                               {60, 175, 23},
                                               {99, 71, 71},
                                               Rect(Punto(X_HPBAR, Y_HPBAR),
                                               WIDTH_HPBAR, HEIGHT_HPBAR))
-    , seleccionado(false),ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0),
-                                               color(color) {
+    , seleccionado(false), ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0) {
     hudRect = {ubicacion,vistaHud.getWidth(),vistaHud.getHeight()};
 
     ElementoGui* elementoGui = new LabelRobot(gRenderer);

@@ -192,7 +192,7 @@ void Canvas::startGame(){
     ElementoManager elementoManager(vistaManager, miColor);
 
 
-    Hud hud(gRenderer, miColor);
+    Hud hud(gRenderer);
     GuiEdificio guiEdificio(gRenderer);
 
 
