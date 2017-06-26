@@ -101,6 +101,7 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
     Reproductor reproductor;
     CodigosPaquete codigos;
     while (!colaEntrada.isEmpty()){
+        printf("el problema esta en desencolar comun\n");
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
             elementoManager.crear(paquete);
@@ -182,14 +183,14 @@ void Canvas::startGame(){
 ////        TODO fix MALO hasta uqe se me ocurra una mejor manera
 //    }
 
-
+printf("antes de desencolar por segunda vez\n");
     Mapa mapa(gRenderer);
     Paquete pMapa = colaEntrada.desencolarBloqueante();
 ////    TODO poner proper manejador de este tipo de paquetes aca.
 //    if (pMapa.getComando() == 5){
 //        mapa.crearMapa(pMapa);
 //    }
-
+    printf("salio de desencolar\n");
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 

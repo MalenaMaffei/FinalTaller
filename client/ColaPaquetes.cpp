@@ -1,6 +1,6 @@
 #include "Header Files/ColaPaquetes.h"
 //TODO refactorizar para que pueda usar mutex madre
-ColaPaquetes::ColaPaquetes() {}
+ColaPaquetes::ColaPaquetes() : salir(false) {}
 
 void ColaPaquetes::encolar(Paquete paquete) {
     bool estabaVAcia = paquetes.empty();
@@ -14,10 +14,12 @@ void ColaPaquetes::encolar(Paquete paquete) {
 Paquete ColaPaquetes::desencolarBloqueante() {
     std::unique_lock<std::mutex> lk(m);
     if (isEmpty()) {
+        printf("esperando que haya para desencolar\n");
         cond_v.wait(lk);
     }
 // Porque la cond_v pudo haber sido despertada por cerrar.
     if (!isEmpty()){
+        printf("desencolo uno\n");
         Paquete paquete = paquetes.front();
         paquetes.pop();
         return paquete;
