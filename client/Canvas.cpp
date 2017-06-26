@@ -23,6 +23,8 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <SDL_mixer.h>
+
 #define NOMBRE_JUEGO "Z: El Ejercicio Final"
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
@@ -31,7 +33,7 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     colaEntrada(colaEntrada), colaSalida(colaSalida), quit(false) {
     bool success = true;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) <  0) {
         printf("No se pudo inicializar SDL. SDL Error: %s\n", SDL_GetError());
         success = false;
     } else {
@@ -66,6 +68,11 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
                                 " %s\n", TTF_GetError());
                     success = false;
                 }
+                if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                {
+                    printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+                    success = false;
+                }
             }
         }
     }
@@ -80,49 +87,44 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 
 
 void Canvas::close() {
-    printf("dentro de close\n");
     //Destroy window
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
     gRenderer = NULL;
 
-
 //    TODO chequear que mas hace falta destruir o cerrar
 
-
     //Quit SDL subsystems
+    Mix_Quit();
     IMG_Quit();
-    printf("antes de cerrar ttf\n");
     TTF_Quit();
-    printf("fuera declose\n");
     SDL_Quit();
-//    TODO chequear que esto no clashee con edificiogui
-
 }
 
 
 void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                              Hud &hud,
-                             GuiEdificio &guiEdificio) {
-    Reproductor reproductor;
+                             GuiEdificio &guiEdificio,
+                             Reproductor &reproductor) {
+
     CodigosPaquete codigos;
+
     while (!colaEntrada.isEmpty()){
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
             PaqueteAccion paqueteAccion(paquete);
             elementoManager.crear(paqueteAccion);
-            if (paqueteAccion.getTipo() == codigos.fuerte && paqueteAccion.getColor() ==
-                miColor){
-                camara.setCentro(Punto(paqueteAccion.getX(), paqueteAccion.getY()));
+            if (paqueteAccion.getColor() == miColor){
+                int tipo = paqueteAccion.getTipo();
+                if (tipo == codigos.fuerte){
+                    camara.setCentro(Punto(paqueteAccion.getX(), paqueteAccion.getY()));
+                } else if (codigos.esRobot(tipo)){
+                    reproductor.playCrearRobot();
+                } else if (codigos.esVehiculo(tipo)){
+                    reproductor.playCrearVehiculo();
+                }
             }
-//            TODO crashea despues de reprodicr
-//            if (codigos.esRobot(paquete.getTipo())){
-//                reproductor.reproducirFX
-//                    ("../client/sounds"
-//                         "/comp_robot_manufactured.wav");
-//            }
-
         } else if (paquete.getComando() == codigos.mover){
             PaqueteAccion paqueteAccion(paquete);
             elementoManager.mover(paqueteAccion);
@@ -131,6 +133,9 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             elementoManager.disparar(paqueteAccion);
         } else if (paquete.getComando() == codigos.matar){
             PaqueteAccion paqueteAccion(paquete);
+            if (elementoManager.unidadEsMia(paqueteAccion.getId())){
+                reproductor.playMuerte();
+            }
             elementoManager.matar(paqueteAccion);
         } else if (paquete.getComando() == codigos.infoFabrica){
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
@@ -191,9 +196,9 @@ void Canvas::startGame(){
     GuiEdificio guiEdificio(gRenderer,vistaTexto);
 //
 //
-    Mouse mouse;
-    SelectBox selectBox;
-    Click click;
+//    Mouse mouse;
+//    SelectBox selectBox;
+//    Click click;
     ColectorDeAcciones colector(selectBox,
                                 click,
                                 hud,
@@ -207,41 +212,20 @@ void Canvas::startGame(){
     gameLoop(elementoManager,
              hud,
              guiEdificio,
-             click,
              colector,
-             mapa,
-             selectBox,
-             mouse);
-
-    SDL_Event e;
-    while (!quit) {
-        while (SDL_PollEvent(&e) != 0) {
-            if (e.type == SDL_QUIT) {
-                quit = true;
-            }
-
-        }
-    }
-
-//printf("uso otra vez la font\n");
-//    mensajeEsperando();
-
+             mapa);
 
 
     vistaTexto.closeFont();
     //Cerrar SDL librenado recursos
     close();
-    printf("me estoy por ir del canvas\n");
 }
 
 void Canvas::gameLoop(ElementoManager &elementoManager,
                       Hud &hud,
                       GuiEdificio &guiEdificio,
-                      Click &click,
                       ColectorDeAcciones &colector,
-                      Mapa &mapa,
-                      SelectBox &selectBox,
-                      Mouse &mouse) {
+                      Mapa &mapa) {
     //Event handler
     SDL_Event e;
 
@@ -252,11 +236,15 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
 //  Para medir los ticks del loop y despues usarlo para cumplir con las
 // frames por segundo
     LTimer capTimer;
+    Reproductor reproductor;
 
     while (!quit){
         capTimer.start();
 
-        manejarPaquetes(elementoManager, hud, guiEdificio);
+        manejarPaquetes(elementoManager,
+                        hud,
+                        guiEdificio,
+                        reproductor);
 
         while (SDL_PollEvent(&e) != 0){
             if (e.type == SDL_QUIT){
@@ -297,10 +285,6 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
         int frameTicks = capTimer.getTicks();
         if (frameTicks < SCREEN_TICK_PER_FRAME){
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
-        }
-
-        if (quit == true){
-            printf("estoy por salir del loop\n");
         }
     }
 }

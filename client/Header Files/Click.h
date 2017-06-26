@@ -6,7 +6,7 @@ class Click {
  public:
   Click();
 
-  void setCoords(int clickedX,int clickedY);
+  void setPunto(Punto punto);
 
   const Punto & getPoint() const;
 
@@ -24,10 +24,13 @@ class Click {
   bool huboClick();
 
   Elemento *getClicked() const;
+  const Punto &getScreenCoords() const;
+  void setScreenCoords(const Punto &screenCoords);
 
  private:
   Elemento* clicked;
   Punto coords;
+  Punto screenCoords;
   bool seleccion;
 };
 

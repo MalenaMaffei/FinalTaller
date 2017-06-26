@@ -24,6 +24,7 @@ class ElementoManager {
   void matar(PaqueteAccion &paquete);
   void disparar(PaqueteAccion &paquete);
 
+  bool unidadEsMia(const std::string &id) const;
 //  Recorre todos los elementos chequeando si fueron clickeados,
 // seleccionados o muertos.
   void elementosVivir(Camara &camara, Click &click, SelectBox &selectBox);

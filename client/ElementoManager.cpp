@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 using std::string;
+
 ElementoManager::ElementoManager(VistaManager &vistaManager,
                                  int MiColor) :
     vistaManager(vistaManager), miColor(MiColor) {}
@@ -169,4 +170,12 @@ ElementoManager::~ElementoManager() {
     for (const auto& kv : balas) {
         delete kv.second;
     }
+}
+
+bool ElementoManager::unidadEsMia(const string &id) const{
+    if (unidades.count(id)){
+        ElementoUnidad* unidad = unidades.at(id);
+        return unidad->esMio();
+    }
+    return false;
 }

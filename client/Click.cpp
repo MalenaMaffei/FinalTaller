@@ -3,8 +3,8 @@ Click::Click() : clicked(nullptr){
     coords = {-1,-1};
 }
 
-void Click::setCoords(int clickedX,int clickedY) {
-    coords = {clickedX, clickedY};
+void Click::setPunto(Punto punto) {
+    coords = punto;
 }
 
 const Punto & Click::getPoint() const {
@@ -32,6 +32,14 @@ void Click::resetCoords() {
 }
 bool Click::huboClick() {
     return coords.x >= 0;
+}
+
+const Punto &Click::getScreenCoords() const {
+    return screenCoords;
+}
+
+void Click::setScreenCoords(const Punto &screenCoords) {
+    Click::screenCoords = screenCoords;
 }
 
 //TODO delete coords after using them

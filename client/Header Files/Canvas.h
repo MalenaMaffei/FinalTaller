@@ -6,6 +6,7 @@
 #include "GuiEdificio.h"
 #include "ColaPaquetes.h"
 #include "Mapa.h"
+#include "Reproductor.h"
 
 class Canvas{
  public:
@@ -15,15 +16,13 @@ class Canvas{
   void startGame();
   void manejarPaquetes(ElementoManager &elementoManager,
                          Hud &hud,
-                         GuiEdificio &guiEdificio);
+                         GuiEdificio &guiEdificio,
+                         Reproductor &reproductor);
   void gameLoop(ElementoManager &elementoManager,
-                Hud &hud,
-                GuiEdificio &guiEdificio,
-                Click &click,
-                ColectorDeAcciones &colector,
-                Mapa &mapa,
-                SelectBox &selectBox,
-                Mouse &mouse);
+                  Hud &hud,
+                  GuiEdificio &guiEdificio,
+                  ColectorDeAcciones &colector,
+                  Mapa &mapa);
  private:
   void mensajeEsperando();
   //The window we'll be rendering to
@@ -35,8 +34,9 @@ class Canvas{
   ColaPaquetes& colaEntrada;
   ColaPaquetes& colaSalida;
   Camara camara;
-//  Mouse mouse;
-//  SelectBox selectBox;
+  Mouse mouse;
+  SelectBox selectBox;
+  Click click;
   int miColor;
   bool quit;
 };

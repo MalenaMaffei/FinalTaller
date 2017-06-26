@@ -39,8 +39,6 @@ VistaTexto::~VistaTexto() {
 
 void VistaTexto::closeFont() {
     //Free global font
-    printf("se va a cerrar font\t");
     TTF_CloseFont(gFont);
     gFont = NULL;
-    printf("se cerrp font\n");
 }

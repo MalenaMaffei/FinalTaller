@@ -36,7 +36,6 @@
 * Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun OK
 -----
 ##### COMENTAR CODIGO #####
-40. CAMBIAR DIMENSIONES DEL MAPA
 
 6. inhibir errores de valgrind de SDL.
 
@@ -55,8 +54,6 @@
 
 ##### "Opcional" #####
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
-
-38. Que el calculo de la dureccion lo haga RECT, no Punto y que tenga en cuenta desde el centro y los bordes del rectangulo.
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
 
@@ -99,4 +96,5 @@
 7. ~~spcket reuseaddrinfo.~~
 35. ~~Que las guis pidan paquetes todo el tiempo~~
 39. ~~Mostrar cartel diciendo esperando a otros jugadores.~~
+40. ~~CAMBIAR DIMENSIONES DEL MAPA~~
 

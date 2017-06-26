@@ -44,10 +44,11 @@ void ColectorDeAcciones::crearAcciones() {
         }
         click.resetCoords();
         return;
-    } else if (hud.click(clicked)){
+    } else if (hud.click(click)){
         click.resetCoords();
         return;
     }
+
 
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
@@ -77,7 +78,7 @@ void ColectorDeAcciones::crearAcciones() {
     } else {
         clickeado->guiRequest(*this);
     }
-    
+
     click.resetCoords();
 }
 

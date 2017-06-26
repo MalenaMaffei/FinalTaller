@@ -72,4 +72,10 @@ static const char fuentePath[] = "../client/ttf/AUDIMRG_.TTF";
 //--------------MISC----------------------
 static const char greeterPath[] = "../client/imgs/greeting.txt";
 
+//-----------SONIDOS---------------
+static const char robotListoPath[] = "../client/sounds/comp_robot_manufactured.wav";
+static const char vehiculoListoPath[] = "."
+    "./client/sounds/comp_vehicle_manufactured.wav";
+static const char avisoMuerte[] = "../client/sounds/unidad muerta.wav";
+
 #endif //TPFINAL_CONSTANTES_H

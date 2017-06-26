@@ -6,8 +6,10 @@
 Mouse::Mouse() : lastButton(-1) {}
 
 void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
+
     if (eventType == SDL_MOUSEBUTTONDOWN) {
         Punto eventPunto(event.button.x, event.button.y);
+        Mouse::screen_coords = eventPunto;
         if (event.button.button == SDL_BUTTON_RIGHT){
             lastButton = rightButtonDown;
             start_coords = eventPunto + offset;
@@ -55,7 +57,9 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
         } break;
 
         case leftButtonUp:{
-            click.setCoords(left_click_coords.x,left_click_coords.y);
+//            click.setPunto(left_click_coords.x, left_click_coords.y);
+            click.setPunto(left_click_coords);
+            click.setScreenCoords(screen_coords);
             click.setSeleccion(selectBox.haySeleccion());
             click.setClicked(nullptr);
         } break;

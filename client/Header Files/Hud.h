@@ -5,6 +5,7 @@
 #include "PaqueteAccion.h"
 #include "../ElementoGui.h"
 #include "VistaHud.h"
+#include "Click.h"
 #include <vector>
 class Hud {
  public:
@@ -14,7 +15,7 @@ class Hud {
 
 //  Se setea la informacion que va  a necesitar el Hud para mostrarse
   void setInfo(Paquete paquete);
-  bool click(Punto click);
+  bool click(Click click);
   void abrirGui(std::string id, int color);
   bool activo();
   const std::string &getIdSeleccionado() const;

@@ -29,6 +29,7 @@ class Mouse {
   Punto start_coords;
   Punto move_coords;
   Punto left_click_coords;
+  Punto screen_coords;
   int lastButton;
 };
 

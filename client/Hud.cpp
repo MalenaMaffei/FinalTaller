@@ -12,6 +12,7 @@
 #include "IconoVehiculo.h"
 #include "IconoArma.h"
 #include "Header Files/PaqueteUnidad.h"
+#include "Header Files/Click.h"
 #define X_HPBAR 14
 #define Y_HPBAR 213
 #define HEIGHT_HPBAR 7
@@ -50,6 +51,9 @@ void Hud::mostrar() {
 }
 
 void Hud::setInfo(Paquete paquete) {
+    if (!esperandoInfo){
+        return;
+    }
     CodigosPaquete codigos;
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     barraVida.setInfo(paqueteUnidad.getVida());
@@ -63,14 +67,16 @@ void Hud::setInfo(Paquete paquete) {
     });
 }
 
-bool Hud::click(Punto click) {
+bool Hud::click(Click click) {
 //    TODO hud rect nunca seleccionado
-    bool huboClick = hudRect.incluyePunto(click);
-    printf("click %i,%i, hudRect: %i,%i\n", click.x, click.y, hudRect.x,
-           hudRect.y);
-    seleccionado = huboClick;
-    esperandoInfo  = huboClick;
-    return huboClick;
+    if (seleccionado){
+        Punto p = click.getScreenCoords();
+        bool huboClick = hudRect.incluyePunto(click.getScreenCoords());
+        seleccionado = !huboClick;
+        esperandoInfo  = !huboClick;
+        return huboClick;
+    }
+    return false;
 }
 
 Hud::~Hud() {
