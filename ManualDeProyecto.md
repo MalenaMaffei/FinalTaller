@@ -113,6 +113,9 @@ __Tareas realizadas__:
     
 ## Inconvenientes encontrados
 ### Cliente
+#### Performance
+Un gran inconveniente encontrado del lado del cliente que llevó un par de días de trabajo e investigación fue consumo del CPU. La performance era muy pobre incluso cuando solo se estaba mostrando el mapa, sin unidades moviendose ni otros elementos animados.
+
 
 ## Analisis de puntos pendientes
 
