@@ -23,7 +23,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-
+#define NOMBRE_JUEGO "Z: El Ejercicio Final"
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
@@ -39,22 +39,22 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
             printf("No se pudo activar filtro lineal a textura\n");
         }
 
-        //Create window
-        gWindow = SDL_CreateWindow( "Z: El Ejercicio Final",
-                                    SDL_WINDOWPOS_UNDEFINED,
-                                    SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        gWindow = SDL_CreateWindow(NOMBRE_JUEGO,SDL_WINDOWPOS_UNDEFINED,
+                                    SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                                   SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if (gWindow == NULL) {
             printf( "No se pudo crear la ventana. SDL Error: %s\n", SDL_GetError
                 () );
             success = false;
         } else {
-            gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE );
+            gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED
+                | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
             if (gRenderer == NULL){
                 printf( "No se pudo crear renderizador. SDL Error: %s\n",
                         SDL_GetError() );
                 success = false;
             } else {
-                SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
                 int imgFlags = IMG_INIT_PNG;
                 if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -214,7 +214,7 @@ void Canvas::startGame(){
              selectBox,
              mouse);
 
-    //Free resources and close SDL
+    //Cerrar SDL librenado recursos
     close();
 }
 
@@ -229,15 +229,13 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
     //Event handler
     SDL_Event e;
 
-//Keeps track of time between steps
+//    Para que la camara se mueva a una velocidad independiente de los FPS
     LTimer stepTimer;
 
-    //The frames per second timer
-    LTimer fpsTimer;
 
-//    The frames per second cap timer
+//  Para medir los ticks del loop y despues usarlo para cumplir con las
+// frames por segundo
     LTimer capTimer;
-    //Current animation frame
 
     while (!quit){
         capTimer.start();
@@ -253,12 +251,10 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
         }
 
         float timeStep = stepTimer.getTicks() / 1000.f;
-
         camara.mover(timeStep);
-        //Restart step timer
         stepTimer.start();
 
-        //Clear screen
+        //Borrar Pantalla
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
 
@@ -275,7 +271,7 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
         hud.mostrar();
         guiEdificio.mostrar(camara);
 
-        //Update screen
+        //Actualizar Pantalla
         SDL_RenderPresent(gRenderer);
 
         colector.crearAcciones();
