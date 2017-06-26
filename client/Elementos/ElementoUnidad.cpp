@@ -70,6 +70,7 @@ void ElementoUnidad::matar() {
 
 void ElementoUnidad::mostrar(Camara &camera) {
     if (estado == muriendo){
+        printf("hola estoy explotando\n");
         Elemento::mostrar(camera);
         avanzarMuerte();
 

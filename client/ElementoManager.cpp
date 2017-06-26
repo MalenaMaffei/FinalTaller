@@ -96,6 +96,7 @@ void ElementoManager::elementosVivir(Camara &camara,Click &click,
     for (const auto& kv : unidades) {
         ElementoUnidad* unidad = unidades.at(kv.first);
         if (unidad->estaMuerto()){
+            printf("ya termine de morir, me van a borrar\n");
             muertos.push_back(unidad->getId());
         } else {
             unidad->mostrar(camara);
@@ -113,7 +114,6 @@ void ElementoManager::matar(Paquete &paquete) {
     if (elementos.count(id)){
         elemento = elementos.at(id);
     } else if (unidades.count(id)){
-        printf("elijo unodad\n");
         elemento = unidades.at(id);
     }else if (balas.count(id)){
         elemento = balas.at(id);
@@ -131,13 +131,16 @@ void ElementoManager::limpiarMuertos(std::vector<string> &muertos) {
           elemento = elementos.at(id);
           elementos.erase(id);
       } else if (unidades.count(id)){
+          printf("a punto de borrar del map\n");
           elemento = unidades.at(id);
+          printf("borrado del map\n");
           unidades.erase(id);
       } else if (balas.count(id)){
           elemento = balas.at(id);
           balas.erase(id);
       }
       delete elemento;
+      printf("deleted, ya no existo\n");
     });
 }
 
