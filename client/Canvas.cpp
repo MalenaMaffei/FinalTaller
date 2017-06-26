@@ -92,6 +92,8 @@ void Canvas::close() {
     //Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
+//    TODO chequear que esto no clashee con edificiogui
+//    TTF_Quit();
 }
 
 
@@ -101,7 +103,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
     Reproductor reproductor;
     CodigosPaquete codigos;
     while (!colaEntrada.isEmpty()){
-        printf("el problema esta en desencolar comun\n");
         Paquete paquete = colaEntrada.desencolar();
         if (paquete.getComando() == codigos.crear) {
             elementoManager.crear(paquete);
@@ -153,44 +154,28 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
     }
 }
 
+void Canvas::inicializarDatos(Mapa &mapa) {
+    CodigosPaquete codigos;
+    Paquete color = colaEntrada.desencolarBloqueante();
+    if (color.getComando() != codigos.equipo){
+//        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
+    }
+    miColor = std::stoi(color.getMensaje().substr(1));
+    printf("mi color es: %i\n", miColor);
+    Paquete pMapa = colaEntrada.desencolarBloqueante();
+    if (color.getComando() != codigos.mapa){
+//        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
+    }
+    mapa.crearMapa(pMapa);
+}
+
 
 void Canvas::startGame(){
-    //Event handler
-    SDL_Event e;
-
-//Keeps track of time between steps
-    LTimer stepTimer;
-    //The frames per second timer
-    LTimer fpsTimer;
-
-    //The frames per second cap timer
-    LTimer capTimer;
-    //Current animation frame
 
 
-
-//    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi
-// puedo probar con SDL_onEvent o algo asi
-//    while (colaEntrada.isEmpty()){
-////        TODO fix MALO hasta uqe se me ocurra una mejor manera
-//    }
-    Paquete color = colaEntrada.desencolarBloqueante();
-    if (color.getComando() == 6){
-        miColor = std::stoi(color.getMensaje().substr(1));
-        printf("mi color es: %i\n", miColor);
-    }
-//    while (colaEntrada.isEmpty()){
-////        TODO fix MALO hasta uqe se me ocurra una mejor manera
-//    }
-
-printf("antes de desencolar por segunda vez\n");
     Mapa mapa(gRenderer);
-    Paquete pMapa = colaEntrada.desencolarBloqueante();
-////    TODO poner proper manejador de este tipo de paquetes aca.
-//    if (pMapa.getComando() == 5){
-//        mapa.crearMapa(pMapa);
-//    }
-    printf("salio de desencolar\n");
+    inicializarDatos(mapa);
+
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 
@@ -211,6 +196,99 @@ printf("antes de desencolar por segunda vez\n");
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
+
+    gameLoop(elementoManager,
+             hud,
+             guiEdificio,
+             click,
+             colector,
+             mapa,
+             selectBox,
+             mouse);
+//    //Event handler
+//    SDL_Event e;
+//
+////Keeps track of time between steps
+//    LTimer stepTimer;
+//    //The frames per second timer
+//    LTimer fpsTimer;
+//
+//    //The frames per second cap timer
+//    LTimer capTimer;
+//    //Current animation frame
+//
+//    while (!quit){
+//        capTimer.start();
+//
+//        manejarPaquetes(elementoManager, hud, guiEdificio);
+//
+//        while (SDL_PollEvent(&e) != 0){
+//            if (e.type == SDL_QUIT){
+//                quit = true;
+//            }
+//            camara.handleEvent(e);
+//            mouse.setState(e.type, e, camara.getPos());
+//        }
+//        float timeStep = stepTimer.getTicks() / 1000.f;
+//
+//        camara.mover(timeStep);
+//        //Restart step timer
+//        stepTimer.start();
+//
+//        //Clear screen
+//        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+//        SDL_RenderClear(gRenderer);
+//
+//
+//        mapa.mostrar(camara);
+//
+//        mouse.setMouseAction(selectBox, click);
+//
+//        elementoManager.elementosVivir(camara, click, selectBox);
+//
+////        TODO cambiar offset por camara! la gracia es que no se dibuje si no
+//// se ve
+//        selectBox.mostrar(gRenderer, camara.getPos());
+//        hud.mostrar();
+//        guiEdificio.mostrar(camara);
+//
+//        //Update screen
+//        SDL_RenderPresent(gRenderer);
+//
+//        colector.crearAcciones();
+//        mouse.resetState();
+//
+//
+//        int frameTicks = capTimer.getTicks();
+//        if (frameTicks < SCREEN_TICK_PER_FRAME){
+//            //Wait remaining time
+//            SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
+//        }
+//    }
+    //Free resources and close SDL
+    close();
+}
+
+void Canvas::gameLoop(ElementoManager &elementoManager,
+                      Hud &hud,
+                      GuiEdificio &guiEdificio,
+                      Click &click,
+                      ColectorDeAcciones &colector,
+                      Mapa &mapa,
+                      SelectBox &selectBox,
+                      Mouse &mouse) {
+    //Event handler
+    SDL_Event e;
+
+//Keeps track of time between steps
+    LTimer stepTimer;
+    //The frames per second timer
+    LTimer fpsTimer;
+
+    //The frames per second cap timer
+    LTimer capTimer;
+    //Current animation frame
+
     while (!quit){
         capTimer.start();
 
@@ -223,7 +301,6 @@ printf("antes de desencolar por segunda vez\n");
             camara.handleEvent(e);
             mouse.setState(e.type, e, camara.getPos());
         }
-
         float timeStep = stepTimer.getTicks() / 1000.f;
 
         camara.mover(timeStep);
@@ -249,6 +326,7 @@ printf("antes de desencolar por segunda vez\n");
 
         //Update screen
         SDL_RenderPresent(gRenderer);
+
         colector.crearAcciones();
         mouse.resetState();
 
@@ -259,8 +337,4 @@ printf("antes de desencolar por segunda vez\n");
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
     }
-
-
-    //Free resources and close SDL
-    close();
 }
