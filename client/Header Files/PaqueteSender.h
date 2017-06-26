@@ -2,15 +2,15 @@
 #define TPFINAL_PAQUETESENDER_H
 #include <condition_variable>
 #include "common_Socket.h"
-#include "ColaPaquetes.h"
+#include "ColaPaquetesVieja.h"
 #include "common_Thread.h"
 #include "PaqueteDelivery.h"
-#include "ColaSalida.h"
+#include "ColaPaquetes.h"
 
 class PaqueteSender : public PaqueteDelivery{
  public:
   PaqueteSender(const Socket &socket,
-                  ColaSalida &cola);
+                  ColaPaquetes &cola);
   void run();
 };
 

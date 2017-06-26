@@ -1,21 +1,22 @@
-#ifndef TPFINAL_MONITORPAQUETES_H
-#define TPFINAL_MONITORPAQUETES_H
-#include "Paquete.h"
-#include <queue>
-#include <mutex>
+#ifndef TPFINAL_COLASALIDA_H
+#define TPFINAL_COLASALIDA_H
+
+#include <condition_variable>
+#include "ColaPaquetesVieja.h"
 class ColaPaquetes {
  public:
-    ColaPaquetes();
-    virtual void encolar(Paquete paquete);
-    virtual Paquete desencolar();
-    bool isEmpty();
-    bool estaCerrada();
-    virtual void cerrar();
- protected:
+  ColaPaquetes();
+  void encolar(Paquete paquete);
+  Paquete desencolarBloqueante();
+  Paquete desencolar();
+  void cerrar();
+  bool isEmpty();
+  bool estaCerrada();
+ private:
   std::queue<Paquete> paquetes;
   bool salir;
- private:
   std::mutex m;
+  std::condition_variable cond_v;
 };
 
-#endif //TPFINAL_MONITORPAQUETES_H
+#endif //TPFINAL_COLASALIDA_H

@@ -4,15 +4,15 @@
 #include "Header Files/common_SocketException.h"
 #include <chrono>
 PaqueteSender::PaqueteSender(const Socket &socket,
-                             ColaSalida &cola)
+                             ColaPaquetes &cola)
     : PaqueteDelivery(socket, cola) {}
 
 void PaqueteSender::run() {
     while (! salir){
         Paquete paquete;
         try {
-//        Se va a quedar bloqueado aca hasta que haya algo para desencolar.
-            paquete = cola.desencolar();
+//        Se va a quedar bloqueado aca hasta que haya algo para desencolarBloqueante.
+            paquete = cola.desencolarBloqueante();
         } catch(std::runtime_error& e) {
             printf("error en la cola: %s\n", e.what());
             shutdown();

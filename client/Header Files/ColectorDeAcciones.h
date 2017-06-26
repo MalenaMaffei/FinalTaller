@@ -5,14 +5,15 @@
 #include "Click.h"
 #include "Hud.h"
 #include "GuiEdificio.h"
+#include "ColaPaquetesVieja.h"
 #include "ColaPaquetes.h"
 class ColectorDeAcciones {
  public:
   ColectorDeAcciones(SelectBox &selectBox,
-                       Click &click,
-                       Hud &hud,
-                       GuiEdificio &guiEdificio,
-                       ColaPaquetes &salida);
+                     Click &click,
+                     Hud &hud,
+                     GuiEdificio &guiEdificio,
+                     ColaPaquetes &salida);
 
 //  Analiza los eventos registrados durante el gamelopp (clicks, selecciones)
 // y crea los paquetes correspondientes en respuesta a esas acciones.

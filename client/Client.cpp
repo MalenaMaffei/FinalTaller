@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
     }
 
     ColaPaquetes colaEntrada;
-    ColaSalida colaSalida;
+    ColaPaquetes colaSalida;
 
     PaqueteReceiver receiver(socket, colaEntrada);
     PaqueteSender sender(socket, colaSalida);

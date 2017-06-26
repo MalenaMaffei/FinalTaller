@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Header Files/PaqueteDelivery.h"
+#include "Header Files/ColaPaquetes.h"
 PaqueteDelivery::PaqueteDelivery(const Socket &socket, ColaPaquetes &cola)
     : socket(socket), cola(cola), salir(false) {}
 

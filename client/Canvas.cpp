@@ -19,6 +19,7 @@
 #include "Header Files/VistaLabelRobot.h"
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/Reproductor.h"
+#include "Header Files/ColaPaquetes.h"
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -169,25 +170,25 @@ void Canvas::startGame(){
 
 //    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi
 // puedo probar con SDL_onEvent o algo asi
-    while (colaEntrada.isEmpty()){
-//        TODO fix MALO hasta uqe se me ocurra una mejor manera
-    }
-    Paquete color = colaEntrada.desencolar();
+//    while (colaEntrada.isEmpty()){
+////        TODO fix MALO hasta uqe se me ocurra una mejor manera
+//    }
+    Paquete color = colaEntrada.desencolarBloqueante();
     if (color.getComando() == 6){
         miColor = std::stoi(color.getMensaje().substr(1));
         printf("mi color es: %i\n", miColor);
     }
-    while (colaEntrada.isEmpty()){
-//        TODO fix MALO hasta uqe se me ocurra una mejor manera
-    }
+//    while (colaEntrada.isEmpty()){
+////        TODO fix MALO hasta uqe se me ocurra una mejor manera
+//    }
 
 
     Mapa mapa(gRenderer);
-    Paquete pMapa = colaEntrada.desencolar();
-//    TODO poner proper manejador de este tipo de paquetes aca.
-    if (pMapa.getComando() == 5){
-        mapa.crearMapa(pMapa);
-    }
+    Paquete pMapa = colaEntrada.desencolarBloqueante();
+////    TODO poner proper manejador de este tipo de paquetes aca.
+//    if (pMapa.getComando() == 5){
+//        mapa.crearMapa(pMapa);
+//    }
 
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
