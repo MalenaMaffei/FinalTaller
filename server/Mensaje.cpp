@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Mensaje.cpp
- * Author: usuario
- * 
- * Created on 18 de junio de 2017, 14:53
- */
 
 #include "Mensaje.h"
 #include "server_Jugador.h"
@@ -20,6 +8,8 @@
 #include <array>
 #include <iostream>
 
+/* Funnción auxiliar que se encarga de convertir un char a un string.
+ */
 std::string charToStr(char c) {
 	std::stringstream ss;
 	std::string s;
@@ -48,6 +38,11 @@ void Mensaje::mensajeDeMapa(Mapa& mapa) {
 }
 
 void Mensaje::mensajeDeCrear(Objeto* objeto, std::string id, int equipo) {
+	/* Formato de mensaje:
+	 * +-----+----+---+---+------+--------+
+	 * | cmd | id | x | y | tipo | equipo |
+	 * +-----+----+---+---+------+--------+
+	 */
 	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoCrear);
 	std::array<double, 2> posicion = objeto->getPosicion();
@@ -61,12 +56,22 @@ void Mensaje::mensajeDeCrear(Objeto* objeto, std::string id, int equipo) {
 }
 
 void Mensaje::mensajeDeMatar(std::string id) {
+	/* Formato de mensaje:
+	 * +-----+----+
+	 * | cmd | id |
+	 * +-----+----+
+	 */
 	std::string comando = charToStr(comandoMatar);
 	this->mensaje = comando+id;
 	this->id = TODOS;
 }
 
 void Mensaje::mensajeDeMover(Movible* movible, std::string id) {
+	/* Formato de mensaje:
+	 * +-----+----+---+---+
+	 * | cmd | id | x | y |
+	 * +-----+----+---+---+
+	 */
 	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoMover);
 	std::array<double, 2> posicion = movible->getPosicion();
@@ -78,6 +83,11 @@ void Mensaje::mensajeDeMover(Movible* movible, std::string id) {
 }
 
 void Mensaje::mensajeDeDisparar(std::string id, Objeto* objetivo) {
+	/* Formato de mensaje:
+	 * +-----+----+---+---+
+	 * | cmd | id | x | y |
+	 * +-----+----+---+---+
+	 */
 	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoDisparar);
 	std::array<double,2> destino = objetivo->getPosicion();
@@ -89,6 +99,11 @@ void Mensaje::mensajeDeDisparar(std::string id, Objeto* objetivo) {
 }
 
 void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
+	/* Formato de mensaje:
+	 * +-----+----+------+------+
+	 * | cmd | id | tipo | vida |
+	 * +-----+----+------+------+
+	 */
 	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoInfoUnidad);
 	std::string tipo = rellenador.rellenar(unidad->getTipo(), largoTipo);
@@ -101,7 +116,18 @@ void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
 void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
 									FabricaUnidades& fabricaUnidades,
 									int dst) {
-  	RellenadorDeNumeros rellenador;
+  	/* Formato de mensaje:
+	 * +-----+----+------+---+----+-----+---+----+-----+-------+------+---+
+	 * | cmd | id | vida | n | t1 | tm1 |...| tn | tmn | const | tipo | % |
+	 * +-----+----+------+---+----+-----+---+----+-----+-------+------+---+
+	 * n es la cantidad de tipos de unidades que puede fabricar
+	 * ti es el tipo de unidad i
+	 * tmi es el tiempo base de construcción del tipo de unidad i
+	 * const indica si se esta construyendo algo
+	 * tipo es el tipo de la unidad en cosntruccion
+	 * % es el porcentaje de la construcción
+	 */
+	RellenadorDeNumeros rellenador;
 	std::string comando = charToStr(comandoInfoFabrica);
 	std::string tipoStr = rellenador.rellenar(edificio->getTipo(), largoTipo);
 	std::string vida = rellenador.rellenar(edificio->getPorcentajeVida (), 
@@ -139,18 +165,29 @@ void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id,
 }
 
 void Mensaje::mensajeDeSalir() {
+  
 	std::string comando = charToStr(comandoDesconectar);
 	this->mensaje = comando;
 	this->id = TODOS;
 }
 
 void Mensaje::mensajeDePerdedor(int id) {
+	/* Formato de mensaje:
+	 * +-----+
+	 * | cmd |
+	 * +-----+
+	 */
 	std::string comando = charToStr(comandoPerdedor);
 	this->mensaje = comando;
 	this->id = id;
 }
 
 void Mensaje::mensajeDeGanador(int id) {
+	/* Formato de mensaje:
+	 * +-----+
+	 * | cmd |
+	 * +-----+
+	 */
 	std::string comando = charToStr(comandoGanador);
 	this->mensaje = comando;
 	this->id = id;

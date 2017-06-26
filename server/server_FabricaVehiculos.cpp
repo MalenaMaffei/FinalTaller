@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaVehiculos.cpp
- * Author: usuario
- * 
- * Created on 30 de mayo de 2017, 11:14
- */
 
 #include "server_FabricaVehiculos.h"
 #include <sstream>
@@ -65,10 +53,6 @@ Vehiculo* FabricaVehiculos::getVehiculo(int tipo) {
 	//El conductor se agrega en la fabrica fisica
 	return new Vehiculo(vidas[tipo],2,2,frecuencias[tipo],
 					 alcances[tipo], velocidades[tipo], tipo, armamentos[tipo]);
-}
-
-int FabricaVehiculos::getCantidad(int tipo) {
-	return cantidades[tipo];
 }
 
 int FabricaVehiculos::getTiempo(int tipo) {

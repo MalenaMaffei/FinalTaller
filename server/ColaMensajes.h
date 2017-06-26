@@ -4,6 +4,10 @@
 #include <mutex>
 #include "Mensaje.h"
 
+/* Cola protegida de mensajes (instancias de la clase Mensaje).
+ * Es thread safe.
+ */
+
 class ColaMensajes {
     public:
         void encolar(Mensaje paquete);

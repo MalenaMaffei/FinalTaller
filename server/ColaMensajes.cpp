@@ -16,9 +16,11 @@ Mensaje ColaMensajes::desencolar() {
 }
 
 int ColaMensajes::size() {
+	std::unique_lock<std::mutex> mlock(m);
 	return paquetes.size();
 }
 
 bool ColaMensajes::isEmpty() {
+	std::unique_lock<std::mutex> mlock(m);
     return paquetes.empty();
 }

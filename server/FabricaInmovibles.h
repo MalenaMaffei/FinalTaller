@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaInmovibles.h
- * Author: usuario
- *
- * Created on 24 de junio de 2017, 12:03
- */
-
 #ifndef FABRICAINMOVIBLES_H
 #define FABRICAINMOVIBLES_H
 
@@ -18,15 +5,36 @@
 #include "server_Bloque.h"
 #include "server_Bandera.h"
 #include <map>
+
+/* Fabrica que se encarga de generar instancias de clases herederas de 
+ * Inmovible.
+ */
+
 class FabricaInmovibles {
 public:
+    /* Inicializa las configuraciones de cada uno de los inmovibles.
+     * Las configuraciones son obtenidas a partir del archivo inmovibles.xml.
+     */
     FabricaInmovibles();
+    /* Devuelve una instancia de un inmovible con el tipo, coordenadas
+     * y id especificados.
+     */
     Inmovible* getInmovible(int tipo, double x, double y, std::string id);
     virtual ~FabricaInmovibles();
 private:
+    /* Método interno (llamado por getInmovible) que devuelve un bloque 
+     * inicializado.
+     */
     Bloque* getBloque(int tipo, double x, double y, std::string id);
+    /* Método interno (llamado por getInmovible) que devuelve una bandera 
+     * inicializado.
+     */
     Bandera* getBandera(int tipo, double x, double y, std::string id);
+    /* Configuraciones de vidas según tipo
+     */
     std::map<int,int> vidas;
+    /* Configuraciones de dimensiones según tipo
+     */
     std::map<int,double> anchos;
     std::map<int,double> altos;
 };

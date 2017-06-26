@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaRobots.h
- * Author: usuario
- *
- * Created on 30 de mayo de 2017, 10:02
- */
-
 #ifndef FABRICAROBOTS_H
 #define FABRICAROBOTS_H
 
@@ -18,22 +5,38 @@
 #include <time.h>
 #include "server_Robot.h"
 
+/* Fabrica que se encarga de generar instancias de la clase Robot.
+ */
+
 class FabricaRobots {
 public:
+    /* Inicializa las configuraciones de cada uno de los robots.
+     * Las configuraciones son obtenidas a partir del archivo robots.xml.
+     */
     FabricaRobots();
+    /* Devuelve una instancia de un robot con el tipo especificados.
+     */
     Robot* getRobot(int tipo);
-    int getCantidad(int tipo);
+    /* Devuelve el tiempo base de creación de un Robot del tipo especificado.
+     */    
     int getTiempo(int tipo);
+    /* Devuelve el alcance de los ataques de un Robot del tipo especificado.
+     */    
     double getAlcance(int tipo);
+    /* Devuelve los tipos de Robots que puede construir un Edificio con el
+     * nivel especificado.
+     */    
     void getRobotsPosibles(int nivel, std::vector<int>& tiposPosibles);
 private:    
-    //Caracteristicas de robot
+    /* Configuraciones propias de los robots
+     */
     std::map<int,int> armamentos;
     std::map<int,double> frecuencias;
     std::map<int,int> alcances;
     std::map<int,int> vidas;
     std::map<int,int> velocidades;
-    //Reqisitos de creación
+    /* Configuraciones de condicones de fabricación
+     */
     std::map<int,int> cantidades;
     std::map<int,time_t> tiempos;
     std::map<int,int> niveles;

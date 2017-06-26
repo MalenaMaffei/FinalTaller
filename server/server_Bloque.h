@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Bloque.h
- * Author: usuario
- *
- * Created on 30 de mayo de 2017, 14:55
- */
 
 #ifndef BLOQUE_H
 #define BLOQUE_H
@@ -19,6 +7,9 @@
 #include "server_Municion.h"
 #include "server_Bandera.h"
 #include "server_Edificio.h"
+
+/* Es un Inmovible que representa a un bloque.
+ */
 
 class Bloque : public Inmovible {
 public:

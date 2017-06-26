@@ -1,8 +1,12 @@
-
 #ifndef EDIFICIO_H
 #define EDIFICIO_H
 
 #include "server_Inmovible.h"
+
+/* Es un Inmovible que representa a un edificio.
+ * Los edificios pueden ser Fuertes, Fabricas de Vehiculos o Fabrica de 
+ * Robots dependiendo de su tipo.
+ */
 
 class Edificio : public Inmovible{
 public:
@@ -15,6 +19,9 @@ public:
     void colisionar (Bandera& bandera) override;
     void setEquipo(int equipo);
     int getEquipo();
+    /* Pone al Edifico a fabricar una Unidad del tipo especificado, en base a 
+     * los territorios capturados y al tiempoBase calcula el tiempo de creación.
+     */
     void setFabricacion(int tiempoBase, int territorios, int tipo);
     int getPorcentajeConstruccion();
     int getTipoCreando();

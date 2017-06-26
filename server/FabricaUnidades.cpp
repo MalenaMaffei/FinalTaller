@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaUnidades.cpp
- * Author: usuario
- * 
- * Created on 21 de junio de 2017, 18:34
- */
 
 #include "FabricaUnidades.h"
 #include <iostream>
@@ -35,15 +23,6 @@ Robot* FabricaUnidades::getRobot(int tipo) {
 
 Vehiculo* FabricaUnidades::getVehiculo(int tipo) {
 	return this->fabricaVehiculos.getVehiculo (tipo);
-}
-
-int FabricaUnidades::getCantidad(int tipo) {
-	if (tipo>=6 && tipo<=10) {
-		return this->fabricaRobots.getCantidad (tipo);
-	} else if (tipo>=11 && tipo<=16) {
-		return this->fabricaVehiculos.getCantidad (tipo);
-	}
-	return -1;
 }
 
 int FabricaUnidades::getTiempo(int tipo) {

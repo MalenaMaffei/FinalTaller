@@ -1,14 +1,12 @@
-/*
- *  server_BoolProtected.h
- */
-
 #ifndef BOOLPROTECTED_H
 #define BOOLPROTECTED_H
 
 #include <mutex>
 
-/* Represents a thread safe boolean
+/* Booleano protegido.
+ * Es thread safe.
  */
+
 class BoolProtected {
 public:
     BoolProtected();

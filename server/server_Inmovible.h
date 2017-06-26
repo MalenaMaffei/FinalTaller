@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Inmovible.h
- * Author: usuario
- *
- * Created on 30 de mayo de 2017, 14:28
- */
-
 #ifndef INMOVIBLE_H
 #define INMOVIBLE_H
 
 #include "server_Objeto.h"
 
+/* Representa a todos los objetos que no pueden moverse en el mapa (Edificio, 
+ * Bloque, Bandera).
+ */
+
 class Inmovible : public Objeto{
     public:
+
         Inmovible(int vida, double ancho, double alto, int tipo);
         Inmovible(const Inmovible& orig);
         Inmovible& operator=(const Inmovible& orig);

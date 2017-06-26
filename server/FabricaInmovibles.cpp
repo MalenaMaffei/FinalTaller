@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaInmovibles.cpp
- * Author: usuario
- * 
- * Created on 24 de junio de 2017, 12:03
- */
 
 #include "FabricaInmovibles.h"
 #include "server_constants.h"

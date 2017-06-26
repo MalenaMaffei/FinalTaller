@@ -25,19 +25,19 @@ void Edificio::colisionar(Municion& municion) {
 }	
 
 void Edificio::colisionar (Unidad& personaje) {
-	//No hago nada si colisiona una persona con un edificio
+	//No hago nada si colisiona una Unidad con un Edificio
 }
 
 void Edificio::colisionar(Bloque& bloque) {
-	//No hago nada si colisiona bloque con un edificio
+	//No hago nada si colisiona un Bloque con un Edificio
 }
 
 void Edificio::colisionar(Edificio& edificio) {
-	//No hago nada si colisiona edificio con un edificio
+	//No hago nada si colisiona un Edificio con un Edificio
 }
 
 void Edificio::colisionar (Bandera& bandera) {
-	//No hago nada si bandera colisiona con fabrica
+	//No hago nada si colisiona una Bandera con un Edificio
 }
 
 void Edificio::setFabricacion(int tiempoBase, int territorios, int tipo) {

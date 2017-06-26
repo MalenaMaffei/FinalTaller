@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaRobots.cpp
- * Author: usuario
- * 
- * Created on 30 de mayo de 2017, 10:02
- */
 
 #include "server_FabricaRobots.h"
 #include <sstream>
@@ -65,10 +53,6 @@ Robot* FabricaRobots::getRobot(int tipo) {
 	 //Agregar velocidad base
 	return new Robot(vidas[tipo],1,1,frecuencias[tipo],
 					 alcances[tipo], velocidades[tipo],tipo, armamentos[tipo]);
-}
-
-int FabricaRobots::getCantidad(int tipo) {
-	return cantidades[tipo];
 }
 
 int FabricaRobots::getTiempo(int tipo) {

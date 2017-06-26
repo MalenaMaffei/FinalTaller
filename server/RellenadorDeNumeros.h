@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   RellenadorDeNumeros.h
- * Author: usuario
- *
- * Created on 24 de junio de 2017, 15:19
- */
-
 #ifndef RELLENADORDENUMEROS_H
 #define RELLENADORDENUMEROS_H
 
 #include <string>
+
+/* Tanto los campos de los mensajes intercambiados, como los ids devueltos por 
+ * el ManejadorIDs, tienen un largo preestablecido. El RellenadorDeNumeros
+ * se encarga de rellenar los numeros con 0 en caso de que tenga menos dígitos
+ * de los esperados.
+ */
 
 class RellenadorDeNumeros {
 public:

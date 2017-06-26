@@ -1,6 +1,3 @@
-/*
- *	server_BoolProtected.cpp
- */
 
 #include "server_BoolProtected.h"
 

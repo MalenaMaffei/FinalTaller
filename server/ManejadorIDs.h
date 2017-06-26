@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   ManejadorIDs.h
- * Author: usuario
- *
- * Created on 24 de junio de 2017, 13:19
- */
-
 #ifndef MANEJADORIDS_H
 #define MANEJADORIDS_H
 
 #include <string>
 #include "RellenadorDeNumeros.h"
+
+/* Se encarga de administrar los ids de los distintos objetos presentes en el 
+ * Juego. Cada vez que se crea un Objeto en el Juego, se le pide un ID a esta
+ * clase.
+ */
 
 class ManejadorIDs {
 public:

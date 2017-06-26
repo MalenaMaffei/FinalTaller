@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Bloque.cpp
- * Author: usuario
- * 
- * Created on 30 de mayo de 2017, 14:55
- */
 
 #include "server_Bloque.h"
 #include <iostream>
@@ -27,19 +15,19 @@ void Bloque::colisionar(Municion& municion) {
 }
 
 void Bloque::colisionar (Unidad& personaje) {
-	//No hago nada si colisiona una persona con un bloque
+	//No hago nada si colisiona una Unidad con un Bloque
 }
 
 void Bloque::colisionar(Bloque& bloque) {
-	//No hago nada si colisiona bloque con bloque
+	//No hago nada si colisiona un Bloque con un Bloque
 }
 
 void Bloque::colisionar(Bandera& bandera) {
-	//Nada
+	//No hago nada si colisiona una Bandera con un Bloque
 } 
 
 void Bloque::colisionar(Edificio& edificio) {
-	//Nada
+	//No hago nada si colisiona un Edificio con un Bloque
 } 
 
 

@@ -6,6 +6,8 @@
 
 typedef std::pair< std::array<int,2>, double> elemConPrioridad_t;
 
+/* Clase auxiliar para comparar elementos encolados en la cola de prioridad.
+ */
 class compararElementosConPrioridad {
 	private:
 		bool reverse;
@@ -19,14 +21,14 @@ class compararElementosConPrioridad {
 		}
 };
 
-
+/* Función auxiliar, la heuristica usada es la distancia Manhattan a destino.
+ */
 const int heuristica(std::array<int, 2> origen, std::array<int, 2> destino) {
-//	Euclideana
-//	return sqrt(pow(origen[0]-destino[0],2) + pow(origen[1]-destino[1],2)); 
-//	Manhattan
 	return abs(origen[0]-destino[0]) + abs(origen[1]-destino[1]);
 }
 
+/* Función auxiliar, devuelve el modulo de un vector.
+ */
 const double modulo(std::array<int, 2> vector) {
 	return sqrt(vector[0]*vector[0] + vector[1]*vector[1]);
 }
@@ -42,6 +44,7 @@ std::vector < std::array<double,2> >
 	std::map <std::array<int,2>,double> costos;
 	std::map <std::array<int,2>,std::array<int,2>> origenes;
 	
+	// Direcciones de posibles movimientos
 	std::array<int,2> adyacencias[8] = { {0,1}, {1,1}, {1,0}, 
 										 {1,-1}, {0,-1}, {-1,-1},
 										 {-1,0}, {-1,1} };
@@ -59,31 +62,26 @@ std::vector < std::array<double,2> >
 	int maxY = mapa.obtenerDimensionY();
 	while (!listaAbierta.empty()) {
 		std::array<int,2> actual = listaAbierta.top ().first;
-//		std::cout<<"actual: "<<actual[0]<<","<<actual[1]<<std::endl;
 		listaAbierta.pop();
 		if (actual == destino)
 			break;
 		
-//		std::cout<<"no llegue"<<std::endl;
 		for (size_t i=0; i< 8; i++) {
 			std::array<int,2> adyacencia = adyacencias[i];
 			int adyX = actual[0]-adyacencia[0];
 			int adyY = actual[1]-adyacencia[1];
 			if (adyX < 0 || adyY < 0 || adyX >= maxX || adyY >= maxY) 
 				continue;
-//			std::cout<<"\tadyacente: "<<adyX<<","<<adyY<<std::endl;
 			std::array<int,2> adyacente = {adyX,adyY};
 						
 			double factorTerreno = mapa.obtenerFactorTerreno(adyacente, movible);
+			// Si el factor de terreno es muy bajo ignoro ese casillero
+			// TODO reemplzar 0.001 hardcodeado
 			if (factorTerreno <= 0.001)
 				continue;
 			double distancia = modulo(adyacencia);
 			double nuevoCosto = costos[actual] + 
 								distancia/factorTerreno;
-//			std::cout<<"\tcosto actual: "<<costos[actual]<<std::endl;
-//			std::cout<<"\tdistancia: "<<distancia<<std::endl;
-//			std::cout<<"\tfactor: "<<mapa.obtenerFactorTerreno(adyacente)<<std::endl;
-//			std::cout<<"\tnuevo costo: "<<nuevoCosto<<std::endl;
 			bool nuevoCostoEsMenor = false;
 			if (costos.count (adyacente)) {
 				if (nuevoCosto<costos[adyacente]) {

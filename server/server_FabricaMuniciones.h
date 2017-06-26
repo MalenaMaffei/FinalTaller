@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   FabricaMuniciones.h
- * Author: usuario
- *
- * Created on 27 de mayo de 2017, 17:30
- */
-
 #ifndef FABRICAMUNICIONES_H
 #define FABRICAMUNICIONES_H
 
@@ -18,13 +5,21 @@
 #include <map>
 #include "server_Municion.h"
 
+/* Fabrica que se encarga de generar instancias de la clase Munición.
+ */
+
 class FabricaMuniciones {
 public:
+    /* Inicializa las configuraciones de cada una de las municiones.
+     * Las configuraciones son obtenidas a partir del archivo municiones.xml.
+     */
     FabricaMuniciones(); 
+    /* Devuelve una instancia de una munición con el tipo especificados.
+     */
     Municion* getMunicion(int tipo);
 private:
-    //Clave: tipo de municion
-    //Valor: daño
+    /* Configuraciones de daño según tipo de munición.
+     */
     std::map<int,int> municiones;
 };
 

@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Bandera.cpp
- * Author: usuario
- * 
- * Created on 4 de junio de 2017, 17:24
- */
 
 #include "server_Bandera.h"
 #include "server_Movible.h"
@@ -34,24 +22,24 @@ void Bandera::colisionar(Objeto& objeto) {
 }
 
 void Bandera::colisionar(Municion& municion) {
-	//No hago nada si colisiona una municion con una bandera
+	//No hago nada si colisiona una Municion con una Bandera
 }
 
 void Bandera::colisionar (Unidad& personaje) {
-	//No hago nada si colisiona una persona con un bandera
+	//Si colisiona una Unidad con una Bandera la Bandera cambia de equipo
 	idEquipo = personaje.getEquipo ();
 }
 
 void Bandera::colisionar(Bloque& bloque) {
-	//No hago nada si colisiona bloque con bandera
+	//No hago nada si colisiona Bloque con Bandera
 }
 
 void Bandera::colisionar(Bandera& bandera) {
-	//No hago nada si colisiona bandera con bandera
+	//No hago nada si colisiona Bandera con Bandera
 }
 
 void Bandera::colisionar(Edificio& edificio) {
-	//No hago nada si colisiona edificio con bandera
+	//No hago nada si colisiona Edificio con Bandera
 }
 
 int Bandera::getEquipo() {
