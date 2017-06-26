@@ -26,6 +26,7 @@ class Canvas{
                 SelectBox &selectBox,
                 Mouse &mouse);
  private:
+  void mensajeEsperando();
   //The window we'll be rendering to
   SDL_Window* gWindow;
 

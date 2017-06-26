@@ -172,6 +172,14 @@ void Canvas::inicializarDatos(Mapa &mapa) {
 
 void Canvas::startGame(){
 
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        VistaTexto vistaTexto(gRenderer);
+        vistaTexto.loadFont(fuentePath, 20);
+        vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
+                               "...", {0, 0,0}, {0,0});
+
+        SDL_RenderPresent(gRenderer);
 
     Mapa mapa(gRenderer);
     inicializarDatos(mapa);
@@ -278,4 +286,15 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
     }
+}
+
+void Canvas::mensajeEsperando() {
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    VistaTexto vistaTexto(gRenderer);
+    vistaTexto.loadFont(fuentePath, 20);
+    vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
+                           "...", {0, 0,0}, {0,0});
+
+    SDL_RenderPresent(gRenderer);
 }
