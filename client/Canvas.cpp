@@ -153,6 +153,20 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 
 void Canvas::startGame(){
+
+//    mensajeEsperando();
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    VistaTexto vistaTexto(gRenderer);
+    vistaTexto.loadFont(fuentePath, 20);
+    vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
+                           "...", {0, 0,0}, {0,0});
+
+    SDL_RenderPresent(gRenderer);
+
+
+
+
     //Event handler
     SDL_Event e;
 
@@ -164,7 +178,6 @@ void Canvas::startGame(){
     //The frames per second cap timer
     LTimer capTimer;
     //Current animation frame
-
 
 
 //    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi
@@ -261,4 +274,15 @@ void Canvas::startGame(){
 
     //Free resources and close SDL
     close();
+}
+
+void Canvas::mensajeEsperando() {
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    VistaTexto vistaTexto(gRenderer);
+    vistaTexto.loadFont(fuentePath, 20);
+    vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
+                           "...", {0, 0,0}, {0,0});
+
+    SDL_RenderPresent(gRenderer);
 }

@@ -16,6 +16,7 @@ class Canvas{
                          GuiEdificio &guiEdificio);
 
  private:
+  void mensajeEsperando();
   //The window we'll be rendering to
   SDL_Window* gWindow;
 
