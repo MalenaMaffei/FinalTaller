@@ -40,16 +40,16 @@ Movible::Movible (int vida, double ancho, double alto,
 										Objeto(vida, ancho, alto, tipo), 
 										trayectoria(trayectoria),
 										destino(destino),
-										idEquipo(idEquipo), 
 										velocidad(velocidad),
 										objetivo(objetivo), 
+										idEquipo(idEquipo), 
 										distancia(distancia) { }
 
 Movible::Movible(const Movible& orig) : Objeto(orig.vida, orig.ancho, 
 											   orig.alto, orig.tipo), 
-										idEquipo(orig.idEquipo),
 										velocidad(orig.velocidad),
 										objetivo(orig.objetivo),
+										idEquipo(orig.idEquipo),
 										distancia(orig.distancia){ }
 
 Movible& Movible::operator=(const Movible& orig) {
@@ -65,10 +65,9 @@ Movible& Movible::operator=(const Movible& orig) {
 }
 
 
-bool Movible::mover (std::array<double,2> destino) {
+void Movible::mover (std::array<double,2> destino) {
 	this->destino = destino;
 //	std::cout<<"Destino: "<<destino[0]<<","<<destino[1]<<std::endl;
-	return true;
 }
 
 void Movible::setPosicion(std::array<double,2> posicion) {

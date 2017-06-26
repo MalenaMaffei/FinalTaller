@@ -8,15 +8,14 @@
 #define VEL_MUNICIONES 1
 
 Terreno::Terreno(int tipo, double velocidadRobots, double velocidadVehiculos) : 
-									tipo(tipo),
 									velocidadRobots(velocidadRobots),
-									velocidadVehiculos(velocidadVehiculos){ }
+									velocidadVehiculos(velocidadVehiculos), 
+									tipo(tipo){ }
 
 Terreno::Terreno(const Terreno& orig) : 
-									tipo(orig.tipo),
 									velocidadRobots(orig.velocidadRobots),
-									velocidadVehiculos(orig.velocidadVehiculos) 
-									{ }
+									velocidadVehiculos(orig.velocidadVehiculos), 
+									tipo(orig.tipo) { }
 
 Terreno& Terreno::operator=(const Terreno& orig) {
 	tipo = orig.tipo;
@@ -25,10 +24,9 @@ Terreno& Terreno::operator=(const Terreno& orig) {
 	return *this;
 }
 
-Terreno::Terreno(Terreno &&orig) : tipo(orig.tipo), 
-									velocidadRobots(orig.velocidadRobots),
-									velocidadVehiculos(orig.velocidadVehiculos)
-									{ }
+Terreno::Terreno(Terreno &&orig) : 	velocidadRobots(orig.velocidadRobots),
+									velocidadVehiculos(orig.velocidadVehiculos),
+									tipo(orig.tipo) { }
 
 Terreno &Terreno::operator=(Terreno &&orig) {
 	this->tipo = orig.tipo;

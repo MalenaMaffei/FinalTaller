@@ -4,18 +4,16 @@
 #include <iostream>
 
 Casillero::Casillero(Terreno &&terreno) : 
+									ocupado(false),
 									terreno(std::move(terreno)) {
-	ocupado = false;
 }
 
-Casillero::Casillero(const Casillero& orig) : terreno(orig.terreno), 
-												ocupado(orig.ocupado){
-	
-}
+Casillero::Casillero(const Casillero& orig) : ocupado(orig.ocupado),
+											terreno(orig.terreno) { }
 
 Casillero& Casillero::operator=(const Casillero& orig) {
-	terreno = orig.terreno;
 	ocupado = orig.ocupado;
+	terreno = orig.terreno;
 	return *this;
 }
 

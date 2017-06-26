@@ -35,7 +35,7 @@ class Municion : public Movible {
         int getDanio();
         double factorTerrenoEn(Terreno* terreno);
         void setAlcance(double alcance);
-        bool mover (std::array<double,2> destino) override;
+        void mover (std::array<double,2> destino) override;
         std::string puedeDisparar() override;
         bool obtuvoBandera() override;
         void colisionar(Municion& municion) override;

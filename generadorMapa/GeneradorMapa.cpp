@@ -92,14 +92,14 @@ void GeneradorMapa::generarMapa(const std::string& nombre) {
 			if (i == 0 && j == 0) {
 				double proba = probabilidad(generador);
 				mapa[i][j] = obtenerTerreno(proba);
-			} else if (i == 0 & j != 0) {
+			} else if (i == 0 && j != 0) {
 				if (probabilidad(generador) < PROBA) {
 					mapa[i][j] = mapa[i][j-1];
 				} else {
 					double proba = probabilidad(generador);
 					mapa[i][j] = obtenerTerreno(proba);
 				}
-			} else if (i != 0 & j == 0) {
+			} else if (i != 0 && j == 0) {
 				if (probabilidad(generador) < PROBA) {
 					mapa[i][j] = mapa[i-1][j];
 				} else {
@@ -322,5 +322,5 @@ void GeneradorMapa::guardarConfiguracion(const std::string& nombre,
 	}
 	rootXML->InsertEndChild(rocasXML);
 	
-	tinyxml2::XMLError eResult = xml.SaveFile(nombre.c_str());
+	xml.SaveFile(nombre.c_str());
 }

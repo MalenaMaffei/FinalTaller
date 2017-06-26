@@ -60,7 +60,6 @@ std::vector < std::array<double,2> >
 	while (!listaAbierta.empty()) {
 		std::array<int,2> actual = listaAbierta.top ().first;
 //		std::cout<<"actual: "<<actual[0]<<","<<actual[1]<<std::endl;
-		double valor = listaAbierta.top().second;
 		listaAbierta.pop();
 		if (actual == destino)
 			break;
@@ -107,7 +106,7 @@ std::vector < std::array<double,2> >
 	
 	std::array<int,2> actual = destino;
 	while (actual != origen) {
-		recorrido.push_back({actual[0],actual[1]});
+		recorrido.push_back({(double) actual[0],(double) actual[1]});
 		actual = origenes[actual];
 	}
 	

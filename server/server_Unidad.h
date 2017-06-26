@@ -42,11 +42,12 @@ class Unidad : public Movible {
         void colisionar (Bandera& bandera) override;
         virtual ~Unidad();
     private:
-        std::string bandera;
+
         int frecuenciaDisparo;
-        int tiempoADisparo;
         int alcance;
         int estado;
+        int tiempoADisparo;
+        std::string bandera;
         int armamento;
 };
 

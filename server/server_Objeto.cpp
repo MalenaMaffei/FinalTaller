@@ -51,6 +51,7 @@ void Objeto::setPosicion (std::array<double,2> posicion) {
 bool Objeto::recibirDanio(int danio) {
 	std::cout<<"Hago daño: "<<danio<<std::endl;
 	vida -= danio;
+	return vida>0;
 }
 
 bool Objeto::estaVivo() {

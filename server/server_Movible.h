@@ -15,7 +15,7 @@ class Movible : public Objeto {
         /* Recibe un destino final, 
          * guarda el destino para luego realizar pasos hacia el.
          */
-        virtual bool mover (std::array<double,2> destino);
+        virtual void mover (std::array<double,2> destino);
         /* Realiza un paso hacia el destino.
          */
         bool mover(double factorTerreno);
@@ -40,11 +40,11 @@ class Movible : public Objeto {
                 std::vector<std::array<double,2>> trayectoria,
                 std::array<double,2> destino, int idEquipo, int velocidad, 
                 std::string objetivo, double distancia, int tipo);
-        std::string objetivo;   //id objetivo
         std::vector< std::array<double,2> > trayectoria;
         std::array<double,2> destino;
         std::array<double,2> posicionAnterior;
         int velocidad;
+        std::string objetivo;   //id objetivo
         int idEquipo;
         double distancia;
 };

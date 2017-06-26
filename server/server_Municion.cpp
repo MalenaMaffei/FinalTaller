@@ -23,8 +23,7 @@
 Municion::Municion (int vida, double ancho, double alto,
 					int tipo, int danio, int velocidad) : 	
 											Movible(vida, ancho, alto, velocidad, tipo),
-											danio(danio),
-											alcance(alcance) { 
+											danio(danio) { 
 	
 }
 
@@ -91,7 +90,7 @@ int Municion::getTipo () {
 	return tipo;
 }
 
-bool Municion::mover (std::array<double,2> destino) {
+void Municion::mover (std::array<double,2> destino) {
 	std::array<double, 2> direccion = { (destino[0] - this->posicion[0]),
 										(destino[1] - this->posicion[1])};	
 	double modulo = std::sqrt(direccion[0]*direccion[0] + direccion[1]*direccion[1]);

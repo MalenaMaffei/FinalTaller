@@ -34,7 +34,7 @@ void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre,
 	
 	tinyxml2::XMLElement* edificiosXML = padre->FirstChildElement (nombreXML.c_str());
 	tinyxml2::XMLElement* edificioXML = edificiosXML->FirstChildElement ("EDIFICIO");
-	for (int i = 0; i < jugadores.size () && i < 4; ++i) {
+	for (size_t i = 0; i < jugadores.size () && i < NUM_EQUIPOS; ++i) {
 		int equipo = atoi(edificioXML->FirstChildElement("EQUIPO")->GetText ());
 		double x = atof(edificioXML->FirstChildElement("X")->GetText ());
 		double y = atof(edificioXML->FirstChildElement("Y")->GetText ());
@@ -99,8 +99,8 @@ void Juego::enviarMensaje(Mensaje& mensaje) {
 }
 
 Juego::Juego (ColaMensajes& colaDeRecibidos, std::vector<Jugador*>& jugadores) :	
-												colaDeRecibidos(colaDeRecibidos),
 												mapa(Mapa("mapa.map")), 
+												colaDeRecibidos(colaDeRecibidos),
 												jugadores(jugadores)
 												 { 
   
@@ -401,7 +401,7 @@ void Juego::recibirMover(std::string mensaje) {
 	std::vector< std::array<double,2> > recorrido = 
 								aEstrella.getRecorrido (movibles[idStr],
 														{inicio[0],inicio[1]},
-														{(int) x,(int) y});
+														{(int) x, (int) y});
 	movibles[idStr]->setTrayectoria(recorrido);
 }
 

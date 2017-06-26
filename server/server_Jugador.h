@@ -33,9 +33,9 @@ private:
     BoolProtected perdio;
     BoolProtected salir;
     Socket socket;
-    int id;
     int equipo;
     ColaMensajes& colaDeRecibidos;
+    int id;
 };
 
 #endif /* RECEPTORCLIENTE_H */
