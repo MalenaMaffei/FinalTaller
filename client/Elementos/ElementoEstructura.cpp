@@ -11,7 +11,7 @@ ElementoEstructura::ElementoEstructura(std::string id,
     ElementoColoreado(id, pos, textura, esMio, color), destruido(false) {}
 
 void ElementoEstructura::guiRequest(ColectorDeAcciones &colector) const {
-    if (!destruido){
+    if (!destruido && esMio()){
         colector.showEdificio(id);
     }
 }

@@ -65,7 +65,10 @@ void Hud::setInfo(Paquete paquete) {
 }
 
 bool Hud::click(Punto click) {
+//    TODO hud rect nunca seleccionado
     bool huboClick = hudRect.incluyePunto(click);
+    printf("click %i,%i, hudRect: %i,%i\n", click.x, click.y, hudRect.x,
+           hudRect.y);
     seleccionado = huboClick;
     esperandoInfo  = huboClick;
     return huboClick;
@@ -77,7 +80,8 @@ Hud::~Hud() {
     });
 }
 
-void Hud::abrirGui(std::string id) {
+void Hud::abrirGui(std::string id, int color) {
+    Hud::color = color;
     esperandoInfo = true;
     idSeleccionado = id;
 }

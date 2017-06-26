@@ -53,7 +53,6 @@
 	*clase error monitor -> singleton
 	*clase SDL_exception
 
-39. ~~Mostrar cartel diciendo esperando a otros jugadores.~~
 ##### "Opcional" #####
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 
@@ -99,4 +98,5 @@
 13. ~~que se muestren tanques~~
 7. ~~spcket reuseaddrinfo.~~
 35. ~~Que las guis pidan paquetes todo el tiempo~~
+39. ~~Mostrar cartel diciendo esperando a otros jugadores.~~
 

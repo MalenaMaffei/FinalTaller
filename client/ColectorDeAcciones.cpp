@@ -65,29 +65,45 @@ void ColectorDeAcciones::crearAcciones() {
     }
 
     Elemento* clickeado = click.getClicked();
-    if (clickeado->esMio()){
-        paquete.pedirInfo(clickeado->getId());
-        colaSalida.encolar(paquete);
-        clickeado->guiRequest(*this);
-
-    } else if (selectBox.haySeleccion()){
+//    if (clickeado->esMio()){
+//        paquete.pedirInfo(clickeado->getId());
+//        colaSalida.encolar(paquete);
+//        clickeado->guiRequest(*this);
+//
+//    } else
+    if (selectBox.haySeleccion() && !clickeado->esMio()){
         vector<ElementoUnidad*> seleccion = selectBox.getSeleccionadas();
         for_each(seleccion.begin(), seleccion.end(), [&](ElementoUnidad*
                                                               unidad){
-              if (! unidad->estaMuriendo()){
+              if (!unidad->estaMuriendo()){
                   paquete.atacar(unidad->getId(),clickeado->getId());
                   colaSalida.encolar(paquete);
               }
         });
+    } else {
+//        paquete.pedirInfo(clickeado->getId());
+//        colaSalida.encolar(paquete);
+        clickeado->guiRequest(*this);
     }
+
+
+
+
+
     click.resetCoords();
 }
 
 void ColectorDeAcciones::showEdificio(std::string id) {
+    PaqueteAccion p;
+    p.pedirInfo(id);
+    colaSalida.encolar(p);
     guiEdificio.abrirGui(click.getPoint(), id);
 }
 
 //TODO aca le puedo pasar el color directamente
-void ColectorDeAcciones::showHud(std::string id) {
-    hud.abrirGui(id);
+void ColectorDeAcciones::showHud(std::string id, int color) {
+    PaqueteAccion p;
+    p.pedirInfo(id);
+    colaSalida.encolar(p);
+    hud.abrirGui(id, color);
 }

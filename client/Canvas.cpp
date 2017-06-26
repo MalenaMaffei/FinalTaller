@@ -129,7 +129,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             elementoManager.matar(paqueteAccion);
         } else if (paquete.getComando() == codigos.infoFabrica){
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
-            printf("llego un paquete farbica\n");
             guiEdificio.setInfo(paqueteFabrica);
         } else if (paquete.getComando() == codigos.infoUnidad){
             hud.setInfo(paquete);
