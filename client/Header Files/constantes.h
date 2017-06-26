@@ -44,7 +44,11 @@ static const char robotMuertePath[] = "../client/imgs/Robots/muerte.png";
 
 //------------VEHICULOS------------------
 static const char heavyCaminarPath[] = "../client/imgs/Tanks/caminar_heavy.png";
+static const char mediumCaminarPath[] = "../client/imgs/Tanks/caminar_medium"
+    ".png";
 static const char heavyDispararPath[] = "../client/imgs/Tanks/disparar_heavy.png";
+static const char mediumDispararPath[] = "../client/imgs/Tanks/disparar_medium"
+    ".png";
 
 static const char tanqueMuertePath[] = "../client/imgs/Tanks/explosion.png";
 static const char tanqueMissilePath[] = "../client/imgs/Tanks/missile.png";

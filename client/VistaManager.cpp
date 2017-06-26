@@ -17,6 +17,8 @@
 #include "Header Files/VistaFabricaVehiculo.h"
 #include "Header Files/VistaFabricaRobot.h"
 #include "Header Files/VistaHeavyDisparar.h"
+#include "Header Files/VistaMediumCaminar.h"
+#include "Header Files/VistaMediumDisparar.h"
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
 #include <vector>
@@ -90,19 +92,30 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         vistasDireccionadas[tipo].push_back(disparar);
     }
 
-//    jeep = 12,
-//    light = 13,
-//    medium = 14,
-//    heavy = 15,
-//    missile = 16
     if (codigos.esVehiculo(tipo)){
         VistaDireccionada* caminar;
         VistaDireccionada* disparar;
-        Vista* morir;
-//        TODO armar aca con todas las vistas de todo el mundo
-        caminar = new VistaHeavyCaminar(gRenderer);
-        disparar = new VistaHeavyDisparar(gRenderer);
-        morir = new VistaTanqueMorir(gRenderer);
+        Vista* morir = new VistaTanqueMorir(gRenderer);;
+
+        if (tipo == codigos.jeep){
+//            TODO FALTA IMG
+            caminar = new VistaMediumCaminar(gRenderer);
+            disparar = new VistaMediumDisparar(gRenderer);
+        } else if (tipo == codigos.light){
+            //            TODO FALTA IMG
+            caminar = new VistaHeavyCaminar(gRenderer);
+            disparar = new VistaHeavyDisparar(gRenderer);
+        } else if (tipo == codigos.medium){
+            caminar = new VistaMediumCaminar(gRenderer);
+            disparar = new VistaMediumDisparar(gRenderer);
+        } else if (tipo == codigos.heavy){
+            caminar = new VistaHeavyCaminar(gRenderer);
+            disparar = new VistaHeavyDisparar(gRenderer);
+        } else if (tipo == codigos.missile){
+            //            TODO FALTA IMG
+            caminar = new VistaHeavyCaminar(gRenderer);
+            disparar = new VistaHeavyDisparar(gRenderer);
+        }
 
         vistas[tipo] = morir;
         vistasDireccionadas[tipo].push_back(caminar);
