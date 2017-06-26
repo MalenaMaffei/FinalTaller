@@ -2,7 +2,6 @@
 #define TPFINAL_COLASALIDA_H
 
 #include <condition_variable>
-#include "ColaPaquetesVieja.h"
 class ColaPaquetes {
  public:
   ColaPaquetes();

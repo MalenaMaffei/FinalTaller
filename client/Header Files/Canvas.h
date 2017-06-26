@@ -1,7 +1,6 @@
 #ifndef TPFINAL_CANVAS_H
 #define TPFINAL_CANVAS_H
 #include <SDL_render.h>
-#include "ColaPaquetesVieja.h"
 #include "ElementoManager.h"
 #include "Hud.h"
 #include "GuiEdificio.h"

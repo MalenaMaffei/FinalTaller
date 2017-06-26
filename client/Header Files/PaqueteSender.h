@@ -2,7 +2,6 @@
 #define TPFINAL_PAQUETESENDER_H
 #include <condition_variable>
 #include "common_Socket.h"
-#include "ColaPaquetesVieja.h"
 #include "common_Thread.h"
 #include "PaqueteDelivery.h"
 #include "ColaPaquetes.h"

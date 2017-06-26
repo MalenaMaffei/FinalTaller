@@ -5,7 +5,6 @@
 #include "Click.h"
 #include "Hud.h"
 #include "GuiEdificio.h"
-#include "ColaPaquetesVieja.h"
 #include "ColaPaquetes.h"
 class ColectorDeAcciones {
  public:
