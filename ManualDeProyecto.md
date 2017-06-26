@@ -28,7 +28,7 @@ __Tareas realizadas__:
 	- Diagrama de clases incial del modelo y modelo de concurrencia.
 	- Repositorio compartido.
 	- Implementación básica de algoritmo A-Star, sin territorios, sin unidades.
-	- Animación de personaje con movimiento usando SDLS.
+	- Animación de personaje con movimiento usando SDL.
 	- Clase reproductor de sonido con SDL. Herramienta tinyxml2 para manejo de archivos xml.
 
 ### Semana 2
@@ -52,6 +52,7 @@ __Tareas propuestas__:
 __Tareas realizadas__:
 	- Inicio de lógica del modelo sobre creación de los robots y vehículos.
 	- Movimiento de la cámara pero ninguna animación o explosión o disparo.
+	- Se crearon las vistas de todos los elementos estáticos.
 	- Generación de mapas mediante algoritmos aleatorio.
 
 ### Semana 4 
@@ -66,6 +67,7 @@ __Tareas realizadas__:
     - Lógica de creación de robots y vehículos.
     - Lógica de captura de territorios.
     - Selección de unidades y fábricas. Acciones de mover y atacar. Selección de que unidad crear.
+    - Creación de animaciones para los movimientos y disparos de las unidades.
     - Comunicación básica cliente/servidor.
 
 ### Semana 5
@@ -85,12 +87,14 @@ __Tareas realizadas__:
     - Refactor de factories (antes implementadas como singleton).
     - Protocolo de comunicación entre cliente y servidor afianzado. 
     - Primer partida multijugador, implementación de clase Jugadro en el servidor.
+    - Creación de animaciones para las estructuras.
     
 ### Semana 7
 __Tareas propuestas__:
     - Testing, corrección de bugs, documentación.
 __Tareas realizadas__:
     - Mensajes de pedido de información de fabricas y unidades.
+    - Finalización las Guis de unidades y fábricas.
     - Corrección de bugs.
     
 ### Semana 8
@@ -100,12 +104,15 @@ __Tareas propuestas__:
 __Tareas realizadas__:  
     - Condiciones de victoria y derrota.
     - Refactor en clases del servidor y clientes.
+    - Últimas imágenes de unidades generadas.
     - Mejoras en performance.
+    - Cambios en la manera en que se renderiza el mapa en el Cliente.
     - Corrección de bugs.
     - Documentación.
     - Armado de entregable.
     
 ## Inconvenientes encontrados
+### Cliente
 
 ## Analisis de puntos pendientes
 
