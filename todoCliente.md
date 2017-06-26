@@ -4,7 +4,7 @@
 
     *~~ **ELIMINAR BUSY WAITS**~~
 
-    * Explicar los timers utilizados
+    * ~~Explicar los timers utilizados~~
 
     * ~~ Separar la carga del juego del *main loop*~~ 
 
