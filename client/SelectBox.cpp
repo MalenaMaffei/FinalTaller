@@ -18,10 +18,10 @@ void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
 }
 
 SelectBox::SelectBox() {
-    rect.x = 0;
-    rect.y = 0;
-    rect.w = 0;
-    rect.h = 0;
+//    rect.x = 0;
+//    rect.y = 0;
+//    rect.w = 0;
+//    rect.h = 0;
 }
 
 void SelectBox::setRect(const Rect &rect) {
