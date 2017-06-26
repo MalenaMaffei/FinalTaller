@@ -1,6 +1,7 @@
 #ifndef TPFINAL_COLASALIDA_H
 #define TPFINAL_COLASALIDA_H
-
+#include "Paquete.h"
+#include <queue>
 #include <condition_variable>
 class ColaPaquetes {
  public:

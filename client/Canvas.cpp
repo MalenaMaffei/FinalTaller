@@ -231,10 +231,11 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
 
 //Keeps track of time between steps
     LTimer stepTimer;
+
     //The frames per second timer
     LTimer fpsTimer;
 
-    //The frames per second cap timer
+//    The frames per second cap timer
     LTimer capTimer;
     //Current animation frame
 
@@ -250,6 +251,7 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
             camara.handleEvent(e);
             mouse.setState(e.type, e, camara.getPos());
         }
+
         float timeStep = stepTimer.getTicks() / 1000.f;
 
         camara.mover(timeStep);
@@ -282,7 +284,6 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
 
         int frameTicks = capTimer.getTicks();
         if (frameTicks < SCREEN_TICK_PER_FRAME){
-            //Wait remaining time
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
     }
