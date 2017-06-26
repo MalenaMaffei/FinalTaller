@@ -36,6 +36,8 @@
 * Clase Paquete y PaqueteFabrica no hay herencia entre ellas... crear clase madre qeu una a las dos? Aunque tendrian muy pocas cosas en comun OK
 -----
 ##### COMENTAR CODIGO #####
+40. CAMBIAR DIMENSIONES DEL MAPA
+
 6. inhibir errores de valgrind de SDL.
 
 14. qye se muestren construibles
@@ -46,8 +48,6 @@
 
 34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
 	Usar interfaz movible
-
-35. Que las guis pidan paquetes todo el tiempo
 
 36. Mostrar ventanitas de error
 	*clase error monitor -> singleton
@@ -98,4 +98,5 @@
 12. ~~que se muestren armas~~
 13. ~~que se muestren tanques~~
 7. ~~spcket reuseaddrinfo.~~
+35. ~~Que las guis pidan paquetes todo el tiempo~~
 

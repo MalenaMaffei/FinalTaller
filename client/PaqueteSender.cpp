@@ -20,8 +20,6 @@ void PaqueteSender::run() {
         }
 
         try {
-            printf("el paquete a mandadar dice %s.",
-                   paquete.getMensaje().c_str());
             socket.SendStrWLen(paquete.getMensaje());
         } catch(SocketException& e){
             displayError(e);

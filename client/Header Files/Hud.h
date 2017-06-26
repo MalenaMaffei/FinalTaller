@@ -15,7 +15,9 @@ class Hud {
 //  Se setea la informacion que va  a necesitar el Hud para mostrarse
   void setInfo(Paquete paquete);
   bool click(Punto click);
-
+  void abrirGui(std::string id);
+  bool activo();
+  const std::string &getIdSeleccionado() const;
  private:
   VistaHud vistaHud;
   ProgressBar barraVida;
@@ -23,6 +25,8 @@ class Hud {
   Punto ubicacion;
   int color;
   Rect hudRect;
+  bool esperandoInfo;
+  std::string idSeleccionado;
 
 
 //  NUEVOS ELEMENTOS

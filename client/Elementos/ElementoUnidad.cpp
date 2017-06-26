@@ -89,7 +89,7 @@ void ElementoUnidad::chequearSeleccion(SelectBox &selectBox) {
 }
 
 void ElementoUnidad::guiRequest(ColectorDeAcciones &colector) const {
-    colector.showHud();
+    colector.showHud(id);
 }
 
 bool ElementoUnidad::estaMuriendo() {

@@ -19,7 +19,7 @@ class ColectorDeAcciones {
   void crearAcciones();
 
 //  Setea al Hud si el click se habia hecho sobre una unidad
-  void showHud();
+  void showHud(std::string id);
 
 //  Setea al gui de Edificio si el click se habia hecho sobre un edificio
   void showEdificio(std::string id);

@@ -55,6 +55,7 @@ void Hud::setInfo(Paquete paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
+//    TODO paqueteUnidad
     PaqueteAccion nuevo;
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
     nuevo.setMensaje(nuevoMensaje);
@@ -66,6 +67,7 @@ void Hud::setInfo(Paquete paquete) {
 bool Hud::click(Punto click) {
     bool huboClick = hudRect.incluyePunto(click);
     seleccionado = huboClick;
+    esperandoInfo  = huboClick;
     return huboClick;
 }
 
@@ -73,4 +75,17 @@ Hud::~Hud() {
     std::for_each(elementos.begin(), elementos.end(), [&](ElementoGui* ele){
       delete ele;
     });
+}
+
+void Hud::abrirGui(std::string id) {
+    esperandoInfo = true;
+    idSeleccionado = id;
+}
+
+bool Hud::activo() {
+    return esperandoInfo;
+}
+
+const std::string &Hud::getIdSeleccionado() const {
+    return idSeleccionado;
 }

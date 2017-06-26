@@ -18,12 +18,14 @@ ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
       colaSalida(salida){}
 
 void ColectorDeAcciones::crearAcciones() {
-
-
     if (guiEdificio.activo()){
         PaqueteAccion paquete;
-        printf("se encola info\n");
         paquete.pedirInfo(guiEdificio.getIdFabrica());
+        colaSalida.encolar(paquete);
+    }
+    if (hud.activo()){
+        PaqueteAccion paquete;
+        paquete.pedirInfo(hud.getIdSeleccionado());
         colaSalida.encolar(paquete);
     }
 
@@ -85,7 +87,7 @@ void ColectorDeAcciones::showEdificio(std::string id) {
     guiEdificio.abrirGui(click.getPoint(), id);
 }
 
-void ColectorDeAcciones::showHud() {
-//TODO codigo para que le diga al hud que muestre otra foto
-//    hud.setInfo(10);
+//TODO aca le puedo pasar el color directamente
+void ColectorDeAcciones::showHud(std::string id) {
+    hud.abrirGui(id);
 }
