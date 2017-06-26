@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Vehiculo.h
- * Author: usuario
- *
- * Created on 30 de mayo de 2017, 00:03
- */
-
 #ifndef VEHICULO_H
 #define VEHICULO_H
 
@@ -18,6 +5,9 @@
 #include "server_Terreno.h"
 
 class Robot;
+
+/* Es una Unidad que representa a un vehiculo. Son creados por las FabricaVehiculos.
+ */
 
 class Vehiculo : public Unidad {
 public:

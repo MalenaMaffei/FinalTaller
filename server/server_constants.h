@@ -1,31 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   server_constants.h
- * Author: usuario
- *
- * Created on 3 de junio de 2017, 11:49
- */
 
 #ifndef SERVER_CONSTANTS_H
 #define SERVER_CONSTANTS_H
+
+/*****************************************************************************/
+/* Constantes de tiempos de TICKS                                            */
+/*****************************************************************************/
 
 #define TICKS 30    //per second
 #define CYCLE_TIME (1.0/TICKS) //in seconds
 #define NANO 1000000000ULL
 
-#define SIN_EQUIPO 4
+/*****************************************************************************/
+/* Constnates  de equipos                                                    */
+/*****************************************************************************/
 
-#define NUM_EQUIPOS 4
-
-#define TODOS -1	//Si el mensaje estará destino a todos los clientes
-#define ESCALA 100	//Al enviar las posiciones al cliente se envian con 
-                        //coordenadas enteras, para no perder totalmente la	
-                        //precisión se multiplican los double por 100.
+#define NUM_EQUIPOS 4   //Cantidad máxima de equipos posibles en el juego
+#define SIN_EQUIPO 4    //Identificador usado para los objetos que no tienen un
+                        //equipo 
 
 enum equipos {
 	equipo_1,
@@ -34,6 +25,18 @@ enum equipos {
 	equipo_4
 };
 
+/*****************************************************************************/
+/* Constantes asociados a los mensajes intercambiados                        */
+/*****************************************************************************/
+
+#define TODOS -1	//Si el mensaje estará destino a todos los clientes
+#define ESCALA 100	//Al enviar las posiciones al cliente se envian con 
+                        //coordenadas enteras, para no perder totalmente la	
+                        //precisión se multiplican los double por 100.
+
+
+/* Largo de cada uno de los campos
+ */
 enum largos {
 	largoComando = 1,
 	largoId = 3,
@@ -47,6 +50,8 @@ enum largos {
 	largoConstrucciones = 2
 };
 
+/* Comando identificador de cada tipo de mensaje
+ */
 enum comandos {
 	comandoCrear = '0',
 	comandoMatar = '1',
@@ -59,7 +64,8 @@ enum comandos {
 	comandoInfoFabrica = '7',
         comandoPerdedor = '8',
         comandoGanador = '9',
-        comandoDesconectar = 'q'
+        comandoDesconectar = 'q' // Mensaje interno en casa de ser necesario 
+                                 // desconectar a todos los clientes
 };
 
 

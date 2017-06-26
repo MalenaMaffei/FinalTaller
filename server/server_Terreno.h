@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Terreno.h
- * Author: usuario
- *
- * Created on 23 de mayo de 2017, 16:17
- */
-
 #ifndef TERRENO_H
 #define TERRENO_H
 
@@ -20,12 +7,16 @@ class Municion;
 class Robot;
 class Vehiculo;
 
+/* Cada Casillero contiene un Territorio.
+ */
+
 class Terreno {
 public:
     Terreno(int tipo, double velocidadRobots, double velocidadVehiculos);
     Terreno(const Terreno& orig);
     Terreno(Terreno &&orig);
     Terreno& operator=(const Terreno& orig);
+    // Double dispatch con movibles
     double getFactor(Movible* movible);
     double getFactor(Robot* robot);
     double getFactor(Vehiculo* vehiculo);
@@ -34,9 +25,12 @@ public:
     Terreno &operator=(Terreno &&orig);
     virtual ~Terreno();
 private:
+    /* Dependiendo del tipo de territorio se determina la velocidad de las
+     * unidades
+     */
     double velocidadRobots;
     double velocidadVehiculos;
-    int tipo;
+    int tipo; // Pantano, Asfalto, Lava, Tierra, Agua, Carretera, Nieve, Pradera
 };
 
 #endif /* TERRENO_H */
