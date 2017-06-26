@@ -52,23 +52,14 @@ void ElementoManager::fabricarElemento(Paquete &paquete) {
         elemento =
             new ElementoPuente(id, pos, vistaManager.getVista(tipo), false);
     } else if (tipo == codigos.fuerte){
-        elemento = new ElementoEstructura(id,
-                                          pos,
-                                          vistaManager.getVista(tipo),
-                                          color == miColor,
-                                          color);
+        elemento = new ElementoEstructura(id, pos,vistaManager.getVista(tipo),
+                                          color == miColor, color);
     } else if (tipo == codigos.fabricaVehiculo){
-        elemento = new ElementoEstructura(id,
-                                          pos,
-                                          vistaManager.getVista(tipo),
-                                          color == miColor,
-                                          color);
+        elemento = new ElementoEstructura(id, pos, vistaManager.getVista(tipo),
+                                          color == miColor, color);
     } else if (tipo == codigos.fabricaRobot){
-        elemento = new ElementoEstructura(id,
-                                          pos,
-                                          vistaManager.getVista(tipo),
-                                          color == miColor,
-                                          color);
+        elemento = new ElementoEstructura(id, pos, vistaManager.getVista(tipo),
+                                          color == miColor, color);
     } else if (codigos.esBala(tipo)){
         ElementoBala* bala;
         bala = new ElementoBala(id, pos, vistaManager.getVista(codigos.bala));
@@ -105,12 +96,11 @@ void ElementoManager::elementosVivir(Camara &camara,Click &click,
     for (const auto& kv : unidades) {
         ElementoUnidad* unidad = unidades.at(kv.first);
         if (unidad->estaMuerto()){
-            printf("puse al id de la unidad en los muertos\n");
             muertos.push_back(unidad->getId());
         } else {
             unidad->mostrar(camara);
-            unidad->chequearSeleccion(selectBox);
             unidad->clicked(click);
+            unidad->chequearSeleccion(selectBox);
         }
     }
 
@@ -140,16 +130,14 @@ void ElementoManager::limpiarMuertos(std::vector<string> &muertos) {
       if (elementos.count(id)){
           elemento = elementos.at(id);
           elementos.erase(id);
-          delete(elemento);
       } else if (unidades.count(id)){
           elemento = unidades.at(id);
           unidades.erase(id);
-          delete(elemento);
       } else if (balas.count(id)){
           elemento = balas.at(id);
           balas.erase(id);
-          delete(elemento);
       }
+      delete elemento;
     });
 }
 
