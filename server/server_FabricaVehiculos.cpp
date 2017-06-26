@@ -18,6 +18,7 @@
 #include <iomanip>
 #include <iostream>
 #include "server_constants.h"
+#include "Logger.h"
 
 FabricaVehiculos::FabricaVehiculos () { 
 	tinyxml2::XMLDocument xml;
@@ -25,7 +26,8 @@ FabricaVehiculos::FabricaVehiculos () {
 		xml.PrintError ();
 		return;
 	}	
-	std::cout<<"fabrica vehiculos"<<std::endl;
+	Logger* logger = Logger::getInstancia();
+	logger->logACout("fabrica vehiculos");
 	tinyxml2::XMLElement* robots = xml.FirstChildElement ("VEHICULOS");
 	for(tinyxml2::XMLElement* robot = robots->FirstChildElement("VEHICULO"); 
 		robot != NULL; robot = robot->NextSiblingElement("VEHICULO")) {

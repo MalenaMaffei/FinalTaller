@@ -27,6 +27,7 @@
 #include <pthread.h>
 #include <iostream>
 #include "common_Socket.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -37,9 +38,10 @@ int
 main (int argc, char** argv)
 {	
 	if (argc != 3) {
-		std::cout<<"Iniciar el server con: "<<std::endl;
-		std::cout<<"./server <puerto> <#clientes>"<<std::endl;
-		std::cout<<"Intentelo nuevamente"<<std::endl;
+		Logger* logger = Logger::getInstancia();
+		logger->logACout("Iniciar el server con: ");
+		logger->logACout("./server <puerto> <#clientes>");
+		logger->logACout("Intentelo nuevamente");
 		return -1;
 	}
 
