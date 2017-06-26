@@ -194,9 +194,9 @@ void Canvas::startGame(){
                                 colaSalida);
 
 
+
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
-
     gameLoop(elementoManager,
              hud,
              guiEdificio,
@@ -205,66 +205,7 @@ void Canvas::startGame(){
              mapa,
              selectBox,
              mouse);
-//    //Event handler
-//    SDL_Event e;
-//
-////Keeps track of time between steps
-//    LTimer stepTimer;
-//    //The frames per second timer
-//    LTimer fpsTimer;
-//
-//    //The frames per second cap timer
-//    LTimer capTimer;
-//    //Current animation frame
-//
-//    while (!quit){
-//        capTimer.start();
-//
-//        manejarPaquetes(elementoManager, hud, guiEdificio);
-//
-//        while (SDL_PollEvent(&e) != 0){
-//            if (e.type == SDL_QUIT){
-//                quit = true;
-//            }
-//            camara.handleEvent(e);
-//            mouse.setState(e.type, e, camara.getPos());
-//        }
-//        float timeStep = stepTimer.getTicks() / 1000.f;
-//
-//        camara.mover(timeStep);
-//        //Restart step timer
-//        stepTimer.start();
-//
-//        //Clear screen
-//        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-//        SDL_RenderClear(gRenderer);
-//
-//
-//        mapa.mostrar(camara);
-//
-//        mouse.setMouseAction(selectBox, click);
-//
-//        elementoManager.elementosVivir(camara, click, selectBox);
-//
-////        TODO cambiar offset por camara! la gracia es que no se dibuje si no
-//// se ve
-//        selectBox.mostrar(gRenderer, camara.getPos());
-//        hud.mostrar();
-//        guiEdificio.mostrar(camara);
-//
-//        //Update screen
-//        SDL_RenderPresent(gRenderer);
-//
-//        colector.crearAcciones();
-//        mouse.resetState();
-//
-//
-//        int frameTicks = capTimer.getTicks();
-//        if (frameTicks < SCREEN_TICK_PER_FRAME){
-//            //Wait remaining time
-//            SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
-//        }
-//    }
+
     //Free resources and close SDL
     close();
 }
