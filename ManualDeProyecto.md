@@ -129,9 +129,12 @@ Lo que se hace entonces en cada iteración del Game Loop es:
 
 
 
-
 ## Análisis de puntos pendientes
 
 ## Herramientas
+* Para coordinar el trabajo se usó git, hosteando el repositorio en github.
+* CMake fue usado para generar fácilmente los ejecutables.
+* Para la realización del cliente se utilizó el IDE CLion. Realmente es altamente recomendable ya que se puede obtener una licencia gratis de estudiante muy fácilmente si se tiene un email otorgado por la FIUBA y ayuda mucho a la productividad.
+* Para generar los spritesheets se usó una herramienta web muy útil y simple: https://draeton.github.io/stitches/ y para la edición de imágenes, Pinta: https://pinta-project.com/pintaproject/pinta/ también una herramienta sumamente simple aunque no cuenta con funcionalidades muy avanzadas.
 
 ## Conclusiones
