@@ -2,7 +2,7 @@
 
 ## Requerimientos de software
 ### SDL
-Para correr el TP es necesario tener SDL2 instalado. 
+Para correr el TP es necesario tener SDL2 instalado.
 ```
 yum install SDL2-devel
 apt-get install libsdl2-dev
@@ -15,7 +15,9 @@ apt-get install libsdl2-image-dev
 Y por último SDL_ttf y SDL_Mixer
 ```
 yum install SDL2_ttf-devel
+apt-get install libsdl2-ttf-dev
 yum install SDL2_mixer-devel
+apt-get install libsdl2-mixer-dev
 
 ```
 
@@ -25,6 +27,7 @@ También es necesario tener TinyXML2 instalado.
 ```
 apt-get install libtinyxml2-dev
 ```
+Para tener la versión más nueva se puede usar el código fuente del github del protyecto: https://github.com/leethomason/tinyxml2. Instrucciones para instalar la librería usando el código fuente del Repositorio pueden encotnrarse aquí: https://charmie11.wordpress.com/2014/03/24/script-for-install-tinyxml2-on-ubuntu/ (recurso en inglés).
 
 ### Make
 Una vez instaladas las librerias
@@ -77,8 +80,17 @@ La parte fundamental del servidor es el modelo el cual se encarga de manejar los
 
 ### Client
 #### Descripción general
+El Cliente es el encargado de reflejar el estado de juego mediante animaciones. Asimismo es el encargado de reportar todas las acciones del usuario al servidor, que serán luego reflejadas en el modelo del juego.
+
 #### Clases
+El funcionamiento general del cliente puede ser resumido a tres clases principales: __PaqueteReceiver__, __PaqueteSender__ y __Canvas__. Las primeras dos son las que se encargan de la comunicación por sockets con el servidor y la última es la que interactúa con el cliente y renderiza todo el juego.
+###### PaqueteReceiver
+Esta clase es la encargada de recibir los paquetes que llegan del servidor. Esta constantemente recibiendo por el socket y cuando algo llega, lo encola en __ColaPaquete__ para que sea procesado por __Canvas__.
+###### PaqueteSender
+Aquí se envían los paquetes previamente encolados por __Canvas__
+###### Canvas
+Esta clase es la que maneja todas las acciones del cliente y todas las visualizaciones, aquí es donde SDL es utilizado.
+
+
 #### Diagramas UML
 #### Descripción de archivos y protocolos
-
-

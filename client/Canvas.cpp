@@ -19,10 +19,11 @@
 #include "Header Files/VistaLabelRobot.h"
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/Reproductor.h"
+#include "Header Files/ColaPaquetes.h"
 #include <string>
 #include <sstream>
 #include <fstream>
-
+#define NOMBRE_JUEGO "Z: El Ejercicio Final"
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
@@ -38,22 +39,22 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
             printf("No se pudo activar filtro lineal a textura\n");
         }
 
-        //Create window
-        gWindow = SDL_CreateWindow( "Z: El Ejercicio Final",
-                                    SDL_WINDOWPOS_UNDEFINED,
-                                    SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        gWindow = SDL_CreateWindow(NOMBRE_JUEGO,SDL_WINDOWPOS_UNDEFINED,
+                                    SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                                   SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if (gWindow == NULL) {
             printf( "No se pudo crear la ventana. SDL Error: %s\n", SDL_GetError
                 () );
             success = false;
         } else {
-            gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE );
+            gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED
+                | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
             if (gRenderer == NULL){
                 printf( "No se pudo crear renderizador. SDL Error: %s\n",
                         SDL_GetError() );
                 success = false;
             } else {
-                SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+                SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
                 int imgFlags = IMG_INIT_PNG;
                 if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -91,6 +92,8 @@ void Canvas::close() {
     //Quit SDL subsystems
     IMG_Quit();
     SDL_Quit();
+//    TODO chequear que esto no clashee con edificiogui
+//    TTF_Quit();
 }
 
 
@@ -151,43 +154,35 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
     }
 }
 
+void Canvas::inicializarDatos(Mapa &mapa) {
+    CodigosPaquete codigos;
+    Paquete color = colaEntrada.desencolarBloqueante();
+    if (color.getComando() != codigos.equipo){
+//        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
+    }
+    miColor = std::stoi(color.getMensaje().substr(1));
+    printf("mi color es: %i\n", miColor);
+    Paquete pMapa = colaEntrada.desencolarBloqueante();
+    if (color.getComando() != codigos.mapa){
+//        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
+    }
+    mapa.crearMapa(pMapa);
+}
+
 
 void Canvas::startGame(){
-    //Event handler
-    SDL_Event e;
 
-//Keeps track of time between steps
-    LTimer stepTimer;
-    //The frames per second timer
-    LTimer fpsTimer;
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_RenderClear(gRenderer);
+        VistaTexto vistaTexto(gRenderer);
+        vistaTexto.loadFont(fuentePath, 20);
+        vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
+                               "...", {0, 0,0}, {0,0});
 
-    //The frames per second cap timer
-    LTimer capTimer;
-    //Current animation frame
-
-
-
-//    TODO dejar durmiendo esto hasta que entren los dos paquetes.. por ahi
-// puedo probar con SDL_onEvent o algo asi
-    while (colaEntrada.isEmpty()){
-//        TODO fix MALO hasta uqe se me ocurra una mejor manera
-    }
-    Paquete color = colaEntrada.desencolar();
-    if (color.getComando() == 6){
-        miColor = std::stoi(color.getMensaje().substr(1));
-        printf("mi color es: %i\n", miColor);
-    }
-    while (colaEntrada.isEmpty()){
-//        TODO fix MALO hasta uqe se me ocurra una mejor manera
-    }
-
+        SDL_RenderPresent(gRenderer);
 
     Mapa mapa(gRenderer);
-    Paquete pMapa = colaEntrada.desencolar();
-//    TODO poner proper manejador de este tipo de paquetes aca.
-    if (pMapa.getComando() == 5){
-        mapa.crearMapa(pMapa);
-    }
+    inicializarDatos(mapa);
 
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
@@ -207,8 +202,41 @@ void Canvas::startGame(){
                                 colaSalida);
 
 
+
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
+    gameLoop(elementoManager,
+             hud,
+             guiEdificio,
+             click,
+             colector,
+             mapa,
+             selectBox,
+             mouse);
+
+    //Cerrar SDL librenado recursos
+    close();
+}
+
+void Canvas::gameLoop(ElementoManager &elementoManager,
+                      Hud &hud,
+                      GuiEdificio &guiEdificio,
+                      Click &click,
+                      ColectorDeAcciones &colector,
+                      Mapa &mapa,
+                      SelectBox &selectBox,
+                      Mouse &mouse) {
+    //Event handler
+    SDL_Event e;
+
+//    Para que la camara se mueva a una velocidad independiente de los FPS
+    LTimer stepTimer;
+
+
+//  Para medir los ticks del loop y despues usarlo para cumplir con las
+// frames por segundo
+    LTimer capTimer;
+
     while (!quit){
         capTimer.start();
 
@@ -223,12 +251,10 @@ void Canvas::startGame(){
         }
 
         float timeStep = stepTimer.getTicks() / 1000.f;
-
         camara.mover(timeStep);
-        //Restart step timer
         stepTimer.start();
 
-        //Clear screen
+        //Borrar Pantalla
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
 
@@ -245,20 +271,27 @@ void Canvas::startGame(){
         hud.mostrar();
         guiEdificio.mostrar(camara);
 
-        //Update screen
+        //Actualizar Pantalla
         SDL_RenderPresent(gRenderer);
+
         colector.crearAcciones();
         mouse.resetState();
 
 
         int frameTicks = capTimer.getTicks();
         if (frameTicks < SCREEN_TICK_PER_FRAME){
-            //Wait remaining time
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
     }
+}
 
+void Canvas::mensajeEsperando() {
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
+    VistaTexto vistaTexto(gRenderer);
+    vistaTexto.loadFont(fuentePath, 20);
+    vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
+                           "...", {0, 0,0}, {0,0});
 
-    //Free resources and close SDL
-    close();
+    SDL_RenderPresent(gRenderer);
 }

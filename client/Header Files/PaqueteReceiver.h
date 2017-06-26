@@ -3,7 +3,6 @@
 
 #include "common_Thread.h"
 #include "common_Socket.h"
-#include "ColaPaquetes.h"
 #include "PaqueteDelivery.h"
 class PaqueteReceiver : public PaqueteDelivery{
  public:

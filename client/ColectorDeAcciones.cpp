@@ -2,6 +2,7 @@
 #include "Header Files/Hud.h"
 #include "Header Files/GuiEdificio.h"
 #include "Header Files/Paquete.h"
+#include "Header Files/ColaPaquetes.h"
 #include <algorithm>
 #include <vector>
 #include <string>

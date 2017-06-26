@@ -2,18 +2,18 @@
 
 * *Canvas.cpp*:
 
-    * ~~**"Fix pedorro"**~~ Cambiado a fix malo * **ELIMINAR BUSY WAITS**
+    *~~ **ELIMINAR BUSY WAITS**~~
 
-    * Explicar los timers utilizados
+    * ~~Explicar los timers utilizados~~
 
-    * Separar la carga del juego del *main loop*
+    * ~~ Separar la carga del juego del *main loop*~~ 
 
 
 * Realizar los *TODO*s
 
     * Funcionalidad faltante
 
-    * Código no performante, poco claro, sin RAII, etc -> Preguntar por sin RAII
+    * ~~Código no performante~~, poco claro, sin RAII, etc -> Preguntar por sin RAII
 
 
 * Hay mucho código comentado, hay código "complejo" sin comentar.
@@ -53,7 +53,7 @@
 	*clase error monitor -> singleton
 	*clase SDL_exception
 
-39. Mostrar cartel diciendo esperando a otros jugadores.
+39. ~~Mostrar cartel diciendo esperando a otros jugadores.~~
 ##### "Opcional" #####
 19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 

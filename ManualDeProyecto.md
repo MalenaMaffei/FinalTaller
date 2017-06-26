@@ -21,7 +21,7 @@ __Distribución final__
 __Tareas propuestas__:
 	- Definición de modelo, diagrama de clases y modelo de concurrencia.
 	- Repositorio compartido.
-	- Implementación del algoritmo A-Star sobre un mapa con distintos terrenos y con unidades con diferentes movilidades. Un robot o vehículo debería poder encontrar el camino a su objetivo. 
+	- Implementación del algoritmo A-Star sobre un mapa con distintos terrenos y con unidades con diferentes movilidades. Un robot o vehículo debería poder encontrar el camino a su objetivo.
 	- Mostrar una imagen. Mostrar una animación. Mostrar ambas en un lugar fijo o desplazándose por la pantalla (movimiento).
 	- Emitir un sonido. Carga y guardado de información a disco. Draft de la interfaz ( wireframes ).
 __Tareas realizadas__:
@@ -55,7 +55,7 @@ __Tareas realizadas__:
 	- Se crearon las vistas de todos los elementos estáticos.
 	- Generación de mapas mediante algoritmos aleatorio.
 
-### Semana 4 
+### Semana 4
 ___Baja de 3er integrante, reorganización de tareas___
 __Tareas propuestas__:
 	- Lógica de modelo sobre captura de territorios y condiciones de victoria y derrota.
@@ -80,15 +80,15 @@ __Tareas realizadas__:
     - Implementación de GUI en SDL (cambio respecto de la idea original de combinar SDL y gtkmm).
 
 ### Semana 6
-__Tareas propuestas__: 
+__Tareas propuestas__:
     - Pruebas y correcciones sobre estabilidad, jugabilidad y performance.
 __Tareas realizadas__:
     - Partida con un solo cliente, jugador puede disparar, eliminar, crear, moverse, etc.
     - Refactor de factories (antes implementadas como singleton).
-    - Protocolo de comunicación entre cliente y servidor afianzado. 
+    - Protocolo de comunicación entre cliente y servidor afianzado.
     - Primer partida multijugador, implementación de clase Jugadro en el servidor.
     - Creación de animaciones para las estructuras.
-    
+
 ### Semana 7
 __Tareas propuestas__:
     - Testing, corrección de bugs, documentación.
@@ -96,7 +96,7 @@ __Tareas realizadas__:
     - Mensajes de pedido de información de fabricas y unidades.
     - Finalización las Guis de unidades y fábricas.
     - Corrección de bugs.
-    
+
 ### Semana 8
 __Tareas propuestas__:
     - Testing, corrección de bugs, documentación.
@@ -110,19 +110,31 @@ __Tareas realizadas__:
     - Corrección de bugs.
     - Documentación.
     - Armado de entregable.
-    
+
 ## Inconvenientes encontrados
 ### Cliente
 #### Performance
-Un gran inconveniente encontrado del lado del cliente que llevó un par de días de trabajo e investigación fue consumo del CPU. La performance era muy pobre incluso cuando solo se estaba mostrando el mapa, sin unidades moviendose ni otros elementos animados.
+Un gran inconveniente encontrado del lado del cliente que llevó un par de días de trabajo e investigación fue consumo del CPU y no fuimos conscientes del mismo hasta la semana 7 aproximadamente. La performance era muy pobre incluso cuando solo se estaba mostrando el mapa, sin unidades moviendose ni otros elementos animados.
+Al principio se pensó que el problema podía ser el hecho de que se iteraran todos los tiles del mapa a ver cuáles estaban siendo enfocados por la cámara y debían ser mostrados, ya que originalmente el mapa era de 160.000 tiles.
+Se pasó a calcular qué índices del vector de tiles se verían enfocados por la cámara de acuerdo a su posición actual e iterar y mostrar solamente aquellos (1875 tiles). Lamentablemente, si bien el consumo bajó, no se solucionó el problema.
+Eventualmente se llegó a la conclusión de que el problema era que la pantalla se refrescaba constantemente, ya que incluso elementos estáticos tenían animaciones, por lo cual no era posible actualizar la pantalla solo cuando ocurría algún evento.
+Después de encontrado el origen del alto consumo, se empezaron a investigar distintas técnicas para no tener que actualizar los tiles en cada iteración del Game Loop. Esto llevó un tiempo considerable, pero se le dió la más alta prioridad ya que en algunas máquinas era casi imposible disfrutar del juego.
+Finalmente investigando la documentación del SDL encontramos la función SDL_SetRenderTarget, que permite usar una textura como renderer en vez de la pantalla. Al parecer el problema era el overhead de renderizar muchos elementos chicos (tiles) en vez de una sola textura del tamaño de toda la pantalla.
+Lo que se hace entonces en cada iteración del Game Loop es:
+1. Chequear si la cámara se ha movido:
+	* Si lo hizo, se cargan todos los tiles a ser renderizados a una textura, y después se la renderiza a la pantalla.
+	* Si la cámara no se había movido, se reusa la textura de tiles que había sido cargada en alguna iteración anterior.  
+2. Luego, todo el resto de los elementos son renderizados directamente a la pantalla.
+3. Al finalizar el loop, se limpia la pantalla.
 
 
-## Analisis de puntos pendientes
+
+## Análisis de puntos pendientes
 
 ## Herramientas
+* Para coordinar el trabajo se usó git, hosteando el repositorio en github.
+* CMake fue usado para generar fácilmente los ejecutables.
+* Para la realización del cliente se utilizó el IDE CLion. Realmente es altamente recomendable ya que se puede obtener una licencia gratis de estudiante muy fácilmente si se tiene un email otorgado por la FIUBA y ayuda mucho a la productividad.
+* Para generar los spritesheets se usó una herramienta web muy útil y simple: https://draeton.github.io/stitches/ y para la edición de imágenes, Pinta: https://pinta-project.com/pintaproject/pinta/ también una herramienta sumamente simple aunque no cuenta con funcionalidades muy avanzadas.
 
 ## Conclusiones
-    
-    
-
-
