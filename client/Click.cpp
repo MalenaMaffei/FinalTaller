@@ -4,7 +4,6 @@ Click::Click() : clicked(nullptr){
 }
 
 void Click::setCoords(int clickedX,int clickedY) {
-//    printf("me estan seteando las coords\n");
     coords = {clickedX, clickedY};
 }
 

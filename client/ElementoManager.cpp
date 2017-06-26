@@ -157,6 +157,7 @@ void ElementoManager::disparar(PaqueteAccion &paquete) {
 }
 
 ElementoManager::~ElementoManager() {
+    printf("borrando elementos\n");
     for (const auto& kv : elementos) {
         delete kv.second;
     }

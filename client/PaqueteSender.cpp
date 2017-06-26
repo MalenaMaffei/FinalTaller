@@ -22,7 +22,7 @@ void PaqueteSender::run() {
         try {
             socket.SendStrWLen(paquete.getMensaje());
         } catch(SocketException& e){
-            displayError(e);
+//            displayError(e);
             shutdown();
             continue;
         }

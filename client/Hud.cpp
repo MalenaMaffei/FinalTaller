@@ -74,6 +74,7 @@ bool Hud::click(Punto click) {
 }
 
 Hud::~Hud() {
+    printf("se va a borar hud\n");
     std::for_each(elementos.begin(), elementos.end(), [&](ElementoGui* ele){
       delete ele;
     });

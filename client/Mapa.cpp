@@ -90,6 +90,7 @@ Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
 }
 
 Mapa::~Mapa() {
+    printf("borrando mapa\n");
     delete vistaTiles;
 }
 

@@ -51,8 +51,8 @@ double intervalos[8] = {0.5,	//TIERRA
 //Probabilidad de repetición de un terreno
 #define PROBA 0.99
 
-#define H 400
-#define W 400
+#define H 200
+#define W 200
 
 GeneradorMapa::GeneradorMapa () { }
 

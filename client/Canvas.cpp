@@ -80,20 +80,25 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 
 
 void Canvas::close() {
+    printf("dentro de close\n");
     //Destroy window
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
     gRenderer = NULL;
 
+
 //    TODO chequear que mas hace falta destruir o cerrar
 
 
     //Quit SDL subsystems
     IMG_Quit();
+    printf("antes de cerrar ttf\n");
+    TTF_Quit();
+    printf("fuera declose\n");
     SDL_Quit();
 //    TODO chequear que esto no clashee con edificiogui
-//    TTF_Quit();
+
 }
 
 
@@ -146,9 +151,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
         }
     }
 
-//    No lo pongo antes del while asi termina de desempaquetar todo. Aunque
-// en realidad no tiene sentido porque ni lo va a mostrar
-//    TODO decidir que hacer con esto
     if (colaEntrada.estaCerrada()){
         quit = true;
 //        Esto quiere decir que yo no fui la que cerre.
@@ -165,7 +167,6 @@ void Canvas::inicializarDatos(Mapa &mapa) {
 //        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
     }
     miColor = std::stoi(color.getMensaje().substr(1));
-    printf("mi color es: %i\n", miColor);
     PaqueteAccion pMapa = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.mapa){
 //        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
@@ -176,26 +177,20 @@ void Canvas::inicializarDatos(Mapa &mapa) {
 
 void Canvas::startGame(){
 
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-        VistaTexto vistaTexto(gRenderer);
-        vistaTexto.loadFont(fuentePath, 20);
-        vistaTexto.mostrar("Esperando a que se conecte el resto de los Clientes"
-                               "...", {0, 0,0}, {0,0});
-
-        SDL_RenderPresent(gRenderer);
+    mensajeEsperando();
 
     Mapa mapa(gRenderer);
     inicializarDatos(mapa);
-
+//
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 
 
     Hud hud(gRenderer);
-    GuiEdificio guiEdificio(gRenderer);
-
-
+    VistaTexto vistaTexto(gRenderer);
+    GuiEdificio guiEdificio(gRenderer,vistaTexto);
+//
+//
     Mouse mouse;
     SelectBox selectBox;
     Click click;
@@ -218,8 +213,25 @@ void Canvas::startGame(){
              selectBox,
              mouse);
 
+    SDL_Event e;
+    while (!quit) {
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                quit = true;
+            }
+
+        }
+    }
+
+//printf("uso otra vez la font\n");
+//    mensajeEsperando();
+
+
+
+    vistaTexto.closeFont();
     //Cerrar SDL librenado recursos
     close();
+    printf("me estoy por ir del canvas\n");
 }
 
 void Canvas::gameLoop(ElementoManager &elementoManager,
@@ -286,6 +298,10 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
         if (frameTicks < SCREEN_TICK_PER_FRAME){
             SDL_Delay(SCREEN_TICK_PER_FRAME - frameTicks);
         }
+
+        if (quit == true){
+            printf("estoy por salir del loop\n");
+        }
     }
 }
 
@@ -298,4 +314,5 @@ void Canvas::mensajeEsperando() {
                            "...", {0, 0,0}, {0,0});
 
     SDL_RenderPresent(gRenderer);
+    vistaTexto.closeFont();
 }

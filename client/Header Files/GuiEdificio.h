@@ -16,7 +16,8 @@
 // vemos que hacer con el nombre
 class GuiEdificio {
  public:
-  explicit GuiEdificio(SDL_Renderer *gRenderer);
+  explicit GuiEdificio(SDL_Renderer *gRenderer,
+                       VistaTexto &vistaTexto);
 
   void mostrar(Camara &camara);
 
@@ -37,11 +38,12 @@ class GuiEdificio {
 //  Setea los distintos elementos a mostrar usando el paquete.
   void setInfo(PaqueteFabrica paquete);
   bool activo();
+  virtual ~GuiEdificio();
 
  private:
   void resetSeleccion();
   VistaGui vistaGui;
-  VistaTexto vistaTexto;
+  VistaTexto& vistaTexto;
   ProgressBar barraConstr;
   bool seMuestra;
   int tipoSeleccionado;

@@ -5,8 +5,8 @@
 static const int TILE_WIDTH = 16;
 static const int TILE_HEIGHT = 16;
 static const int TILE_CLIPS = 8;
-static const int TILESX = 400;
-static const int TILESY = 400;
+static const int TILESX = 200;
+static const int TILESY = 200;
 
 static const int SCREEN_WIDTH = 800;
 static const int SCREEN_HEIGHT = 600;

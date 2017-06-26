@@ -23,8 +23,11 @@
 #define CONSTR_RELY 22
 using std::string;
 
-GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer)
-    : vistaGui(VistaGui(gRenderer)),vistaTexto(VistaTexto(gRenderer)),
+GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer,
+                         VistaTexto &vistaTexto)
+    : vistaGui(VistaGui(gRenderer)),
+//      vistaTexto(VistaTexto(gRenderer)),
+      vistaTexto(vistaTexto),
       barraConstr(ProgressBar(gRenderer,
                               {3, 91, 11},
                               {223, 175, 75},
@@ -138,4 +141,10 @@ void GuiEdificio::setInfo(PaqueteFabrica paquete) {
 
 bool GuiEdificio::activo() {
     return seMuestra;
+}
+
+GuiEdificio::~GuiEdificio() {
+    printf("se va a destruir gui edificio\n");
+//    vistaTexto.closeFont();
+//    printf("termino de cerrar font gui edificio\n");
 }

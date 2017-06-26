@@ -124,6 +124,7 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
 }
 
 VistaManager::~VistaManager() {
+    printf("borrando vistas\n");
     for (const auto& kv : vistas) {
         delete kv.second;
     }
