@@ -28,6 +28,7 @@
 #include <chrono>
 #include <string>
 #include "Mensaje.h"
+#include "Logger.h"
 
 void Juego::inicializarEdificios(int tipo, tinyxml2::XMLElement* padre, 
 									std::string nombreXML) {
@@ -92,7 +93,10 @@ void Juego::enviarMensaje(Mensaje& mensaje) {
 		try {
 			jugador->enviarMensaje (mensajeStr, mensaje.getId ());		
 		} catch (SocketException &e) {
-			std::cout<<"Se desconectará el servidor"<<std::endl;
+			Logger* logger = Logger::getInstancia ();
+			logger->logACout("Se desconectará el servidor");
+			logger->logACerr("Se intentó enviar un mensaje "
+								"a un cliente y no se pudo");
 			this->finalizar (); 
 		}
 	}
@@ -295,7 +299,8 @@ void Juego::actualizarDisparos() {
 		
 		//Si tiene el movible puede disparar entonces es una unidad
 		int armamento = ((Unidad*) movible)->getArmamento ();
-		std::cout<<"antes de fabrica municiones"<<std::endl;
+		Logger* logger = Logger::getInstancia ();
+		logger->logACout ("antes de fabrica municiones");
 		Municion* municion = fabricaMuniciones.getMunicion (armamento);
 		municion->setEquipo (movible->getEquipo ());
 		municion->setPosicion (movible->getPosicion ());

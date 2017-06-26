@@ -14,6 +14,7 @@
 #include "server_Jugador.h"
 #include <iostream>
 #include "common_SocketException.h"
+#include "Logger.h"
 
 Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) : 
 												socket(std::move(socket)),
@@ -29,8 +30,9 @@ void Jugador::run () {
 			mensaje = socket.ReceiveStrWLen ();
 		} catch (SocketException &e) {
 			if (!salir.get_value()) { //Se salio desde el cliente
-				std::cout<<"Un cliente fue cerrado"<<std::endl;
-				std::cout<<"Todos los clientes serán desconectados"<<std::endl;
+				Logger* logger = Logger::getInstancia();
+				logger->logACout("Un cliente fue cerrado");
+				logger->logACout("Todos los clientes serán desconectados");
 				Mensaje mensajeSalir;
 				mensajeSalir.mensajeDeSalir();
 				colaDeRecibidos.encolar(mensajeSalir);
@@ -50,7 +52,6 @@ void Jugador::enviarMensaje(std::string& mensaje, int id) {
 	try {
 		socket.SendStrWLen(mensaje);
 	} catch (SocketException &e) {
-		std::cout<<e.what()<<std::endl;
 		throw e;
 	}
 }
