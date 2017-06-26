@@ -57,7 +57,6 @@ void Hud::setInfo(Paquete paquete) {
     seleccionado = true;
     Paquete nuevo;
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
-    printf("nuevo mensaje: %s\n", nuevoMensaje.c_str());
     nuevo.setMensaje(nuevoMensaje);
     std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
       ele->setInfo(nuevo);

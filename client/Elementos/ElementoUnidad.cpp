@@ -44,7 +44,7 @@ void ElementoUnidad::avanzarDisparo() {
         estado = haciendoNada;
         textura = vistaMovimiento;
         currentClip = 0;
-        vistaMovimiento->getClip(currentClip, direccion);
+        currentClip = vistaMovimiento->getClip(currentClip, direccion);
         return;
     }
 
@@ -70,7 +70,6 @@ void ElementoUnidad::matar() {
 
 void ElementoUnidad::mostrar(Camara &camera) {
     if (estado == muriendo){
-        printf("hola estoy explotando\n");
         Elemento::mostrar(camera);
         avanzarMuerte();
 

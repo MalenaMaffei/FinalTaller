@@ -99,8 +99,8 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
 
         if (tipo == codigos.jeep){
 //            TODO FALTA IMG
-            caminar = new VistaHeavyCaminar(gRenderer);
-            disparar = new VistaHeavyDisparar(gRenderer);
+            caminar = new VistaMediumCaminar(gRenderer);
+            disparar = new VistaMediumDisparar(gRenderer);
         } else if (tipo == codigos.light){
             //            TODO FALTA IMG
             caminar = new VistaHeavyCaminar(gRenderer);

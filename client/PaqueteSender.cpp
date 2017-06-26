@@ -23,7 +23,6 @@ void PaqueteSender::run() {
             printf("el paquete a mandadar dice %s.",
                    paquete.getMensaje().c_str());
             socket.SendStrWLen(paquete.getMensaje());
-            printf(" y ya se mando\n");
         } catch(SocketException& e){
             displayError(e);
             shutdown();

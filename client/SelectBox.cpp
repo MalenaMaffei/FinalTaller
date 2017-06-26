@@ -8,7 +8,6 @@ void SelectBox::mostrar(SDL_Renderer *renderer, Punto offset) {
     SDL_RenderDrawRect(renderer, &displayRect);
     seleccionadas.erase(std::remove_if(seleccionadas.begin(),
         seleccionadas.end(),[](ElementoUnidad* unidad) {
-                printf("estaba muriendo asi que me borraron de la seleccion\n");
                 return unidad->estaMuriendo();}), seleccionadas.end());
 
     std::for_each(seleccionadas.begin(), seleccionadas.end(), [&]
