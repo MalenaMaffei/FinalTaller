@@ -130,6 +130,19 @@ Se puede observar que, dado que tanto los Jugadores como el Juego corren concurr
 
 #### Descripción de archivos y protocolos
 
+De la lado del servidor los archivos utilizados son:
+
+- ```mapa.map```: Posee los distintos territorios del mapa. Leido al generar el mapa. Generado por el generador de mapa.
+- ```configuracion.xml```: Posee la configuración inicial del mapa, con las posiciones de los edificios e inmovibles iniciales. Leido al generar el mapa. Generado por el generador de mapa.
+- ```terrenos.xml```: Archivo que posee las configuraciones de los distintos terrenos. Leido al inicializar la fabrica de territorios.
+- ```edificios.xml```: Archivo que posee las configuraciones de los distintos edificios. Leido al inicializar la fabrica de edificios.
+- ```inmovibles.xml```: Archivo que posee las configuraciones de los distintos inmovibles. Leido al inicializar la fabrica de inmovibles.
+- ```municiones.xml```: Archivo que posee las configuraciones de los distintos municiones. Leido al inicializar la fabrica de municiones.
+- ```robots.xml```: Archivo que posee las configuraciones de los distintos robots. Leido al inicializar la fabrica de robots.
+- ```vehículos.xml```: Archivo que posee las configuraciones de los distintos vehiculos. Leido al inicializar la fabrica de vehiculos.
+
+En cuanto a los protocolos de comunicación, serán explicados de forma conjunta (junto con los del cliente).
+
 ### Client
 #### Descripción general
 El Cliente es el encargado de reflejar el estado de juego mediante animaciones y sonidos. Asimismo es el encargado de reportar todas las acciones del usuario al servidor, que serán luego reflejadas en el modelo del juego.
@@ -180,3 +193,98 @@ Debido a la necesidad de mostrar constantemente animaciones por pantalla  monito
 
 #### Diagramas UML
 #### Descripción de archivos y protocolos
+
+### Descripción de protocolos
+
+**Todos los paquetes son precedidos por su largo, un int de 4 bytes. Estos no serán incluidos en los mensajes a continuación:
+
+#### Paquetes que envía el Cliente
+##### Mover
+
+comando | id | x | y
+--- | --- | --- | ---
+2 | 007 | 00001 | 00001
+1 char | 3 chars | 5 chars | 5 chars
+
+##### Crear
+Lo van a enviar las fabricas
+
+comando | id | x | y | tipo 
+--- | --- | --- | --- | --- 
+0 | 007 | 00001 | 00001 | 09 
+1 char | 3 chars | 5 chars | 5 chars | 2 chars 
+
+##### PedirInfo
+Se va a enviar cuando el usuario hace click sobre una unidad o fábrica.
+
+comando | id |
+--- | --- |
+4 | 007 |
+1 char | 3 chars |
+
+##### Disparar
+
+comando | id | id
+--- | --- | ---
+3 | 007 | 001
+|| agresor | agredido
+1 char | 3 chars | 3 chars
+
+#### Paquetes que envía el Servidor
+
+##### Mover
+
+comando | id | x | y
+--- | --- | --- | ---
+2 | 007 | 00001 | 00001
+1 char | 3 chars | 5 chars | 5 chars
+
+##### Crear
+Lo van a enviar las fabricas
+
+comando | id | x | y | tipo | color
+--- | --- | --- | --- | --- | --- 
+0 | 007 | 00001 | 00001 | 09 | 2 
+|||||| equipo de 0 a 3 |
+1 char | 3 chars | 5 chars | 5 chars | 2 chars | 1 char
+
+##### Disparar
+
+comando | id | x | y
+--- | --- | --- | ---
+3 | 007 | 00001 | 00001
+|| disparador ||
+1 char | 3 chars | 5 chars | 5s chars
+
+##### Matar
+
+comando | id |
+--- | --- |
+1 | 007 |
+|| el/lo que murio |
+1 char | 3 chars |
+
+##### Informacion
+
+###### Caso Unidad:
+
+comando | id | tipo | vida | 
+--- | --- | --- | --- |
+4 | 007 | 09 | 999 |
+||| tipo unidad | vida que le queda |
+1 char | 3 chars | 2 chars | 3 chars |
+
+###### Caso Fabrica:
+
+comando | id | tipo | vida | cant q puede construir | tipo 1 | tiempo 1 | tipo 2 | tiempo 2 | ... | esta construyendo? | tipo construyendo | %construido
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+7 | 007 | 03 | 999 | 02 | 09 | 0100 | 10 | 1400 | ... | 1 | 09 | 010 |
+||| fuerte | vida que le queda | cuantas unidades sabe construir | tipo pyro | mmss |tipo sniper | mmss | ... | bool | tipo en construccion(si el anterior fue true) | % que ya se construyo (si el bool fue true) |
+1 char | 3 chars | 2 chars | 3 chars | 2 chars | 2 chars | 4 chars | 2 chars | 4 chars | ... | 1 char | 2 char | 3 char |
+
+##### Enviar Mapa #####
+
+comando |  tiposTiles |
+--- | --- |
+1 char | 200x200 chars de ints| 
+
