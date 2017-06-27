@@ -1,4 +1,4 @@
-#include "ArmaGallery.h"
+#include "../../Header Files/ArmaGallery.h"
 #include "../../Header Files/VistaIconoArma.h"
 #include "../../Header Files/PaqueteUnidad.h"
 #define X 0

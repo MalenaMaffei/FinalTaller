@@ -1,4 +1,4 @@
-#include "VehiculoGallery.h"
+#include "../../Header Files/VehiculoGallery.h"
 #include "../../Header Files/VistaIconoVehiculo.h"
 #include "../../Header Files/PaqueteUnidad.h"
 #define X 0

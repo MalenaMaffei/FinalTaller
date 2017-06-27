@@ -3,7 +3,7 @@
 #include "Header Files/PaqueteSender.h"
 #include "Header Files/Greeter.h"
 #include "Header Files/CanvasException.h"
-#include "ErrorMonitor.h"
+#include "Header Files/ErrorMonitor.h"
 #include <iostream>
 #include <string>
 int main(int argc, char *argv[]){
