@@ -158,6 +158,7 @@ Lamentablemente, como se explica en la Documentación Técnica, se usan dos thre
 
 ## Análisis de puntos pendientes
 * Sonidos: Si bien el juego cuenta con la capacidad de reproducir sonidos, solo pudimos reproducir tres. Esto se debe a que para reproducir sonidos en otros eventos, debíamos enviar más paquetes y el servidor debía monitorear más eventos que no eran los estrictamente necesarios para el desarrollo del juego. Los eventos en los que hay sonido son los que coinciden con paquetes que ya estaba recibiendo el cliente de todas formas.
+* Faltaron crear spritesheets para algunos vehículos y para la selección de unidades a crear en la fábrica (se informa con texto). Se le dió muy baja prioridad a terminar esto, ya que simplemente se trataba de detalles estéticos.
 * Puentes: Finalmente no pudimos implementar la lógica de creación de puentes sobre un canal de agua.
 * Generador de Mapas: Nos hubiera gustado poder terminar de pulirlo, hay algunos chequeos que no se hacen, como comprobar que haya un camino transitable entre todos los fuertes y filtrar que no queden tiles sueltos de un solo tipo, por ejemplo un solo tile de pradera en medio de un lago de lava.
 * Las unidades no empiezan a disparar automáticamente cuando tienen a un enemigo al alcance.

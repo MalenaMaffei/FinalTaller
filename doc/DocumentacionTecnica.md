@@ -201,6 +201,7 @@ Debido a la necesidad de mostrar constantemente animaciones por pantalla  monito
 #### Diagramas UML
 ![Diagrama Clases](img/generalCliente.png)
 
+__Diagrama General del Cliente__: Acá se pueden ver las principales clases del cliente y cómo se relacionan  entre si. Como se menciono anteriormente los threads que reciben y envían información comparten las colas de los paquetes con Canvas. Canvas contiene todos los elementos necesarios para poder renderizar el juego y registrar el input del usuario. No se agregaron al diagrama para que sea simple de entender.
 
 ![Herencia de los Elementos](img/Elementos.png)
 __Herencia de Elementos__: En este diagrama se puede apreciar como funciona la herencia entre los distintos elementos que pueden ser representados en el mapa, estos elementos son los que se corresponden uno a uno con los que viven en el modelo del servidor.
