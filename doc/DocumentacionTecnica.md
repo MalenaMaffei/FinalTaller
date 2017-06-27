@@ -82,7 +82,7 @@ En primer lugar, para lograr entender el modelo, es necesario comprender cómo e
 ![Herencia de los distintos tipos de objeto](img/Objetos.png)
 
 Como se puede ver, hay dos clases principales que tienen como padre __Objeto__, estas son __Movible__ e __Inmovible__. Como sus nombres lo indican, la diferencia entre estos es que los objetos del primer grupo tienen la logica necesaria para poder moverse, mientras que los del segundo grupo no.
-A su vez, de __Movible__ heredan __Unidad__ y __Munición__. __Unidad__ incluye a los personajes que pueden ser movidos por los jugadores correspondientes. Las unidades guardan la lógica necesaria para realizar disparos y capturar banderas. __Municion__ es la clase que representa a las balas generadas cuando una __Unidad__ desea efectuar un disparo. 
+A su vez, de __Movible__ heredan __Unidad__ y __Munición__. __Unidad__ incluye a los personajes que pueden ser movidos por los jugadores correspondientes. Las unidades guardan la lógica necesaria para realizar disparos y capturar banderas. __Municion__ es la clase que representa a las balas generadas cuando una __Unidad__ desea efectuar un disparo.
 Por otro lado, de __Inmovible__ se observa que se desprenden __Bloque__, __Bandera__ y __Edificio__. El primero, es simplemente un objeto que ocupa un espacio en el mapa, el segundo ocupa un espacio en el mapa pero además al pasar una __Unidad__ por el mismo la bandera es capturada, y por último en __Edificio__ se guarda la lógica de la creación de unidades (desde el punto de vista del modelo, no es la clase que genera las instancias de __Unidad__).
 
 Dicho esto, es importante mencionar que esta estructuración permite que cualquier objeto pueda colisionar con cualquier objeto, y que internamente dependiendo de las clases de los mismos, las colisiones se manejen según correspondan. Veamos simplemente los métodos de __Objeto__ que permiten esto:
@@ -91,7 +91,7 @@ Dicho esto, es importante mencionar que esta estructuración permite que cualqui
 
 Como se puede ver, todo objeto debe saber colisionar con cualquier instancia de una clase heredra de Objeto (es decir, deben tener implementados esos métodos).
 
-Pero la clase principal del modelo, no es __Objeto__, sino __Juego__. Esta clase es la más extensa e importante del mismo, y tiene la funcionalidad principal de __manejar y modificar los estados del modelo__. Pero estas modificaciones deben ser desencadenadas a partir de mensajes recibidos del cliente. Por lo tanto el __Juego__ debe también __interactuar con los jugadores__. Por lo tanto, se puede decir que es una clase con dos "caras". 
+Pero la clase principal del modelo, no es __Objeto__, sino __Juego__. Esta clase es la más extensa e importante del mismo, y tiene la funcionalidad principal de __manejar y modificar los estados del modelo__. Pero estas modificaciones deben ser desencadenadas a partir de mensajes recibidos del cliente. Por lo tanto el __Juego__ debe también __interactuar con los jugadores__. Por lo tanto, se puede decir que es una clase con dos "caras".
 
 Veamos la primera:
 
@@ -106,7 +106,7 @@ Se puede observar que los métodos que están involucrados son:
 
 - ```actualizarDisparos```: Si una Unidad debe generar un nuevo disparo, realiza el disparo creando la nueva Munición correspondiente.
 
-- ```actualizarEdificios``: Si un Edificio debe generar una nueva unidad, crea la nueva Unidad.
+- ```actualizarEdificios```: Si un Edificio debe generar una nueva unidad, crea la nueva Unidad.
 
 Además de una serie de métodos de inicialización de Juego, y el método ```run``` en donde se inicia el hilo y con él, el ciclo de juego.
 
@@ -117,7 +117,7 @@ Por otro lado, en lo que respecta a la interacción:
 ![Juego como comunicador con jugadores](img/JuegoComunicacion.png)
 
 En primer lugar, en este diagrama de clases se puede observar que tanto Juego como Jugador heredan de la clase Thread. Es decir, los métodos run correrán en hilos separados.
-Dentro de Juego, se observan una serie de métodos encargados de recibir mensajes y enviar mensajes. Estos mensajes se modelan en la clase Mensaje, la cual dependiendo del tipo de mensaje se encarga de generar y guardar el string que se enviará posteriormente a los clientes. El intercambio de mensajes con los clientes se realiza mediante la clase Jugador, la cual encola los mensajes recibidos en la colaDeRecibidos (posteriormente los lee el Juego) y va enviando mensajes desde servidor a medida de que el Juego llama a ```enviarMensaje```. 
+Dentro de Juego, se observan una serie de métodos encargados de recibir mensajes y enviar mensajes. Estos mensajes se modelan en la clase Mensaje, la cual dependiendo del tipo de mensaje se encarga de generar y guardar el string que se enviará posteriormente a los clientes. El intercambio de mensajes con los clientes se realiza mediante la clase Jugador, la cual encola los mensajes recibidos en la colaDeRecibidos (posteriormente los lee el Juego) y va enviando mensajes desde servidor a medida de que el Juego llama a ```enviarMensaje```.
 
 A partir de este diagrama se introduce la concurrencia dentro del servidor, para aclarar un poco este funcionamiento se puede observar el siguiente esquema:
 
@@ -200,14 +200,14 @@ Debido a la necesidad de mostrar constantemente animaciones por pantalla  monito
 
 #### Diagramas UML
 ![Herencia de los Elementos](img/Elementos.png)
-__Herencia de Elementos__: En este diagrama se puede apreciar como funciona la herencia entre los distintos elementos que pueden ser representados en el mapa, estos elementos son los que se corresponden uno a uno con los que viven en el modelo del servidor. 
+__Herencia de Elementos__: En este diagrama se puede apreciar como funciona la herencia entre los distintos elementos que pueden ser representados en el mapa, estos elementos son los que se corresponden uno a uno con los que viven en el modelo del servidor.
 Se optó por separar a estos elementos por la forma en que se representan y no a lo que representan, es decir, no hay diferencia entre tanque y robot por ejemplo, porque ambos están compuestos de Vistas, que aunque distintas, sus imágenes son recorridas y mostradas de la misma manera. Lo mismo pasa con los distintos tipos de fábricas.
 ElementoColoreado cubre a todos los elementos que son de algún equipo y por lo tanto el clip de la Vista que se muestra en cada caso, debe corresponderse con el color del elemento. Es esta clase quien se encarga de sumarle al clip de animación el offset necesario para mostrar el color correcto.
-ElementoUnidad tiene más métodos que sus predecesores, debido a que una unidad tiene varias animaciones distintas que deben ser mostradas en distintas ocasiones. 
+ElementoUnidad tiene más métodos que sus predecesores, debido a que una unidad tiene varias animaciones distintas que deben ser mostradas en distintas ocasiones.
 ElementoUnidad maneja el estado, que puede ser disparando, caminando o muriendo. En cada caso la clase se encarga de pedirle a las Vistas solo los clips de animación que corresponden a cada estado.
 ***
 ![Secuencia de un Evento](img/SecuenciaEvento.png)
-__Secuencia de un Evento__: Los eventos son relevados por Canvas y es Mouse quien registra los eventos generados por el Mouse. Luego Mouse actualiza el estado de Click y SelectBox, ahora ambas clases saben qué sucedió y en dónde, pero no saben a que Elementos afecta. En una siguiente instancia se iteran todos los elementos  chequean si ellos fueron los afectados, si lo fueron se envían a Click o SelectBox según corresponda. 
+__Secuencia de un Evento__: Los eventos son relevados por Canvas y es Mouse quien registra los eventos generados por el Mouse. Luego Mouse actualiza el estado de Click y SelectBox, ahora ambas clases saben qué sucedió y en dónde, pero no saben a que Elementos afecta. En una siguiente instancia se iteran todos los elementos  chequean si ellos fueron los afectados, si lo fueron se envían a Click o SelectBox según corresponda.
 Finalmente el ColectorDeAcciones tiene la lógica para saber interpretar estas selecciones y arma el paquete correspondiente que llega al cliente mediante PaqueteSender, que está bloqueado en ColaPaquetes hasta que haya algo en la cola para enviar.
 #### Descripción de archivos y protocolos
 
@@ -226,10 +226,10 @@ comando | id | x | y
 ##### Crear
 Lo van a enviar las fabricas
 
-comando | id | x | y | tipo 
---- | --- | --- | --- | --- 
-0 | 007 | 00001 | 00001 | 09 
-1 char | 3 chars | 5 chars | 5 chars | 2 chars 
+comando | id | x | y | tipo
+--- | --- | --- | --- | ---
+0 | 007 | 00001 | 00001 | 09
+1 char | 3 chars | 5 chars | 5 chars | 2 chars
 
 ##### PedirInfo
 Se va a enviar cuando el usuario hace click sobre una unidad o fábrica.
@@ -260,8 +260,8 @@ comando | id | x | y
 Lo van a enviar las fabricas
 
 comando | id | x | y | tipo | color
---- | --- | --- | --- | --- | --- 
-0 | 007 | 00001 | 00001 | 09 | 2 
+--- | --- | --- | --- | --- | ---
+0 | 007 | 00001 | 00001 | 09 | 2
 |||||| equipo de 0 a 3 |
 1 char | 3 chars | 5 chars | 5 chars | 2 chars | 1 char
 
@@ -285,7 +285,7 @@ comando | id |
 
 ###### Caso Unidad:
 
-comando | id | tipo | vida | 
+comando | id | tipo | vida |
 --- | --- | --- | --- |
 4 | 007 | 09 | 100 |
 ||| tipo unidad | %vida que le queda |
@@ -303,6 +303,4 @@ comando | id | tipo | vida | cant q puede construir | tipo 1 | tiempo 1 | tipo 2
 
 comando |  tiposTiles |
 --- | --- |
-1 char | 200x200 chars de ints| 
-
-
+1 char | 200x200 chars de ints|

@@ -16,6 +16,7 @@ bool Vista::loadMedia() {
     bool success = true;
 
     if (!loadFromFile(fileName)){
+
         printf("No se pudo cargar la textura: %s\n", fileName.c_str());
         success = false;
         return success;

@@ -2,6 +2,8 @@
 #include "Header Files/PaqueteReceiver.h"
 #include "Header Files/PaqueteSender.h"
 #include "Header Files/Greeter.h"
+#include "Header Files/CanvasException.h"
+#include "ErrorMonitor.h"
 #include <iostream>
 #include <string>
 int main(int argc, char *argv[]){
@@ -37,6 +39,17 @@ int main(int argc, char *argv[]){
 
     receiver.start();
     sender.start();
+    ErrorMonitor errorMonitor;
+    try {
+
+    } catch(CanvasException& e) {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+                                 "Juego Abortado", "El Juego no se pudo inicializar correctamente."
+                                     " Se cerrará a continuación.",
+                                 NULL);
+        errorMonitor.outputError(e.what());
+    }
+
     Canvas canvas(colaEntrada, colaSalida);
     canvas.startGame();
 //    Si llegue aca es porque se cerro la ventana

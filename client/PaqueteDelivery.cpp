@@ -8,8 +8,3 @@ void PaqueteDelivery::shutdown() {
     salir = true;
     cola.cerrar();
 }
-
-void PaqueteDelivery::displayError(SocketException &e) {
-    std::cerr << e.what() << std::endl;
-}
-
