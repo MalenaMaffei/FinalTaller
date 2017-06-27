@@ -1,11 +1,11 @@
-#include "IconoArma.h"
+#include "ArmaGallery.h"
 #include "../../Header Files/VistaIconoArma.h"
 #include "../../Header Files/PaqueteUnidad.h"
 #define X 0
 #define Y 144
 
-IconoArma::IconoArma(SDL_Renderer *gRenderer) : ElementoGui(new VistaIconoArma(
-    gRenderer), Punto(X,Y)) {
+ArmaGallery::ArmaGallery(Vista *vista,Punto relPos) :
+    GuiGallery(vista, relPos) {
     labels[codigos.grunt] = labelGrunt;
     labels[codigos.laser] = labelLaser;
     labels[codigos.psycho] = labelPsycho;
@@ -14,7 +14,7 @@ IconoArma::IconoArma(SDL_Renderer *gRenderer) : ElementoGui(new VistaIconoArma(
     labels[codigos.tough] = labelTough;
 }
 
-void IconoArma::setInfo(PaqueteAccion paquete) {
+void ArmaGallery::setInfo(PaqueteUnidad paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esRobot(tipo)){

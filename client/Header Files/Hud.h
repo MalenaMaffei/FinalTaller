@@ -3,7 +3,7 @@
 #include "Vista.h"
 #include "ProgressBar.h"
 #include "PaqueteAccion.h"
-#include "../Elementos/Elementos Gui/ElementoGui.h"
+#include "../Elementos/Elementos Gui/GuiGallery.h"
 #include "VistaHud.h"
 #include "Click.h"
 #include <vector>
@@ -15,7 +15,7 @@ class Hud {
   void mostrar();
 
 //  Se setea la informacion que va  a necesitar el Hud para mostrarse
-  void setInfo(Paquete paquete);
+  void setInfo(PaqueteUnidad paquete);
   bool click(Click click);
   void abrirGui(std::string id, int color);
   bool activo();
@@ -31,7 +31,7 @@ class Hud {
   std::string idSeleccionado;
 
 //ElementosGui que componen al hud
-  std::vector<ElementoGui*> elementos;
+  std::vector<GuiGallery*> elementos;
 };
 
 #endif //TPFINAL_HUD_H

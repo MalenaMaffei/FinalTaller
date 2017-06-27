@@ -1,15 +1,15 @@
-#include "ElementoGui.h"
+#include "GuiGallery.h"
 
-ElementoGui::ElementoGui(Vista *vista,
+GuiGallery::GuiGallery(Vista *vista,
                          Punto relPos) : vista(vista), relPos(relPos),
                                          seMuestra(false) {}
 
-void ElementoGui::mostrar(Punto p) {
+void GuiGallery::mostrar(Punto p) {
     if (seMuestra){
         vista->mostrar(relPos + p, clip);
     }
 }
 
-ElementoGui::~ElementoGui() {
+GuiGallery::~GuiGallery() {
     delete vista;
 }

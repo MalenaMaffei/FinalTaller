@@ -1,7 +1,7 @@
-#include "../../Header Files/GuiFabrica.h"
-#include "../../Header Files/VistaGui.h"
-#include "../../Header Files/constantes.h"
-#include "../../Header Files/common_CodigosPaquete.h"
+#include "Header Files/GuiFabrica.h"
+#include "Header Files/VistaGui.h"
+#include "Header Files/constantes.h"
+#include "Header Files/common_CodigosPaquete.h"
 #include <string>
 #define CANCEL_RELX 67
 #define CANCEL_RELY 47

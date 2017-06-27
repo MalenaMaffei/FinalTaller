@@ -163,6 +163,7 @@ ElementoManager::~ElementoManager() {
     }
 
     for (const auto& kv : unidades) {
+        printf("borrando una unidad\n");
         delete kv.second;
     }
 

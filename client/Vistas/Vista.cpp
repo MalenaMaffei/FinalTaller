@@ -38,10 +38,7 @@ void Vista::recorrerImagen() {
     }
 }
 
-Vista::~Vista() {
-//gSpriteSheetTextureTank.free();
-//    TODO no se si hay que ponerlo
-}
+Vista::~Vista() {}
 
 void Vista::mostrar(Punto p, size_t nrClip) {
     render(p.x, p.y, &gClips[nrClip]);
@@ -56,6 +53,9 @@ int Vista::getWidth() const {
 }
 
 size_t Vista::getClip(size_t clip, size_t fila) const {
+    if (fila > filas-1){
+        fila = 0;
+    }
     return clip%clips + (clips*fila);
 }
 

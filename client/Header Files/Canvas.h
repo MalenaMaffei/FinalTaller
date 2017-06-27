@@ -11,8 +11,9 @@
 class Canvas{
  public:
   Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida);
+ public:
   void inicializarDatos(Mapa& mapa);
-  void close();
+//  void close();
   void startGame();
   void manejarPaquetes(ElementoManager &elementoManager,
                          Hud &hud,
@@ -23,6 +24,7 @@ class Canvas{
                   GuiFabrica &guiEdificio,
                   ColectorDeAcciones &colector,
                   Mapa &mapa);
+  virtual ~Canvas();
 
  private:
   void mensajeEsperando();

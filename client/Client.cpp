@@ -40,8 +40,6 @@ int main(int argc, char *argv[]){
     Canvas canvas(colaEntrada, colaSalida);
     canvas.startGame();
 //    Si llegue aca es porque se cerro la ventana
-
-    printf("voy a hacer shutdown\n");
     receiver.shutdown();
     sender.shutdown();
 

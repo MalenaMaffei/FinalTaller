@@ -3,16 +3,15 @@
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/VistaLabelRobot.h"
 #include "Header Files/common_CodigosPaquete.h"
-#include "Header Files/PaqueteAccion.h"
-#include "Elementos/Elementos Gui/LabelRobot.h"
 #include "Header Files/VistaIconoRobot.h"
 #include "Header Files/VistaHud.h"
-#include "Elementos/Elementos Gui/LabelVehiculo.h"
-#include "Elementos/Elementos Gui/IconoRobot.h"
-#include "Elementos/Elementos Gui/IconoVehiculo.h"
-#include "Elementos/Elementos Gui/IconoArma.h"
+#include "Elementos/Elementos Gui/RobotGallery.h"
+#include "Elementos/Elementos Gui/VehiculoGallery.h"
+#include "Elementos/Elementos Gui/ArmaGallery.h"
 #include "Header Files/PaqueteUnidad.h"
 #include "Header Files/Click.h"
+#include "Header Files/VistaIconoVehiculo.h"
+#include "Header Files/VistaIconoArma.h"
 #define X_HPBAR 14
 #define Y_HPBAR 213
 #define HEIGHT_HPBAR 7
@@ -25,32 +24,36 @@ Hud::Hud(SDL_Renderer *gRenderer) : vistaHud(VistaHud(gRenderer)),
                                               {99, 71, 71},
                                               Rect(Punto(X_HPBAR, Y_HPBAR),
                                               WIDTH_HPBAR, HEIGHT_HPBAR))
-    , seleccionado(false), ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0) {
+    , seleccionado(false), ubicacion(SCREEN_WIDTH - vistaHud.getWidth(), 0),
+                                    esperandoInfo(false) {
     hudRect = {ubicacion,vistaHud.getWidth(),vistaHud.getHeight()};
 
-    ElementoGui* elementoGui = new LabelRobot(gRenderer);
+    GuiGallery* elementoGui = new RobotGallery(new VistaLabelRobot(gRenderer),
+                                               {3,124});
     elementos.push_back(elementoGui);
-    elementoGui = new LabelVehiculo(gRenderer);
+    elementoGui = new VehiculoGallery(new VistaLabelVehiculo(gRenderer),
+                                      {2, 230});
     elementos.push_back(elementoGui);
-    elementoGui = new IconoRobot(gRenderer);
+    elementoGui = new RobotGallery(new VistaIconoRobot(gRenderer), {8, 46});
     elementos.push_back(elementoGui);
-    elementoGui = new IconoVehiculo(gRenderer);
+    elementoGui = new VehiculoGallery(new VistaIconoVehiculo(gRenderer),
+                                      {0, 148});
     elementos.push_back(elementoGui);
-    elementoGui = new IconoArma(gRenderer);
+    elementoGui = new ArmaGallery(new VistaIconoArma(gRenderer), {0,144});
     elementos.push_back(elementoGui);
 }
 
 void Hud::mostrar() {
     if (seleccionado){
         vistaHud.mostrar(ubicacion, 0);
-        std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
+        std::for_each(elementos.begin(), elementos.end(),[&](GuiGallery* ele){
           ele->mostrar(ubicacion);
         });
         barraVida.mostrar(ubicacion);
     }
 }
 
-void Hud::setInfo(Paquete paquete) {
+void Hud::setInfo(PaqueteUnidad paquete) {
     if (!esperandoInfo){
         return;
     }
@@ -59,12 +62,12 @@ void Hud::setInfo(Paquete paquete) {
     barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
 //    TODO paqueteUnidad
-    PaqueteAccion nuevo;
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
-    nuevo.setMensaje(nuevoMensaje);
+    PaqueteUnidad nuevo(nuevoMensaje);
+
 //    Se le pasa el paquete con información de la unidad a cada elemento para
 // que se setee y muestre lo que debe.
-    std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
+    std::for_each(elementos.begin(), elementos.end(),[&](GuiGallery* ele){
       ele->setInfo(nuevo);
     });
 }
@@ -83,7 +86,7 @@ bool Hud::click(Click click) {
 
 Hud::~Hud() {
     printf("se va a borar hud\n");
-    std::for_each(elementos.begin(), elementos.end(), [&](ElementoGui* ele){
+    std::for_each(elementos.begin(), elementos.end(), [&](GuiGallery* ele){
       delete ele;
     });
 }

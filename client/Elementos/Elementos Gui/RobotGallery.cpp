@@ -1,11 +1,10 @@
-#include "IconoRobot.h"
+#include "RobotGallery.h"
 #include "../../Header Files/VistaIconoRobot.h"
 #include "../../Header Files/PaqueteUnidad.h"
 #define X 8
 #define Y 46
-IconoRobot::IconoRobot(SDL_Renderer *gRenderer) : ElementoGui(new
-                                                                  VistaIconoRobot(
-    gRenderer), Punto(X,Y)) {
+RobotGallery::RobotGallery(Vista *vista,
+                           Punto relPos) : GuiGallery(vista, relPos) {
     labels[codigos.grunt] = labelGrunt;
     labels[codigos.laser] = labelLaser;
     labels[codigos.psycho] = labelPsycho;
@@ -14,7 +13,7 @@ IconoRobot::IconoRobot(SDL_Renderer *gRenderer) : ElementoGui(new
     labels[codigos.tough] = labelTough;
 }
 
-void IconoRobot::setInfo(PaqueteAccion paquete) {
+void RobotGallery::setInfo(PaqueteUnidad paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     int tipo = paqueteUnidad.getTipo();
     if (codigos.esRobot(tipo)){
@@ -23,7 +22,6 @@ void IconoRobot::setInfo(PaqueteAccion paquete) {
         seMuestra = true;
     } else if (codigos.esVehiculo(tipo)){
         clip = labels.at(codigos.grunt);
-
         clip = vista->getClip(clip,paqueteUnidad.getColor());
         seMuestra = true;
     } else{

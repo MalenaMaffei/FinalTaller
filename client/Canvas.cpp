@@ -68,7 +68,7 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
                                 " %s\n", TTF_GetError());
                     success = false;
                 }
-                if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0)
                 {
                     printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                     success = false;
@@ -86,22 +86,22 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
 }
 
 
-void Canvas::close() {
-    //Destroy window
-    SDL_DestroyRenderer(gRenderer);
-    SDL_DestroyWindow(gWindow);
-    gWindow = NULL;
-    gRenderer = NULL;
-
-//    TODO chequear que mas hace falta destruir o cerrar
-
-    //Quit SDL subsystems
-    Mix_CloseAudio();
-    Mix_Quit();
-    IMG_Quit();
-    TTF_Quit();
-    SDL_Quit();
-}
+//void Canvas::close() {
+//    //Destroy window
+//    SDL_DestroyRenderer(gRenderer);
+//    SDL_DestroyWindow(gWindow);
+//    gWindow = NULL;
+//    gRenderer = NULL;
+//
+////    TODO chequear que mas hace falta destruir o cerrar
+//
+//    //Quit SDL subsystems
+//    Mix_CloseAudio();
+//    Mix_Quit();
+//    IMG_Quit();
+//    TTF_Quit();
+//    SDL_Quit();
+//}
 
 
 void Canvas::manejarPaquetes(ElementoManager &elementoManager,
@@ -142,7 +142,8 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             PaqueteFabrica paqueteFabrica(paquete.getMensaje());
             guiEdificio.setInfo(paqueteFabrica);
         } else if (paquete.getComando() == codigos.infoUnidad){
-            hud.setInfo(paquete);
+            PaqueteUnidad paqueteUnidad(paquete.getMensaje());
+            hud.setInfo(paqueteUnidad);
         } else if (paquete.getComando() == codigos.perdedor){
             quit = true;
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
@@ -182,19 +183,19 @@ void Canvas::inicializarDatos(Mapa &mapa) {
 
 
 void Canvas::startGame(){
-
     mensajeEsperando();
 
     Mapa mapa(gRenderer);
     inicializarDatos(mapa);
-//
+
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
 
-
     Hud hud(gRenderer);
+
     VistaTexto vistaTexto(gRenderer);
     GuiFabrica guiEdificio(gRenderer,vistaTexto);
+
 
     ColectorDeAcciones colector(selectBox,
                                 click,
@@ -210,10 +211,7 @@ void Canvas::startGame(){
              colector,
              mapa);
 
-
     vistaTexto.closeFont();
-    //Cerrar SDL librenado recursos
-    close();
 }
 
 void Canvas::gameLoop(ElementoManager &elementoManager,
@@ -293,5 +291,23 @@ void Canvas::mensajeEsperando() {
                            "...", {0, 0,0}, {0,0});
 
     SDL_RenderPresent(gRenderer);
+    printf("cerrando fuente\n");
     vistaTexto.closeFont();
+}
+
+Canvas::~Canvas() {
+    //Destroy window
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
+    gWindow = NULL;
+    gRenderer = NULL;
+
+//    TODO chequear que mas hace falta destruir o cerrar
+
+    //Quit SDL subsystems
+    Mix_Quit();
+    Mix_CloseAudio();
+    IMG_Quit();
+    TTF_Quit();
+    SDL_Quit();
 }
