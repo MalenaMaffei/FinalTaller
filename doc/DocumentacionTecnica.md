@@ -143,6 +143,13 @@ De la lado del servidor los archivos utilizados son:
 
 En cuanto a los protocolos de comunicación, serán explicados de forma conjunta (junto con los del cliente).
 
+### Generador de Mapa
+
+Pequeño sistema que se encarga de generar los mapas de forma aleatoria. Éste se desprende de las funcionalidades del servidor, por lo que no merece mayor desarrollo que una descripción general del algoritmo.
+
+#### Descripción general
+El algoritmo desarrollado para generar los mapas funciona a partir de la base de que "cuando un territorio ocurre, es muy probable que vuelva a ocurrir adyacentemente". Por lo tanto, si un casillero tiene un adyacente con territorio ya asignado, con una probabilidad muy alta elige el mismo territorio que el adyacente. Si tiene dos adyacentes con territorios, elige con esa misma probabilidad arbitrariamente alguno de los dos territorios (por como se itera la matriz como máximo tendrá dos adyacentes asignados). En caso contrario, se elige a partir de una serie de probabilidades de aparición de cada territorio.
+
 ### Client
 #### Descripción general
 El Cliente es el encargado de reflejar el estado de juego mediante animaciones y sonidos. Asimismo es el encargado de reportar todas las acciones del usuario al servidor, que serán luego reflejadas en el modelo del juego.
