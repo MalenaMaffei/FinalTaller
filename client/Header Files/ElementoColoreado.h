@@ -10,6 +10,8 @@ public:
                           Vista *textura,
                           bool esMio,
                           int color);
+//  antes de mostrar, elige la fila correcta de imagenes dependiendo del
+// color del elemento
     virtual void mostrar(Camara &camera);
 protected:
     int color;

@@ -31,14 +31,10 @@ void VistaTexto::mostrar(std::string texto, SDL_Color color, Punto p) {
 }
 
 VistaTexto::~VistaTexto() {
-    //Free loaded images
     free();
-        //Quit SDL subsystems
-//    TTF_Quit();
 }
 
 void VistaTexto::closeFont() {
-    //Free global font
     TTF_CloseFont(gFont);
     gFont = NULL;
 }

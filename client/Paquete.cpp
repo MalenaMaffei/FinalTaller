@@ -1,5 +1,6 @@
 #include "Header Files/Paquete.h"
 #include <stdexcept>
+#include <string>
 int Paquete::toInt(std::string str) const{
     try {
         return stoi(str);

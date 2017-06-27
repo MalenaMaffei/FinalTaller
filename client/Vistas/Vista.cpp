@@ -39,7 +39,8 @@ void Vista::recorrerImagen() {
 }
 
 Vista::~Vista() {
-//gSpriteSheetTextureTank.free(); TODO no se si hay que ponerlo
+//gSpriteSheetTextureTank.free();
+//    TODO no se si hay que ponerlo
 }
 
 void Vista::mostrar(Punto p, size_t nrClip) {

@@ -1,7 +1,7 @@
 #include "Header Files/Camara.h"
 #include "Header Files/Texture.h"
 #include "Header Files/Punto.h"
-Camara::Camara() : camRect(Punto(), SCREEN_WIDTH,SCREEN_HEIGHT), velX(0), velY(0){}
+Camara::Camara() : camRect(Punto(),SCREEN_WIDTH,SCREEN_HEIGHT),velX(0),velY(0){}
 
 void Camara::handleEvent(SDL_Event& e){
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0){
