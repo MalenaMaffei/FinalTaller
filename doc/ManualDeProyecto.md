@@ -112,6 +112,24 @@ __Tareas realizadas__:
     - Armado de entregable.
 
 ## Inconvenientes encontrados
+
+### Servidor
+
+#### Mapa invertido
+Una problemática que surgió fue que se observó que al moverse la unidad en el mapa, sus velocidades variaban, pero no lo hacían acorde al terreno en el que estaba. Esto nos hizo sospechar del buen funcionamiento del A*. Luego de destinar un tiempo considerable a buscar el error en este algoritmo, se descubrió que el error estaba en la forma en que se enviaba el mapa. Mientras que en el cliente se iteraba primero filas y luego columnas, el servidor las enviaba como columnas y luego filas. Por lo tanto, el mapa observado por el cliente no era el mimso que usaba el algoritmo A*, y por tal motivo no estaban las velocidades bien asociadas.
+
+#### Tiempo de A*
+Dado el funcionamiento del algoritmo, en casos en que se eligen caminos muy largos o "costosos" de encontrar, puede llegar a tardar más del tiempo del del TICK asignado por el servidor. Para solucionar esto, se reemplazo la distancia euclideana como heurística por la distancia manhattan (la cual requiere un menor grado de cálculo), además se decidió poner un máximo numero de iteraciones en el algoritmo. Por lo tanto, en caso de no encontrar un camino en ese número de iteraciones, simplemente no hace nada. 
+Esto además soluciona el problema de seleccionar como destino una posición con lava o inaccesible (rodeada por lava). Si bien el primer caso, se podría solucionar verificando que el destino no sea lava, el segundo caso es más complejo. Supongamos que se selecciona una isla que tiene lava a su alrededor, en este caso el algoritmo buscará exhaustivamente un camino hasta darse cuenta de que no puede llegar hasta allí.
+Asimismo, esta problemática nos hizo dar cuenta de la necesidad de considerar el caso en que alguna iteración del ciclo de juego tarde más de un TICK de reloj. En estos casos, se opta por enviar la información en el siguiente TICK en el que esté obtenida.
+
+#### Clase Juego
+Si bien se buscó minimizar al máximo el código necesario en la clase Juego, esta fue una tarea dificil. La dificultad recide en que esta clase es la principal del modelo, y además requiere participar activamente del intercambio de información con los jugadores. Por lo tanto, no solo debe contener los métodos y atributos del modelo, sino también una serie de métodos y atributos asociados a la comunicación con los jugadores. Por este motivo, la clase tomó una extensión considerablemente mayor con respecto a otras clases, y si bien se la refactorizó con el fin de minimizarla, no se la pudo reducir a una extensión todavía menor.
+
+#### Bugs varios
+A lo largo del desarrollo del juego se fueron encontrando distintos bugs. El primero fue que las balas finalizaban en el objetivo (en lugar de seguir su trayectoria), por más que este haya sido eliminado. Otro bug con disparar fue que en caso de disparar a un objeto lejano, se ponía a disparar constantemente por más de que no llegara nunca la munición. Además, fueron surgiendo otros bugs que solo se percibían mediante la visualización del cliente.
+
+
 ### Cliente
 #### Performance
 Un gran inconveniente encontrado del lado del cliente que llevó un par de días de trabajo e investigación fue consumo del CPU, no fuimos conscientes del mismo hasta la semana 7 aproximadamente. La performance era muy pobre incluso cuando solo se estaba mostrando el mapa, sin unidades moviendose ni otros elementos animados.
@@ -137,15 +155,18 @@ Finalmente, luego de una consulta, encontramos al culpable: ```int read = recv(f
 Lamentablemente, como se explica en la Documentación Técnica, se usan dos threads para el envío y recepción de información, así que perdimos bastante tiempo investigando esta pista falsa convencidos de que el problema era debido a una Race Condition.
 
 
+
 ## Análisis de puntos pendientes
 * Sonidos: Si bien el juego cuenta con la capacidad de reproducir sonidos, solo pudimos reproducir tres. Esto se debe a que para reproducir sonidos en otros eventos, debíamos enviar más paquetes y el servidor debía monitorear más eventos que no eran los estrictamente necesarios para el desarrollo del juego. Los eventos en los que hay sonido son los que coinciden con paquetes que ya estaba recibiendo el cliente de todas formas.
 * Puentes: Finalmente no pudimos implementar la lógica de creación de puentes sobre un canal de agua.
 * Generador de Mapas: Nos hubiera gustado poder terminar de pulirlo, hay algunos chequeos que no se hacen, como comprobar que haya un camino transitable entre todos los fuertes y filtrar que no queden tiles sueltos de un solo tipo, por ejemplo un solo tile de pradera en medio de un lago de lava.
 * Las unidades no empiezan a disparar automáticamente cuando tienen a un enemigo al alcance.
+
 ## Herramientas
 * Para coordinar el trabajo se usó git, hosteando el repositorio en github.
 * CMake fue usado para generar fácilmente los ejecutables.
 * Para la realización del cliente se utilizó el IDE CLion. Realmente es altamente recomendable ya que se puede obtener una licencia gratis de estudiante muy fácilmente si se tiene un email otorgado por la FIUBA y ayuda mucho a la productividad.
 * Para generar los spritesheets se usó una herramienta web muy útil y simple: https://draeton.github.io/stitches/ y para la edición de imágenes, Pinta: https://pinta-project.com/pintaproject/pinta/ también una herramienta sumamente simple aunque no cuenta con funcionalidades muy avanzadas.
+* Para probar los mapas generado sin necesidad de correr el juego se implementó un script de python que lo visualizaba.
 
 ## Conclusiones
