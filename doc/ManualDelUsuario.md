@@ -10,6 +10,7 @@
 2. Cada Jugador debe correr, ubicado en la carpeta client, ```./client``` e ingresar el puerto e ip que se desea usar o usar los defaults ingresando Enter. Alternativamente se puede optar por ```./client <ip> <puerto>```
 
 ![Interfaz Cliente](img/interfaz cliente.png)
+
 3. Una vez conectados todos los jugadores dados en ```<cantidadJugadores>```, arrancará la partida.
 
 ### Juego
