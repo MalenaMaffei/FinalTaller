@@ -2,10 +2,10 @@
 #define MENSAJE_H
 
 #include <string>
-#include "server_Mapa.h"
-#include "server_Objeto.h"
-#include "server_Movible.h"
-#include "server_Unidad.h"
+#include "Mapa.h"
+#include "Objeto.h"
+#include "Movible.h"
+#include "Unidad.h"
 #include "FabricaUnidades.h"
 #include <array>
 #include <vector>
@@ -70,6 +70,7 @@ public:
      */
     int getId();
     virtual ~Mensaje();
+
 private:
     /* El propio mensaje a ser enviado a los clientes.
      */

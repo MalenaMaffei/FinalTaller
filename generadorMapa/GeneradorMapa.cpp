@@ -54,9 +54,9 @@ double intervalos[8] = {0.5,	//TIERRA
 #define H 200
 #define W 200
 
-GeneradorMapa::GeneradorMapa () { }
+GeneradorMapa::GeneradorMapa() { }
 
-GeneradorMapa::~GeneradorMapa () { }
+GeneradorMapa::~GeneradorMapa() { }
 
 int obtenerTerreno(double probabilidad) {
 	if (probabilidad<intervalos[TIERRA]) {
@@ -84,7 +84,7 @@ void GeneradorMapa::generarMapa(const std::string& nombre) {
   	std::ofstream myfile;
 	myfile.open(nombre);
 	
-	std::default_random_engine generador (std::random_device{}());
+	std::default_random_engine generador(std::random_device{}());
 	std::uniform_real_distribution<double> probabilidad(0.0,1.0);
 	
 	for (size_t i = 0; i<H; i++){
@@ -159,9 +159,9 @@ void GeneradorMapa::generarObjetos(const std::string& nombre) {
 	celdas[fuertes[3][0]/pasoX][fuertes[3][1]/pasoY] = fuerte;
 
 	//Generadores random
-	std::default_random_engine generador (std::random_device{}());
-	std::uniform_int_distribution<int> posX (pasoX,W/2-pasoX);
-	std::uniform_int_distribution<int> posY (pasoY,H/2-pasoY);
+	std::default_random_engine generador(std::random_device{}());
+	std::uniform_int_distribution<int> posX(pasoX,W/2-pasoX);
+	std::uniform_int_distribution<int> posY(pasoY,H/2-pasoY);
 	
 	//Ubica fabricas cercanas a fuertes del mismo equipo
 	fabricasR[0] = {posX(generador), posY(generador)};
@@ -203,8 +203,8 @@ void GeneradorMapa::generarObjetos(const std::string& nombre) {
 	
 	
 	//Agrego banderas
-	std::uniform_int_distribution<int> posBanderaX (pasoX,W-pasoX);
-	std::uniform_int_distribution<int> posBanderaY (pasoY,H-pasoY);
+	std::uniform_int_distribution<int> posBanderaX(pasoX,W-pasoX);
+	std::uniform_int_distribution<int> posBanderaY(pasoY,H-pasoY);
 
 	for (int i=0; i<NUM_BANDERAS; ++i) {
 		banderas[i] = {posBanderaX(generador), posBanderaY(generador)};
@@ -213,16 +213,10 @@ void GeneradorMapa::generarObjetos(const std::string& nombre) {
 		}
 		celdas[banderas[i][0]/pasoX][banderas[i][1]/pasoY] = bandera;
 	}
-	
-	for (int i = 0; i<NUM_CELDAS_X; i++){ 
-		for (int j=0; j<NUM_CELDAS_Y; j++) {
-			std::cout<<celdas[i][j];
-		}
-		std::cout<<std::endl;
-	}
+
 	this->guardarConfiguracion(nombre,fuertes,fabricasR, 
 							 fabricasV, banderas, celdas);
-	//En el resto de las celdas van banderas centradas
+	//En el resto de las celdas van bloques centradas
 }
 
 void GeneradorMapa::guardarConfiguracion(const std::string& nombre, 

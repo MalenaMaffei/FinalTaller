@@ -14,8 +14,8 @@ public:
     RellenadorDeNumeros();
     std::string rellenar(int n, int len);
     virtual ~RellenadorDeNumeros();
-private:
 
+private:
 };
 
 #endif /* RELLENADORDENUMEROS_H */
