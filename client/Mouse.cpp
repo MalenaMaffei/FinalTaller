@@ -6,7 +6,6 @@
 Mouse::Mouse() : lastButton(-1) {}
 
 void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
-
     if (eventType == SDL_MOUSEBUTTONDOWN) {
         Punto eventPunto(event.button.x, event.button.y);
         Mouse::screen_coords = eventPunto;
@@ -32,13 +31,11 @@ void Mouse::setState(Uint32 eventType, SDL_Event event, Punto offset) {
     }
 }
 
-Punto Mouse::getCoordinates() {
-    return move_coords;
-}
-
 void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
     switch (lastButton){
         case rightButtonDown:{
+//            Se setea el origen del Rectangulo de seleccion de selectBox y
+// sus dimensiones si el mouse se movio
             int width = move_coords.x - start_coords.x;
             int height = start_coords.y - move_coords.y;
             int x = start_coords.x;
@@ -53,11 +50,12 @@ void Mouse::setMouseAction(SelectBox &selectBox, Click &click) {
         } break;
 
         case rightButtonUp:{
+//            desaparece el rectangulo de seleccion cuando se deja de clickear
             selectBox.setRect(Rect());
         } break;
 
         case leftButtonUp:{
-//            click.setPunto(left_click_coords.x, left_click_coords.y);
+//            se le dice a Click donde se hizo click
             click.setPunto(left_click_coords);
             click.setScreenCoords(screen_coords);
             click.setSeleccion(selectBox.haySeleccion());

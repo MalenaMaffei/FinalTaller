@@ -18,7 +18,6 @@ class Mouse {
 //  Setea el estado del mouse dependiendo al evento recibido
   void setState(Uint32 eventType, SDL_Event event, Punto offset);
   void resetState();
-  Punto getCoordinates();
 
 //  Dependiendo la secuencia de eventos registrados modifica a Click o a
 // selectBox (buttonDOWN, drag, buttonUP seria seleccionar unidades por ejemplo)

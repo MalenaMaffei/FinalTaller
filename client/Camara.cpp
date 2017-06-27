@@ -1,7 +1,7 @@
 #include "Header Files/Camara.h"
 #include "Header Files/Texture.h"
 #include "Header Files/Punto.h"
-Camara::Camara() : mBox(Punto(), SCREEN_WIDTH,SCREEN_HEIGHT), velX(0), velY(0){}
+Camara::Camara() : camRect(Punto(), SCREEN_WIDTH,SCREEN_HEIGHT), velX(0), velY(0){}
 
 void Camara::handleEvent(SDL_Event& e){
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0){
@@ -24,22 +24,22 @@ void Camara::handleEvent(SDL_Event& e){
 
 
 void Camara::mover(float timeStep) {
-    mBox = mBox.positiveShift(Punto(velX * timeStep, velY * timeStep));
+    camRect = camRect.positiveShift(Punto(velX * timeStep, velY * timeStep));
     Camara::ajustar();
 }
 
 bool Camara::estaEnfocado(Rect b) {
-    return mBox.hayColision(b);
+    return camRect.hayColision(b);
 }
 
 Punto Camara::getPos() {
-    return mBox.getPunto();
+    return camRect.getPunto();
 }
 
 void Camara::centrar() {
     Punto origenCamara;
     origenCamara = centro - Punto(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
-    mBox.setPunto(origenCamara);
+    camRect.setPunto(origenCamara);
     Camara::ajustar();
 }
 
@@ -49,15 +49,15 @@ void Camara::setCentro(const Punto &centro) {
 }
 
 void Camara::ajustar() {
-    if (mBox.x < 0){
-        mBox.x = 0;
-    } else if (mBox.x > LEVEL_WIDTH - mBox.w){
-        mBox.x = LEVEL_WIDTH - mBox.w;
+    if (camRect.x < 0){
+        camRect.x = 0;
+    } else if (camRect.x > LEVEL_WIDTH - camRect.w){
+        camRect.x = LEVEL_WIDTH - camRect.w;
     }
 
-    if (mBox.y < 0){
-        mBox.y = 0;
-    } else if (mBox.y > LEVEL_HEIGHT - mBox.h){
-        mBox.y  = LEVEL_HEIGHT - mBox.h;
+    if (camRect.y < 0){
+        camRect.y = 0;
+    } else if (camRect.y > LEVEL_HEIGHT - camRect.h){
+        camRect.y  = LEVEL_HEIGHT - camRect.h;
     }
 }

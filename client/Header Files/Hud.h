@@ -29,9 +29,7 @@ class Hud {
   bool esperandoInfo;
   std::string idSeleccionado;
 
-
-//  NUEVOS ELEMENTOS
-//TODO generar destructor.....
+//ElementosGui que componen al hud
   std::vector<ElementoGui*> elementos;
 };
 

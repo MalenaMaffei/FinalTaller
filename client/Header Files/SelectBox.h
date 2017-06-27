@@ -13,9 +13,6 @@ class SelectBox {
 // las unidades seleciconadas dentro de ese recuadro.
   void mostrar(SDL_Renderer *renderer, Punto offset);
 
-  int getX();
-  int getY();
-
   bool checkCollision(Rect b);
   void setRect(const Rect &rect);
 

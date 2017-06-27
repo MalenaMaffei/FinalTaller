@@ -7,6 +7,14 @@
 #include <algorithm>
 using std::string;
 
+Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
+    , gRenderer(gRenderer) {
+    vistaTiles = new VistaTiles(gRenderer);
+//    Inicializo la textura sobre la que se renderizan los tiles
+    target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT,SDL_TEXTUREACCESS_TARGET);
+    target.setBlendMode(SDL_BLENDMODE_BLEND);
+}
+
 void Mapa::crearMapa(PaqueteAccion &paquete) {
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
@@ -37,10 +45,8 @@ void Mapa::crearMapa(PaqueteAccion &paquete) {
 }
 
 void Mapa::mostrar(Camara &camara) {
-//    TODO REFACTOR Y REVISAR XQ SE ITERAN 100 TILES DE MAS
-
-
     Punto camStart = camara.getPos();
+//    Si la camara no se movió, renderizo la misma textura de antes
     if (camStart == prevCamPos){
         target.render(0, 0, NULL);
         return;
@@ -48,13 +54,14 @@ void Mapa::mostrar(Camara &camara) {
 
     prevCamPos = camStart;
 
+//    seteo la textura para que de ahora en mas se renderice sobre ella
     target.setAsRenderTarget();
-
-
+//  Reseteo el render (ahora la textura)
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
 
-
+//    Calculo que tiles voy a tener que iterar (los que estan dentro de la
+// camara)
     Punto camEnd = camStart + Punto(SCREEN_WIDTH, SCREEN_HEIGHT);
     int col = camStart.x / TILE_WIDTH;
     int fil = camStart.y / TILE_HEIGHT;
@@ -65,32 +72,22 @@ void Mapa::mostrar(Camara &camara) {
     fil = camEnd.y / TILE_HEIGHT;
     int lastTile = col + fil*TILESX;
     int iteradas = 0;
+//    Muestro los tiles
     for (int i = headRowTile; i <= lastTile; i += TILESX) {
         for (int j = 0; j <= tailRowTile - headRowTile; ++j) {
             Tile tile = tiles[j+i];
+//            mostrar va a renderizar sobre la textura
             tile.mostrar(camara);
             ++iteradas;
         }
     }
-//    printf("se iteraron: %i tiles\n", iteradas);
+//    Pantalla es el renderizador otra vez
     SDL_SetRenderTarget(gRenderer, NULL);
-
-//    Show rendered to texture
+// Renderizo la textura con los tiles.
     target.render(0, 0, NULL);
 }
 
-Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
-    , gRenderer(gRenderer) {
-    vistaTiles = new VistaTiles(gRenderer);
-    if (!target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT,
-                            SDL_TEXTUREACCESS_TARGET)) {
-        printf("Failed to create target texture!\n");
-    }
-    target.setBlendMode(SDL_BLENDMODE_BLEND);
-}
-
 Mapa::~Mapa() {
-    printf("borrando mapa\n");
     delete vistaTiles;
 }
 

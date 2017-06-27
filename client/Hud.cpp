@@ -62,16 +62,18 @@ void Hud::setInfo(Paquete paquete) {
     PaqueteAccion nuevo;
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
     nuevo.setMensaje(nuevoMensaje);
+//    Se le pasa el paquete con información de la unidad a cada elemento para
+// que se setee y muestre lo que debe.
     std::for_each(elementos.begin(), elementos.end(),[&](ElementoGui* ele){
       ele->setInfo(nuevo);
     });
 }
 
 bool Hud::click(Click click) {
-//    TODO hud rect nunca seleccionado
     if (seleccionado){
+//        Si se hizo click sobre el HUD, lo cierro
         Punto p = click.getScreenCoords();
-        bool huboClick = hudRect.incluyePunto(click.getScreenCoords());
+        bool huboClick = hudRect.incluyePunto(p);
         seleccionado = !huboClick;
         esperandoInfo  = !huboClick;
         return huboClick;

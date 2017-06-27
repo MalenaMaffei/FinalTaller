@@ -7,8 +7,11 @@ class ColaPaquetes {
  public:
   ColaPaquetes();
   void encolar(Paquete paquete);
+//  Usa una condition variable para bloquear al invocante hasta que se haya
+// encolado algo
   Paquete desencolarBloqueante();
   Paquete desencolar();
+//  Cierra la cola
   void cerrar();
   bool isEmpty();
   bool estaCerrada();

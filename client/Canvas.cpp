@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <algorithm>
-#include "Header Files/LTimer.h"
+#include "Header Files/Timer.h"
 #include "Header Files/VistaTiles.h"
 #include "Header Files/Tile.h"
 
@@ -225,12 +225,12 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
     SDL_Event e;
 
 //    Para que la camara se mueva a una velocidad independiente de los FPS
-    LTimer stepTimer;
+    Timer stepTimer;
 
 
 //  Para medir los ticks del loop y despues usarlo para cumplir con las
 // frames por segundo
-    LTimer capTimer;
+    Timer capTimer;
     Reproductor reproductor;
 
     while (!quit){

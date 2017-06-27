@@ -11,7 +11,6 @@ class VistaManager {
   explicit VistaManager(SDL_Renderer *gRenderer);
   VistaDireccionada* getVistaDisparo(int tipoUnidad);
   VistaDireccionada* getVistaCaminar(int tipoUnidad);
-//  Vista* getVistaMuerte(int tipoUnidad);
   Vista* getVista(int tipoElemento);
   virtual ~VistaManager();
 

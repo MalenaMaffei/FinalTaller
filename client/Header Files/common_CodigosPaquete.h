@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 class CodigosPaquete {
+//  Los codigos usados en el protocolo de comunicación
  public:
   bool esUnidad(int tipo);
   int unidadesBegin();
