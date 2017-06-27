@@ -152,7 +152,7 @@ void Canvas::inicializarDatos(Mapa &mapa) {
     }
     miColor = std::stoi(color.getMensaje().substr(1));
     Paquete pMapa = colaEntrada.desencolarBloqueante();
-    if (color.getComando() != codigos.mapa){
+    if (pMapa.getComando() != codigos.mapa){
         throw CanvasException("El segundo paquete enviado no fue el mapa, "
                                   "fue: " + pMapa.getMensaje());
     }

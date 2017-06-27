@@ -1,0 +1,38 @@
+# Manual del usuario
+## Instalación
+
+## Instrucciones de uso
+### Generacion de mapa y uso de xml
+* Los mapas se generan desde la carpeta generadorMapa, desde allí corremos ```./generador```. Ese comando dejará en la carpeta del servidor un nuevo mapa aleatorio y la configuración inicial de la partida.
+
+### Arrancar una nueva partida:
+1. Correr el server:  ```./server <puerto> <cantidadJugadores>```
+2. Cada Jugador debe correr, ubicado en la carpeta client, ```./client``` e ingresar el puerto e ip que se desea usar o usar los defaults ingresando Enter. Alternativamente se puede optar por ```./client <ip> <puerto>```
+![Interfaz Cliente](img/interfaz cliente.png)
+3. Una vez conectados todos los jugadores dados en ```<cantidadJugadores>```, arrancará la partida.
+
+### Juego
+#### Los controles del juego son:
+* __Click Derecho + arrastrar el mouse:__ así seleccionamos nuestras unidades que querramos controlar. Las unidades quedarán seleccionadas hasta que se haga una nueva selección.
+
+![Seleccion de Unidades](img/seleccionunidades.png)
+* __Click Izquierdo:__ lo usamos para hacer que las unidades seleccionadas ataquen a un enemigo y se dirijan a un punto del mapa, o para obtener información de las unidades y las fábricas.
+
+![Ataque](img/ataque.png)
+* __Teclas W,A,S,D:__ para movernos sobre el mapa.
+* __Shift Izquierdo:__ para volver rápidamente a nuestro fuerte.
+
+#### HUD
+El HUD nos muestra información de la unidad seleccionada, como la cantidad de vida que le queda, su tipo y las armas que posee. Lo abrimos haciendo click sobre la unidad que nos interesa y los cerramos clickeando sobre el HUD.
+
+![HUD](img/hud.png)
+#### Interfaz fábrica
+Si hacemos click sobre una de nuestras fábricas, aparecerá esta interfaz. Aquí podemos ver qué unidades puede construir la fábrica, sus tiempos de construccion, los vida que el queda a la fábrica.
+Si una unidad está en construcción, aparecerá una barra de progreso indicando su porcentaje de construcción. Para mandar a construir una unidad, la elegimos primero con el botón NEXT, y luego confirmamos con OK. Para salir de la interfaz, apretamos CANCEL.
+
+![Fábrica](img/fabrica.png)
+
+#### Finalización del Juego
+Al ser un juego multiplayer online, si alguna de las conexiones de algún jugador se cae, el juego terminará.
+Cuando un jugador pierde, se le informará, será desconectado del server y el juego se cerrará.
+Cuando un jugador gané la partida, también se le informará y luego se cerrará el juego.
