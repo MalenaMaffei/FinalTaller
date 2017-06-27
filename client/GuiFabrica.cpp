@@ -143,8 +143,4 @@ bool GuiFabrica::activo() {
     return seMuestra;
 }
 
-GuiFabrica::~GuiFabrica() {
-    printf("se va a destruir gui edificio\n");
-//    vistaTexto.closeFont();
-//    printf("termino de cerrar font gui edificio\n");
-}
+GuiFabrica::~GuiFabrica() {}

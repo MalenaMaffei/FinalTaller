@@ -15,8 +15,6 @@ void PaqueteSender::run() {
 // desencolar.
             paquete = cola.desencolarBloqueante();
         } catch(std::runtime_error& e) {
-            printf("error en la cola: %s\n", e.what());
-            shutdown();
             continue;
         }
 

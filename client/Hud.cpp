@@ -85,7 +85,6 @@ bool Hud::click(Click click) {
 }
 
 Hud::~Hud() {
-    printf("se va a borar hud\n");
     std::for_each(elementos.begin(), elementos.end(), [&](GuiGallery* ele){
       delete ele;
     });

@@ -157,13 +157,11 @@ void ElementoManager::disparar(PaqueteAccion &paquete) {
 }
 
 ElementoManager::~ElementoManager() {
-    printf("borrando elementos\n");
     for (const auto& kv : elementos) {
         delete kv.second;
     }
 
     for (const auto& kv : unidades) {
-        printf("borrando una unidad\n");
         delete kv.second;
     }
 

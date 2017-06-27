@@ -124,16 +124,13 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
 }
 
 VistaManager::~VistaManager() {
-    printf("borrando vistas\n");
     for (const auto& kv : vistas) {
-        printf("borrando vista comun\n");
         delete kv.second;
     }
     for (const auto& kv : vistasDireccionadas) {
 
         std::vector<VistaDireccionada *> vistasDir = kv.second;
         for (auto &vista : vistasDir){
-            printf("borrando vistas direccionadas\n");
             delete vista;
         }
     }

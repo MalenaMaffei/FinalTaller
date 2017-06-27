@@ -12,8 +12,6 @@ void PaqueteReceiver::run() {
 //            Se va a quedar bloqueado acá hasta que llegue un paquete
             mensaje = socket.ReceiveStrWLen();
         } catch(SocketException& e ){
-//            TODO se podria decir, si ya estaba salir==true, es que cerre yo
-// al socket entonces no muestro nada. si salir==false, se cerro desde el server
 //            displayError(e);
             shutdown();
             continue;

@@ -2,6 +2,7 @@
 #include<SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <stdio.h>
 #include <string>
 #include <algorithm>
@@ -23,7 +24,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <SDL_mixer.h>
+
 
 #define NOMBRE_JUEGO "Z: El Ejercicio Final"
 const int SCREEN_FPS = 20;
@@ -85,31 +86,21 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     }
 }
 
-
-//void Canvas::close() {
-//    //Destroy window
-//    SDL_DestroyRenderer(gRenderer);
-//    SDL_DestroyWindow(gWindow);
-//    gWindow = NULL;
-//    gRenderer = NULL;
-//
-////    TODO chequear que mas hace falta destruir o cerrar
-//
-//    //Quit SDL subsystems
-//    Mix_CloseAudio();
-//    Mix_Quit();
-//    IMG_Quit();
-//    TTF_Quit();
-//    SDL_Quit();
-//}
-
-
 void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                              Hud &hud,
                              GuiFabrica &guiEdificio,
                              Reproductor &reproductor) {
 
     CodigosPaquete codigos;
+
+    if (colaEntrada.estaCerrada()){
+        quit = true;
+//        Esto quiere decir que yo no fui la que cerre.
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+                                 "Servidor Cerrado", "El servidor se ha desconectado, el juego se "
+                                     "cerrará a continuación.", NULL);
+        return;
+    }
 
     while (!colaEntrada.isEmpty()){
         Paquete paquete = colaEntrada.desencolar();
@@ -156,14 +147,6 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                                          "fuiste el ganador! El juego se "
                                          "cerrará a continuación.", NULL);
         }
-    }
-
-    if (colaEntrada.estaCerrada()){
-        quit = true;
-//        Esto quiere decir que yo no fui la que cerre.
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-            "Servidor Cerrado", "El servidor se ha desconectado, el juego se "
-             "cerrará a continuación.", NULL);
     }
 }
 
@@ -291,7 +274,6 @@ void Canvas::mensajeEsperando() {
                            "...", {0, 0,0}, {0,0});
 
     SDL_RenderPresent(gRenderer);
-    printf("cerrando fuente\n");
     vistaTexto.closeFont();
 }
 

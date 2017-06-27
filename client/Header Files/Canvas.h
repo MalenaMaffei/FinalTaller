@@ -13,7 +13,6 @@ class Canvas{
   Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida);
  public:
   void inicializarDatos(Mapa& mapa);
-//  void close();
   void startGame();
   void manejarPaquetes(ElementoManager &elementoManager,
                          Hud &hud,

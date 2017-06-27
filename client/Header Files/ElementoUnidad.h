@@ -31,7 +31,7 @@ class ElementoUnidad : public ElementoColoreado{
 //  En este caso (unidad) pide que se muestre el HUD
   void guiRequest(ColectorDeAcciones& colector) const;
 
- protected:
+ private:
   void avanzarMuerte();
   void avanzarDisparo();
   VistaDireccionada* vistaMovimiento;
