@@ -70,7 +70,6 @@ void GuiFabrica::mostrar(Camara &camara) {
             barraConstr.mostrar(pReal);
         }
         gallery.mostrar(pReal);
-
     }
 }
 

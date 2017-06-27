@@ -1,10 +1,9 @@
-
 #include "Header Files/Reproductor.h"
 #include "Header Files/constantes.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
-
+#include <string>
 Reproductor::Reproductor() {
 	robotManufactured = Mix_LoadWAV(robotListoPath);
 	if (!robotManufactured) {

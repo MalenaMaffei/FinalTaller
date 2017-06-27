@@ -41,17 +41,18 @@ int main(int argc, char *argv[]){
     sender.start();
     Logger* logger = Logger::getInstancia();
     try {
-
+        Canvas canvas(colaEntrada, colaSalida);
+        canvas.startGame();
     } catch(CanvasException& e) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-                                 "Juego Abortado", "El Juego no se pudo inicializar correctamente."
+                                 "Juego Abortado", "El Juego no se pudo "
+                                     "inicializar correctamente."
                                      " Se cerrará a continuación.",
                                  NULL);
         logger->logACerr(e.what());
     }
 
-    Canvas canvas(colaEntrada, colaSalida);
-    canvas.startGame();
+
 //    Si llegue aca es porque se cerro la ventana
     receiver.shutdown();
     sender.shutdown();

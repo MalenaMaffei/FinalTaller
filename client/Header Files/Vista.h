@@ -21,6 +21,7 @@ class Vista : public Texture{
   size_t getClip(size_t clip, size_t fila = 0) const;
   virtual bool isLastClip(size_t clip) const;
   virtual ~Vista();
+  
  protected:
 //  Recorre la imagen cargada creando los clips, rectangulos que apuntan a un
 // cierto lugar de la imagen.

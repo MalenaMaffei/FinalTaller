@@ -3,14 +3,14 @@
 #include "Header Files/Logger.h"
 Logger* Logger::instancia = NULL;
 
-Logger* Logger::getInstancia () {
+Logger* Logger::getInstancia() {
   if (!instancia) {
     instancia = new Logger();
   }
   return instancia;
 }
 
-void Logger::deleteInstancia () {
+void Logger::deleteInstancia() {
   if (!instancia) {
     return;
   }
@@ -28,4 +28,4 @@ void Logger::logACerr(const std::string& mensaje) {
   std::cout<<mensaje<<std::endl;
 }
 
-Logger::~Logger () { }
+Logger::~Logger() { }
