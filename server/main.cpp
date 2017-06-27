@@ -1,14 +1,14 @@
 
 #include <cstdlib>
 #include "Logger.h"
-#include "server_Jugador.h"
-#include "server_AEstrella.h"
-#include "server_Mapa.h"
-#include "server_Movible.h"
-#include "server_Objeto.h"
-#include "server_FabricaMuniciones.h"
-#include "server_Municion.h"
-#include "server_Juego.h"
+#include "Jugador.h"
+#include "AEstrella.h"
+#include "Mapa.h"
+#include "Movible.h"
+#include "Objeto.h"
+#include "FabricaMuniciones.h"
+#include "Municion.h"
+#include "Juego.h"
 #include <iostream>
 #include <condition_variable>
 #include <mutex>
@@ -17,6 +17,8 @@
 #include <iostream>
 #include "common_Socket.h"
 #include "Logger.h"
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -25,7 +27,7 @@ using namespace std;
  * Es el Thread principal y espera una 'q' en stdin para cerrar el servidor.
  */
 int
-main (int argc, char** argv)
+main(int argc, char** argv)
 {	
 	if (argc != 3) {
 		Logger* logger = Logger::getInstancia();
@@ -48,7 +50,7 @@ main (int argc, char** argv)
 	std::vector<Jugador*> jugadores;
 	
 	for (int i=0; i<n; i++) {
-		Socket socket = aceptor.Accept ();
+		Socket socket = aceptor.Accept();
 		jugadores.push_back(new Jugador(socket, colaDeRecibidos, i));
 	}
 	
@@ -69,7 +71,7 @@ main (int argc, char** argv)
 		juego->finalizar();
 	}
 	
-	juego->join ();
+	juego->join();
 	
 	delete juego;
 	

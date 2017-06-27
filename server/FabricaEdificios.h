@@ -1,7 +1,7 @@
 #ifndef FABRICAEDIFICIOS_H
 #define FABRICAEDIFICIOS_H
 
-#include "server_Edificio.h"
+#include "Edificio.h"
 #include <array>
 #include <map>
 

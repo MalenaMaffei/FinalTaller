@@ -1,10 +1,11 @@
 #ifndef FABRICAINMOVIBLES_H
 #define FABRICAINMOVIBLES_H
 
-#include "server_Inmovible.h"
-#include "server_Bloque.h"
-#include "server_Bandera.h"
+#include "Inmovible.h"
+#include "Bloque.h"
+#include "Bandera.h"
 #include <map>
+#include <string>
 
 /* Fabrica que se encarga de generar instancias de clases herederas de 
  * Inmovible.
@@ -21,6 +22,7 @@ public:
      */
     Inmovible* getInmovible(int tipo, double x, double y, std::string id);
     virtual ~FabricaInmovibles();
+
 private:
     /* Método interno (llamado por getInmovible) que devuelve un bloque 
      * inicializado.

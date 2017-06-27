@@ -1,9 +1,9 @@
 #ifndef FABRICAUNIDADES_H
 #define FABRICAUNIDADES_H
 
-#include "server_FabricaRobots.h"
-#include "server_FabricaVehiculos.h"
-
+#include "FabricaRobots.h"
+#include "FabricaVehiculos.h"
+#include <vector>
 /* Fabrica que se encarga de generar instancias de clases herederas de 
  * Unidad.
  */
@@ -35,13 +35,13 @@ public:
     std::vector<int> getUnidadesPosibles(int tipo, int nivel);
 
     virtual ~FabricaUnidades();
+
 private:
     /* Fabricas de Robots y Vehiculos que almacenan las configuraciones 
      * internas iniciales.
      */
     FabricaRobots fabricaRobots;
     FabricaVehiculos fabricaVehiculos;
-
 };
 
 #endif /* FABRICAUNIDADES_H */

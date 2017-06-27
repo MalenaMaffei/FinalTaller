@@ -1,12 +1,12 @@
-
+#include <string>
 #include "ManejadorIDs.h"
 
 #define MAX_MUNICIONES 1000
 
-ManejadorIDs::ManejadorIDs () : proximoIDMovible (0),
-								proximoIDEdificio (0),
-								proximoIDInmovible (0),
-								proximoIDMunicion (0) { }
+ManejadorIDs::ManejadorIDs() : proximoIDMovible(0),
+								proximoIDEdificio(0),
+								proximoIDInmovible(0),
+								proximoIDMunicion(0) { }
 
 std::string ManejadorIDs::getIDMunicion() {
 	/* Los ids de las Municiones no tienen prefijo identificatorio y tienen un 
@@ -47,6 +47,6 @@ std::string ManejadorIDs::getIDInmovible() {
 	return id;
 }
 
-ManejadorIDs::~ManejadorIDs () { }
+ManejadorIDs::~ManejadorIDs() { }
 
 
