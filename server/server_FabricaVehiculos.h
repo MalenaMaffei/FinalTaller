@@ -39,7 +39,11 @@ private:
      */
     std::map<int,int> cantidades;
     std::map<int,int> tiempos;
-    std::map<int,int> niveles;
+    std::map<int,int> niveles;    
+    /* Configuraciones de dimensiones según tipo
+     */
+    std::map<int,double> anchos;
+    std::map<int,double> altos;
 };
 
 #endif /* FABRICAVEHICULOS_H */

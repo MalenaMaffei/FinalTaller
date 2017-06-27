@@ -26,13 +26,15 @@ FabricaVehiculos::FabricaVehiculos () {
 		int resistencia = atoi(robot->FirstChildElement ("RESISTENCIA")->GetText());		
 		int velocidad = atoi(robot->FirstChildElement ("VELOCIDAD")->GetText());
 		int cantidad = atoi(robot->FirstChildElement ("CANT_FABRICA")->GetText());
-		const char* tiempoStr = robot->FirstChildElement ("TIEMPO_FABRICA")->GetText();
+		const char* tiempoStr = robot->FirstChildElement ("TIEMPO_FABRICA")->GetText();		
+		
 		struct tm tm;
 		std::istringstream ss(tiempoStr);
 		ss >> std::get_time(&tm, "%M:%S");
 		int secs = tm.tm_min*60 + tm.tm_sec;
 		int nivel = atoi(robot->FirstChildElement ("NIVEL")->GetText());
-
+		double ancho = atof(robot->FirstChildElement ("ANCHO")->GetText ());
+		double alto = atof(robot->FirstChildElement ("ALTO")->GetText ());
 		
 		//Caracteristicas de robot
 		armamentos[tipo] = armamento;
@@ -44,14 +46,14 @@ FabricaVehiculos::FabricaVehiculos () {
 		cantidades[tipo] = cantidad;
 		tiempos[tipo] = secs*TICKS;
 		niveles[tipo] = nivel;
+		//Dimensiones
+		anchos[tipo] = ancho;
+		altos[tipo] = alto;
 	}
 }
 
 Vehiculo* FabricaVehiculos::getVehiculo(int tipo) {  
-	//Por ahora todos los vehiculos son de 2x2
-	//TODO
-	//El conductor se agrega en la fabrica fisica
-	return new Vehiculo(vidas[tipo],2,2,frecuencias[tipo],
+	return new Vehiculo(vidas[tipo],anchos[tipo],altos[tipo],frecuencias[tipo],
 					 alcances[tipo], velocidades[tipo], tipo, armamentos[tipo]);
 }
 

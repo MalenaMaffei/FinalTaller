@@ -33,6 +33,8 @@ FabricaRobots::FabricaRobots () {
 		ss >> std::get_time(&tm, "%M:%S");
 		int secs = tm.tm_min*60 + tm.tm_sec;
 		int nivel = atoi(robot->FirstChildElement ("NIVEL")->GetText());
+		double ancho = atof(robot->FirstChildElement ("ANCHO")->GetText ());
+		double alto = atof(robot->FirstChildElement ("ALTO")->GetText ());
 		
 		//Caracteristicas de robot
 		armamentos[tipo] = armamento;
@@ -44,14 +46,14 @@ FabricaRobots::FabricaRobots () {
 		cantidades[tipo] = cantidad;
 		tiempos[tipo] = secs*TICKS;
 		niveles[tipo] = nivel;
+		//Dimensiones
+		anchos[tipo] = ancho;
+		altos[tipo] = alto;
 	}
 }
 
 Robot* FabricaRobots::getRobot(int tipo) {  
-	 //Por ahora todos los robots son de 1x1
-	 //TODO
-	 //Agregar velocidad base
-	return new Robot(vidas[tipo],1,1,frecuencias[tipo],
+	return new Robot(vidas[tipo],anchos[tipo],altos[tipo],frecuencias[tipo],
 					 alcances[tipo], velocidades[tipo],tipo, armamentos[tipo]);
 }
 

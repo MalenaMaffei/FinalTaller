@@ -3,6 +3,9 @@
 #include <queue>
 #include <math.h>
 #include <iostream>
+#include "server_constants.h"
+
+#define MAX_ITERACIONES 15000
 
 typedef std::pair< std::array<int,2>, double> elemConPrioridad_t;
 
@@ -60,11 +63,17 @@ std::vector < std::array<double,2> >
 	
 	int maxX = mapa.obtenerDimensionX();
 	int maxY = mapa.obtenerDimensionY();
+	int iteraciones = 0;
 	while (!listaAbierta.empty()) {
 		std::array<int,2> actual = listaAbierta.top ().first;
 		listaAbierta.pop();
+		iteraciones++;
 		if (actual == destino)
 			break;
+		
+		if (iteraciones>MAX_ITERACIONES) {
+			return recorrido;
+		}
 		
 		for (size_t i=0; i< 8; i++) {
 			std::array<int,2> adyacencia = adyacencias[i];
@@ -76,8 +85,7 @@ std::vector < std::array<double,2> >
 						
 			double factorTerreno = mapa.obtenerFactorTerreno(adyacente, movible);
 			// Si el factor de terreno es muy bajo ignoro ese casillero
-			// TODO reemplzar 0.001 hardcodeado
-			if (factorTerreno <= 0.001)
+			if (factorTerreno <= DIFF)
 				continue;
 			double distancia = modulo(adyacencia);
 			double nuevoCosto = costos[actual] + 

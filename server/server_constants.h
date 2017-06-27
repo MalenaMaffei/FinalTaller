@@ -2,6 +2,14 @@
 #ifndef SERVER_CONSTANTS_H
 #define SERVER_CONSTANTS_H
 
+#define DIFF 0.0000001
+
+/*****************************************************************************/
+/* Constantes de creación de unidades                                        */
+/*****************************************************************************/
+#define X_DE_CREACION -2    //Indican la posición de creacion de las unidades 
+#define Y_DE_CREACION -2    //con respecto a la posición de las fabricas
+
 /*****************************************************************************/
 /* Constantes de tiempos de TICKS                                            */
 /*****************************************************************************/
@@ -11,7 +19,7 @@
 #define NANO 1000000000ULL
 
 /*****************************************************************************/
-/* Constnates  de equipos                                                    */
+/* Constantes  de equipos                                                    */
 /*****************************************************************************/
 
 #define NUM_EQUIPOS 4   //Cantidad máxima de equipos posibles en el juego

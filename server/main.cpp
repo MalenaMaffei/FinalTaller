@@ -1,5 +1,6 @@
 
 #include <cstdlib>
+#include "Logger.h"
 #include "server_Jugador.h"
 #include "server_AEstrella.h"
 #include "server_Mapa.h"
@@ -79,6 +80,8 @@ main (int argc, char** argv)
 	for (Jugador* jugador : jugadores) {
 		delete jugador;
 	}
+	
+	Logger::deleteInstancia();
 	
 	return 0;
 }

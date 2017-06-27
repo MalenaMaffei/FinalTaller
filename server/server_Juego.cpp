@@ -338,10 +338,9 @@ void Juego::actualizarEdificios() {
 		unidad->setId (id);
 		unidad->setEquipo (edificio->getEquipo ());
 		movibles[id] = unidad;
-		//Posicion de creacion hardcodeada
-		//Todos se crean en la misma posicion
-		//TODO
-		unidad->setPosicion ({posEdificio[0]-2,posEdificio[1]-2});
+		//Todos se crean en la misma posicion en relación a la fabrica
+		unidad->setPosicion ({posEdificio[0]+X_DE_CREACION,
+								posEdificio[1]+Y_DE_CREACION});
 		Mensaje mensajeCrear;
 		mensajeCrear.mensajeDeCrear (unidad,id,unidad->getEquipo ());
 		colaDeEnviados.encolar (mensajeCrear);

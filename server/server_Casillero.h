@@ -13,8 +13,6 @@ public:
     Casillero (Terreno &&terreno);
     Casillero(const Casillero& orig);
     Casillero& operator=(const Casillero& orig);
-    // TODO utilizar estaOcupado o eliminarlo.
-    bool estaOcupado();
     /* Devuelve el factor de terreno para el movible pasado por parametro del
      * Territorio presente en el casillero.
      */
@@ -25,8 +23,6 @@ public:
     virtual ~Casillero();
 
 private:
-    // TODO utilizar ocupado o eliminarlo
-    bool ocupado;
     /* Cada casillero contienen un Terreno.
      */
     Terreno terreno;

@@ -10,6 +10,7 @@
 class Logger {
 public:
     static Logger* getInstancia();
+    static void deleteInstancia ();
     void logACout(const std::string& mensaje);
     void logACerr(const std::string& mensaje);
     virtual ~Logger();
