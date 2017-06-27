@@ -38,7 +38,7 @@ make
 ```
 
 ### Ejecución
-Esto generara el ejecutable **vista** dentro de la misma carpeta client, el ejecutable **server** dentro de la carpeta server y el ejecutable **generador** dentro de la carpeta generadorMapa.
+Esto generara el ejecutable **client** dentro de la misma carpeta client, el ejecutable **server** dentro de la carpeta server y el ejecutable **generador** dentro de la carpeta generadorMapa.
 
 Principalmente se debe generar un mapa mediante:
 ```
