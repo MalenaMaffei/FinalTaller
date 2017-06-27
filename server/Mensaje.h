@@ -50,7 +50,7 @@ public:
      */
     void mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
                                 FabricaUnidades& fabricaUnidades,
-                                int dst);
+                                int dst, int territorios);
     /* Inicializa un Mensaje con la información de que el Jugador con el id
      * especifiado perdió.
      */
