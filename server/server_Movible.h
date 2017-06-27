@@ -37,6 +37,7 @@ public:
 
     virtual void setPosicion(std::array<double,2> posicion) override;
     
+    virtual int calcularVelocidad(double factorTerreno) = 0;
     /* En caso de que sea un movible con posibilidad de disparar devuelve el id
      * del objetivo.
      */
