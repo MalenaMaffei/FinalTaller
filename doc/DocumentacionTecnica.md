@@ -277,16 +277,16 @@ comando | id |
 
 comando | id | tipo | vida | 
 --- | --- | --- | --- |
-4 | 007 | 09 | 999 |
-||| tipo unidad | vida que le queda |
+4 | 007 | 09 | 100 |
+||| tipo unidad | %vida que le queda |
 1 char | 3 chars | 2 chars | 3 chars |
 
 ###### Caso Fabrica:
 
 comando | id | tipo | vida | cant q puede construir | tipo 1 | tiempo 1 | tipo 2 | tiempo 2 | ... | esta construyendo? | tipo construyendo | %construido
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-7 | 007 | 03 | 999 | 02 | 09 | 0100 | 10 | 1400 | ... | 1 | 09 | 010 |
-||| fuerte | vida que le queda | cuantas unidades sabe construir | tipo pyro | mmss |tipo sniper | mmss | ... | bool | tipo en construccion(si el anterior fue true) | % que ya se construyo (si el bool fue true) |
+7 | 007 | 03 | 100 | 02 | 09 | 0100 | 10 | 1400 | ... | 1 | 09 | 010 |
+||| fuerte | %vida que le queda | cuantas unidades sabe construir | tipo pyro | segundos |tipo sniper | segundos | ... | bool | tipo en construccion(si el anterior fue true) | % que ya se construyo (si el bool fue true) |
 1 char | 3 chars | 2 chars | 3 chars | 2 chars | 2 chars | 4 chars | 2 chars | 4 chars | ... | 1 char | 2 char | 3 char |
 
 ##### Enviar Mapa #####
