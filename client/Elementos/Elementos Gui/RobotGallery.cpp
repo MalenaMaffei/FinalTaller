@@ -1,4 +1,4 @@
-#include "RobotGallery.h"
+#include "../../Header Files/RobotGallery.h"
 #include "../../Header Files/VistaIconoRobot.h"
 #include "../../Header Files/PaqueteUnidad.h"
 #define X 8

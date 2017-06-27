@@ -5,7 +5,7 @@
 #include "common_Socket.h"
 #include "common_SocketException.h"
 #include "ColaPaquetes.h"
-#include "../ErrorMonitor.h"
+#include "ErrorMonitor.h"
 
 // Interfaz y funcionalidad comun para PaqueteReceiver y PaqueteSender que
 // son los encargados de recibir y mandar paquetes respectivamente.

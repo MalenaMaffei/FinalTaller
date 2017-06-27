@@ -25,7 +25,7 @@
 #include <sstream>
 #include <fstream>
 #include "Header Files/CanvasException.h"
-#include "ErrorMonitor.h"
+#include "Header Files/ErrorMonitor.h"
 
 #define NOMBRE_JUEGO "Z: El Ejercicio Final"
 using std::string;

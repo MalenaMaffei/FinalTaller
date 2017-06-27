@@ -1,4 +1,4 @@
-#include "GuiGallery.h"
+#include "../../Header Files/GuiGallery.h"
 
 GuiGallery::GuiGallery(Vista *vista,
                          Punto relPos) : vista(vista), relPos(relPos),
@@ -13,3 +13,6 @@ void GuiGallery::mostrar(Punto p) {
 GuiGallery::~GuiGallery() {
     delete vista;
 }
+
+void GuiGallery::setInfo(PaqueteUnidad paquete) {}
+void GuiGallery::setInfo(int tipo) {}

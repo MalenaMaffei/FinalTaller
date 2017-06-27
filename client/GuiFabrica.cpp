@@ -37,7 +37,7 @@ GuiFabrica::GuiFabrica(SDL_Renderer *gRenderer,
       ok(Boton({OK_RELX, OK_RELY}, WIDTH_BUTTON, HEIGHT_BUTTON)),
       cancel(Boton({CANCEL_RELX, CANCEL_RELY}, WIDTH_BUTTON,HEIGHT_BUTTON)),
       next(Boton({ARROW_RELX, ARROW_RELY}, WIDTH_ARROW,HEIGHT_ARROW)),
-      esperandoInfo(false){
+      esperandoInfo(false), gallery(FactoryGallery(gRenderer, {5,6})){
         posUNIT = {UNIT_RELX, UNIT_RELY};
         posVida = {VIDA_RELX, VIDA_RELY};
         posNombre = {5,7};
@@ -69,10 +69,9 @@ void GuiFabrica::mostrar(Camara &camara) {
                                                            TIEMPO_RELY));
         if (hayEnConstruccion && tipoSeleccionado == tipoEnConstruccion){
             barraConstr.mostrar(pReal);
-//            TODO mensaje "en construccion"-> hace falta?
         }
+        gallery.mostrar(pReal);
 
-//        TODO elegir label de la fabrica para poner
     }
 }
 
@@ -136,6 +135,7 @@ void GuiFabrica::setInfo(PaqueteFabrica paquete) {
     } else {
         hayEnConstruccion = false;
     }
+    gallery.setInfo(tipoFabrica);
     seMuestra = true;
 }
 

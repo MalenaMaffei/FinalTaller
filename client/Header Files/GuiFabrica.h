@@ -7,6 +7,7 @@
 #include "ProgressBar.h"
 #include "Boton.h"
 #include "Paquete.h"
+#include "FactoryGallery.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -67,6 +68,7 @@ class GuiFabrica {
   int tipoEnConstruccion;
   bool hayEnConstruccion;
   bool esperandoInfo;
+  FactoryGallery gallery;
 };
 
 #endif //TPFINAL_GUIEDIFICIO_H

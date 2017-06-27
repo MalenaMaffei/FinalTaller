@@ -3,7 +3,7 @@
 #include "Vista.h"
 #include "ProgressBar.h"
 #include "PaqueteAccion.h"
-#include "../Elementos/Elementos Gui/GuiGallery.h"
+#include "GuiGallery.h"
 #include "VistaHud.h"
 #include "Click.h"
 #include <vector>

@@ -70,10 +70,10 @@ static const char armasPath[] = "../client/imgs/Gui/armas.png";
 
 
 
-//----------------GUI EDIFICIO ---------------
+//----------------GUI FABRICA ---------------
 static const char guiEdificioPath[] = "../client/imgs/Gui/edificio.png";
-
 static const char fuentePath[] = "../client/ttf/AUDIMRG_.TTF";
+static const char fabricaLabelsPath[] = "../client/imgs/Gui/factory_labels.png";
 
 
 //--------------MISC----------------------
