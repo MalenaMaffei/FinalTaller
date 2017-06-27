@@ -18,5 +18,9 @@ double Robot::factorTerrenoEn(Terreno* terreno) {
 	return terreno->getFactor(this);
 }
 
+int Robot::calcularVelocidad(double factorTerreno) {
+	return int(velocidad*factorTerreno);
+}
+
 Robot::~Robot () { }
 

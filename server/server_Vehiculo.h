@@ -15,6 +15,7 @@ public:
             int frecuenciaDisparo, int alcance, 
             int velocidad, int tipo, int armamento);
     
+    int calcularVelocidad(double factorTerreno) override;
     double factorTerrenoEn(Terreno* terreno);
     bool addConductor(Robot* conductor);
     virtual ~Vehiculo();

@@ -139,3 +139,7 @@ void Municion::setAlcance(double alcance) {
 double Municion::factorTerrenoEn(Terreno* terreno) {
 	return terreno->getFactor(this);
 }
+
+int Municion::calcularVelocidad(double factorTerreno) {
+	return this->velocidad;
+}

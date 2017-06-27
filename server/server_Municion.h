@@ -28,6 +28,7 @@ public:
     double factorTerrenoEn(Terreno* terreno);
     void setAlcance(double alcance);
     void mover (std::array<double,2> destino) override;
+    int calcularVelocidad(double factorTerreno) override;
     std::string puedeDisparar() override;
     bool obtuvoBandera() override;
     void colisionar(Municion& municion) override;

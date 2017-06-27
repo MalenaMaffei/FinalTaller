@@ -92,7 +92,7 @@ bool Movible::mover (double factorTerreno) {
 	}
 	
 	//TODO tomar en cuenta daño relativo en vehiculos
-	int velFinal = std::max(int(velocidad*factorTerreno),1);
+	int velFinal = std::max(this->calcularVelocidad(factorTerreno),1);
 		
 	direccion = {direccion[0]/modulo, direccion[1]/modulo};
 
