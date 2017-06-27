@@ -3,6 +3,7 @@
 #include <queue>
 #include <math.h>
 #include <iostream>
+#include "server_constants.h"
 
 typedef std::pair< std::array<int,2>, double> elemConPrioridad_t;
 
@@ -76,8 +77,7 @@ std::vector < std::array<double,2> >
 						
 			double factorTerreno = mapa.obtenerFactorTerreno(adyacente, movible);
 			// Si el factor de terreno es muy bajo ignoro ese casillero
-			// TODO reemplzar 0.001 hardcodeado
-			if (factorTerreno <= 0.001)
+			if (factorTerreno <= DIFF)
 				continue;
 			double distancia = modulo(adyacencia);
 			double nuevoCosto = costos[actual] + 

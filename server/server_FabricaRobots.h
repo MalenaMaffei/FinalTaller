@@ -40,6 +40,10 @@ private:
     std::map<int,int> cantidades;
     std::map<int,time_t> tiempos;
     std::map<int,int> niveles;
+    /* Configuraciones de dimensiones según tipo
+     */
+    std::map<int,double> anchos;
+    std::map<int,double> altos;
 };
 
 #endif /* FABRICAROBOTS_H */

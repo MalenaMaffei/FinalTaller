@@ -11,6 +11,14 @@ Logger* Logger::getInstancia () {
 	return instancia;
 }
 
+void Logger::deleteInstancia () {
+	if (!instancia) {
+		return;
+	}
+	delete instancia;
+	instancia = NULL;
+}
+
 void Logger::logACout(const std::string& mensaje) {
 	std::unique_lock<std::mutex> mlock(coutMutex);
 	std::cout<<mensaje<<std::endl;

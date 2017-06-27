@@ -3,9 +3,6 @@
 #include <iostream>
 #include "server_constants.h"
 
-#define DIFF 0.0000001
-
-
 bool esPosicionIntermedia(std::array<double,2> a,
 						  std::array<double,2> b,
 						  std::array<double,2> c) {
@@ -91,7 +88,6 @@ bool Movible::mover (double factorTerreno) {
 		return false;
 	}
 	
-	//TODO tomar en cuenta daño relativo en vehiculos
 	int velFinal = std::max(this->calcularVelocidad(factorTerreno),1);
 		
 	direccion = {direccion[0]/modulo, direccion[1]/modulo};

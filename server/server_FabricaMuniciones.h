@@ -21,6 +21,11 @@ private:
     /* Configuraciones de daño según tipo de munición.
      */
     std::map<int,int> municiones;
+    /* Configuraciones de dimensiones según tipo
+     */
+    std::map<int,double> anchos;
+    std::map<int,double> altos;
+    
 };
 
 #endif /* FABRICAMUNICIONES_H */

@@ -4,6 +4,8 @@
 #include "Logger.h"
 #include <tinyxml2.h>
 
+#define VEL_MUNICION 1
+
 FabricaMuniciones::FabricaMuniciones() {
 	tinyxml2::XMLDocument xml;
  
@@ -20,15 +22,16 @@ FabricaMuniciones::FabricaMuniciones() {
 		
 		int tipo = atoi(municion->FirstChildElement("ID")->GetText ());
 		int danio = atoi(municion->FirstChildElement ("DANIO")->GetText ());
+		double ancho = atof(municion->FirstChildElement ("ANCHO")->GetText ());
+		double alto = atof(municion->FirstChildElement ("ALTO")->GetText ());
 		
 		this->municiones[tipo] = danio;
+		this->anchos[tipo] = ancho;
+		this->altos[tipo] = alto;
 	}
 }
 
 Municion* FabricaMuniciones::getMunicion(int tipo) {
-	//Por ahora el tamaño de las balas es ancho = 0.3 y alto = 0.3
-	//TODO
-	//Velocidad 1 por ahora
-	Logger* logger = Logger::getInstancia();
-	return new Municion(municiones[tipo],0.3,0.3,tipo,municiones[tipo],1);
+	return new Municion(municiones[tipo],anchos[tipo],altos[tipo],tipo,
+					 municiones[tipo],VEL_MUNICION);
 }
