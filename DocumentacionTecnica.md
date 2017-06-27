@@ -107,6 +107,17 @@ En el cliente hay una relación uno a uno con todos los elementos existentes en 
 * __Elemento__: compuesto por un puntero a una __Vista__ y un rectángulo __Rect__. El mismo reflejará la posición del elemento renderizándose la imagen pertintente sobre él y también se utilizará para registrar clicks sobre el __Elemento__, entre otros atributos.
 * __Vista__: hereda de __Texture__ que es una clase que simplemente encapsula a SDL_Texture. Hay una __Vista__ por cada tipo de elemento que existe en el juego. Una __Vista__ contiene la imagen entera de animaciones que componen a un elemento del juego. Por ejemplo, la vista de un Fuerte es una imagen que contiene varios cuadros de la animación del mismo más un cuadro extra que se muestra al ser destruido, asimismo  la imagen contiene a todas las animaciones del mismo elemento pero de diferentes colores. Lo positivo de este enfoque es que se cargan pocas imágenes en memoria y además todos los elementos de un mismo tipo comparten una misma __Vista__.
 * *manejarPaquetes*: Aquí se desencolan los paquetes de la __ColaPaquetes__. Este método es el que define qué hay que hacer con cada __Paquete__, hay tres tipos: __PaqueteAccion__, que es enviado a __ElementoManager__; __PaqueteUnidad__, que es enviado al __Hud__ (dónde se muestra la vida de la unidad seleccionada); y por último __PaqueteFabrica__, usado por __GuiFabrica__ para mostrar al usuario las distintas unidades que la fábrica puede construir. También en *manejarPaquetes* se reproducen sonidos para informar al usuario de algunos __Paquetes__ que merecen la atención del usuario.
+
+###### Recorrido por el GameLoop
+1. Al comienzo se resetean los __Timers__ que se usan para controlar los FPS para que las animaciones se vean con fluidez pero sin estar demasiado aceleradas.
+2. Luego se manejan todos los paquetes que hayan llegado y se actualizan los __Elementos__.
+3. *SDL_PollEvent* devuelve los eventos ocurridos y son manejados por la __Camara__ y el __Mouse__.
+4. Se enfoca la __Camara__ , se limpia la pantalla y se muestran los __Tiles__.
+5. Se muestran los elementos y se los hace "vivir", es decir, se avanzan las animaciones y se limpia a los muertos.
+6. Se muestran las guis de las unidades y fábricas si corresponde.
+7. Se actualiza la pantalla.
+8. El __ColectorDeAcciones__ identifica las acciones y encola los __Paquetes__ en la cola de salida.
+9. Se calcula el tiempo que tiene que dormir __Canvas__ para cumplir con los FPS seteados.
 ***
 
 #### __Concurrencia__
