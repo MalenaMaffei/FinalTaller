@@ -5,6 +5,8 @@
 #include <iostream>
 #include "server_constants.h"
 
+#define MAX_ITERACIONES 15000
+
 typedef std::pair< std::array<int,2>, double> elemConPrioridad_t;
 
 /* Clase auxiliar para comparar elementos encolados en la cola de prioridad.
@@ -61,11 +63,17 @@ std::vector < std::array<double,2> >
 	
 	int maxX = mapa.obtenerDimensionX();
 	int maxY = mapa.obtenerDimensionY();
+	int iteraciones = 0;
 	while (!listaAbierta.empty()) {
 		std::array<int,2> actual = listaAbierta.top ().first;
 		listaAbierta.pop();
+		iteraciones++;
 		if (actual == destino)
 			break;
+		
+		if (iteraciones>MAX_ITERACIONES) {
+			return recorrido;
+		}
 		
 		for (size_t i=0; i< 8; i++) {
 			std::array<int,2> adyacencia = adyacencias[i];
