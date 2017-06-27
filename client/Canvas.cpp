@@ -24,65 +24,58 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-
+#include "Header Files/CanvasException.h"
+#include "ErrorMonitor.h"
 
 #define NOMBRE_JUEGO "Z: El Ejercicio Final"
+using std::string;
 const int SCREEN_FPS = 20;
 const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 
 Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
     colaEntrada(colaEntrada), colaSalida(colaSalida), quit(false) {
-    bool success = true;
-
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) <  0) {
-        printf("No se pudo inicializar SDL. SDL Error: %s\n", SDL_GetError());
-        success = false;
+        throw CanvasException("No se pudo inicializar SDL. SDL Error: " +
+            string(SDL_GetError()));
     } else {
         if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
-            printf("No se pudo activar filtro lineal a textura\n");
+            throw CanvasException("No se pudo activar filtro lineal a textura");
         }
 
         gWindow = SDL_CreateWindow(NOMBRE_JUEGO,SDL_WINDOWPOS_UNDEFINED,
                                     SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
                                    SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if (gWindow == NULL) {
-            printf( "No se pudo crear la ventana. SDL Error: %s\n", SDL_GetError
-                () );
-            success = false;
+            throw CanvasException("No se pudo crear la ventana. SDL Error: " +
+                string(SDL_GetError()));
         } else {
             gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED
                 | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
             if (gRenderer == NULL){
-                printf( "No se pudo crear renderizador. SDL Error: %s\n",
-                        SDL_GetError() );
-                success = false;
+                throw CanvasException("No se pudo crear renderizador. SDL Error: " +
+                    string(SDL_GetError()));
             } else {
                 SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
                 int imgFlags = IMG_INIT_PNG;
                 if (!(IMG_Init(imgFlags) & imgFlags)) {
-                    printf("No se pudo inicializar a SDL_image could not SDL_image Error: %s\n", IMG_GetError());
-                    success = false;
+                    throw CanvasException("No se pudo inicializar a SDL_image"
+                                              ". SDL_image Error: " +
+                        string(IMG_GetError()));
                 }
                 if (TTF_Init() == -1){
-                    printf("No se pudo inicializar a SDL_ttf. SDL_ttf Error:"
-                                " %s\n", TTF_GetError());
-                    success = false;
+                    throw CanvasException("No se pudo inicializar a SDL_ttf. "
+                                              "SDL_ttf Error: " +
+                        string(TTF_GetError()));
                 }
-                if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0)
-                {
-                    printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
-                    success = false;
+                if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+                    throw CanvasException("No se pudo inicializar a SDL_Mixer"
+                                              ".  SDL_mixer Error: " +
+                        string(Mix_GetError()));
+
                 }
             }
         }
-    }
-
-    if (!success){
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-            "Juego Abortado", "El Juego no se pudo inicializar correctamente."
-                                     " Se cerrará a continuación.",
-                                 NULL);
     }
 }
 
@@ -154,22 +147,35 @@ void Canvas::inicializarDatos(Mapa &mapa) {
     CodigosPaquete codigos;
     Paquete color = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.equipo){
-//        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
+        throw CanvasException("El primer paquete enviado no fue el color, "
+                                  "fue: " + color.getMensaje());
     }
     miColor = std::stoi(color.getMensaje().substr(1));
     Paquete pMapa = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.mapa){
-//        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
+        throw CanvasException("El segundo paquete enviado no fue el mapa, "
+                                  "fue: " + pMapa.getMensaje());
     }
     mapa.crearMapa(pMapa);
 }
 
 
 void Canvas::startGame(){
+    ErrorMonitor errorMonitor;
     mensajeEsperando();
 
     Mapa mapa(gRenderer);
-    inicializarDatos(mapa);
+    try {
+        inicializarDatos(mapa);
+    } catch(CanvasException& e){
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+                                 "Juego Abortado", "No se recibieron los "
+                                     "datos necesarios del servidor para "
+                                     "inicializar, el juego se cerrará a "
+                                     "continuación.",
+                                 NULL);
+        errorMonitor.outputError(e.what());
+    }
 
     VistaManager vistaManager(gRenderer);
     ElementoManager elementoManager(vistaManager, miColor);
@@ -245,8 +251,6 @@ void Canvas::gameLoop(ElementoManager &elementoManager,
 
         elementoManager.elementosVivir(camara, click, selectBox);
 
-//        TODO cambiar offset por camara! la gracia es que no se dibuje si no
-// se ve
         selectBox.mostrar(gRenderer, camara.getPos());
         hud.mostrar();
         guiEdificio.mostrar(camara);
@@ -278,15 +282,13 @@ void Canvas::mensajeEsperando() {
 }
 
 Canvas::~Canvas() {
-    //Destroy window
+    //Destruir ventana y renderizador
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
     gRenderer = NULL;
 
-//    TODO chequear que mas hace falta destruir o cerrar
-
-    //Quit SDL subsystems
+    //Salir de SDL y sus módulos
     Mix_Quit();
     Mix_CloseAudio();
     IMG_Quit();

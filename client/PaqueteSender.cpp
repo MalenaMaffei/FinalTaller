@@ -21,7 +21,7 @@ void PaqueteSender::run() {
         try {
             socket.SendStrWLen(paquete.getMensaje());
         } catch(SocketException& e){
-//            displayError(e);
+            errorMonitor.outputError(e.what());
             shutdown();
             continue;
         }

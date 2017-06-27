@@ -5,7 +5,6 @@
 using std::string;
 class ErrorMonitor {
  public:
-  ErrorMonitor();
   void outputError(string error);
  private:
   std::mutex m;
