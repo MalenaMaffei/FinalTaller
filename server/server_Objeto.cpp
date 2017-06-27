@@ -40,6 +40,10 @@ std::array<double, 2> Objeto::getPosicion() {
 	return posicion;
 }
 
+std::array<double, 2> Objeto::getPosicionCentral() {
+	return {posicion[0]+ancho/2, posicion[1]+alto/2};
+}
+
 int Objeto::getVida() {
 	return vida;
 }

@@ -25,6 +25,7 @@ public:
     void setFabricacion(int tiempoBase, int territorios, int tipo);
     int getPorcentajeConstruccion();
     int getTipoCreando();
+    int getTiempoParaFabricacion(int tiempoBase, int territorios);
     int getNivel();
     bool estaCreando();
     int debeCrear();
@@ -34,7 +35,6 @@ private:
     int tiempoParaFabricacion;
     int equipo;
     int tipoCreando;   //Tipo de objeto a construir
-    int territoriosTomados;
     int construccionesRealizadas; // Cuento la cantidad de construcciones 
                                   // y a partir de eso calculo el nivel
     int nivel; // Cada 2 personajes construidos aumento el nivel

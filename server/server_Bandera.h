@@ -17,6 +17,7 @@ public:
     void colisionar(Bandera& bandera) override; 
     void colisionar(Edificio& edificio) override; 
     void setEquipo(int equipo);
+    int getEquipoAnterior();
     int getEquipo();
     virtual ~Bandera();
 private:
@@ -24,6 +25,7 @@ private:
      * SIN_EQUIPO (definido en "constantes.h").
      */
     int idEquipo;
+    int idEquipoAnterior;
 };
 
 #endif /* BANDERA_H */

@@ -89,6 +89,11 @@ int Edificio::getPorcentajeConstruccion() {
 												double(tiempoFabricacion)*100;
 }
 
+int Edificio::getTiempoParaFabricacion(int tiempoBase, int territorios) {
+	return (double(tiempoBase)/double(territorios))/
+								std::sqrt(double(vida)/double(vidaTotal));
+}
+
 int Edificio::getTipoCreando() {
 	return tipoCreando;
 }

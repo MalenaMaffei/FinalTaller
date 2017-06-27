@@ -51,11 +51,11 @@ void Unidad::colisionar(Edificio& edificio) {
 }
 
 void Unidad::colisionar(Bandera& bandera) {
-	std::cout<<"colisiono con bandera"<<std::endl;
+//	std::cout<<"colisiono con bandera"<<std::endl;
 	std::cout<<bandera.getEquipo()<<std::endl;
 	std::cout<<idEquipo<<std::endl;
 	if (bandera.getEquipo() != idEquipo) {
-		std::cout<<"capturo bandera"<<std::endl;
+//		std::cout<<"capturo bandera"<<std::endl;
 		this->bandera = bandera.getId();
 	}
 }

@@ -7,7 +7,8 @@
 
 Bandera::Bandera (double ancho, double alto, int tipo) : Inmovible(0, ancho, 
 															alto, tipo), 
-												idEquipo(SIN_EQUIPO) { }
+												idEquipo(SIN_EQUIPO), 
+												idEquipoAnterior(SIN_EQUIPO){ }
 
 void Bandera::setEquipo (int equipo) {
 	idEquipo = equipo;
@@ -27,6 +28,7 @@ void Bandera::colisionar(Municion& municion) {
 
 void Bandera::colisionar (Unidad& personaje) {
 	//Si colisiona una Unidad con una Bandera la Bandera cambia de equipo
+	idEquipoAnterior = idEquipo;
 	idEquipo = personaje.getEquipo ();
 }
 
@@ -44,6 +46,10 @@ void Bandera::colisionar(Edificio& edificio) {
 
 int Bandera::getEquipo() {
 	return idEquipo;
+}
+
+int Bandera::getEquipoAnterior() {
+	return idEquipoAnterior;
 }
 
 Bandera::~Bandera () { }

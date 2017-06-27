@@ -250,6 +250,13 @@ void Juego::chequearColisiones () {
 			mensajeCrear.mensajeDeCrear (bandera,idBandera,bandera->getEquipo ());
 			colaDeEnviados.encolar (mensajeCrear);
 			banderasPorEquipo[mov1->getEquipo ()] ++;
+			banderasPorEquipo[bandera->getEquipoAnterior ()] --;
+			Logger* logger = Logger::getInstancia();
+			std::string msj = std::to_string(banderasPorEquipo[0]) + "|" +
+								std::to_string(banderasPorEquipo[1]) + "|" +
+								std::to_string(banderasPorEquipo[2]) + "|" +
+								std::to_string(banderasPorEquipo[3]);
+			logger->logACout (msj);
 		}
 		++it1;
 	}
@@ -294,7 +301,7 @@ void Juego::actualizarDisparos() {
 		municion->setPosicion (movible->getPosicion ());
 		municion->setObjetivo (idObjetivo);
 		municion->setAlcance (alcance);
-		std::array<double,2> target = objetivo->getPosicion ();
+		std::array<double,2> target = objetivo->getPosicionCentral ();
 		municion->mover (target);
 		std::string idMunicion = manejadorIDs.getIDMunicion ();
 		movibles[idMunicion] = municion;
@@ -423,7 +430,9 @@ void Juego::enviarInfoUnidad (std::string id, int dst) {
 void Juego::enviarInfoFabrica (std::string id, int dst) {
 	Edificio* edificio = edificios[id];
 	Mensaje mensajeInfoFabrica;
-	mensajeInfoFabrica.mensajeDeInfoFabrica (edificio,id,fabricaUnidades,dst);
+	int equipo = edificio->getEquipo ();
+	int cantTerritorios = banderasPorEquipo[equipo];
+	mensajeInfoFabrica.mensajeDeInfoFabrica (edificio,id,fabricaUnidades,dst, cantTerritorios);
 	colaDeEnviados.encolar (mensajeInfoFabrica);
 }
 
@@ -461,10 +470,14 @@ void Juego::run() {
 	
 	for (Jugador* jugador : jugadores) {
 		jugador->finalizar();
-		Mensaje mensajeGanador;
-		mensajeGanador.mensajeDeGanador (jugador->getId ());
-		std::string mensajeStr = mensajeGanador.getMensaje ();
-		jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
+		if (this->hayGanador()) {
+			Mensaje mensajeGanador;
+			mensajeGanador.mensajeDeGanador (jugador->getId ());
+			std::string mensajeStr = mensajeGanador.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
+		} else {
+			jugador->cerrarConexion ();
+		}
 	}
 }
 

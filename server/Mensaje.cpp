@@ -115,7 +115,7 @@ void Mensaje::mensajeDeInfoUnidad(Unidad* unidad, std::string id, int dst) {
 
 void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id, 
 									FabricaUnidades& fabricaUnidades,
-									int dst) {
+									int dst, int territorios) {
   	/* Formato de mensaje:
 	 * +-----+----+------+---+----+-----+---+----+-----+-------+------+---+
 	 * | cmd | id | vida | n | t1 | tm1 |...| tn | tmn | const | tipo | % |
@@ -144,7 +144,8 @@ void Mensaje::mensajeDeInfoFabrica(Edificio* edificio, std::string id,
 	std::string unidadesStr = "";
 	
 	for (int idActual : unidadesPosibles) {
-		int tiempo = fabricaUnidades.getTiempo (idActual)/TICKS; //En segundos
+		int tiempoBase = fabricaUnidades.getTiempo (idActual);
+		int tiempo = edificio->getTiempoParaFabricacion(tiempoBase,territorios)/TICKS;
 		std::string tiempoStr = rellenador.rellenar(tiempo,4);
 		std::string idStr = rellenador.rellenar(idActual,2);
 		unidadesStr += idStr + tiempoStr;

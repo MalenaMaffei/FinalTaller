@@ -28,9 +28,9 @@ public:
     int getEquipo();
     int getId();
     void run();
+    void cerrarConexion();
     virtual ~Jugador();
 private:
-    BoolProtected perdio;
     BoolProtected salir;
     Socket socket;
     int equipo;

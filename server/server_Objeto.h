@@ -34,6 +34,7 @@ public:
     double distanciaCuadrada(Objeto* objeto);
     virtual bool estaVivo();
     std::array<double, 2> getPosicion();
+    std::array<double, 2> getPosicionCentral();
     virtual void setPosicion (std::array<double,2> posicion);
     bool recibirDanio(int danio);
     virtual ~Objeto();
