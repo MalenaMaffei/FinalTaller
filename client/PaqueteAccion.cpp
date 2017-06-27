@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include "Header Files/PaqueteAccion.h"
-#include "Header Files/common_CodigosPaquete.h"
+#include "Header Files/CodigosPaquete.h"
 #include "Header Files/constantes.h"
 #include <string>
 #include <cmath>

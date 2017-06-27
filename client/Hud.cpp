@@ -2,7 +2,7 @@
 #include "Header Files/constantes.h"
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/VistaLabelRobot.h"
-#include "Header Files/common_CodigosPaquete.h"
+#include "Header Files/CodigosPaquete.h"
 #include "Header Files/VistaIconoRobot.h"
 #include "Header Files/VistaHud.h"
 #include "Header Files/RobotGallery.h"

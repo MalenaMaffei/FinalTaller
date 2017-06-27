@@ -4,7 +4,7 @@
 #include <vector>
 #include "Vista.h"
 #include "VistaDireccionada.h"
-#include "common_CodigosPaquete.h"
+#include "CodigosPaquete.h"
 
 class VistaManager {
  public:

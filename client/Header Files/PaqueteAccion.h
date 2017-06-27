@@ -1,7 +1,7 @@
 #ifndef TPFINAL_PAQUETEACCION_H
 #define TPFINAL_PAQUETEACCION_H
 #include <string>
-#include "common_CodigosPaquete.h"
+#include "CodigosPaquete.h"
 #include "Paquete.h"
 
 class PaqueteAccion : public Paquete {
