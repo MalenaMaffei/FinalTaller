@@ -175,4 +175,5 @@ Se hizo evidente muy rápidamente la importancia de una comunicación fluida ent
 Quizas nos hubiera gustado un proyecto con un scope más limitado, pero poder hacerlo más prolijo y cumpliendo todas las especificaciones <- CRITICA CONSTRUCTIVA? SINO REEMPLAZAR POR OTRA COSA QUE HUBIERAMOS CAMBIADO DEL TP O QUE NO NOS GUSTO.
 
 ALGO MAS TECNICO DEL TP, ALGO DE SOCKETS O DE CONCURRENCIA ->Después del trabajo nos sentimos más cómodos con los temas de multithreading y comunicación por sockets. -> AHORA SOMOS UNOS CAPOS DE LA CONCURRENCIA O ALGO, AGREGAR ALG TIPO AHORA SABEMOS QUE TENEMOS ESTAS HERRAMIENTAS A NUESTRA DISPOSICION Y SON MUY UTILES
+
 CONCLUSION FINAL 
