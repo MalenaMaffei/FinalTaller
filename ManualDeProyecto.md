@@ -126,11 +126,16 @@ Lo que se hace entonces en cada iteración del Game Loop es:
 	* Si la cámara no se había movido, se reusa la textura de tiles que había sido cargada en alguna iteración anterior.  
 2. Luego, todo el resto de los elementos son renderizados directamente a la pantalla.
 3. Al finalizar el loop, se limpia la pantalla.
-
+#### Spritesheets y Guis dentro del Juego
+La creación de spritesheets fue un proceso tedioso y largo, mucho más de lo que se había previsto inicialmente. Se tomo un enfoque pragmático, al principio solo había una sola imagen para todos los robots y otra para todos los vehículos, de a poco se fueron agregando las imágenes particulares.
+La creación de guis también fue larga y se le fueron agregando elementos por partes. Al comienzo se pensaba usar un diseño propio, pero finalmente se optó por copiar lo más posible las guis originales de juego, ya que eran claras y sobretodo intuitivas y nos pareció que intentando reinventarlas íbamos a terminar tardando más tiempo. 
 
 
 ## Análisis de puntos pendientes
-
+* Sonidos: Si bien el juego cuenta con la capacidad de reproducir sonidos, solo pudimos reproducir tres. Esto se debe a que para reproducir sonidos en otros eventos, debíamos enviar más paquetes y el servidor debía monitorear más eventos que no eran los estrictamente necesarios para el desarrollo del juego. Los eventos en los que hay sonido son los que coinciden con paquetes que ya estaba recibiendo el cliente de todas formas.
+* Puentes: Finalmente no pudimos implementar la lógica de creación de puentes sobre un canal de agua.
+* Generador de Mapas: Nos hubiera gustado poder terminar de pulirlo, hay algunos chequeos que no se hacen, como comprobar que haya un camino transitable entre todos los fuertes y filtrar que no queden tiles sueltos de un solo tipo, por ejemplo un solo tile de pradera en medio de un lago de lava.
+* Las unidades no empiezan a disparar automáticamente cuando tienen a un enemigo al alcance.
 ## Herramientas
 * Para coordinar el trabajo se usó git, hosteando el repositorio en github.
 * CMake fue usado para generar fácilmente los ejecutables.
