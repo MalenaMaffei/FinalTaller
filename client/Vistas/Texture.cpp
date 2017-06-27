@@ -66,10 +66,7 @@ bool Texture::loadFromRenderedText(std::string textureText,
     return mTexture != NULL;
 }
 
-
-
 void Texture::free(){
-    //Free texture if it exists
     if (mTexture != NULL){
         SDL_DestroyTexture(mTexture);
         mTexture = NULL;
@@ -102,12 +99,13 @@ void Texture::setAsRenderTarget() {
 }
 
 bool Texture::createBlank(int width, int height, SDL_TextureAccess access) {
-    //Create uninitialized texture
-    mTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGBA8888, access, width, height );
-    if(mTexture == NULL) {
-        printf("Unable to create blank texture! SDL Error: %s\n", SDL_GetError());
-    }
-    else {
+    //Cra ub
+    mTexture = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_RGBA8888,
+                                  access, width, height);
+    if (mTexture == NULL) {
+        printf("Unable to create blank texture! SDL Error: %s\n",
+               SDL_GetError());
+    }else {
         mWidth = width;
         mHeight = height;
     }
@@ -115,5 +113,5 @@ bool Texture::createBlank(int width, int height, SDL_TextureAccess access) {
     return mTexture != NULL;
 }
 void Texture::setBlendMode(SDL_BlendMode blending) {
-    SDL_SetTextureBlendMode( mTexture, blending );
+    SDL_SetTextureBlendMode(mTexture, blending);
 }

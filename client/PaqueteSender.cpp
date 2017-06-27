@@ -11,7 +11,8 @@ void PaqueteSender::run() {
     while (! salir){
         Paquete paquete;
         try {
-//        Se va a quedar bloqueado aca hasta que haya algo para desencolarBloqueante.
+//        Se va a quedar bloqueado aca hasta que haya algo para
+// desencolar.
             paquete = cola.desencolarBloqueante();
         } catch(std::runtime_error& e) {
             printf("error en la cola: %s\n", e.what());

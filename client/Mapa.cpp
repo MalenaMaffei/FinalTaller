@@ -15,7 +15,7 @@ Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
     target.setBlendMode(SDL_BLENDMODE_BLEND);
 }
 
-void Mapa::crearMapa(PaqueteAccion &paquete) {
+void Mapa::crearMapa(Paquete &paquete) {
     string mapa = paquete.getMensaje().substr(1);
     int x = 0;
     int y = 0;

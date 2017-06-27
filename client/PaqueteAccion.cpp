@@ -92,16 +92,16 @@ int PaqueteAccion::getY() {
 
 int PaqueteAccion::getTipo() const {
     if (getComando() != codigos.crear){
-        throw std::invalid_argument("PaqueteAccion "+to_string(getComando())+" no "
-            "tiene campo Tipo.");
+        throw std::invalid_argument("PaqueteAccion "+to_string(getComando())+
+            " no tiene campo Tipo.");
     }
     return toInt(mensaje.substr(codigos.posTipo,codigos.tipo));
 }
 
 int PaqueteAccion::getColor() const {
     if (getComando() != codigos.crear){
-        throw std::invalid_argument("PaqueteAccion "+to_string(getComando())+" no "
-            "tiene campo Color.");
+        throw std::invalid_argument("PaqueteAccion "+to_string(getComando())+
+            " no tiene campo Color.");
     }
     return toInt(mensaje.substr(codigos.posColor,codigos.color));
 }

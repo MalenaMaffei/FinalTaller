@@ -16,7 +16,6 @@ ElementoUnidad::ElementoUnidad(std::string id,
 
 
 void ElementoUnidad::mover(Punto nuevo) {
-//    direccion = rect.getCentro().calcularDireccion(nuevo);
     direccion = rect.getPunto().calcularDireccion(nuevo);
     rect.setPunto(nuevo);
     if (estado != enMovimiento) {

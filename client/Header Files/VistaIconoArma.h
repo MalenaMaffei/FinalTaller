@@ -4,8 +4,7 @@
 #include "Vista.h"
 class VistaIconoArma : public Vista{
  public:
-  VistaIconoArma(SDL_Renderer *gRenderer);
-
+  explicit VistaIconoArma(SDL_Renderer *gRenderer);
 };
 
 #endif //TPFINAL_VISTAICONOARMA_H

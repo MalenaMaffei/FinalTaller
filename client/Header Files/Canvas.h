@@ -23,6 +23,7 @@ class Canvas{
                   GuiFabrica &guiEdificio,
                   ColectorDeAcciones &colector,
                   Mapa &mapa);
+
  private:
   void mensajeEsperando();
   //The window we'll be rendering to

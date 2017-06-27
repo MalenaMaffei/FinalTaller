@@ -5,7 +5,7 @@
 #include <SDL2/SDL_mixer.h>
 
 
-Reproductor::Reproductor () {
+Reproductor::Reproductor() {
 	robotManufactured = Mix_LoadWAV(robotListoPath);
 	if (!robotManufactured) {
 		printf("MixLoadWAV: %s\n", Mix_GetError());
@@ -20,7 +20,7 @@ Reproductor::Reproductor () {
 	}
 }
 
-Reproductor::~Reproductor () {
+Reproductor::~Reproductor() {
 	Mix_FreeChunk(robotManufactured);
 	Mix_FreeChunk(vehicleManufactured);
 	Mix_FreeChunk(muerte);

@@ -19,6 +19,7 @@ class Texture {
   void render(int x, int y, SDL_Rect* clip = NULL);
 //Set self as render target
   void setAsRenderTarget();
+//  crea una textura vacia sin inicializar
   bool createBlank(int width, int height,
                    SDL_TextureAccess = SDL_TEXTUREACCESS_STREAMING);
   int getWidth();

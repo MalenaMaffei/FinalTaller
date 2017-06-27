@@ -39,7 +39,6 @@ class ElementoManager {
   std::map<std::string, ElementoUnidad *> unidades;
   std::map<std::string, ElementoBala*> balas;
   CodigosPaquete codigos;
-
 };
 
 #endif //TPFINAL_FABRICAUNIDAD_H

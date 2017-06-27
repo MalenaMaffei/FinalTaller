@@ -6,7 +6,7 @@
 
 class PaqueteAccion : public Paquete {
  public:
-  PaqueteAccion(Paquete paquete);
+  explicit PaqueteAccion(Paquete paquete);
   PaqueteAccion();
 //  Para setear los campos del paquete dependiendo que accion se va a
 // realizar, despues se manda al servidor
