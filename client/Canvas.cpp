@@ -96,6 +96,7 @@ void Canvas::close() {
 //    TODO chequear que mas hace falta destruir o cerrar
 
     //Quit SDL subsystems
+    Mix_CloseAudio();
     Mix_Quit();
     IMG_Quit();
     TTF_Quit();
@@ -105,7 +106,7 @@ void Canvas::close() {
 
 void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                              Hud &hud,
-                             GuiEdificio &guiEdificio,
+                             GuiFabrica &guiEdificio,
                              Reproductor &reproductor) {
 
     CodigosPaquete codigos;
@@ -193,19 +194,13 @@ void Canvas::startGame(){
 
     Hud hud(gRenderer);
     VistaTexto vistaTexto(gRenderer);
-    GuiEdificio guiEdificio(gRenderer,vistaTexto);
-//
-//
-//    Mouse mouse;
-//    SelectBox selectBox;
-//    Click click;
+    GuiFabrica guiEdificio(gRenderer,vistaTexto);
+
     ColectorDeAcciones colector(selectBox,
                                 click,
                                 hud,
                                 guiEdificio,
                                 colaSalida);
-
-
 
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
@@ -223,7 +218,7 @@ void Canvas::startGame(){
 
 void Canvas::gameLoop(ElementoManager &elementoManager,
                       Hud &hud,
-                      GuiEdificio &guiEdificio,
+                      GuiFabrica &guiEdificio,
                       ColectorDeAcciones &colector,
                       Mapa &mapa) {
     //Event handler

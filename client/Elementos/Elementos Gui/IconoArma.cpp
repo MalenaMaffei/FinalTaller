@@ -1,6 +1,6 @@
 #include "IconoArma.h"
-#include "Header Files/VistaIconoArma.h"
-#include "Header Files/PaqueteUnidad.h"
+#include "../../Header Files/VistaIconoArma.h"
+#include "../../Header Files/PaqueteUnidad.h"
 #define X 0
 #define Y 144
 

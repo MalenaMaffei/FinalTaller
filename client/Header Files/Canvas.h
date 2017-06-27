@@ -3,7 +3,7 @@
 #include <SDL_render.h>
 #include "ElementoManager.h"
 #include "Hud.h"
-#include "GuiEdificio.h"
+#include "GuiFabrica.h"
 #include "ColaPaquetes.h"
 #include "Mapa.h"
 #include "Reproductor.h"
@@ -16,11 +16,11 @@ class Canvas{
   void startGame();
   void manejarPaquetes(ElementoManager &elementoManager,
                          Hud &hud,
-                         GuiEdificio &guiEdificio,
+                         GuiFabrica &guiEdificio,
                          Reproductor &reproductor);
   void gameLoop(ElementoManager &elementoManager,
                   Hud &hud,
-                  GuiEdificio &guiEdificio,
+                  GuiFabrica &guiEdificio,
                   ColectorDeAcciones &colector,
                   Mapa &mapa);
  private:

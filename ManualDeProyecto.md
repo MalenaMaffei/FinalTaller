@@ -2,7 +2,7 @@
 
 ## Integrantes y división de tareas
 
-La distribución de tareas se tuvo que reorganizar debido a que un integrante debío abandonar trabajo.
+La distribución de tareas se tuvo que reorganizar debido a que un integrante debió abandonar trabajo.
 
 __Distribución original__
 
@@ -114,12 +114,12 @@ __Tareas realizadas__:
 ## Inconvenientes encontrados
 ### Cliente
 #### Performance
-Un gran inconveniente encontrado del lado del cliente que llevó un par de días de trabajo e investigación fue consumo del CPU y no fuimos conscientes del mismo hasta la semana 7 aproximadamente. La performance era muy pobre incluso cuando solo se estaba mostrando el mapa, sin unidades moviendose ni otros elementos animados.
+Un gran inconveniente encontrado del lado del cliente que llevó un par de días de trabajo e investigación fue consumo del CPU, no fuimos conscientes del mismo hasta la semana 7 aproximadamente. La performance era muy pobre incluso cuando solo se estaba mostrando el mapa, sin unidades moviendose ni otros elementos animados.
 Al principio se pensó que el problema podía ser el hecho de que se iteraran todos los tiles del mapa a ver cuáles estaban siendo enfocados por la cámara y debían ser mostrados, ya que originalmente el mapa era de 160.000 tiles.
 Se pasó a calcular qué índices del vector de tiles se verían enfocados por la cámara de acuerdo a su posición actual e iterar y mostrar solamente aquellos (1875 tiles). Lamentablemente, si bien el consumo bajó, no se solucionó el problema.
 Eventualmente se llegó a la conclusión de que el problema era que la pantalla se refrescaba constantemente, ya que incluso elementos estáticos tenían animaciones, por lo cual no era posible actualizar la pantalla solo cuando ocurría algún evento.
 Después de encontrado el origen del alto consumo, se empezaron a investigar distintas técnicas para no tener que actualizar los tiles en cada iteración del Game Loop. Esto llevó un tiempo considerable, pero se le dió la más alta prioridad ya que en algunas máquinas era casi imposible disfrutar del juego.
-Finalmente investigando la documentación del SDL encontramos la función SDL_SetRenderTarget, que permite usar una textura como renderer en vez de la pantalla. Al parecer el problema era el overhead de renderizar muchos elementos chicos (tiles) en vez de una sola textura del tamaño de toda la pantalla.
+Finalmente investigando la documentación de SDL se encontró la función SDL_SetRenderTarget, que permite usar una textura como renderer en vez de la pantalla. Al parecer el problema era el overhead de renderizar muchos elementos chicos (tiles) en vez de una sola textura del tamaño de toda la pantalla.
 Lo que se hace entonces en cada iteración del Game Loop es:
 1. Chequear si la cámara se ha movido:
 	* Si lo hizo, se cargan todos los tiles a ser renderizados a una textura, y después se la renderiza a la pantalla.
@@ -127,10 +127,21 @@ Lo que se hace entonces en cada iteración del Game Loop es:
 2. Luego, todo el resto de los elementos son renderizados directamente a la pantalla.
 3. Al finalizar el loop, se limpia la pantalla.
 
+#### Spritesheets y Guis dentro del Juego
+La creación de spritesheets fue un proceso tedioso y largo, mucho más de lo que se había previsto inicialmente. Se tomo un enfoque pragmático, al principio solo había una sola imagen para todos los robots y otra para todos los vehículos, de a poco se fueron agregando las imágenes particulares.
+La creación de guis también fue larga y se le fueron agregando elementos por partes. Al comienzo se pensaba usar un diseño propio, pero finalmente se optó por copiar lo más posible las guis originales de juego, ya que eran claras y sobretodo intuitivas y nos pareció que intentando reinventarlas íbamos a terminar tardando más tiempo.
+
+#### Mal uso del Socket
+En la última semana, probando el juego en condiciones normales, el mismo empezó a crashear. Después de un tiempo pudimos identificar que el problema se generaba al momento de leer o envíar al Socket. El problema surgía cuando se intentaban mandar y recibir muchos paqutes al mismo tiempo.
+Finalmente, luego de una consulta, encontramos al culpable: ```int read = recv(fD, NULL, 0, MSG_DONTWAIT | MSG_PEEK);``` Su uso había pasado totalmente por desapercibido y no era necesario en absoluto.
+Lamentablemente, como se explica en la Documentación Técnica, se usan dos threads para el envío y recepción de información, así que perdimos bastante tiempo investigando esta pista falsa convencidos de que el problema era debido a una Race Condition.
 
 
 ## Análisis de puntos pendientes
-
+* Sonidos: Si bien el juego cuenta con la capacidad de reproducir sonidos, solo pudimos reproducir tres. Esto se debe a que para reproducir sonidos en otros eventos, debíamos enviar más paquetes y el servidor debía monitorear más eventos que no eran los estrictamente necesarios para el desarrollo del juego. Los eventos en los que hay sonido son los que coinciden con paquetes que ya estaba recibiendo el cliente de todas formas.
+* Puentes: Finalmente no pudimos implementar la lógica de creación de puentes sobre un canal de agua.
+* Generador de Mapas: Nos hubiera gustado poder terminar de pulirlo, hay algunos chequeos que no se hacen, como comprobar que haya un camino transitable entre todos los fuertes y filtrar que no queden tiles sueltos de un solo tipo, por ejemplo un solo tile de pradera en medio de un lago de lava.
+* Las unidades no empiezan a disparar automáticamente cuando tienen a un enemigo al alcance.
 ## Herramientas
 * Para coordinar el trabajo se usó git, hosteando el repositorio en github.
 * CMake fue usado para generar fácilmente los ejecutables.

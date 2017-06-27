@@ -1,7 +1,7 @@
-#include "Header Files/GuiEdificio.h"
-#include "Header Files/VistaGui.h"
-#include "Header Files/constantes.h"
-#include "Header Files/common_CodigosPaquete.h"
+#include "../../Header Files/GuiFabrica.h"
+#include "../../Header Files/VistaGui.h"
+#include "../../Header Files/constantes.h"
+#include "../../Header Files/common_CodigosPaquete.h"
 #include <string>
 #define CANCEL_RELX 67
 #define CANCEL_RELY 47
@@ -23,7 +23,7 @@
 #define CONSTR_RELY 22
 using std::string;
 
-GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer,
+GuiFabrica::GuiFabrica(SDL_Renderer *gRenderer,
                          VistaTexto &vistaTexto)
     : vistaGui(VistaGui(gRenderer)),
 //      vistaTexto(VistaTexto(gRenderer)),
@@ -46,7 +46,7 @@ GuiEdificio::GuiEdificio(SDL_Renderer *gRenderer,
 //        tiposConstruibles = {6,7,8,9,10,11,12,13,14,15,16};
 }
 
-void GuiEdificio::mostrar(Camara &camara) {
+void GuiFabrica::mostrar(Camara &camara) {
 //    TODO REFACTORIZAR ESTO POR AMOR A DIOS y despues documentar
     if (seMuestra && camara.estaEnfocado(Rect(position,
                                               vistaGui.getWidth(),
@@ -76,14 +76,14 @@ void GuiEdificio::mostrar(Camara &camara) {
     }
 }
 
-void GuiEdificio::abrirGui(Punto pos, std::string id) {
+void GuiFabrica::abrirGui(Punto pos, std::string id) {
     resetSeleccion();
     idFabrica = id;
     position = pos;
     esperandoInfo = true;
 }
 
-bool GuiEdificio::click(Punto click) {
+bool GuiFabrica::click(Punto click) {
     if (cancel.wasPressed(click)){
         resetSeleccion();
         seMuestra = false;
@@ -101,24 +101,24 @@ bool GuiEdificio::click(Punto click) {
     return true;
 }
 
-void GuiEdificio::resetSeleccion() {
+void GuiFabrica::resetSeleccion() {
     tipoSeleccionado = -1;
     posSeleccionada = 0;
 }
 
-int GuiEdificio::getTipoSeleccionado() const {
+int GuiFabrica::getTipoSeleccionado() const {
     return tipoSeleccionado;
 }
 
-bool GuiEdificio::huboSeleccion() const {
+bool GuiFabrica::huboSeleccion() const {
     return tipoSeleccionado >= 0;
 }
 
-std::string GuiEdificio::getIdFabrica() const {
+std::string GuiFabrica::getIdFabrica() const {
     return idFabrica;
 }
 
-void GuiEdificio::setInfo(PaqueteFabrica paquete) {
+void GuiFabrica::setInfo(PaqueteFabrica paquete) {
     if (!esperandoInfo){
         return;
     }
@@ -139,11 +139,11 @@ void GuiEdificio::setInfo(PaqueteFabrica paquete) {
     seMuestra = true;
 }
 
-bool GuiEdificio::activo() {
+bool GuiFabrica::activo() {
     return seMuestra;
 }
 
-GuiEdificio::~GuiEdificio() {
+GuiFabrica::~GuiFabrica() {
     printf("se va a destruir gui edificio\n");
 //    vistaTexto.closeFont();
 //    printf("termino de cerrar font gui edificio\n");

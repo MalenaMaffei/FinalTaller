@@ -39,11 +39,10 @@
 
 6. inhibir errores de valgrind de SDL.
 
-14. qye se muestren construibles
-
 15. terminar de crear spritesheets para los vehiculos que faltan.
 
 25. Terminar Refactor en edificioGui, crear clase guiElement o algo asi y usar composicion en vez de un millon de atributos
+	*qye se muestren construibles
 
 34. Bala Podría ser un elemento coloreado asi se sabe cuales son de quien.
 	Usar interfaz movible
@@ -53,7 +52,6 @@
 	*clase SDL_exception
 
 ##### "Opcional" #####
-19. generar sonidos cuando haya un paquete que sucede dentro de la camara.
 
 28. En el hud se puede poner tambien una etiqueta que te diga que color sos.
 
@@ -97,4 +95,5 @@
 35. ~~Que las guis pidan paquetes todo el tiempo~~
 39. ~~Mostrar cartel diciendo esperando a otros jugadores.~~
 40. ~~CAMBIAR DIMENSIONES DEL MAPA~~
+19. ~~generar sonidos cuando haya un paquete que sucede dentro de la camara.~~
 

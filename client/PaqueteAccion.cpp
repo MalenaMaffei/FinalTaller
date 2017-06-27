@@ -68,21 +68,9 @@ void PaqueteAccion::mover(string id, int x, int y) {
     mensaje = comando + idStr + xStr + yStr;
 }
 
-//string & PaqueteAccion::getMensaje()  {
-//    return mensaje;
-//}
-
-//void PaqueteAccion::setMensaje(const string &mensaje) {
-//    PaqueteAccion::mensaje = mensaje;
-//}
-
 string PaqueteAccion::getId() const {
     return mensaje.substr(codigos.posId,codigos.id);
 }
-
-//int PaqueteAccion::getComando() const {
-//    return toInt(mensaje.substr(codigos.posComando,codigos.comando));
-//}
 
 int PaqueteAccion::getX() {
     if (getComando() == codigos.matar){
@@ -124,12 +112,4 @@ PaqueteAccion::PaqueteAccion(Paquete paquete) {
 
 PaqueteAccion::PaqueteAccion() {}
 
-//int PaqueteAccion::toInt(std::string str) const{
-//    try {
-//        return stoi(str);
-//    } catch(std::invalid_argument& e){
-//        throw std::invalid_argument("se intento transformar: "+str+" a int en"
-//            " un PaqueteAccion con mensaje: "+ mensaje);
-//    }
-//}
 

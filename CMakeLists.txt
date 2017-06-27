@@ -56,6 +56,7 @@ file(GLOB VISTA_SRC
         "client/*.cpp"
 	"client/Vistas/*.cpp"
 	"client/Elementos/*.cpp"
+	"client/Elementos/Elementos Gui/*.cpp"
         )
 add_executable(client ${VISTA_SRC})
 set_target_properties(client PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../client/)

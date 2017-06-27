@@ -12,10 +12,7 @@ class PaqueteAccion : public Paquete {
   void crear(std::string id, int tipo);
   void pedirInfo(std::string id);
   void mover(std::string id, int x, int y);
-//  std::string & getMensaje();
-//  void setMensaje(const std::string &mensaje);
   std::string getId() const;
-//  int getComando() const;
   int getX();
   int getY();
   int getTipo() const;
@@ -24,9 +21,6 @@ class PaqueteAccion : public Paquete {
  private:
   int coordToServer(double coord);
   int coordToClient(double coord);
-//  int toInt(std::string str) const;
-//  std::string mensaje;
-//  CodigosPaquete codigos;
   std::string crearCampo(int campo, int contenido);
   std::string crearCampo(int campo, std::string contenidoStr);
 };
