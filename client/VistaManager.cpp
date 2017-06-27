@@ -100,11 +100,13 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
         Vista* morir = new VistaTanqueMorir(gRenderer);;
 
         if (tipo == codigos.jeep){
-//            TODO FALTA IMG
+//            Por restricciones de tiempo, no se crearon las imagenes
+// especificas de este vehículo
             caminar = new VistaMediumCaminar(gRenderer);
             disparar = new VistaMediumDisparar(gRenderer);
         } else if (tipo == codigos.light){
-            //            TODO FALTA IMG
+//            Por restricciones de tiempo, no se crearon las imagenes
+// especificas de este vehículo
             caminar = new VistaHeavyCaminar(gRenderer);
             disparar = new VistaHeavyDisparar(gRenderer);
         } else if (tipo == codigos.medium){
@@ -114,7 +116,8 @@ void VistaManager::fabricarVistasDeElemento(int tipo) {
             caminar = new VistaHeavyCaminar(gRenderer);
             disparar = new VistaHeavyDisparar(gRenderer);
         } else if (tipo == codigos.missile){
-            //            TODO FALTA IMG
+//            Por restricciones de tiempo, no se crearon las imagenes
+// especificas de este vehículo
             caminar = new VistaHeavyCaminar(gRenderer);
             disparar = new VistaHeavyDisparar(gRenderer);
         }

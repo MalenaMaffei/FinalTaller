@@ -61,7 +61,6 @@ void Hud::setInfo(PaqueteUnidad paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
-//    TODO paqueteUnidad
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
     PaqueteUnidad nuevo(nuevoMensaje);
 

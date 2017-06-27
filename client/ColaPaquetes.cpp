@@ -1,5 +1,5 @@
 #include "Header Files/ColaPaquetes.h"
-//TODO refactorizar para que pueda usar mutex madre
+
 ColaPaquetes::ColaPaquetes() : salir(false) {}
 
 void ColaPaquetes::encolar(Paquete paquete) {

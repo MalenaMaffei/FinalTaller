@@ -47,7 +47,6 @@ GuiFabrica::GuiFabrica(SDL_Renderer *gRenderer,
 }
 
 void GuiFabrica::mostrar(Camara &camara) {
-//    TODO REFACTORIZAR ESTO POR AMOR A DIOS y despues documentar
     if (seMuestra && camara.estaEnfocado(Rect(position,
                                               vistaGui.getWidth(),
                                               vistaGui.getHeight()))){
