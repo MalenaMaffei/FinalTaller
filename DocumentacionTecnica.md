@@ -82,7 +82,7 @@ La parte fundamental del servidor es el modelo el cual se encarga de manejar los
 #### Descripción general
 El Cliente es el encargado de reflejar el estado de juego mediante animaciones y sonidos. Asimismo es el encargado de reportar todas las acciones del usuario al servidor, que serán luego reflejadas en el modelo del juego.
 
-#### Clases
+#### __Clases__
 El funcionamiento general del cliente puede ser resumido a tres clases principales: __PaqueteReceiver__, __PaqueteSender__ y __Canvas__. Las primeras dos son las que se encargan de la comunicación por sockets con el servidor y la última es la que interactúa con el cliente y renderiza todo el juego.
 ***
 ##### PaqueteReceiver
@@ -108,5 +108,12 @@ En el cliente hay una relación uno a uno con todos los elementos existentes en 
 * __Vista__: hereda de __Texture__ que es una clase que simplemente encapsula a SDL_Texture. Hay una __Vista__ por cada tipo de elemento que existe en el juego. Una __Vista__ contiene la imagen entera de animaciones que componen a un elemento del juego. Por ejemplo, la vista de un Fuerte es una imagen que contiene varios cuadros de la animación del mismo más un cuadro extra que se muestra al ser destruido, asimismo  la imagen contiene a todas las animaciones del mismo elemento pero de diferentes colores. Lo positivo de este enfoque es que se cargan pocas imágenes en memoria y además todos los elementos de un mismo tipo comparten una misma __Vista__.
 * *manejarPaquetes*: Aquí se desencolan los paquetes de la __ColaPaquetes__. Este método es el que define qué hay que hacer con cada __Paquete__, hay tres tipos: __PaqueteAccion__, que es enviado a __ElementoManager__; __PaqueteUnidad__, que es enviado al __Hud__ (dónde se muestra la vida de la unidad seleccionada); y por último __PaqueteFabrica__, usado por __GuiFabrica__ para mostrar al usuario las distintas unidades que la fábrica puede construir. También en *manejarPaquetes* se reproducen sonidos para informar al usuario de algunos __Paquetes__ que merecen la atención del usuario.
 ***
+
+#### __Concurrencia__
+Debido a la necesidad de mostrar constantemente animaciones por pantalla y monitorear las acciones del usario al mismo tiempo que se envían y reciben mensajes por __Sockets__, se tuvo que hacer una implementación concurrente del juego. El juego está compuesto de 3 __Threads__. La principal es la que hace la primer conexión con el servidor y luego corre __Canvas__. Las otras dos threads son __PaqueteReceiver__ y __PaqueteSender__, ambas cuentan cada una como se mencionó anteriormente con una __ColaPaquetes__. Esta implementación de cola contiene __Paquetes__, está protegida con mutexes y tiene dos versiones de *desencolar*: una normal y una bloqueante. *desencolarBloqueante* es utilizado por __PaqueteSender__ para que no este constantemente chequeando si hay algo en la cola para enviar, directamente intenta desencolar y se quedará bloqueado allí hasta que entre un nuevo __Paquete__ en la cola. __PaqueteReceiver__ simplemente se queda bloqueado en *Socket::Receive* hasta que haya algo para recibir.
+
+
+
+
 #### Diagramas UML
 #### Descripción de archivos y protocolos
