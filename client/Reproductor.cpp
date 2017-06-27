@@ -28,8 +28,6 @@ Reproductor::~Reproductor() {
 
 
 void Reproductor::reproducirFX(Mix_Chunk *fx) {
-	printf("play sound\n");
-
 	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
 	
 	if (Mix_PlayChannel(-1,fx,0) == -1) {
