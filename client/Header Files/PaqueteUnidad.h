@@ -6,6 +6,7 @@
 class PaqueteUnidad : public Paquete {
  public:
   explicit PaqueteUnidad(const std::string &mensaje);
+//  Este paquete llega del server, con estos métodos se obtiene su información
   int getTipo();
   float getVida();
   int getColor();

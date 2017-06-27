@@ -9,6 +9,7 @@ void PaqueteReceiver::run() {
     while (!salir){
         string mensaje;
         try {
+//            Se va a quedar bloqueado acá hasta que llegue un paquete
             mensaje = socket.ReceiveStrWLen();
         } catch(SocketException& e ){
 //            TODO se podria decir, si ya estaba salir==true, es que cerre yo
@@ -20,9 +21,6 @@ void PaqueteReceiver::run() {
 
         Paquete paquete;
         paquete.setMensaje(mensaje);
-//        if (paquete.getComando() != 5 && paquete.getComando()!=2){
-//            printf("paquete recibido: %s\n", mensaje.c_str());
-//        }
         cola.encolar(paquete);
     }
 }

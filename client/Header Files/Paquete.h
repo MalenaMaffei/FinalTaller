@@ -12,6 +12,7 @@ class Paquete {
  protected:
   std::string mensaje;
   CodigosPaquete codigos;
+//  Wrapper para cuando stoi falle, de un mensaje mas descriptivo
   int toInt(std::string str) const;
 };
 

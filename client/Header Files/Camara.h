@@ -21,13 +21,18 @@ class Camara {
 
 //  Chequea si el Rect pasado esta dentro de la camara.
   bool estaEnfocado(Rect b);
+
   void setCentro(const Punto &centro);
 
  private:
-    Rect mBox;
+//  REctangulo que representa a la camara
+    Rect camRect;
+//  Centro del mapa, al que la camara vuelve a pedido del usuario.
     Punto centro;
     float velX, velY;
+  //    Centra a al camara. El centro es la ubicación del fuerte del jugador
     void centrar();
+//  Ajusta la ubicación de camRect para que no se vaya de la pantalla.
     void ajustar();
 };
 

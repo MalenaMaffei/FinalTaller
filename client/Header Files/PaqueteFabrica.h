@@ -7,6 +7,7 @@
 class PaqueteFabrica : public  Paquete{
  public:
   explicit PaqueteFabrica(const std::string &mensaje);
+//  Este paquete llega del servidor, con estos métodos se obtiene su información
   std::string getId();
   int getTipoFabrica();
   std::string getVidaFabrica();
@@ -15,7 +16,6 @@ class PaqueteFabrica : public  Paquete{
   int tipoEnConstruccion();
   float porcentajeConstruido();
   int getCantConstuibles();
-//  const std::string &getMensaje() const;
 
  private:
   int getOffsetConstruibles();

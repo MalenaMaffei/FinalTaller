@@ -8,6 +8,7 @@ class Punto : public SDL_Point{
   Punto operator+(Punto otro);
   Punto operator-(Punto otro);
   bool operator==(Punto otro);
+//  calcula la dirección en la que apuntaría un vector de este punto a otro.
   int calcularDireccion(Punto otro);
   enum {
     norte = 2,

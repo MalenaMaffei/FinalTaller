@@ -1,7 +1,6 @@
 #include <algorithm>
 #include "Header Files/ElementoManager.h"
 #include "Header Files/ElementoBandera.h"
-#include "Header Files/ElementoRoca.h"
 #include "Header Files/ElementoPuente.h"
 #include "Header Files/ElementoEstructura.h"
 #include "Header Files/Mouse.h"
@@ -48,7 +47,7 @@ void ElementoManager::fabricarElemento(PaqueteAccion &paquete) {
         elemento =
             new ElementoBandera(id, pos, vistaManager.getVista(tipo), color);
     } else if (tipo == codigos.roca){
-        elemento = new ElementoRoca(id, pos, vistaManager.getVista(tipo));
+        elemento = new Elemento(id, pos, vistaManager.getVista(tipo), false);
     } else if (tipo == codigos.puente){
         elemento =
             new ElementoPuente(id, pos, vistaManager.getVista(tipo), false);

@@ -28,8 +28,11 @@ class Click {
   void setScreenCoords(const Punto &screenCoords);
 
  private:
+//  Elemento clickeado por el usuario
   Elemento* clicked;
+//  Coordenadas absolutas
   Punto coords;
+  //  Coordenadas relativas a la ventana
   Punto screenCoords;
   bool seleccion;
 };

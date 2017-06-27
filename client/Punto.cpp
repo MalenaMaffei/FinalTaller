@@ -20,7 +20,6 @@ Punto::Punto(int x, int y) {
 
 int Punto::calcularDireccion(Punto otro) {
     Punto shift = *this - otro;
-//    TODO usar una formula
     if (shift.x > 0){
         if (shift.y > 0){
             return noroeste;
@@ -46,6 +45,7 @@ int Punto::calcularDireccion(Punto otro) {
             return sureste;
         }
     }
+    return centro;
 }
 
 bool Punto::operator==(Punto otro) {

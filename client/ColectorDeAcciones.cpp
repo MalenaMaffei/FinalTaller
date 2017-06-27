@@ -18,6 +18,7 @@ ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
       colaSalida(salida){}
 
 void ColectorDeAcciones::crearAcciones() {
+//    Reenvío los paquetes pidiendo información si las guis están activas.
     if (guiEdificio.activo()){
         PaqueteAccion paquete;
         paquete.pedirInfo(guiEdificio.getIdFabrica());
@@ -35,8 +36,10 @@ void ColectorDeAcciones::crearAcciones() {
 
     Punto clicked = click.getPoint();
     PaqueteAccion paquete;
-//    TODO refactor esto
-    if (guiEdificio.click(clicked)){
+
+//    Si se hizo click sobre las guis, releva si el usuario hizo algo para
+// mandar el paquete
+    if (guiEdificio.click(clicked) || hud.click(click)){
         if (guiEdificio.huboSeleccion()){
             paquete.crear(guiEdificio.getIdFabrica(),
                         guiEdificio.getTipoSeleccionado());
@@ -44,12 +47,10 @@ void ColectorDeAcciones::crearAcciones() {
         }
         click.resetCoords();
         return;
-    } else if (hud.click(click)){
-        click.resetCoords();
-        return;
     }
 
-
+// Si no se clickeo a un elemento, chequea si habia seleccion para mandar a
+// las unidades al punto clickeado.
     if (!click.hayClickeado()){
         if (selectBox.haySeleccion()){
             vector<ElementoUnidad*> seleccion=selectBox.getSeleccionadas();
@@ -65,6 +66,9 @@ void ColectorDeAcciones::crearAcciones() {
         return;
     }
 
+//  Si llegué hasta acá, había un clickeado. Si hay seleccion y el clickeado
+// es enemigo, lo voy a atacar. Si no era ese el caso, pido informacion del
+// clickeado.
     Elemento* clickeado = click.getClicked();
     if (selectBox.haySeleccion() && !clickeado->esMio()){
         vector<ElementoUnidad*> seleccion = selectBox.getSeleccionadas();
@@ -82,6 +86,8 @@ void ColectorDeAcciones::crearAcciones() {
     click.resetCoords();
 }
 
+// Los elementos llaman a alguna de estas en guiRequest, depende de si es una
+// estructura o una unidad llama al gui de fabricar o el de ver la vida.
 void ColectorDeAcciones::showEdificio(std::string id) {
     PaqueteAccion p;
     p.pedirInfo(id);
