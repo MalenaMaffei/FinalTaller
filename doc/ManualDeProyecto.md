@@ -66,7 +66,7 @@ __Tareas realizadas__:
     - Lógica de ataque y destrucción de unidades y edificios.
     - Lógica de creación de robots y vehículos.
     - Lógica de captura de territorios.
-    - Selección de unidades y fábricas. Acciones de mover y atacar. Selección de que unidad crear.
+    - Selección de unidades y fábricas. Acciones de mover y atacar. Selección de qué unidad crear.
     - Creación de animaciones para los movimientos y disparos de las unidades.
     - Comunicación básica cliente/servidor.
 
@@ -84,7 +84,7 @@ __Tareas propuestas__:
     - Pruebas y correcciones sobre estabilidad, jugabilidad y performance.
 __Tareas realizadas__:
     - Partida con un solo cliente, jugador puede disparar, eliminar, crear, moverse, etc.
-    - Refactor de factories (antes implementadas como singleton).
+    - Refactor de fábricas (antes implementadas como singleton).
     - Protocolo de comunicación entre cliente y servidor afianzado.
     - Primer partida multijugador, implementación de clase Jugadro en el servidor.
     - Creación de animaciones para las estructuras.
@@ -124,10 +124,10 @@ Esto además soluciona el problema de seleccionar como destino una posición con
 Asimismo, esta problemática nos hizo dar cuenta de la necesidad de considerar el caso en que alguna iteración del ciclo de juego tarde más de un TICK de reloj. En estos casos, se opta por enviar la información en el siguiente TICK en el que esté obtenida.
 
 #### Clase Juego
-Si bien se buscó minimizar al máximo el código necesario en la clase Juego, esta fue una tarea dificil. La dificultad recide en que esta clase es la principal del modelo, y además requiere participar activamente del intercambio de información con los jugadores. Por lo tanto, no solo debe contener los métodos y atributos del modelo, sino también una serie de métodos y atributos asociados a la comunicación con los jugadores. Por este motivo, la clase tomó una extensión considerablemente mayor con respecto a otras clases, y si bien se la refactorizó con el fin de minimizarla, no se la pudo reducir a una extensión todavía menor.
+Si bien se buscó minimizar al máximo el código necesario en la clase Juego, esta fue una tarea dificil. La dificultad reside en que esta clase es la principal del modelo, y además requiere participar activamente del intercambio de información con los jugadores. Por lo tanto, no solo debe contener los métodos y atributos del modelo, sino también una serie de métodos y atributos asociados a la comunicación con los jugadores. Por este motivo, la clase tomó una extensión considerablemente mayor con respecto a otras clases, y si bien se la refactorizó con el fin de minimizarla, no se la pudo reducir a una extensión todavía menor.
 
 #### Bugs varios
-A lo largo del desarrollo del juego se fueron encontrando distintos bugs. El primero fue que las balas finalizaban en el objetivo (en lugar de seguir su trayectoria), por más que este haya sido eliminado. Otro bug con disparar fue que en caso de disparar a un objeto lejano, se ponía a disparar constantemente por más de que no llegara nunca la munición. Además, fueron surgiendo otros bugs que solo se percibían mediante la visualización del cliente.
+A lo largo del desarrollo del juego se fueron encontrando distintos bugs. El primero fue que las balas finalizaban en el objetivo (en lugar de seguir su trayectoria), por más que este haya sido eliminado. Otro bug con disparar fue que en caso de disparar a un objeto lejano, se ponía a disparar constantemente por más de que no llegara nunca la munición. Además, fueron surgiendo otros bugs que solo se percibían mediante la visualización del cliente, por lo que recién establecida la comunicación pudieron ser resueltos.
 
 
 ### Cliente
@@ -167,13 +167,13 @@ Lamentablemente, como se explica en la Documentación Técnica, se usan dos thre
 * CMake fue usado para generar fácilmente los ejecutables.
 * Para la realización del cliente se utilizó el IDE CLion. Realmente es altamente recomendable ya que se puede obtener una licencia gratis de estudiante muy fácilmente si se tiene un email otorgado por la FIUBA y ayuda mucho a la productividad.
 * Para generar los spritesheets se usó una herramienta web muy útil y simple: https://draeton.github.io/stitches/ y para la edición de imágenes, Pinta: https://pinta-project.com/pintaproject/pinta/ también una herramienta sumamente simple aunque no cuenta con funcionalidades muy avanzadas.
-* Para probar los mapas generado sin necesidad de correr el juego se implementó un script de python que lo visualizaba.
+* Para probar los mapas generados sin necesidad de correr el juego se implementó un script de python que lo visualizaba.
 
 ## Conclusiones
 Realizar el juego fue un trabajo realmente arduo, aunque gratificante. Ninguno de los integrantes había encarado antes un proyecto de esta envergadura, así que fue una experiencia muy enriquecedora para ambos. 
-Se hizo evidente muy rápidamente la importancia de una comunicación fluida entre ambos, muchas veces ambos tuvimos que modificar partes del código por no haber previsto el tipo de paquetes que iba a necesitar cada parte. En retrospectiva, lo primero que deberíamos haber hecho fue establecer un protocolo sólido de comunicación pensando con detenimiento en cada tipo de paquete y sus campos. Aunque por el otro lado, en los comienzos tampoco sabíamos a ciencia cierta qué exactamente íbamos a necesitar, la conclusión que sacamos de este "catch-22", es que es fundamental tener un diseño básico pero hecho a conciencia antes de ponerse a hacer cualquier otra cosa. Por supuesto esto lo sabíamos, pero al sentirnos tan apremiados por el tiempo, nos fue difícil dejar de programar y probar ideas constantemente y tomarnos el tiempo necesario para solamente diseñar, pero probablemente eso nos hubiera ahorrado mucho tiempo que pasamos cambiando cosas y arreglando bugs.<-ESOTY CHAMUYANDO ACA, LA VERDAD NO SE QUE PONER DE QUE APRENDIMOS.
-Quizas nos hubiera gustado un proyecto con un scope más limitado, pero poder hacerlo más prolijo y cumpliendo todas las especificaciones <- CRITICA CONSTRUCTIVA? SINO REEMPLAZAR POR OTRA COSA QUE HUBIERAMOS CAMBIADO DEL TP O QUE NO NOS GUSTO.
+Se hizo evidente muy rápidamente la importancia de una comunicación fluida entre ambos, muchas veces tanto del cliente, como del servidor se tuvo que modificar partes del código por no haber previsto el tipo de paquetes que iba a necesitar cada parte. En retrospectiva, lo primero que deberíamos haber hecho fue establecer un protocolo sólido de comunicación pensando con detenimiento en cada tipo de paquete y sus campos. Si bien al iniciarse el proyecto se buscó establecer esta "convención", en los comienzos tampoco sabíamos a ciencia cierta qué exactamente íbamos a necesitar. La conclusión que sacamos de este "catch-22", es que es fundamental tener un diseño básico pero hecho a conciencia antes de ponerse a hacer cualquier otra cosa.
+Desde un punto de vista estrictamente técnico, el tp nos ayudo a consolidar conocimientos de concurrencia y de comunicación por socket, así como también nos dió mayor práctica en la programación en C++. Sin embargo, consideramos que un aprendizaje no menor, está en el manejo de un proyecto a mayor escala. A lo largo de este tipo de proyectos, pueden ocurrir inconvenientes o problemas que deben ser resueltos o que involucran realizar cambios con respecto a la idea inicial o incluso que implican una reestructuración en las tareas asignadas. Consideramos que en mayor o menor medida, es innevitable que ocurran, por lo tanto es importante mantener cierta flexibilidad con respecto a la planificación inicialmente propuesta y en cuanto a objetivos (dado el factor de tiempo).
 
-ALGO MAS TECNICO DEL TP, ALGO DE SOCKETS O DE CONCURRENCIA ->Después del trabajo nos sentimos más cómodos con los temas de multithreading y comunicación por sockets. -> AHORA SOMOS UNOS CAPOS DE LA CONCURRENCIA O ALGO, AGREGAR ALG TIPO AHORA SABEMOS QUE TENEMOS ESTAS HERRAMIENTAS A NUESTRA DISPOSICION Y SON MUY UTILES
+En cuanto al trabajo práctico en particular, nos pareció que el juego propuesto era demasiado amplio. Con amplio nos referimos a que tenía quizas demasiadas "particularidades". Tal vez, hubieramos preferido un proyecto con un scope más limitado, pero poder hacerlo más prolijo y cumpliendo todas las especificacione. Positivamente, destacamos que la implementación de un juego puede ser motivadora a la hora de encarar un proyecto.
 
-CONCLUSION FINAL 
+A modo de conclusión, consideramos que el trabajo permitió afianzar conocimientos no solo de programación, sino también en cuanto a administración de un proyecto.
