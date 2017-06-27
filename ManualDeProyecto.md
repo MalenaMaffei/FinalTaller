@@ -133,10 +133,8 @@ La creación de guis también fue larga y se le fueron agregando elementos por p
 
 #### Mal uso del Socket
 En la última semana, probando el juego en condiciones normales, el mismo empezó a crashear. Después de un tiempo pudimos identificar que el problema se generaba al momento de leer o envíar al Socket. El problema surgía cuando se intentaban mandar y recibir muchos paqutes al mismo tiempo.
-Finalmente gracias a una observación de nuestro ayudante, encontramos al culpable: ```int read = recv(fD, NULL, 0, MSG_DONTWAIT | MSG_PEEK);``` Su uso había pasado totalmente por desapercibido y no era necesario en absoluto.
+Finalmente, luego de una consulta, encontramos al culpable: ```int read = recv(fD, NULL, 0, MSG_DONTWAIT | MSG_PEEK);``` Su uso había pasado totalmente por desapercibido y no era necesario en absoluto.
 Lamentablemente, como se explica en la Documentación Técnica, se usan dos threads para el envío y recepción de información, así que perdimos bastante tiempo investigando esta pista falsa convencidos de que el problema era debido a una Race Condition.
-
-
 
 
 ## Análisis de puntos pendientes
