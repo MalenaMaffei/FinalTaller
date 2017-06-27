@@ -19,6 +19,7 @@
 #include "Header Files/VistaHeavyDisparar.h"
 #include "Header Files/VistaMediumCaminar.h"
 #include "Header Files/VistaMediumDisparar.h"
+#include "Header Files/CanvasException.h"
 #define POS_CAMINAR 0
 #define POS_DISPARO 1
 #include <vector>
@@ -50,25 +51,26 @@ Vista *VistaManager::getVista(int tipoElemento) {
 }
 
 void VistaManager::fabricarVistasDeElemento(int tipo) {
-    if (!codigos.esUnidad(tipo)){
-        Vista* vista;
-        if (tipo == codigos.bandera){
-            vista = new VistaBandera(gRenderer);
-        } else if (tipo == codigos.roca){
-            vista = new VistaRoca(gRenderer);
-        } else if (tipo == codigos.puente){
-            vista = new VistaPuente(gRenderer);
-        } else if (tipo == codigos.fuerte){
-            vista = new VistaFuerte(gRenderer);
-        } else if (tipo == codigos.fabricaVehiculo){
-            vista = new VistaFabricaVehiculo(gRenderer);
-        } else if (tipo == codigos.fabricaRobot){
-            vista = new VistaFabricaRobot(gRenderer);
-        } else if (tipo == codigos.bala){
-            vista = new VistaBala(gRenderer);
+        if (!codigos.esUnidad(tipo)){
+            Vista* vista;
+            if (tipo == codigos.bandera){
+                vista = new VistaBandera(gRenderer);
+            } else if (tipo == codigos.roca){
+                vista = new VistaRoca(gRenderer);
+            } else if (tipo == codigos.puente){
+                vista = new VistaPuente(gRenderer);
+            } else if (tipo == codigos.fuerte){
+                vista = new VistaFuerte(gRenderer);
+            } else if (tipo == codigos.fabricaVehiculo){
+                vista = new VistaFabricaVehiculo(gRenderer);
+            } else if (tipo == codigos.fabricaRobot){
+                vista = new VistaFabricaRobot(gRenderer);
+            } else if (tipo == codigos.bala){
+                vista = new VistaBala(gRenderer);
+            }
+            vistas[tipo] = vista;
         }
-        vistas[tipo] = vista;
-    }
+
 
     if (codigos.esRobot(tipo)){
         VistaDireccionada* caminar = new VistaRobotCaminar(gRenderer);

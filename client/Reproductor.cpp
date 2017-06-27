@@ -8,15 +8,15 @@
 Reproductor::Reproductor() {
 	robotManufactured = Mix_LoadWAV(robotListoPath);
 	if (!robotManufactured) {
-		printf("MixLoadWAV: %s\n", Mix_GetError());
+        logger->logACerr(("MixLoadWAV: " + std::string(Mix_GetError())));
 	}
 	vehicleManufactured = Mix_LoadWAV(vehiculoListoPath);
 	if (!vehicleManufactured) {
-		printf("MixLoadWAV: %s\n", Mix_GetError());
+        logger->logACerr("MixLoadWAV: " + std::string(Mix_GetError()));
 	}
 	muerte = Mix_LoadWAV(avisoMuerte);
 	if (!muerte) {
-		printf("MixLoadWAV: %s\n", Mix_GetError());
+        logger->logACerr("MixLoadWAV: " + std::string(Mix_GetError()));
 	}
 }
 
@@ -31,7 +31,7 @@ void Reproductor::reproducirFX(Mix_Chunk *fx) {
 	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
 	
 	if (Mix_PlayChannel(-1,fx,0) == -1) {
-		printf("MixPlay: %s\n", Mix_GetError());
+        logger->logACerr("MixPlay: " + std::string(Mix_GetError()));
 		return;
 	}
 }

@@ -25,7 +25,7 @@
 #include <sstream>
 #include <fstream>
 #include "Header Files/CanvasException.h"
-#include "Header Files/ErrorMonitor.h"
+#include "Header Files/Logger.h"
 
 #define NOMBRE_JUEGO "Z: El Ejercicio Final"
 using std::string;
@@ -161,7 +161,7 @@ void Canvas::inicializarDatos(Mapa &mapa) {
 
 
 void Canvas::startGame(){
-    ErrorMonitor errorMonitor;
+    Logger* logger = Logger::getInstancia();
     mensajeEsperando();
 
     Mapa mapa(gRenderer);
@@ -174,7 +174,7 @@ void Canvas::startGame(){
                                      "inicializar, el juego se cerrará a "
                                      "continuación.",
                                  NULL);
-        errorMonitor.outputError(e.what());
+        logger->logACerr(e.what());
     }
 
     VistaManager vistaManager(gRenderer);

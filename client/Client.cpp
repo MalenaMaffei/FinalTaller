@@ -3,7 +3,7 @@
 #include "Header Files/PaqueteSender.h"
 #include "Header Files/Greeter.h"
 #include "Header Files/CanvasException.h"
-#include "Header Files/ErrorMonitor.h"
+#include "Header Files/Logger.h"
 #include <iostream>
 #include <string>
 int main(int argc, char *argv[]){
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 
     receiver.start();
     sender.start();
-    ErrorMonitor errorMonitor;
+    Logger* logger = Logger::getInstancia();
     try {
 
     } catch(CanvasException& e) {
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
                                  "Juego Abortado", "El Juego no se pudo inicializar correctamente."
                                      " Se cerrará a continuación.",
                                  NULL);
-        errorMonitor.outputError(e.what());
+        logger->logACerr(e.what());
     }
 
     Canvas canvas(colaEntrada, colaSalida);
