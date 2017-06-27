@@ -199,6 +199,8 @@ Debido a la necesidad de mostrar constantemente animaciones por pantalla  monito
 
 
 #### Diagramas UML
+![Herencia de los Elementos](img/Elementos.png)
+![Secuencia de un Evento](img/SecuenciaEvento.png)
 #### Descripción de archivos y protocolos
 
 ### Descripción de protocolos
