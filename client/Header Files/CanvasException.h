@@ -1,6 +1,6 @@
 #ifndef TPFINAL_CANVASEXCEPTION_H
 #define TPFINAL_CANVASEXCEPTION_H
-
+#include <string>
 #include <stdexcept>
 class CanvasException : public std::runtime_error {
  public:

@@ -11,7 +11,6 @@
 class Canvas{
  public:
   Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida);
- public:
   void inicializarDatos(Mapa& mapa);
   void startGame();
   void manejarPaquetes(ElementoManager &elementoManager,

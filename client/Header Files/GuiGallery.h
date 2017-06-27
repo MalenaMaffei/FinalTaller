@@ -1,6 +1,6 @@
 #ifndef TPFINAL_ELEMENTOGUI_H
 #define TPFINAL_ELEMENTOGUI_H
-
+#include <map>
 #include "Punto.h"
 #include "Vista.h"
 #include "PaqueteAccion.h"

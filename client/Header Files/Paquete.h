@@ -1,7 +1,7 @@
 #ifndef TPFINAL_PAQUETE_H
 #define TPFINAL_PAQUETE_H
 #include <string>
-#include "common_CodigosPaquete.h"
+#include "CodigosPaquete.h"
 
 class Paquete {
  public:

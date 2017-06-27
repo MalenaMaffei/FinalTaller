@@ -2,7 +2,7 @@
 #include "Header Files/constantes.h"
 #include "Header Files/VistaLabelVehiculo.h"
 #include "Header Files/VistaLabelRobot.h"
-#include "Header Files/common_CodigosPaquete.h"
+#include "Header Files/CodigosPaquete.h"
 #include "Header Files/VistaIconoRobot.h"
 #include "Header Files/VistaHud.h"
 #include "Header Files/RobotGallery.h"
@@ -61,7 +61,6 @@ void Hud::setInfo(PaqueteUnidad paquete) {
     PaqueteUnidad paqueteUnidad(paquete.getMensaje());
     barraVida.setInfo(paqueteUnidad.getVida());
     seleccionado = true;
-//    TODO paqueteUnidad
     std::string nuevoMensaje =  paquete.getMensaje() + std::to_string(color);
     PaqueteUnidad nuevo(nuevoMensaje);
 

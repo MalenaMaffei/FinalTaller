@@ -28,14 +28,12 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
         currTipo = toInt(mensaje.substr(pos + offset, tipo));
         currTiempo = toInt((mensaje.substr(pos + offset + tipo, tiempo)));
 
+//        No se encontró una manera más "moderna" y tan simple para lograr esto
         time_t seconds(currTiempo);
         tm *p = gmtime(&seconds);
-
-//        TODO esta bien formatear aca? Explicar por que tuve que usar esto,
-// y ojo que no leak
         char buffer [80];
-
         strftime(buffer,80,"%M:%S",p);
+
         string minSec = string(buffer);
 
         construibles[currTipo] = minSec;

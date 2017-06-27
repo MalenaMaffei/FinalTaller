@@ -5,28 +5,25 @@
 
 VistaTexto::VistaTexto(SDL_Renderer *gRenderer) : Texture(gRenderer) {}
 
-bool VistaTexto::loadFont(std::string fontPath, int fontSize) {
-    bool success = true;
-
+void VistaTexto::loadFont(std::string fontPath, int fontSize) {
     gFont = TTF_OpenFont(fontPath.c_str(), fontSize);
     if (gFont == NULL){
-        printf("No se pudo cargar la fuente SDL_ttf Error: %s\n", TTF_GetError
-            ());
-        success = false;
+        Logger* logger = Logger::getInstancia();
+        logger->logACerr("No se pudo cargar la fuente SDL_ttf Error: "
+                                  "" + std::string(TTF_GetError()));
     }
-
-    return success;
 }
 
 void VistaTexto::mostrar(std::string texto, SDL_Color color, Punto p) {
+    Logger* logger = Logger::getInstancia();
+
     if (NULL == gFont){
-        printf("se va a intentar imprimir con una null font\n");
+        logger->logACerr("se va a intentar imprimir con una null font");
     }
     if (loadFromRenderedText(texto, color, gFont)){
         render(p.x, p.y);
     } else {
-        printf("No se pudo renderizar el texto\n");
-//        TODO lanzar excep? O dejar que el juego siga sin texto?
+        logger->logACerr("No se pudo renderizar el texto");
     }
 }
 

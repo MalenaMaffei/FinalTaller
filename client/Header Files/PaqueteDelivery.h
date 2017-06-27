@@ -5,7 +5,7 @@
 #include "common_Socket.h"
 #include "common_SocketException.h"
 #include "ColaPaquetes.h"
-#include "ErrorMonitor.h"
+#include "Logger.h"
 
 // Interfaz y funcionalidad comun para PaqueteReceiver y PaqueteSender que
 // son los encargados de recibir y mandar paquetes respectivamente.
@@ -18,7 +18,7 @@ class PaqueteDelivery  : public Thread{
   Socket socket;
   ColaPaquetes& cola;
   bool salir;
-  ErrorMonitor errorMonitor;
+  Logger* logger = Logger::getInstancia();
 };
 
 #endif //TPFINAL_PAQUETEDELIVERY_H

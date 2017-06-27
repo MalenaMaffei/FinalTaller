@@ -7,7 +7,7 @@
 class VistaTexto : public Texture {
  public:
   explicit VistaTexto(SDL_Renderer *gRenderer);
-  bool loadFont(std::string fontPath, int fontSize);
+  void loadFont(std::string fontPath, int fontSize);
   void mostrar(std::string texto, SDL_Color color, Punto p);
   void closeFont();
   virtual ~VistaTexto();

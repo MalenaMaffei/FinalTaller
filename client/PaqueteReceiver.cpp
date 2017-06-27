@@ -12,7 +12,7 @@ void PaqueteReceiver::run() {
 //            Se va a quedar bloqueado acá hasta que llegue un paquete
             mensaje = socket.ReceiveStrWLen();
         } catch(SocketException& e ){
-            errorMonitor.outputError(e.what());
+            logger->logACerr(e.what());
             shutdown();
             continue;
         }

@@ -209,7 +209,21 @@ ElementoUnidad maneja el estado, que puede ser disparando, caminando o muriendo.
 ![Secuencia de un Evento](img/SecuenciaEvento.png)
 __Secuencia de un Evento__: Los eventos son relevados por Canvas y es Mouse quien registra los eventos generados por el Mouse. Luego Mouse actualiza el estado de Click y SelectBox, ahora ambas clases saben qué sucedió y en dónde, pero no saben a que Elementos afecta. En una siguiente instancia se iteran todos los elementos  chequean si ellos fueron los afectados, si lo fueron se envían a Click o SelectBox según corresponda.
 Finalmente el ColectorDeAcciones tiene la lógica para saber interpretar estas selecciones y arma el paquete correspondiente que llega al cliente mediante PaqueteSender, que está bloqueado en ColaPaquetes hasta que haya algo en la cola para enviar.
+
 #### Descripción de archivos y protocolos
+En la carpeta ```client``` podemos encontrar las siguientes carpetas:
+* Header Files contiene todos los headers
+* Elementos los .cpp de los elementos
+* Vistas, los .cpp de las Vistas
+* imgs contiene las imagenes que se usarán en el juego
+* sounds, los sonidos
+* ttf la fuente utilizada en el juego.
+
+Todos los códigos usados en el protocolo de comunicación se encuentran en ```CodigosPaquete.h``` y todas las constantes del juego, como tamaño de la pantalla, tamaño de los tiles y los caminos a las imágenes, sonidos y fuentes se encuentran en ```constantes.h```
+
+
+
+
 
 ### Descripción de protocolos
 

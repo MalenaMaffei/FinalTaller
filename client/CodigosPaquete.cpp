@@ -1,4 +1,4 @@
-#include "Header Files/common_CodigosPaquete.h"
+#include "Header Files/CodigosPaquete.h"
 #include <string>
 #define COMIENZO_UNIDADES 6
 #define FIN_UNIDADES 16

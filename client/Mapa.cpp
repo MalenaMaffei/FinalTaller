@@ -11,7 +11,9 @@ Mapa::Mapa(SDL_Renderer *gRenderer) : prevCamPos({-1, -1}), target(gRenderer)
     , gRenderer(gRenderer) {
     vistaTiles = new VistaTiles(gRenderer);
 //    Inicializo la textura sobre la que se renderizan los tiles
-    target.createBlank(SCREEN_WIDTH, SCREEN_HEIGHT,SDL_TEXTUREACCESS_TARGET);
+    target.crearTexturaVacia(SCREEN_WIDTH,
+                             SCREEN_HEIGHT,
+                             SDL_TEXTUREACCESS_TARGET);
     target.setBlendMode(SDL_BLENDMODE_BLEND);
 }
 

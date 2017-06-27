@@ -1,4 +1,5 @@
 #include "../Header Files/Vista.h"
+#include "../Header Files/CanvasException.h"
 #include <string>
 
 Vista::Vista(SDL_Renderer *gRenderer,
@@ -12,18 +13,10 @@ Vista::Vista(SDL_Renderer *gRenderer,
     loadMedia();
 }
 
-bool Vista::loadMedia() {
-    bool success = true;
-
-    if (!loadFromFile(fileName)){
-
-        printf("No se pudo cargar la textura: %s\n", fileName.c_str());
-        success = false;
-        return success;
-    } else {
+void Vista::loadMedia() {
+    if (loadFromFile(fileName)){
         recorrerImagen();
     }
-    return success;
 }
 
 void Vista::recorrerImagen() {

@@ -25,7 +25,7 @@
 #include <sstream>
 #include <fstream>
 #include "Header Files/CanvasException.h"
-#include "Header Files/ErrorMonitor.h"
+#include "Header Files/Logger.h"
 
 #define NOMBRE_JUEGO "Z: El Ejercicio Final"
 using std::string;
@@ -52,8 +52,8 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
             gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED
                 | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
             if (gRenderer == NULL){
-                throw CanvasException("No se pudo crear renderizador. SDL Error: " +
-                    string(SDL_GetError()));
+                throw CanvasException("No se pudo crear renderizador."
+                                      " SDL Error: " +string(SDL_GetError()));
             } else {
                 SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
@@ -68,11 +68,10 @@ Canvas::Canvas(ColaPaquetes &colaEntrada, ColaPaquetes &colaSalida) :
                                               "SDL_ttf Error: " +
                         string(TTF_GetError()));
                 }
-                if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+                if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
                     throw CanvasException("No se pudo inicializar a SDL_Mixer"
                                               ".  SDL_mixer Error: " +
                         string(Mix_GetError()));
-
                 }
             }
         }
@@ -83,14 +82,14 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
                              Hud &hud,
                              GuiFabrica &guiEdificio,
                              Reproductor &reproductor) {
-
     CodigosPaquete codigos;
 
     if (colaEntrada.estaCerrada()){
         quit = true;
 //        Esto quiere decir que yo no fui la que cerre.
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-                                 "Servidor Cerrado", "El servidor se ha desconectado, el juego se "
+                                 "Servidor Cerrado", "El servidor se ha "
+                                     "desconectado, el juego se "
                                      "cerrará a continuación.", NULL);
         return;
     }
@@ -103,7 +102,8 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
             if (paqueteAccion.getColor() == miColor){
                 int tipo = paqueteAccion.getTipo();
                 if (tipo == codigos.fuerte){
-                    camara.setCentro(Punto(paqueteAccion.getX(), paqueteAccion.getY()));
+                    camara.setCentro(Punto(paqueteAccion.getX(),
+                                           paqueteAccion.getY()));
                 } else if (codigos.esRobot(tipo)){
                     reproductor.playCrearRobot();
                 } else if (codigos.esVehiculo(tipo)){
@@ -161,7 +161,7 @@ void Canvas::inicializarDatos(Mapa &mapa) {
 
 
 void Canvas::startGame(){
-    ErrorMonitor errorMonitor;
+    Logger* logger = Logger::getInstancia();
     mensajeEsperando();
 
     Mapa mapa(gRenderer);
@@ -174,7 +174,7 @@ void Canvas::startGame(){
                                      "inicializar, el juego se cerrará a "
                                      "continuación.",
                                  NULL);
-        errorMonitor.outputError(e.what());
+        logger->logACerr(e.what());
     }
 
     VistaManager vistaManager(gRenderer);

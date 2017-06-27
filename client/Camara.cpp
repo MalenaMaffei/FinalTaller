@@ -17,9 +17,7 @@ void Camara::handleEvent(SDL_Event& e){
             case SDLK_s: velY -= CAM_VEL; break;
             case SDLK_a: velX += CAM_VEL; break;
             case SDLK_d: velX -= CAM_VEL; break;
-            case SDLK_LSHIFT:
-                printf("hubo un espacio\n");
-                Camara::centrar(); break;
+            case SDLK_LSHIFT: Camara::centrar(); break;
         }
     }
 }

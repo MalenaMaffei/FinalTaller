@@ -1,7 +1,7 @@
 #include "Header Files/GuiFabrica.h"
 #include "Header Files/VistaGui.h"
 #include "Header Files/constantes.h"
-#include "Header Files/common_CodigosPaquete.h"
+#include "Header Files/CodigosPaquete.h"
 #include <string>
 #define CANCEL_RELX 67
 #define CANCEL_RELY 47
@@ -47,7 +47,6 @@ GuiFabrica::GuiFabrica(SDL_Renderer *gRenderer,
 }
 
 void GuiFabrica::mostrar(Camara &camara) {
-//    TODO REFACTORIZAR ESTO POR AMOR A DIOS y despues documentar
     if (seMuestra && camara.estaEnfocado(Rect(position,
                                               vistaGui.getWidth(),
                                               vistaGui.getHeight()))){
@@ -71,7 +70,6 @@ void GuiFabrica::mostrar(Camara &camara) {
             barraConstr.mostrar(pReal);
         }
         gallery.mostrar(pReal);
-
     }
 }
 

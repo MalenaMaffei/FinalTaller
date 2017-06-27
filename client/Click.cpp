@@ -41,5 +41,3 @@ const Punto &Click::getScreenCoords() const {
 void Click::setScreenCoords(const Punto &screenCoords) {
     Click::screenCoords = screenCoords;
 }
-
-//TODO delete coords after using them
