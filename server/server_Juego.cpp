@@ -294,7 +294,7 @@ void Juego::actualizarDisparos() {
 		municion->setPosicion (movible->getPosicion ());
 		municion->setObjetivo (idObjetivo);
 		municion->setAlcance (alcance);
-		std::array<double,2> target = objetivo->getPosicion ();
+		std::array<double,2> target = objetivo->getPosicionCentral ();
 		municion->mover (target);
 		std::string idMunicion = manejadorIDs.getIDMunicion ();
 		movibles[idMunicion] = municion;
@@ -461,10 +461,14 @@ void Juego::run() {
 	
 	for (Jugador* jugador : jugadores) {
 		jugador->finalizar();
-		Mensaje mensajeGanador;
-		mensajeGanador.mensajeDeGanador (jugador->getId ());
-		std::string mensajeStr = mensajeGanador.getMensaje ();
-		jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
+		if (this->hayGanador()) {
+			Mensaje mensajeGanador;
+			mensajeGanador.mensajeDeGanador (jugador->getId ());
+			std::string mensajeStr = mensajeGanador.getMensaje ();
+			jugador->enviarMensaje (mensajeStr, mensajeGanador.getId());
+		} else {
+			jugador->cerrarConexion ();
+		}
 	}
 }
 

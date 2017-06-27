@@ -10,7 +10,6 @@ Jugador::Jugador (Socket& socket, ColaMensajes &colaDeRecibidos, int id) :
 												id(id) { }
 
 void Jugador::run () {
-	//TODO agregar bool salir
 	salir.set_value(false);
 	while (!salir.get_value()) {
 		std::string mensaje;
@@ -61,6 +60,10 @@ void Jugador::finalizar() {
 		return;
 	}
 	salir.set_value(true);
+}
+
+void Jugador::cerrarConexion() {
+	socket.Shutdown(SHUT_RDWR);
 }
 
 Jugador::~Jugador () { }
