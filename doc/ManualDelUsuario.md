@@ -1,5 +1,25 @@
 # Manual del usuario
+
+
 ## Instalación
+
+## Configuración
+La configuración de los los distintos elementos que conforman el juego son configurables por xml. Los archivos donde se encuentran las configuraciones son:
+
+- edificios.xml: Presenta las configuraciones de todos los tipos de edificios (Fuerte, Fabrica de Robots y Fabrica de Unidades).
+- inmovibles.xml: Presenta las configuraciones de los otros tipos inmovibles (Bandera o Bloque).
+- municiones.xml: Presenta las configuraciones de todos los tipos de municiones.
+- robots.xml: Presenta las configuraciones de todos los tipos de robots.
+- vehiculos.xml: Presenta las configuraciones de todos los tipos de vehiculos.
+- terrenos.xml: Presenta las configuraciones de todos los tipos de terrenos.
+
+Estos archivos deben estar presentes en la carpeta server. Los archivos son bastante claros, y presentan comentarios en los casos necesarios, por lo que si se desea modificar alguna configuración, simplemente alcanza con modificar el campo deseado.
+
+Además existen dos archivos más que son generados por el generador de mapas, estos son:
+
+- mapa.map: Presenta los terrenos de cada uno de los casilleros.
+- configuracion.xml: Presenta las posiciones iniciales de cada uno de los inmovibles (Edificios, Banderas o Bloques).
+
 
 ## Instrucciones de uso
 ### Generacion de mapa y uso de xml
