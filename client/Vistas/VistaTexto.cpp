@@ -19,7 +19,7 @@ bool VistaTexto::loadFont(std::string fontPath, int fontSize) {
 }
 
 void VistaTexto::mostrar(std::string texto, SDL_Color color, Punto p) {
-    if( NULL == gFont ){
+    if (NULL == gFont){
         printf("se va a intentar imprimir ocn una null fonr\n");
     }
     if (loadFromRenderedText(texto, color, gFont)){

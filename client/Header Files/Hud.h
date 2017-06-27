@@ -7,9 +7,10 @@
 #include "VistaHud.h"
 #include "Click.h"
 #include <vector>
+#include <string>
 class Hud {
  public:
-  Hud(SDL_Renderer *gRenderer);
+  explicit Hud(SDL_Renderer *gRenderer);
   virtual ~Hud();
   void mostrar();
 

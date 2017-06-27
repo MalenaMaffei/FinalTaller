@@ -168,12 +168,12 @@ void Canvas::manejarPaquetes(ElementoManager &elementoManager,
 
 void Canvas::inicializarDatos(Mapa &mapa) {
     CodigosPaquete codigos;
-    PaqueteAccion color = colaEntrada.desencolarBloqueante();
+    Paquete color = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.equipo){
 //        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
     }
     miColor = std::stoi(color.getMensaje().substr(1));
-    PaqueteAccion pMapa = colaEntrada.desencolarBloqueante();
+    Paquete pMapa = colaEntrada.desencolarBloqueante();
     if (color.getComando() != codigos.mapa){
 //        TODO TIRAR ERROR ACA NO SE PUDO INICIALIZAR
     }

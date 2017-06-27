@@ -25,19 +25,24 @@ static const char balaPath[] = "../client/imgs/bala.png";
 static const char fuertePath[] = "../client/imgs/Edificios/fuerte.png";
 static const char fabricaVehiculosPath[] = ""
     "../client/imgs/Edificios/fabrica_vehiculos.png";
-static const char fabricaRobotsPath[] = "../client/imgs/Edificios/fabrica_robots.png";
+static const char fabricaRobotsPath[] = "../client/imgs/Edificios/"
+    "fabrica_robots.png";
 static const char puentePath[] = "../client/imgs/Puentes/bridge_city.png";
 static const char banderaPath[] = "../client/imgs/Banderas/bandera.png";
 
 //------------ROBOTS------------------
-static const char robotCaminarPath[] = "../client/imgs/Robots/caminar_robot.png";
-static const char robotPyroDisparar[] = "../client/imgs/Robots/disparo_pyro.png";
-static const char robotGruntDisparar[] = "../client/imgs/Robots/disparo_grunt.png";
+static const char robotCaminarPath[] = "../client/imgs/Robots/"
+    "caminar_robot.png";
+static const char robotPyroDisparar[] = "../client/imgs/Robots/"
+    "disparo_pyro.png";
+static const char robotGruntDisparar[] = "../client/imgs/Robots/"
+    "disparo_grunt.png";
 static const char robotToughDisparar[] = "."
     "./client/imgs/Robots/disparo_tough.png";
 static const char robotLaserDisparar[] = "."
     "./client/imgs/Robots/disparo_laser.png";
-static const char robotPsychoDisparar[] = "../client/imgs/Robots/disparo_psycho.png";
+static const char robotPsychoDisparar[] = "../client/imgs/Robots/"
+    "disparo_psycho.png";
 static const char robotSniperDisparar[] = "."
     "./client/imgs/Robots/disparo_sniper.png";
 static const char robotMuertePath[] = "../client/imgs/Robots/muerte.png";
@@ -46,7 +51,8 @@ static const char robotMuertePath[] = "../client/imgs/Robots/muerte.png";
 static const char heavyCaminarPath[] = "../client/imgs/Tanks/caminar_heavy.png";
 static const char mediumCaminarPath[] = "../client/imgs/Tanks/caminar_medium"
     ".png";
-static const char heavyDispararPath[] = "../client/imgs/Tanks/disparar_heavy.png";
+static const char heavyDispararPath[] = "../client/imgs/Tanks/"
+    "disparar_heavy.png";
 static const char mediumDispararPath[] = "../client/imgs/Tanks/disparar_medium"
     ".png";
 
@@ -57,7 +63,8 @@ static const char tanqueMissilePath[] = "../client/imgs/Tanks/missile.png";
 static const char hudPath[] = "../client/imgs/Gui/hud.png";
 static const char carasPath[] = "../client/imgs/Gui/unidades.png";
 static const char robotsLabelPath[] = "../client/imgs/Gui/robot_labels.png";
-static const char vehiculosLabelPath[] = "../client/imgs/Gui/vehiculos_labels.png";
+static const char vehiculosLabelPath[] = "../client/imgs/Gui/"
+    "vehiculos_labels.png";
 static const char vehiculosPath[] = "../client/imgs/Gui/vehiculos.png";
 static const char armasPath[] = "../client/imgs/Gui/armas.png";
 
@@ -73,7 +80,8 @@ static const char fuentePath[] = "../client/ttf/AUDIMRG_.TTF";
 static const char greeterPath[] = "../client/imgs/greeting.txt";
 
 //-----------SONIDOS---------------
-static const char robotListoPath[] = "../client/sounds/comp_robot_manufactured.wav";
+static const char robotListoPath[] = "../client/sounds/"
+    "comp_robot_manufactured.wav";
 static const char vehiculoListoPath[] = "."
     "./client/sounds/comp_vehicle_manufactured.wav";
 static const char avisoMuerte[] = "../client/sounds/unidad muerta.wav";

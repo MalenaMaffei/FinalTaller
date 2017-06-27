@@ -6,7 +6,7 @@
 class Mapa {
  public:
   explicit Mapa(SDL_Renderer *gRenderer);
-  void crearMapa(PaqueteAccion &paquete);
+  void crearMapa(Paquete &paquete);
   void mostrar(Camara &camara);
   virtual ~Mapa();
  private:
