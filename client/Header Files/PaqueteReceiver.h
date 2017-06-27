@@ -3,8 +3,8 @@
 
 #include "common_Thread.h"
 #include "common_Socket.h"
-#include "PaqueteDelivery.h"
-class PaqueteReceiver : public PaqueteDelivery{
+#include "PaqueteTransporte.h"
+class PaqueteReceiver : public PaqueteTransporte{
  public:
   PaqueteReceiver(const Socket &socket, ColaPaquetes &cola);
   void run();

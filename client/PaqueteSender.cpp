@@ -5,7 +5,7 @@
 #include <chrono>
 PaqueteSender::PaqueteSender(const Socket &socket,
                              ColaPaquetes &cola)
-    : PaqueteDelivery(socket, cola) {}
+    : PaqueteTransporte(socket, cola) {}
 
 void PaqueteSender::run() {
     while (! salir){

@@ -3,10 +3,10 @@
 #include <condition_variable>
 #include "common_Socket.h"
 #include "common_Thread.h"
-#include "PaqueteDelivery.h"
+#include "PaqueteTransporte.h"
 #include "ColaPaquetes.h"
 
-class PaqueteSender : public PaqueteDelivery{
+class PaqueteSender : public PaqueteTransporte{
  public:
   PaqueteSender(const Socket &socket,
                   ColaPaquetes &cola);

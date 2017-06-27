@@ -26,12 +26,9 @@ class Canvas{
 
  private:
   void mensajeEsperando();
-  //The window we'll be rendering to
+  //La ventana
   SDL_Window* gWindow;
-
-//The window renderer
   SDL_Renderer* gRenderer;
-
   ColaPaquetes& colaEntrada;
   ColaPaquetes& colaSalida;
   Camara camara;

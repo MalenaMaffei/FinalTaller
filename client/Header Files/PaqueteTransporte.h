@@ -9,9 +9,9 @@
 
 // Interfaz y funcionalidad comun para PaqueteReceiver y PaqueteSender que
 // son los encargados de recibir y mandar paquetes respectivamente.
-class PaqueteDelivery  : public Thread{
+class PaqueteTransporte  : public Thread{
  public:
-  PaqueteDelivery(const Socket &socket, ColaPaquetes &cola);
+  PaqueteTransporte(const Socket &socket, ColaPaquetes &cola);
   virtual void run() = 0;
   void shutdown();
  protected:

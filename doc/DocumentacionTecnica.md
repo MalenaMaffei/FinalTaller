@@ -199,6 +199,9 @@ Debido a la necesidad de mostrar constantemente animaciones por pantalla  monito
 
 
 #### Diagramas UML
+![Diagrama Clases](img/generalCliente.png)
+
+
 ![Herencia de los Elementos](img/Elementos.png)
 __Herencia de Elementos__: En este diagrama se puede apreciar como funciona la herencia entre los distintos elementos que pueden ser representados en el mapa, estos elementos son los que se corresponden uno a uno con los que viven en el modelo del servidor.
 Se optó por separar a estos elementos por la forma en que se representan y no a lo que representan, es decir, no hay diferencia entre tanque y robot por ejemplo, porque ambos están compuestos de Vistas, que aunque distintas, sus imágenes son recorridas y mostradas de la misma manera. Lo mismo pasa con los distintos tipos de fábricas.

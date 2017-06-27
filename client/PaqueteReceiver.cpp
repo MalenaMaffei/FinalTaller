@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 PaqueteReceiver::PaqueteReceiver(const Socket &socket, ColaPaquetes &cola)
-    : PaqueteDelivery(socket, cola) {}
+    : PaqueteTransporte(socket, cola) {}
 
 void PaqueteReceiver::run() {
     while (!salir){
