@@ -38,7 +38,7 @@ make
 ```
 
 ### Ejecución
-Esto generara el ejecutable **vista** dentro de la misma carpeta client, el ejecutable **server** dentro de la carpeta server y el ejecutable **generador** dentro de la carpeta generadorMapa.
+Esto generara el ejecutable **client** dentro de la misma carpeta client, el ejecutable **server** dentro de la carpeta server y el ejecutable **generador** dentro de la carpeta generadorMapa.
 
 Principalmente se debe generar un mapa mediante:
 ```
@@ -199,6 +199,16 @@ Debido a la necesidad de mostrar constantemente animaciones por pantalla  monito
 
 
 #### Diagramas UML
+![Herencia de los Elementos](img/Elementos.png)
+__Herencia de Elementos__: En este diagrama se puede apreciar como funciona la herencia entre los distintos elementos que pueden ser representados en el mapa, estos elementos son los que se corresponden uno a uno con los que viven en el modelo del servidor. 
+Se optó por separar a estos elementos por la forma en que se representan y no a lo que representan, es decir, no hay diferencia entre tanque y robot por ejemplo, porque ambos están compuestos de Vistas, que aunque distintas, sus imágenes son recorridas y mostradas de la misma manera. Lo mismo pasa con los distintos tipos de fábricas.
+ElementoColoreado cubre a todos los elementos que son de algún equipo y por lo tanto el clip de la Vista que se muestra en cada caso, debe corresponderse con el color del elemento. Es esta clase quien se encarga de sumarle al clip de animación el offset necesario para mostrar el color correcto.
+ElementoUnidad tiene más métodos que sus predecesores, debido a que una unidad tiene varias animaciones distintas que deben ser mostradas en distintas ocasiones. 
+ElementoUnidad maneja el estado, que puede ser disparando, caminando o muriendo. En cada caso la clase se encarga de pedirle a las Vistas solo los clips de animación que corresponden a cada estado.
+***
+![Secuencia de un Evento](img/SecuenciaEvento.png)
+__Secuencia de un Evento__: Los eventos son relevados por Canvas y es Mouse quien registra los eventos generados por el Mouse. Luego Mouse actualiza el estado de Click y SelectBox, ahora ambas clases saben qué sucedió y en dónde, pero no saben a que Elementos afecta. En una siguiente instancia se iteran todos los elementos  chequean si ellos fueron los afectados, si lo fueron se envían a Click o SelectBox según corresponda. 
+Finalmente el ColectorDeAcciones tiene la lógica para saber interpretar estas selecciones y arma el paquete correspondiente que llega al cliente mediante PaqueteSender, que está bloqueado en ColaPaquetes hasta que haya algo en la cola para enviar.
 #### Descripción de archivos y protocolos
 
 ### Descripción de protocolos

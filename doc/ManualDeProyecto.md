@@ -161,7 +161,7 @@ Lamentablemente, como se explica en la Documentación Técnica, se usan dos thre
 * Puentes: Finalmente no pudimos implementar la lógica de creación de puentes sobre un canal de agua.
 * Generador de Mapas: Nos hubiera gustado poder terminar de pulirlo, hay algunos chequeos que no se hacen, como comprobar que haya un camino transitable entre todos los fuertes y filtrar que no queden tiles sueltos de un solo tipo, por ejemplo un solo tile de pradera en medio de un lago de lava.
 * Las unidades no empiezan a disparar automáticamente cuando tienen a un enemigo al alcance.
-
+* Los conductores de los vehículos son meramente estéticos, es decir, no tienen representación real ni en el modelo de servidor ni en el cliente, solo son mostrados en la gui como conductores. Tomamos esta decisión porque no llegamos a implementar la lógica de subir y bajar unidades de los vehículos, así que no nos pareció crear unidades de más (los conductores) que nunca van a interactuar con ningún otro elemento.
 ## Herramientas
 * Para coordinar el trabajo se usó git, hosteando el repositorio en github.
 * CMake fue usado para generar fácilmente los ejecutables.
