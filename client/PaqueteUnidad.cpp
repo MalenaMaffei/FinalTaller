@@ -1,17 +1,19 @@
 #include "Header Files/PaqueteUnidad.h"
 #include <string>
-PaqueteUnidad::PaqueteUnidad(const std::string &mensaje) : mensaje(mensaje) {}
-//TODO poner los enums correspondientes
+PaqueteUnidad::PaqueteUnidad(const std::string &mensaje)  {
+    setMensaje(mensaje);
+}
+
 int PaqueteUnidad::getTipo() {
-    return std::stoi(mensaje.substr(4,codigos.tipo));
+    return toInt(mensaje.substr(posTipo,codigos.tipo));
 }
 
 float PaqueteUnidad::getVida() {
-    float vida  = std::stoi(mensaje.substr(6,3));
+    float vida  = toInt(mensaje.substr(posVida,largoVida));
     float cienporciento = 100;
     return vida/cienporciento;
 }
 
 int PaqueteUnidad::getColor() {
-    return std::stoi(mensaje.substr(9,1));
+    return toInt(mensaje.substr(posColor,codigos.color));
 }

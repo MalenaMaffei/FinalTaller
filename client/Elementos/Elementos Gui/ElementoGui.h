@@ -1,9 +1,9 @@
 #ifndef TPFINAL_ELEMENTOGUI_H
 #define TPFINAL_ELEMENTOGUI_H
 
-#include "Header Files/Punto.h"
-#include "Header Files/Vista.h"
-#include "Header Files/PaqueteAccion.h"
+#include "../../Header Files/Punto.h"
+#include "../../Header Files/Vista.h"
+#include "../../Header Files/PaqueteAccion.h"
 class ElementoGui {
  public:
   ElementoGui(Vista *vista,

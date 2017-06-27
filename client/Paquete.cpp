@@ -13,8 +13,6 @@ int Paquete::getComando() const {
     return toInt(mensaje.substr(codigos.posComando,codigos.comando));
 }
 
-
-
 std::string &Paquete::getMensaje() {
     return mensaje;
 }

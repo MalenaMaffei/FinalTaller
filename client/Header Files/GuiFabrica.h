@@ -14,9 +14,9 @@
 //TODO van a faltar las vistas de los bichos
 //TODO es la misma para todos, el server me dice que puede construir, dsp
 // vemos que hacer con el nombre
-class GuiEdificio {
+class GuiFabrica {
  public:
-  explicit GuiEdificio(SDL_Renderer *gRenderer,
+  explicit GuiFabrica(SDL_Renderer *gRenderer,
                        VistaTexto &vistaTexto);
 
   void mostrar(Camara &camara);
@@ -38,7 +38,7 @@ class GuiEdificio {
 //  Setea los distintos elementos a mostrar usando el paquete.
   void setInfo(PaqueteFabrica paquete);
   bool activo();
-  virtual ~GuiEdificio();
+  virtual ~GuiFabrica();
 
  private:
   void resetSeleccion();

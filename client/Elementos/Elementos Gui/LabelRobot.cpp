@@ -1,6 +1,6 @@
 #include "LabelRobot.h"
-#include "Header Files/VistaLabelRobot.h"
-#include "Header Files/PaqueteUnidad.h"
+#include "../../Header Files/VistaLabelRobot.h"
+#include "../../Header Files/PaqueteUnidad.h"
 #include <map>
 #define X 3
 #define Y 124

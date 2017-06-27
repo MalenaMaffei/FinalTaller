@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 #include <map>
-class PaqueteFabrica {
+#include "Paquete.h"
+class PaqueteFabrica : public  Paquete{
  public:
   explicit PaqueteFabrica(const std::string &mensaje);
   std::string getId();
@@ -14,7 +15,7 @@ class PaqueteFabrica {
   int tipoEnConstruccion();
   float porcentajeConstruido();
   int getCantConstuibles();
-  const std::string &getMensaje() const;
+//  const std::string &getMensaje() const;
 
  private:
   int getOffsetConstruibles();

@@ -1,6 +1,6 @@
 #include "IconoRobot.h"
-#include "Header Files/VistaIconoRobot.h"
-#include "Header Files/PaqueteUnidad.h"
+#include "../../Header Files/VistaIconoRobot.h"
+#include "../../Header Files/PaqueteUnidad.h"
 #define X 8
 #define Y 46
 IconoRobot::IconoRobot(SDL_Renderer *gRenderer) : ElementoGui(new

@@ -1,5 +1,5 @@
 #include <SDL_render.h>
-#include "Header Files/ProgressBar.h"
+#include "../../Header Files/ProgressBar.h"
 
 ProgressBar::ProgressBar(SDL_Renderer *gRenderer,
                          const SDL_Color &FGColor,

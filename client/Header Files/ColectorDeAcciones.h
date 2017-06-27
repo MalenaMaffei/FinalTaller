@@ -4,14 +4,14 @@
 #include "SelectBox.h"
 #include "Click.h"
 #include "Hud.h"
-#include "GuiEdificio.h"
+#include "GuiFabrica.h"
 #include "ColaPaquetes.h"
 class ColectorDeAcciones {
  public:
   ColectorDeAcciones(SelectBox &selectBox,
                      Click &click,
                      Hud &hud,
-                     GuiEdificio &guiEdificio,
+                     GuiFabrica &guiEdificio,
                      ColaPaquetes &salida);
 
 //  Analiza los eventos registrados durante el gamelopp (clicks, selecciones)
@@ -27,7 +27,7 @@ class ColectorDeAcciones {
  private:
   SelectBox &selectBox;
   Click &click;
-  GuiEdificio &guiEdificio;
+  GuiFabrica &guiEdificio;
   Hud &hud;
   ColaPaquetes& colaSalida;
 };

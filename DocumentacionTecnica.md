@@ -80,17 +80,33 @@ La parte fundamental del servidor es el modelo el cual se encarga de manejar los
 
 ### Client
 #### Descripción general
-El Cliente es el encargado de reflejar el estado de juego mediante animaciones. Asimismo es el encargado de reportar todas las acciones del usuario al servidor, que serán luego reflejadas en el modelo del juego.
+El Cliente es el encargado de reflejar el estado de juego mediante animaciones y sonidos. Asimismo es el encargado de reportar todas las acciones del usuario al servidor, que serán luego reflejadas en el modelo del juego.
 
 #### Clases
 El funcionamiento general del cliente puede ser resumido a tres clases principales: __PaqueteReceiver__, __PaqueteSender__ y __Canvas__. Las primeras dos son las que se encargan de la comunicación por sockets con el servidor y la última es la que interactúa con el cliente y renderiza todo el juego.
-###### PaqueteReceiver
-Esta clase es la encargada de recibir los paquetes que llegan del servidor. Esta constantemente recibiendo por el socket y cuando algo llega, lo encola en __ColaPaquete__ para que sea procesado por __Canvas__.
-###### PaqueteSender
-Aquí se envían los paquetes previamente encolados por __Canvas__
-###### Canvas
+***
+##### PaqueteReceiver
+Esta clase es la encargada de recibir los paquetes que llegan del servidor. Está constantemente recibiendo por el socket y cuando algo llega, lo encola en __ColaPaquete__ para que sea procesado por __Canvas__.
+***
+##### PaqueteSender
+Aquí se envían los paquetes previamente encolados por __Canvas__.
+***
+##### Canvas
 Esta clase es la que maneja todas las acciones del cliente y todas las visualizaciones, aquí es donde SDL es utilizado.
+Las responsabilidades de esta clase son: interpretar todos los paquetes que llegan del servidor por medio de __PaqueteReceiver__, reflejar estos paquetes mostrando el estado del juego en la pantalla mediante el *GameLoop* y por último interpretar los eventos generados por el cliente para enviarle al servidor la acción que el usuario quiso llevar a cabo. En este sentido, el Cliente no es del todo "tonto". No se limita a informar "el cliente hizo click en x,y" si no que interpreta una cadena de eventos para enviar al servidor mensajes del tipo "Id x ataca a id y" o "pedir informacion de la unidad de id x", para dar unos ejemplos.
+A continuación se hará una descripcion de las partes mas importantes que componen a esta parte del cliente.
 
+###### Análisis de eventos
+Los eventos soportados por esta aplicación son: movimiento del mouse, click del mouse, apretar la barra espaciadora, apretar las teclas w,a,s,d y cerrar la ventana.
+* __Mouse__: Esta clase se encarga de registrar los eventos relacionados al mouse. Cuando detecta que se quiso hacer una seleccion (arrastrar apretando el botón derecho), le infroma a la clase __SelectBox__ de qué dimensiones es el rectángulo de selección creado. Cuando detecta un click izquierdo le informa a la clase __Click__ las coordenadas del mismo. En __SelectBox__ quedarán guardadas las unidades seleccionadas y en __Click__ el elemento clickeado.
+* __ColectorDeAcciones__: Aquí es donde se interpretan los contenidos de __SelectBox__ y __Click__ y se decide cuál fue la acción específica que quiso realizar el usuario. Una vez determinada la misma aquí mismo se arma el Paquete y se encola en __ColaDePaquetes__, cola compartida con __PaqueteReceiver__.
+* __Camara__: Camara es básicamente un rectángulo __Rect__ contra el cuál se comparan todos los elementos del mapa para ver si hay una colisión. Si la hay, el elemento será mostrado. La cámara se puede mover usando w,a,s,d para moverse en las cuatro direcciones y usando la barra espaciadora se vuelve en un solo movimiento al fuerte del jugador.
 
+###### Reflejando el estado del modelo
+En el cliente hay una relación uno a uno con todos los elementos existentes en el modelo del servidor. Todos los elementos son de clase __Elemento__ con una __Vista__, que es la que contiene a la imagen que representará al elemento en pantalla. __ElementoManager__ y __VistaManager__ son las clases que coordinan el acceso y creación de estas clases respectivamente.
+* __Elemento__: compuesto por un puntero a una __Vista__ y un rectángulo __Rect__. El mismo reflejará la posición del elemento renderizándose la imagen pertintente sobre él y también se utilizará para registrar clicks sobre el __Elemento__, entre otros atributos.
+* __Vista__: hereda de __Texture__ que es una clase que simplemente encapsula a SDL_Texture. Hay una __Vista__ por cada tipo de elemento que existe en el juego. Una __Vista__ contiene la imagen entera de animaciones que componen a un elemento del juego. Por ejemplo, la vista de un Fuerte es una imagen que contiene varios cuadros de la animación del mismo más un cuadro extra que se muestra al ser destruido, asimismo  la imagen contiene a todas las animaciones del mismo elemento pero de diferentes colores. Lo positivo de este enfoque es que se cargan pocas imágenes en memoria y además todos los elementos de un mismo tipo comparten una misma __Vista__.
+* *manejarPaquetes*: Aquí se desencolan los paquetes de la __ColaPaquetes__. Este método es el que define qué hay que hacer con cada __Paquete__, hay tres tipos: __PaqueteAccion__, que es enviado a __ElementoManager__; __PaqueteUnidad__, que es enviado al __Hud__ (dónde se muestra la vida de la unidad seleccionada); y por último __PaqueteFabrica__, usado por __GuiFabrica__ para mostrar al usuario las distintas unidades que la fábrica puede construir. También en *manejarPaquetes* se reproducen sonidos para informar al usuario de algunos __Paquetes__ que merecen la atención del usuario.
+***
 #### Diagramas UML
 #### Descripción de archivos y protocolos

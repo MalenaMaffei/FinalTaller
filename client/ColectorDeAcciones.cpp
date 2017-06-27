@@ -1,6 +1,6 @@
 #include "Header Files/ColectorDeAcciones.h"
 #include "Header Files/Hud.h"
-#include "Header Files/GuiEdificio.h"
+#include "Header Files/GuiFabrica.h"
 #include "Header Files/PaqueteAccion.h"
 #include "Header Files/ColaPaquetes.h"
 #include <algorithm>
@@ -12,7 +12,7 @@ using std::for_each;
 ColectorDeAcciones::ColectorDeAcciones(SelectBox &selectBox,
                                        Click &click,
                                        Hud &hud,
-                                       GuiEdificio &guiEdificio,
+                                       GuiFabrica &guiEdificio,
                                        ColaPaquetes &salida)
     : selectBox(selectBox), click(click), guiEdificio(guiEdificio), hud(hud),
       colaSalida(salida){}

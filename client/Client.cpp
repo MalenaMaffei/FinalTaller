@@ -46,6 +46,7 @@ int main(int argc, char *argv[]){
     sender.shutdown();
 
     socket.Shutdown(SHUT_RDWR);
+    socket.Close();
 
     receiver.join();
     sender.join();

@@ -1,7 +1,7 @@
 #ifndef TPFINAL_LABELSROBOTS_H
 #define TPFINAL_LABELSROBOTS_H
 
-#include "Header Files/Vista.h"
+#include "../../Header Files/Vista.h"
 #include "ElementoGui.h"
 class LabelRobot : public ElementoGui {
 

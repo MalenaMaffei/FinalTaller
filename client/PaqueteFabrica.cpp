@@ -2,21 +2,18 @@
 #include <map>
 #include <string>
 using std::string;
-using std::stoi;
 PaqueteFabrica::PaqueteFabrica(const std::string &mensaje) : mensaje(mensaje) {}
-
 
 string PaqueteFabrica::getId() {
     return mensaje.substr(posId, id);
 }
 
 int PaqueteFabrica::getTipoFabrica() {
-    return stoi(mensaje.substr(posTipoFabrica, tipo));
+    return toInt(mensaje.substr(posTipoFabrica, tipo));
 }
 
 string PaqueteFabrica::getVidaFabrica() {
-    return std::to_string(stoi(mensaje.substr(posVida, vida)));
-//    return mensaje.substr(posVida, vida);
+    return std::to_string(toInt(mensaje.substr(posVida, vida)));
 }
 
 std::map<int,std::string> PaqueteFabrica::getConstruibles() {
@@ -28,8 +25,8 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
     int offset;
     for (int i = 0; i < cantRecibida; ++i) {
         offset = (tiempo + tipo)*i;
-        currTipo = stoi(mensaje.substr(pos + offset, tipo));
-        currTiempo = stoi((mensaje.substr(pos + offset + tipo, tiempo)));
+        currTipo = toInt(mensaje.substr(pos + offset, tipo));
+        currTiempo = toInt((mensaje.substr(pos + offset + tipo, tiempo)));
 
         time_t seconds(currTiempo);
         tm *p = gmtime(&seconds);
@@ -48,23 +45,17 @@ std::map<int,std::string> PaqueteFabrica::getConstruibles() {
 
 bool PaqueteFabrica::estaConstruyendo() {
     int pos = getOffsetConstruibles();
-    return stoi(mensaje.substr(pos, isConstruyendo));
+    return toInt(mensaje.substr(pos, isConstruyendo));
 }
 
 int PaqueteFabrica::tipoEnConstruccion() {
-//    if (!estaConstruyendo()){
-////        TODO lanzar excepcion aca
-//    }
     int pos = getOffsetConstruibles() + isConstruyendo;
-    return stoi(mensaje.substr(pos, tipo));
+    return toInt(mensaje.substr(pos, tipo));
 }
 
 float PaqueteFabrica::porcentajeConstruido() {
-    //    if (!estaConstruyendo()){
-////        TODO lanzar excepcion aca
-//    }
     int pos = getOffsetConstruibles() + isConstruyendo + tipo;
-    float construido = stoi(mensaje.substr(pos, porConstruido));
+    float construido = toInt(mensaje.substr(pos, porConstruido));
     float cienporciento = 100;
     return construido/cienporciento;
 }
@@ -75,10 +66,7 @@ int PaqueteFabrica::getOffsetConstruibles() {
 }
 
 int PaqueteFabrica::getCantConstuibles() {
-    return stoi(mensaje.substr(posCant, cant));;
-}
-const string &PaqueteFabrica::getMensaje() const {
-    return mensaje;
+    return toInt(mensaje.substr(posCant, cant));;
 }
 
 
